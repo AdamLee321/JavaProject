@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="686d1210-3c5f-42ee-80e8-120e7a6ea756" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/ojdbc6.xml" />
-      <change type="MOVED" beforePath="C:\Users\David\Desktop\Git Folder\Github\2ndYearProject\src\lib\ojdbc6.jar" afterPath="$PROJECT_DIR$/lib/ojdbc6.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/2ndYearProject.iml" afterPath="$PROJECT_DIR$/2ndYearProject.iml" />
+    <list default="true" id="686d1210-3c5f-42ee-80e8-120e7a6ea756" name="Default" comment="Done the connection part of the createDB class">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/database/CreateDB.java" afterPath="$PROJECT_DIR$/src/database/CreateDB.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/database/dbOperations.java" afterPath="$PROJECT_DIR$/src/database/dbOperations.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="DGAComputers.iws" />
@@ -74,9 +72,13 @@
       <file leaf-file-name="dbOperations.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/database/dbOperations.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="255">
-              <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
-              <folding />
+            <state vertical-scroll-proportion="0.0" vertical-offset="155" max-vertical-offset="799">
+              <caret line="38" column="3" selection-start-line="38" selection-start-column="3" selection-end-line="38" selection-end-column="3" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#410#411#0" expanded="true" />
+                <element signature="e#435#436#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -84,12 +86,14 @@
       <file leaf-file-name="CreateDB.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/database/CreateDB.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3979764" vertical-offset="223" max-vertical-offset="816">
-              <caret line="27" column="19" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
+            <state vertical-scroll-proportion="0.79932547" vertical-offset="223" max-vertical-offset="884">
+              <caret line="41" column="34" selection-start-line="41" selection-start-column="34" selection-end-line="41" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#401#402#0" expanded="true" />
                 <element signature="e#426#427#0" expanded="true" />
+                <element signature="e#844#845#0" expanded="true" />
+                <element signature="e#883#884#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -141,6 +145,7 @@
         <option value="$PROJECT_DIR$/src/Shop.java" />
         <option value="$PROJECT_DIR$/src/test/test.java" />
         <option value="$PROJECT_DIR$/src/model/Shop.java" />
+        <option value="$PROJECT_DIR$/src/database/dbOperations.java" />
         <option value="$PROJECT_DIR$/src/database/CreateDB.java" />
       </list>
     </option>
@@ -445,7 +450,13 @@
       <option name="project" value="LOCAL" />
       <updated>1424889867662</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Done the connection part of the createDB class">
+      <created>1424891168504</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1424891168506</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -494,7 +505,8 @@
       <TodoPanelSettings />
     </option>
     <MESSAGE value="Just added the class files. nothing in them just the class names" />
-    <option name="LAST_COMMIT_MESSAGE" value="Just added the class files. nothing in them just the class names" />
+    <MESSAGE value="Done the connection part of the createDB class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Done the connection part of the createDB class" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -563,20 +575,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/database/dbOperations.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="255">
-          <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
-          <folding />
+        <state vertical-scroll-proportion="0.0" vertical-offset="155" max-vertical-offset="799">
+          <caret line="38" column="3" selection-start-line="38" selection-start-column="3" selection-end-line="38" selection-end-column="3" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#410#411#0" expanded="true" />
+            <element signature="e#435#436#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/database/CreateDB.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3979764" vertical-offset="223" max-vertical-offset="816">
-          <caret line="27" column="19" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
+        <state vertical-scroll-proportion="0.79932547" vertical-offset="223" max-vertical-offset="884">
+          <caret line="41" column="34" selection-start-line="41" selection-start-column="34" selection-end-line="41" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#401#402#0" expanded="true" />
             <element signature="e#426#427#0" expanded="true" />
+            <element signature="e#844#845#0" expanded="true" />
+            <element signature="e#883#884#0" expanded="true" />
           </folding>
         </state>
       </provider>

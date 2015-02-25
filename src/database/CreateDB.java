@@ -38,5 +38,9 @@ public class CreateDB {
     return conn;
   }
 
+  static void main(String [] args){
+    CreateDB cdb = new CreateDB();
+  }
+
 
 }
