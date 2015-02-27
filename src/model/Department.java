@@ -8,6 +8,8 @@ Group 17
 
 public class Department {
 
+// instance variables
+
     private int deptId;
     private String deptName;
 
