@@ -1,8 +1,9 @@
-package model;/*2ndYearProject
-  model
-  Created by David
-  18:37   25/02/2015
-  Software Development 3
+package model;
+
+/*
+IT Tallaght - 2015, S2
+Computing - Year 2, Project
+Group 17
 */
 
 public class Employee {
