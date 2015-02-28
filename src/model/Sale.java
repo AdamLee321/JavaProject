@@ -29,7 +29,7 @@ public class Sale {
       this.discount = discount;
       this.amount = amount;
     }
-    
+     //METHODS
     public void awardpoints(){
       
     }
@@ -38,4 +38,28 @@ public class Sale {
       
       return 0.00;
     }
+    
+    //GETTERS
+    public int getSaleID(){
+        return saleID;
+    }
+    
+    public String getDate(){
+        return date;
+    }
+    
+    public String getTime(){
+        return time;
+    }
+    
+    public double getDiscount(){
+        return discount;
+    }
+    
+    public double getAmount(){
+        return amount;
+    }
+    
+    //SETTERS
+    
 }
