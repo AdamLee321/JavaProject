@@ -1,8 +1,9 @@
-package database;/*2ndYearProject
-  database
-  Created by David
-  18:41   25/02/2015
-  Software Development 3
+package database;
+
+/*
+IT Tallaght - 2015, S2
+Computing - Year 2, Project
+Group 17
 */
 
 import oracle.jdbc.pool.OracleDataSource;
