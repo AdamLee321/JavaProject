@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 /*
 IT Tallaght - 2015, S2
 Computing - Year 2, Project
@@ -12,13 +14,14 @@ public class Department {
 
     private int deptId;
     private String deptName;
-
+    private ArrayList<Employee> empList;
 
 // default constructor
     public Department(){
 
         deptId = 0;
         deptName = "";
+        empList = new ArrayList<Employee>();
     }
 
 // overloaded constructor
@@ -26,6 +29,7 @@ public class Department {
 
         deptId = 0; // sequence in
         deptName = deptNameIn;
+        empList = new ArrayList<Employee>();
     }
 
     // get department id
