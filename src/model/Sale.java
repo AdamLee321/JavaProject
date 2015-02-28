@@ -14,7 +14,7 @@ public class Sale {
     private double discount;
     private double amount;
     
-    public sale(){
+    public sale() {
       saleID = 0;
       date = "";
       time = "";
@@ -30,36 +30,54 @@ public class Sale {
       this.amount = amount;
     }
      //METHODS
-    public void awardpoints(){
+    public void awardpoints() {
       
     }
     
-    public double loyaltyDiscount(){
+    public double loyaltyDiscount() {
       
       return 0.00;
     }
     
     //GETTERS
-    public int getSaleID(){
+    public int getSaleID() {
         return saleID;
     }
     
-    public String getDate(){
+    public String getDate() {
         return date;
     }
     
-    public String getTime(){
+    public String getTime() {
         return time;
     }
     
-    public double getDiscount(){
+    public double getDiscount() {
         return discount;
     }
     
-    public double getAmount(){
+    public double getAmount() {
         return amount;
     }
     
     //SETTERS
+    public void setSaleID(int saleID) {
+        this.saleID = saleID;
+    }
     
+    public void setDate(String date) {
+        this.date = date;
+    }
+    
+    public void setTime(String time) {
+        this.time = time;
+    }
+    
+    public void setDiscount(double discount) {
+        this.discount = discount;
+    }
+    
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
 }
