@@ -25,9 +25,9 @@ public class ConnectionFB {
     try{
       OracleDataSource ods = new OracleDataSource();
 
-      ods.setURL("jdbc:oracle:thin:Dave@localhost:1521/XE");
-      ods.setUser("");
-      ods.setPassword("");
+      ods.setURL("jdbc:oracle:thin:hr@localhost:1521/XE");
+      ods.setUser("Project");
+      ods.setPassword("1234");
 
       conn = ods.getConnection();
 
