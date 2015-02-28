@@ -14,12 +14,12 @@ public class Sale {
     private double discount;
     private double amount;
     
-    public sale() {
+    public Sale() {
       saleID = 0;
       date = "";
       time = "";
       discount = 0.00;
-      amount - 0.00;
+      amount = 0.00;
     }
     
     public Sale(int saleID, String date, String time, double discount, double amount) {
