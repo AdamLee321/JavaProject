@@ -56,14 +56,10 @@ public class CreateDepartment {
             // insert data into employee table
             String sqlData = "INSERT INTO department(deptId, deptName) values(deptSeq.nextVal,?)";
             pstmt = conn.prepareStatement(sqlData);
-            System.out.println(sqlData);
 
-
-            System.out.println("here");
             // department names
             pstmt.setString(1,"Administration");
             pstmt.execute();
-            System.out.println("here");
 
             pstmt.setString(1, "Management");
             pstmt.execute();
@@ -78,7 +74,7 @@ public class CreateDepartment {
             pstmt.execute();
 
         } catch (SQLException e){
-            System.out.println("e");
+            System.out.println(e);
         }
 
     }

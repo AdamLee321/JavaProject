@@ -21,9 +21,9 @@ public class Main {
     cs.dropShopTable();
     cs.createShopTable(); */
 
-  /*  CreateDepartment cd = new CreateDepartment(connDB.getConn());
+    CreateDepartment cd = new CreateDepartment(connDB.getConn());
     cd.dropDepartment();
-    cd.createDepartments(); */
+    cd.createDepartments(); 
 
     CreateEmployee ce = new CreateEmployee(connDB.getConn());
     ce.dropEmployees();
