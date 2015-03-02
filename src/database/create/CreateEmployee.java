@@ -27,7 +27,7 @@ public class CreateEmployee {
                 System.out.println("Employee Table Dropped");
             } catch (SQLException e) {}
         } catch (SQLException e) {
-            System.out.println("ERROR: " + e.getMessage());
+            System.out.println(e);
         }
     }
 
