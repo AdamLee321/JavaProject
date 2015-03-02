@@ -25,7 +25,7 @@ public class CreateEmployee {
             stmt = conn.createStatement();
             try {
                 stmt.execute("DROP SEQUENCE empSeq");
-                System.out.println("\nEmployee Sequence Dropped");
+                System.out.println("Employee Sequence Dropped");
             } catch (SQLException e) {
             }
             try {
@@ -45,29 +45,29 @@ public class CreateEmployee {
             String sqlTable = "CREATE TABLE employee(" +
                     "empId INTEGER," +
                     "deptId INTEGER," +
-                    "empFName VARCHAR(30)," +
-                    "empLName VARCHAR(30)," +
+                    "empFName VARCHAR2(30)," +
+                    "empLName VARCHAR2(30)," +
                     "position VARCHAR2(30)," +
                     "empStreet VARCHAR2(80)," +
                     "empCity VARCHAR2(20)," +
                     "empCounty VARCHAR2(25)," +
-                    "empDOB DATE," +
+                    "empDOB VARCHAR2(255)," +
                     "empEmail VARCHAR2(70)," +
-                    "salary NUMBER," +
-                    "empPicUrl BLOB," +
-                    "empUsername VARCHAR2 (30)," +
-                    "empPassword VARCHAR(8)," +
+                    "salary VARCHAR2(80)," +
+                    "empPicUrl VARCHAR2(20)," +
+                    "empUsername VARCHAR2(30)," +
+                    "empPassword VARCHAR2(8)," +
                     "Primary Key(empId)," +
                     "Foreign Key(deptId) references department(deptId) on delete set null" +
                     ")";
-            System.out.println("\nEmployee Table Created");
+            System.out.println("Employee Table Created");
             stmt.execute(sqlTable);
         } catch (SQLException e) {
             System.out.println(e);
         }
         try {
             // create employee id sequence
-            String sqlSequence = "CREATE SEQUENCE empSeq START WITH 1 INCREMENT BY 1";
+            String sqlSequence = "CREATE SEQUENCE empSeq INCREMENT BY 1 START WITH 1";
             stmt.execute(sqlSequence);
             System.out.println("Employee Sequence Created");
         } catch (SQLException e) {
@@ -81,20 +81,20 @@ public class CreateEmployee {
             // stmt.execute(sqlstm);
 
             String sqlData = "INSERT INTO employee (empId, deptId, empFName, empLName, position, empStreet, empCity, empCounty, empDOB, empEmail, salary, empPicUrl, empUsername, empPassword)" +
-                    "VALUES (empId_seq.nextVal,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                    "VALUES (empSeq.nextVal,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             pstmt = conn.prepareStatement(sqlData);
 
             // employee id SEQUENCE
-            pstmt.setInt(1, 2);  // department id
-            pstmt.setString(2, "Ruth"); // employee first name
+            pstmt.setString(2, "hu"); // department id
+            pstmt.setString(2, "Rush"); // employee first name
             pstmt.setString(3, "Ward"); // employee last name
             pstmt.setString(4, "Sales"); // employee position
             pstmt.setString(5, "41 Wright Court"); // employee street
             pstmt.setString(6, "Tallaght"); // employee city
             pstmt.setString(7, "Dublin"); // employee county
-            pstmt.setString(8, "04-MAY-1982"); // employee dob
-            pstmt.setString(9, "ruth.ward@gmail.com"); // employee email
-            pstmt.setInt(10, 12000); // employee salary
+            pstmt.setString(8, "01-FEB-1984"); // employee dob
+            pstmt.setString(9, "ruth.ward@gmail.com");  //employee email
+            pstmt.setString(10, "12000"); // employee salary
             pstmt.setString(11, "NULL"); // employee picture
             pstmt.setString(12, "ruthward"); // employee username
             pstmt.setString(13, "1234"); // employee password

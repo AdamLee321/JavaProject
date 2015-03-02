@@ -53,8 +53,8 @@ public class CreateSales {
             System.out.println(e);
         }
         try {
-            // create employee id sequence
-            String sqlSequence = "create sequence saleSeq increment by 1 start with 1";
+            // create sales id sequence
+            String sqlSequence = "CREATE SEQUENCE saleSeq INCREMENT BY 1 START WITH 1";
             stmt.execute(sqlSequence);
             System.out.println("Sales Sequence Created");
         } catch (SQLException e){
@@ -63,7 +63,7 @@ public class CreateSales {
         try {
             //
             String sqlData = "INSERT INTO sales(saleId, empId, saleDate, saleTime, saleDiscount, saleAmount)" +
-            "values(saleSeq.nextVal,?,?,?,?,?)";
+            "VALUES(saleSeq.nextVal,?,?,?,?,?)";
             pstmt = conn.prepareStatement(sqlData);
 
             pstmt.setInt(1,3);
