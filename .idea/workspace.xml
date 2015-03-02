@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8ac28a1c-b34a-42c4-9d30-2be94cc97892" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/database/create/CreateEmployee.java" afterPath="$PROJECT_DIR$/src/database/create/CreateEmployee.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="2ndYearProject.iws" />
@@ -42,8 +40,8 @@
       <file leaf-file-name="CreateEmployee.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/database/create/CreateEmployee.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.7297298" vertical-offset="0" max-vertical-offset="5508">
-              <caret line="64" column="42" selection-start-line="64" selection-start-column="42" selection-end-line="64" selection-end-column="42" />
+            <state vertical-scroll-proportion="0.7027027" vertical-offset="0" max-vertical-offset="5508">
+              <caret line="26" column="55" selection-start-line="26" selection-start-column="55" selection-end-line="26" selection-end-column="55" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -181,6 +179,7 @@
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="recentsLimit" value="5" />
     <property name="dynamic.classpath" value="false" />
+    <property name="FullScreen" value="false" />
   </component>
   <component name="RunManager" selected="Application.CreateProduct">
     <configuration default="false" name="CreateProduct" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -384,7 +383,13 @@
       <option name="project" value="LOCAL" />
       <updated>1425308357010</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="changed things">
+      <created>1425313787668</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1425313787668</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -486,8 +491,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/database/create/CreateEmployee.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.7297298" vertical-offset="0" max-vertical-offset="5508">
-          <caret line="64" column="42" selection-start-line="64" selection-start-column="42" selection-end-line="64" selection-end-column="42" />
+        <state vertical-scroll-proportion="0.7027027" vertical-offset="0" max-vertical-offset="5508">
+          <caret line="26" column="55" selection-start-line="26" selection-start-column="55" selection-end-line="26" selection-end-column="55" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
