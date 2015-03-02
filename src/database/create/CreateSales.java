@@ -52,6 +52,13 @@ public class CreateSales {
         } catch (SQLException e) {
             System.out.println(e);
         }
-
+        try {
+            // create employee id sequence
+            String sqlSequence = "create sequence saleSeq increment by 1 start with 1";
+            stmt.execute(sqlSequence);
+            System.out.println("Sales Sequence Created");
+        } catch (SQLException e){
+            System.out.println(e);
+        }
     }
 }
