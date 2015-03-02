@@ -58,6 +58,7 @@ public class CreateEmployee {
                     "Primary Key(empId),\n" +
                     "Foreign Key(deptId) references department(deptId) on delete set null\n" +
                     ")";
+            System.out.println("Employee Table Created");
             stmt.execute(sqlTable);
 
             // create employee id sequence
