@@ -15,8 +15,6 @@ import java.sql.SQLException;
 
 public class ConnectionDB {
   private Connection conn = null;
-  private ResultSet rset = null;
-  private PreparedStatement pstmt = null;
 
   public ConnectionDB(){
     conn = openDB();
@@ -31,7 +29,7 @@ public class ConnectionDB {
       ods.setPassword("1234");
 
       this.conn = ods.getConnection();
-
+      System.out.println("connected.");
 
     }catch (Exception e){
       System.out.println(e);
@@ -42,13 +40,15 @@ public class ConnectionDB {
 
   public void closeDB() {
     try {
-      pstmt.close();
-      rset.close();
       conn.close();
       System.out.print("Connection closed");
     } catch (SQLException e) {
       System.out.print("Could not close connection ");
       e.printStackTrace();
     }
+  }
+
+  public Connection getConn(){
+    return conn;
   }
 }
