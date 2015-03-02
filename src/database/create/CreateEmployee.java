@@ -74,22 +74,16 @@ public class CreateEmployee {
             System.out.println(e);
         }
         try {
-            // insert data into employee table
-
-            // String sqlstm = "INSERT INTO employee(empId,deptId,empFName,empLName,position,empStreet,empCity,empCounty,empDOB,empEmail,salary,empPicUrl,empUsername,empPassword)" +
-            //         "values(empId_seq.nextVal,null,null,null,null,null,null,null," + "'"12-FEB-1985"'" +, null,null,null,null,null)";
-            // stmt.execute(sqlstm);
-
             String sqlData = "INSERT INTO employee (empId, deptId, empFName, empLName, position, empStreet, empCity, empCounty, empDOB, empEmail, salary, empPicUrl, empUsername, empPassword)" +
                     "VALUES (empSeq.nextVal,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             pstmt = conn.prepareStatement(sqlData);
 
             // employee id SEQUENCE
-            pstmt.setString(2, "hu"); // department id
+            pstmt.setInt(1, 4); // department id
             pstmt.setString(2, "Rush"); // employee first name
             pstmt.setString(3, "Ward"); // employee last name
             pstmt.setString(4, "Sales"); // employee position
-            pstmt.setString(5, "41 Wright Court"); // employee street
+            pstmt.setString(5, "Wright Court"); // employee street
             pstmt.setString(6, "Tallaght"); // employee city
             pstmt.setString(7, "Dublin"); // employee county
             pstmt.setString(8, "01-FEB-1984"); // employee dob
@@ -374,6 +368,12 @@ public class CreateEmployee {
             pstmt.setString(13,"1234");
             pstmt.execute();
         }
+
+                    // insert data into employee table
+
+            // String sqlstm = "INSERT INTO employee(empId,deptId,empFName,empLName,position,empStreet,empCity,empCounty,empDOB,empEmail,salary,empPicUrl,empUsername,empPassword)" +
+            //         "values(empId_seq.nextVal,null,null,null,null,null,null,null," + "'"12-FEB-1985"'" +, null,null,null,null,null)";
+            // stmt.execute(sqlstm);
 
 */
     }
