@@ -12,7 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class ConnectionFB {
+public class ConnectionDB {
   private Connection conn = null;
   private ResultSet rset = null;
   private PreparedStatement pstmt = null;
