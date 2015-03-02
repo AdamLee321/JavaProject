@@ -5,5 +5,4 @@ package database.operations;
  */
 public class memberOperations {
  //Insert here
-    int something = 0;
 }
