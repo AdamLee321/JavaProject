@@ -12,8 +12,8 @@ Group 17
 public class CreateEmployee {
 
     private Connection conn;
-    private PreparedStatement pstmt = null;
-    private Statement stmt = null;
+    private PreparedStatement pstmt;
+    private Statement stmt;
 
     public CreateEmployee(Connection connIn){
 
@@ -25,7 +25,7 @@ public class CreateEmployee {
             stmt = conn.createStatement();
             try {
                 stmt.execute("DROP SEQUENCE empId_seq");
-                System.out.println("Employee Sequence Dropped");
+                System.out.println("\nEmployee Sequence Dropped");
             } catch (SQLException e) {}
             try {
                 stmt.execute("DROP TABLE employee");
@@ -58,18 +58,19 @@ public class CreateEmployee {
                     "Primary Key(empId),\n" +
                     "Foreign Key(deptId) references department(deptId) on delete set null\n" +
                     ")";
-            System.out.println("Employee Table Created");
+            System.out.println("\nEmployee Table Created");
             stmt.execute(sqlTable);
 
             // create employee id sequence
             String sqlSequence = "create sequence empId_seq increment by 1 start with 1";
             stmt.execute(sqlSequence);
+            System.out.println("Employee Sequence Created");
 
             // insert data into employee table
 
-      //      String sqlstm = "INSERT INTO employee(empId,deptId,empFName,empLName,position,empStreet,empCity,empCounty,empDOB,empEmail,salary,empPicUrl,empUsername,empPassword)" +
-        //            "values(empId_seq.nextVal,null,null,null,null,null,null,null," + "'"12-FEB-1985"'" +, null,null,null,null,null)";
-          //  stmt.execute(sqlstm);
+           // String sqlstm = "INSERT INTO employee(empId,deptId,empFName,empLName,position,empStreet,empCity,empCounty,empDOB,empEmail,salary,empPicUrl,empUsername,empPassword)" +
+           //         "values(empId_seq.nextVal,null,null,null,null,null,null,null," + "'"12-FEB-1985"'" +, null,null,null,null,null)";
+           // stmt.execute(sqlstm);
 
             String sqlData = "INSERT INTO employee(empId,deptId,empFName,empLName,position,empStreet,empCity,empCounty,empDOB,empEmail,salary,empPicUrl,empUsername,empPassword)" +
                     "values(empId_seq.nextVal,?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -97,7 +98,7 @@ public class CreateEmployee {
             pstmt.setString(5,"41 Wright Court");
             pstmt.setString(6,"Tallaght");
             pstmt.setString(7,"Dublin");
-            pstmt.setString(8,"12-NOV-1980");
+            pstmt.setString(8,"12-NOV-1989");
             pstmt.setString(9,"ruth.ward@gmail.com");
             pstmt.setInt(10,12000);
             pstmt.setString(11,"NULL");
@@ -338,7 +339,7 @@ public class CreateEmployee {
             pstmt.setString(5,"92 Horsefair Green");
             pstmt.setString(6,"Terenure");
             pstmt.setString(7,"Dublin");
-          //  pstmt.setString(8,"08/05/1981");
+            pstmt.setString(8,"08/05/1981");
             pstmt.setString(9,"Jeffery.jones@outlook.com");
             pstmt.setInt(10, 16000);
             pstmt.setString(11,"NULL");

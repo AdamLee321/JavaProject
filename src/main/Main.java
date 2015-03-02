@@ -28,19 +28,6 @@ public class Main {
     ce.dropEmployees();
     ce.createEmployees();
 
-  /*  CreateProduct cp = new CreateProduct(connDB.getConn());
-    cp.dropProductTable();
-<<<<<<< HEAD
-    cp.createProductTable(); */
-
-=======
-    cp.createProductTable();
-    
-    CreateMember cm = new CreateMember();
-    cm.dropMembers(connDB.getConn());
-    cm.createMembers();
->>>>>>> b24df70808d90024e7ec86c05cc576182a9c8136
-
     connDB.closeDB();
   }
 }
