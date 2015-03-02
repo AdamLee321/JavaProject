@@ -697,5 +697,4 @@ public class CreateProduct {
             System.out.println("Error creating table");
         }
     }
-
 }

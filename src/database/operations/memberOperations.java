@@ -1,9 +1,8 @@
 package database.operations;
 
 /**
- * Created by Adam Lee on 28/02/2015.
+ * Created by Adam Lee on 02/03/2015.
  */
-public class MemberOperations {
-
-    final boolean technicaldifficulty = true;
+public class memberOperations {
+ //Insert here
 }
