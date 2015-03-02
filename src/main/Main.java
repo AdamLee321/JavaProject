@@ -25,13 +25,15 @@ public class Main {
     cd.dropDepartment();
     cd.createDepartments(); */
 
-   /* CreateEmployee ce = new CreateEmployee(connDB.getConn());
+    CreateEmployee ce = new CreateEmployee(connDB.getConn());
     ce.dropEmployees();
-    ce.createEmployees(); */
+    ce.createEmployees();
 
+/*
       CreateSales se = new CreateSales(connDB.getConn());
       se.dropSales();
       se.createSales();
+      */
 
    /*   CreateMember me = new CreateMember();
       me.dropMembers(connDB.getConn());
