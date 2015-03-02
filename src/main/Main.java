@@ -15,21 +15,21 @@ public class Main {
   public static void main(String[] args) {
     ConnectionDB connDB = new ConnectionDB();
 
-    CreateShop cs = new CreateShop(connDB.getConn());
+   /* CreateShop cs = new CreateShop(connDB.getConn());
     cs.dropShopTable();
-    cs.createShopTable();
+    cs.createShopTable(); */
 
-    CreateDepartment cd = new CreateDepartment(connDB.getConn());
+  /*  CreateDepartment cd = new CreateDepartment(connDB.getConn());
     cd.dropDepartment();
-    cd.createDepartments();
+    cd.createDepartments(); */
 
     CreateEmployee ce = new CreateEmployee(connDB.getConn());
     ce.dropEmployees();
     ce.createEmployees();
 
-    CreateProduct cp = new CreateProduct(connDB.getConn());
+  /*  CreateProduct cp = new CreateProduct(connDB.getConn());
     cp.dropProductTable();
-    cp.createProductTable();
+    cp.createProductTable(); */
 
 
     connDB.closeDB();

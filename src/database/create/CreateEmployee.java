@@ -86,20 +86,20 @@ public class CreateEmployee {
 
 
             pstmt.setInt(1,2);
-            pstmt.setString(2,"Ruth");
+            pstmt.setString(2, "Ruth");
             pstmt.setString(3,"Ward");
             pstmt.setString(4,"Sales");
             pstmt.setString(5,"41 Wright Court");
             pstmt.setString(6,"Tallaght");
-            pstmt.setString(7,"Dublin");
-            pstmt.setString(8,"03-05-1967");
+            pstmt.setString(7, "Dublin");
+            pstmt.setString(8,"02-01-1990");
             pstmt.setString(9,"ruth.ward@gmail.com");
             pstmt.setInt(10,12000);
             pstmt.setString(11,"NULL");
             pstmt.setString(12,"ruthward");
             pstmt.setString(13,"1234");
             pstmt.execute();
-
+/*
             pstmt.setInt(1,4);
             pstmt.setString(2,"Norma");
             pstmt.setString(3,"Brown");
@@ -370,7 +370,7 @@ public class CreateEmployee {
             pstmt.setString(12,"philiplee");
             pstmt.setString(13,"1234");
             pstmt.execute();
-
+*/
         } catch (SQLException e){
             System.out.println(e);
         }
