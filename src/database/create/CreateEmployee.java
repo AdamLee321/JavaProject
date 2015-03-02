@@ -280,6 +280,7 @@ public class CreateEmployee {
             pstmt.setString(13,"1234");
             pstmt.execute();
 
+
             pstmt.setInt(1,3);
             pstmt.setString(2,"Melissa");
             pstmt.setString(3,"Evans");
@@ -363,7 +364,7 @@ public class CreateEmployee {
             pstmt.setString(6,"Ranlagh");
             pstmt.setString(7,"Dublin");
         //    pstmt.setString(8,"26/09/1984");
-            pstmt.setString(9,"Philip.lee@gmail.com");
+            pstmt.setString(9, "Philip.lee@gmail.com");
             pstmt.setInt(10,12000);
             pstmt.setString(11,"NULL");
             pstmt.setString(12,"philiplee");
