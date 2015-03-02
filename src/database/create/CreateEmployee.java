@@ -11,9 +11,14 @@ Group 17
 
 public class CreateEmployee {
 
-    private Connection conn = null;
+    private Connection conn;
     private PreparedStatement pstmt = null;
     private Statement stmt = null;
+
+    public CreateEmployee(Connection connIn){
+
+        conn = connIn;
+    }
 
     public void dropEmployees() {
         try{
@@ -52,7 +57,7 @@ public class CreateEmployee {
                     "empPassword VARCHAR(8),\n" +
                     "Primary Key(empId),\n" +
                     "Foreign Key(deptId) references department(deptId) on delete set null\n" +
-                    ");";
+                    ")";
             stmt.execute(sqlTable);
 
             // create employee id sequence
@@ -61,7 +66,7 @@ public class CreateEmployee {
 
             // insert data into employee table
             String sqlData = "INSERT INTO employee(empId,deptId,empFName,empLName,position,empStreet,empCity,empCounty,empDOB,empEmail,salary,empPicUrl,empUsername,empPassword)" +
-                    "values(empId_seq.nextVal,dept_seq.currVal,?,?,?,?,?,?,?,?,?,?,?,?)";
+                    "values(empId_seq.nextVal,deptId_seq.currVal,?,?,?,?,?,?,?,?,?,?,?,?)";
             pstmt = conn.prepareStatement(sqlData);
 
             // employee id
