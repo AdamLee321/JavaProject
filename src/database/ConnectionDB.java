@@ -11,6 +11,7 @@ import oracle.jdbc.pool.OracleDataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class ConnectionDB {
   private Connection conn = null;
@@ -25,17 +26,29 @@ public class ConnectionDB {
     try{
       OracleDataSource ods = new OracleDataSource();
 
-      ods.setURL("jdbc:oracle:thin:hr@localhost:1521/XE");
+      ods.setURL("jdbc:oracle:thin:Project@localhost:1521/XE");
       ods.setUser("Project");
       ods.setPassword("1234");
 
-      conn = ods.getConnection();
+      this.conn = ods.getConnection();
 
 
     }catch (Exception e){
       System.out.println(e);
       System.out.println("Cannot establish connection");
     }
-    return conn;
+    return this.conn;
+  }
+
+  public void closeDB() {
+    try {
+      pstmt.close();
+      rset.close();
+      conn.close();
+      System.out.print("Connection closed");
+    } catch (SQLException e) {
+      System.out.print("Could not close connection ");
+      e.printStackTrace();
+    }
   }
 }
