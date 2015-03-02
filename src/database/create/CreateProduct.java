@@ -10,20 +10,26 @@ import java.sql.*;
 public class CreateProduct {
     private PreparedStatement pstmt;
     private Statement stmt;
-    private ResultSet rset;
     private Connection conn;
 
-    public void dropProductTable(Connection connIn) {
+    public CreateProduct(Connection connIn){
+        conn =  connIn;
+    }
+
+    public void dropProductTable() {
         try {
-            this.conn = connIn;
             stmt = conn.createStatement();
             try {
                 stmt.execute("DROP TABLE Product");
-                System.out.println("Table dropped successfully");
-                stmt.execute("DROP SEQUENCE productSeq");
-                System.out.println("Sequence dropped successfully");
+                System.out.println("Product table dropped successfully");
             } catch (SQLException ex) {
-                System.out.println("Error dropping table or they may not exist");
+                System.out.println("Error dropping product table or it may not exist");
+            }
+            try{
+                stmt.execute("DROP SEQUENCE productSeq");
+                System.out.println("Product sequence dropped successfully");
+            } catch (SQLException ex) {
+                System.out.println("Error dropping product sequence or if may not exist");
             }
         } catch (SQLException e) {
             //System.out.println(e);
@@ -52,7 +58,7 @@ public class CreateProduct {
                     "screen VARCHAR2(30)," +
                     "prodDesc VARCHAR2(500)," +
                     "PRIMARY KEY (prodId))");
-            System.out.println("Table created successfully");
+            System.out.println("Product table created successfully");
 
             //create product sequence
             stmt.execute("CREATE SEQUENCE productSeq START WITH 100000 INCREMENT BY 1");
