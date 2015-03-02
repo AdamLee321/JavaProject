@@ -698,12 +698,4 @@ public class CreateProduct {
         }
     }
 
-    public static void main(String[] args) {
-        ConnectionDB connDB = new ConnectionDB();
-        CreateProduct cp = new CreateProduct();
-        cp.dropProductTable(connDB.getConn());
-        cp.createProductTable();
-        connDB.closeDB();
-    }
-
 }
