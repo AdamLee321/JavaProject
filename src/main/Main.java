@@ -6,6 +6,7 @@ package main;/*2ndYearProject
 */
 import database.ConnectionDB;
 import database.create.CreateDepartment;
+import database.create.CreateEmployee;
 import database.create.CreateProduct;
 import database.create.CreateShop;
 import model.Shop;
@@ -21,6 +22,10 @@ public class Main {
     CreateDepartment cd = new CreateDepartment(connDB.getConn());
     cd.dropDepartment();
     cd.createDepartments();
+
+    CreateEmployee ce = new CreateEmployee(connDB.getConn());
+    ce.dropEmployees();
+    ce.createEmployees();
 
     CreateProduct cp = new CreateProduct(connDB.getConn());
     cp.dropProductTable();
