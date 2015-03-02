@@ -11,9 +11,14 @@ Group 17
 
 public class CreateEmployee {
 
-    private Connection conn = null;
+    private Connection conn;
     private PreparedStatement pstmt = null;
     private Statement stmt = null;
+
+    public CreateEmployee(Connection connIn){
+
+        conn = connIn;
+    }
 
     public void dropEmployees() {
         try{
@@ -52,7 +57,7 @@ public class CreateEmployee {
                     "empPassword VARCHAR(8),\n" +
                     "Primary Key(empId),\n" +
                     "Foreign Key(deptId) references department(deptId) on delete set null\n" +
-                    ");";
+                    ")";
             stmt.execute(sqlTable);
 
             // create employee id sequence
@@ -61,8 +66,23 @@ public class CreateEmployee {
 
             // insert data into employee table
             String sqlData = "INSERT INTO employee(empId,deptId,empFName,empLName,position,empStreet,empCity,empCounty,empDOB,empEmail,salary,empPicUrl,empUsername,empPassword)" +
-                    "values(empId_seq.nextVal,dept_seq.currVal,?,?,?,?,?,?,?,?,?,?,?,?)";
+                    "values(empId_seq.nextVal,deptId_seq.currVal,?,?,?,?,?,?,?,?,?,?,?,?)";
             pstmt = conn.prepareStatement(sqlData);
+
+            // employee id
+            // department id
+            // employee first name
+            // employee last name
+            // employee position
+            // employee street
+            // employee city
+            // employee county
+            // employee dob
+            // employee email
+            // employee salary
+            // employee picture
+            // employee username
+            // employee password
 
             pstmt.setString(1,"Ruth");
             pstmt.setString(2,"Ward");
@@ -74,8 +94,8 @@ public class CreateEmployee {
             pstmt.setString(8,"ruth.ward@gmail.com");
             pstmt.setString(9,"€12000");
             pstmt.setString(10,"NULL");
-            pstmt.setString(11,"NULL");
-            pstmt.setString(12,"NULL");
+            pstmt.setString(11,"ruthward");
+            pstmt.setString(12,"1234");
 
             pstmt.setString(1,"Norma");
             pstmt.setString(2,"Brown");
@@ -87,8 +107,8 @@ public class CreateEmployee {
             pstmt.setString(8,"norma.brown@gmail.com");
             pstmt.setString(9,"€19000");
             pstmt.setString(10,"NULL");
-            pstmt.setString(11,"NULL");
-            pstmt.setString(12,"NULL");
+            pstmt.setString(11,"normabrown");
+            pstmt.setString(12,"1234");
 
             pstmt.setString(1,"Teresa");
             pstmt.setString(2,"Griffin");
@@ -100,8 +120,8 @@ public class CreateEmployee {
             pstmt.setString(8,"Teresa.griffin@outlook.com");
             pstmt.setString(9,"€17000");
             pstmt.setString(10,"NULL");
-            pstmt.setString(11,"NULL");
-            pstmt.setString(12,"NULL");
+            pstmt.setString(11,"teresagriffin");
+            pstmt.setString(12,"1234");
 
             pstmt.setString(1,"Arthur");
             pstmt.setString(2,"Watson");
@@ -113,8 +133,8 @@ public class CreateEmployee {
             pstmt.setString(8,"Arthur.watson@yahoo.co.uk");
             pstmt.setString(9,"€24000");
             pstmt.setString(10,"NULL");
-            pstmt.setString(11,"NULL");
-            pstmt.setString(12,"NULL");
+            pstmt.setString(11,"arthurwatson");
+            pstmt.setString(12,"1234");
 
             pstmt.setString(1,"Fred");
             pstmt.setString(2,"Martin");
@@ -126,8 +146,8 @@ public class CreateEmployee {
             pstmt.setString(8,"Fred.martin@hotmail.com");
             pstmt.setString(9,"€12000");
             pstmt.setString(10,"NULL");
-            pstmt.setString(11,"NULL");
-            pstmt.setString(12,"NULL");
+            pstmt.setString(11,"fredmartin");
+            pstmt.setString(12,"1234");
 
             pstmt.setString(1,"Melissa");
             pstmt.setString(2,"Brooks");
@@ -139,8 +159,8 @@ public class CreateEmployee {
             pstmt.setString(8,"Melissa.brooks@gmail.com");
             pstmt.setString(9,"€23500");
             pstmt.setString(10,"NULL");
-            pstmt.setString(11,"NULL");
-            pstmt.setString(12,"NULL");
+            pstmt.setString(11,"melissabrooks");
+            pstmt.setString(12,"1234");
 
             pstmt.setString(1,"Sara");
             pstmt.setString(2,"Reed");
@@ -152,8 +172,8 @@ public class CreateEmployee {
             pstmt.setString(8,"Sara.reed@gmail.com");
             pstmt.setString(9,"€16000");
             pstmt.setString(10,"NULL");
-            pstmt.setString(11,"NULL");
-            pstmt.setString(12,"NULL");
+            pstmt.setString(11,"sarareed");
+            pstmt.setString(12,"1234");
 
             pstmt.setString(1,"Sean");
             pstmt.setString(2,"Torres");
@@ -165,8 +185,8 @@ public class CreateEmployee {
             pstmt.setString(8,"Sean.torres@hotmail.com");
             pstmt.setString(9,"€12000");
             pstmt.setString(10,"NULL");
-            pstmt.setString(11,"NULL");
-            pstmt.setString(12,"NULL");
+            pstmt.setString(11,"seartorres");
+            pstmt.setString(12,"1234");
 
             pstmt.setString(1,"Angela");
             pstmt.setString(2,"Hernandez");
@@ -178,8 +198,8 @@ public class CreateEmployee {
             pstmt.setString(8,"Angela.hernandez@yahoo.co.uk");
             pstmt.setString(9,"€12000");
             pstmt.setString(10,"NULL");
-            pstmt.setString(11,"NULL");
-            pstmt.setString(12,"NULL");
+            pstmt.setString(11,"angelahernandez");
+            pstmt.setString(12,"1234");
 
             pstmt.setString(1,"Stephen");
             pstmt.setString(2,"Bailey");
@@ -191,8 +211,8 @@ public class CreateEmployee {
             pstmt.setString(8,"Stephen.bailey@yahoo.co.uk");
             pstmt.setString(9,"€12000");
             pstmt.setString(10,"NULL");
-            pstmt.setString(11,"NULL");
-            pstmt.setString(12,"NULL");
+            pstmt.setString(11,"stephenbailey");
+            pstmt.setString(12,"1234");
 
             pstmt.setString(1,"Beverly");
             pstmt.setString(2,"Wright");
@@ -204,8 +224,8 @@ public class CreateEmployee {
             pstmt.setString(8,"Beverly.wright@outlook.com");
             pstmt.setString(9,"€19000");
             pstmt.setString(10,"NULL");
-            pstmt.setString(11,"NULL");
-            pstmt.setString(12,"NULL");
+            pstmt.setString(11,"beverlywright");
+            pstmt.setString(12,"1234");
 
             pstmt.setString(1,"Willie");
             pstmt.setString(2,"Jones");
@@ -217,8 +237,8 @@ public class CreateEmployee {
             pstmt.setString(8,"Willie.jones@gmail.com");
             pstmt.setString(9,"€14500");
             pstmt.setString(10,"NULL");
-            pstmt.setString(11,"NULL");
-            pstmt.setString(12,"NULL");
+            pstmt.setString(11,"williejones");
+            pstmt.setString(12,"1234");
 
             pstmt.setString(1,"Marie");
             pstmt.setString(2,"Miller");
@@ -230,8 +250,8 @@ public class CreateEmployee {
             pstmt.setString(8,"Marie.miller@hotmail.com");
             pstmt.setString(9,"€12000");
             pstmt.setString(10,"NULL");
-            pstmt.setString(11,"NULL");
-            pstmt.setString(12,"NULL");
+            pstmt.setString(11,"mariemiller");
+            pstmt.setString(12,"1234");
 
             pstmt.setString(1,"Melissa");
             pstmt.setString(2,"Evans");
@@ -243,8 +263,8 @@ public class CreateEmployee {
             pstmt.setString(8,"Melissa.evans@yahoo.co.uk");
             pstmt.setString(9,"€22000");
             pstmt.setString(10,"NULL");
-            pstmt.setString(11,"NULL");
-            pstmt.setString(12,"NULL");
+            pstmt.setString(11,"mellisaevans");
+            pstmt.setString(12,"1234");
 
             pstmt.setString(1,"Kimberly");
             pstmt.setString(2,"Garcia");
@@ -256,8 +276,8 @@ public class CreateEmployee {
             pstmt.setString(8,"Kimberly.garcia@outlook.com");
             pstmt.setString(9,"€12000");
             pstmt.setString(10,"NULL");
-            pstmt.setString(11,"NULL");
-            pstmt.setString(12,"NULL");
+            pstmt.setString(11,"kimberlygarcia");
+            pstmt.setString(12,"1234");
 
             pstmt.setString(1,"Gerald");
             pstmt.setString(2,"Perry");
@@ -269,8 +289,8 @@ public class CreateEmployee {
             pstmt.setString(8,"Gerald.perry@gmail.com");
             pstmt.setString(9,"€22000");
             pstmt.setString(10,"NULL");
-            pstmt.setString(11,"NULL");
-            pstmt.setString(12,"NULL");
+            pstmt.setString(11,"geraldperry");
+            pstmt.setString(12,"1234");
 
             pstmt.setString(1,"Jeffrey");
             pstmt.setString(2,"James");
@@ -282,8 +302,8 @@ public class CreateEmployee {
             pstmt.setString(8,"Jeffery.jones@outlook.com");
             pstmt.setString(9,"€16000");
             pstmt.setString(10,"NULL");
-            pstmt.setString(11,"NULL");
-            pstmt.setString(12,"NULL");
+            pstmt.setString(11,"jeffreyjames");
+            pstmt.setString(12,"1234");
 
             pstmt.setString(1,"Kelly");
             pstmt.setString(2,"Hall");
@@ -295,8 +315,8 @@ public class CreateEmployee {
             pstmt.setString(8,"Kelly.hall@hotmail.com");
             pstmt.setString(9,"€17500");
             pstmt.setString(10,"NULL");
-            pstmt.setString(11,"NULL");
-            pstmt.setString(12,"NULL");
+            pstmt.setString(11,"kellyhall");
+            pstmt.setString(12,"1234");
 
             pstmt.setString(1,"Philip");
             pstmt.setString(2,"Lee");
@@ -308,8 +328,8 @@ public class CreateEmployee {
             pstmt.setString(8,"Philip.lee@gmail.com");
             pstmt.setString(9,"€12000");
             pstmt.setString(10,"NULL");
-            pstmt.setString(11,"NULL");
-            pstmt.setString(12,"NULL");
+            pstmt.setString(11,"philiplee");
+            pstmt.setString(12,"1234");
 
         } catch (SQLException e){
             System.out.println(e);
