@@ -52,13 +52,11 @@ public class CreateEmployee {
                     "Primary Key(empId),\n" +
                     "Foreign Key(deptId) references department(deptId) on delete set null\n" +
                     ");";
-            pstmt = conn.prepareStatement(sqlTable);
-            pstmt.executeUpdate();
+            stmt = execute(sqlTable);
 
             // create employee id sequence
             String sqlSequence = "create sequence empId_seq increment by 1 start with 1";
-            pstmt = conn.prepareStatement(sqlSequence);
-            pstmt.executeUpdate();
+            stmt = execute(sqlSequence);
 
             // insert data into employee table
             String sqlData = "INSERT INTO employee(empId,deptId,empFName,empLName,position,empStreet,empCity,empCounty,empDOB,empEmail,salary,empPicUrl,empUsername,empPassword)" +
