@@ -47,7 +47,7 @@ public class CreateSales {
                     "saleDiscount NUMBER(4,2)," +
                     "saleAmount NUMBER" +
                     ")";
-            System.out.println("\nEmployee Table Created");
+            System.out.println("\nSales Table Created");
             stmt.execute(sqlTable);
         } catch (SQLException e) {
             System.out.println(e);
