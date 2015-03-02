@@ -34,6 +34,7 @@ public class CreateEmployee {
     public void createEmployees(){
         try{
             // create employee table
+            stmt = conn.createStatement();
             String sqlTable = "CREATE TABLE employee(\n" +
                     "empId NUMBER,\n" +
                     "deptId INTEGER,\n" +
@@ -52,11 +53,11 @@ public class CreateEmployee {
                     "Primary Key(empId),\n" +
                     "Foreign Key(deptId) references department(deptId) on delete set null\n" +
                     ");";
-            stmt = execute(sqlTable);
+            stmt.execute(sqlTable);
 
             // create employee id sequence
             String sqlSequence = "create sequence empId_seq increment by 1 start with 1";
-            stmt = execute(sqlSequence);
+            stmt.execute(sqlSequence);
 
             // insert data into employee table
             String sqlData = "INSERT INTO employee(empId,deptId,empFName,empLName,position,empStreet,empCity,empCounty,empDOB,empEmail,salary,empPicUrl,empUsername,empPassword)" +
