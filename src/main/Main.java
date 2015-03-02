@@ -9,6 +9,7 @@ import database.create.CreateDepartment;
 import database.create.CreateEmployee;
 import database.create.CreateProduct;
 import database.create.CreateShop;
+import database.create.CreateMember;
 import model.Shop;
 
 public class Main {
@@ -34,8 +35,6 @@ public class Main {
     CreateMember cm = new CreateMember();
     cm.dropMembers(connDB.getConn());
     cm.createMembers();
-    
-
 
     connDB.closeDB();
   }
