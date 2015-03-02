@@ -30,6 +30,11 @@ public class Main {
     CreateProduct cp = new CreateProduct(connDB.getConn());
     cp.dropProductTable();
     cp.createProductTable();
+    
+    CreateMember cm = new CreateMember();
+    cm.dropMembers(connDB.getConn());
+    cm.createMembers();
+    
 
 
     connDB.closeDB();
