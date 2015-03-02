@@ -1,13 +1,19 @@
-package test;/*2ndYearProject
+package main;/*2ndYearProject
   test
   Created by David
   18:32   25/02/2015
   Software Development 3
 */
+import database.ConnectionDB;
+import database.create.CreateProduct;
 import model.Shop;
 
 public class Main {
   public static void main(String[] args) {
-    //Shop shop1 = new Shop();
+    ConnectionDB connDB = new ConnectionDB();
+    CreateProduct cp = new CreateProduct();
+    cp.dropProductTable(connDB.getConn());
+    cp.createProductTable();
+    connDB.closeDB();
   }
 }

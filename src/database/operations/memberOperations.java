@@ -5,5 +5,5 @@ package database.operations;
  */
 public class MemberOperations {
 
-    final boolean technicaldifficulty = true;
+    //final boolean technicaldifficulty = true;
 }
