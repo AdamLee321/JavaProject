@@ -5,6 +5,7 @@ package main;/*2ndYearProject
   Software Development 3
 */
 import database.ConnectionDB;
+import database.create.CreateDepartment;
 import database.create.CreateProduct;
 import database.create.CreateShop;
 import model.Shop;
@@ -17,8 +18,9 @@ public class Main {
     cs.dropShopTable();
     cs.createShopTable();
 
-    
-
+    CreateDepartment cd = new CreateDepartment(connDB.getConn());
+    cd.dropDepartment();
+    cd.createDepartments();
 
     CreateProduct cp = new CreateProduct(connDB.getConn());
     cp.dropProductTable();
