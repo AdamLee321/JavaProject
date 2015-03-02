@@ -10,6 +10,7 @@ import database.create.CreateEmployee;
 import database.create.CreateProduct;
 import database.create.CreateShop;
 import database.create.CreateMember;
+import database.create.CreateSales;
 import model.Shop;
 
 public class Main {
@@ -24,10 +25,14 @@ public class Main {
     cd.dropDepartment();
     cd.createDepartments(); */
 
-    CreateEmployee ce = new CreateEmployee(connDB.getConn());
+   /* CreateEmployee ce = new CreateEmployee(connDB.getConn());
     ce.dropEmployees();
-    ce.createEmployees();
+    ce.createEmployees(); */
 
-    connDB.closeDB();
+      CreateSales se = new CreateSales(connDB.getConn());
+      se.dropSales();
+      se.createSales();
+
+      connDB.closeDB();
   }
 }
