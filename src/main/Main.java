@@ -33,6 +33,10 @@ public class Main {
       se.dropSales();
       se.createSales();
 
+   /*   CreateMember me = new CreateMember();
+      me.dropMembers(connDB.getConn());
+      me.createMembers(); */
+
       connDB.closeDB();
   }
 }

@@ -24,7 +24,7 @@ public class CreateEmployee {
         try{
             stmt = conn.createStatement();
             try {
-                stmt.execute("DROP SEQUENCE empId_seq");
+                stmt.execute("DROP SEQUENCE empSeq");
                 System.out.println("\nEmployee Sequence Dropped");
             } catch (SQLException e) {}
             try {
@@ -64,16 +64,14 @@ public class CreateEmployee {
             } catch (SQLException e){
                 System.out.println(e);
             }
-
             try {
                 // create employee id sequence
-                String sqlSequence = "create sequence empId_seq increment by 1 start with 1";
+                String sqlSequence = "CREATE SEQUENCE empSeq START WITH 1 INCREMENT BY 1";
                 stmt.execute(sqlSequence);
                 System.out.println("Employee Sequence Created");
             } catch (SQLException e){
                 System.out.println(e);
             }
-
             try {
                 // insert data into employee table
 
@@ -81,38 +79,24 @@ public class CreateEmployee {
                 //         "values(empId_seq.nextVal,null,null,null,null,null,null,null," + "'"12-FEB-1985"'" +, null,null,null,null,null)";
                 // stmt.execute(sqlstm);
 
-                String sqlData = "INSERT INTO employee(empId,deptId,empFName,empLName,position,empStreet,empCity,empCounty,empDOB,empEmail,salary,empPicUrl,empUsername,empPassword)" +
-                        "values(empId_seq.nextVal,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                String sqlData = "INSERT INTO employee (empId, deptId, empFName, empLName, position, empStreet, empCity, empCounty, empDOB, empEmail, salary, empPicUrl, empUsername, empPassword)" +
+                        "VALUES (empId_seq.nextVal,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                 pstmt = conn.prepareStatement(sqlData);
 
                 // employee id SEQUENCE
-                // department id
-                // employee first name
-                // employee last name
-                // employee position
-                // employee street
-                // employee city
-                // employee county
-                // employee dob
-                // employee email
-                // employee salary
-                // employee picture
-                // employee username
-                // employee password
-
-                pstmt.setInt(1, 2);
-                pstmt.setString(2, "Ruth");
-                pstmt.setString(3, "Ward");
-                pstmt.setString(4, "Sales");
-                pstmt.setString(5, "41 Wright Court");
-                pstmt.setString(6, "Tallaght");
-                pstmt.setString(7, "Dublin");
-                pstmt.setString(8, "12-NOV-1989");
-                pstmt.setString(9, "ruth.ward@gmail.com");
-                pstmt.setInt(10, 12000);
-                pstmt.setString(11, "NULL");
-                pstmt.setString(12, "ruthward");
-                pstmt.setString(13, "1234");
+                pstmt.setInt(1, 2);  // department id
+                pstmt.setString(2, "Ruth"); // employee first name
+                pstmt.setString(3, "Ward"); // employee last name
+                pstmt.setString(4, "Sales"); // employee position
+                pstmt.setString(5, "41 Wright Court"); // employee street
+                pstmt.setString(6, "Tallaght"); // employee city
+                pstmt.setString(7, "Dublin"); // employee county
+                pstmt.setString(8, "12-NOV-1989"); // employee dob
+                pstmt.setString(9, "ruth.ward@gmail.com"); // employee email
+                pstmt.setInt(10, 12000); // employee salary
+                pstmt.setString(11, "NULL"); // employee picture
+                pstmt.setString(12, "ruthward"); // employee username
+                pstmt.setString(13, "1234"); // employee password
                 pstmt.execute();
             } catch (SQLException e){
                 System.out.println(e);
