@@ -37,7 +37,7 @@ public class CreateSales {
 
     public void createSales() {
         try {
-            // create employee table
+            // create sales table
             stmt = conn.createStatement();
             String sqlTable = "CREATE TABLE sales(" +
                     "saleId INTEGER," +
