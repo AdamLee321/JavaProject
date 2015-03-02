@@ -41,7 +41,7 @@ public class CreateEmployee {
             // create employee table
             stmt = conn.createStatement();
             String sqlTable = "CREATE TABLE employee(\n" +
-                    "empId NUMBER,\n" +
+                    "empId INTEGER,\n" +
                     "deptId INTEGER,\n" +
                     "empFName VARCHAR(30),\n" +
                     "empLName VARCHAR(30),\n" +
@@ -65,6 +65,11 @@ public class CreateEmployee {
             stmt.execute(sqlSequence);
 
             // insert data into employee table
+
+      //      String sqlstm = "INSERT INTO employee(empId,deptId,empFName,empLName,position,empStreet,empCity,empCounty,empDOB,empEmail,salary,empPicUrl,empUsername,empPassword)" +
+        //            "values(empId_seq.nextVal,null,null,null,null,null,null,null," + "'"12-FEB-1985"'" +, null,null,null,null,null)";
+          //  stmt.execute(sqlstm);
+
             String sqlData = "INSERT INTO employee(empId,deptId,empFName,empLName,position,empStreet,empCity,empCounty,empDOB,empEmail,salary,empPicUrl,empUsername,empPassword)" +
                     "values(empId_seq.nextVal,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             pstmt = conn.prepareStatement(sqlData);
@@ -84,15 +89,14 @@ public class CreateEmployee {
             // employee username
             // employee password
 
-
             pstmt.setInt(1,2);
-            pstmt.setString(2, "Ruth");
+            pstmt.setString(2,"Ruth");
             pstmt.setString(3,"Ward");
             pstmt.setString(4,"Sales");
             pstmt.setString(5,"41 Wright Court");
             pstmt.setString(6,"Tallaght");
-            pstmt.setString(7, "Dublin");
-            pstmt.setString(8,"02-01-1990");
+            pstmt.setString(7,"Dublin");
+            pstmt.setString(8,"12-NOV-1980");
             pstmt.setString(9,"ruth.ward@gmail.com");
             pstmt.setInt(10,12000);
             pstmt.setString(11,"NULL");
@@ -257,7 +261,7 @@ public class CreateEmployee {
             pstmt.setString(5,"71 Russell Rd");
             pstmt.setString(6,"Blackrock");
             pstmt.setString(7,"Dublin");
-            //pstmt.setDate(8,05/03/1984);
+            pstmt.setDate(8,05/03/1984);
             pstmt.setString(9,"Willie.jones@gmail.com");
             pstmt.setInt(10,14500);
             pstmt.setString(11,"NULL");
@@ -303,7 +307,7 @@ public class CreateEmployee {
             pstmt.setString(5,"7 Helland Bridge");
             pstmt.setString(6,"Crumlin");
             pstmt.setString(7,"Dublin");
-           // pstmt.setString(8,"10/05/1992");
+            pstmt.setString(8,"10/05/1992");
             pstmt.setString(9,"Kimberly.garcia@outlook.com");
             pstmt.setInt(10, 12000);
             pstmt.setString(11,"NULL");
@@ -318,7 +322,7 @@ public class CreateEmployee {
             pstmt.setString(5,"40 Fraserburgh Rd");
             pstmt.setString(6,"Terenure");
             pstmt.setString(7,"Dublin");
-          //  pstmt.setString(8,"23/05/1979");
+            pstmt.setString(8,"23/05/1979");
             pstmt.setString(9,"Gerald.perry@gmail.com");
             pstmt.setInt(10, 22000);
             pstmt.setString(11,"NULL");
@@ -348,7 +352,7 @@ public class CreateEmployee {
             pstmt.setString(5,"94 Iffley Road");
             pstmt.setString(6,"Finglas");
             pstmt.setString(7,"Dublin");
-         //   pstmt.setString(8,"29/05/1985");
+            pstmt.setString(8,"29/05/1985");
             pstmt.setString(9,"Kelly.hall@hotmail.com");
             pstmt.setInt(10, 17500);
             pstmt.setString(11,"NULL");
@@ -363,7 +367,7 @@ public class CreateEmployee {
             pstmt.setString(5,"7 Southern Way");
             pstmt.setString(6,"Ranlagh");
             pstmt.setString(7,"Dublin");
-        //    pstmt.setString(8,"26/09/1984");
+            pstmt.setString(8,"26/09/1984");
             pstmt.setString(9, "Philip.lee@gmail.com");
             pstmt.setInt(10,12000);
             pstmt.setString(11,"NULL");
