@@ -695,6 +695,207 @@ public class CreateProduct {
                     "is fun and functional for the whole family.\n");//prodDesc
             pstmt.execute();
 
+            //APPLE
+            //Product 1
+            pstmt.setString(1, "Apple");//prodMake
+            pstmt.setString(2, "MacBook Pro 13");//prodModel
+            pstmt.setDouble(3, 1349);//prodSalePrice
+            pstmt.setDouble(4, 1146);//prodCostPrice
+            pstmt.setInt(5, 17);//prodQTY
+            pstmt.setString(6, null);//prodPic
+            pstmt.setString(7, "Apple");//prodType
+            pstmt.setString(8, "Intel Core i5 processor");//cpu
+            pstmt.setString(9, "8 GB DDR3 - 1600 MHz");//ram
+            pstmt.setString(10, "OS X Yosemite");//operatingSystem
+            pstmt.setString(11, "128GB PCIe-Flash");//storage
+            pstmt.setString(12, "13.3\" Retina LED");//screen
+            pstmt.setString(13, "A groundbreaking Retina display. All-flash architecture. Fourth-generation" +
+                    " Intel processors. Remarkably thin and light 13-inch and 15-inch designs. Together, " +
+                    "these features take the notebook to a place it’s never been. And they’ll do the same " +
+                    "for everything you create with it.");//prodDesc
+            pstmt.execute();
+
+            //APPLE
+            //Product 2
+            pstmt.setString(1, "Apple");//prodMake
+            pstmt.setString(2, "MacBook Pro 13");//prodModel
+            pstmt.setDouble(3, 1549.00);//prodSalePrice
+            pstmt.setDouble(4, 1316.00);//prodCostPrice
+            pstmt.setInt(5, 17);//prodQTY
+            pstmt.setString(6, null);//prodPic
+            pstmt.setString(7, "Apple");//prodType
+            pstmt.setString(8, "Intel Core i5 processor ");//cpu
+            pstmt.setString(9, "8 GB DDR3 - 1600 MHz");//ram
+            pstmt.setString(10, "OS X Yosemite");//operatingSystem
+            pstmt.setString(11, "256GB PCIe-Flash");//storage
+            pstmt.setString(12, "13.3\" Retina LED");//screen
+            pstmt.setString(13, "A groundbreaking Retina display. All-flash architecture. Fourth-generation" +
+                    " Intel processors. Remarkably thin and light 13-inch and 15-inch designs. Together, " +
+                    "these features take the notebook to a place it’s never been. And they’ll do the same " +
+                    "for everything you create with it");//prodDesc
+            pstmt.execute();
+
+            //APPLE
+            //Product 3
+            pstmt.setString(1, "Apple");//prodMake
+            pstmt.setString(2, "MacBook Pro 13");//prodModel
+            pstmt.setDouble(3, 1849.00);//prodSalePrice
+            pstmt.setDouble(4, 1570.99);//prodCostPrice
+            pstmt.setInt(5, 14);//prodQTY
+            pstmt.setString(6, null);//prodPic
+            pstmt.setString(7, "Apple");//prodType
+            pstmt.setString(8, "Intel Core i5 processor");//cpu
+            pstmt.setString(9, "8 GB DDR3 - 1600 MHz");//ram
+            pstmt.setString(10, "OS X Yosemite");//operatingSystem
+            pstmt.setString(11, "512GB PCIe-Flash");//storage
+            pstmt.setString(12, "13.3\" Retina LED");//screen
+            pstmt.setString(13, "A groundbreaking Retina display. All-flash architecture. Fourth-generation" +
+                    " Intel processors. Remarkably thin and light 13-inch and 15-inch designs. Together, " +
+                    "these features take the notebook to a place it’s never been. And they’ll do the same " +
+                    "for everything you create with it.");//prodDesc
+            pstmt.execute();
+
+            //APPLE
+            //Product 4
+            pstmt.setString(1, "Apple");//prodMake
+            pstmt.setString(2, "MacBook Pro 15");//prodModel
+            pstmt.setDouble(3, 2049.00);//prodSalePrice
+            pstmt.setDouble(4, 1741.00);//prodCostPrice
+            pstmt.setInt(5, 11);//prodQTY
+            pstmt.setString(6, null);//prodPic
+            pstmt.setString(7, "Apple");//prodType
+            pstmt.setString(8, "Intel Core i7 processor ");//cpu
+            pstmt.setString(9, "16 GB DDR3 - 1600 MHz");//ram
+            pstmt.setString(10, "OS X Yosemite");//operatingSystem
+            pstmt.setString(11, "256 GB – PCIe-Flash");//storage
+            pstmt.setString(12, "15.4 Retina LED");//screen
+            pstmt.setString(13, "A groundbreaking Retina display. All-flash architecture. Fourth-generation" +
+                    " Intel processors. Remarkably thin and light 13-inch and 15-inch designs. Together, " +
+                    "these features take the notebook to a place it’s never been. And they’ll do the same " +
+                    "for everything you create with it.");//prodDesc
+            pstmt.execute();
+
+            //APPLE
+            //Product 5
+            pstmt.setString(1, "Apple");//prodMake
+            pstmt.setString(2, "21.5-inch iMac");//prodModel
+            pstmt.setDouble(3, 1349.00);//prodSalePrice
+            pstmt.setDouble(4, 1146.00);//prodCostPrice
+            pstmt.setInt(5, 19);//prodQTY
+            pstmt.setString(6, null);//prodPic
+            pstmt.setString(7, "Apple");//prodType
+            pstmt.setString(8, "Intel Core i5 processor ");//cpu
+            pstmt.setString(9, "8 GB DDR3 - 1600 MHz");//ram
+            pstmt.setString(10, "OS X Yosemite");//operatingSystem
+            pstmt.setString(11, "1 TB – HDD");//storage
+            pstmt.setString(12, "21.5\" LED");//screen
+            pstmt.setString(13, "Creating such a stunningly thin design took equally stunning feats of " +
+                    "technological innovation. We meticulously designed and engineered everything about " +
+                    "iMac from the inside out. The result is an advanced, elegant all-in-one computer " +
+                    "that’s as much a work of art as it is state of the art.");//prodDesc
+            pstmt.execute();
+
+            //APPLE
+            //Product 6
+            pstmt.setString(1, "Apple");//prodMake
+            pstmt.setString(2, "27-inch iMac");//prodModel
+            pstmt.setDouble(3, 2099.00);//prodSalePrice
+            pstmt.setDouble(4, 1784.00);//prodCostPrice
+            pstmt.setInt(5, 17);//prodQTY
+            pstmt.setString(6, null);//prodPic
+            pstmt.setString(7, "Apple");//prodType
+            pstmt.setString(8, "Intel Core i5 processor");//cpu
+            pstmt.setString(9, "8 GB DDR3 - 1600 MHz");//ram
+            pstmt.setString(10, "OS X Yosemite");//operatingSystem
+            pstmt.setString(11, "1 TB – HDD");//storage
+            pstmt.setString(12, "27\" LED");//screen
+            pstmt.setString(13, "Creating such a stunningly thin design took equally stunning feats of " +
+                    "technological innovation. We meticulously designed and engineered everything about " +
+                    "iMac from the inside out. The result is an advanced, elegant all-in-one computer " +
+                    "that’s as much a work of art as it is state of the art.");//prodDesc
+            pstmt.execute();
+
+            //APPLE
+            //Product 7
+            pstmt.setString(1, "Apple");//prodMake
+            pstmt.setString(2, "27-inch iMac");//prodModel
+            pstmt.setDouble(3, 1899.00);//prodSalePrice
+            pstmt.setDouble(4, 1614.00);//prodCostPrice
+            pstmt.setInt(5, 16);//prodQTY
+            pstmt.setString(6, null);//prodPic
+            pstmt.setString(7, "Apple");//prodType
+            pstmt.setString(8, "Intel Core i5 processor ");//cpu
+            pstmt.setString(9, "8 GB DDR3 - 1600 MHz");//ram
+            pstmt.setString(10, "OS X Yosemite");//operatingSystem
+            pstmt.setString(11, "1 TB – HDD");//storage
+            pstmt.setString(12, "27\" LED");//screen
+            pstmt.setString(13, "Creating such a stunningly thin design took equally stunning feats of " +
+                    "technological innovation. We meticulously designed and engineered everything about " +
+                    "iMac from the inside out. The result is an advanced, elegant all-in-one computer " +
+                    "that’s as much a work of art as it is state of the art.");//prodDesc
+            pstmt.execute();
+
+            //APPLE
+            //Product 8
+            pstmt.setString(1, "Apple");//prodMake
+            pstmt.setString(2, "MacBook Air 11");//prodModel
+            pstmt.setDouble(3, 929.00);//prodSalePrice
+            pstmt.setDouble(4, 789.00);//prodCostPrice
+            pstmt.setInt(5, 16);//prodQTY
+            pstmt.setString(6, null);//prodPic
+            pstmt.setString(7, "Apple");//prodType
+            pstmt.setString(8, "Intel Core i5 processor");//cpu
+            pstmt.setString(9, "4 GB DDR3 - 1600 MHz");//ram
+            pstmt.setString(10, "OS X Yosemite");//operatingSystem
+            pstmt.setString(11, "128 GB – PCIe-Flash");//storage
+            pstmt.setString(12, "11.6 LED");//screen
+            pstmt.setString(13, "Whatever the task, fourth-generation Intel Core processors with Intel HD" +
+                    " Graphics 5000 are up to it. From editing photos to browsing the web, everything " +
+                    "happens ultra-fast — while using less energy. And all that power is encased in an " +
+                    "incredibly thin 1.7-cm unibody design that weighs only 1.08kg.");//prodDesc
+            pstmt.execute();
+
+            //APPLE
+            //Product 9
+            pstmt.setString(1, "Apple");//prodMake
+            pstmt.setString(2, "MacBook Air 13");//prodModel
+            pstmt.setDouble(3, 1029.00);//prodSalePrice
+            pstmt.setDouble(4, 875.00);//prodCostPrice
+            pstmt.setInt(5, 12);//prodQTY
+            pstmt.setString(6, null);//prodPic
+            pstmt.setString(7, "Apple");//prodType
+            pstmt.setString(8, "Intel Core i5 processor ");//cpu
+            pstmt.setString(9, "4 GB DDR3 - 1600 MHz");//ram
+            pstmt.setString(10, "OS X Yosemite");//operatingSystem
+            pstmt.setString(11, "128 GB – PCIe-Flash");//storage
+            pstmt.setString(12, "13.3 LED");//screen
+            pstmt.setString(13, "Whatever the task, fourth-generation Intel Core processors with Intel " +
+                    "HD Graphics 5000 are up to it. From editing photos to browsing the web, everything " +
+                    "happens ultra-fast — while using less energy. And all that power is encased in an " +
+                    "incredibly thin 1.7-cm unibody design that weighs only 1.08kg.");//prodDesc
+            pstmt.execute();
+
+            //APPLE
+            //Product 10
+            pstmt.setString(1, "Apple");//prodMake
+            pstmt.setString(2, "iMac Retina 5K");//prodModel
+            pstmt.setDouble(3, 2699.00);//prodSalePrice
+            pstmt.setDouble(4, 2295.00);//prodCostPrice
+            pstmt.setInt(5, 17);//prodQTY
+            pstmt.setString(6, null);//prodPic
+            pstmt.setString(7, "Apple");//prodType
+            pstmt.setString(8, "Intel Core i7 processor (4.0GHz, 3MB cache)");//cpu
+            pstmt.setString(9, "16 GB DDR3 - 1600 MHz");//ram
+            pstmt.setString(10, "OS X Yosemite");//operatingSystem
+            pstmt.setString(11, "1TB – Fusion Drive");//storage
+            pstmt.setString(12, "27 LED");//screen
+            pstmt.setString(13, "iMac has always been about having a huge, immersive place to see and " +
+                    "create amazing things. So making the best possible iMac meant making the best " +
+                    "possible display. The new 27-inch iMac with Retina 5K display has four times as many" +
+                    " pixels as the standard 27-inch iMac display. So you experience unbelievable detail." +
+                    " On an unbelievable scale.");//prodDesc
+            pstmt.execute();
+
 
 
 

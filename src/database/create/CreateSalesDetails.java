@@ -16,7 +16,7 @@ public class CreateSalesDetails {
         conn = connIn;
     }
 
-    public void dropSalesDetails() {
+    public void dropSalesDetailsTable() {
         try {
             stmt = conn.createStatement();
             try {
@@ -29,7 +29,7 @@ public class CreateSalesDetails {
         }
     }
 
-    public void createSalesDetails() {
+    public void createSalesDetailsTable() {
         try {
             // create salesdetails table
             stmt = conn.createStatement();

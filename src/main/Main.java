@@ -19,9 +19,9 @@ public class Main {
       CreateSales se = new CreateSales(connDB.getConn());
       CreateProduct cp = new CreateProduct(connDB.getConn());
       CreateMember cm = new CreateMember(connDB.getConn());
-      //CreateSaleDetails sld = new CreateSaleDetails(connDB.getConn());
+      CreateSalesDetails sld = new CreateSalesDetails(connDB.getConn());
 
-      //sld.dropSaleDetailsTable();
+      sld.dropSalesDetailsTable();
       cm.dropMembersTable();
       cp.dropProductTable();
       se.dropSalesTable();
@@ -37,7 +37,7 @@ public class Main {
       se.createSalesTable();
       cp.createProductTable();
       cm.createMembersTable();
-      //sld.createSaleDetailTable();
+      sld.createSalesDetailsTable();
 
 
     connDB.closeDB();
