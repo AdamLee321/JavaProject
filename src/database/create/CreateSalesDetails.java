@@ -11,7 +11,7 @@ public class CreateSalesDetails {
     private PreparedStatement pstmt;
     private Statement stmt;
 
-    public CreateEmployee(Connection connIn) {
+    public CreateSalesDetails(Connection connIn) {
         conn = connIn;
     }
 
