@@ -40,7 +40,6 @@ public class CreateShopDepartment {
                     "PRIMARY KEY (shopId, deptId)," +
                     "FOREIGN KEY (shopId) REFERENCES shop(shopId)," +
                     "FOREIGN KEY (deptId) REFERENCES department(deptId))");
-
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -49,10 +48,24 @@ public class CreateShopDepartment {
             pstmt = conn.prepareStatement(sqlData);
 
             pstmt.setInt(1,1);
-            pstmt.setInt(1,2);
-            pstmt.setInt(1,3);
-            pstmt.setInt(1,4);
-            pstmt.setInt(1,5);
+            pstmt.setInt(2,1);
+            pstmt.execute();
+
+            pstmt.setInt(1,1);
+            pstmt.setInt(2,2);
+            pstmt.execute();
+
+            pstmt.setInt(1,1);
+            pstmt.setInt(2,3);
+            pstmt.execute();
+
+            pstmt.setInt(1,1);
+            pstmt.setInt(2,4);
+            pstmt.execute();
+
+            pstmt.setInt(1,1);
+            pstmt.setInt(2,5);
+            pstmt.execute();
 
         } catch (SQLException e){
             System.out.println(e);
