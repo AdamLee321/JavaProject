@@ -83,5 +83,4 @@ public class CreateShopDepartment {
         } catch (SQLException sqlE) {
             System.out.println("Error creating ShopDepartment table");
         }
-    }
-}
+    }}
