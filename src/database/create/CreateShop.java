@@ -30,7 +30,7 @@ public class CreateShop {
       }
       try{
         stmt.execute("DROP SEQUENCE shopSeq");
-        System.out.println("Shop sequence dropped successfully");
+        System.out.println("Shop sequence dropped successfully\n");
       } catch (SQLException ex) {
         System.out.println("Error dropping shop sequence or if may not exist");
       }
@@ -58,7 +58,7 @@ public class CreateShop {
 
       //create shop sequence
       stmt.execute("CREATE SEQUENCE shopSeq START WITH 1 INCREMENT BY 1");
-      System.out.println("Shop sequence created successfully");
+      System.out.println("Shop sequence created successfully\n");
 
       String sql = "INSERT INTO SHOP (shopId, shopName, shopStreet, shopCity, shopCounty, phoneNumber) VALUES "+
               "(shopSeq.nextVal,?,?,?,?,?)";

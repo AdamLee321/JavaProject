@@ -12,28 +12,33 @@ public class Main {
   public static void main(String[] args) {
     ConnectionDB connDB = new ConnectionDB();
 
-    CreateShop cs = new CreateShop(connDB.getConn());
-    cs.dropShopTable();
-    cs.createShopTable();
+      CreateShop cs = new CreateShop(connDB.getConn());
+      CreateDepartment cd = new CreateDepartment(connDB.getConn());
+      CreateShopDepartment sd = new CreateShopDepartment(connDB.getConn());
+      CreateEmployee ce = new CreateEmployee(connDB.getConn());
+      CreateSales se = new CreateSales(connDB.getConn());
+      CreateProduct cp = new CreateProduct(connDB.getConn());
+      CreateMember cm = new CreateMember(connDB.getConn());
+      //CreateSaleDetails sld = new CreateSaleDetails(connDB.getConn());
 
-    CreateDepartment cd = new CreateDepartment(connDB.getConn());
-    cd.dropDepartment();
-    cd.createDepartments();
+      //sld.dropSaleDetailsTable();
+      cm.dropMembersTable();
+      cp.dropProductTable();
+      se.dropSalesTable();
+      ce.dropEmployeesTable();
+      sd.dropShopDepartmentTable();
+      cd.dropDepartmentTable();
+      cs.dropShopTable();
 
-    CreateEmployee ce = new CreateEmployee(connDB.getConn());
-    ce.dropEmployees();
-    ce.createEmployees();
+      cs.createShopTable();
+      cd.createDepartmentsTable();
+      sd.createShopDepartmentTable();
+      ce.createEmployeesTable();
+      se.createSalesTable();
+      cp.createProductTable();
+      cm.createMembersTable();
+      //sld.createSaleDetailTable();
 
-    CreateSales se = new CreateSales(connDB.getConn());
-    se.dropSales();
-    se.createSales();
-
-    CreateMember me = new CreateMember();
-    me.dropMembers(connDB.getConn());
-    me.createMembers();
-
-    CreateShopDepartment sd = new CreateShopDepartment(connDB.getConn());
-    sd.dropShopDepartment();
 
     connDB.closeDB();
   }
