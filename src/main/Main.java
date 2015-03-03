@@ -5,40 +5,36 @@ package main;/*2ndYearProject
   Software Development 3
 */
 import database.ConnectionDB;
-import database.create.CreateDepartment;
-import database.create.CreateEmployee;
-import database.create.CreateProduct;
-import database.create.CreateShop;
-import database.create.CreateMember;
-import database.create.CreateSales;
+import database.create.*;
 import model.Shop;
 
 public class Main {
   public static void main(String[] args) {
     ConnectionDB connDB = new ConnectionDB();
 
-   /* CreateShop cs = new CreateShop(connDB.getConn());
+    CreateShop cs = new CreateShop(connDB.getConn());
     cs.dropShopTable();
-    cs.createShopTable(); */
+    cs.createShopTable();
 
     CreateDepartment cd = new CreateDepartment(connDB.getConn());
     cd.dropDepartment();
-    cd.createDepartments(); 
+    cd.createDepartments();
 
     CreateEmployee ce = new CreateEmployee(connDB.getConn());
     ce.dropEmployees();
     ce.createEmployees();
 
-/*
-      CreateSales se = new CreateSales(connDB.getConn());
-      se.dropSales();
-      se.createSales();
-      */
+    CreateSales se = new CreateSales(connDB.getConn());
+    se.dropSales();
+    se.createSales();
 
-   /*   CreateMember me = new CreateMember();
-      me.dropMembers(connDB.getConn());
-      me.createMembers(); */
+    CreateMember me = new CreateMember();
+    me.dropMembers(connDB.getConn());
+    me.createMembers();
 
-      connDB.closeDB();
+    CreateShopDepartment sd = new CreateShopDepartment(connDB.getConn());
+    sd.dropShopDepartment();
+
+    connDB.closeDB();
   }
 }

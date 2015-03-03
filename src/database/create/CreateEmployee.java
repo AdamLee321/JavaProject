@@ -57,8 +57,8 @@ public class CreateEmployee {
                     "empPicUrl BLOB," +
                     "empUsername VARCHAR2(30)," +
                     "empPassword VARCHAR2(8)," +
-                    "Primary Key(empId)," +
-                    "Foreign Key(deptId) references department(deptId) on delete set null" +
+                    "PRIMARY KEY(empId)," +
+                    "FOREIGN KEY(deptId) references department(deptId) on delete set null" +
                     ")";
             System.out.println("Employee Table Created");
             stmt.execute(sqlTable);
