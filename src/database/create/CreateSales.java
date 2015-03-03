@@ -45,7 +45,8 @@ public class CreateSales {
                     "saleDate DATE," +
                     "saleTime VARCHAR(20)," +
                     "saleDiscount NUMBER(4,2)," +
-                    "saleAmount NUMBER(6,2)" +
+                    "saleAmount NUMBER(6,2)," +
+                    "PRIMARY KEY (saleId)" +
                     ")";
             System.out.println("Sales table created successfully");
             stmt.execute(sqlTable);

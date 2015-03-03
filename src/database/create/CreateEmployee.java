@@ -16,7 +16,6 @@ public class CreateEmployee {
     private Statement stmt;
 
     public CreateEmployee(Connection connIn) {
-
         conn = connIn;
     }
 
@@ -57,8 +56,8 @@ public class CreateEmployee {
                     "empPicUrl BLOB," +
                     "empUsername VARCHAR2(30)," +
                     "empPassword VARCHAR2(8)," +
-                    "Primary Key(empId)," +
-                    "Foreign Key(deptId) references department(deptId) on delete set null" +
+                    "PRIMARY KEY(empId)," +
+                    "FOREIGN KEY(deptId) references department(deptId) on delete set null" +
                     ")";
             System.out.println("Employee table created successfully");
             stmt.execute(sqlTable);
@@ -78,7 +77,7 @@ public class CreateEmployee {
                     "VALUES (empSeq.nextVal,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             pstmt = conn.prepareStatement(sqlData);
 
-            // employee id SEQUENCE
+                                // employee id SEQUENCE
             pstmt.setInt(1, 4); // department id
             pstmt.setString(2, "Rush"); // employee first name
             pstmt.setString(3, "Ward"); // employee last name
