@@ -16,7 +16,6 @@ public class CreateEmployee {
     private Statement stmt;
 
     public CreateEmployee(Connection connIn) {
-
         conn = connIn;
     }
 
@@ -78,7 +77,7 @@ public class CreateEmployee {
                     "VALUES (empSeq.nextVal,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             pstmt = conn.prepareStatement(sqlData);
 
-            // employee id SEQUENCE
+                                // employee id SEQUENCE
             pstmt.setInt(1, 4); // department id
             pstmt.setString(2, "Rush"); // employee first name
             pstmt.setString(3, "Ward"); // employee last name

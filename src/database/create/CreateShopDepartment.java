@@ -14,7 +14,6 @@ public class CreateShopDepartment {
     private Statement stmt;
 
     public CreateShopDepartment(Connection connIn) {
-
         conn = connIn;
     }
 
@@ -45,6 +44,18 @@ public class CreateShopDepartment {
         } catch (SQLException e) {
             System.out.println(e);
         }
+        try {
+            String sqlData = "INSERT INTO shopdepartment (shopId, deptId) VALUES (?,?)";
+            pstmt = conn.prepareStatement(sqlData);
 
+            pstmt.setInt(1,1);
+            pstmt.setInt(1,2);
+            pstmt.setInt(1,3);
+            pstmt.setInt(1,4);
+            pstmt.setInt(1,5);
+
+        } catch (SQLException e){
+            System.out.println(e);
+        }
     }
 }
