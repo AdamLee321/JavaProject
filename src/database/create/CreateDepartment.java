@@ -20,18 +20,18 @@ public class CreateDepartment {
         conn = connIn;
     }
 
-    public void dropDepartment(){
+    public void dropDepartmentTable(){
         try {
             stmt = conn.createStatement();
             try {
                 stmt.execute("DROP TABLE department");
-                System.out.println("Department Table Dropped");
+                System.out.println("Department table dropped successfully");
             } catch (SQLException e) {
                 System.out.println("Error dropping department table or it may not exist");
             }
             try{
                 stmt.execute("DROP SEQUENCE deptSeq");
-                System.out.println("Department Sequence Dropped");
+                System.out.println("Department sequence dropped successfully\n");
             } catch (SQLException e) {
                 System.out.println("Error dropping department sequence or it may not exist");
             }
@@ -40,7 +40,7 @@ public class CreateDepartment {
         }
     }
 
-    public void createDepartments(){
+    public void createDepartmentsTable(){
         try{
             // create department table
             stmt = conn.createStatement();
@@ -51,7 +51,7 @@ public class CreateDepartment {
             // create department id sequence
             String sqlSequence = "create sequence deptSeq increment by 1 start with 1";
             stmt.execute(sqlSequence);
-            System.out.println("Department sequence created successfully");
+            System.out.println("Department sequence created successfully\n");
 
             // insert data into employee table
             String sqlData = "INSERT INTO department(deptId, deptName) values(deptSeq.nextVal,?)";

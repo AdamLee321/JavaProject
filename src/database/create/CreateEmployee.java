@@ -20,17 +20,17 @@ public class CreateEmployee {
         conn = connIn;
     }
 
-    public void dropEmployees() {
+    public void dropEmployeesTable() {
         try {
             stmt = conn.createStatement();
             try {
                 stmt.execute("DROP SEQUENCE empSeq");
-                System.out.println("Employee Sequence Dropped");
+                System.out.println("Employee sequence dropped successfully");
             } catch (SQLException e) {
             }
             try {
                 stmt.execute("DROP TABLE employee");
-                System.out.println("Employee Table Dropped");
+                System.out.println("Employee table dropped successfully\n");
             } catch (SQLException e) {
             }
         } catch (SQLException e) {
@@ -38,7 +38,7 @@ public class CreateEmployee {
         }
     }
 
-    public void createEmployees() {
+    public void createEmployeesTable() {
         try {
             // create employee table
             stmt = conn.createStatement();
@@ -60,7 +60,7 @@ public class CreateEmployee {
                     "Primary Key(empId)," +
                     "Foreign Key(deptId) references department(deptId) on delete set null" +
                     ")";
-            System.out.println("Employee Table Created");
+            System.out.println("Employee table created successfully");
             stmt.execute(sqlTable);
         } catch (SQLException e) {
             System.out.println(e);
@@ -69,7 +69,7 @@ public class CreateEmployee {
             // create employee id sequence
             String sqlSequence = "CREATE SEQUENCE empSeq INCREMENT BY 1 START WITH 1";
             stmt.execute(sqlSequence);
-            System.out.println("Employee Sequence Created");
+            System.out.println("Employee sequence created successfully\n");
         } catch (SQLException e) {
             System.out.println(e);
         }

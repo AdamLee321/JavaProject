@@ -27,9 +27,9 @@ public class CreateProduct {
             }
             try{
                 stmt.execute("DROP SEQUENCE productSeq");
-                System.out.println("Product sequence dropped successfully");
+                System.out.println("Product sequence dropped successfully\n");
             } catch (SQLException ex) {
-                System.out.println("Error dropping product sequence or if may not exist");
+                System.out.println("Error dropping product sequence or if may not exist\n");
             }
         } catch (SQLException e) {
             //System.out.println(e);
@@ -62,7 +62,7 @@ public class CreateProduct {
 
             //create product sequence
             stmt.execute("CREATE SEQUENCE productSeq START WITH 100000 INCREMENT BY 1");
-            System.out.println("Product sequence created successfully");
+            System.out.println("Product sequence created successfully\n");
 
             //create prepared statement
             String sql = "INSERT INTO Product (prodId, prodMake, prodModel, prodSalePrice, prodCostPrice, " +
@@ -328,7 +328,7 @@ public class CreateProduct {
             pstmt.setString(7, "Laptop");//prodType
             pstmt.setString(8, "");//cpu
             pstmt.setString(9, "2 GB ");//ram
-            pstmt.setString(10, "Windows 8");//operatingSystem
+            pstmt.setString(10, "Windows 8.1");//operatingSystem
             pstmt.setString(11, "500 GB HDD, 5400 rpm");//storage
             pstmt.setString(12, "11.6\" LED  ");//screen
             pstmt.setString(13, "The X200MA comes pre-installed with the expressive Windows 8 operating " +
@@ -351,7 +351,7 @@ public class CreateProduct {
             pstmt.setString(7, "Laptop");//prodType
             pstmt.setString(8, "Intel Core i7 4700MQ");//cpu
             pstmt.setString(9, "16 GB");//ram
-            pstmt.setString(10, "");//operatingSystem
+            pstmt.setString(10, "Windows 8.1");//operatingSystem
             pstmt.setString(11, "128GB mSATA SSD");//storage
             pstmt.setString(12, "18\" LED");//screen
             pstmt.setString(13, "NVIDIA Optimus graphics technology delivers long battery life when you " +

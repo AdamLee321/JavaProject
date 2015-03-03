@@ -13,21 +13,23 @@ public class CreateMember {
 
     private PreparedStatement pstmt;
     private Statement stmt;
-    //private ResultSet rset;
     private Connection conn;
 
+    public CreateMember(Connection conn){
+        this.conn = conn;
+    }
+
     //Drop Tables Method
-    public void dropMembers(Connection connIn){
+    public void dropMembersTable(){
         try {
-            this.conn = connIn;
             stmt = conn.createStatement();
             try {
                 stmt.execute("DROP TABLE member");
-                System.out.println("Table dropped successfully");
+                System.out.println("Members table dropped successfully");
                 stmt.execute("DROP SEQUENCE memberSeq");
-                System.out.println("Sequence dropped successfully");
+                System.out.println("Members sequence dropped successfully\n");
             } catch (SQLException ex) {
-                System.out.println("Error dropping table or they may not exist");
+                System.out.println("Error dropping table or they may not exist\n");
             }
         } catch (SQLException e) {
             //System.out.println(e);
@@ -36,7 +38,7 @@ public class CreateMember {
     }
 
 //Create Members
-    public void createMembers() {
+    public void createMembersTable() {
         try {
             // create member table
             stmt = conn.createStatement();
@@ -54,11 +56,11 @@ public class CreateMember {
                     "memberPoints INTEGER," +
                     "memPicUrl BLOB," +
                     "PRIMARY KEY(memberId))");
-            System.out.println("Table created successfully");
+            System.out.println("Member table created successfully");
 
             // create member id sequence
             stmt.execute("CREATE SEQUENCE memberSeq START WITH 1 INCREMENT BY 1");
-            System.out.println("Product sequence created successfully");
+            System.out.println("Member sequence created successfully\n");
 
             // prepared statement
             String sql = "INSERT INTO member (memberId, memberFName, memberLName, memberStreet, memberCity, memberCounty," +

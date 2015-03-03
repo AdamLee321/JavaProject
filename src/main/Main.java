@@ -5,39 +5,41 @@ package main;/*2ndYearProject
   Software Development 3
 */
 import database.ConnectionDB;
-import database.create.CreateDepartment;
-import database.create.CreateEmployee;
-import database.create.CreateProduct;
-import database.create.CreateShop;
-import database.create.CreateMember;
-import database.create.CreateSales;
+import database.create.*;
 import model.Shop;
 
 public class Main {
   public static void main(String[] args) {
     ConnectionDB connDB = new ConnectionDB();
 
-   /* CreateShop cs = new CreateShop(connDB.getConn());
-    cs.dropShopTable();
-    cs.createShopTable(); */
-
-    CreateDepartment cd = new CreateDepartment(connDB.getConn());
-    cd.dropDepartment();
-    cd.createDepartments(); 
-
-    CreateEmployee ce = new CreateEmployee(connDB.getConn());
-    ce.dropEmployees();
-    ce.createEmployees();
-
-/*
+      CreateShop cs = new CreateShop(connDB.getConn());
+      CreateDepartment cd = new CreateDepartment(connDB.getConn());
+      CreateShopDepartment sd = new CreateShopDepartment(connDB.getConn());
+      CreateEmployee ce = new CreateEmployee(connDB.getConn());
       CreateSales se = new CreateSales(connDB.getConn());
-      se.dropSales();
-      se.createSales();
-      */
+      CreateProduct cp = new CreateProduct(connDB.getConn());
+      CreateMember cm = new CreateMember(connDB.getConn());
+      //CreateSaleDetails sld = new CreateSaleDetails(connDB.getConn());
 
-   /*   CreateMember me = new CreateMember();
-      me.dropMembers(connDB.getConn());
-      me.createMembers(); */
+      //sld.dropSaleDetailsTable();
+      cm.dropMembersTable();
+      cp.dropProductTable();
+      se.dropSalesTable();
+      ce.dropEmployeesTable();
+      sd.dropShopDepartmentTable();
+      cd.dropDepartmentTable();
+      cs.dropShopTable();
+
+      cs.createShopTable();
+      cd.createDepartmentsTable();
+      sd.createShopDepartmentTable();
+      ce.createEmployeesTable();
+      se.createSalesTable();
+      cp.createProductTable();
+      cm.createMembersTable();
+      //sld.createSaleDetailTable();
+
+
 
       connDB.closeDB();
   }

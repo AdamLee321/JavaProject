@@ -17,17 +17,17 @@ public class CreateSales {
         conn = connIn;
     }
 
-    public void dropSales() {
+    public void dropSalesTable() {
         try {
             stmt = conn.createStatement();
             try {
                 stmt.execute("DROP SEQUENCE saleSeq");
-                System.out.println("Sales Sequence Dropped");
+                System.out.println("Sales sequence dropped successfully");
             } catch (SQLException e) {
             }
             try {
                 stmt.execute("DROP TABLE sales");
-                System.out.println("Sales Table Dropped");
+                System.out.println("Sales table dropped successfully\n");
             } catch (SQLException e) {
             }
         } catch (SQLException e) {
@@ -35,7 +35,7 @@ public class CreateSales {
         }
     }
 
-    public void createSales() {
+    public void createSalesTable() {
         try {
             // create sales table
             stmt = conn.createStatement();
@@ -47,7 +47,7 @@ public class CreateSales {
                     "saleDiscount NUMBER(4,2)," +
                     "saleAmount NUMBER(6,2)" +
                     ")";
-            System.out.println("Sales Table Created");
+            System.out.println("Sales table created successfully");
             stmt.execute(sqlTable);
         } catch (SQLException e) {
             System.out.println(e);
@@ -56,7 +56,7 @@ public class CreateSales {
             // create sales id sequence
             String sqlSequence = "CREATE SEQUENCE saleSeq INCREMENT BY 1 START WITH 1";
             stmt.execute(sqlSequence);
-            System.out.println("Sales Sequence Created");
+            System.out.println("Sales sequence created successfully\n");
         } catch (SQLException e){
             System.out.println(e);
         }
