@@ -6,11 +6,13 @@
 
 package projectmustsave;
 
+import javax.swing.*;
+
 /**
  *
  * @author DL
  */
-public class TouchMain extends javax.swing.JPanel {
+public class TouchMain extends JPanel {
 
     /**
      * Creates new form TouchMain
