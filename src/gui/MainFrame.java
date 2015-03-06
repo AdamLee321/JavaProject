@@ -14,35 +14,46 @@ public class MainFrame extends JFrame {
 
   ImageIcon logo;
   JLabel logoLabel;
-  JPanel northPanel;
+  JPanel northPanel, southPanel;
+  JButton b1, b2, b3;
   String loc = "/res/images/banner.png";
-  JFrame f;
+
 
   public MainFrame(){
-    f = new JFrame();
-    f.setTitle("DGA Computers");
-    f.setLayout(new BorderLayout());
-    f.setSize(1000, 650);
-    f.setResizable(true);
-    f.setLocationRelativeTo(null);
-    f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    //f.getContentPane().setBackground(new Color(98, 169, 221));
-    f.setVisible(true);
+
+    this.setTitle("DGA Computers");
+    this.setLayout(new BorderLayout());
+    this.setSize(1000, 650);
+    this.setResizable(true);
+    this.setLocationRelativeTo(null);
+    this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    this.getContentPane().setBackground(new Color(98, 169, 221));
+    this.setVisible(true);
 
 
     //logoLabel = new JLabel();
     //logoLabel = new JLabel(new ImageIcon(loc));
     //this.add(logoLabel, BorderLayout.PAGE_START);
 
+    b1 = new JButton("One");
+    b2 = new JButton("Two");
+    b3 = new JButton("Three");
 
-    northPanel = new JPanel();
+    northPanel = new JPanel(new GridLayout(1,1));
+    southPanel = new JPanel();
+
     ImageIcon tvIcon = new ImageIcon("src/res/images/banner.png");
-    JLabel northLabel = new JLabel(" F", tvIcon,
-            SwingConstants.LEFT);
-    northLabel.setHorizontalTextPosition(SwingConstants.LEADING);
-    northPanel.setBackground(Color.white);
-    northPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+    JLabel northLabel = new JLabel(tvIcon);
+    //southPanel.setHorizontalTextPosition(SwingConstants.LEADING);
     northPanel.add(northLabel);
-    f.add(northPanel, BorderLayout.NORTH);
+
+    northPanel.setBackground(new Color(98, 169, 221));
+    southPanel.setBackground(new Color(98, 169, 221));
+    
+    southPanel.add(b1);
+    southPanel.add(b2);
+    southPanel.add(b3);
+    this.add(northPanel, BorderLayout.NORTH);
+    this.add(southPanel, BorderLayout.CENTER);
   }
 }
