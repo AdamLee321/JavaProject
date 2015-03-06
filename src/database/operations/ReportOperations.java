@@ -6,6 +6,6 @@ Computing - Year 2, Project
 Group 17
 */
 
-public class memberOperations {
- //Insert here
+public class ReportOperations {
+    //Operations and ResultSets go here
 }
