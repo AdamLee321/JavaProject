@@ -7,53 +7,88 @@ package gui;/*2ndYearProject
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
-
-public class MainFrame extends JFrame {
+public class MainFrame extends JFrame implements ActionListener {
 
   ImageIcon logo;
   JLabel logoLabel;
-  JPanel northPanel, southPanel;
-  JButton b1, b2, b3;
-  String loc = "/res/images/banner.png";
+  JPanel northPanel, centerPanel, southPanel, main;
+  JButton help;
+  JButton browse, search;
 
 
   public MainFrame(){
 
     this.setTitle("DGA Computers");
-    this.setLayout(new BorderLayout());
+    //this.setLayout();
     this.setSize(1000, 650);
     this.setResizable(true);
     this.setLocationRelativeTo(null);
     this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     this.getContentPane().setBackground(new Color(98, 169, 221));
-    this.setVisible(true);
+
 
 
     //logoLabel = new JLabel();
     //logoLabel = new JLabel(new ImageIcon(loc));
     //this.add(logoLabel, BorderLayout.PAGE_START);
 
-    b1 = new JButton("One");
-    b2 = new JButton("Two");
-    b3 = new JButton("Three");
 
+    browse = new JButton(new ImageIcon("src/res/images/UI Elements/product150.png"));
+    search = new JButton(new ImageIcon("src/res/images/UI Elements/search150.png"));
+    help = new JButton("HELP", new ImageIcon("src/res/images/UI Elements/help64.png"));
+
+
+    GridBagLayout bl = new GridBagLayout();
+
+
+    main = new JPanel(new BorderLayout());
+    main.setMaximumSize(new Dimension(800,600));
     northPanel = new JPanel(new GridLayout(1,1));
+    centerPanel = new JPanel(bl);
     southPanel = new JPanel();
 
-    ImageIcon tvIcon = new ImageIcon("src/res/images/banner.png");
+    ImageIcon tvIcon = new ImageIcon("src/res/images/UI Elements/banner.png");
     JLabel northLabel = new JLabel(tvIcon);
-    //southPanel.setHorizontalTextPosition(SwingConstants.LEADING);
-    northPanel.add(northLabel);
 
     northPanel.setBackground(new Color(98, 169, 221));
+    northPanel.add(northLabel);
+
+    centerPanel.setBackground(new Color(98, 169, 221));
+    centerPanel.add(browse, getConstraints(0,0,1,1, GridBagConstraints.WEST));
+    centerPanel.add(search, getConstraints(1,0,1,1, GridBagConstraints.EAST));
+
     southPanel.setBackground(new Color(98, 169, 221));
-    
-    southPanel.add(b1);
-    southPanel.add(b2);
-    southPanel.add(b3);
-    this.add(northPanel, BorderLayout.NORTH);
-    this.add(southPanel, BorderLayout.CENTER);
+    southPanel.add(help);
+
+
+    main.add(northPanel, BorderLayout.NORTH);
+    main.add(centerPanel, BorderLayout.CENTER);
+    main.add(southPanel, BorderLayout.SOUTH);
+
+    this.add(main);
+  }
+
+  @Override
+  public void actionPerformed(ActionEvent e) {
+
+  }
+
+  private GridBagConstraints getConstraints(int gridx, int gridy,
+                                            int gridwidth, int gridheight, int anchor)
+  {
+    GridBagConstraints c = new GridBagConstraints();
+    c.insets = new Insets(0, 50, 0, 50);
+    c.ipadx = 10;
+    c.ipady = 10;
+    c.gridx = gridx;
+    c.gridy = gridy;
+    c.gridwidth = gridwidth;
+    c.gridheight = gridheight;
+    c.anchor = anchor;
+    return c;
   }
 }

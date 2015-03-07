@@ -44,5 +44,6 @@ public class Main {
     connDB.closeDB();*/
 
     MainFrame mf = new MainFrame();
+    mf.setVisible(true);
   }
 }
