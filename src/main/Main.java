@@ -11,9 +11,9 @@ import model.Shop;
 
 public class Main {
   public static void main(String[] args) {
-    /*
-    ConnectionDB connDB = new ConnectionDB();
 
+    ConnectionDB connDB = new ConnectionDB();
+/*
       CreateShop cs = new CreateShop(connDB.getConn());
       CreateDepartment cd = new CreateDepartment(connDB.getConn());
       CreateShopDepartment sd = new CreateShopDepartment(connDB.getConn());
@@ -43,7 +43,7 @@ public class Main {
 
     connDB.closeDB();*/
 
-    MainFrame mf = new MainFrame();
+    MainFrame mf = new MainFrame(connDB.getConn());
     mf.setVisible(true);
   }
 }

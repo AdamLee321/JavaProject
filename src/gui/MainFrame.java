@@ -5,22 +5,31 @@ package gui;/*2ndYearProject
   Software Development 3
 */
 
+import database.operations.ProductOperations;
+
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
 
 
 public class MainFrame extends JFrame implements ActionListener {
 
-  ImageIcon logo;
+  private Connection conn;
+  ProductOperations po;
+
   JLabel logoLabel;
   JPanel northPanel, centerPanel, southPanel, main;
-  JButton help;
-  JButton browse, search;
+  JButton browse, search,help;
+  GridBagLayout bl;
+  private boolean displayarea = false;
 
 
-  public MainFrame(){
+  public MainFrame(Connection conn){
+    this.conn = conn;
+    po = new ProductOperations(conn);
 
     this.setTitle("DGA Computers");
     //this.setLayout();
@@ -31,42 +40,27 @@ public class MainFrame extends JFrame implements ActionListener {
     this.getContentPane().setBackground(new Color(98, 169, 221));
 
 
-
-    //logoLabel = new JLabel();
-    //logoLabel = new JLabel(new ImageIcon(loc));
-    //this.add(logoLabel, BorderLayout.PAGE_START);
-
-
-    browse = new JButton(new ImageIcon("src/res/images/UI Elements/product150.png"));
-    search = new JButton(new ImageIcon("src/res/images/UI Elements/search150.png"));
     help = new JButton("HELP", new ImageIcon("src/res/images/UI Elements/help64.png"));
+    help.addActionListener(this);
 
-
-    GridBagLayout bl = new GridBagLayout();
-
+    bl = new GridBagLayout();
 
     main = new JPanel(new BorderLayout());
     main.setMaximumSize(new Dimension(800,600));
     northPanel = new JPanel(new GridLayout(1,1));
-    centerPanel = new JPanel(bl);
     southPanel = new JPanel();
 
-    ImageIcon tvIcon = new ImageIcon("src/res/images/UI Elements/banner.png");
-    JLabel northLabel = new JLabel(tvIcon);
+    logoLabel = new JLabel(new ImageIcon("src/res/images/UI Elements/banner.png"));
 
     northPanel.setBackground(new Color(98, 169, 221));
-    northPanel.add(northLabel);
-
-    centerPanel.setBackground(new Color(98, 169, 221));
-    centerPanel.add(browse, getConstraints(0,0,1,1, GridBagConstraints.WEST));
-    centerPanel.add(search, getConstraints(1,0,1,1, GridBagConstraints.EAST));
+    northPanel.add(logoLabel);
 
     southPanel.setBackground(new Color(98, 169, 221));
     southPanel.add(help);
 
 
     main.add(northPanel, BorderLayout.NORTH);
-    main.add(centerPanel, BorderLayout.CENTER);
+    main.add(getCenterPanel(), BorderLayout.CENTER);
     main.add(southPanel, BorderLayout.SOUTH);
 
     this.add(main);
@@ -74,14 +68,72 @@ public class MainFrame extends JFrame implements ActionListener {
 
   @Override
   public void actionPerformed(ActionEvent e) {
+    if(e.getSource().equals(search)){
+      System.out.println("search");
+      ProductSearch c = new ProductSearch(po);
+      if(displayarea){
+        main.remove(centerPanel);
+      }
+      centerPanel = c.getSearch();
+      main.add(centerPanel, BorderLayout.CENTER);
+
+      displayarea = true;
+      centerPanel.setVisible(true);
+      this.setVisible(true);
+    }
+
+    else if(e.getSource().equals(browse)){
+      System.out.println("Browse");
+      ProductCategories c = new ProductCategories();
+      if(displayarea){
+        main.remove(centerPanel);
+      }
+      centerPanel = c.getCategories();
+      main.add(centerPanel, BorderLayout.CENTER);
+
+      displayarea = true;
+      centerPanel.setVisible(true);
+      this.setVisible(true);
+    }
+    else if(e.getSource().equals(help)){
+      System.out.println("help");
+      ProductResults c = new ProductResults(po);
+      if(displayarea){
+        main.remove(centerPanel);
+      }
+      centerPanel = c.getResults("All");
+      main.add(centerPanel, BorderLayout.CENTER);
+
+      displayarea = true;
+      centerPanel.setVisible(true);
+      this.setVisible(true);
+    }
 
   }
 
-  private GridBagConstraints getConstraints(int gridx, int gridy,
-                                            int gridwidth, int gridheight, int anchor)
+  public JPanel getCenterPanel(){
+    centerPanel = new JPanel(bl);
+
+    browse = new JButton(new ImageIcon("src/res/images/UI Elements/product150.png"));
+    browse.addActionListener(this);
+
+    search = new JButton(new ImageIcon("src/res/images/UI Elements/search150.png"));
+    search.addActionListener(this);
+
+    centerPanel.setBackground(new Color(98, 169, 221));
+    centerPanel.add(browse, getConstraints(0,0,1,1, GridBagConstraints.WEST, 0,75,0,75));
+    centerPanel.add(search, getConstraints(1,0,1,1, GridBagConstraints.EAST, 0,75,0,75));
+
+    displayarea = true;
+
+    return centerPanel;
+  }
+
+  private GridBagConstraints getConstraints(int gridx, int gridy, int gridwidth, int gridheight, int anchor,
+                                            int nIns, int wIns, int sIns, int eIns)
   {
     GridBagConstraints c = new GridBagConstraints();
-    c.insets = new Insets(0, 50, 0, 50);
+    c.insets = new Insets(nIns, wIns, sIns, eIns);
     c.ipadx = 10;
     c.ipady = 10;
     c.gridx = gridx;
