@@ -10,7 +10,7 @@ Computing - Year 2, Project
 Group 17
 */
 
-public class ReportSales extends javax.swing.JPanel {
+public class ReportSales implements ActionListener {
 
     //Declaration
     private Button employee;
@@ -58,6 +58,11 @@ public class ReportSales extends javax.swing.JPanel {
 
     private void yearActionPerformed(ActionEvent e) {
         //Void for now
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
     }
 }
 

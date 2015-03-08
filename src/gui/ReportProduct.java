@@ -10,5 +10,10 @@ Computing - Year 2, Project
 Group 17
 */
 
-public class ReportProduct {
+public class ReportProduct implements ActionListener{
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
 }

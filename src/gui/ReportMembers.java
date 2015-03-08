@@ -8,8 +8,9 @@ Group 17
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class ReportMembers extends javax.swing.JPanel {
+public class ReportMembers implements ActionListener {
 
     //Declaration
     private Button employee;
@@ -57,5 +58,9 @@ public class ReportMembers extends javax.swing.JPanel {
     private void yearActionPerformed(ActionEvent e) {
         //Void for now
     }
-}
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
+}
