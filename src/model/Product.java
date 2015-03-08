@@ -6,20 +6,26 @@ Computing - Year 2, Project
 Group 17
 */
 
+import oracle.sql.BLOB;
+
+import javax.swing.*;
+import java.sql.Blob;
+
 public class Product {
   private int prodId;
   private String prodMake;
   private String prodModel;
   private double prodSalePrice;
   private double prodCostPrice;
-  private String prodDesc;
   private int prodQTY;
-  //prodPic BLOB,
+  //private Blob prodPic;
+  private String prodType;
   private String cpu;
   private String ram;
   private String OS;
   private String storage;
   private String screen;
+  private String prodDesc;
 
   public Product() {
     this.prodId = 0;
@@ -27,17 +33,20 @@ public class Product {
     this.prodModel = "";
     this.prodSalePrice = 0;
     this.prodCostPrice = 0;
-    this.prodDesc = "";
     this.prodQTY = 0;
+    //this.prodPic = null;
+    this.prodType = "";
     this.cpu = "";
     this.ram = "";
     this.OS = "";
     this.storage = "";
     this.screen = "";
+	this.prodDesc = "";
   }
 
-  public Product(int prodId, String prodMake, String prodModel, double prodSalePrice, double prodCostPrice,
-                 String prodDesc, int prodQTY, String cpu, String ram, String OS, String storage, String screen) {
+  public Product(int prodId, String prodMake, String prodModel, double prodSalePrice, double prodCostPrice, int prodQTY,
+                // Blob prodPic,
+                 String prodType, String cpu, String ram, String OS, String storage, String screen, String prodDesc){
     this.prodId = prodId;
     this.prodMake = prodMake;
     this.prodModel = prodModel;
@@ -45,11 +54,14 @@ public class Product {
     this.prodCostPrice = prodCostPrice;
     this.prodDesc = prodDesc;
     this.prodQTY = prodQTY;
+    //this.prodPic = prodPic;
+    this.prodType = prodType;
     this.cpu = cpu;
     this.ram = ram;
     this.OS = OS;
     this.storage = storage;
     this.screen = screen;
+    this.prodDesc = prodDesc;
   }
 
 //getters for all attributes

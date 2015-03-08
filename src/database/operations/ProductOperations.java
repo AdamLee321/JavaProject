@@ -19,12 +19,25 @@ public class ProductOperations {
 
     public ResultSet searchProducts(String keyword, String category){
         String sql = " ";
-        if (category.equals("All")){
-            sql = "SELECT * FROM PRODUCTS WHERE prodDesc = '%" +keyword +"%'";
+        /*if (category.equals("All")){
+            sql = "SELECT prodId, prodMake, prodModel, prodSalePrice, prodCostPrice, prodQTY, "+
+                                    // Blob prodPic,\n" +
+                    "prodType, cpu, ram, OperatingSystem, storage, screen, prodDesc FROM PRODUCT WHERE prodDesc like '%" +keyword +"%'";
+            System.out.println(sql);
         }
         else {
-            sql = "SELECT * FROM PRODUCTS WHERE prodDesc like '%" + keyword + "%' AND prodType = '" + category +"'";
+            sql = "SELECT * FROM PRODUCT WHERE prodDesc like '%" + keyword + "%' AND prodType = '" + category +"'";
+            System.out.println(sql);
+        }*/
+        if (category.equals("All")){
+            sql = "SELECT prodId, prodMake, prodModel, prodSalePrice, prodCostPrice, prodQTY, "+
+                    "FROM PRODUCT WHERE prodDesc like '%" +keyword +"%'";
         }
+        else {
+            sql = "SELECT prodId, prodMake, prodModel, prodSalePrice, prodCostPrice, prodQTY, "+
+                    "FROM PRODUCT WHERE prodDesc like '%" + keyword + "%' AND prodType = '" + category +"'";
+        }
+
         try{
             stmt = conn.createStatement();
             rset = stmt.executeQuery(sql);

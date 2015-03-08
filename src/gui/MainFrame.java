@@ -8,11 +8,11 @@ package gui;/*2ndYearProject
 import database.operations.ProductOperations;
 
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
+import java.sql.ResultSet;
 
 
 public class MainFrame extends JFrame implements ActionListener {
@@ -20,11 +20,18 @@ public class MainFrame extends JFrame implements ActionListener {
   private Connection conn;
   private ProductOperations po;
 
+  private MainFrame mf;
+
   private JLabel logoLabel;
   private JPanel northPanel, centerPanel, southPanel, main;
   private JButton browse, search, help, home, back;
   private GridBagLayout bl;
-  private boolean displayarea = false;
+  private boolean displayArea = false;
+
+
+  public void setMf(MainFrame mf){
+    this.mf = mf;
+  }
 
 
   public MainFrame(Connection conn){
@@ -65,6 +72,7 @@ public class MainFrame extends JFrame implements ActionListener {
     main.add(getMinSouthPanel(), BorderLayout.SOUTH);
 
     this.add(main);
+    this.setVisible(true);
   }
 
 
@@ -82,7 +90,7 @@ public class MainFrame extends JFrame implements ActionListener {
     centerPanel.add(browse, getConstraints(0,0,1,1, GridBagConstraints.WEST, 0,75,0,75));
     centerPanel.add(search, getConstraints(1,0,1,1, GridBagConstraints.EAST, 0,75,0,75));
 
-    displayarea = true;
+    displayArea = true;
 
     return centerPanel;
   }
@@ -93,7 +101,6 @@ public class MainFrame extends JFrame implements ActionListener {
     southPanel = new JPanel(bl);
     southPanel.setBackground(new Color(98, 169, 221));
     southPanel.add(help, getConstraints(0,0,1,1,GridBagConstraints.CENTER, 0,0,20,0));
-
 
     return southPanel;
   }
@@ -129,65 +136,79 @@ public class MainFrame extends JFrame implements ActionListener {
   @Override
   public void actionPerformed(ActionEvent e) {
     if(e.getSource().equals(search)){
-      System.out.println("search");
-      ProductSearch c = new ProductSearch(conn, po);
-      if(displayarea){
-        main.remove(centerPanel);
-        main.remove(southPanel);
-      }
-      centerPanel = c.getSearch();
-      southPanel = getFullSouthPanel();
-      main.add(centerPanel, BorderLayout.CENTER);
-      main.add(southPanel, BorderLayout.SOUTH);
-
-      displayarea = true;
-      this.setVisible(true);
+      setCenterToSearch();
     }
-
     else if(e.getSource().equals(browse)){
-      System.out.println("Browse");
-      ProductCategories c = new ProductCategories();
-      if(displayarea){
-        main.remove(centerPanel);
-        main.remove(southPanel);
-      }
-      centerPanel = c.getCategories();
-      southPanel = getFullSouthPanel();
-      main.add(centerPanel, BorderLayout.CENTER);
-      main.add(southPanel, BorderLayout.SOUTH);
-
-      displayarea = true;
-      this.setVisible(true);
+      setCenterToBrowse();
     }
-
     else if(e.getSource().equals(home)){
-      if(displayarea){
-        main.remove(centerPanel);
-        main.remove(southPanel);
-      }
-      centerPanel = getCenterPanel();
-      southPanel = getMinSouthPanel();
-      main.add(centerPanel, BorderLayout.CENTER);
-      main.add(southPanel, BorderLayout.SOUTH);
-
-      displayarea = true;
-      this.setVisible(true);
+      setCenterTOMain();
     }
-
     else if(e.getSource().equals(help)){
-      ProductResults c = new ProductResults(po);
-      if(displayarea){
-        main.remove(centerPanel);
-      }
-      centerPanel = c.getResults("All");
-      main.add(centerPanel, BorderLayout.CENTER);
-
-      displayarea = true;
-      this.setVisible(true);
     }
     else if(e.getSource().equals(back)){
 
     }
+    displayArea = true;
+    this.setVisible(true);
   }
+
+  //To change the center pane to the search
+  public void setCenterToSearch(){
+    System.out.println("search");
+    ProductSearch c = new ProductSearch(mf, conn, po);
+    if(displayArea){
+      main.remove(centerPanel);
+      main.remove(southPanel);
+    }
+    centerPanel = c.getSearch();
+    southPanel = getFullSouthPanel();
+    main.add(centerPanel, BorderLayout.CENTER);
+    main.add(southPanel, BorderLayout.SOUTH);
+  }
+
+
+  //To change the center pane to the browse
+  public void setCenterToBrowse(){
+    System.out.println("Browse");
+    ProductCategories c = new ProductCategories();
+    if(displayArea){
+      main.remove(centerPanel);
+      main.remove(southPanel);
+    }
+    centerPanel = c.getCategories();
+    southPanel = getFullSouthPanel();
+    main.add(centerPanel, BorderLayout.CENTER);
+    main.add(southPanel, BorderLayout.SOUTH);
+  }
+
+
+  //To change the center pane to the home
+  public void setCenterTOMain(){
+    if(displayArea){
+      main.remove(centerPanel);
+      main.remove(southPanel);
+    }
+    centerPanel = getCenterPanel();
+    southPanel = getMinSouthPanel();
+    main.add(centerPanel, BorderLayout.CENTER);
+    main.add(southPanel, BorderLayout.SOUTH);
+  }
+
+  //To change the center pane to the results of a search or the product category picked
+  public void setCenterToProductResults(String category, ResultSet rset){
+    ProductResults pr = new ProductResults(po);
+    if(displayArea){
+      main.remove(centerPanel);
+      main.remove(southPanel);
+    }
+    centerPanel = pr.getResults(category, rset);
+    southPanel = getFullSouthPanel();
+    main.add(centerPanel, BorderLayout.CENTER);
+    main.add(southPanel, BorderLayout.SOUTH);
+    displayArea = true;
+    this.setVisible(true);
+  }
+
 
 }

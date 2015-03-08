@@ -6,21 +6,25 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
+import java.sql.ResultSet;
 
 /**
  * Created by DL on 08/03/2015.
  */
 public class ProductSearch implements ActionListener{
     private Connection conn;
+    private ResultSet rset;
     private ProductOperations po;
 
+    private MainFrame mf;
     private JPanel jp;
     private JLabel textboxLabel, categoryLabel;
     private JTextField searchText;
     private JComboBox category;
     private JButton searchButton;
 
-    public ProductSearch(Connection conn, ProductOperations po){
+    public ProductSearch(MainFrame mf, Connection conn, ProductOperations po){
+        this.mf = mf;
         this.conn = conn;
         this.po = po;
     }
@@ -42,9 +46,10 @@ public class ProductSearch implements ActionListener{
 
         String[] categoryTypes = {"All", "Desktops", "Laptops", "Apple", "All-In-One"};
         category = new JComboBox(categoryTypes);
-        category.setSelectedIndex(1);
+        category.setSelectedIndex(0);
 
         searchButton = new JButton("Search", new ImageIcon("src/res/images/UI Elements/search16.png"));
+        searchButton.addActionListener(this);
 
         jp.add(textboxLabel, getConstraints(0,0,2,1, GridBagConstraints.CENTER, 0,0,10,0));
         jp.add(searchText, getConstraints(0,1,2,1, GridBagConstraints.CENTER, 0,0,20,0));
@@ -77,7 +82,11 @@ public class ProductSearch implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(searchButton)) {
-            po.searchProducts(searchText.getText(), (String)category.getSelectedItem());
+            System.out.println("Search1");
+            String categoryName = (String) category.getSelectedItem();
+
+            rset = po.searchProducts(searchText.getText(), categoryName);
+            mf.setCenterToProductResults(categoryName, rset);
         }
 
     }

@@ -8,6 +8,8 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class ProductCategories implements ActionListener {
+    private MainFrame mf;
+
     JPanel categoriesPanel;
     JButton desktops, laptops, apple, allInOne;
 

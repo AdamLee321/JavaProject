@@ -41,9 +41,10 @@ public class Main {
       cm.createMembersTable();
       sld.createSalesDetailsTable();
 
-    connDB.closeDB();*/
-
+    //connDB.closeDB();
+*/
     MainFrame mf = new MainFrame(connDB.getConn());
-    mf.setVisible(true);
+    //mf.setVisible(true);
+      mf.setMf(mf);
   }
 }
