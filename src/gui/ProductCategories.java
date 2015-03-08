@@ -32,10 +32,10 @@ public class ProductCategories implements ActionListener {
         allInOne.setVerticalTextPosition(SwingConstants.BOTTOM);
         allInOne.setHorizontalTextPosition(SwingConstants.CENTER);
 
-        categoriesPanel.add(desktops, getConstraints(0,0,1,1, GridBagConstraints.CENTER, 0,20,0,20));
-        categoriesPanel.add(laptops, getConstraints(1,0,1,1, GridBagConstraints.CENTER, 0,20,0,20));
-        categoriesPanel.add(apple, getConstraints(2,0,1,1, GridBagConstraints.CENTER, 0,20,0,20));
-        categoriesPanel.add(allInOne, getConstraints(3,0,1,1, GridBagConstraints.CENTER, 0,20,0,20));
+        categoriesPanel.add(desktops, getConstraints(0,0,1,1, GridBagConstraints.CENTER, 0,25,0,25));
+        categoriesPanel.add(laptops, getConstraints(1,0,1,1, GridBagConstraints.CENTER, 0,25,0,25));
+        categoriesPanel.add(apple, getConstraints(2,0,1,1, GridBagConstraints.CENTER, 0,25,0,25));
+        categoriesPanel.add(allInOne, getConstraints(3,0,1,1, GridBagConstraints.CENTER, 0,25,0,25));
 
         return categoriesPanel;
 

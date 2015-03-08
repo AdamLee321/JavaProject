@@ -18,12 +18,12 @@ import java.sql.Connection;
 public class MainFrame extends JFrame implements ActionListener {
 
   private Connection conn;
-  ProductOperations po;
+  private ProductOperations po;
 
-  JLabel logoLabel;
-  JPanel northPanel, centerPanel, southPanel, main;
-  JButton browse, search,help;
-  GridBagLayout bl;
+  private JLabel logoLabel;
+  private JPanel northPanel, centerPanel, southPanel, main;
+  private JButton browse, search, help, home, back;
+  private GridBagLayout bl;
   private boolean displayarea = false;
 
 
@@ -43,73 +43,31 @@ public class MainFrame extends JFrame implements ActionListener {
     help = new JButton("HELP", new ImageIcon("src/res/images/UI Elements/help64.png"));
     help.addActionListener(this);
 
+    home = new JButton("HOME", new ImageIcon("src/res/images/UI Elements/home64.png"));
+    home.addActionListener(this);
+
+    back = new JButton("BACK", new ImageIcon("src/res/images/UI Elements/backarrow64.png"));
+    help.addActionListener(this);
+
     bl = new GridBagLayout();
 
     main = new JPanel(new BorderLayout());
     main.setMaximumSize(new Dimension(800,600));
-    northPanel = new JPanel(new GridLayout(1,1));
-    southPanel = new JPanel();
 
     logoLabel = new JLabel(new ImageIcon("src/res/images/UI Elements/banner.png"));
 
+    northPanel = new JPanel(new GridLayout(1,1));
     northPanel.setBackground(new Color(98, 169, 221));
     northPanel.add(logoLabel);
 
-    southPanel.setBackground(new Color(98, 169, 221));
-    southPanel.add(help);
-
-
     main.add(northPanel, BorderLayout.NORTH);
     main.add(getCenterPanel(), BorderLayout.CENTER);
-    main.add(southPanel, BorderLayout.SOUTH);
+    main.add(getMinSouthPanel(), BorderLayout.SOUTH);
 
     this.add(main);
   }
 
-  @Override
-  public void actionPerformed(ActionEvent e) {
-    if(e.getSource().equals(search)){
-      System.out.println("search");
-      ProductSearch c = new ProductSearch(po);
-      if(displayarea){
-        main.remove(centerPanel);
-      }
-      centerPanel = c.getSearch();
-      main.add(centerPanel, BorderLayout.CENTER);
 
-      displayarea = true;
-      centerPanel.setVisible(true);
-      this.setVisible(true);
-    }
-
-    else if(e.getSource().equals(browse)){
-      System.out.println("Browse");
-      ProductCategories c = new ProductCategories();
-      if(displayarea){
-        main.remove(centerPanel);
-      }
-      centerPanel = c.getCategories();
-      main.add(centerPanel, BorderLayout.CENTER);
-
-      displayarea = true;
-      centerPanel.setVisible(true);
-      this.setVisible(true);
-    }
-    else if(e.getSource().equals(help)){
-      System.out.println("help");
-      ProductResults c = new ProductResults(po);
-      if(displayarea){
-        main.remove(centerPanel);
-      }
-      centerPanel = c.getResults("All");
-      main.add(centerPanel, BorderLayout.CENTER);
-
-      displayarea = true;
-      centerPanel.setVisible(true);
-      this.setVisible(true);
-    }
-
-  }
 
   public JPanel getCenterPanel(){
     centerPanel = new JPanel(bl);
@@ -129,6 +87,30 @@ public class MainFrame extends JFrame implements ActionListener {
     return centerPanel;
   }
 
+
+  // South Panel with help button
+  public JPanel getMinSouthPanel(){
+    southPanel = new JPanel(bl);
+    southPanel.setBackground(new Color(98, 169, 221));
+    southPanel.add(help, getConstraints(0,0,1,1,GridBagConstraints.CENTER, 0,0,20,0));
+
+
+    return southPanel;
+  }
+
+
+  //South Panel With back, home and help buttons
+  public JPanel getFullSouthPanel(){
+    southPanel = new JPanel(bl);
+    southPanel.setBackground(new Color(98, 169, 221));
+    southPanel.add(back, getConstraints(0,0,1,1,GridBagConstraints.WEST, 0,0,20,0));
+    southPanel.add(home, getConstraints(1,0,1,1,GridBagConstraints.WEST, 0,150,20,150));
+    southPanel.add(help, getConstraints(2,0,1,1,GridBagConstraints.EAST, 0,0,20,0));
+
+    return southPanel;
+  }
+
+  //For setting the gridbagLayout constraints
   private GridBagConstraints getConstraints(int gridx, int gridy, int gridwidth, int gridheight, int anchor,
                                             int nIns, int wIns, int sIns, int eIns)
   {
@@ -143,4 +125,69 @@ public class MainFrame extends JFrame implements ActionListener {
     c.anchor = anchor;
     return c;
   }
+
+  @Override
+  public void actionPerformed(ActionEvent e) {
+    if(e.getSource().equals(search)){
+      System.out.println("search");
+      ProductSearch c = new ProductSearch(conn, po);
+      if(displayarea){
+        main.remove(centerPanel);
+        main.remove(southPanel);
+      }
+      centerPanel = c.getSearch();
+      southPanel = getFullSouthPanel();
+      main.add(centerPanel, BorderLayout.CENTER);
+      main.add(southPanel, BorderLayout.SOUTH);
+
+      displayarea = true;
+      this.setVisible(true);
+    }
+
+    else if(e.getSource().equals(browse)){
+      System.out.println("Browse");
+      ProductCategories c = new ProductCategories();
+      if(displayarea){
+        main.remove(centerPanel);
+        main.remove(southPanel);
+      }
+      centerPanel = c.getCategories();
+      southPanel = getFullSouthPanel();
+      main.add(centerPanel, BorderLayout.CENTER);
+      main.add(southPanel, BorderLayout.SOUTH);
+
+      displayarea = true;
+      this.setVisible(true);
+    }
+
+    else if(e.getSource().equals(home)){
+      if(displayarea){
+        main.remove(centerPanel);
+        main.remove(southPanel);
+      }
+      centerPanel = getCenterPanel();
+      southPanel = getMinSouthPanel();
+      main.add(centerPanel, BorderLayout.CENTER);
+      main.add(southPanel, BorderLayout.SOUTH);
+
+      displayarea = true;
+      this.setVisible(true);
+    }
+
+    else if(e.getSource().equals(help)){
+      ProductResults c = new ProductResults(po);
+      if(displayarea){
+        main.remove(centerPanel);
+      }
+      centerPanel = c.getResults("All");
+      main.add(centerPanel, BorderLayout.CENTER);
+
+      displayarea = true;
+      this.setVisible(true);
+    }
+    else if(e.getSource().equals(back)){
+
+    }
+  }
+
 }

@@ -5,11 +5,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
 
 /**
  * Created by DL on 08/03/2015.
  */
 public class ProductSearch implements ActionListener{
+    private Connection conn;
     private ProductOperations po;
 
     private JPanel jp;
@@ -18,7 +20,8 @@ public class ProductSearch implements ActionListener{
     private JComboBox category;
     private JButton searchButton;
 
-    public ProductSearch(ProductOperations po){
+    public ProductSearch(Connection conn, ProductOperations po){
+        this.conn = conn;
         this.po = po;
     }
 
@@ -41,7 +44,7 @@ public class ProductSearch implements ActionListener{
         category = new JComboBox(categoryTypes);
         category.setSelectedIndex(1);
 
-        searchButton = new JButton("Search", new ImageIcon("src/res/images/UI Elements/search.png"));
+        searchButton = new JButton("Search", new ImageIcon("src/res/images/UI Elements/search16.png"));
 
         jp.add(textboxLabel, getConstraints(0,0,2,1, GridBagConstraints.CENTER, 0,0,10,0));
         jp.add(searchText, getConstraints(0,1,2,1, GridBagConstraints.CENTER, 0,0,20,0));
@@ -73,6 +76,9 @@ public class ProductSearch implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (e.getSource().equals(searchButton)) {
+            po.searchProducts(searchText.getText(), (String)category.getSelectedItem());
+        }
 
     }
 }
