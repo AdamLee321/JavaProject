@@ -6,6 +6,7 @@ package gui;/*2ndYearProject
 */
 
 import database.operations.ProductOperations;
+import model.Product;
 
 import javax.swing.*;
 import java.awt.*;
@@ -118,7 +119,7 @@ public class MainFrame extends JFrame implements ActionListener {
   }
 
   //For setting the gridbagLayout constraints
-  private GridBagConstraints getConstraints(int gridx, int gridy, int gridwidth, int gridheight, int anchor,
+  public static GridBagConstraints getConstraints(int gridx, int gridy, int gridwidth, int gridheight, int anchor,
                                             int nIns, int wIns, int sIns, int eIns)
   {
     GridBagConstraints c = new GridBagConstraints();
@@ -136,78 +137,81 @@ public class MainFrame extends JFrame implements ActionListener {
   @Override
   public void actionPerformed(ActionEvent e) {
     if(e.getSource().equals(search)){
-      setCenterToSearch();
+      setToSearch();
     }
     else if(e.getSource().equals(browse)){
-      setCenterToBrowse();
+      setToBrowse();
     }
     else if(e.getSource().equals(home)){
-      setCenterTOMain();
+      setToMain();
     }
     else if(e.getSource().equals(help)){
+      setToProductView();
     }
     else if(e.getSource().equals(back)){
 
     }
-    displayArea = true;
-    this.setVisible(true);
   }
 
   //To change the center pane to the search
-  public void setCenterToSearch(){
+  public void setToSearch(){
     System.out.println("search");
     ProductSearch c = new ProductSearch(mf, conn, po);
-    if(displayArea){
-      main.remove(centerPanel);
-      main.remove(southPanel);
-    }
+    removePanels();
     centerPanel = c.getSearch();
     southPanel = getFullSouthPanel();
-    main.add(centerPanel, BorderLayout.CENTER);
-    main.add(southPanel, BorderLayout.SOUTH);
+    changePanels(centerPanel, southPanel);
   }
 
 
   //To change the center pane to the browse
-  public void setCenterToBrowse(){
+  public void setToBrowse(){
     System.out.println("Browse");
-    ProductCategories c = new ProductCategories();
-    if(displayArea){
-      main.remove(centerPanel);
-      main.remove(southPanel);
-    }
+    ProductCategories c = new ProductCategories(po, mf);
+    removePanels();
     centerPanel = c.getCategories();
     southPanel = getFullSouthPanel();
-    main.add(centerPanel, BorderLayout.CENTER);
-    main.add(southPanel, BorderLayout.SOUTH);
+    changePanels(centerPanel, southPanel);
   }
 
 
   //To change the center pane to the home
-  public void setCenterTOMain(){
-    if(displayArea){
-      main.remove(centerPanel);
-      main.remove(southPanel);
-    }
+  public void setToMain(){
+    removePanels();
     centerPanel = getCenterPanel();
     southPanel = getMinSouthPanel();
-    main.add(centerPanel, BorderLayout.CENTER);
-    main.add(southPanel, BorderLayout.SOUTH);
+    changePanels(centerPanel, southPanel);
   }
 
   //To change the center pane to the results of a search or the product category picked
-  public void setCenterToProductResults(String category, ResultSet rset){
+  public void setToProductResults(String category, ResultSet rset){
     ProductResults pr = new ProductResults(po);
-    if(displayArea){
-      main.remove(centerPanel);
-      main.remove(southPanel);
-    }
+    removePanels();
     centerPanel = pr.getResults(category, rset);
     southPanel = getFullSouthPanel();
+    changePanels(centerPanel, southPanel);
+  }
+
+  public void setToProductView(){
+    ProductView pv = new ProductView(mf);
+    removePanels();
+    centerPanel = pv.getProductView(new Product());
+    southPanel = getFullSouthPanel();
+    changePanels(centerPanel, southPanel);
+  }
+
+  public void changePanels(JPanel centerPanel, JPanel southPanel){
     main.add(centerPanel, BorderLayout.CENTER);
     main.add(southPanel, BorderLayout.SOUTH);
     displayArea = true;
     this.setVisible(true);
+  }
+
+  public void removePanels(){
+    if(displayArea){
+      main.remove(centerPanel);
+      main.remove(southPanel);
+    }
   }
 
 

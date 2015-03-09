@@ -51,31 +51,16 @@ public class ProductSearch implements ActionListener{
         searchButton = new JButton("Search", new ImageIcon("src/res/images/UI Elements/search16.png"));
         searchButton.addActionListener(this);
 
-        jp.add(textboxLabel, getConstraints(0,0,2,1, GridBagConstraints.CENTER, 0,0,10,0));
-        jp.add(searchText, getConstraints(0,1,2,1, GridBagConstraints.CENTER, 0,0,20,0));
-        jp.add(categoryLabel, getConstraints(0,2,1,1, GridBagConstraints.CENTER, 0,0,20,0));
-        jp.add(category, getConstraints(1,2,1,1, GridBagConstraints.LAST_LINE_END, 0,0,20,0));
-        jp.add(searchButton, getConstraints(0,3,2,1, GridBagConstraints.CENTER, 0,0,0,0));
+        jp.add(textboxLabel, MainFrame.getConstraints(0, 0, 2, 1, GridBagConstraints.CENTER, 0, 0, 10, 0));
+        jp.add(searchText, MainFrame.getConstraints(0, 1, 2, 1, GridBagConstraints.CENTER, 0, 0, 20, 0));
+        jp.add(categoryLabel, MainFrame.getConstraints(0, 2, 1, 1, GridBagConstraints.CENTER, 0, 0, 20, 0));
+        jp.add(category, MainFrame.getConstraints(1, 2, 1, 1, GridBagConstraints.LAST_LINE_END, 0, 0, 20, 0));
+        jp.add(searchButton, MainFrame.getConstraints(0, 3, 2, 1, GridBagConstraints.CENTER, 0, 0, 0, 0));
 
 
 
 
         return jp;
-    }
-
-    private GridBagConstraints getConstraints(int gridx, int gridy, int gridwidth, int gridheight, int anchor,
-                                              int nIns, int wIns, int sIns, int eIns)
-    {
-        GridBagConstraints c = new GridBagConstraints();
-        c.insets = new Insets(nIns, wIns, sIns, eIns);
-        c.ipadx = 10;
-        c.ipady = 10;
-        c.gridx = gridx;
-        c.gridy = gridy;
-        c.gridwidth = gridwidth;
-        c.gridheight = gridheight;
-        c.anchor = anchor;
-        return c;
     }
 
 
@@ -86,7 +71,7 @@ public class ProductSearch implements ActionListener{
             String categoryName = (String) category.getSelectedItem();
 
             rset = po.searchProducts(searchText.getText(), categoryName);
-            mf.setCenterToProductResults(categoryName, rset);
+            mf.setToProductResults(categoryName, rset);
         }
 
     }

@@ -3,16 +3,26 @@ package gui;/*
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import database.operations.ProductOperations;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.ResultSet;
 
 public class ProductCategories implements ActionListener {
     private MainFrame mf;
 
+    ResultSet rset;
+    ProductOperations po;
+
     JPanel categoriesPanel;
     JButton desktops, laptops, apple, allInOne;
 
+    public ProductCategories(ProductOperations po, MainFrame mf){
+        this.po = po;
+        this.mf = mf;
+    }
 
     public JPanel getCategories(){
         categoriesPanel = new JPanel(new GridBagLayout());
@@ -21,23 +31,27 @@ public class ProductCategories implements ActionListener {
         desktops = new JButton("Desktops", new ImageIcon("src/res/images/Product Categories/desktop100.png"));
         desktops.setVerticalTextPosition(SwingConstants.BOTTOM);
         desktops.setHorizontalTextPosition(SwingConstants.CENTER);
+        desktops.addActionListener(this);
 
         laptops = new JButton("Laptops", new ImageIcon("src/res/images/Product Categories/Laptop100.png"));
         laptops.setVerticalTextPosition(SwingConstants.BOTTOM);
         laptops.setHorizontalTextPosition(SwingConstants.CENTER);
+        laptops.addActionListener(this);
 
         apple = new JButton("Apple", new ImageIcon("src/res/images/Product Categories/iMac100.png"));
         apple.setVerticalTextPosition(SwingConstants.BOTTOM);
         apple.setHorizontalTextPosition(SwingConstants.CENTER);
+        apple.addActionListener(this);
 
         allInOne = new JButton("All-In-One", new ImageIcon("src/res/images/Product Categories/AIOComputer100.png"));
         allInOne.setVerticalTextPosition(SwingConstants.BOTTOM);
         allInOne.setHorizontalTextPosition(SwingConstants.CENTER);
+        allInOne.addActionListener(this);
 
-        categoriesPanel.add(desktops, getConstraints(0,0,1,1, GridBagConstraints.CENTER, 0,25,0,25));
-        categoriesPanel.add(laptops, getConstraints(1,0,1,1, GridBagConstraints.CENTER, 0,25,0,25));
-        categoriesPanel.add(apple, getConstraints(2,0,1,1, GridBagConstraints.CENTER, 0,25,0,25));
-        categoriesPanel.add(allInOne, getConstraints(3,0,1,1, GridBagConstraints.CENTER, 0,25,0,25));
+        categoriesPanel.add(desktops, MainFrame.getConstraints(0, 0, 1, 1, GridBagConstraints.CENTER, 0, 25, 0, 25));
+        categoriesPanel.add(laptops, MainFrame.getConstraints(1, 0, 1, 1, GridBagConstraints.CENTER, 0, 25, 0, 25));
+        categoriesPanel.add(apple, MainFrame.getConstraints(2, 0, 1, 1, GridBagConstraints.CENTER, 0, 25, 0, 25));
+        categoriesPanel.add(allInOne, MainFrame.getConstraints(3, 0, 1, 1, GridBagConstraints.CENTER, 0, 25, 0, 25));
 
         return categoriesPanel;
 
@@ -47,34 +61,21 @@ public class ProductCategories implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        String category = "";
         if(e.getSource().equals(desktops)){
-
+            category = desktops.getText();
         }
         else if(e.getSource().equals(laptops)){
-
+            category = laptops.getText();
         }
         else if(e.getSource().equals(apple)){
-
+            category = apple.getText();
         }
         else if(e.getSource().equals(allInOne)){
-
+            category = allInOne.getText();
         }
+        rset = po.productCategory(category);
+        mf.setToProductResults(category, rset);
 
-
-    }
-
-    private GridBagConstraints getConstraints(int gridx, int gridy, int gridwidth, int gridheight, int anchor,
-                                              int nIns, int wIns, int sIns, int eIns)
-    {
-        GridBagConstraints c = new GridBagConstraints();
-        c.insets = new Insets(nIns, wIns, sIns, eIns);
-        c.ipadx = 10;
-        c.ipady = 10;
-        c.gridx = gridx;
-        c.gridy = gridy;
-        c.gridwidth = gridwidth;
-        c.gridheight = gridheight;
-        c.anchor = anchor;
-        return c;
     }
 }
