@@ -1,6 +1,5 @@
 package gui;
 
-import database.operations.ProductOperations;
 import database.operations.ReportOperations;
 
 import javax.swing.*;
