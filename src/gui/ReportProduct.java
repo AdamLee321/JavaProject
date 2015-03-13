@@ -12,7 +12,7 @@ Group 17
 
 public class ReportProduct extends JFrame {
 
-    private JFrame re;
+    private JFrame rp;
     private JButton employee, year, month, week, okButton, members, product, sales;
     private JLabel jLabel1; //Graph
     private JPanel jPanel1, jPanel2, jPanel3;//Personnel, calender, range
@@ -21,13 +21,13 @@ public class ReportProduct extends JFrame {
 
     public ReportProduct() {
 
-        re = new JFrame();
-        re.setTitle("View Reports");
-        re.setSize(800,700);
-        re.setLocationRelativeTo(null);
-        re.setLayout(new BorderLayout());
-        re.getContentPane().setBackground(new Color(98, 169, 221));
-        re.setVisible(true);
+        rp = new JFrame();
+        rp.setTitle("View Reports");
+        rp.setSize(800,700);
+        rp.setLocationRelativeTo(null);
+        rp.setLayout(new BorderLayout());
+        rp.getContentPane().setBackground(new Color(98, 169, 221));
+        rp.setVisible(true);
 
         employee = new JButton("Employee");
         employee.setPreferredSize(new Dimension(150, 40));

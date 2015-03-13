@@ -12,7 +12,7 @@ Computing - Year 2, Project
 Group 17
 */
 
-public class ReportEmployee  extends JFrame {
+public class ReportEmployee extends JFrame {
 
     private JFrame re;
     private JButton employee, year, month, week, okButton, members, product, sales;
@@ -112,17 +112,20 @@ public class ReportEmployee  extends JFrame {
         });
 
         jPanel1 = new JPanel(new FlowLayout(FlowLayout.CENTER));// personnel Panel
+        jPanel1.setBackground(new Color(98, 169, 221));
         jPanel1.add(employee);
         jPanel1.add(members);
         jPanel1.add(product);
         jPanel1.add(sales);
         
         jPanel2 = new JPanel(new GridBagLayout()); //Calender
+        jPanel2.setBackground(new Color(98, 169, 221));
         jPanel2.add(week); 
         jPanel2.add(month);
         jPanel2.add(year);
         
         jPanel3 = new JPanel(new FlowLayout(FlowLayout.CENTER)); // Range
+        jPanel3.setBackground(new Color(98, 169, 221));
         jPanel3.add(jTextField1);
         jPanel3.add(okButton);
         

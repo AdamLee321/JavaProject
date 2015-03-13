@@ -10,9 +10,9 @@ Computing - Year 2, Project
 Group 17
 */
 
-public class ReportSales   extends JFrame {
+public class ReportSales  extends JFrame {
 
-    private JFrame re;
+    private JFrame rs;
     private JButton employee, year, month, week, okButton, members, product, sales;
     private JLabel jLabel1; //Graph
     private JPanel jPanel1, jPanel2, jPanel3;//Personnel, calender, range
@@ -21,13 +21,13 @@ public class ReportSales   extends JFrame {
 
     public ReportSales() {
 
-        re = new JFrame();
-        re.setTitle("View Reports");
-        re.setSize(800,700);
-        re.setLocationRelativeTo(null);
-        re.setLayout(new BorderLayout());
-        re.getContentPane().setBackground(new Color(98, 169, 221));
-        re.setVisible(true);
+        rs = new JFrame();
+        rs.setTitle("View Reports");
+        rs.setSize(800, 700);
+        rs.setLocationRelativeTo(null);
+        rs.setLayout(new BorderLayout());
+        rs.getContentPane().setBackground(new Color(98, 169, 221));
+        rs.setVisible(true);
 
         employee = new JButton("Employee");
         employee.setPreferredSize(new Dimension(150, 40));
@@ -127,3 +127,4 @@ public class ReportSales   extends JFrame {
 
 
     }
+}
