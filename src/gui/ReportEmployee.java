@@ -17,7 +17,6 @@ public class ReportEmployee extends JFrame {
 
     private JFrame re;
     private JButton employee, year, month, week, okButton, members, product, sales;
-    private JButton check;
     private JLabel jLabel1; //Graph
     private JPanel north, jPanel1, jPanel2, jPanel3, south;//Container ,Personnel, calender, range, graph
     private JTextField jTextField1; // Search
