@@ -45,10 +45,10 @@ public class Main {
 
     //connDB.closeDB();
 */
-    MainFrame mf = new MainFrame(connDB.getConn());
+    //MainFrame mf = new MainFrame(connDB.getConn());
     //mf.setVisible(true);
-      mf.setMf(mf);
-      AdminMain am = new AdminMain();
-      //ReportEmployee re = new ReportEmployee();
+      //mf.setMf(mf);
+      //AdminMain am = new AdminMain();
+      ReportEmployee re = new ReportEmployee();
   }
 }

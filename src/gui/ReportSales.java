@@ -138,7 +138,7 @@ public class ReportSales extends JFrame {
         south.add(jLabel1 ,BorderLayout.CENTER);
 
         re.add(north, BorderLayout.NORTH);
-        re.add(south, BorderLayout.SOUTH);
+        re.add(south, BorderLayout.CENTER);
         re.setVisible(true);
 
 

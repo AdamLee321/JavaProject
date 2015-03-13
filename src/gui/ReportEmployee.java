@@ -17,6 +17,7 @@ public class ReportEmployee extends JFrame {
 
     private JFrame re;
     private JButton employee, year, month, week, okButton, members, product, sales;
+    private JButton check;
     private JLabel jLabel1; //Graph
     private JPanel north, jPanel1, jPanel2, jPanel3, south;//Container ,Personnel, calender, range, graph
     private JTextField jTextField1; // Search
@@ -134,11 +135,11 @@ public class ReportEmployee extends JFrame {
         //SOUTH
         south = new JPanel(new BorderLayout());
         south.setBackground(new Color(98, 169, 221));
-        jLabel1 = new JLabel(new ImageIcon("Graph")); //Graph displayed here
+        jLabel1 = new JLabel("GRAPH"); //Graph displayed here
         south.add(jLabel1 ,BorderLayout.CENTER);
 
         re.add(north, BorderLayout.NORTH);
-        re.add(south, BorderLayout.SOUTH);
+        re.add(south, BorderLayout.CENTER);
         re.setVisible(true);
 
 
