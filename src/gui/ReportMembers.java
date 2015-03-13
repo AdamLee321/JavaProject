@@ -135,6 +135,7 @@ public class ReportMembers extends JFrame {
         south = new JPanel(new BorderLayout());
         south.setBackground(new Color(98, 169, 221));
         jLabel1 = new JLabel(new ImageIcon("Graph")); //Graph displayed here
+        //jLabel1.setHorizontalAlignment();
         south.add(jLabel1 ,BorderLayout.CENTER);
 
         re.add(north, BorderLayout.NORTH);
