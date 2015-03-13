@@ -1,17 +1,19 @@
-package gui.product;
+package gui;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * Created by User on 07/03/2015.
- */
+/*
+IT Tallaght - 2015, S2
+Computing - Year 2, Project
+Group 17 (George - 07/03/2015)
+*/
 
 public class ProductMain {
 
-    private JFrame prodMain;
+    private JPanel prodMain;
     private JButton addButton, editButton, deleteButton, searchButton, backButton;
     private JTextField searchField;
     private JComboBox prodTypes, brandTypes, modelTypes;
@@ -21,25 +23,23 @@ public class ProductMain {
     String[] brandTypess = {"All", "DELL", "HP", "Apple"};  // this just a placeholder, real info will be populated from DB
     String[] modelTypess = {"All", "Inpiron 5150", "Latitude 1350"};  // this just a placeholder, real info will be populated from DB
 
-    public ProductMain(){
+    public JPanel getProductMain(){
 
     // setup the frame
 
-        prodMain = new JFrame("Employees");
+        prodMain = new JPanel();
         prodMain.setLayout(new BorderLayout());
-        prodMain.setSize(800, 500);
-        prodMain.setLocationRelativeTo(null);
         //prodMain.getContentPane().setBackground(new Color(98, 169, 221));
 
 // north panel
 
         northPanel = new JPanel(new GridBagLayout());
-        northPanel.setBackground(new Color(98, 169, 221));
+        //northPanel.setBackground(new Color(98, 169, 221));
 
     // manage products panel
 
         managePanel = new JPanel(new FlowLayout());
-        managePanel.setBackground(new Color(98, 169, 221));
+        //managePanel.setBackground(new Color(98, 169, 221));
         managePanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Manage Products")); // set anonymous titled, etched border
 
         addButton = new JButton("Add");
@@ -62,13 +62,13 @@ public class ProductMain {
     // search products panel
 
         searchPanel = new JPanel(new BorderLayout());
-        searchPanel.setBackground(new Color(98, 169, 221));
+        //searchPanel.setBackground(new Color(98, 169, 221));
         searchPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Search Products")); // set anonymous titled, etched border
 
         // top panel containing the search field and search button
         searchTopPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        searchTopPanel.setBackground(new Color(98, 169, 221));
-        searchField = new JTextField(20);
+        //searchTopPanel.setBackground(new Color(98, 169, 221));
+        searchField = new JTextField(25);
         searchTopPanel.add(searchField);
 
         searchButton = new JButton("Search");
@@ -81,7 +81,7 @@ public class ProductMain {
 
         // buttom panel containing comboboxes for information filtering
         searchBottomPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        searchBottomPanel.setBackground(new Color(98, 169, 221));
+        //searchBottomPanel.setBackground(new Color(98, 169, 221));
         prodTypes = new JComboBox(new DefaultComboBoxModel<String>(prodTypess));
         brandTypes = new JComboBox(new DefaultComboBoxModel<String>(brandTypess));
         modelTypes = new JComboBox(new DefaultComboBoxModel<String>(modelTypess));
@@ -94,7 +94,7 @@ public class ProductMain {
         searchPanel.add(searchBottomPanel, BorderLayout.SOUTH);
 
         // add all the above to northPanel
-        northPanel.add(searchPanel, getConstraints(1,0,1,2,0,0,0,GridBagConstraints.CENTER));
+        northPanel.add(searchPanel, getConstraints(1,0,1,2,1,0,0,GridBagConstraints.CENTER));
 
         // add the above to the northPanel
         prodMain.add(northPanel, BorderLayout.NORTH);
@@ -105,10 +105,10 @@ public class ProductMain {
 // south panel
 
         southPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        southPanel.setBackground(new Color(98, 169, 221));
+        //southPanel.setBackground(new Color(98, 169, 221));
 
     // bottom buttons
-
+/*
         backButton = new JButton("Back");
         backButton.setPreferredSize(new Dimension(150, 26));
         backButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
@@ -120,12 +120,12 @@ public class ProductMain {
                 prodMain.setVisible(false);  // lights off
             }
         });
-
+*/
         prodMain.add(southPanel, BorderLayout.SOUTH);
 
 // turns the lights on
 
-        prodMain.setVisible(true);
+        return prodMain;
     }
 
     // return GridBagConstraints for GridBagLayout

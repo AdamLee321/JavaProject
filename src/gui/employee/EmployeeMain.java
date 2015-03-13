@@ -1,43 +1,46 @@
-package gui.employee;
+package gui;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * Created by User on 07/03/2015.
- */
+/*
+IT Tallaght - 2015, S2
+Computing - Year 2, Project
+Group 17 (George - 07/03/2015)
+*/
 
 public class EmployeeMain {
 
-    private JFrame empMain;
+    private JPanel empMain;
     private JButton addButton, editButton, deleteButton, searchButton, viewOrdersButton, backButton;
     private JTextField searchField;
     private JComboBox empTypes;
-    private JPanel managePanel, northPanel, southPanel, searchPanel, searchTopPanel, searchBottomPanel;
+    private JPanel managePanel, northPanel, southPanel, searchPanel;
 
     String[] eempTypes = {"All", "Sales", "Management"};  // this just a placeholder, real info will be populated from DB
 
-    public EmployeeMain(){
+    public JPanel getEmployeeMain(){
 
     // setup the frame
 
-        empMain = new JFrame("Employees");
+        //empMain = new JFrame("Employees");
+        empMain = new JPanel();
         empMain.setLayout(new BorderLayout());
-        empMain.setSize(800, 500);
-        empMain.setLocationRelativeTo(null);
+        //empMain.setSize(800, 500);
+        //empMain.setLocationRelativeTo(null);
         //empMain.getContentPane().setBackground(new Color(98, 169, 221));
 
 // north panel
 
-        northPanel = new JPanel(new GridBagLayout());
-        northPanel.setBackground(new Color(98, 169, 221));
+        northPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        //northPanel.setBackground(new Color(98, 169, 100));
 
     // manage employees panel
 
         managePanel = new JPanel(new FlowLayout());
-        managePanel.setBackground(new Color(98, 169, 221));
+        //managePanel.setBackground(new Color(98, 169, 221));
         managePanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Manage Employees")); // set anonymous titled, etched border
 
         addButton = new JButton("Add");
@@ -55,42 +58,31 @@ public class EmployeeMain {
         deleteButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
         managePanel.add(deleteButton);
 
-        northPanel.add(managePanel, getConstraints(0,0,1,1,0,0,0,GridBagConstraints.CENTER));
+        //northPanel.add(managePanel, getConstraints(0,0,1,1,0,0,1,GridBagConstraints.CENTER));
+        northPanel.add(managePanel);
 
     // search employees panel
 
-        searchPanel = new JPanel(new BorderLayout());
-        searchPanel.setBackground(new Color(98, 169, 221));
+        searchPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        //searchPanel.setBackground(new Color(98, 169, 221));
         searchPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Search Employees")); // set anonymous titled, etched border
 
-        // top panel containing the search field and search button
-        searchTopPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        searchTopPanel.setBackground(new Color(98, 169, 221));
-        searchField = new JTextField(20);
-        searchTopPanel.add(searchField);
+        searchField = new JTextField(19);
+        searchPanel.add(searchField);
+
+        empTypes = new JComboBox(new DefaultComboBoxModel<String>(eempTypes));
+
+        searchPanel.add(empTypes);
 
         searchButton = new JButton("Search");
         searchButton.setPreferredSize(new Dimension(100, 26));
         searchButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
-        searchTopPanel.add(searchButton);
-
-        // add top panel to search panel
-        searchPanel.add(searchTopPanel, BorderLayout.NORTH);
-
-        // buttom panel containing comboboxes for information filtering
-        searchBottomPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        searchBottomPanel.setBackground(new Color(98, 169, 221));
-        empTypes = new JComboBox(new DefaultComboBoxModel<String>(eempTypes));
-
-        // add bottom panel to search panel
-        searchBottomPanel.add(empTypes);
-
-        searchPanel.add(searchBottomPanel, BorderLayout.SOUTH);
+        searchPanel.add(searchButton);
 
         // add all the above to northPanel
-        northPanel.add(searchPanel, getConstraints(1,0,1,2,0,0,0,GridBagConstraints.CENTER));
+        northPanel.add(searchPanel);
 
-        // add the above to the northPanel
+        // add northPanel to main
         empMain.add(northPanel, BorderLayout.NORTH);
 
     // results panel
@@ -102,28 +94,15 @@ public class EmployeeMain {
 
     // bottom buttons
 
-        backButton = new JButton("Back");
-        backButton.setPreferredSize(new Dimension(150, 26));
-        backButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
-        backButton.setAlignmentX(Component.LEFT_ALIGNMENT);
-        southPanel.add(backButton, getConstraints(0,0,1,1,0,15,15,GridBagConstraints.WEST));
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                empMain.setVisible(false);  // lights off
-            }
-        });
-
         viewOrdersButton = new JButton("View Orders");
         viewOrdersButton.setPreferredSize(new Dimension(150, 26));
         viewOrdersButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
-        southPanel.add(viewOrdersButton, getConstraints(1, 0, 1, 1, 0, 15, 15, GridBagConstraints.EAST));
+        southPanel.add(viewOrdersButton, getConstraints(0, 0, 1, 1, 0, 15, 15, GridBagConstraints.EAST));
 
         empMain.add(southPanel, BorderLayout.SOUTH);
 
-// turns the lights on
-
-        empMain.setVisible(true);
+    // return to AdminMain
+        return empMain;
     }
 
     // return GridBagConstraints for GridBagLayout
