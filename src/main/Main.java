@@ -8,6 +8,7 @@ import database.ConnectionDB;
 import database.create.*;
 import gui.AdminMain;
 import gui.MainFrame;
+import gui.ReportEmployee;
 import model.Shop;
 
 public class Main {
@@ -48,5 +49,6 @@ public class Main {
     //mf.setVisible(true);
       mf.setMf(mf);
       AdminMain am = new AdminMain();
+      //ReportEmployee re = new ReportEmployee();
   }
 }

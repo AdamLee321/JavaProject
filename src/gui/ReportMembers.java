@@ -1,127 +1,151 @@
 package gui;
+
+import database.operations.ReportOperations;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.time.Year;
+
 /*
 IT Tallaght - 2015, S2
 Computing - Year 2, Project
 Group 17
 */
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+public class ReportMembers extends JFrame {
 
-public class ReportMembers  extends JFrame {
-
-    private JFrame rm;
+    private JFrame re;
     private JButton employee, year, month, week, okButton, members, product, sales;
     private JLabel jLabel1; //Graph
-    private JPanel jPanel1, jPanel2, jPanel3;//Personnel, calender, range
-    private JPanel mainPanel;
+    private JPanel north, jPanel1, jPanel2, jPanel3, south;//Container ,Personnel, calender, range, graph
     private JTextField jTextField1; // Search
 
     public ReportMembers() {
 
-        rm = new JFrame();
-        rm.setTitle("View Reports");
-        rm.setSize(800, 700);
-        rm.setLocationRelativeTo(null);
-        rm.setLayout(new BorderLayout());
-        rm.getContentPane().setBackground(new Color(98, 169, 221));
-        rm.setVisible(true);
-
-        jTextField1 = new JTextField();
+        re = new JFrame();
+        re.setTitle("Reports");
+        re.setLayout(new BorderLayout());
+        re.setSize(500, 500);
+        re.setLocationRelativeTo(null); //Sets the screen to appear in the center
+        re.setResizable(true);
 
 
+        //NORTH PANEL
+        north = new JPanel(new BorderLayout());
+        north.setBackground(new Color(98, 169, 221));
+
+        jPanel1 = new JPanel(new FlowLayout());
+        jPanel1.setBackground(new Color(98, 169, 221));
+        jPanel1.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Personnel"));
+        //north.add(jPanel1, BorderLayout.NORTH); //Places the panel inside the north panel
+        //Sales Button;
+        sales = new JButton("Sales");
+        jPanel1.add(sales);
+        jPanel1.setForeground(Color.GRAY);
+        sales.addActionListener(new ActionListener() {    // action
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //SALES ACTION
+            }
+        });
+
+        //Employee Button
         employee = new JButton("Employee");
-        employee.setPreferredSize(new Dimension(150, 40));
-        employee.addActionListener(new ActionListener() {
+        jPanel1.add(employee);
+        employee.addActionListener(new ActionListener() {    // action
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                //EMPLOYEE ACTION
             }
         });
 
-        year = new JButton("Year");//Year Combo Box
-        year.setPreferredSize(new Dimension(150, 40));
-        year.addActionListener(new ActionListener() {
+        //Product Button
+        product = new JButton("Product");
+        jPanel1.add(product);
+        jPanel1.setBackground(new Color(98, 169, 221));
+        product.addActionListener(new ActionListener() {    // action
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Get combo boxes
+                //PRODUCT ACTION
             }
         });
 
-        month = new JButton("Month");//Month Year Combo Box
-        month.setPreferredSize(new Dimension(150, 40));
-        month.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-
-        week = new JButton("Week"); //Week Year Combo Box
-        week.setPreferredSize(new Dimension(150, 40));
-        week.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-
-
-            }
-        });
-
-        okButton = new JButton("Ok");
-        okButton.setPreferredSize(new Dimension(150, 40));
-        okButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                System.out.println("Button Clicked!");
-            }
-        });
-
+        //Members Button
         members = new JButton("Members");
-        members.setPreferredSize(new Dimension(150, 40));
+        jPanel1.add(members);
         members.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                //MEMBERS ACTION
             }
         });
+        north.add(jPanel1, BorderLayout.NORTH);//Places the panel inside the north panel
 
-        product = new JButton("Products");
-        product.setPreferredSize(new Dimension(150, 40));
-        product.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-
-        sales = new JButton("Sales");
-        sales.setPreferredSize(new Dimension(150, 40));
-        sales.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-
-        jPanel1 = new JPanel(new FlowLayout(FlowLayout.CENTER));// personnel Panel
-        jPanel1.add(employee);
-        jPanel1.add(members);
-        jPanel1.add(product);
-        jPanel1.add(sales);
-
-        jPanel2 = new JPanel(new GridBagLayout()); //Calender
+        jPanel2 = new JPanel(new FlowLayout());
+        jPanel2.setBackground(new Color(98, 169, 221));
+        jPanel2.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Calender"));
+        //Week Button
+        week = new JButton("Week");
         jPanel2.add(week);
+        week.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //WEEK ACTION
+            }
+        });
+        //Month Button
+        month = new JButton("Month");
         jPanel2.add(month);
+        month.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //MONTH ACTION
+            }
+        });
+        //Year Button
+        year = new JButton("Year");
         jPanel2.add(year);
+        year.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //YEAR ACTION
+            }
+        });
+        north.add(jPanel2, BorderLayout.CENTER);
 
-        jPanel3 = new JPanel(new FlowLayout(FlowLayout.CENTER)); // Range
+        jPanel3 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        jPanel3.setBackground(new Color(98, 169, 221));
+        jPanel3.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Range"));
+        //TextField
+        jTextField1 = new JTextField("Emp id");
         jPanel3.add(jTextField1);
+        //OK BUTTON
+        okButton = new JButton("Ok");
         jPanel3.add(okButton);
+        okButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //OK ACTION
+            }
+        });
+        north.add(jPanel3,BorderLayout.SOUTH);
+
+        //SOUTH
+        south = new JPanel(new BorderLayout());
+        south.setBackground(new Color(98, 169, 221));
+        jLabel1 = new JLabel(new ImageIcon("Graph")); //Graph displayed here
+        south.add(jLabel1 ,BorderLayout.CENTER);
+
+        re.add(north, BorderLayout.NORTH);
+        re.add(south, BorderLayout.SOUTH);
+        re.setVisible(true);
+
+
+
+
 
 
     }
 }
+
