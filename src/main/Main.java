@@ -6,6 +6,7 @@ package main;/*2ndYearProject
 */
 import database.ConnectionDB;
 import database.create.*;
+import gui.AdminMain;
 import gui.MainFrame;
 import model.Shop;
 
@@ -46,5 +47,6 @@ public class Main {
     MainFrame mf = new MainFrame(connDB.getConn());
     //mf.setVisible(true);
       mf.setMf(mf);
+      AdminMain am = new AdminMain();
   }
 }
