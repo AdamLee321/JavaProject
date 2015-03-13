@@ -2,11 +2,11 @@ package gui;
 
 import java.util.Calendar;
 
-/**
- * Created by User on 08/03/2015.
- */
-
 /*
+IT Tallaght - 2015, S2
+Computing - Year 2, Project
+Group 17 (George - 08/03/2015)
+
 This class is for generation of correct dates for ComboBoxes,
 It returns String arrays of months, past 100 years (-16),
 and correct number of days... meaning days correctly reflect leap years and months

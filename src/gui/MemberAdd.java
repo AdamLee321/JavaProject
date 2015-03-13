@@ -1,4 +1,4 @@
-package gui.member;
+package gui;
 
 import gui.DateGen;
 
@@ -7,13 +7,15 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * Created by User on 08/03/2015.
- */
+/*
+IT Tallaght - 2015, S2
+Computing - Year 2, Project
+Group 17 (George - 08/03/2015)
+*/
 
-public class AddMember {
+public class MemberAdd {
 
-    private JDialog addMember;
+    private JDialog memberAdd;
     private JPanel picturePanel, pictureButtonsPanel, detailsPanel, buttonsPanel;
     private JLabel profilePictureLabel, memberIdLabel, memberFNameLabel, memberLNameLabel, memberStreetLabel, memberCityLabel, memberCountyLabel, memberDOB, memberEmailLabel, memberPointsLabel;
     private JTextField memberIdField, memberFNameField, memberLNameField, memberStreetField, memberCityField, memberCountyField, memberEmailField, memberPointsField;
@@ -22,16 +24,16 @@ public class AddMember {
 
     DateGen dg;
 
-    public AddMember(JFrame parent){
+    public MemberAdd(JFrame parent){
 
     // setup the jdialog
 
-        addMember = new JDialog(parent, true);
-        addMember.setTitle("Add New Member");
-        addMember.setLayout(new BorderLayout());
-        addMember.setSize(450, 560);
-        addMember.setResizable(false);
-        addMember.setLocationRelativeTo(null);
+        memberAdd = new JDialog(parent, true);
+        memberAdd.setTitle("Add New Member");
+        memberAdd.setLayout(new BorderLayout());
+        memberAdd.setSize(450, 560);
+        memberAdd.setResizable(false);
+        memberAdd.setLocationRelativeTo(null);
 
     // picture panel + picture buttons  panel inside it
 
@@ -60,7 +62,7 @@ public class AddMember {
         picturePanel.add(pictureButtonsPanel, BorderLayout.SOUTH);
 
         // add picture panel to the main JDialog
-        addMember.add(picturePanel, BorderLayout.NORTH);
+        memberAdd.add(picturePanel, BorderLayout.NORTH);
 
     // detailsPanel - GridBagLayout
 
@@ -148,7 +150,7 @@ public class AddMember {
         memberPointsField = new JTextField();
         detailsPanel.add(memberPointsField, getConstraints(1,8,1,1,1,15,15,GridBagConstraints.CENTER));
 
-        addMember.add(detailsPanel, BorderLayout.CENTER);
+        memberAdd.add(detailsPanel, BorderLayout.CENTER);
 
     // bottom, buttons panel - FlowLayout, added to main's South border
 
@@ -161,7 +163,7 @@ public class AddMember {
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                addMember.setVisible(false);  // close the window, aka lights off
+                memberAdd.setVisible(false);  // close the window, aka lights off
             }
         });
         buttonsPanel.add(cancelButton);
@@ -176,11 +178,11 @@ public class AddMember {
         okButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
         buttonsPanel.add(okButton);
 
-        addMember.add(buttonsPanel, BorderLayout.SOUTH);
+        memberAdd.add(buttonsPanel, BorderLayout.SOUTH);
 
 // turns the lights on
 
-        addMember.setVisible(true);
+        memberAdd.setVisible(true);
     }
 
     // return GridBagConstraints for GridBagLayout

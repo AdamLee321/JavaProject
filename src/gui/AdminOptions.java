@@ -6,9 +6,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * Created by User on 07/03/2015.
- */
+/*
+IT Tallaght - 2015, S2
+Computing - Year 2, Project
+Group 17 (George - 07/03/2015)
+*/
 
 public class AdminOptions {
 

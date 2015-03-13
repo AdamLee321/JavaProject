@@ -1,4 +1,4 @@
-package gui.member;
+package gui;
 
 import gui.DateGen;
 
@@ -7,15 +7,17 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * Created by User on 08/03/2015.
- */
+/*
+IT Tallaght - 2015, S2
+Computing - Year 2, Project
+Group 17 (George - 08/03/2015)
+*/
 
 // THIS EDITS A MEMBER SO MUCH FETCH THE INFO. SET THE DATE TO PERSON'S BIRTHDAY
 
-public class EditMember {
+public class MemberEdit {
 
-    private JDialog editMember;
+    private JDialog memberEdit;
     private JPanel picturePanel, pictureButtonsPanel, detailsPanel, buttonsPanel;
     private JLabel profilePictureLabel, memberIdLabel, memberFNameLabel, memberLNameLabel, memberStreetLabel, memberCityLabel, memberCountyLabel, memberDOB, memberEmailLabel, memberPointsLabel;
     private JTextField memberIdField, memberFNameField, memberLNameField, memberStreetField, memberCityField, memberCountyField, memberEmailField, memberPointsField;
@@ -24,16 +26,16 @@ public class EditMember {
 
     DateGen dg;
 
-    public EditMember(JFrame parent){
+    public MemberEdit(JFrame parent){
 
     // setup the jdialog
 
-        editMember = new JDialog(parent, true);
-        editMember.setTitle("Add Member");
-        editMember.setLayout(new BorderLayout());
-        editMember.setSize(450, 560);
-        editMember.setResizable(false);
-        editMember.setLocationRelativeTo(null);
+        memberEdit = new JDialog(parent, true);
+        memberEdit.setTitle("Add Member");
+        memberEdit.setLayout(new BorderLayout());
+        memberEdit.setSize(450, 560);
+        memberEdit.setResizable(false);
+        memberEdit.setLocationRelativeTo(null);
 
     // picture panel + picture buttons  panel inside it
 
@@ -62,7 +64,7 @@ public class EditMember {
         picturePanel.add(pictureButtonsPanel, BorderLayout.SOUTH);
 
         // add picture panel to the main JDialog
-        editMember.add(picturePanel, BorderLayout.NORTH);
+        memberEdit.add(picturePanel, BorderLayout.NORTH);
 
     // detailsPanel - GridBagLayout
 
@@ -150,7 +152,7 @@ public class EditMember {
         memberPointsField = new JTextField();
         detailsPanel.add(memberPointsField, getConstraints(1,8,1,1,1,15,15,GridBagConstraints.CENTER));
 
-        editMember.add(detailsPanel, BorderLayout.CENTER);
+        memberEdit.add(detailsPanel, BorderLayout.CENTER);
 
     // bottom, buttons panel - FlowLayout, added to main's South border
 
@@ -163,7 +165,7 @@ public class EditMember {
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                editMember.setVisible(false);  // close the window, aka lights off
+                memberEdit.setVisible(false);  // close the window, aka lights off
             }
         });
         buttonsPanel.add(cancelButton);
@@ -178,11 +180,11 @@ public class EditMember {
         okButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
         buttonsPanel.add(okButton);
 
-        editMember.add(buttonsPanel, BorderLayout.SOUTH);
+        memberEdit.add(buttonsPanel, BorderLayout.SOUTH);
 
 // turns the lights on
 
-        editMember.setVisible(true);
+        memberEdit.setVisible(true);
     }
 
     // return GridBagConstraints for GridBagLayout

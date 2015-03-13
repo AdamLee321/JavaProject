@@ -1,4 +1,4 @@
-package gui.member;
+package gui;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -6,28 +6,30 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * Created by User on 08/03/2015.
- */
+/*
+IT Tallaght - 2015, S2
+Computing - Year 2, Project
+Group 17 (George - 08/03/2015)
+*/
 
-public class MemberPreview {
+public class EmployeePreview {
 
-    private JDialog memPreview;
-    private JLabel profilePictureLabel, memberIdLabel, memberNameLabel, memberAddress, memberDOB, memberEmailLabel, memberPointsLabel;
+    private JDialog empPreview;
+    private JLabel profilePictureLabel, emdIdLabel, empNameLabel, empAddress, empDOB, empEmailLabel, empUsernameLabel, empPasswordLabel, empPositionLabel, empSalaryLabel, empDeptIdLabel;
     private JButton backButton, printButton;
     private JPanel detailsPanel, topPanel, buttonsPanel;
     private Border paddingBorder;
 
-    public MemberPreview(JFrame parent){
+    public EmployeePreview(JFrame parent){
 
     // setup the jdialog
 
-        memPreview = new JDialog(parent, true);
-        memPreview.setTitle("Member");
-        memPreview.setLayout(new BorderLayout());
-        memPreview.setSize(260, 400);
-        memPreview.setResizable(false);
-        memPreview.setLocationRelativeTo(null);
+        empPreview = new JDialog(parent, true);
+        empPreview.setTitle("Employee");
+        empPreview.setLayout(new BorderLayout());
+        empPreview.setSize(260, 490);
+        empPreview.setResizable(false);
+        empPreview.setLocationRelativeTo(null);
 
     // setup top panel, which will hold the profile picture + all the details panel (grid) with a titled, etched border surrounding them
 
@@ -40,35 +42,47 @@ public class MemberPreview {
         topPanel.add(profilePictureLabel);
 
         // details panel, Grid
-        detailsPanel = new JPanel(new GridLayout(6,1,0,10)); // rows, cols, hgap, vgap
+        detailsPanel = new JPanel(new GridLayout(10,1,0,10)); // rows, cols, hgap, vgap
         paddingBorder = BorderFactory.createEmptyBorder(0,20,0,20);  // set the border inside the grid to move details away from the edges
         detailsPanel.setBorder(paddingBorder);
         detailsPanel.setBackground(new Color(98, 169, 221));
 
-        memberIdLabel = new JLabel("1");
-        detailsPanel.add(memberIdLabel);
+        emdIdLabel = new JLabel("1");
+        detailsPanel.add(emdIdLabel);
 
-        memberNameLabel = new JLabel("John Smith");
-        detailsPanel.add(memberNameLabel);
+        empNameLabel = new JLabel("John Smith");
+        detailsPanel.add(empNameLabel);
 
-        memberDOB = new JLabel("31/08/1973");
-        detailsPanel.add(memberDOB);
+        empDOB = new JLabel("31/08/1973");
+        detailsPanel.add(empDOB);
 
-        memberEmailLabel = new JLabel("Email: j.smith@gmail.com");
-        detailsPanel.add(memberEmailLabel);
+        empEmailLabel = new JLabel("Email: j.smith@gmail.com");
+        detailsPanel.add(empEmailLabel);
 
-        memberAddress = new JLabel("25, Belgard Road, Tallaght, Dublin");
-        detailsPanel.add(memberAddress);
+        empAddress = new JLabel("25, Belgard Road, Tallaght, Dublin");
+        detailsPanel.add(empAddress);
 
-        memberPointsLabel = new JLabel("234 Points");
-        detailsPanel.add(memberPointsLabel);
+        empUsernameLabel = new JLabel("j.smith1");
+        detailsPanel.add(empUsernameLabel);
+
+        empPasswordLabel = new JLabel("12345678");
+        detailsPanel.add(empPasswordLabel);
+
+        empPositionLabel = new JLabel("Sales");
+        detailsPanel.add(empPositionLabel);
+
+        empSalaryLabel = new JLabel("25000");
+        detailsPanel.add(empSalaryLabel);
+
+        empDeptIdLabel = new JLabel("Sales");
+        detailsPanel.add(empDeptIdLabel);
 
         topPanel.add(detailsPanel);
 
         // add to main dialog
-        memPreview.add(topPanel, BorderLayout.CENTER);
+        empPreview.add(topPanel, BorderLayout.CENTER);
 
-    // setup the buttons panel, which will be on the SOUTH of the memPreview's BorderLayout (below the etched border). Buttons panel will have a simple centered flow layout
+    // setup the buttons panel, which will be on the SOUTH of the empPreview's BorderLayout (below the etched border). Buttons panel will have a simple centered flow layout
 
         buttonsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         buttonsPanel.setBackground(new Color(98, 169, 221));
@@ -79,7 +93,7 @@ public class MemberPreview {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                memPreview.setVisible(false);
+                empPreview.setVisible(false);
             }
         });
         buttonsPanel.add(backButton);
@@ -90,9 +104,9 @@ public class MemberPreview {
         buttonsPanel.add(printButton);
 
         // add to main dialog
-        memPreview.add(buttonsPanel, BorderLayout.SOUTH);
+        empPreview.add(buttonsPanel, BorderLayout.SOUTH);
 
-        memPreview.setVisible(true);
+        empPreview.setVisible(true);
     }
 }
 

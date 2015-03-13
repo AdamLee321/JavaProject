@@ -1,4 +1,4 @@
-package gui.employee;
+package gui;
 
 import gui.DateGen;
 
@@ -7,13 +7,15 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * Created by User on 08/03/2015.
- */
+/*
+IT Tallaght - 2015, S2
+Computing - Year 2, Project
+Group 17 (George - 08/03/2015)
+*/
 
-public class AddEmployee {
+public class EmployeeAdd {
 
-    private JDialog addEmployee;
+    private JDialog employeeAdd;
     private JPanel picturePanel, pictureButtonsPanel, detailsPanel, buttonsPanel;
     private JLabel profilePictureLabel, empIdLabel, empFNameLabel, empLNameLabel, empStreetLabel, empCityLabel, empCountyLabel, empDOB, empEmailLabel, empUsernameLabel, empPasswordLabel, empPositionLabel, empSalaryLabel, empDeptLabel;
     private JTextField empIdField, empFNameField, empLNameField, empStreetField, empCityField, empCountyField, empEmailField, empUsernameField, empPasswordField, empPositionField, empSalaryField, empDeptField;
@@ -22,16 +24,16 @@ public class AddEmployee {
 
     DateGen dg;
 
-    public AddEmployee(JFrame parent){
+    public EmployeeAdd(JFrame parent){
 
     // setup the jdialog
 
-        addEmployee = new JDialog(parent, true);
-        addEmployee.setTitle("Add New Employee");
-        addEmployee.setLayout(new BorderLayout());
-        addEmployee.setSize(450, 670);
-        addEmployee.setResizable(false);
-        addEmployee.setLocationRelativeTo(null);
+        employeeAdd = new JDialog(parent, true);
+        employeeAdd.setTitle("Add New Employee");
+        employeeAdd.setLayout(new BorderLayout());
+        employeeAdd.setSize(450, 670);
+        employeeAdd.setResizable(false);
+        employeeAdd.setLocationRelativeTo(null);
 
     // picture panel + picture buttons  panel inside it
 
@@ -60,7 +62,7 @@ public class AddEmployee {
         picturePanel.add(pictureButtonsPanel, BorderLayout.SOUTH);
 
         // add picture panel to the main JDialog
-        addEmployee.add(picturePanel, BorderLayout.NORTH);
+        employeeAdd.add(picturePanel, BorderLayout.NORTH);
 
     // detailsPanel - GridBagLayout
 
@@ -171,7 +173,7 @@ public class AddEmployee {
         empDeptField = new JTextField();
         detailsPanel.add(empDeptField, getConstraints(1,12,1,1,1,15,15,GridBagConstraints.CENTER));
 
-        addEmployee.add(detailsPanel, BorderLayout.CENTER);
+        employeeAdd.add(detailsPanel, BorderLayout.CENTER);
 
     // bottom, buttons panel - FlowLayout, added to main's South border
 
@@ -184,7 +186,7 @@ public class AddEmployee {
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                addEmployee.setVisible(false);  // close the window, aka lights off
+                employeeAdd.setVisible(false);  // close the window, aka lights off
             }
         });
         buttonsPanel.add(cancelButton);
@@ -199,11 +201,11 @@ public class AddEmployee {
         okButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
         buttonsPanel.add(okButton);
 
-        addEmployee.add(buttonsPanel, BorderLayout.SOUTH);
+        employeeAdd.add(buttonsPanel, BorderLayout.SOUTH);
 
 // turns the lights on
 
-        addEmployee.setVisible(true);
+        employeeAdd.setVisible(true);
     }
 
     // return GridBagConstraints for GridBagLayout
