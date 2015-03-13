@@ -119,6 +119,7 @@ public class ReportMembers extends JFrame {
         jPanel3.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Range"));
         //TextField
         jTextField1 = new JTextField("Emp id");
+        jTextField1.setColumns(15);
         jPanel3.add(jTextField1);
         //OK BUTTON
         okButton = new JButton("Ok");

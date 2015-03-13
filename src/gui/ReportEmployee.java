@@ -119,6 +119,7 @@ public class ReportEmployee extends JFrame {
         jPanel3.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Range"));
         //TextField
         jTextField1 = new JTextField("Emp id");
+        jTextField1.setColumns(15);// Sets the column width of the Textfield
         jPanel3.add(jTextField1);
         //OK BUTTON
         okButton = new JButton("Ok");
