@@ -4,23 +4,18 @@ package main;/*2ndYearProject
   18:32   25/02/2015
   Software Development 3
 */
+
+
 import database.ConnectionDB;
-<<<<<<< HEAD
+import database.create.*;
 import gui.admin.AdminMain;
 import gui.terminal.MainFrame;
-=======
-import database.create.*;
-import gui.AdminMain;
-import gui.MainFrame;
-import gui.ReportEmployee;
-import model.Shop;
->>>>>>> 8c43078b504927769ec9d2465d00a0f6ceebea8f
 
 public class Main {
   public static void main(String[] args) {
 
     ConnectionDB connDB = new ConnectionDB();
-/*
+
       CreateShop cs = new CreateShop(connDB.getConn());
       CreateDepartment cd = new CreateDepartment(connDB.getConn());
       CreateShopDepartment sd = new CreateShopDepartment(connDB.getConn());
@@ -49,11 +44,11 @@ public class Main {
       sld.createSalesDetailsTable();
 
     //connDB.closeDB();
-*/
-    //MainFrame mf = new MainFrame(connDB.getConn());
-    //mf.setVisible(true);
-      //mf.setMf(mf);
+
+      MainFrame mf = new MainFrame(connDB.getConn());
+      mf.setVisible(true);
+      mf.setMf(mf);
       //AdminMain am = new AdminMain();
-      //ReportEmployee re = new ReportEmployee();
+      //
   }
 }
