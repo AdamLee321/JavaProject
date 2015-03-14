@@ -16,7 +16,7 @@ public class ProductView {
     private JPanel productDetails, details, specifications, description;
     private JLabel productPicture;
     private JTextField idTf, makeTf, modelTf, priceTf, qtyTf, cpuTf, ramTf, osTf, hddTf, screenTf;
-    private JTextField descriptionTF;
+    private JTextArea descriptionTF;
 
     public ProductView(MainFrame mf){
         this.mf = mf;
@@ -25,6 +25,8 @@ public class ProductView {
     public JPanel getProductView(Product p){
         idTf = new JTextField();
         idTf.setPreferredSize(new Dimension(200,10));
+        idTf.setEditable(false);
+        idTf.setText("Fuck");
 
         makeTf = new JTextField();
         makeTf.setPreferredSize(new Dimension(200,10));
@@ -54,15 +56,17 @@ public class ProductView {
         screenTf.setPreferredSize(new Dimension(200,10));
 
 
-        //description = new JPanel(new FlowLayout());
-        //description.setBorder(new TitledBorder("Description"));
-        descriptionTF  = new JTextField();
-        //JScrollPane scrollPane = new JScrollPane(descriptionTF);
-        //descriptionTF.setText("The affordable Lenovo H500s desktop uniquely combines a slim space-saving\" +\n" +
-        //       "design with the latest processor technology and plenty of storage space for everyday\" +\n" +
-        //        "home computing.");
-        //scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        //description.add(scrollPane);
+        description = new JPanel(new FlowLayout());
+        description.setBackground(new Color(150, 150, 150));
+        description.setBorder(new TitledBorder("Description"));
+        descriptionTF  = new JTextArea();
+        descriptionTF.setLineWrap(true);
+        descriptionTF.setSize(700, 100);
+        descriptionTF.setBackground(new Color(150, 150, 150));
+        JScrollPane scrollPane = new JScrollPane(descriptionTF);
+        descriptionTF.setText("The affordable Lenovo H500s desktop uniquely combines a slim space-saving design with the latest processor technology and plenty of storage space for everyday home computing.");
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        description.add(descriptionTF);
 
         productPicture = new JLabel(new ImageIcon("src/res/images/Product Categories/AllInOnePC150.png"));
 
@@ -110,10 +114,10 @@ public class ProductView {
         productDetails = new JPanel(new GridBagLayout());
         productDetails.setBorder(BorderFactory.createLineBorder(new Color(98, 169, 221), 20));
 
-        //productDetails.add(productPicture, MainFrame.getConstraints(0,0,1,1, GridBagConstraints.WEST, 0, 0, 0, 0));
-        //productDetails.add(details, MainFrame.getConstraints(1,0,1,1, GridBagConstraints.CENTER, 0, 0, 0, 0));
-        //productDetails.add(specifications, MainFrame.getConstraints(2,0,1,1, GridBagConstraints.EAST, 0, 0, 0, 0));
-        productDetails.add(descriptionTF, MainFrame.getConstraints(0,1,3,1, GridBagConstraints.WEST, 0, 0, 0, 0));
+        productDetails.add(productPicture, MainFrame.getConstraints(0,0,1,1, GridBagConstraints.WEST, 0, 0, 0, 0));
+        productDetails.add(details, MainFrame.getConstraints(1,0,1,1, GridBagConstraints.CENTER, 0, 0, 0, 0));
+        productDetails.add(specifications, MainFrame.getConstraints(2,0,1,1, GridBagConstraints.EAST, 0, 0, 0, 0));
+        productDetails.add(description, MainFrame.getConstraints(1,1,2,1, GridBagConstraints.CENTER, 0, 0, 0, 0));
 
         return productDetails;
     }

@@ -6,6 +6,9 @@ package gui;/*2ndYearProject
 */
 
 import database.operations.ProductOperations;
+import gui.employee.AddEmployee;
+import gui.employee.EmpLoyeePreview;
+import gui.employee.EmployeeMain;
 import model.Product;
 
 import javax.swing.*;
@@ -18,7 +21,7 @@ import java.sql.ResultSet;
 
 public class MainFrame extends JFrame implements ActionListener {
 
-  private Connection conn;
+  private static Connection conn;
   private ProductOperations po;
 
   private MainFrame mf;
@@ -55,7 +58,7 @@ public class MainFrame extends JFrame implements ActionListener {
     home.addActionListener(this);
 
     back = new JButton("BACK", new ImageIcon("src/res/images/UI Elements/backarrow64.png"));
-    help.addActionListener(this);
+    back.addActionListener(this);
 
     bl = new GridBagLayout();
 
@@ -149,14 +152,15 @@ public class MainFrame extends JFrame implements ActionListener {
       setToProductView();
     }
     else if(e.getSource().equals(back)){
-
+      System.out.println("AAAAA");
+      //EmployeeMain ae = new EmployeeMain();
     }
   }
 
   //To change the center pane to the search
   public void setToSearch(){
     System.out.println("search");
-    ProductSearch c = new ProductSearch(mf, conn, po);
+    ProductSearch c = new ProductSearch(mf, po);
     removePanels();
     centerPanel = c.getSearch();
     southPanel = getFullSouthPanel();

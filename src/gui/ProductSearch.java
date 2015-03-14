@@ -12,8 +12,6 @@ import java.sql.ResultSet;
  * Created by DL on 08/03/2015.
  */
 public class ProductSearch implements ActionListener{
-    private Connection conn;
-    private ResultSet rset;
     private ProductOperations po;
 
     private MainFrame mf;
@@ -23,9 +21,8 @@ public class ProductSearch implements ActionListener{
     private JComboBox category;
     private JButton searchButton;
 
-    public ProductSearch(MainFrame mf, Connection conn, ProductOperations po){
+    public ProductSearch(MainFrame mf, ProductOperations po){
         this.mf = mf;
-        this.conn = conn;
         this.po = po;
     }
 
@@ -70,7 +67,7 @@ public class ProductSearch implements ActionListener{
             System.out.println("Search1");
             String categoryName = (String) category.getSelectedItem();
 
-            rset = po.searchProducts(searchText.getText(), categoryName);
+            ResultSet rset = po.searchProducts(searchText.getText(), categoryName);
             mf.setToProductResults(categoryName, rset);
         }
 
