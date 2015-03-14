@@ -1,4 +1,4 @@
-package gui;
+package gui.member;
 
 import gui.DateGen;
 

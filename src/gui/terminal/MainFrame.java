@@ -1,4 +1,4 @@
-package gui;/*2ndYearProject
+package gui.terminal;/*2ndYearProject
   gui
   Created by David
   14:56   06/03/2015
@@ -6,9 +6,14 @@ package gui;/*2ndYearProject
 */
 
 import database.operations.ProductOperations;
+<<<<<<< HEAD:src/gui/MainFrame.java
 import gui.employee.AddEmployee;
 import gui.employee.EmpLoyeePreview;
 import gui.employee.EmployeeMain;
+=======
+import gui.product.ProductResults;
+import gui.product.ProductSearch;
+>>>>>>> 6725e81bb6d028af2b9fcdefca8d84d39be25867:src/gui/terminal/MainFrame.java
 import model.Product;
 
 import javax.swing.*;

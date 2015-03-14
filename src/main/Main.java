@@ -5,11 +5,16 @@ package main;/*2ndYearProject
   Software Development 3
 */
 import database.ConnectionDB;
+<<<<<<< HEAD
+import gui.admin.AdminMain;
+import gui.terminal.MainFrame;
+=======
 import database.create.*;
 import gui.AdminMain;
 import gui.MainFrame;
 import gui.ReportEmployee;
 import model.Shop;
+>>>>>>> 8c43078b504927769ec9d2465d00a0f6ceebea8f
 
 public class Main {
   public static void main(String[] args) {

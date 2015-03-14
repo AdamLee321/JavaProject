@@ -1,4 +1,4 @@
-package gui;
+package gui.report;
 
 import javax.swing.*;
 import java.awt.*;

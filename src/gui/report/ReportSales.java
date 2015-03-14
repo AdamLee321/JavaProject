@@ -1,4 +1,4 @@
-package gui;
+package gui.report;
 
 import database.operations.ReportOperations;
 
@@ -13,7 +13,7 @@ Computing - Year 2, Project
 Group 17
 */
 
-public class ReportMembers extends JFrame {
+public class ReportSales extends JFrame {
 
     private JFrame re;
     private JButton employee, year, month, week, okButton, members, product, sales;
@@ -21,7 +21,7 @@ public class ReportMembers extends JFrame {
     private JPanel north, jPanel1, jPanel2, jPanel3, south;//Container ,Personnel, calender, range, graph
     private JTextField jTextField1; // Search
 
-    public ReportMembers() {
+    public ReportSales() {
 
         re = new JFrame();
         re.setTitle("Reports");
@@ -136,7 +136,6 @@ public class ReportMembers extends JFrame {
         south = new JPanel(new BorderLayout());
         south.setBackground(new Color(98, 169, 221));
         jLabel1 = new JLabel(new ImageIcon("Graph")); //Graph displayed here
-        //jLabel1.setHorizontalAlignment();
         south.add(jLabel1 ,BorderLayout.CENTER);
 
         re.add(north, BorderLayout.NORTH);

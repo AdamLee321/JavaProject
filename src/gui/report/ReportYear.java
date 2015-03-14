@@ -1,4 +1,4 @@
-package gui;
+package gui.report;
 
 import javafx.scene.control.ComboBox;
 

@@ -1,4 +1,4 @@
-package gui;
+package gui.employee;
 
 import gui.DateGen;
 
@@ -13,29 +13,27 @@ Computing - Year 2, Project
 Group 17 (George - 08/03/2015)
 */
 
-// THIS EDITS A MEMBER SO MUCH FETCH THE INFO. SET THE DATE TO PERSON'S BIRTHDAY
+public class EmployeeAdd {
 
-public class MemberEdit {
-
-    private JDialog memberEdit;
+    private JDialog employeeAdd;
     private JPanel picturePanel, pictureButtonsPanel, detailsPanel, buttonsPanel;
-    private JLabel profilePictureLabel, memberIdLabel, memberFNameLabel, memberLNameLabel, memberStreetLabel, memberCityLabel, memberCountyLabel, memberDOB, memberEmailLabel, memberPointsLabel;
-    private JTextField memberIdField, memberFNameField, memberLNameField, memberStreetField, memberCityField, memberCountyField, memberEmailField, memberPointsField;
+    private JLabel profilePictureLabel, empIdLabel, empFNameLabel, empLNameLabel, empStreetLabel, empCityLabel, empCountyLabel, empDOB, empEmailLabel, empUsernameLabel, empPasswordLabel, empPositionLabel, empSalaryLabel, empDeptLabel;
+    private JTextField empIdField, empFNameField, empLNameField, empStreetField, empCityField, empCountyField, empEmailField, empUsernameField, empPasswordField, empPositionField, empSalaryField, empDeptField;
     private JComboBox<String> birthDayCBox, birthMonthCBox, birthYearCBox;;
     private JButton addButton, removeButton, cancelButton, previewButton, okButton;
 
     DateGen dg;
 
-    public MemberEdit(JFrame parent){
+    public EmployeeAdd(JFrame parent){
 
     // setup the jdialog
 
-        memberEdit = new JDialog(parent, true);
-        memberEdit.setTitle("Add Member");
-        memberEdit.setLayout(new BorderLayout());
-        memberEdit.setSize(450, 560);
-        memberEdit.setResizable(false);
-        memberEdit.setLocationRelativeTo(null);
+        employeeAdd = new JDialog(parent, true);
+        employeeAdd.setTitle("Add New Employee");
+        employeeAdd.setLayout(new BorderLayout());
+        employeeAdd.setSize(450, 670);
+        employeeAdd.setResizable(false);
+        employeeAdd.setLocationRelativeTo(null);
 
     // picture panel + picture buttons  panel inside it
 
@@ -64,7 +62,7 @@ public class MemberEdit {
         picturePanel.add(pictureButtonsPanel, BorderLayout.SOUTH);
 
         // add picture panel to the main JDialog
-        memberEdit.add(picturePanel, BorderLayout.NORTH);
+        employeeAdd.add(picturePanel, BorderLayout.NORTH);
 
     // detailsPanel - GridBagLayout
 
@@ -72,35 +70,34 @@ public class MemberEdit {
         detailsPanel.setBackground(new Color(98, 169, 221));
 
         // ID
-        memberIdLabel = new JLabel("Member ID");
-        detailsPanel.add(memberIdLabel, getConstraints(0,0,1,1,0,15,5,GridBagConstraints.WEST));
-        memberIdField = new JTextField();
-        detailsPanel.add(memberIdField, getConstraints(1,0,1,1,1,15,15,GridBagConstraints.CENTER));
+        empIdLabel = new JLabel("Employee ID");
+        detailsPanel.add(empIdLabel, getConstraints(0,0,1,1,0,15,5,GridBagConstraints.WEST));
+        empIdField = new JTextField();
+        detailsPanel.add(empIdField, getConstraints(1,0,1,1,1,15,15,GridBagConstraints.CENTER));
 
         // Name
-        memberFNameLabel = new JLabel("Member Name");
-        detailsPanel.add(memberFNameLabel, getConstraints(0,1,1,1,0,15,5,GridBagConstraints.WEST));
-        memberFNameField = new JTextField();
-        detailsPanel.add(memberFNameField, getConstraints(1,1,1,1,1,15,15,GridBagConstraints.CENTER));
+        empFNameLabel = new JLabel("Employee Name");
+        detailsPanel.add(empFNameLabel, getConstraints(0,1,1,1,0,15,5,GridBagConstraints.WEST));
+        empFNameField = new JTextField();
+        detailsPanel.add(empFNameField, getConstraints(1,1,1,1,1,15,15,GridBagConstraints.CENTER));
 
         // Surname
-        memberLNameLabel = new JLabel("Member Surname");
-        detailsPanel.add(memberLNameLabel, getConstraints(0,2,1,1,0,15,5,GridBagConstraints.WEST));
-        memberLNameField = new JTextField();
-        detailsPanel.add(memberLNameField, getConstraints(1,2,1,1,1,15,15,GridBagConstraints.CENTER));
+        empLNameLabel = new JLabel("Employee Surname");
+        detailsPanel.add(empLNameLabel, getConstraints(0,2,1,1,0,15,5,GridBagConstraints.WEST));
+        empLNameField = new JTextField();
+        detailsPanel.add(empLNameField, getConstraints(1,2,1,1,1,15,15,GridBagConstraints.CENTER));
 
         // Email
-        memberEmailLabel = new JLabel("Member Email");
-        detailsPanel.add(memberEmailLabel, getConstraints(0,3,1,1,0,15,5,GridBagConstraints.WEST));
-        memberEmailField = new JTextField();
-        detailsPanel.add(memberEmailField, getConstraints(1,3,1,1,1,15,15,GridBagConstraints.CENTER));
+        empEmailLabel = new JLabel("Employee Email");
+        detailsPanel.add(empEmailLabel, getConstraints(0,3,1,1,0,15,5,GridBagConstraints.WEST));
+        empEmailField = new JTextField();
+        detailsPanel.add(empEmailField, getConstraints(1,3,1,1,1,15,15,GridBagConstraints.CENTER));
 
         // DOB
-
         dg = new DateGen();  // this needs DateGen class, to get correct days, months and years
 
-        memberDOB = new JLabel("Date Of Birth");
-        detailsPanel.add(memberDOB, getConstraints(0,4,1,1,0,15,5,GridBagConstraints.WEST));
+        empDOB = new JLabel("Date Of Birth");
+        detailsPanel.add(empDOB, getConstraints(0,4,1,1,0,15,5,GridBagConstraints.WEST));
 
         birthYearCBox = new JComboBox<String>(new DefaultComboBoxModel<String>(dg.getPastCentury()));
         // can either directly pass the parameters as displayed above, or do separately as displayed below
@@ -124,35 +121,59 @@ public class MemberEdit {
         birthDayCBox = new JComboBox<String>(dg.getMonthDays(birthMonthCBox.getSelectedIndex() + 1, Integer.parseInt(birthYearCBox.getSelectedItem().toString())));
 
             // add day, month, year comboboxes to details panel
-        detailsPanel.add(birthYearCBox, getConstraints(1, 4, 1, 1, 0, 125, 140, GridBagConstraints.WEST));
-        detailsPanel.add(birthMonthCBox, getConstraints(1, 4, 1, 1, 0, 65, 200, GridBagConstraints.WEST));
-        detailsPanel.add(birthDayCBox, getConstraints(1, 4, 1, 1, 0, 15, 260, GridBagConstraints.WEST));
+        detailsPanel.add(birthYearCBox, getConstraints(1, 4, 1, 1, 0, 115, 125, GridBagConstraints.WEST));
+        detailsPanel.add(birthMonthCBox, getConstraints(1, 4, 1, 1, 0, 60, 190, GridBagConstraints.WEST));
+        detailsPanel.add(birthDayCBox, getConstraints(1, 4, 1, 1, 0, 15, 245, GridBagConstraints.WEST));
 
         // Street
-        memberStreetLabel = new JLabel("Member Street");
-        detailsPanel.add(memberStreetLabel, getConstraints(0,5,1,1,0,15,5,GridBagConstraints.WEST));
-        memberStreetField = new JTextField();
-        detailsPanel.add(memberStreetField, getConstraints(1,5,1,1,1,15,15,GridBagConstraints.CENTER));
+        empStreetLabel = new JLabel("Employee Street");
+        detailsPanel.add(empStreetLabel, getConstraints(0,5,1,1,0,15,5,GridBagConstraints.WEST));
+        empStreetField = new JTextField();
+        detailsPanel.add(empStreetField, getConstraints(1,5,1,1,1,15,15,GridBagConstraints.CENTER));
 
         // City
-        memberCityLabel = new JLabel("Member City");
-        detailsPanel.add(memberCityLabel, getConstraints(0,6,1,1,0,15,5,GridBagConstraints.WEST));
-        memberCityField = new JTextField();
-        detailsPanel.add(memberCityField, getConstraints(1,6,1,1,1,15,15,GridBagConstraints.CENTER));
+        empCityLabel = new JLabel("Employee City");
+        detailsPanel.add(empCityLabel, getConstraints(0,6,1,1,0,15,5,GridBagConstraints.WEST));
+        empCityField = new JTextField();
+        detailsPanel.add(empCityField, getConstraints(1,6,1,1,1,15,15,GridBagConstraints.CENTER));
 
         // County
-        memberCountyLabel = new JLabel("Member County");
-        detailsPanel.add(memberCountyLabel, getConstraints(0,7,1,1,0,15,5,GridBagConstraints.WEST));
-        memberCountyField = new JTextField();
-        detailsPanel.add(memberCountyField, getConstraints(1,7,1,1,1,15,15,GridBagConstraints.CENTER));
+        empCountyLabel = new JLabel("Employee County");
+        detailsPanel.add(empCountyLabel, getConstraints(0,7,1,1,0,15,5,GridBagConstraints.WEST));
+        empCountyField = new JTextField();
+        detailsPanel.add(empCountyField, getConstraints(1,7,1,1,1,15,15,GridBagConstraints.CENTER));
 
-        // Points
-        memberPointsLabel = new JLabel("Member Points");
-        detailsPanel.add(memberPointsLabel, getConstraints(0,8,1,1,0,15,5,GridBagConstraints.WEST));
-        memberPointsField = new JTextField();
-        detailsPanel.add(memberPointsField, getConstraints(1,8,1,1,1,15,15,GridBagConstraints.CENTER));
+        // Username
+        empUsernameLabel = new JLabel("Employee Username");
+        detailsPanel.add(empUsernameLabel, getConstraints(0,8,1,1,0,15,5,GridBagConstraints.WEST));
+        empUsernameField = new JTextField();
+        detailsPanel.add(empUsernameField, getConstraints(1,8,1,1,1,15,15,GridBagConstraints.CENTER));
 
-        memberEdit.add(detailsPanel, BorderLayout.CENTER);
+        // Password
+        empPasswordLabel = new JLabel("Employee Password");
+        detailsPanel.add(empPasswordLabel, getConstraints(0,9,1,1,0,15,5,GridBagConstraints.WEST));
+        empPasswordField = new JTextField();
+        detailsPanel.add(empPasswordField, getConstraints(1,9,1,1,1,15,15,GridBagConstraints.CENTER));
+
+        // Position
+        empPositionLabel = new JLabel("Employee Position");
+        detailsPanel.add(empPositionLabel, getConstraints(0,10,1,1,0,15,5,GridBagConstraints.WEST));
+        empPositionField = new JTextField();
+        detailsPanel.add(empPositionField, getConstraints(1,10,1,1,1,15,15,GridBagConstraints.CENTER));
+
+        // Salary
+        empSalaryLabel = new JLabel("Employee Salary");
+        detailsPanel.add(empSalaryLabel, getConstraints(0,11,1,1,0,15,5,GridBagConstraints.WEST));
+        empSalaryField = new JTextField();
+        detailsPanel.add(empSalaryField, getConstraints(1,11,1,1,1,15,15,GridBagConstraints.CENTER));
+
+        // Department
+        empDeptLabel = new JLabel("Employee Department");
+        detailsPanel.add(empDeptLabel, getConstraints(0,12,1,1,0,15,5,GridBagConstraints.WEST));
+        empDeptField = new JTextField();
+        detailsPanel.add(empDeptField, getConstraints(1,12,1,1,1,15,15,GridBagConstraints.CENTER));
+
+        employeeAdd.add(detailsPanel, BorderLayout.CENTER);
 
     // bottom, buttons panel - FlowLayout, added to main's South border
 
@@ -165,7 +186,7 @@ public class MemberEdit {
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                memberEdit.setVisible(false);  // close the window, aka lights off
+                employeeAdd.setVisible(false);  // close the window, aka lights off
             }
         });
         buttonsPanel.add(cancelButton);
@@ -180,11 +201,11 @@ public class MemberEdit {
         okButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
         buttonsPanel.add(okButton);
 
-        memberEdit.add(buttonsPanel, BorderLayout.SOUTH);
+        employeeAdd.add(buttonsPanel, BorderLayout.SOUTH);
 
 // turns the lights on
 
-        memberEdit.setVisible(true);
+        employeeAdd.setVisible(true);
     }
 
     // return GridBagConstraints for GridBagLayout

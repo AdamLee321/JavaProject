@@ -1,4 +1,4 @@
-package gui;
+package gui.employee;
 
 import javax.swing.*;
 import javax.swing.border.Border;

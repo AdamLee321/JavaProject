@@ -1,4 +1,4 @@
-package gui;
+package gui.employee;
 
 import gui.DateGen;
 
@@ -13,9 +13,11 @@ Computing - Year 2, Project
 Group 17 (George - 08/03/2015)
 */
 
-public class EmployeeAdd {
+// THIS EDITS A EMPLOYEE SO FETCH THE INFO. SET THE DATE TO PERSON'S BIRTHDAY
 
-    private JDialog employeeAdd;
+public class EmployeeEdit {
+
+    private JDialog employeeEdit;
     private JPanel picturePanel, pictureButtonsPanel, detailsPanel, buttonsPanel;
     private JLabel profilePictureLabel, empIdLabel, empFNameLabel, empLNameLabel, empStreetLabel, empCityLabel, empCountyLabel, empDOB, empEmailLabel, empUsernameLabel, empPasswordLabel, empPositionLabel, empSalaryLabel, empDeptLabel;
     private JTextField empIdField, empFNameField, empLNameField, empStreetField, empCityField, empCountyField, empEmailField, empUsernameField, empPasswordField, empPositionField, empSalaryField, empDeptField;
@@ -24,16 +26,16 @@ public class EmployeeAdd {
 
     DateGen dg;
 
-    public EmployeeAdd(JFrame parent){
+    public EmployeeEdit(JFrame parent){
 
     // setup the jdialog
 
-        employeeAdd = new JDialog(parent, true);
-        employeeAdd.setTitle("Add New Employee");
-        employeeAdd.setLayout(new BorderLayout());
-        employeeAdd.setSize(450, 670);
-        employeeAdd.setResizable(false);
-        employeeAdd.setLocationRelativeTo(null);
+        employeeEdit = new JDialog(parent, true);
+        employeeEdit.setTitle("Add New Employee");
+        employeeEdit.setLayout(new BorderLayout());
+        employeeEdit.setSize(450, 670);
+        employeeEdit.setResizable(false);
+        employeeEdit.setLocationRelativeTo(null);
 
     // picture panel + picture buttons  panel inside it
 
@@ -62,7 +64,7 @@ public class EmployeeAdd {
         picturePanel.add(pictureButtonsPanel, BorderLayout.SOUTH);
 
         // add picture panel to the main JDialog
-        employeeAdd.add(picturePanel, BorderLayout.NORTH);
+        employeeEdit.add(picturePanel, BorderLayout.NORTH);
 
     // detailsPanel - GridBagLayout
 
@@ -173,7 +175,7 @@ public class EmployeeAdd {
         empDeptField = new JTextField();
         detailsPanel.add(empDeptField, getConstraints(1,12,1,1,1,15,15,GridBagConstraints.CENTER));
 
-        employeeAdd.add(detailsPanel, BorderLayout.CENTER);
+        employeeEdit.add(detailsPanel, BorderLayout.CENTER);
 
     // bottom, buttons panel - FlowLayout, added to main's South border
 
@@ -186,7 +188,7 @@ public class EmployeeAdd {
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                employeeAdd.setVisible(false);  // close the window, aka lights off
+                employeeEdit.setVisible(false);  // close the window, aka lights off
             }
         });
         buttonsPanel.add(cancelButton);
@@ -201,11 +203,11 @@ public class EmployeeAdd {
         okButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
         buttonsPanel.add(okButton);
 
-        employeeAdd.add(buttonsPanel, BorderLayout.SOUTH);
+        employeeEdit.add(buttonsPanel, BorderLayout.SOUTH);
 
 // turns the lights on
 
-        employeeAdd.setVisible(true);
+        employeeEdit.setVisible(true);
     }
 
     // return GridBagConstraints for GridBagLayout

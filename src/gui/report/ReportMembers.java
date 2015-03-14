@@ -1,4 +1,4 @@
-package gui;
+package gui.report;
 
 import database.operations.ReportOperations;
 
@@ -13,7 +13,7 @@ Computing - Year 2, Project
 Group 17
 */
 
-public class ReportEmployee extends JFrame {
+public class ReportMembers extends JFrame {
 
     private JFrame re;
     private JButton employee, year, month, week, okButton, members, product, sales;
@@ -21,7 +21,7 @@ public class ReportEmployee extends JFrame {
     private JPanel north, jPanel1, jPanel2, jPanel3, south;//Container ,Personnel, calender, range, graph
     private JTextField jTextField1; // Search
 
-    public ReportEmployee() {
+    public ReportMembers() {
 
         re = new JFrame();
         re.setTitle("Reports");
@@ -119,7 +119,7 @@ public class ReportEmployee extends JFrame {
         jPanel3.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Range"));
         //TextField
         jTextField1 = new JTextField("Emp id");
-        jTextField1.setColumns(15);// Sets the column width of the Textfield
+        jTextField1.setColumns(15);
         jPanel3.add(jTextField1);
         //OK BUTTON
         okButton = new JButton("Ok");
@@ -135,7 +135,8 @@ public class ReportEmployee extends JFrame {
         //SOUTH
         south = new JPanel(new BorderLayout());
         south.setBackground(new Color(98, 169, 221));
-        jLabel1 = new JLabel("GRAPH"); //Graph displayed here
+        jLabel1 = new JLabel(new ImageIcon("Graph")); //Graph displayed here
+        //jLabel1.setHorizontalAlignment();
         south.add(jLabel1 ,BorderLayout.CENTER);
 
         re.add(north, BorderLayout.NORTH);
