@@ -1,11 +1,13 @@
-package gui;
+package gui.admin;
+
+import gui.employee.EmployeeMain;
+import gui.member.MemberMain;
+import gui.product.ProductMain;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.ImageObserver;
-import java.sql.SQLException;
 
 /*
 IT Tallaght - 2015, S2

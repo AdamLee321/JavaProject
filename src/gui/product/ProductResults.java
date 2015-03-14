@@ -1,6 +1,7 @@
-package gui;
+package gui.product;
 
 import database.operations.ProductOperations;
+import gui.terminal.ProductTableModel;
 import model.Product;
 
 import javax.swing.*;

@@ -1,4 +1,4 @@
-package gui;
+package gui.report;
 /*
 IT Tallaght - 2015, S2
 Computing - Year 2, Project

@@ -1,6 +1,7 @@
-package gui;
+package gui.employee;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,7 +18,9 @@ public class EmployeeMain {
     private JButton addButton, editButton, deleteButton, searchButton, viewOrdersButton, backButton;
     private JTextField searchField;
     private JComboBox empTypes;
-    private JPanel managePanel, northPanel, southPanel, searchPanel;
+    private JPanel managePanel, northPanel, southPanel, searchPanel, tablePanel;
+    private JTable tblEmployee;
+    private JScrollPane tblScroll;
 
     String[] eempTypes = {"All", "Sales", "Management"};  // this just a placeholder, real info will be populated from DB
 
@@ -85,11 +88,21 @@ public class EmployeeMain {
         // add northPanel to main
         empMain.add(northPanel, BorderLayout.NORTH);
 
-    // results panel
-/////////////////////////////////////////////////////////////////////////////////////
+    // results table panel
+        tablePanel = new JPanel(new FlowLayout());
+
+        tblEmployee = new JTable();
+       // DefaultTableModel tblModel = new DefaultTableModel(new Object[][]{{null, null, null, null}, {null, null, null, null}, {null, null, null, null}, {null, null, null, null}});
+     //   String titles[] = {"Title 1", "Title 2", "Title 3", "Title 4"};
+     //   tblEmployee.setModel(tblModel,titles[]);
+//        tblScroll.setViewportView(tblEmployee);
+                tablePanel.add(tblEmployee);
+
+        empMain.add(tablePanel, BorderLayout.CENTER);
+
 // south panel
 
-        southPanel = new JPanel(new GridBagLayout());
+        southPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         southPanel.setBackground(new Color(98, 169, 221));
 
     // bottom buttons
@@ -97,7 +110,7 @@ public class EmployeeMain {
         viewOrdersButton = new JButton("View Orders");
         viewOrdersButton.setPreferredSize(new Dimension(150, 26));
         viewOrdersButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
-        southPanel.add(viewOrdersButton, getConstraints(0, 0, 1, 1, 0, 15, 15, GridBagConstraints.EAST));
+        southPanel.add(viewOrdersButton);
 
         empMain.add(southPanel, BorderLayout.SOUTH);
 

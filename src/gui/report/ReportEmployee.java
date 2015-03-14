@@ -1,4 +1,4 @@
-package gui;
+package gui.report;/*
 
 import database.operations.ReportOperations;
 
@@ -10,7 +10,7 @@ import java.awt.event.*;
 IT Tallaght - 2015, S2
 Computing - Year 2, Project
 Group 17
-*/
+
 
 public class ReportEmployee extends JFrame implements ActionListener{
 
@@ -38,7 +38,7 @@ public class ReportEmployee extends JFrame implements ActionListener{
         this.conn = conn;
         this.ro = ro;
 
-    }*/
+    }
 
     public JPanel getjPanel1() {
         jPanel3 = new JPanel(new GridBagLayout());
@@ -145,4 +145,4 @@ public class ReportEmployee extends JFrame implements ActionListener{
         this.ro = ro;
     }
 
-}
+}*/

@@ -1,6 +1,8 @@
-package gui;
+package gui.product;
 
 import database.operations.ProductOperations;
+import gui.terminal.MainFrame;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

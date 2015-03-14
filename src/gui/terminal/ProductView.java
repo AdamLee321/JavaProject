@@ -1,9 +1,8 @@
-package gui;
+package gui.terminal;
 
 import model.Product;
 
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 
