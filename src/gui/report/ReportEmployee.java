@@ -5,6 +5,7 @@ import database.operations.ReportOperations;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.time.Year;
 
 /*
 IT Tallaght - 2015, S2
@@ -12,125 +13,146 @@ Computing - Year 2, Project
 Group 17
 
 
-public class ReportEmployee extends JFrame implements ActionListener{
+public class ReportEmployee extends JFrame {
 
-    public class ReportEmployee {
-
-    private MainFrame mf;
-    private JButton employee,year,month,week,okButton,members,product,sales;
+    private JFrame re;
+    private JButton employee, year, month, week, okButton, members, product, sales;
     private JLabel jLabel1; //Graph
-    private JPanel jPanel1; //Personnel Panel
-    private JPanel jPanel2; //Calender
-    private JPanel jPanel3; //Range
-    private Connection conn;
-    private ReportOperations ro;
-    private JPanel mainPanel;
-    private JTextField jTextField1;
+    private JPanel north, jPanel1, jPanel2, jPanel3, south;//Container ,Personnel, calender, range, graph
+    private JTextField jTextField1; // Search
 
-    public JPanel getMainPanel(){
-        mainPanel = new JPanel();
-        mainPanel.setBackground(new Color(98,168,221));
-        return mainPanel;
+<<<<<<< HEAD:src/gui/report/ReportEmployee.java
     }
+=======
+    public ReportEmployee() {
+>>>>>>> 8c43078b504927769ec9d2465d00a0f6ceebea8f:src/gui/ReportEmployee.java
 
-    /*public ReportEmployee(MainFrame mf, Connection conn, ReportOperations ro) {
-        this.mf = mf;
-        this.conn = conn;
-        this.ro = ro;
+        re = new JFrame();
+        re.setTitle("Reports");
+        re.setLayout(new BorderLayout());
+        re.setSize(500, 500);
+        re.setLocationRelativeTo(null); //Sets the screen to appear in the center
+        re.setResizable(true);
 
-    }
 
-    public JPanel getjPanel1() {
-        jPanel3 = new JPanel(new GridBagLayout());
-        jPanel3.setBackground(new Color(98, 168, 221));
+        //NORTH PANEL
+        north = new JPanel(new BorderLayout());
+        north.setBackground(new Color(98, 169, 221));
 
-        employee = new JButton("Employee");
-        employee.setVerticalTextPosition(SwingConstants.BOTTOM);
-        employee.setHorizontalTextPosition(SwingConstants.CENTER);
-        employee.addActionListener((ActionListener) this);
-
-        members = new JButton("Members");
-        members.setVerticalTextPosition(SwingConstants.BOTTOM);
-        members.setHorizontalTextPosition(SwingConstants.CENTER);
-        members.addActionListener((ActionListener) this);
-
-        product = new JButton("Product");
-        product.setVerticalTextPosition(SwingConstants.BOTTOM);
-        product.setHorizontalTextPosition(SwingConstants.CENTER);
-        product.addActionListener((ActionListener) this);
-
+        jPanel1 = new JPanel(new FlowLayout());
+        jPanel1.setBackground(new Color(98, 169, 221));
+        jPanel1.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Personnel"));
+        //north.add(jPanel1, BorderLayout.NORTH); //Places the panel inside the north panel
+        //Sales Button;
         sales = new JButton("Sales");
-        sales.setVerticalTextPosition(SwingConstants.BOTTOM);
-        sales.setHorizontalTextPosition(SwingConstants.CENTER);
-        sales.addActionListener((ActionListener) this);
+        jPanel1.add(sales);
+        jPanel1.setForeground(Color.GRAY);
+        sales.addActionListener(new ActionListener() {    // action
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //SALES ACTION
+            }
+        });
 
-        //Need to add to grid bag constraints
+        //Employee Button
+        employee = new JButton("Employee");
+        jPanel1.add(employee);
+        employee.addActionListener(new ActionListener() {    // action
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //EMPLOYEE ACTION
+            }
+        });
 
-        return jPanel1;
-    }
+        //Product Button
+        product = new JButton("Product");
+        jPanel1.add(product);
+        jPanel1.setBackground(new Color(98, 169, 221));
+        product.addActionListener(new ActionListener() {    // action
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //PRODUCT ACTION
+            }
+        });
 
-    public JPanel getjPanel2() {
-        jPanel2 = new JPanel(new GridBagLayout());
-        jPanel2.setBackground(new Color(98, 168, 221));
+        //Members Button
+        members = new JButton("Members");
+        jPanel1.add(members);
+        members.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //MEMBERS ACTION
+            }
+        });
+        north.add(jPanel1, BorderLayout.NORTH);//Places the panel inside the north panel
 
+        jPanel2 = new JPanel(new FlowLayout());
+        jPanel2.setBackground(new Color(98, 169, 221));
+        jPanel2.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Calender"));
+        //Week Button
         week = new JButton("Week");
-        week.setVerticalTextPosition(SwingConstants.BOTTOM);
-        week.setHorizontalTextPosition(SwingConstants.CENTER);
-        week.addActionListener((ActionListener) this);
-
+        jPanel2.add(week);
+        week.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //WEEK ACTION
+            }
+        });
+        //Month Button
         month = new JButton("Month");
-        month.setVerticalTextPosition(SwingConstants.BOTTOM);
-        month.setHorizontalTextPosition(SwingConstants.CENTER);
-        month.addActionListener((ActionListener) this);
-
+        jPanel2.add(month);
+        month.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //MONTH ACTION
+            }
+        });
+        //Year Button
         year = new JButton("Year");
-        year.setVerticalTextPosition(SwingConstants.BOTTOM);
-        year.setHorizontalTextPosition(SwingConstants.CENTER);
-        year.addActionListener((ActionListener) this);
+        jPanel2.add(year);
+        year.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //YEAR ACTION
+            }
+        });
+        north.add(jPanel2, BorderLayout.CENTER);
 
-        //Need to add to grid bag constraints
-
-        return jPanel2;
-    }
-
-    public JPanel getjPanel3() {
-        jPanel1 = new JPanel(new GridBagLayout());
-        jPanel1.setBackground(new Color(98, 168, 221));
-
+        jPanel3 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        jPanel3.setBackground(new Color(98, 169, 221));
+        jPanel3.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Range"));
+        //TextField
+        jTextField1 = new JTextField("Emp id");
+        jTextField1.setColumns(15);// Sets the column width of the Textfield
+        jPanel3.add(jTextField1);
+        //OK BUTTON
         okButton = new JButton("Ok");
-        okButton.setVerticalTextPosition(SwingConstants.BOTTOM);
-        okButton.setHorizontalTextPosition(SwingConstants.CENTER);
-        okButton.addActionListener((ActionListener) this);
+        jPanel3.add(okButton);
+        okButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //OK ACTION
+            }
+        });
+        north.add(jPanel3,BorderLayout.SOUTH);
 
-        jTextField1 = new JTextField();
-        //
+        //SOUTH
+        south = new JPanel(new BorderLayout());
+        south.setBackground(new Color(98, 169, 221));
+        jLabel1 = new JLabel("GRAPH"); //Graph displayed here
+        south.add(jLabel1 ,BorderLayout.CENTER);
 
-        //Need to add to grid bag constraints
+        re.add(north, BorderLayout.NORTH);
+        re.add(south, BorderLayout.CENTER);
+        re.setVisible(true);
 
-        return jPanel3;
+
+
+
+
+
     }
-
-
-
-
-    private void salesActionPerformed(ActionEvent e) {
-        //Void for now
-    }
-
-    private void productActionPerformed(ActionEvent e) {
-        //Void for now
-    }
-
-    private void membersActionPerformed(ActionEvent e) {
-        //Void for now
-    }
-    private void okButtonActionPerformed(ActionEvent e) {
-        //Void for now
-    }
-
-    private void weekActionPerformed(ActionEvent e) {
-        //Void for now
-    }
+<<<<<<< HEAD:src/gui/report/ReportEmployee.java
 
     private void monthActionPerformed(ActionEvent e) {
         //Void for now
@@ -146,3 +168,7 @@ public class ReportEmployee extends JFrame implements ActionListener{
     }
 
 }*/
+=======
+}
+
+>>>>>>> 8c43078b504927769ec9d2465d00a0f6ceebea8f:src/gui/ReportEmployee.java
