@@ -8,6 +8,7 @@ import database.ConnectionDB;
 import database.create.*;
 import gui.AdminMain;
 import gui.MainFrame;
+import gui.ReportEmployee;
 import model.Shop;
 
 public class Main {
@@ -44,9 +45,10 @@ public class Main {
 
     //connDB.closeDB();
 */
-    MainFrame mf = new MainFrame(connDB.getConn());
+    //MainFrame mf = new MainFrame(connDB.getConn());
     //mf.setVisible(true);
-      mf.setMf(mf);
-      AdminMain am = new AdminMain();
+      //mf.setMf(mf);
+      //AdminMain am = new AdminMain();
+      //ReportEmployee re = new ReportEmployee();
   }
 }
