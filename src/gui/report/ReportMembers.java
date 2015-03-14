@@ -1,7 +1,4 @@
-<<<<<<< HEAD:src/gui/report/ReportMembers.java
 package gui.report;
-=======
-package gui;
 
 import database.operations.ReportOperations;
 
@@ -10,7 +7,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.time.Year;
 
->>>>>>> 8c43078b504927769ec9d2465d00a0f6ceebea8f:src/gui/ReportMembers.java
 /*
 IT Tallaght - 2015, S2
 Computing - Year 2, Project

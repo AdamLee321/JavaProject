@@ -1,4 +1,4 @@
-package gui.report;/*
+package gui.report;
 
 import database.operations.ReportOperations;
 
@@ -7,10 +7,10 @@ import java.awt.*;
 import java.awt.event.*;
 import java.time.Year;
 
-/*
-IT Tallaght - 2015, S2
+
+/*IT Tallaght - 2015, S2
 Computing - Year 2, Project
-Group 17
+Group 17*/
 
 
 public class ReportEmployee extends JFrame {
@@ -21,11 +21,9 @@ public class ReportEmployee extends JFrame {
     private JPanel north, jPanel1, jPanel2, jPanel3, south;//Container ,Personnel, calender, range, graph
     private JTextField jTextField1; // Search
 
-<<<<<<< HEAD:src/gui/report/ReportEmployee.java
-    }
-=======
+
     public ReportEmployee() {
->>>>>>> 8c43078b504927769ec9d2465d00a0f6ceebea8f:src/gui/ReportEmployee.java
+
 
         re = new JFrame();
         re.setTitle("Reports");
@@ -146,29 +144,5 @@ public class ReportEmployee extends JFrame {
         re.add(south, BorderLayout.CENTER);
         re.setVisible(true);
 
-
-
-
-
-
     }
-<<<<<<< HEAD:src/gui/report/ReportEmployee.java
-
-    private void monthActionPerformed(ActionEvent e) {
-        //Void for now
-    }
-
-    private void yearActionPerformed(ActionEvent e) {
-        //Void for now
-    }
-
-    public ReportEmployee(ReportOperations ro){
-
-        this.ro = ro;
-    }
-
-}*/
-=======
 }
-
->>>>>>> 8c43078b504927769ec9d2465d00a0f6ceebea8f:src/gui/ReportEmployee.java
