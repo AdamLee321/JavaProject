@@ -9,19 +9,17 @@ Group 17
 import oracle.jdbc.pool.OracleDataSource;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ConnectionDB {
-  private Connection conn = null;
+  private static Connection conn = null;
 
   public ConnectionDB(){
     conn = openDB();
   }
 
   public Connection openDB(){
-    try{
+    try {
       OracleDataSource ods = new OracleDataSource();
 
       ods.setURL("jdbc:oracle:thin:Project@localhost:1521/XE");
@@ -30,6 +28,10 @@ public class ConnectionDB {
 
       this.conn = ods.getConnection();
       System.out.println("connected.");
+
+    }catch (SQLException se) {
+        SQLExceptionHandler.handleException(se, conn);
+        System.exit(0);
 
     }catch (Exception e){
       System.out.println(e);
@@ -48,7 +50,7 @@ public class ConnectionDB {
     }
   }
 
-  public Connection getConn(){
+  public static Connection getConn(){
     return conn;
   }
 }

@@ -31,7 +31,7 @@ public class ProductSearch implements ActionListener{
 
     public JPanel getSearch(){
         jp = new JPanel(new GridBagLayout());
-        jp.setBackground(new Color(98, 169, 221));
+        jp.setBackground(new Color(200,200,200));
 
         textboxLabel = new JLabel("Enter Search Query");
         textboxLabel.setFont(new java.awt.Font("Calibri", Font.BOLD, 18));

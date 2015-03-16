@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class ProductCategories implements ActionListener {
     private MainFrame mf;
@@ -60,7 +61,7 @@ public class ProductCategories implements ActionListener {
 
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e){
         String category = "";
         if(e.getSource().equals(desktops)){
             category = desktops.getText();

@@ -6,14 +6,7 @@ package gui.terminal;/*2ndYearProject
 */
 
 import database.operations.ProductOperations;
-<<<<<<< HEAD:src/gui/MainFrame.java
-import gui.employee.AddEmployee;
-import gui.employee.EmpLoyeePreview;
-import gui.employee.EmployeeMain;
-=======
-import gui.product.ProductResults;
 import gui.product.ProductSearch;
->>>>>>> 6725e81bb6d028af2b9fcdefca8d84d39be25867:src/gui/terminal/MainFrame.java
 import model.Product;
 
 import javax.swing.*;
@@ -22,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 
 public class MainFrame extends JFrame implements ActionListener {
@@ -48,7 +42,7 @@ public class MainFrame extends JFrame implements ActionListener {
     po = new ProductOperations(conn);
 
     this.setTitle("DGA Computers");
-    //this.setLayout();
+    this.setLayout(new BorderLayout());
     this.setSize(1000, 650);
     this.setResizable(true);
     this.setLocationRelativeTo(null);
@@ -76,11 +70,18 @@ public class MainFrame extends JFrame implements ActionListener {
     northPanel.setBackground(new Color(98, 169, 221));
     northPanel.add(logoLabel);
 
+    //JPanel westPad = new JPanel();
+    //westPad.add(new JLabel(new ImageIcon("src/res/images/UI Elements/Untitled.png")));
+    //JPanel rightPad = new JPanel();
+    //rightPad.add(new JLabel(new ImageIcon("src/res/images/UI Elements/Untitled.png")));
+
     main.add(northPanel, BorderLayout.NORTH);
     main.add(getCenterPanel(), BorderLayout.CENTER);
     main.add(getMinSouthPanel(), BorderLayout.SOUTH);
+    //main.add(westPad, BorderLayout.WEST);
+    //main.add(rightPad, BorderLayout.EAST);
 
-    this.add(main);
+    this.add(main, BorderLayout.CENTER);
     this.setVisible(true);
   }
 
@@ -196,7 +197,12 @@ public class MainFrame extends JFrame implements ActionListener {
   public void setToProductResults(String category, ResultSet rset){
     ProductResults pr = new ProductResults(po);
     removePanels();
-    centerPanel = pr.getResults(category, rset);
+    try{
+      centerPanel = pr.getResults(category, rset);
+    }catch(SQLException se){
+      System.out.println(se);
+    }
+
     southPanel = getFullSouthPanel();
     changePanels(centerPanel, southPanel);
   }

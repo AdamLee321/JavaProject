@@ -3,6 +3,7 @@ package gui.terminal;
 import model.Product;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 
@@ -23,36 +24,36 @@ public class ProductView {
 
     public JPanel getProductView(Product p){
         idTf = new JTextField();
-        idTf.setPreferredSize(new Dimension(200,10));
+        idTf.setPreferredSize(new Dimension(150,10));
         idTf.setEditable(false);
-        idTf.setText("Fuck");
+        idTf.setText("");
 
         makeTf = new JTextField();
-        makeTf.setPreferredSize(new Dimension(200,10));
+        makeTf.setPreferredSize(new Dimension(150,10));
 
         modelTf = new JTextField();
-        modelTf.setPreferredSize(new Dimension(200,10));
+        modelTf.setPreferredSize(new Dimension(150,10));
 
         priceTf = new JTextField();
-        priceTf.setPreferredSize(new Dimension(200,10));
+        priceTf.setPreferredSize(new Dimension(150,10));
 
         qtyTf = new JTextField();
-        qtyTf.setPreferredSize(new Dimension(200,10));
+        qtyTf.setPreferredSize(new Dimension(150,10));
 
         cpuTf = new JTextField();
-        cpuTf.setPreferredSize(new Dimension(200,10));
+        cpuTf.setPreferredSize(new Dimension(150,10));
 
         ramTf = new JTextField();
-        ramTf.setPreferredSize(new Dimension(200,10));
+        ramTf.setPreferredSize(new Dimension(150,10));
 
         osTf = new JTextField();
-        osTf.setPreferredSize(new Dimension(200,10));
+        osTf.setPreferredSize(new Dimension(150,10));
 
         hddTf = new JTextField();
-        hddTf.setPreferredSize(new Dimension(200,10));
+        hddTf.setPreferredSize(new Dimension(150,10));
 
         screenTf = new JTextField();
-        screenTf.setPreferredSize(new Dimension(200,10));
+        screenTf.setPreferredSize(new Dimension(150,10));
 
 
         description = new JPanel(new FlowLayout());
@@ -60,7 +61,7 @@ public class ProductView {
         description.setBorder(new TitledBorder("Description"));
         descriptionTF  = new JTextArea();
         descriptionTF.setLineWrap(true);
-        descriptionTF.setSize(700, 100);
+        descriptionTF.setSize(500, 100);
         descriptionTF.setBackground(new Color(150, 150, 150));
         JScrollPane scrollPane = new JScrollPane(descriptionTF);
         descriptionTF.setText("The affordable Lenovo H500s desktop uniquely combines a slim space-saving design with the latest processor technology and plenty of storage space for everyday home computing.");
@@ -117,6 +118,8 @@ public class ProductView {
         productDetails.add(details, MainFrame.getConstraints(1,0,1,1, GridBagConstraints.CENTER, 0, 0, 0, 0));
         productDetails.add(specifications, MainFrame.getConstraints(2,0,1,1, GridBagConstraints.EAST, 0, 0, 0, 0));
         productDetails.add(description, MainFrame.getConstraints(1,1,2,1, GridBagConstraints.CENTER, 0, 0, 0, 0));
+
+
 
         return productDetails;
     }

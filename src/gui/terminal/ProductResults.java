@@ -1,7 +1,6 @@
-package gui.product;
+package gui.terminal;
 
 import database.operations.ProductOperations;
-import gui.terminal.ProductTableModel;
 import model.Product;
 
 import javax.swing.*;
@@ -29,7 +28,7 @@ public class ProductResults extends JFrame implements ActionListener {
         this.po = po;
     }
 
-    public JPanel getResults(String category, ResultSet rset){
+    public JPanel getResults(String category, ResultSet rset) throws SQLException{
         products = new ArrayList<Product>();
         productResultsPanel = new JPanel();
 
@@ -46,14 +45,15 @@ public class ProductResults extends JFrame implements ActionListener {
            System.out.println("Error in extracting results from resultSet");
         }
 
-        ProductTableModel prodTable = new ProductTableModel(products);
-        resultsTable = new JTable(prodTable);
 
-        tableScroll = new JScrollPane();
-        tableScroll.add(resultsTable);
+        productTable productTable = new productTable();
+
+
+        //tableScroll = new JScrollPane();
+        //tableScroll.add(resultsTable);
 
         productResultsPanel.setBackground(new Color(98, 169, 221));
-        productResultsPanel.add(tableScroll);
+        productResultsPanel.add(productTable);
 
         //          Just for testing that the products have been added to the ArrayList
         //          for (Product x : products)
