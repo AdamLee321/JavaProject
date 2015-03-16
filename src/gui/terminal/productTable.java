@@ -8,16 +8,18 @@ import java.awt.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class productTable extends JTable {
-    public JScrollPane scrollPane = null;
+public class ProductTable extends JTable {
+    public static JScrollPane scrollPane;
+    ProductTableModel tableModel;
 
     //Set the table height
-    protected static final int tableHeight = 350;
+    protected static final int tableHeight = 200;
 
-    public productTable() throws SQLException {
-        ProductTableModel tableModel = new ProductTableModel();
+    public ProductTable() throws SQLException {
+        tableModel = new ProductTableModel();
         this.setModel(tableModel);
-        scrollPane = new JScrollPane(this);
+        scrollPane = new JScrollPane();
+        scrollPane.add(this);
 
         // Set the table width, depending upon the width of
         // the columns

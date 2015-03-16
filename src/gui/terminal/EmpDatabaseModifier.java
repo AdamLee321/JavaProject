@@ -43,7 +43,7 @@ public class EmpDatabaseModifier {
         }
     }
 
-    /*// Update the table with the arraylist information
+    // Update the table with the arraylist information
     public static void doTableUpdates(Connection conn) {
         try {
             if (rowsToInsert.size() > 0)
@@ -58,11 +58,11 @@ public class EmpDatabaseModifier {
         catch (SQLException ex) {
             SQLExceptionHandler.handleException(ex, conn);
         }
-    }*/
+    }
 
     // Update the lastname field
     private static void doEmpLastNameUpdate(Connection conn) throws SQLException {
-        String query = "UPDATE Employee SET lastname = ? WHERE empID = ?";
+        String query = "UPDATE product SET prodmake = ? WHERE prodmake = ?";
         PreparedStatement stmt = conn.prepareStatement(query);
 
         while(ELNUpdates.size() > 0) {
@@ -79,7 +79,7 @@ public class EmpDatabaseModifier {
     // Update the firstname field
     private static void doEmpFirstNameUpdate(Connection conn) throws SQLException {
 
-        String query = "UPDATE Employee SET firstname = ? WHERE empID = ?";
+        String query = "UPDATE product SET productID = ? WHERE productID = ?";
         PreparedStatement stmt = conn.prepareStatement(query);
 
         while (EFNUpdates.size() > 0) {
@@ -94,27 +94,30 @@ public class EmpDatabaseModifier {
     }
 
     // Insert a row into the table
-    /*private static void doRowInsert(Connection conn) throws SQLException
+    private static void doRowInsert(Connection conn) throws SQLException
     {
-        String sql = "INSERT INTO Employee VALUES(?, ?, ?)";
+        String sql = "INSERT INTO product VALUES(?, ?, ?, ?, ?)";
         PreparedStatement stmt = conn.prepareStatement(sql);
 
         while (rowsToInsert.size() > 0) {
-            EmpRow row = (EmpRow)((ObjectToIntMap)rowsToInsert.get(0)).obj;
-            stmt.setInt(1, getNewRowId(conn));
+            ProductRow productRow = (ProductRow)((ObjectToIntMap)rowsToInsert.get(0)).obj;
+            //stmt.setInt(1, getNewRowId(conn));
 
-            stmt.setString(2, row.EmpLastName);
-            stmt.setString(3, row.EmpFirstName);
+            stmt.setInt(1, productRow.Id);
+            stmt.setString(2, productRow.make);
+            stmt.setString(3, productRow.model);
+            stmt.setDouble(4, productRow.price);
+            stmt.setInt(5, productRow.quantity);
             stmt.executeUpdate();
             rowsToInsert.remove(0);
             conn.commit();
         }
         stmt.close();
-    }*/
+    }
 
     // Delete a row from the table
     private static void doRowDelete(Connection conn) throws SQLException {
-        String sql = "DELETE FROM Employee WHERE empID = ?";
+        String sql = "DELETE FROM product WHERE productID = ?";
         PreparedStatement stmt = conn.prepareStatement(sql);
 
         while (rowsToDelete.size() > 0) {
@@ -130,7 +133,7 @@ public class EmpDatabaseModifier {
     private static int getNewRowId(Connection conn) throws SQLException {
         if (maxRowId == NOROWID) {
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT MAX(empID) FROM  employee");
+            ResultSet rs = stmt.executeQuery("SELECT MAX(productid) FROM  product");
             if (rs.next())
                 maxRowId = rs.getInt(1);
             else
