@@ -7,183 +7,175 @@ Group 17
 */
 
 public class Employee {
-  private int empId;
-  private String empFName;
-  private String empLName;
-  private String empUsername;
-  private String empPassword;
-  private String position;
-  private String empStreet;
-  private String empCity;
-  private String empCounty;
-  private String empDOB;
-  private String empEmail;
-  private double salary;
-  //private ???? empPic BLOB
 
+    private int empId;
+    private int empDeptId;
+    private String empFName;
+    private String empLName;
+    private String position;
+    private String empStreet;
+    private String empCity;
+    private String empCounty;
+    private int empDOBd;
+    private String empDOBm;
+    private int empDOBy;
+    private String empEmail;
+    private double salary;
+    private String empUsername;
+    private String empPassword;
+    private String empPic;
 
-  public Employee() {
-    this.empFName = "";
-    this.empLName = "";
-    this.empUsername = "";
-    this.empPassword = "";
-    this.position = "";
-    this.empStreet = "";
-    this.empCounty = "";
-    this.empCity = "";
-    this.empDOB = "";
-    this.empEmail = "";
-    this.salary = 0;
-  }
+// overloaded constructor
+    public Employee(int empId, int empDeptId, String empFName, String empLName, String position, String empStreet,
+                    String empCity, String empCounty, int empDOBd, String empDOBm, int empDOBy, String empEmail,
+                    double salary, String empUsername, String empPassword, String empPic) {
+        this.empId = empId;
+        this.empDeptId = empDeptId;
+        this.empFName = empFName;
+        this.empLName = empLName;
+        this.position = position;
+        this.empStreet = empStreet;
+        this.empCity = empCity;
+        this.empCounty = empCounty;
+        this.empDOBd = empDOBd;
+        this.empDOBm = empDOBm;
+        this.empDOBy = empDOBy;
+        this.empEmail = empEmail;
+        this.salary = salary;
+        this.empUsername = empUsername;
+        this.empPassword = empPassword;
+        this.empPic = empPic;
+    }
 
-  public Employee(String empFName, String empLName, String empUsername, String empPassword,
-                  String position, String empStreet, String empCounty, String empCity,
-                  String empDOB, String empEmail, double salary) {
-    this.empFName = empFName;
-    this.empLName = empLName;
-    this.empUsername = generateUsername();
-    this.empPassword = generatePassword();
-    this.position = position;
-    this.empStreet = empStreet;
-    this.empCounty = empCounty;
-    this.empCity = empCity;
-    this.empDOB = empDOB;
-    this.empEmail = empEmail;
-    this.salary = salary;
-  }
+// getters
 
+    public int getEmpId() {
+        return empId;
+    }
 
-  //getters for all attributes
+    public int getEmpDeptId() {
+        return empDeptId;
+    }
 
-  //getter for ID
-  public int getEmpId() {
-    return empId;
-  }
+    public String getEmpFName() {
+        return empFName;
+    }
 
-  //getter for first name
-  public String getEmpFName() {
-    return empFName;
-  }
+    public String getEmpLName() {
+        return empLName;
+    }
 
-  //getter for last name
-  public String getEmpLName() {
-    return empLName;
-  }
+    public String getPosition() {
+        return position;
+    }
 
-  //getter for username
-  public String getEmpUsername() {
-    return empUsername;
-  }
+    public String getEmpStreet() {
+        return empStreet;
+    }
 
-  //getter for password
-  public String getEmpPassword() {
-    return empPassword;
-  }
+    public String getEmpCity() {
+        return empCity;
+    }
 
-  //getter for position
-  public String getPosition() {
-    return position;
-  }
+    public String getEmpCounty() {
+        return empCounty;
+    }
 
-  //getter for street
-  public String getEmpStreet() {
-    return empStreet;
-  }
+    public int getEmpDOBd() {
+        return empDOBd;
+    }
 
-  //getter for city
-  public String getEmpCity() {
-    return empCity;
-  }
+    public String getEmpDOBm() {
+        return empDOBm;
+    }
 
-  //getter for county
-  public String getEmpCounty() {
-    return empCounty;
-  }
+    public int getEmpDOBy() {
+        return empDOBy;
+    }
 
-  //getter for dob
-  public String getEmpDOB() {
-    return empDOB;
-  }
+    public String getEmpEmail() {
+        return empEmail;
+    }
 
-  //getter for email
-  public String getEmpEmail() {
-    return empEmail;
-  }
+    public double getSalary() {
+        return salary;
+    }
 
-  //getter for salary
-  public double getSalary() {
-    return salary;
-  }
+    public String getEmpUsername() {
+        return empUsername;
+    }
 
-  // Setters for all attributes
+    public String getEmpPassword() {
+        return empPassword;
+    }
 
-  // setter for id
-  public void setEmpId(int empId) {
-    this.empId = empId;
-  }
+    public String getEmpPic() {
+        return empPic;
+    }
 
-  // setter for salary
-  public void setSalary(double salary) {
-    this.salary = salary;
-  }
+// setters
 
-  // setter for email
-  public void setEmpEmail(String empEmail) {
-    this.empEmail = empEmail;
-  }
+    public void setEmpId(int empId) {
+        this.empId = empId;
+    }
 
-  //setter for DOB
-  public void setEmpDOB(String empDOB) {
-    this.empDOB = empDOB;
-  }
+    public void setEmpDeptId(int empDeptId) {
+        this.empDeptId = empDeptId;
+    }
 
-  //setter for county
-  public void setEmpCounty(String empCounty) {
-    this.empCounty = empCounty;
-  }
+    public void setEmpFName(String empFName) {
+        this.empFName = empFName;
+    }
 
-  //setter for city
-  public void setEmpCity(String empCity) {
-    this.empCity = empCity;
-  }
+    public void setEmpLName(String empLName) {
+        this.empLName = empLName;
+    }
 
-  //setter for position
-  public void setPosition(String position) {
-    this.position = position;
-  }
+    public void setPosition(String position) {
+        this.position = position;
+    }
 
-  //setter for street
-  public void setEmpStreet(String empStreet) {
-    this.empStreet = empStreet;
-  }
+    public void setEmpStreet(String empStreet) {
+        this.empStreet = empStreet;
+    }
 
-  //setter for password
-  public void setEmpPassword(String empPassword) {
-    this.empPassword = empPassword;
-  }
+    public void setEmpCity(String empCity) {
+        this.empCity = empCity;
+    }
 
-  //setter for username
-  public void setEmpUsername(String empUsername) {
-    this.empUsername = empUsername;
-  }
+    public void setEmpCounty(String empCounty) {
+        this.empCounty = empCounty;
+    }
 
-  // setter for last name
-  public void setEmpLName(String empLName) {
-    this.empLName = empLName;
-  }
+    public void setEmpDOBd(int empDOBd) {
+        this.empDOBd = empDOBd;
+    }
 
-  //setter for first name
-  public void setEmpFName(String empFName) {
-    this.empFName = empFName;
-  }
+    public void setEmpDOBm(String empDOBm) {
+        this.empDOBm = empDOBm;
+    }
 
-  public String generatePassword() {
-    String pass = "";
-    return pass;
-  }
+    public void setEmpDOBy(int empDOBy) {
+        this.empDOBy = empDOBy;
+    }
 
-  public String generateUsername() {
-    String user = "";
-    return user;
-  }
+    public void setEmpEmail(String empEmail) {
+        this.empEmail = empEmail;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
+    public void setEmpUsername(String empUsername) {
+        this.empUsername = empUsername;
+    }
+
+    public void setEmpPassword(String empPassword) {
+        this.empPassword = empPassword;
+    }
+
+    public void setEmpPic(String empPic) {
+        this.empPic = empPic;
+    }
 }

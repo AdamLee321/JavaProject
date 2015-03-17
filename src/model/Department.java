@@ -1,5 +1,9 @@
 package model;
 
+import database.ConnectionDB;
+import database.operations.EmployeeOperations;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /*
@@ -10,19 +14,11 @@ Group 17
 
 public class Department {
 
-// instance variables
-
     private int deptId;
     private String deptName;
     private ArrayList<Employee> empList;
-
-// default constructor
-    public Department(){
-
-        deptId = 0;
-        deptName = "";
-        empList = new ArrayList<Employee>();
-    }
+    private ConnectionDB conn;
+    private EmployeeOperations eo;
 
 // overloaded constructor
     public Department(String deptNameIn){  // also pass database sequence id
@@ -30,6 +26,7 @@ public class Department {
         deptId = 0; // sequence in
         deptName = deptNameIn;
         empList = new ArrayList<Employee>();
+        conn.getConn();
     }
 
     // get department id

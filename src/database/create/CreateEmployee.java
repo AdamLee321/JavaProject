@@ -50,12 +50,14 @@ public class CreateEmployee {
                     "empStreet VARCHAR2(80)," +
                     "empCity VARCHAR2(20)," +
                     "empCounty VARCHAR2(25)," +
-                    "empDOB DATE," +
+                    "empDOBd INTEGER," +
+                    "empDOBm VARCHAR2(20)," +
+                    "empDOBy INTEGER," +
                     "empEmail VARCHAR2(70)," +
                     "salary NUMBER," +
-                    "empPicUrl BLOB," +
                     "empUsername VARCHAR2(30)," +
                     "empPassword VARCHAR2(8)," +
+                    "empPicUrl VARCHAR2(255)," +
                     "PRIMARY KEY(empId)," +
                     "FOREIGN KEY(deptId) references department(deptId) on delete set null" +
                     ")";
@@ -73,8 +75,8 @@ public class CreateEmployee {
             System.out.println(e);
         }
         try {
-            String sqlData = "INSERT INTO employee (empId, deptId, empFName, empLName, position, empStreet, empCity, empCounty, empDOB, empEmail, salary, empPicUrl, empUsername, empPassword)" +
-                    "VALUES (empSeq.nextVal,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String sqlData = "INSERT INTO employee (empId, deptId, empFName, empLName, position, empStreet, empCity, empCounty, empDOBd, empDOBm, empDOBy, empEmail, salary, empPicUrl, empUsername, empPassword)" +
+                    "VALUES (empSeq.nextVal,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             pstmt = conn.prepareStatement(sqlData);
 
                                 // employee id SEQUENCE
@@ -85,14 +87,16 @@ public class CreateEmployee {
             pstmt.setString(5, "Wright Court"); // employee street
             pstmt.setString(6, "Tallaght"); // employee city
             pstmt.setString(7, "Dublin"); // employee county
-            pstmt.setString(8, "01-FEB-1984"); // employee dob
-            pstmt.setString(9, "ruth.ward@gmail.com");  //employee email
-            pstmt.setInt(10, 12000); // employee salary
-            pstmt.setString(11, null); // employee picture
-            pstmt.setString(12, "ruthward"); // employee username
-            pstmt.setString(13, "1234"); // employee password
+            pstmt.setInt(8, 1); // employee dob day
+            pstmt.setString(9, "Feb"); // employee dob month
+            pstmt.setInt(10, 1984); // employee dob year
+            pstmt.setString(11, "ruth.ward@gmail.com");  //employee email
+            pstmt.setInt(12, 12000); // employee salary
+            pstmt.setString(13, "ruthward"); // employee username
+            pstmt.setString(14, "1234"); // employee password
+            pstmt.setString(15, "0"); // employee picture
             pstmt.execute();
-
+/*
             pstmt.setInt(1,4);
             pstmt.setString(2, "Norma");
             pstmt.setString(3, "Brown");
@@ -363,6 +367,7 @@ public class CreateEmployee {
             pstmt.setString(12, "philiplee");
             pstmt.setString(13, "1234");
             pstmt.execute();
+            */
         } catch (SQLException e) {
         System.out.println(e);
         }

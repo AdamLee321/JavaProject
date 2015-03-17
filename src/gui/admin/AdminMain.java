@@ -1,13 +1,16 @@
 package gui.admin;
 
+//import gui.admin.AdminOptions;import gui.employee.EmployeeMain;
+//import gui.member.MemberMain;
+//import gui.product.ProductMain;
+
 import gui.employee.EmployeeMain;
 import gui.member.MemberMain;
 import gui.product.ProductMain;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import javax.swing.BorderFactory;import javax.swing.ImageIcon;import javax.swing.JButton;import javax.swing.JDialog;import javax.swing.JFrame;import javax.swing.JLabel;import javax.swing.JMenu;import javax.swing.JMenuBar;import javax.swing.JMenuItem;import javax.swing.JPanel;import javax.swing.JSeparator;
+import java.awt.BorderLayout;import java.awt.Color;import java.awt.Dimension;import java.awt.FlowLayout;import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;import java.lang.Override;
 
 /*
 IT Tallaght - 2015, S2

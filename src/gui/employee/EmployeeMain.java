@@ -1,10 +1,31 @@
 package gui.employee;
 
+import database.operations.EmployeeOperations;
+import model.Employee;
+
 import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.String;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /*
 IT Tallaght - 2015, S2
@@ -21,6 +42,9 @@ public class EmployeeMain {
     private JPanel managePanel, northPanel, southPanel, searchPanel, tablePanel;
     private JTable tblEmployee;
     private JScrollPane tblScroll;
+
+    EmployeeOperations eo;
+    Employee e;
 
     String[] eempTypes = {"All", "Sales", "Management"};  // this just a placeholder, real info will be populated from DB
 

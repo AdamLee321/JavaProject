@@ -8,7 +8,7 @@ package main;/*2ndYearProject
 
 import database.ConnectionDB;
 import database.create.*;
-import gui.admin.AdminMain;
+//import gui.admin.AdminMain;
 import gui.terminal.MainFrame;
 
 public class Main {
@@ -19,7 +19,7 @@ public class Main {
       CreateShop cs = new CreateShop(connDB.getConn());
       CreateDepartment cd = new CreateDepartment(connDB.getConn());
       CreateShopDepartment sd = new CreateShopDepartment(connDB.getConn());
-      CreateEmployee ce = new CreateEmployee(connDB.getConn());
+     // CreateEmployee ce = new CreateEmployee(connDB.getConn());
       CreateSales se = new CreateSales(connDB.getConn());
       CreateProduct cp = new CreateProduct(connDB.getConn());
       CreateMember cm = new CreateMember(connDB.getConn());
@@ -29,7 +29,7 @@ public class Main {
       cm.dropMembersTable();
       cp.dropProductTable();
       se.dropSalesTable();
-      ce.dropEmployeesTable();
+   //   ce.dropEmployeesTable();
       sd.dropShopDepartmentTable();
       cd.dropDepartmentTable();
       cs.dropShopTable();
@@ -37,7 +37,7 @@ public class Main {
       cs.createShopTable();
       cd.createDepartmentsTable();
       sd.createShopDepartmentTable();
-      ce.createEmployeesTable();
+   //   ce.createEmployeesTable();
       se.createSalesTable();
       cp.createProductTable();
       cm.createMembersTable();

@@ -1,11 +1,11 @@
-package gui.report;
+package gui.terminal;
 
 import database.operations.ReportOperations;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.time.Year;
+//import java.time.Year;
 
 /*
 IT Tallaght - 2015, S2

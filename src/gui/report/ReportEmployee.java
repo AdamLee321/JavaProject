@@ -5,8 +5,6 @@ import database.operations.ReportOperations;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.time.Year;
-
 
 /*IT Tallaght - 2015, S2
 Computing - Year 2, Project
