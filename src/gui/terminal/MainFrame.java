@@ -2,44 +2,34 @@ package gui.terminal;/*2ndYearProject
   gui
   Created by David
   14:56   06/03/2015
-  Software Development 3
 */
 
 import database.operations.ProductOperations;
-import gui.product.ProductSearch;
 import model.Product;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
 public class MainFrame extends JFrame implements ActionListener {
 
-  private static Connection conn;
   private ProductOperations po;
 
-  private MainFrame mf;
-
+  public static MainFrame mf;
   private JLabel logoLabel;
-  private JPanel northPanel, centerPanel, southPanel, main;
+  private JPanel centerPanel;
+  private JPanel southPanel;
+  private JPanel main;
   private JButton browse, search, help, home, back;
   private GridBagLayout bl;
   private boolean displayArea = false;
 
 
-  public void setMf(MainFrame mf){
-    this.mf = mf;
-  }
-
-
-  public MainFrame(Connection conn){
-    this.conn = conn;
-    po = new ProductOperations(conn);
+  public MainFrame(){
+    po = new ProductOperations();
 
     this.setTitle("DGA Computers");
     this.setLayout(new BorderLayout());
@@ -66,20 +56,13 @@ public class MainFrame extends JFrame implements ActionListener {
 
     logoLabel = new JLabel(new ImageIcon("src/res/images/UI Elements/banner.png"));
 
-    northPanel = new JPanel(new GridLayout(1,1));
+    JPanel northPanel = new JPanel(new GridLayout(1, 1));
     northPanel.setBackground(new Color(98, 169, 221));
     northPanel.add(logoLabel);
-
-    //JPanel westPad = new JPanel();
-    //westPad.add(new JLabel(new ImageIcon("src/res/images/UI Elements/Untitled.png")));
-    //JPanel rightPad = new JPanel();
-    //rightPad.add(new JLabel(new ImageIcon("src/res/images/UI Elements/Untitled.png")));
 
     main.add(northPanel, BorderLayout.NORTH);
     main.add(getCenterPanel(), BorderLayout.CENTER);
     main.add(getMinSouthPanel(), BorderLayout.SOUTH);
-    //main.add(westPad, BorderLayout.WEST);
-    //main.add(rightPad, BorderLayout.EAST);
 
     this.add(main, BorderLayout.CENTER);
     this.setVisible(true);
@@ -110,7 +93,7 @@ public class MainFrame extends JFrame implements ActionListener {
   public JPanel getMinSouthPanel(){
     southPanel = new JPanel(bl);
     southPanel.setBackground(new Color(98, 169, 221));
-    southPanel.add(help, getConstraints(0,0,1,1,GridBagConstraints.CENTER, 0,0,20,0));
+    southPanel.add(help, getConstraints(0,0,1,1,GridBagConstraints.CENTER, 20,0,20,0));
 
     return southPanel;
   }
@@ -120,9 +103,9 @@ public class MainFrame extends JFrame implements ActionListener {
   public JPanel getFullSouthPanel(){
     southPanel = new JPanel(bl);
     southPanel.setBackground(new Color(98, 169, 221));
-    southPanel.add(back, getConstraints(0,0,1,1,GridBagConstraints.WEST, 0,0,20,0));
-    southPanel.add(home, getConstraints(1,0,1,1,GridBagConstraints.WEST, 0,150,20,150));
-    southPanel.add(help, getConstraints(2,0,1,1,GridBagConstraints.EAST, 0,0,20,0));
+    southPanel.add(back, getConstraints(0,0,1,1,GridBagConstraints.WEST, 20,0,20,0));
+    southPanel.add(home, getConstraints(1,0,1,1,GridBagConstraints.WEST, 20,150,20,150));
+    southPanel.add(help, getConstraints(2,0,1,1,GridBagConstraints.EAST, 20,0,20,0));
 
     return southPanel;
   }
@@ -155,18 +138,15 @@ public class MainFrame extends JFrame implements ActionListener {
       setToMain();
     }
     else if(e.getSource().equals(help)){
-      setToProductView();
+      //setToProductView();
     }
     else if(e.getSource().equals(back)){
-      System.out.println("AAAAA");
-      //EmployeeMain ae = new EmployeeMain();
     }
   }
 
   //To change the center pane to the search
   public void setToSearch(){
-    System.out.println("search");
-    ProductSearch c = new ProductSearch(mf, po);
+    ProductSearch c = new ProductSearch();
     removePanels();
     centerPanel = c.getSearch();
     southPanel = getFullSouthPanel();
@@ -176,8 +156,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
   //To change the center pane to the browse
   public void setToBrowse(){
-    System.out.println("Browse");
-    ProductCategories c = new ProductCategories(po, mf);
+    ProductCategories c = new ProductCategories(po);
     removePanels();
     centerPanel = c.getCategories();
     southPanel = getFullSouthPanel();
@@ -193,12 +172,12 @@ public class MainFrame extends JFrame implements ActionListener {
     changePanels(centerPanel, southPanel);
   }
 
-  //To change the center pane to the results of a search or the product category picked
-  public void setToProductResults(String category, ResultSet rset){
-    ProductResults pr = new ProductResults(po);
+  //To change the center pane to the results of a product category picked
+  public void setToProductResults(String category){
+    ProductResults pr = new ProductResults();
     removePanels();
     try{
-      centerPanel = pr.getResults(category, rset);
+      centerPanel = pr.getResults(category, "");
     }catch(SQLException se){
       System.out.println(se);
     }
@@ -207,10 +186,25 @@ public class MainFrame extends JFrame implements ActionListener {
     changePanels(centerPanel, southPanel);
   }
 
-  public void setToProductView(){
-    ProductView pv = new ProductView(mf);
+  //To change the center pane to the results of a product category picked
+  public void setToProductResults(String category, String keyword){
+    ProductResults pr = new ProductResults();
     removePanels();
-    centerPanel = pv.getProductView(new Product());
+    try{
+      centerPanel = pr.getResults(category, keyword);
+    }catch(SQLException se){
+      System.out.println(se);
+    }
+
+    southPanel = getFullSouthPanel();
+    changePanels(centerPanel, southPanel);
+  }
+
+  public void setToProductView(int productId){
+    ProductView pv = new ProductView();
+    Product p = po.productByID(productId);
+    removePanels();
+    centerPanel = pv.getProductView(p);
     southPanel = getFullSouthPanel();
     changePanels(centerPanel, southPanel);
   }
@@ -227,6 +221,10 @@ public class MainFrame extends JFrame implements ActionListener {
       main.remove(centerPanel);
       main.remove(southPanel);
     }
+  }
+
+  public static void setMf(MainFrame mf) {
+    MainFrame.mf = mf;
   }
 
 

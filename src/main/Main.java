@@ -45,9 +45,9 @@ public class Main {
 
     //connDB.closeDB();
 
-      MainFrame mf = new MainFrame(connDB.getConn());
+      MainFrame mf = new MainFrame();
       mf.setVisible(true);
-      mf.setMf(mf);
+      MainFrame.setMf(mf);
       //AdminMain am = new AdminMain();
       //
   }

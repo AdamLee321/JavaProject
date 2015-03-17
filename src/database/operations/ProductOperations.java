@@ -1,6 +1,7 @@
 package database.operations;
 
-import com.sun.org.apache.xpath.internal.SourceTree;
+import database.ConnectionDB;
+import model.Product;
 
 import java.sql.*;
 
@@ -13,8 +14,8 @@ public class ProductOperations {
     PreparedStatement pstmt;
     ResultSet rset;
 
-    public ProductOperations(Connection conn){
-        this.conn = conn;
+    public ProductOperations(){
+        this.conn = ConnectionDB.getConn();
     }
 
     public ResultSet searchProducts(String keyword, String category){
@@ -25,6 +26,7 @@ public class ProductOperations {
                   "prodType, cpu, ram, OperatingSystem, storage, screen, prodDesc FROM PRODUCT WHERE prodDesc " +
                   "like '%" +keyword +"%'";
             System.out.println(sql);
+
         }
         else {
             sql = "SELECT prodId, prodMake, prodModel, prodSalePrice, prodCostPrice, prodQTY," +
@@ -43,10 +45,17 @@ public class ProductOperations {
     }
 
     public ResultSet productCategory(String category){
-        String sql = "SELECT prodId, prodMake, prodModel, prodSalePrice, prodCostPrice, prodQTY," +
+        String sql = new String();
+        if (category.equals("All")){
+            sql = "SELECT prodId, prodMake, prodModel, prodSalePrice, prodCostPrice, prodQTY, "+
+                    // Blob prodPic,\n" +
+                    "prodType, cpu, ram, OperatingSystem, storage, screen, prodDesc FROM PRODUCT";
+        }
+        else
+            sql = "SELECT prodId, prodMake, prodModel, prodSalePrice, prodCostPrice, prodQTY," +
                 "prodType, cpu, ram, OperatingSystem, storage, screen, prodDesc FROM PRODUCT WHERE prodType =" +
                 "'" + category + "'";
-        System.out.println(sql);
+
         try{
             stmt = conn.createStatement();
             rset = stmt.executeQuery(sql);
@@ -54,5 +63,28 @@ public class ProductOperations {
             System.out.println("Error in category query");
         }
         return rset;
+    }
+
+    public Product productByID(int id){
+        Product p = null;
+        String sql = "SELECT prodId, prodMake, prodModel, prodSalePrice, prodCostPrice, prodQTY," +
+                "prodType, cpu, ram, OperatingSystem, storage, screen, prodDesc FROM PRODUCT WHERE prodId = '"+id+"'";
+        System.out.println(sql);
+
+        try{
+            stmt = conn.createStatement();
+            rset = stmt.executeQuery(sql);
+            while (rset.next()) {
+                 p = new Product(rset.getInt(1), rset.getString(2), rset.getString(3), rset.getDouble(4), rset.getDouble(5),
+                        rset.getInt(6),
+                        //rset.getBlob(7),
+                        rset.getString(7), rset.getString(8), rset.getString(9), rset.getString(10),
+                        rset.getString(11), rset.getString(12), rset.getString(13));
+            }
+
+        }catch(SQLException sqlE){
+            System.out.println("Error in ResultSet to product Conversion");
+        }
+        return p;
     }
 }

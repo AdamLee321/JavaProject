@@ -52,7 +52,6 @@ public class Product {
     this.prodModel = prodModel;
     this.prodSalePrice = prodSalePrice;
     this.prodCostPrice = prodCostPrice;
-    this.prodDesc = prodDesc;
     this.prodQTY = prodQTY;
     //this.prodPic = prodPic;
     this.prodType = prodType;

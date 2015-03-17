@@ -79,7 +79,7 @@ public class CreateProduct {
             pstmt.setDouble(4, 229.99);//prodCostPrice
             pstmt.setInt(5, 11);//prodQTY
             pstmt.setString(6, null);//prodPic
-            pstmt.setString(7, "Desktop");//prodType
+            pstmt.setString(7, "Desktops");//prodType
             pstmt.setString(8, "Intel Pentium G2030 Processor");//cpu
             pstmt.setString(9, "4 GB DDR3 - 1600 MHz");//ram
             pstmt.setString(10, "Windows 8.1 64-bit Edition");//operatingSystem
@@ -97,7 +97,7 @@ public class CreateProduct {
             pstmt.setDouble(4, 254.99);//prodCostPrice
             pstmt.setInt(5, 12);//prodQTY
             pstmt.setString(6, null);//prodPic
-            pstmt.setString(7, "Desktop");//prodType
+            pstmt.setString(7, "Desktops");//prodType
             pstmt.setString(8, "Intel Pentium Processor J2900");//cpu
             pstmt.setString(9, "4 GB DDR3 - 1600 MHz");//ram
             pstmt.setString(10, "Windows 8.1 64-bit Edition");//operatingSystem
@@ -116,7 +116,7 @@ public class CreateProduct {
             pstmt.setDouble(4, 237.99);//prodCostPrice
             pstmt.setInt(5, 13);//prodQTY
             pstmt.setString(6, null);//prodPic
-            pstmt.setString(7, "Desktop");//prodType
+            pstmt.setString(7, "Desktops");//prodType
             pstmt.setString(8, "Intel Pentium Processor J2900");//cpu
             pstmt.setString(9, "4 GB DDR3 - 1600 MHz");//ram
             pstmt.setString(10, "Windows 7 64-bit Edition");//operatingSystem
@@ -138,7 +138,7 @@ public class CreateProduct {
             pstmt.setDouble(4, 577.99);//prodCostPrice
             pstmt.setInt(5, 14);//prodQTY
             pstmt.setString(6, null);//prodPic
-            pstmt.setString(7, "Desktop");//prodType
+            pstmt.setString(7, "Desktops");//prodType
             pstmt.setString(8, "AMD FX 4300 processor");//cpu
             pstmt.setString(9, "8 GB DDR3 - 1600 MHz");//ram
             pstmt.setString(10, "Windows 8.1 64-bit Edition");//operatingSystem
@@ -159,7 +159,7 @@ public class CreateProduct {
             pstmt.setDouble(4, 569.99);//prodCostPrice
             pstmt.setInt(5, 15);//prodQTY
             pstmt.setString(6, null);//prodPic
-            pstmt.setString(7, "Desktop");//prodType
+            pstmt.setString(7, "Desktops");//prodType
             pstmt.setString(8, "Intel Core i3-4160 Processor");//cpu
             pstmt.setString(9, "8 GB DDR3 - 1600 MHz");//ram
             pstmt.setString(10, "Windows 7 64-bit Edition");//operatingSystem
@@ -179,7 +179,7 @@ public class CreateProduct {
             pstmt.setDouble(4, 551.99);//prodCostPrice
             pstmt.setInt(5, 19);//prodQTY
             pstmt.setString(6, null);//prodPic
-            pstmt.setString(7, "Desktop");//prodType
+            pstmt.setString(7, "Desktops");//prodType
             pstmt.setString(8, "Intel Core i7-4770 processor");//cpu
             pstmt.setString(9, "8 GB DDR3 - 1600 MHz");//ram
             pstmt.setString(10, "Windows 8.1 64-bit Edition");//operatingSystem
@@ -200,7 +200,7 @@ public class CreateProduct {
             pstmt.setDouble(4, 424.99);//prodCostPrice
             pstmt.setInt(5, 18);//prodQTY
             pstmt.setString(6, null);//prodPic
-            pstmt.setString(7, "Desktop");//prodType
+            pstmt.setString(7, "Desktops");//prodType
             pstmt.setString(8, "Intel Pentium Processor J2900");//cpu
             pstmt.setString(9, "8 GB DDR3 - 1600 MHz");//ram
             pstmt.setString(10, "Windows 8.1 64-bit Edition");//operatingSystem
@@ -221,7 +221,7 @@ public class CreateProduct {
             pstmt.setDouble(4, 450.99);//prodCostPrice
             pstmt.setInt(5, 19);//prodQTY
             pstmt.setString(6, null);//prodPic
-            pstmt.setString(7, "Desktop");//prodType
+            pstmt.setString(7, "Desktops");//prodType
             pstmt.setString(8, "AMD A8-6500 APU");//cpu
             pstmt.setString(9, "6 GB DDR3 - 1600 MHz");//ram
             pstmt.setString(10, "Windows 8.1 64-bit Edition");//operatingSystem
@@ -241,7 +241,7 @@ public class CreateProduct {
             pstmt.setDouble(4, 229.99);//prodCostPrice
             pstmt.setInt(5, 9);//prodQTY
             pstmt.setString(6, null);//prodPic
-            pstmt.setString(7, "Desktop");//prodType
+            pstmt.setString(7, "Desktops");//prodType
             pstmt.setString(8, "Intel Core i3-4150 Processor");//cpu
             pstmt.setString(9, "6 GB DDR3 - 1600 MHz");//ram
             pstmt.setString(10, "Windows 8.1 64-bit Edition");//operatingSystem
@@ -262,7 +262,7 @@ public class CreateProduct {
             pstmt.setDouble(4, 254.99);//prodCostPrice
             pstmt.setInt(5, 23);//prodQTY
             pstmt.setString(6, null);//prodPic
-            pstmt.setString(7, "Desktop");//prodType
+            pstmt.setString(7, "Desktops");//prodType
             pstmt.setString(8, "AMD E1-2500 Processor");//cpu
             pstmt.setString(9, "4 GB DDR3 - 1600 MHz");//ram
             pstmt.setString(10, "Windows 8.1 64-bit Edition");//operatingSystem
@@ -284,7 +284,7 @@ public class CreateProduct {
             pstmt.setDouble(4, 356.99);//prodCostPrice
             pstmt.setInt(5, 21);//prodQTY
             pstmt.setString(6, null);//prodPic
-            pstmt.setString(7, "Laptop");//prodType
+            pstmt.setString(7, "Laptops");//prodType
             pstmt.setString(8, "Intel Pentium N3540 Processor");//cpu
             pstmt.setString(9, "4 GB");//ram
             pstmt.setString(10, "Windows 8.1 64-Bit Edition");//operatingSystem
@@ -304,7 +304,7 @@ public class CreateProduct {
             pstmt.setDouble(4, 1359.99);//prodCostPrice
             pstmt.setInt(5, 15);//prodQTY
             pstmt.setString(6, null);//prodPic
-            pstmt.setString(7, "Laptop");//prodType
+            pstmt.setString(7, "Laptops");//prodType
             pstmt.setString(8, "Intel Core i5 processor");//cpu
             pstmt.setString(9, "8 GB ");//ram
             pstmt.setString(10, "Windows 7 Professional");//operatingSystem
@@ -325,7 +325,7 @@ public class CreateProduct {
             pstmt.setDouble(4, 220.99);//prodCostPrice
             pstmt.setInt(5, 19);//prodQTY
             pstmt.setString(6, null);//prodPic
-            pstmt.setString(7, "Laptop");//prodType
+            pstmt.setString(7, "Laptops");//prodType
             pstmt.setString(8, "");//cpu
             pstmt.setString(9, "2 GB ");//ram
             pstmt.setString(10, "Windows 8.1");//operatingSystem
@@ -348,7 +348,7 @@ public class CreateProduct {
             pstmt.setDouble(4, 1747.59);//prodCostPrice
             pstmt.setInt(5, 14);//prodQTY
             pstmt.setString(6, null);//prodPic
-            pstmt.setString(7, "Laptop");//prodType
+            pstmt.setString(7, "Laptops");//prodType
             pstmt.setString(8, "Intel Core i7 4700MQ");//cpu
             pstmt.setString(9, "16 GB");//ram
             pstmt.setString(10, "Windows 8.1");//operatingSystem
@@ -369,7 +369,7 @@ public class CreateProduct {
             pstmt.setDouble(4, 280.49);//prodCostPrice
             pstmt.setInt(5, 11);//prodQTY
             pstmt.setString(6, null);//prodPic
-            pstmt.setString(7, "Laptop");//prodType
+            pstmt.setString(7, "Laptops");//prodType
             pstmt.setString(8, "Intel Celeron Processor N2840");//cpu
             pstmt.setString(9, "4GB");//ram
             pstmt.setString(10, "Windows 8.1 64-bit Edition");//operatingSystem
@@ -387,7 +387,7 @@ public class CreateProduct {
             pstmt.setDouble(4, 237.00);//prodCostPrice
             pstmt.setInt(5, 14);//prodQTY
             pstmt.setString(6, null);//prodPic
-            pstmt.setString(7, "Laptop");//prodType
+            pstmt.setString(7, "Laptops");//prodType
             pstmt.setString(8, "Intel Celeron Processor N2830  ");//cpu
             pstmt.setString(9, "4 GB ");//ram
             pstmt.setString(10, "Windows 8.1 64-bit Edition");//operatingSystem
@@ -409,7 +409,7 @@ public class CreateProduct {
             pstmt.setDouble(4, 509.99);//prodCostPrice
             pstmt.setInt(5, 14);//prodQTY
             pstmt.setString(6, null);//prodPic
-            pstmt.setString(7, "Laptop");//prodType
+            pstmt.setString(7, "Laptops");//prodType
             pstmt.setString(8, "Intel  Core i3-3217U processor");//cpu
             pstmt.setString(9, "4 GB ");//ram
             pstmt.setString(10, "Windows 8.1 64-bit Edition");//operatingSystem
@@ -429,7 +429,7 @@ public class CreateProduct {
             pstmt.setDouble(4, 225.99);//prodCostPrice
             pstmt.setInt(5, 19);//prodQTY
             pstmt.setString(6, null);//prodPic
-            pstmt.setString(7, "Laptop");//prodType
+            pstmt.setString(7, "Laptops");//prodType
             pstmt.setString(8, "Intel Celeron Processor N2840");//cpu
             pstmt.setString(9, "2 GB ");//ram
             pstmt.setString(10, "Windows 8.1 64-bit Edition");//operatingSystem
@@ -449,7 +449,7 @@ public class CreateProduct {
             pstmt.setDouble(4, 1087.15);//prodCostPrice
             pstmt.setInt(5, 13);//prodQTY
             pstmt.setString(6, null);//prodPic
-            pstmt.setString(7, "Laptop");//prodType
+            pstmt.setString(7, "Laptops");//prodType
             pstmt.setString(8, "Intel Core i7-4710MQ Processor ");//cpu
             pstmt.setString(9, "8 GB DDR3 - 1600 MHz");//ram
             pstmt.setString(10, "Windows 8.1 64-bit Edition");//operatingSystem
@@ -470,7 +470,7 @@ public class CreateProduct {
             pstmt.setDouble(4, 1600.59);//prodCostPrice
             pstmt.setInt(5, 17);//prodQTY
             pstmt.setString(6, null);//prodPic
-            pstmt.setString(7, "Laptop");//prodType
+            pstmt.setString(7, "Laptops");//prodType
             pstmt.setString(8, "Intel Core i7-4710MQ Processor");//cpu
             pstmt.setString(9, "8 GB DDR3");//ram
             pstmt.setString(10, "Windows 8.1");//operatingSystem

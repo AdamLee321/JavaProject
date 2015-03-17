@@ -9,10 +9,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class ProductCategories implements ActionListener {
-    private MainFrame mf;
 
     ResultSet rset;
     ProductOperations po;
@@ -20,9 +18,8 @@ public class ProductCategories implements ActionListener {
     JPanel categoriesPanel;
     JButton desktops, laptops, apple, allInOne;
 
-    public ProductCategories(ProductOperations po, MainFrame mf){
+    public ProductCategories(ProductOperations po){
         this.po = po;
-        this.mf = mf;
     }
 
     public JPanel getCategories(){
@@ -74,9 +71,8 @@ public class ProductCategories implements ActionListener {
         }
         else if(e.getSource().equals(allInOne)){
             category = allInOne.getText();
-        }
-        rset = po.productCategory(category);
-        mf.setToProductResults(category, rset);
+        };
+        MainFrame.mf.setToProductResults(category);
 
     }
 }

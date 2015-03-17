@@ -1,4 +1,4 @@
-package gui.product;
+package gui.terminal;
 
 import database.operations.ProductOperations;
 import gui.terminal.MainFrame;
@@ -14,24 +14,19 @@ import java.sql.ResultSet;
  * Created by DL on 08/03/2015.
  */
 public class ProductSearch implements ActionListener{
-    private ProductOperations po;
 
-    private MainFrame mf;
+
+
     private JPanel jp;
     private JLabel textboxLabel, categoryLabel;
     private JTextField searchText;
     private JComboBox category;
     private JButton searchButton;
 
-    public ProductSearch(MainFrame mf, ProductOperations po){
-        this.mf = mf;
-        this.po = po;
-    }
-
 
     public JPanel getSearch(){
         jp = new JPanel(new GridBagLayout());
-        jp.setBackground(new Color(200,200,200));
+        jp.setBackground(new Color(98, 169, 221));
 
         textboxLabel = new JLabel("Enter Search Query");
         textboxLabel.setFont(new java.awt.Font("Calibri", Font.BOLD, 18));
@@ -69,8 +64,7 @@ public class ProductSearch implements ActionListener{
             System.out.println("Search1");
             String categoryName = (String) category.getSelectedItem();
 
-            ResultSet rset = po.searchProducts(searchText.getText(), categoryName);
-            mf.setToProductResults(categoryName, rset);
+            MainFrame.mf.setToProductResults(categoryName, searchText.getText());
         }
 
     }

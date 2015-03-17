@@ -1,0 +1,39 @@
+Changed from result set to ArrayList
+    try {
+        while (rset.next()) {
+          products.add(new Product(rset.getInt(1), rset.getString(2), rset.getString(3), rset.getDouble(4), rset.getDouble(5),
+                    rset.getInt(6),
+                    //rset.getBlob(7),
+                    rset.getString(7), rset.getString(8), rset.getString(9), rset.getString(10),
+                    rset.getString(11), rset.getString(12), rset.getString(13)));
+       }
+    }catch(SQLException sqlE){
+       System.out.println("Error in extracting results from resultSet");
+    }
+
+
+
+If Window is closed, do any pending updates
+addWindowListener(new WindowAdapter() {
+  public void windowClosing(WindowEvent e) {
+     if (productTable.isEditing())
+        productTable.getCellEditor().stopCellEditing();
+    if (EmpDatabaseModifier.hasTableUpdates())
+EmpDatabaseModifier.doTableUpdates(ConnectionDB.getConn());
+        System.exit(0);
+}
+});
+
+
+Just for testing that the products have been added to the ArrayList
+for (Product x : products)
+System.out.println(x.getProdId());
+
+
+
+productTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+@Override
+public void valueChanged(ListSelectionEvent event) {
+System.out.println(productTable.getValueAt(productTable.getSelectedRow(), 0));
+}
+});

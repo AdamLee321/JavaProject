@@ -1,8 +1,12 @@
 package gui.terminal;
 
+import database.operations.ProductOperations;
+
+import javax.swing.*;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableColumnModel;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -10,17 +14,16 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class ProductTableModel extends AbstractTableModel {
+public class ProductTableModel extends DefaultTableModel {
 
     final static int id = 0;
     final static int make = 1;
     final static int model = 2;
     final static int price = 3;
     final static int quantity = 4;
-    final static String[] columnNames = { "Product ID", "Make", "Model", "Price", "Quantity" };
+    final static String[] columnNames = { "Product ID", "Make", "Model", "Price €", "Quantity" };
 
     private static ArrayList<Object> productRows = new ArrayList();
-    final static String sql = "SELECT prodId, prodMake, prodModel, prodSalePrice, prodQTY FROM product ORDER BY prodId";
 
     DefaultTableColumnModel columnModel = new DefaultTableColumnModel();
 
@@ -35,53 +38,33 @@ public class ProductTableModel extends AbstractTableModel {
         }
     }
 
-    public void queryTableData(Connection conn) throws SQLException {
-        Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery(sql);
-
-        while (rs.next()) {
-            productRows.add( new ProductRow(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getInt(5)));
-            System.out.println(rs.getInt(1));
-            System.out.println(rs.getString(2));
-            System.out.println(rs.getString(3));
-            System.out.println(rs.getDouble(4));
-            System.out.println(rs.getInt(5));
+    public void queryTableData(String category) throws SQLException {
+        ProductOperations po = new ProductOperations();
+        ResultSet rset = po.productCategory(category);
+        emptyArray();
+        while (rset.next()) {
+            productRows.add( new ProductRow(rset.getInt(1), rset.getString(2), rset.getString(3), rset.getDouble(4), rset.getInt(6)));
         }
-        rs.close();
-        stmt.close();
+        rset.close();
         fireTableChanged(new TableModelEvent(this, -1, -1));
     }
 
-    public int insertRow() {
-        ProductRow row = new ProductRow();
-
-        int rowNum = productRows.size();
-        productRows.add(row);
-
-        EmpDatabaseModifier.addToInsert(new ObjectToIntMap(row, rowNum));
-        fireTableRowsInserted(rowNum, rowNum);
-
-        return rowNum;
-    }
-
-    public void deleteRow(int rowNum) {
-        if (rowNum >= 0) {
-            ProductRow row = (ProductRow)productRows.get(rowNum);
-
-            if (row.Id == ProductRow.INSERTED)
-                EmpDatabaseModifier.removeAddToInsert(rowNum);
-            else
-                EmpDatabaseModifier.addToDelete(row.Id);
-
-            productRows.remove(rowNum);
-            EmpDatabaseModifier.changeRowNumbers(rowNum);
-            fireTableRowsDeleted(rowNum, rowNum);
+    public void queryTableData(String category, String keyword) throws SQLException {
+        ProductOperations po = new ProductOperations();
+        System.out.println("herewerrt");
+        ResultSet rset = po.searchProducts(keyword, category);
+        emptyArray();
+        while (rset.next()) {
+            productRows.add( new ProductRow(rset.getInt(1), rset.getString(2), rset.getString(3), rset.getDouble(4), rset.getInt(6)));
         }
+        rset.close();
+        fireTableChanged(new TableModelEvent(this, -1, -1));
     }
+
 
     //a method just to pass in a column number and row and return that cell value
     public Object getValueAt(int rowNum, int colNum) {
-        ProductRow row = (ProductRow)productRows.get(rowNum);//casting a product from the arraylist to a row type
+        ProductRow row = (ProductRow)productRows.get(rowNum);//casting a product from the object arraylist to a row type
         switch (colNum) {
             case id:
                 return row.productID;
@@ -98,38 +81,6 @@ public class ProductTableModel extends AbstractTableModel {
         }
     }
 
-    public void setValueAt(Object value, int rowNum, int colNum) {
-        ProductRow row = (ProductRow)productRows.get(rowNum);
-        switch (colNum) {
-            case id:
-                row.productID = (Integer)value;
-                if (row.Id != ProductRow.INSERTED)
-                    EmpDatabaseModifier.add2ELNUpdates(new ObjectToIntMap(value, row.Id));
-                break;
-            case make:
-                row.make = (String)value;
-                if (row.Id != ProductRow.INSERTED)
-                    EmpDatabaseModifier.add2EFNUpdates(new ObjectToIntMap(value, row.Id));
-                break;
-            case model:
-                row.model = (String)value;
-                if (row.Id != ProductRow.INSERTED)
-                    EmpDatabaseModifier.add2EFNUpdates(new ObjectToIntMap(value, row.Id));
-                break;
-            case price:
-                row.price = (Double)value;
-                if (row.Id != ProductRow.INSERTED)
-                    EmpDatabaseModifier.add2EFNUpdates(new ObjectToIntMap(value, row.Id));
-                break;
-            case quantity:
-                row.quantity = (Integer)value;
-                if (row.Id != ProductRow.INSERTED)
-                    EmpDatabaseModifier.add2EFNUpdates(new ObjectToIntMap(value, row.Id));
-                break;
-            default:
-                break;
-        }
-    }
 
     public String getColumnName(int column) {
         if (columnNames[column] != null)
@@ -138,8 +89,20 @@ public class ProductTableModel extends AbstractTableModel {
             return "";
     }
 
+    public void reset(){
+
+    }
+
+    public void emptyArray(){
+        if (productRows.size()>0){
+            for (int i = productRows.size(); i>0; i--){
+                productRows.remove(i-1);
+            }
+        }
+    }
+
     public boolean isCellEditable(int row, int column) {
-        return true;
+        return false;
     }
 
     public Class getColumnClass(int column) {
