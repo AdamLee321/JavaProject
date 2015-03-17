@@ -33,7 +33,7 @@ public class MemberEdit {
     // setup the jdialog
 
         memberEdit = new JDialog(parent, true);
-        memberEdit.setTitle("Add Member");
+        memberEdit.setTitle("Edit Member");
         memberEdit.setLayout(new BorderLayout());
         memberEdit.setSize(450, 560);
         memberEdit.setResizable(false);

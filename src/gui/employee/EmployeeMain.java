@@ -54,13 +54,12 @@ public class EmployeeMain {
 
     // setup the frame
 
-        empMain = new JPanel();
-        empMain.setLayout(new BorderLayout());
+        empMain = new JPanel(new BorderLayout());
         //empMain.getContentPane().setBackground(new Color(98, 169, 221));
 
 // north panel
 
-        northPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        northPanel = new JPanel(new GridBagLayout());
         //northPanel.setBackground(new Color(98, 169, 100));
 
     // manage employees panel
@@ -96,8 +95,7 @@ public class EmployeeMain {
         deleteButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
         managePanel.add(deleteButton);
 
-        //northPanel.add(managePanel, getConstraints(0,0,1,1,0,0,1,GridBagConstraints.CENTER));
-        northPanel.add(managePanel);
+        northPanel.add(managePanel, getConstraints(0,0,1,1,1,0,0, GridBagConstraints.CENTER));
 
     // search employees panel
 
@@ -113,12 +111,13 @@ public class EmployeeMain {
         searchPanel.add(empTypes);
 
         searchButton = new JButton("Search");
-        searchButton.setPreferredSize(new Dimension(100, 26));
+        searchButton.setPreferredSize(new Dimension(105, 26));
         searchButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
         searchPanel.add(searchButton);
 
         // add all the above to northPanel
-        northPanel.add(searchPanel);
+       // northPanel.add(searchPanel);
+        northPanel.add(searchPanel, getConstraints(1,0,1,1,1,0,0,GridBagConstraints.CENTER));
 
         // add northPanel to main
         empMain.add(northPanel, BorderLayout.NORTH);
@@ -142,7 +141,7 @@ public class EmployeeMain {
 
     // bottom buttons
 
-        viewOrdersButton = new JButton("View Orders");
+        viewOrdersButton = new JButton("View Sales");
         viewOrdersButton.setPreferredSize(new Dimension(150, 26));
         viewOrdersButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
         southPanel.add(viewOrdersButton);

@@ -33,7 +33,7 @@ public class EmployeeEdit {
     // setup the jdialog
 
         employeeEdit = new JDialog(parent, true);
-        employeeEdit.setTitle("Add New Employee");
+        employeeEdit.setTitle("Edit Employee");
         employeeEdit.setLayout(new BorderLayout());
         employeeEdit.setSize(450, 670);
         employeeEdit.setResizable(false);

@@ -27,8 +27,7 @@ public class ProductMain {
 
     // setup the frame
 
-        prodMain = new JPanel();
-        prodMain.setLayout(new BorderLayout());
+        prodMain = new JPanel(new BorderLayout());
         //prodMain.getContentPane().setBackground(new Color(98, 169, 221));
 
 // north panel
@@ -68,11 +67,11 @@ public class ProductMain {
         // top panel containing the search field and search button
         searchTopPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         //searchTopPanel.setBackground(new Color(98, 169, 221));
-        searchField = new JTextField(25);
+        searchField = new JTextField(29);
         searchTopPanel.add(searchField);
 
         searchButton = new JButton("Search");
-        searchButton.setPreferredSize(new Dimension(100, 26));
+        searchButton.setPreferredSize(new Dimension(105, 26));
         searchButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
         searchTopPanel.add(searchButton);
 
@@ -108,7 +107,7 @@ public class ProductMain {
         //southPanel.setBackground(new Color(98, 169, 221));
 
     // bottom buttons
-/*
+/*-- DISABLED FOR NOW CAUSE I DON"T KNOW IF WE'LL NEED THEM AT ALL
         backButton = new JButton("Back");
         backButton.setPreferredSize(new Dimension(150, 26));
         backButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));

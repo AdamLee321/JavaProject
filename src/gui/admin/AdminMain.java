@@ -1,17 +1,15 @@
 package gui.admin;
 
-//import gui.admin.AdminOptions;import gui.employee.EmployeeMain;
-//import gui.member.MemberMain;
-//import gui.product.ProductMain;
-
 import gui.employee.EmployeeMain;
 import gui.member.MemberMain;
-import gui.member.MemberMainOld;
 import gui.product.ProductMain;
 
 import javax.swing.BorderFactory;import javax.swing.ImageIcon;import javax.swing.JButton;import javax.swing.JDialog;import javax.swing.JFrame;import javax.swing.JLabel;import javax.swing.JMenu;import javax.swing.JMenuBar;import javax.swing.JMenuItem;import javax.swing.JPanel;import javax.swing.JSeparator;
-import java.awt.BorderLayout;import java.awt.Color;import java.awt.Dimension;import java.awt.FlowLayout;import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;import java.lang.Override;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemListener;
+import java.lang.Override;
 
 /*
 IT Tallaght - 2015, S2
@@ -19,7 +17,7 @@ Computing - Year 2, Project
 Group 17 (George - 10/03/2015)
 */
 
-public class AdminMain extends JFrame {
+public class AdminMain extends JFrame implements ActionListener {
 
     JFrame am;
     JMenuBar menu;
@@ -27,11 +25,11 @@ public class AdminMain extends JFrame {
     JMenuItem exitMI, logOutMI, empMI, memIM, prodMI, reportMI, optionsMI, helpMI, aboutMI;
     JSeparator fileSep, manageSep1, manageSep2;
     JLabel mainLogo;
-    JPanel outerNorth, outerSouth, outerCenter, innerNorth, dynCenter;
+    JPanel outerNorth, outerSouth, outerCenter, innerNorth, innerCenter;
     JButton empButton, memButton, prodButton, reportButton, optButton, logoutButton;
 
-    private boolean displayarea = false;
-    private static JPanel currentdisplayPanel;
+    private boolean displayarea = true;
+    EmployeeMain em;
 
     public AdminMain() {
 
@@ -53,54 +51,43 @@ public class AdminMain extends JFrame {
 
         logOutMI = new JMenuItem("Log Out");
         fileMenu.add(logOutMI);
+        logOutMI.addActionListener(this);
 
         fileSep = new JSeparator();
         fileMenu.add(fileSep);
 
         exitMI = new JMenuItem("Exit");
         fileMenu.add(exitMI);
-        exitMI.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                am.setVisible(false);
-            }
-        });
+        exitMI.addActionListener(this);
 
         // manage menu and its menu items
         manageMenu = new JMenu("Manage");
         menu.add(manageMenu);
 
         empMI = new JMenuItem("Employees");
+        empMI.addActionListener(this);
         manageMenu.add(empMI);
-        empMI.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                EmployeeMain em = new EmployeeMain();
-                dynCenter = em.getEmployeeMain();
-                dynCenter.setBackground(Color.GRAY);
-                outerCenter.add(dynCenter, BorderLayout.CENTER);
-                am.add(outerCenter, BorderLayout.CENTER);
-                am.setVisible(true);
-                displayarea = true;
-            }
-        });
 
         memIM = new JMenuItem("Members");
+        memIM.addActionListener(this);
         manageMenu.add(memIM);
 
         prodMI = new JMenuItem("Products");
+        prodMI.addActionListener(this);
         manageMenu.add(prodMI);
 
         manageSep1 = new JSeparator();
         manageMenu.add(manageSep1);
 
         reportMI = new JMenuItem("Report");
+        reportMI.addActionListener(this);
         manageMenu.add(reportMI);
 
         manageSep2 = new JSeparator();
         manageMenu.add(manageSep2);
 
         optionsMI = new JMenuItem("Options");
+        optionsMI.addActionListener(this);
         manageMenu.add(optionsMI);
 
         // help menu and its items
@@ -108,22 +95,25 @@ public class AdminMain extends JFrame {
         menu.add(helpMenu);
 
         helpMI = new JMenuItem("View Help");
+        helpMI.addActionListener(this);
         helpMenu.add(helpMI);
 
         aboutMI = new JMenuItem("About");
+        aboutMI.addActionListener(this);
         helpMenu.add(aboutMI);
 
-        // OUTER NORTH - logo
+// OUTER NORTH - logo
+
         outerNorth = new JPanel();
         outerNorth.setBackground(new Color(98, 169, 221));
         mainLogo = new JLabel();
         mainLogo.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\newBanner.png"));
-        //mainLogo.setVerticalAlignment(SwingConstants.TOP);
         mainLogo.setBackground(new Color(98, 169, 221));
         outerNorth.add(mainLogo);
         am.add(outerNorth, BorderLayout.NORTH);  // add to frame
 
-        // OUTER CENTER - buttons and interchangeable panels
+// OUTER CENTER - buttons and interchangeable panels
+
         outerCenter = new JPanel(new BorderLayout());
 
         // INNER NORTH - buttons
@@ -134,65 +124,19 @@ public class AdminMain extends JFrame {
         empButton = new JButton("Employees");
         empButton.setPreferredSize(new Dimension(150, 40));
         empButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\32\\save.png"));
-        empButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                EmployeeMain em = new EmployeeMain();
-                dynCenter = em.getEmployeeMain();
-                dynCenter.setBackground(Color.GRAY);
-                outerCenter.add(dynCenter, BorderLayout.CENTER);
-                am.add(outerCenter, BorderLayout.CENTER);
-                am.setVisible(true);
-                if (displayarea){
-                    currentdisplayPanel.remove(dynCenter);
-                    displayarea = true;
-                    currentdisplayPanel = dynCenter;
-                }
-            }
-        });
+        empButton.addActionListener(this);
         innerNorth.add(empButton);
 
         memButton = new JButton("Members");
         memButton.setPreferredSize(new Dimension(150, 40));
         memButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\32\\save.png"));
-        memButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                MemberMain mm = new MemberMain();
-                dynCenter = mm.getMemberMain();
-                dynCenter.setBackground(Color.GRAY);
-                outerCenter.add(dynCenter, BorderLayout.CENTER);
-                am.add(outerCenter, BorderLayout.CENTER);
-                am.setVisible(true);
-                if (displayarea){
-                    currentdisplayPanel.remove(dynCenter);
-                    displayarea = true;
-                    currentdisplayPanel = dynCenter;
-                }
-            }
-        });
-
+        memButton.addActionListener(this);
         innerNorth.add(memButton);
 
         prodButton = new JButton("Products");
         prodButton.setPreferredSize(new Dimension(150, 40));
         prodButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\32\\save.png"));
-        prodButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ProductMain pm = new ProductMain();
-                dynCenter = pm.getProductMain();
-                dynCenter.setBackground(Color.GRAY);
-                outerCenter.add(dynCenter, BorderLayout.CENTER);
-                am.add(outerCenter, BorderLayout.CENTER);
-                am.setVisible(true);
-                if (displayarea){
-                    currentdisplayPanel.remove(dynCenter);
-                    displayarea = true;
-                    currentdisplayPanel = dynCenter;
-                }
-            }
-        });
+        prodButton.addActionListener(this);
         innerNorth.add(prodButton);
 
         reportButton = new JButton("Report");
@@ -203,40 +147,95 @@ public class AdminMain extends JFrame {
         optButton = new JButton("Options");
         optButton.setPreferredSize(new Dimension(150, 40));
         optButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\32\\save.png"));
-        optButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                AdminOptions ao = new AdminOptions(AdminMain.this);
-            }
-        });
+        optButton.addActionListener(this);
         innerNorth.add(optButton);
 
         outerCenter.add(innerNorth, BorderLayout.NORTH);
 
-        am.add(outerCenter, BorderLayout.CENTER);  // add to frame
+////////////////////////////
 
-        // OUTER SOUTH
+        // INNER CENTER - interchangeable panels
+        innerCenter = new JPanel(new GridLayout());
+
+        // starter panel - this appears by default when the program starts
+        em = new EmployeeMain();  // have to do this (init EM twice) in order to set something visible when the program starts
+        innerCenter.add(em.getEmployeeMain());
+
+        outerCenter.add(innerCenter, BorderLayout.CENTER);
+
+        am.add(outerCenter, BorderLayout.CENTER);  // add outer center to frame
+
+//////////////////////////////////
+
+// OUTER SOUTH
 
         outerSouth = new JPanel(new FlowLayout(FlowLayout.LEFT));
         outerSouth.setBackground(new Color(98, 169, 221));
         outerSouth.setBorder(BorderFactory.createEtchedBorder()); // set anonymous titled, etched border);
         logoutButton = new JButton("Log Out");
         outerSouth.add(logoutButton);
-        am.add(outerSouth, BorderLayout.SOUTH);
+        am.add(outerSouth, BorderLayout.SOUTH);  // add outer south to frame
 
+        // switch the lights on
         am.setVisible(true);
     }
 
-// needs button.addActionListener(this);{
+// BUTTON ACTIONS
 
+    public void actionPerformed(ActionEvent e) {
+        // Employees Menu Item and Button ACTIONS
+        if (e.getSource().equals(empMI) || e.getSource().equals(empButton)) {
+            em = new EmployeeMain();
+            empButton.setForeground(Color.RED);
+            memButton.setForeground(null);
+            prodButton.setForeground(null);
+            if (displayarea) {
+                innerCenter.removeAll();
+            }
+            innerCenter.add(em.getEmployeeMain());
+            displayarea = true;
+            am.setVisible(true);
+        } // Member Menu Item and Button ACTIONS
+        else if (e.getSource().equals(memIM) || e.getSource().equals(memButton)) {
+            MemberMain me = new MemberMain();
+            empButton.setForeground(null);
+            memButton.setForeground(Color.RED);
+            prodButton.setForeground(null);
+            if (displayarea) {
+                innerCenter.removeAll();
+            }
+            innerCenter.add(me.getMemberMain());
+            displayarea = true;
+            am.setVisible(true);
+        } // Product Menu Item and Button ACTIONS
+        else if (e.getSource().equals(prodMI) || e.getSource().equals(prodButton)) {
+            ProductMain pm = new ProductMain();
+            empButton.setForeground(null);
+            memButton.setForeground(null);
+            prodButton.setForeground(Color.RED);
+            if (displayarea) {
+                innerCenter.removeAll();
+            }
+            innerCenter.add(pm.getProductMain());
+            displayarea = true;
+            am.setVisible(true);
+        }
+        else if (e.getSource().equals(reportButton) || e.getSource().equals(reportMI)){
+        }
+        else if (e.getSource().equals(optButton) || e.getSource().equals(optionsMI)){
+            AdminOptions ao = new AdminOptions(AdminMain.this);
+        }
+        else if (e.getSource().equals(helpMI)){
+
+        }
+        else if (e.getSource().equals(aboutMI)){
+
+        }
+        else if (e.getSource().equals(logOutMI) || e.getSource().equals(logoutButton)){
+            am.setVisible(false);
+        }
+        else if (e.getSource().equals(exitMI)){
+            am.setVisible(false);
+        }
     }
-/*
-            } else if (e.getSource().equals(memButton)) {
-                MembersMain mm = new MemberMain();
-
-                if (displayarea) {
-                    currentdisplayPanel.removeAll();
-                    displayarea = true;
-                    currentdisplayPanel = addPanel;
-                }
-            }*/
+}

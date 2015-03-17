@@ -18,14 +18,11 @@ Group 17 (George - 07/03/2015)
 public class MemberMain {
 
     private JPanel memberMain;
-    private JButton addButton, editButton, deleteButton, searchButton, viewOrdersButton, backButton;
+    private JButton addButton, editButton, deleteButton, searchButton, viewOrdersButton;
     private JTextField searchField;
-    private JComboBox empTypes;
     private JPanel northPanel, managePanel, searchPanel, southPanel, tablePanel;
-    private JTable tblEmployee;
-    private JScrollPane tblScroll;
 
-    AdminMain am;  // declare for usage with JDialogs as parent
+    AdminMain am;  // declare for usage with JDialogs as parent. No need to initialize
     EmployeeOperations eo;
     Employee e;
 
@@ -39,7 +36,7 @@ public class MemberMain {
 
 // north panel
 
-        northPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        northPanel = new JPanel(new GridBagLayout());
         //northPanel.setBackground(new Color(98, 169, 100));
 
     // manage members panel
@@ -75,8 +72,7 @@ public class MemberMain {
         deleteButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
         managePanel.add(deleteButton);
 
-        //northPanel.add(managePanel, getConstraints(0,0,1,1,0,0,1,GridBagConstraints.CENTER));
-        northPanel.add(managePanel);
+        northPanel.add(managePanel, getConstraints(0,0,1,1,1,0,0, GridBagConstraints.CENTER));
 
     // search members panel
 
@@ -84,16 +80,16 @@ public class MemberMain {
         //searchPanel.setBackground(new Color(98, 169, 221));
         searchPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Search Members")); // set anonymous titled, etched border
 
-        searchField = new JTextField(19);
+        searchField = new JTextField(29);
         searchPanel.add(searchField);
 
         searchButton = new JButton("Search");
-        searchButton.setPreferredSize(new Dimension(100, 26));
+        searchButton.setPreferredSize(new Dimension(105, 26));
         searchButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
         searchPanel.add(searchButton);
 
         // add all the above to northPanel
-        northPanel.add(searchPanel);
+        northPanel.add(searchPanel, getConstraints(1,0,1,1,1,0,0,GridBagConstraints.CENTER));
 
         // add northPanel to main
         memberMain.add(northPanel, BorderLayout.NORTH);
