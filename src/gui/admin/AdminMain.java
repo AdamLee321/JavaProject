@@ -3,7 +3,6 @@ package gui.admin;
 import gui.employee.EmployeeMain;
 import gui.member.MemberMain;
 import gui.product.ProductMain;
-
 import javax.swing.BorderFactory;import javax.swing.ImageIcon;import javax.swing.JButton;import javax.swing.JDialog;import javax.swing.JFrame;import javax.swing.JLabel;import javax.swing.JMenu;import javax.swing.JMenuBar;import javax.swing.JMenuItem;import javax.swing.JPanel;import javax.swing.JSeparator;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -152,20 +151,15 @@ public class AdminMain extends JFrame implements ActionListener {
 
         outerCenter.add(innerNorth, BorderLayout.NORTH);
 
-////////////////////////////
-
         // INNER CENTER - interchangeable panels
         innerCenter = new JPanel(new GridLayout());
 
         // starter panel - this appears by default when the program starts
         em = new EmployeeMain();  // have to do this (init EM twice) in order to set something visible when the program starts
-        innerCenter.add(em.getEmployeeMain());
+        innerCenter.add(em.getEmployeeMain()); // get employee panel
 
         outerCenter.add(innerCenter, BorderLayout.CENTER);
-
         am.add(outerCenter, BorderLayout.CENTER);  // add outer center to frame
-
-//////////////////////////////////
 
 // OUTER SOUTH
 
@@ -173,6 +167,7 @@ public class AdminMain extends JFrame implements ActionListener {
         outerSouth.setBackground(new Color(98, 169, 221));
         outerSouth.setBorder(BorderFactory.createEtchedBorder()); // set anonymous titled, etched border);
         logoutButton = new JButton("Log Out");
+        logoutButton.addActionListener(this);
         outerSouth.add(logoutButton);
         am.add(outerSouth, BorderLayout.SOUTH);  // add outer south to frame
 
@@ -219,21 +214,21 @@ public class AdminMain extends JFrame implements ActionListener {
             innerCenter.add(pm.getProductMain());
             displayarea = true;
             am.setVisible(true);
-        }
-        else if (e.getSource().equals(reportButton) || e.getSource().equals(reportMI)){
-        }
-        else if (e.getSource().equals(optButton) || e.getSource().equals(optionsMI)){
+        } // Report Menu Item and Button ACTIONS
+        else if (e.getSource().equals(reportMI) || e.getSource().equals(reportButton)){
+        } // Options Menu Item and Button ACTIONS
+        else if (e.getSource().equals(optionsMI) || e.getSource().equals(optButton)){
             AdminOptions ao = new AdminOptions(AdminMain.this);
-        }
+        } // Help Button
         else if (e.getSource().equals(helpMI)){
 
-        }
+        } // About Button
         else if (e.getSource().equals(aboutMI)){
 
-        }
-        else if (e.getSource().equals(logOutMI) || e.getSource().equals(logoutButton)){
+        } // Logout Menu Item and Button ACTIONS
+        else if (e.getSource().equals(logOutMI) || e.getSource().equals(logoutButton) ){
             am.setVisible(false);
-        }
+        } // Exit menuItem
         else if (e.getSource().equals(exitMI)){
             am.setVisible(false);
         }

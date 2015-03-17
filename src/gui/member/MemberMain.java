@@ -3,7 +3,6 @@ package gui.member;
 import database.operations.EmployeeOperations;
 import gui.admin.AdminMain;
 import model.Employee;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -15,12 +14,12 @@ Computing - Year 2, Project
 Group 17 (George - 07/03/2015)
 */
 
-public class MemberMain {
+public class MemberMain implements ActionListener {
 
     private JPanel memberMain;
     private JButton addButton, editButton, deleteButton, searchButton, viewOrdersButton;
     private JTextField searchField;
-    private JPanel northPanel, managePanel, searchPanel, southPanel, tablePanel;
+    private JPanel northPanel, managePanel, searchPanel, southPanel, centerPanel;
 
     AdminMain am;  // declare for usage with JDialogs as parent. No need to initialize
     EmployeeOperations eo;
@@ -34,7 +33,7 @@ public class MemberMain {
         memberMain.setLayout(new BorderLayout());
         //memberMain.getContentPane().setBackground(new Color(98, 169, 221));
 
-// north panel
+// NORTH PANEL
 
         northPanel = new JPanel(new GridBagLayout());
         //northPanel.setBackground(new Color(98, 169, 100));
@@ -48,23 +47,13 @@ public class MemberMain {
         addButton = new JButton("Add");
         addButton.setPreferredSize(new Dimension(100, 26));
         addButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
-        addButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                MemberAdd ma = new MemberAdd(am);
-            }
-        });
+        addButton.addActionListener(this);
         managePanel.add(addButton);
 
         editButton = new JButton("Edit");
         editButton.setPreferredSize(new Dimension(100, 26));
         editButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
-        editButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                MemberEdit me = new MemberEdit(am);
-            }
-        });
+        editButton.addActionListener(this);
         managePanel.add(editButton);
 
         deleteButton = new JButton("Delete");
@@ -94,13 +83,13 @@ public class MemberMain {
         // add northPanel to main
         memberMain.add(northPanel, BorderLayout.NORTH);
 
-    // results table panel
-        tablePanel = new JPanel(new FlowLayout());
+// CENTER PANEL - results table panel
+        centerPanel = new JPanel(new FlowLayout());
 
 
-        memberMain.add(tablePanel, BorderLayout.CENTER);
+        memberMain.add(centerPanel, BorderLayout.CENTER);
 
-// south panel
+// SOUTH PANEL
 
         southPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         southPanel.setBackground(new Color(98, 169, 221));
@@ -116,6 +105,17 @@ public class MemberMain {
 
     // return to AdminMain
         return memberMain;
+    }
+
+// BUTTON ACTIONS
+
+    public void actionPerformed(ActionEvent e){
+        if (e.getSource().equals(addButton)){
+            MemberAdd ma = new MemberAdd(am);
+        } // edit member
+        else if (e.getSource().equals(editButton)){
+            MemberEdit me = new MemberEdit(am);
+        }
     }
 
     // return GridBagConstraints for GridBagLayout

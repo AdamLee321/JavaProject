@@ -34,13 +34,13 @@ Computing - Year 2, Project
 Group 17 (George - 07/03/2015)
 */
 
-public class EmployeeMain {
+public class EmployeeMain implements ActionListener {
 
     private JPanel empMain;
     private JButton addButton, editButton, deleteButton, searchButton, viewOrdersButton, backButton;
     private JTextField searchField;
     private JComboBox empTypes;
-    private JPanel northPanel, managePanel, searchPanel, southPanel, tablePanel;
+    private JPanel northPanel, managePanel, searchPanel, southPanel, centerPanel;
     private JTable tblEmployee;
     private JScrollPane tblScroll;
 
@@ -57,7 +57,7 @@ public class EmployeeMain {
         empMain = new JPanel(new BorderLayout());
         //empMain.getContentPane().setBackground(new Color(98, 169, 221));
 
-// north panel
+// NORTH PANEL
 
         northPanel = new JPanel(new GridBagLayout());
         //northPanel.setBackground(new Color(98, 169, 100));
@@ -71,23 +71,13 @@ public class EmployeeMain {
         addButton = new JButton("Add");
         addButton.setPreferredSize(new Dimension(100, 26));
         addButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
-        addButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                EmployeeAdd ea = new EmployeeAdd(am);
-            }
-        });
+        addButton.addActionListener(this);
         managePanel.add(addButton);
 
         editButton = new JButton("Edit");
         editButton.setPreferredSize(new Dimension(100, 26));
         editButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
-        editButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                EmployeeEdit ee = new EmployeeEdit(am);
-            }
-        });
+        editButton.addActionListener(this);
         managePanel.add(editButton);
 
         deleteButton = new JButton("Delete");
@@ -116,25 +106,25 @@ public class EmployeeMain {
         searchPanel.add(searchButton);
 
         // add all the above to northPanel
-       // northPanel.add(searchPanel);
         northPanel.add(searchPanel, getConstraints(1,0,1,1,1,0,0,GridBagConstraints.CENTER));
 
         // add northPanel to main
         empMain.add(northPanel, BorderLayout.NORTH);
 
-    // results table panel
-        tablePanel = new JPanel(new FlowLayout());
+// CENTER PANEL - table panel
+
+        centerPanel = new JPanel(new FlowLayout());
 
         tblEmployee = new JTable();
        // DefaultTableModel tblModel = new DefaultTableModel(new Object[][]{{null, null, null, null}, {null, null, null, null}, {null, null, null, null}, {null, null, null, null}});
      //   String titles[] = {"Title 1", "Title 2", "Title 3", "Title 4"};
      //   tblEmployee.setModel(tblModel,titles[]);
 //        tblScroll.setViewportView(tblEmployee);
-                tablePanel.add(tblEmployee);
+                centerPanel.add(tblEmployee);
 
-        empMain.add(tablePanel, BorderLayout.CENTER);
+        empMain.add(centerPanel, BorderLayout.CENTER);
 
-// south panel
+// SOUTH PANEL
 
         southPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         southPanel.setBackground(new Color(98, 169, 221));
@@ -150,6 +140,18 @@ public class EmployeeMain {
 
     // return to AdminMain
         return empMain;
+    }
+
+// BUTTON ACTIONS
+
+    public void actionPerformed(ActionEvent e) {
+        // add button
+        if (e.getSource().equals(addButton)) {
+            EmployeeAdd ea = new EmployeeAdd(am);
+        } // edit button
+        else if (e.getSource().equals(editButton)){
+            EmployeeEdit ee = new EmployeeEdit(am);
+        }
     }
 
     // return GridBagConstraints for GridBagLayout

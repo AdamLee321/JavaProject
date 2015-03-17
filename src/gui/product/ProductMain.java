@@ -11,7 +11,7 @@ Computing - Year 2, Project
 Group 17 (George - 07/03/2015)
 */
 
-public class ProductMain {
+public class ProductMain implements ActionListener {
 
     private JPanel prodMain;
     private JButton addButton, editButton, deleteButton, searchButton, backButton;
@@ -125,6 +125,17 @@ public class ProductMain {
 // turns the lights on
 
         return prodMain;
+    }
+
+// BUTTON ACTIONS
+
+    public void actionPerformed(ActionEvent e){
+        if (e.getSource().equals(addButton)){
+
+        } // edit product
+        else if (e.getSource().equals(editButton)){
+
+        }
     }
 
     // return GridBagConstraints for GridBagLayout
