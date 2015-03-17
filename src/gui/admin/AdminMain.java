@@ -6,6 +6,7 @@ package gui.admin;
 
 import gui.employee.EmployeeMain;
 import gui.member.MemberMain;
+import gui.member.MemberMainOld;
 import gui.product.ProductMain;
 
 import javax.swing.BorderFactory;import javax.swing.ImageIcon;import javax.swing.JButton;import javax.swing.JDialog;import javax.swing.JFrame;import javax.swing.JLabel;import javax.swing.JMenu;import javax.swing.JMenuBar;import javax.swing.JMenuItem;import javax.swing.JPanel;import javax.swing.JSeparator;
@@ -157,9 +158,17 @@ public class AdminMain extends JFrame {
         memButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MemberMain mm = new MemberMain(AdminMain.this);
-                JDialog md = mm.getMemberMain();
-                md.setVisible(true);
+                MemberMain mm = new MemberMain();
+                dynCenter = mm.getMemberMain();
+                dynCenter.setBackground(Color.GRAY);
+                outerCenter.add(dynCenter, BorderLayout.CENTER);
+                am.add(outerCenter, BorderLayout.CENTER);
+                am.setVisible(true);
+                if (displayarea){
+                    currentdisplayPanel.remove(dynCenter);
+                    displayarea = true;
+                    currentdisplayPanel = dynCenter;
+                }
             }
         });
 

@@ -1,5 +1,9 @@
 package gui.member;
 
+import database.operations.EmployeeOperations;
+import gui.admin.AdminMain;
+import model.Employee;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,42 +17,57 @@ Group 17 (George - 07/03/2015)
 
 public class MemberMain {
 
-    private JDialog memberMain;
+    private JPanel memberMain;
     private JButton addButton, editButton, deleteButton, searchButton, viewOrdersButton, backButton;
     private JTextField searchField;
-    private JPanel northPanel, managePanel, searchPanel, resultsPanel, southPanel;
+    private JComboBox empTypes;
+    private JPanel northPanel, managePanel, searchPanel, southPanel, tablePanel;
+    private JTable tblEmployee;
+    private JScrollPane tblScroll;
 
-    public MemberMain(JFrame parent) {
+    AdminMain am;  // declare for usage with JDialogs as parent
+    EmployeeOperations eo;
+    Employee e;
 
-        // setup the frame
+    public JPanel getMemberMain(){
 
-        memberMain = new JDialog(parent, true);
-        memberMain.setTitle("Manage Members");
+    // setup the frame
+
+        memberMain = new JPanel();
         memberMain.setLayout(new BorderLayout());
-        memberMain.setSize(1200, 650);
-        memberMain.setLocationRelativeTo(null);
-        memberMain.setResizable(false);
         //memberMain.getContentPane().setBackground(new Color(98, 169, 221));
 
-        // north panel
+// north panel
 
-        northPanel = new JPanel(new GridBagLayout());
-        northPanel.setBackground(new Color(98, 169, 221));
+        northPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        //northPanel.setBackground(new Color(98, 169, 100));
 
-        // manage members panel
+    // manage members panel
 
         managePanel = new JPanel(new FlowLayout());
-        managePanel.setBackground(new Color(98, 169, 221));
+        //managePanel.setBackground(new Color(98, 169, 221));
         managePanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Manage Members")); // set anonymous titled, etched border
 
         addButton = new JButton("Add");
         addButton.setPreferredSize(new Dimension(100, 26));
         addButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
+        addButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MemberAdd ma = new MemberAdd(am);
+            }
+        });
         managePanel.add(addButton);
 
         editButton = new JButton("Edit");
         editButton.setPreferredSize(new Dimension(100, 26));
         editButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
+        editButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MemberEdit me = new MemberEdit(am);
+            }
+        });
         managePanel.add(editButton);
 
         deleteButton = new JButton("Delete");
@@ -56,15 +75,16 @@ public class MemberMain {
         deleteButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
         managePanel.add(deleteButton);
 
-        northPanel.add(managePanel, getConstraints(0, 0, 1, 1, 0, 0, 0, GridBagConstraints.CENTER));
+        //northPanel.add(managePanel, getConstraints(0,0,1,1,0,0,1,GridBagConstraints.CENTER));
+        northPanel.add(managePanel);
 
-        // search members panel
+    // search members panel
 
         searchPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        searchPanel.setBackground(new Color(98, 169, 221));
+        //searchPanel.setBackground(new Color(98, 169, 221));
         searchPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Search Members")); // set anonymous titled, etched border
 
-        searchField = new JTextField(20);
+        searchField = new JTextField(19);
         searchPanel.add(searchField);
 
         searchButton = new JButton("Search");
@@ -72,42 +92,33 @@ public class MemberMain {
         searchButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
         searchPanel.add(searchButton);
 
-        northPanel.add(searchPanel, getConstraints(1, 0, 1, 1, 0, 0, 0, GridBagConstraints.CENTER));
+        // add all the above to northPanel
+        northPanel.add(searchPanel);
 
-        // add the above to the frame
-
+        // add northPanel to main
         memberMain.add(northPanel, BorderLayout.NORTH);
 
-        // results panel
-/////////////////////////////////////////////////////////////////////////////////////
+    // results table panel
+        tablePanel = new JPanel(new FlowLayout());
+
+
+        memberMain.add(tablePanel, BorderLayout.CENTER);
 
 // south panel
 
-        southPanel = new JPanel(new GridBagLayout());
+        southPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         southPanel.setBackground(new Color(98, 169, 221));
 
-        // bottom buttons
-
-        backButton = new JButton("Back");
-        backButton.setPreferredSize(new Dimension(150, 26));
-        backButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
-        southPanel.add(backButton, getConstraints(0, 0, 1, 1, 0, 15, 15, GridBagConstraints.WEST));
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                memberMain.setVisible(false);
-            }
-        });
+    // bottom buttons
 
         viewOrdersButton = new JButton("View Orders");
         viewOrdersButton.setPreferredSize(new Dimension(150, 26));
         viewOrdersButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
-        southPanel.add(viewOrdersButton, getConstraints(1, 0, 1, 1, 0, 15, 15, GridBagConstraints.EAST));
+        southPanel.add(viewOrdersButton);
 
         memberMain.add(southPanel, BorderLayout.SOUTH);
-    }
 
-    public JDialog getMemberMain(){
+    // return to AdminMain
         return memberMain;
     }
 
@@ -124,7 +135,7 @@ public class MemberMain {
         c.gridheight = gridheight;
         c.weightx = weightxIn;
         c.weighty = 0;
-        //c.fill = GridBagConstraints.HORIZONTAL;
+        c.fill = GridBagConstraints.HORIZONTAL;
         c.anchor = anchor;
         return c;
     }

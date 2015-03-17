@@ -1,6 +1,7 @@
 package gui.employee;
 
 import database.operations.EmployeeOperations;
+import gui.admin.AdminMain;
 import model.Employee;
 
 import javax.swing.*;
@@ -39,10 +40,11 @@ public class EmployeeMain {
     private JButton addButton, editButton, deleteButton, searchButton, viewOrdersButton, backButton;
     private JTextField searchField;
     private JComboBox empTypes;
-    private JPanel managePanel, northPanel, southPanel, searchPanel, tablePanel;
+    private JPanel northPanel, managePanel, searchPanel, southPanel, tablePanel;
     private JTable tblEmployee;
     private JScrollPane tblScroll;
 
+    AdminMain am;  // declare for usage with JDialogs as parent
     EmployeeOperations eo;
     Employee e;
 
@@ -52,11 +54,8 @@ public class EmployeeMain {
 
     // setup the frame
 
-        //empMain = new JFrame("Employees");
         empMain = new JPanel();
         empMain.setLayout(new BorderLayout());
-        //empMain.setSize(800, 500);
-        //empMain.setLocationRelativeTo(null);
         //empMain.getContentPane().setBackground(new Color(98, 169, 221));
 
 // north panel
@@ -73,11 +72,23 @@ public class EmployeeMain {
         addButton = new JButton("Add");
         addButton.setPreferredSize(new Dimension(100, 26));
         addButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
+        addButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                EmployeeAdd ea = new EmployeeAdd(am);
+            }
+        });
         managePanel.add(addButton);
 
         editButton = new JButton("Edit");
         editButton.setPreferredSize(new Dimension(100, 26));
         editButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
+        editButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                EmployeeEdit ee = new EmployeeEdit(am);
+            }
+        });
         managePanel.add(editButton);
 
         deleteButton = new JButton("Delete");

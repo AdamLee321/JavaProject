@@ -1,6 +1,7 @@
 package gui.employee;
 
 import gui.DateGen;
+import gui.admin.AdminMain;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,6 +24,7 @@ public class EmployeeAdd {
     private JButton addButton, removeButton, cancelButton, previewButton, okButton;
 
     DateGen dg;
+    AdminMain am;  // used for JDialogs as parent
 
     public EmployeeAdd(JFrame parent){
 
@@ -194,6 +196,12 @@ public class EmployeeAdd {
         previewButton = new JButton("Preview");
         previewButton.setPreferredSize(new Dimension(100, 26));
         previewButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
+        previewButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                EmployeePreview ep = new EmployeePreview(am);
+            }
+        });
         buttonsPanel.add(previewButton);
 
         okButton = new JButton("OK");
