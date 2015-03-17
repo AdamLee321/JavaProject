@@ -14,6 +14,7 @@ import java.awt.*;
 public class ProductAdd {
 
     private JDialog prodAdd;
+    private JPanel centerLeftPanel, centerRightPanel, southPanel;
 
     public ProductAdd(JFrame parent){
 

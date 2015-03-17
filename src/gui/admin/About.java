@@ -17,7 +17,7 @@ public class About implements ActionListener {
     private JDialog about;
     private JButton closeButton;
     private JLabel progNameLabel, versionNumLabel, devsLabel, devPic, thanksLabel;
-    private JPanel northPanel, centerPanel, southPanel;
+    private JPanel northPanel, centerPanel, southPanel, mainBigPanel;
     private Border paddingBorder = BorderFactory.createEmptyBorder(20,50,50,20);  // set the border inside the grid to move details away from the edges
 
 
@@ -25,13 +25,17 @@ public class About implements ActionListener {
 
         // setup the jdialog
         about = new JDialog();
-        about.setTitle("About DGA Computers");
+        about.setTitle("DGA Computers");
         about.getContentPane().setBackground(new Color(98, 169, 221));
-        about.setLayout(new BorderLayout());
+        about.setLayout(new GridLayout());
         about.setSize(500, 400);
         about.setResizable(false);
         about.setLocationRelativeTo(null);
         about.getContentPane().setBounds(20,20,20,20);
+
+        mainBigPanel = new JPanel(new BorderLayout());
+        mainBigPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "About",2,2)); // set anonymous, titled, centered, etched border
+        mainBigPanel.setBackground(new Color(98, 169, 221));
 
 // NORTH PANEL
 
@@ -41,7 +45,7 @@ public class About implements ActionListener {
         devPic = new JLabel(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\128\\save.png"));
         northPanel.add(devPic);
 
-        about.add(devPic, BorderLayout.NORTH);
+        mainBigPanel.add(devPic, BorderLayout.NORTH);
 
 
 // CENTER PANEL
@@ -50,10 +54,10 @@ public class About implements ActionListener {
         centerPanel.setBackground(new Color(98, 169, 221));
         centerPanel.setBorder(paddingBorder);
 
-        progNameLabel = new JLabel("Program Name: DGA Computers");
+        progNameLabel = new JLabel("Application Name: DGA Computers");
         centerPanel.add(progNameLabel);
 
-        versionNumLabel = new JLabel("Version: 0.5b");
+        versionNumLabel = new JLabel("Application Version: 1.0b");
         centerPanel.add(versionNumLabel);
 
         devsLabel = new JLabel("Developed By: ");
@@ -62,7 +66,7 @@ public class About implements ActionListener {
         thanksLabel = new JLabel("Special Thanks To: ");
         centerPanel.add(thanksLabel);
 
-        about.add(centerPanel, BorderLayout.CENTER);
+        mainBigPanel.add(centerPanel, BorderLayout.CENTER);
 
 // SOUTH PANEL
 
@@ -74,9 +78,9 @@ public class About implements ActionListener {
         closeButton.addActionListener(this);
 
         southPanel.add(closeButton);
-        about.add(southPanel, BorderLayout.SOUTH);
+        mainBigPanel.add(southPanel, BorderLayout.SOUTH);
 
-
+        about.add(mainBigPanel);
 
         // make about window visible
         about.setVisible(true);
