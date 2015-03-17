@@ -224,13 +224,13 @@ public class AdminMain extends JFrame implements ActionListener {
 
         } // About Button
         else if (e.getSource().equals(aboutMI)){
-
+            About ab = new About();
         } // Logout Menu Item and Button ACTIONS
         else if (e.getSource().equals(logOutMI) || e.getSource().equals(logoutButton) ){
-            am.setVisible(false);
+            am.dispose();
         } // Exit menuItem
         else if (e.getSource().equals(exitMI)){
-            am.setVisible(false);
+            System.exit(0);
         }
     }
 }
