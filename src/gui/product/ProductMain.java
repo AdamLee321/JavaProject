@@ -110,27 +110,19 @@ public class ProductMain implements ActionListener {
 
 // south panel
 
-        southPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        //southPanel.setBackground(new Color(98, 169, 221));
+        southPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        southPanel.setBackground(new Color(98, 169, 221));
 
-    // bottom buttons
-/*-- DISABLED FOR NOW CAUSE I DON"T KNOW IF WE'LL NEED THEM AT ALL
-        backButton = new JButton("Back");
+        // bottom buttons
+        backButton = new JButton("View Product");
         backButton.setPreferredSize(new Dimension(150, 26));
         backButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
-        backButton.setAlignmentX(Component.LEFT_ALIGNMENT);
         southPanel.add(backButton);
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                prodMain.setVisible(false);  // lights off
-            }
-        });
-*/
+        backButton.addActionListener(this);
+
         prodMain.add(southPanel, BorderLayout.SOUTH);
 
-// turns the lights on
-
+        // turns the lights on
         return prodMain;
     }
 
