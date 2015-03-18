@@ -24,7 +24,6 @@ public class ProductAdd implements ActionListener {
 
     AdminMain am;  // used for JDialogs as parent
 
-
     public ProductAdd(JFrame parent){
 
         // setup the jdialog
@@ -183,6 +182,18 @@ public class ProductAdd implements ActionListener {
 
     public void actionPerformed(ActionEvent e){
         if (e.getSource().equals(addButton)){
+
+        }
+        else if (e.getSource().equals(removeButton)){
+
+        }
+        else if (e.getSource().equals(cancelButton)){
+            prodAdd.dispose();
+        }
+        else if (e.getSource().equals(previewButton)){
+
+        }
+        else if (e.getSource().equals(okButton)){
 
         }
     }
