@@ -149,6 +149,7 @@ public class AdminMain extends JFrame implements ActionListener {
         reportButton = new JButton("Report");
         reportButton.setPreferredSize(new Dimension(150, 40));
         reportButton.setIcon(new ImageIcon(Icons.report32));
+        reportButton.addActionListener(this);
         innerNorth.add(reportButton);
 
         optButton = new JButton("Options");
@@ -225,6 +226,7 @@ public class AdminMain extends JFrame implements ActionListener {
             am.setVisible(true);
         } // Report Menu Item and Button ACTIONS
         else if (e.getSource().equals(reportMI) || e.getSource().equals(reportButton)){
+            Soon sosoon = new Soon();
         } // Options Menu Item and Button ACTIONS
         else if (e.getSource().equals(optionsMI) || e.getSource().equals(optButton)){
             AdminOptions ao = new AdminOptions(AdminMain.this);
