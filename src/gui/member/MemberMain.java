@@ -1,6 +1,7 @@
 package gui.member;
 
 import database.operations.EmployeeOperations;
+import gui.Icons;
 import gui.admin.AdminMain;
 import model.Employee;
 import javax.swing.*;
@@ -46,19 +47,19 @@ public class MemberMain implements ActionListener {
 
         addButton = new JButton("Add");
         addButton.setPreferredSize(new Dimension(100, 26));
-        addButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
+        addButton.setIcon(new ImageIcon(Icons.plus16));
         addButton.addActionListener(this);
         managePanel.add(addButton);
 
         editButton = new JButton("Edit");
         editButton.setPreferredSize(new Dimension(100, 26));
-        editButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
+        editButton.setIcon(new ImageIcon(Icons.edit16));
         editButton.addActionListener(this);
         managePanel.add(editButton);
 
         deleteButton = new JButton("Delete");
         deleteButton.setPreferredSize(new Dimension(100, 26));
-        deleteButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
+        deleteButton.setIcon(new ImageIcon(Icons.delete16));
         managePanel.add(deleteButton);
 
         northPanel.add(managePanel, getConstraints(0,0,1,1,1,0,0, GridBagConstraints.CENTER));
@@ -74,7 +75,7 @@ public class MemberMain implements ActionListener {
 
         searchButton = new JButton("Search");
         searchButton.setPreferredSize(new Dimension(105, 26));
-        searchButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
+        searchButton.setIcon(new ImageIcon(Icons.search16));
         searchPanel.add(searchButton);
 
         // add all the above to northPanel
@@ -98,7 +99,7 @@ public class MemberMain implements ActionListener {
 
         viewOrdersButton = new JButton("View Orders");
         viewOrdersButton.setPreferredSize(new Dimension(150, 26));
-        viewOrdersButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
+        viewOrdersButton.setIcon(new ImageIcon(Icons.open16));
         southPanel.add(viewOrdersButton);
 
         memberMain.add(southPanel, BorderLayout.SOUTH);
@@ -111,10 +112,10 @@ public class MemberMain implements ActionListener {
 
     public void actionPerformed(ActionEvent e){
         if (e.getSource().equals(addButton)){
-            MemberAdd ma = new MemberAdd(am);
+            MemberAddEdit mae = new MemberAddEdit(am,0);
         } // edit member
         else if (e.getSource().equals(editButton)){
-            MemberEdit me = new MemberEdit(am);
+            MemberAddEdit mae = new MemberAddEdit(am,1);
         }
     }
 

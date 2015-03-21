@@ -1,5 +1,7 @@
 package gui.admin;
 
+import gui.Icons;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -86,8 +88,8 @@ public class AdminOptions {
         buttonsPanel.setBackground(new Color(98, 169, 221));
 
         cancelButton = new JButton("Cancel");
-        cancelButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
-        cancelButton.setPreferredSize(new Dimension(100, 30));
+        cancelButton.setIcon(new ImageIcon(Icons.cancel6));
+        cancelButton.setPreferredSize(new Dimension(100, 26));
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -97,8 +99,8 @@ public class AdminOptions {
         buttonsPanel.add(cancelButton);
 
         okButton = new JButton("OK");
-        okButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
-        okButton.setPreferredSize(new Dimension(100, 30));
+        okButton.setIcon(new ImageIcon(Icons.save16));
+        okButton.setPreferredSize(new Dimension(100, 26));
         buttonsPanel.add(okButton);
 
         adminOps.add(buttonsPanel, BorderLayout.SOUTH);

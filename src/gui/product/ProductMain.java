@@ -1,5 +1,6 @@
 package gui.product;
 
+import gui.Icons;
 import gui.admin.AdminMain;
 
 import javax.swing.*;
@@ -16,7 +17,7 @@ Group 17 (George - 07/03/2015)
 public class ProductMain implements ActionListener {
 
     private JPanel prodMain;
-    private JButton addButton, editButton, deleteButton, searchButton, backButton;
+    private JButton addButton, editButton, deleteButton, searchButton, viewButton;
     private JTextField searchField;
     private JComboBox prodTypes, brandTypes, modelTypes;
     private JPanel managePanel, northPanel, southPanel, searchPanel, searchTopPanel, searchBottomPanel;
@@ -47,19 +48,19 @@ public class ProductMain implements ActionListener {
 
         addButton = new JButton("Add");
         addButton.setPreferredSize(new Dimension(100, 26));
-        addButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
+        addButton.setIcon(new ImageIcon(Icons.plus16));
         addButton.addActionListener(this);
         managePanel.add(addButton);
 
         editButton = new JButton("Edit");
         editButton.setPreferredSize(new Dimension(100, 26));
-        editButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
+        editButton.setIcon(new ImageIcon(Icons.edit16));
         editButton.addActionListener(this);
         managePanel.add(editButton);
 
         deleteButton = new JButton("Delete");
         deleteButton.setPreferredSize(new Dimension(100, 26));
-        deleteButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
+        deleteButton.setIcon(new ImageIcon(Icons.delete16));
         deleteButton.addActionListener(this);
         managePanel.add(deleteButton);
 
@@ -79,7 +80,7 @@ public class ProductMain implements ActionListener {
 
         searchButton = new JButton("Search");
         searchButton.setPreferredSize(new Dimension(105, 26));
-        searchButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
+        searchButton.setIcon(new ImageIcon(Icons.search16));
         searchTopPanel.add(searchButton);
 
         // add top panel to search panel
@@ -114,11 +115,11 @@ public class ProductMain implements ActionListener {
         southPanel.setBackground(new Color(98, 169, 221));
 
         // bottom buttons
-        backButton = new JButton("View Product");
-        backButton.setPreferredSize(new Dimension(150, 26));
-        backButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
-        southPanel.add(backButton);
-        backButton.addActionListener(this);
+        viewButton = new JButton("View Product");
+        viewButton.setPreferredSize(new Dimension(150, 26));
+        viewButton.setIcon(new ImageIcon(Icons.product16));
+        southPanel.add(viewButton);
+        viewButton.addActionListener(this);
 
         prodMain.add(southPanel, BorderLayout.SOUTH);
 
@@ -130,10 +131,16 @@ public class ProductMain implements ActionListener {
 
     public void actionPerformed(ActionEvent e){
         if (e.getSource().equals(addButton)){
-            ProductAdd pa = new ProductAdd(am);
+            ProductAddEdit pae = new ProductAddEdit(am,0);
         } // edit product
         else if (e.getSource().equals(editButton)){
+            ProductAddEdit pae = new ProductAddEdit(am,1);
+        }
+        else if (e.getSource().equals(deleteButton)){
 
+        }
+        else if (e.getSource().equals(viewButton)){
+            ProductView pv = new ProductView(am);
         }
     }
 

@@ -1,10 +1,10 @@
 package gui.employee;
 
 import database.operations.EmployeeOperations;
+import gui.Icons;
 import gui.admin.AdminMain;
 import model.Employee;
 
-import javax.swing.*;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -14,7 +14,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -25,8 +24,6 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.String;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 /*
 IT Tallaght - 2015, S2
@@ -70,19 +67,19 @@ public class EmployeeMain implements ActionListener {
 
         addButton = new JButton("Add");
         addButton.setPreferredSize(new Dimension(100, 26));
-        addButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
+        addButton.setIcon(new ImageIcon(Icons.plus16));
         addButton.addActionListener(this);
         managePanel.add(addButton);
 
         editButton = new JButton("Edit");
         editButton.setPreferredSize(new Dimension(100, 26));
-        editButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
+        editButton.setIcon(new ImageIcon(Icons.edit16));
         editButton.addActionListener(this);
         managePanel.add(editButton);
 
         deleteButton = new JButton("Delete");
         deleteButton.setPreferredSize(new Dimension(100, 26));
-        deleteButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
+        deleteButton.setIcon(new ImageIcon(Icons.delete16));
         managePanel.add(deleteButton);
 
         northPanel.add(managePanel, getConstraints(0,0,1,1,1,0,0, GridBagConstraints.CENTER));
@@ -102,7 +99,7 @@ public class EmployeeMain implements ActionListener {
 
         searchButton = new JButton("Search");
         searchButton.setPreferredSize(new Dimension(105, 26));
-        searchButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
+        searchButton.setIcon(new ImageIcon(Icons.search16));
         searchPanel.add(searchButton);
 
         // add all the above to northPanel
@@ -133,7 +130,7 @@ public class EmployeeMain implements ActionListener {
 
         viewOrdersButton = new JButton("View Sales");
         viewOrdersButton.setPreferredSize(new Dimension(150, 26));
-        viewOrdersButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
+        viewOrdersButton.setIcon(new ImageIcon(Icons.open16));
         southPanel.add(viewOrdersButton);
 
         empMain.add(southPanel, BorderLayout.SOUTH);
@@ -147,10 +144,10 @@ public class EmployeeMain implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         // add button
         if (e.getSource().equals(addButton)) {
-            EmployeeAdd ea = new EmployeeAdd(am);
+            EmployeeAddEdit eae = new EmployeeAddEdit(am,0);
         } // edit button
         else if (e.getSource().equals(editButton)){
-            EmployeeEdit ee = new EmployeeEdit(am);
+            EmployeeAddEdit eae = new EmployeeAddEdit(am,1);
         }
     }
 

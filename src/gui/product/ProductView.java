@@ -7,16 +7,19 @@ Group 17 (George - 17/03/2015)
 */
 
 import gui.Griddy;
+import gui.Icons;
 import gui.admin.AdminMain;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
-public class ProductAdd implements ActionListener {
+public class ProductView implements ActionListener {
 
     private JDialog prodAdd;
-    private JButton addButton, removeButton, cancelButton, previewButton, okButton;
+    private JButton addButton, removeButton, cancelButton, okButton, editButton;
     private JLabel imgLabel, idLabel, makeLabel, modelLabel, salePriceLabel, costPriceLabel, descLabel, qtyLabel, typeLabel, cpuLabel, ramLabel, osLabel, storageLabel, screenLabel;
     private JTextField idTF, makeTF, modelTF, salePriceTF, costPriceTF, qtyTF, typeTF, cpuTF, ramTF, osTF, storageTF, screenTF;
     private JTextArea descTA;
@@ -24,7 +27,7 @@ public class ProductAdd implements ActionListener {
 
     AdminMain am;  // used for JDialogs as parent
 
-    public ProductAdd(JFrame parent){
+    public ProductView(JFrame parent){
 
         // setup the jdialog
         prodAdd = new JDialog(parent, true);
@@ -49,12 +52,12 @@ public class ProductAdd implements ActionListener {
         centerLeftPanel.add(imgLabel, Griddy.getConstraints(0,0,3,1,0,0,0,0,5,5,5,5,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
 
         addButton = new JButton("Add");
-        addButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
+        addButton.setIcon(new ImageIcon(Icons.plus16));
         addButton.setPreferredSize(new Dimension(100, 26));
         centerLeftPanel.add(addButton, Griddy.getConstraints(1,1,1,1,0,0,0,0,5,5,5,5,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
 
         removeButton = new JButton("Remove");
-        removeButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
+        removeButton.setIcon(new ImageIcon(Icons.minus16));
         removeButton.setPreferredSize(new Dimension(100, 26));
         centerLeftPanel.add(removeButton, Griddy.getConstraints(2,1,1,1,0,0,0,0,5,5,5,5,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
 
@@ -155,27 +158,42 @@ public class ProductAdd implements ActionListener {
         southPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         southPanel.setBackground(new Color(98, 169, 221));
 
-        cancelButton = new JButton("Cancel");
+        cancelButton = new JButton("Back");
         cancelButton.setPreferredSize(new Dimension(100, 26));
-        cancelButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
+        cancelButton.setIcon(new ImageIcon(Icons.cancel6));
         cancelButton.addActionListener(this);
         southPanel.add(cancelButton);
 
-        previewButton = new JButton("Preview");
-        previewButton.setPreferredSize(new Dimension(100, 26));
-        previewButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
-        previewButton.addActionListener(this);
-        southPanel.add(previewButton);
+        editButton = new JButton("Edit");
+        editButton.setPreferredSize(new Dimension(100, 26));
+        editButton.setIcon(new ImageIcon(Icons.edit16));
+        editButton.addActionListener(this);
+        southPanel.add(editButton);
 
         okButton = new JButton("OK");
         okButton.setPreferredSize(new Dimension(100, 26));
-        okButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
+        okButton.setIcon(new ImageIcon(Icons.save16));
         okButton.addActionListener(this);
         southPanel.add(okButton);
 
         prodAdd.add(southPanel, BorderLayout.SOUTH);
 
+        setFieldsEditable(false);
+
         prodAdd.setVisible(true);
+    }
+
+// EDIT FIELDS - ON/OFF
+
+    public void setFieldsEditable(boolean choice){
+        JTextField[] textFields = {idTF, makeTF, modelTF, salePriceTF, costPriceTF, qtyTF, typeTF, cpuTF, ramTF, osTF, storageTF, screenTF};
+        for(JTextField c : textFields){
+            c.setEditable(choice);
+        }
+        descTA.setEditable(choice);
+        addButton.setEnabled(choice);
+        removeButton.setEnabled(choice);
+        okButton.setEnabled(choice);
     }
 
 // BUTTON ACTIONS
@@ -190,8 +208,8 @@ public class ProductAdd implements ActionListener {
         else if (e.getSource().equals(cancelButton)){
             prodAdd.dispose();
         }
-        else if (e.getSource().equals(previewButton)){
-
+        else if (e.getSource().equals(editButton)) {
+            setFieldsEditable(true);
         }
         else if (e.getSource().equals(okButton)){
 

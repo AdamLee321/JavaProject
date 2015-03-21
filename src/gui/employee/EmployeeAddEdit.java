@@ -1,6 +1,7 @@
 package gui.employee;
 
 import gui.DateGen;
+import gui.Icons;
 import gui.admin.AdminMain;
 
 import javax.swing.*;
@@ -14,11 +15,9 @@ Computing - Year 2, Project
 Group 17 (George - 08/03/2015)
 */
 
-// THIS EDITS A EMPLOYEE SO FETCH THE INFO. SET THE DATE TO PERSON'S BIRTHDAY
+public class EmployeeAddEdit {
 
-public class EmployeeEdit {
-
-    private JDialog employeeEdit;
+    private JDialog employeeAdd;
     private JPanel picturePanel, pictureButtonsPanel, detailsPanel, buttonsPanel;
     private JLabel profilePictureLabel, empIdLabel, empFNameLabel, empLNameLabel, empStreetLabel, empCityLabel, empCountyLabel, empDOB, empEmailLabel, empUsernameLabel, empPasswordLabel, empPositionLabel, empSalaryLabel, empDeptLabel;
     private JTextField empIdField, empFNameField, empLNameField, empStreetField, empCityField, empCountyField, empEmailField, empUsernameField, empPasswordField, empPositionField, empSalaryField, empDeptField;
@@ -28,16 +27,16 @@ public class EmployeeEdit {
     DateGen dg;
     AdminMain am;  // used for JDialogs as parent
 
-    public EmployeeEdit(JFrame parent){
+    public EmployeeAddEdit(JFrame parent, int choice){
 
     // setup the jdialog
 
-        employeeEdit = new JDialog(parent, true);
-        employeeEdit.setTitle("Edit Employee");
-        employeeEdit.setLayout(new BorderLayout());
-        employeeEdit.setSize(450, 670);
-        employeeEdit.setResizable(false);
-        employeeEdit.setLocationRelativeTo(null);
+        employeeAdd = new JDialog(parent, true);
+        employeeAdd.setTitle("Add New Employee");
+        employeeAdd.setLayout(new BorderLayout());
+        employeeAdd.setSize(450, 670);
+        employeeAdd.setResizable(false);
+        employeeAdd.setLocationRelativeTo(null);
 
     // picture panel + picture buttons  panel inside it
 
@@ -46,7 +45,7 @@ public class EmployeeEdit {
         picturePanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Profile Picture",2,2)); // set anonymous titled, etched border, centered title
 
         // profile picture
-        profilePictureLabel = new JLabel(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\128\\user.png"));
+        profilePictureLabel = new JLabel(new ImageIcon(Icons.person128));
         picturePanel.add(profilePictureLabel, BorderLayout.NORTH);
 
         // buttons panel
@@ -55,18 +54,18 @@ public class EmployeeEdit {
 
         addButton = new JButton("Add");
         addButton.setPreferredSize(new Dimension(100, 26));
-        addButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
+        addButton.setIcon(new ImageIcon(Icons.plus16));
         pictureButtonsPanel.add(addButton);
 
         removeButton = new JButton("Remove");
         removeButton.setPreferredSize(new Dimension(100, 26));
-        removeButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
+        removeButton.setIcon(new ImageIcon(Icons.minus16));
         pictureButtonsPanel.add(removeButton);
 
         picturePanel.add(pictureButtonsPanel, BorderLayout.SOUTH);
 
         // add picture panel to the main JDialog
-        employeeEdit.add(picturePanel, BorderLayout.NORTH);
+        employeeAdd.add(picturePanel, BorderLayout.NORTH);
 
     // detailsPanel - GridBagLayout
 
@@ -177,7 +176,7 @@ public class EmployeeEdit {
         empDeptField = new JTextField();
         detailsPanel.add(empDeptField, getConstraints(1,12,1,1,1,15,15,GridBagConstraints.CENTER));
 
-        employeeEdit.add(detailsPanel, BorderLayout.CENTER);
+        employeeAdd.add(detailsPanel, BorderLayout.CENTER);
 
     // bottom, buttons panel - FlowLayout, added to main's South border
 
@@ -186,18 +185,18 @@ public class EmployeeEdit {
 
         cancelButton = new JButton("Cancel");
         cancelButton.setPreferredSize(new Dimension(100, 26));
-        cancelButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
+        cancelButton.setIcon(new ImageIcon(Icons.cancel6));
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                employeeEdit.setVisible(false);  // close the window, aka lights off
+                employeeAdd.setVisible(false);  // close the window, aka lights off
             }
         });
         buttonsPanel.add(cancelButton);
 
         previewButton = new JButton("Preview");
         previewButton.setPreferredSize(new Dimension(100, 26));
-        previewButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
+        previewButton.setIcon(new ImageIcon(Icons.person16));
         previewButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -208,14 +207,20 @@ public class EmployeeEdit {
 
         okButton = new JButton("OK");
         okButton.setPreferredSize(new Dimension(100, 26));
-        okButton.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\16\\save.png"));
+        okButton.setIcon(new ImageIcon(Icons.save16));
         buttonsPanel.add(okButton);
 
-        employeeEdit.add(buttonsPanel, BorderLayout.SOUTH);
+        employeeAdd.add(buttonsPanel, BorderLayout.SOUTH);
+
+        // choice - add(clean fields) or edit(populate fields (1))
+        if (choice == 1) {
+            empFNameField.setText("Mario");
+            empCityField.setText("Mario Land");
+        }
 
 // turns the lights on
 
-        employeeEdit.setVisible(true);
+        employeeAdd.setVisible(true);
     }
 
     // return GridBagConstraints for GridBagLayout
