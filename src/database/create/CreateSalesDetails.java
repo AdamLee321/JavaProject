@@ -1,5 +1,6 @@
 package database.create;
 
+import javax.swing.*;
 import java.sql.*;
 
 /**
@@ -21,7 +22,7 @@ public class CreateSalesDetails {
             stmt = conn.createStatement();
             try {
                 stmt.execute("DROP TABLE salesdetails");
-                System.out.println("SalesDetails Table Dropped");
+                System.out.println("\nSalesDetails table dropped successfully\n");
             } catch (SQLException e) {
             }
         } catch (SQLException e) {
@@ -49,21 +50,23 @@ public class CreateSalesDetails {
             String sqlData = "INSERT INTO salesdetails (prodId, saleId, memberId) VALUES (?,?,?)";
             pstmt = conn.prepareStatement(sqlData);
 
-            pstmt.setInt(1,1);
+            pstmt.setInt(1,100000);
             pstmt.setInt(2,1);
             pstmt.setInt(3,1);
 
-            pstmt.setInt(1,4);
+            pstmt.setInt(1,100003);
             pstmt.setInt(2,5);
             pstmt.setInt(3,4);
 
-            pstmt.setInt(1,6);
+            pstmt.setInt(1,100005);
             pstmt.setInt(2,2);
             pstmt.setInt(3,8);
 
             pstmt.execute();
+
         } catch (SQLException e){
             System.out.println(e);
+            JOptionPane.showMessageDialog(null,e,"Error",JOptionPane.ERROR_MESSAGE);
         }
     }
 }
