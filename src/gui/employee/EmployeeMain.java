@@ -1,7 +1,7 @@
 package gui.employee;
 
 import database.operations.EmployeeOperations;
-import gui.Icons;
+import gui.UIElements;
 import gui.admin.AdminMain;
 import model.Employee;
 
@@ -67,19 +67,19 @@ public class EmployeeMain implements ActionListener {
 
         addButton = new JButton("Add");
         addButton.setPreferredSize(new Dimension(100, 26));
-        addButton.setIcon(new ImageIcon(Icons.plus16));
+        addButton.setIcon(new ImageIcon(UIElements.plus16));
         addButton.addActionListener(this);
         managePanel.add(addButton);
 
         editButton = new JButton("Edit");
         editButton.setPreferredSize(new Dimension(100, 26));
-        editButton.setIcon(new ImageIcon(Icons.edit16));
+        editButton.setIcon(new ImageIcon(UIElements.edit16));
         editButton.addActionListener(this);
         managePanel.add(editButton);
 
         deleteButton = new JButton("Delete");
         deleteButton.setPreferredSize(new Dimension(100, 26));
-        deleteButton.setIcon(new ImageIcon(Icons.delete16));
+        deleteButton.setIcon(new ImageIcon(UIElements.delete16));
         managePanel.add(deleteButton);
 
         northPanel.add(managePanel, getConstraints(0,0,1,1,1,0,0, GridBagConstraints.CENTER));
@@ -99,7 +99,7 @@ public class EmployeeMain implements ActionListener {
 
         searchButton = new JButton("Search");
         searchButton.setPreferredSize(new Dimension(105, 26));
-        searchButton.setIcon(new ImageIcon(Icons.search16));
+        searchButton.setIcon(new ImageIcon(UIElements.search16));
         searchPanel.add(searchButton);
 
         // add all the above to northPanel
@@ -130,7 +130,7 @@ public class EmployeeMain implements ActionListener {
 
         viewOrdersButton = new JButton("View Sales");
         viewOrdersButton.setPreferredSize(new Dimension(150, 26));
-        viewOrdersButton.setIcon(new ImageIcon(Icons.open16));
+        viewOrdersButton.setIcon(new ImageIcon(UIElements.open16));
         southPanel.add(viewOrdersButton);
 
         empMain.add(southPanel, BorderLayout.SOUTH);

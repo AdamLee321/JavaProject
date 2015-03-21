@@ -6,7 +6,7 @@ Computing - Year 2, Project
 Group 17 (George - 17/03/2015)
 */
 
-import gui.Icons;
+import gui.UIElements;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -76,7 +76,7 @@ public class About implements ActionListener {
         southPanel.setBackground(new Color(98, 169, 221));
 
         closeButton = new JButton("Close");
-        closeButton.setIcon(new ImageIcon(Icons.remove16));
+        closeButton.setIcon(new ImageIcon(UIElements.remove16));
         closeButton.setPreferredSize(new Dimension(100, 26));
         closeButton.addActionListener(this);
 

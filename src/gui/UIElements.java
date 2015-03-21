@@ -1,9 +1,20 @@
 package gui;
 
-/**
- * Created by User on 21/03/2015.
- */
-public class Icons {
+/*
+IT Tallaght - 2015, S2
+Computing - Year 2, Project
+Group 17 (George - 21/03/2015)
+*/
+
+/*
+this class was created to allow reuse of various user interface elements throughout the UI
+attributes are set to static to allow access without the need for reference object creation
+*/
+
+public class UIElements {
+
+    // DGA banner
+    public final static String banner = "src/res/images/UI Elements/banner.png";
 
     // 16 pixel icons
     public final static String save16 = "src/res/images/UI Elements/save16.png";

@@ -1,6 +1,6 @@
 package gui.product;
 
-import gui.Icons;
+import gui.UIElements;
 import gui.admin.AdminMain;
 
 import javax.swing.*;
@@ -48,19 +48,19 @@ public class ProductMain implements ActionListener {
 
         addButton = new JButton("Add");
         addButton.setPreferredSize(new Dimension(100, 26));
-        addButton.setIcon(new ImageIcon(Icons.plus16));
+        addButton.setIcon(new ImageIcon(UIElements.plus16));
         addButton.addActionListener(this);
         managePanel.add(addButton);
 
         editButton = new JButton("Edit");
         editButton.setPreferredSize(new Dimension(100, 26));
-        editButton.setIcon(new ImageIcon(Icons.edit16));
+        editButton.setIcon(new ImageIcon(UIElements.edit16));
         editButton.addActionListener(this);
         managePanel.add(editButton);
 
         deleteButton = new JButton("Delete");
         deleteButton.setPreferredSize(new Dimension(100, 26));
-        deleteButton.setIcon(new ImageIcon(Icons.delete16));
+        deleteButton.setIcon(new ImageIcon(UIElements.delete16));
         deleteButton.addActionListener(this);
         managePanel.add(deleteButton);
 
@@ -80,7 +80,7 @@ public class ProductMain implements ActionListener {
 
         searchButton = new JButton("Search");
         searchButton.setPreferredSize(new Dimension(105, 26));
-        searchButton.setIcon(new ImageIcon(Icons.search16));
+        searchButton.setIcon(new ImageIcon(UIElements.search16));
         searchTopPanel.add(searchButton);
 
         // add top panel to search panel
@@ -117,7 +117,7 @@ public class ProductMain implements ActionListener {
         // bottom buttons
         viewButton = new JButton("View Product");
         viewButton.setPreferredSize(new Dimension(150, 26));
-        viewButton.setIcon(new ImageIcon(Icons.product16));
+        viewButton.setIcon(new ImageIcon(UIElements.product16));
         southPanel.add(viewButton);
         viewButton.addActionListener(this);
 

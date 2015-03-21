@@ -1,8 +1,7 @@
 package gui.member;
 
 import gui.DateGen;
-import gui.Griddy;
-import gui.Icons;
+import gui.UIElements;
 import gui.admin.AdminMain;
 import javax.swing.*;
 import java.awt.*;
@@ -45,7 +44,7 @@ public class MemberAddEdit {
         picturePanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Profile Picture",2,2)); // set anonymous titled, etched border, centered title
 
         // profile picture
-        profilePictureLabel = new JLabel(new ImageIcon(Icons.person128));
+        profilePictureLabel = new JLabel(new ImageIcon(UIElements.person128));
         picturePanel.add(profilePictureLabel, BorderLayout.NORTH);
 
         // buttons panel
@@ -54,12 +53,12 @@ public class MemberAddEdit {
 
         addButton = new JButton("Add");
         addButton.setPreferredSize(new Dimension(100, 26));
-        addButton.setIcon(new ImageIcon(Icons.plus16));
+        addButton.setIcon(new ImageIcon(UIElements.plus16));
         pictureButtonsPanel.add(addButton);
 
         removeButton = new JButton("Remove");
         removeButton.setPreferredSize(new Dimension(100, 26));
-        removeButton.setIcon(new ImageIcon(Icons.minus16));
+        removeButton.setIcon(new ImageIcon(UIElements.minus16));
         pictureButtonsPanel.add(removeButton);
 
         picturePanel.add(pictureButtonsPanel, BorderLayout.SOUTH);
@@ -162,7 +161,7 @@ public class MemberAddEdit {
 
         cancelButton = new JButton("Cancel");
         cancelButton.setPreferredSize(new Dimension(100, 26));
-        cancelButton.setIcon(new ImageIcon(Icons.cancel6));
+        cancelButton.setIcon(new ImageIcon(UIElements.cancel6));
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -173,7 +172,7 @@ public class MemberAddEdit {
 
         previewButton = new JButton("Preview");
         previewButton.setPreferredSize(new Dimension(100, 26));
-        previewButton.setIcon(new ImageIcon(Icons.person16));
+        previewButton.setIcon(new ImageIcon(UIElements.person16));
         previewButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -184,7 +183,7 @@ public class MemberAddEdit {
 
         okButton = new JButton("OK");
         okButton.setPreferredSize(new Dimension(100, 26));
-        okButton.setIcon(new ImageIcon(Icons.save16));
+        okButton.setIcon(new ImageIcon(UIElements.save16));
         buttonsPanel.add(okButton);
 
         memberAdd.add(buttonsPanel, BorderLayout.SOUTH);

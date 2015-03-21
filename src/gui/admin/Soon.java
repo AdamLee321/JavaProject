@@ -6,13 +6,12 @@ import java.awt.*;
 /**
  * Created by User on 21/03/2015.
  */
-public class Soon extends JFrame {
+public class Soon extends JDialog {
 
     public Soon(){
 
         this.setTitle("Soon, soon...");
         this.setSize(500,500);
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

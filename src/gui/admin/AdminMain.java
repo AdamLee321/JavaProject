@@ -1,15 +1,14 @@
 package gui.admin;
 
-import gui.Icons;
+import gui.UIElements;
 import gui.employee.EmployeeMain;
 import gui.member.MemberMain;
 import gui.product.ProductMain;
-import javax.swing.BorderFactory;import javax.swing.ImageIcon;import javax.swing.JButton;import javax.swing.JDialog;import javax.swing.JFrame;import javax.swing.JLabel;import javax.swing.JMenu;import javax.swing.JMenuBar;import javax.swing.JMenuItem;import javax.swing.JPanel;import javax.swing.JSeparator;
+
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemListener;
-import java.lang.Override;
 
 /*
 IT Tallaght - 2015, S2
@@ -37,7 +36,8 @@ public class AdminMain extends JFrame implements ActionListener {
         am.setTitle("DGA Administration");
         am.setSize(800, 700);
         am.setLocationRelativeTo(null);
-        //am.setResiable(false);
+        am.setResizable(false);
+        am.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         am.setLayout(new BorderLayout());
         am.getContentPane().setBackground(new Color(98, 169, 221));
 
@@ -50,7 +50,7 @@ public class AdminMain extends JFrame implements ActionListener {
         menu.add(fileMenu);
 
         logOutMI = new JMenuItem("Log Out");
-        logOutMI.setIcon(new ImageIcon(Icons.logout16));
+        logOutMI.setIcon(new ImageIcon(UIElements.logout16));
         fileMenu.add(logOutMI);
         logOutMI.addActionListener(this);
 
@@ -58,7 +58,7 @@ public class AdminMain extends JFrame implements ActionListener {
         fileMenu.add(fileSep);
 
         exitMI = new JMenuItem("Exit");
-        exitMI.setIcon(new ImageIcon(Icons.remove16));
+        exitMI.setIcon(new ImageIcon(UIElements.remove16));
         fileMenu.add(exitMI);
         exitMI.addActionListener(this);
 
@@ -67,17 +67,17 @@ public class AdminMain extends JFrame implements ActionListener {
         menu.add(manageMenu);
 
         empMI = new JMenuItem("Employees");
-        empMI.setIcon(new ImageIcon(Icons.person16));
+        empMI.setIcon(new ImageIcon(UIElements.person16));
         empMI.addActionListener(this);
         manageMenu.add(empMI);
 
         memIM = new JMenuItem("Members");
-        memIM.setIcon(new ImageIcon(Icons.person16));
+        memIM.setIcon(new ImageIcon(UIElements.person16));
         memIM.addActionListener(this);
         manageMenu.add(memIM);
 
         prodMI = new JMenuItem("Products");
-        prodMI.setIcon(new ImageIcon(Icons.product16));
+        prodMI.setIcon(new ImageIcon(UIElements.product16));
         prodMI.addActionListener(this);
         manageMenu.add(prodMI);
 
@@ -85,7 +85,7 @@ public class AdminMain extends JFrame implements ActionListener {
         manageMenu.add(manageSep1);
 
         reportMI = new JMenuItem("Report");
-        reportMI.setIcon(new ImageIcon(Icons.report16));
+        reportMI.setIcon(new ImageIcon(UIElements.report16));
         reportMI.addActionListener(this);
         manageMenu.add(reportMI);
 
@@ -93,7 +93,7 @@ public class AdminMain extends JFrame implements ActionListener {
         manageMenu.add(manageSep2);
 
         optionsMI = new JMenuItem("Options");
-        optionsMI.setIcon(new ImageIcon(Icons.info16));
+        optionsMI.setIcon(new ImageIcon(UIElements.info16));
         optionsMI.addActionListener(this);
         manageMenu.add(optionsMI);
 
@@ -111,10 +111,10 @@ public class AdminMain extends JFrame implements ActionListener {
 
 // OUTER NORTH - logo
 
-        outerNorth = new JPanel();
+        outerNorth = new JPanel(new GridBagLayout());
         outerNorth.setBackground(new Color(98, 169, 221));
         mainLogo = new JLabel();
-        mainLogo.setIcon(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\newBanner.png"));
+        mainLogo.setIcon(new ImageIcon(UIElements.banner));
         mainLogo.setBackground(new Color(98, 169, 221));
         outerNorth.add(mainLogo);
         am.add(outerNorth, BorderLayout.NORTH);  // add to frame
@@ -130,31 +130,31 @@ public class AdminMain extends JFrame implements ActionListener {
 
         empButton = new JButton("Employees");
         empButton.setPreferredSize(new Dimension(150, 40));
-        empButton.setIcon(new ImageIcon(Icons.person32));
+        empButton.setIcon(new ImageIcon(UIElements.person32));
         empButton.addActionListener(this);
         innerNorth.add(empButton);
 
         memButton = new JButton("Members");
         memButton.setPreferredSize(new Dimension(150, 40));
-        memButton.setIcon(new ImageIcon(Icons.person32));
+        memButton.setIcon(new ImageIcon(UIElements.person32));
         memButton.addActionListener(this);
         innerNorth.add(memButton);
 
         prodButton = new JButton("Products");
         prodButton.setPreferredSize(new Dimension(150, 40));
-        prodButton.setIcon(new ImageIcon(Icons.product32));
+        prodButton.setIcon(new ImageIcon(UIElements.product32));
         prodButton.addActionListener(this);
         innerNorth.add(prodButton);
 
         reportButton = new JButton("Report");
         reportButton.setPreferredSize(new Dimension(150, 40));
-        reportButton.setIcon(new ImageIcon(Icons.report32));
+        reportButton.setIcon(new ImageIcon(UIElements.report32));
         reportButton.addActionListener(this);
         innerNorth.add(reportButton);
 
         optButton = new JButton("Options");
         optButton.setPreferredSize(new Dimension(150, 40));
-        optButton.setIcon(new ImageIcon(Icons.info32));
+        optButton.setIcon(new ImageIcon(UIElements.info32));
         optButton.addActionListener(this);
         innerNorth.add(optButton);
 
@@ -166,6 +166,7 @@ public class AdminMain extends JFrame implements ActionListener {
         // starter panel - this appears by default when the program starts
         em = new EmployeeMain();  // have to do this (init EM twice) in order to set something visible when the program starts
         innerCenter.add(em.getEmployeeMain()); // get employee panel
+        empButton.setForeground(Color.RED);
 
         outerCenter.add(innerCenter, BorderLayout.CENTER);
         am.add(outerCenter, BorderLayout.CENTER);  // add outer center to frame
@@ -176,7 +177,7 @@ public class AdminMain extends JFrame implements ActionListener {
         outerSouth.setBackground(new Color(98, 169, 221));
         outerSouth.setBorder(BorderFactory.createEtchedBorder()); // set anonymous titled, etched border);
         logoutButton = new JButton("Log Out");
-        logoutButton.setIcon(new ImageIcon(Icons.logout16));
+        logoutButton.setIcon(new ImageIcon(UIElements.logout16));
         logoutButton.addActionListener(this);
         outerSouth.add(logoutButton);
         am.add(outerSouth, BorderLayout.SOUTH);  // add outer south to frame

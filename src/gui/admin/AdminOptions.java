@@ -1,6 +1,6 @@
 package gui.admin;
 
-import gui.Icons;
+import gui.UIElements;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -88,7 +88,7 @@ public class AdminOptions {
         buttonsPanel.setBackground(new Color(98, 169, 221));
 
         cancelButton = new JButton("Cancel");
-        cancelButton.setIcon(new ImageIcon(Icons.cancel6));
+        cancelButton.setIcon(new ImageIcon(UIElements.cancel6));
         cancelButton.setPreferredSize(new Dimension(100, 26));
         cancelButton.addActionListener(new ActionListener() {
             @Override
@@ -99,7 +99,7 @@ public class AdminOptions {
         buttonsPanel.add(cancelButton);
 
         okButton = new JButton("OK");
-        okButton.setIcon(new ImageIcon(Icons.save16));
+        okButton.setIcon(new ImageIcon(UIElements.save16));
         okButton.setPreferredSize(new Dimension(100, 26));
         buttonsPanel.add(okButton);
 

@@ -7,7 +7,7 @@ Group 17 (George - 17/03/2015)
 */
 
 import gui.Griddy;
-import gui.Icons;
+import gui.UIElements;
 import gui.admin.AdminMain;
 import javax.swing.*;
 import java.awt.*;
@@ -46,16 +46,16 @@ public class ProductAddEdit implements ActionListener {
         centerLeftPanel.setBackground(new Color(98, 169, 221));
         centerLeftPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Product Picture", 2, 2)); // set anonymous titled, etched border, centered title
 
-        imgLabel = new JLabel(new ImageIcon(Icons.person128));
+        imgLabel = new JLabel(new ImageIcon(UIElements.person128));
         centerLeftPanel.add(imgLabel, Griddy.getConstraints(0,0,3,1,0,0,0,0,5,5,5,5,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
 
         addButton = new JButton("Add");
-        addButton.setIcon(new ImageIcon(Icons.plus16));
+        addButton.setIcon(new ImageIcon(UIElements.plus16));
         addButton.setPreferredSize(new Dimension(100, 26));
         centerLeftPanel.add(addButton, Griddy.getConstraints(1,1,1,1,0,0,0,0,5,5,5,5,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
 
         removeButton = new JButton("Remove");
-        removeButton.setIcon(new ImageIcon(Icons.minus16));
+        removeButton.setIcon(new ImageIcon(UIElements.minus16));
         removeButton.setPreferredSize(new Dimension(100, 26));
         centerLeftPanel.add(removeButton, Griddy.getConstraints(2,1,1,1,0,0,0,0,5,5,5,5,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
 
@@ -158,13 +158,13 @@ public class ProductAddEdit implements ActionListener {
 
         cancelButton = new JButton("Cancel");
         cancelButton.setPreferredSize(new Dimension(100, 26));
-        cancelButton.setIcon(new ImageIcon(Icons.cancel6));
+        cancelButton.setIcon(new ImageIcon(UIElements.cancel6));
         cancelButton.addActionListener(this);
         southPanel.add(cancelButton);
 
         okButton = new JButton("OK");
         okButton.setPreferredSize(new Dimension(100, 26));
-        okButton.setIcon(new ImageIcon(Icons.save16));
+        okButton.setIcon(new ImageIcon(UIElements.save16));
         okButton.addActionListener(this);
         southPanel.add(okButton);
 
