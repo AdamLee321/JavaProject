@@ -34,7 +34,7 @@ Group 17 (George - 07/03/2015)
 public class EmployeeMain implements ActionListener {
 
     private JPanel empMain;
-    private JButton addButton, editButton, deleteButton, searchButton, viewOrdersButton, backButton;
+    private JButton addButton, editButton, deleteButton, searchButton, viewSalesButton, backButton;
     private JTextField searchField;
     private JComboBox empTypes;
     private JPanel northPanel, managePanel, searchPanel, southPanel, centerPanel;
@@ -128,10 +128,11 @@ public class EmployeeMain implements ActionListener {
 
     // bottom buttons
 
-        viewOrdersButton = new JButton("View Sales");
-        viewOrdersButton.setPreferredSize(new Dimension(150, 26));
-        viewOrdersButton.setIcon(new ImageIcon(UIElements.open16));
-        southPanel.add(viewOrdersButton);
+        viewSalesButton = new JButton("View Sales");
+        viewSalesButton.setPreferredSize(new Dimension(150, 26));
+        viewSalesButton.setIcon(new ImageIcon(UIElements.open16));
+        viewSalesButton.addActionListener(this);
+        southPanel.add(viewSalesButton);
 
         empMain.add(southPanel, BorderLayout.SOUTH);
 
@@ -148,6 +149,9 @@ public class EmployeeMain implements ActionListener {
         } // edit button
         else if (e.getSource().equals(editButton)){
             EmployeeAddEdit eae = new EmployeeAddEdit(am,1);
+        }
+        else if (e.getSource().equals(viewSalesButton)){
+            SalesView sv = new SalesView();
         }
     }
 

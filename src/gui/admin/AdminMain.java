@@ -102,10 +102,12 @@ public class AdminMain extends JFrame implements ActionListener {
         menu.add(helpMenu);
 
         helpMI = new JMenuItem("View Help");
+        helpMI.setIcon(new ImageIcon(UIElements.info16));
         helpMI.addActionListener(this);
         helpMenu.add(helpMI);
 
         aboutMI = new JMenuItem("About");
+        aboutMI.setIcon(new ImageIcon(UIElements.info16));
         aboutMI.addActionListener(this);
         helpMenu.add(aboutMI);
 

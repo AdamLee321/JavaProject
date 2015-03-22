@@ -46,7 +46,7 @@ public class ProductAddEdit implements ActionListener {
         centerLeftPanel.setBackground(new Color(98, 169, 221));
         centerLeftPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Product Picture", 2, 2)); // set anonymous titled, etched border, centered title
 
-        imgLabel = new JLabel(new ImageIcon(UIElements.person128));
+        imgLabel = new JLabel(new ImageIcon(UIElements.product128));
         centerLeftPanel.add(imgLabel, Griddy.getConstraints(0,0,3,1,0,0,0,0,5,5,5,5,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
 
         addButton = new JButton("Add");
@@ -153,7 +153,7 @@ public class ProductAddEdit implements ActionListener {
 
 // SOUTH PANEL
 
-        southPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        southPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         southPanel.setBackground(new Color(98, 169, 221));
 
         cancelButton = new JButton("Cancel");

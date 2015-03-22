@@ -24,7 +24,7 @@ public class MemberMain implements ActionListener {
 
     AdminMain am;  // declare for usage with JDialogs as parent. No need to initialize
     EmployeeOperations eo;
-    Employee e;
+  //  Employee e;
 
     public JPanel getMemberMain(){
 
@@ -100,6 +100,7 @@ public class MemberMain implements ActionListener {
         viewOrdersButton = new JButton("View Orders");
         viewOrdersButton.setPreferredSize(new Dimension(150, 26));
         viewOrdersButton.setIcon(new ImageIcon(UIElements.open16));
+        viewOrdersButton.addActionListener(this);
         southPanel.add(viewOrdersButton);
 
         memberMain.add(southPanel, BorderLayout.SOUTH);
@@ -116,6 +117,9 @@ public class MemberMain implements ActionListener {
         } // edit member
         else if (e.getSource().equals(editButton)){
             MemberAddEdit mae = new MemberAddEdit(am,1);
+        }
+        else if (e.getSource().equals(viewOrdersButton)){
+            OrderView ov = new OrderView();
         }
     }
 
