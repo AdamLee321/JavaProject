@@ -4,9 +4,10 @@ package gui.employee;
 /*
 IT Tallaght - 2015, S2
 Computing - Year 2, Project
-Group 17 (George - 08/03/2015)
+Group 17 (George - 22/03/2015)
 */
 
+import gui.OrderDetails;
 import gui.UIElements;
 
 import javax.swing.*;
@@ -105,6 +106,9 @@ public class SalesView extends JDialog implements MouseListener, ActionListener 
     public void actionPerformed(ActionEvent e){
         if (e.getSource().equals(btnBack)){
             this.dispose();
+        }
+        else if (e.getSource().equals(btnView)){
+            OrderDetails od = new OrderDetails();
         }
     }
 

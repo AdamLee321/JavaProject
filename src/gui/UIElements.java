@@ -11,6 +11,8 @@ this class was created to allow reuse of various user interface elements through
 attributes are set to static to allow access without the need for reference object creation
 */
 
+import java.awt.*;
+
 public class UIElements {
 
     // DGA banner
@@ -31,6 +33,7 @@ public class UIElements {
     public final static String person16 = "src/res/images/UI Elements/person16.png";
     public final static String report16 = "src/res/images/UI Elements/report16.png";
     public final static String info16 = "src/res/images/UI Elements/info16.png";
+    public final static String print16 = "src/res/images/UI Elements/print16.png";
 
     // 32 pixel icons
     public final static String person32 = "src/res/images/UI Elements/person32.png";
@@ -41,4 +44,9 @@ public class UIElements {
     // 128 pixel icons
     public final static String person128 = "src/res/images/UI Elements/person128.png";
     public final static String product128 = "src/res/images/UI Elements/product128.png";
+
+    // UI colour
+    public static Color getColour(){
+        return (new Color(98, 169, 221));
+    }
 }

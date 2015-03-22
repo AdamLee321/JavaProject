@@ -4,9 +4,10 @@ package gui.member;
 /*
 IT Tallaght - 2015, S2
 Computing - Year 2, Project
-Group 17 (George - 08/03/2015)
+Group 17 (George - 22/03/2015)
 */
 
+import gui.OrderDetails;
 import gui.UIElements;
 import gui.admin.AdminMain;
 
@@ -15,25 +16,25 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.EventListener;
 
-public class OrderView extends JDialog implements MouseListener, ActionListener  {
+public class OrderView extends JDialog implements MouseListener, ActionListener {
 
     JPanel pnlNorth, pnlCenter, pnlSouth;
     JButton btnSearch, btnView, btnBack;
     JTextField tfSearch;
     String textFieldTip = "Type in the order number...";
 
-    public OrderView(){
+    public OrderView() {
 
         this.setTitle("Order History");
         this.setLayout(new BorderLayout()); // tip: border(don't indicate position), grid or gridbag layouts will stretch a component to the whole screen
-        this.setSize(580,650);
+        this.setSize(580, 650);
         this.setResizable(false);
-        this.getContentPane().setBackground(new Color(98, 169, 221));
+        this.getContentPane().setBackground(UIElements.getColour());
         this.setLocationRelativeTo(null);
 
 // NORTH
 
-        pnlNorth = new JPanel(new FlowLayout(FlowLayout.CENTER, 10,10)); // center and add padding
+        pnlNorth = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10)); // center and add padding
         pnlNorth.setBorder(BorderFactory.createEtchedBorder()); // set empty etched border
         pnlNorth.setBackground(new Color(98, 169, 221));
 
@@ -80,23 +81,32 @@ public class OrderView extends JDialog implements MouseListener, ActionListener 
 // BUTTON ACTIONS
 
     // have to implement these methods for MouseListener
-    public void mouseExited(MouseEvent e){}
-    public void mouseReleased(MouseEvent e){}
-    public void mousePressed(MouseEvent e){}
-    public void mouseEntered(MouseEvent e){}
+    public void mouseExited(MouseEvent e) {
+    }
 
-    public void mouseClicked(MouseEvent e){
-        if(e.getSource().equals(tfSearch)){
+    public void mouseReleased(MouseEvent e) {
+    }
+
+    public void mousePressed(MouseEvent e) {
+    }
+
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    public void mouseClicked(MouseEvent e) {
+        if (e.getSource().equals(tfSearch)) {
             if (tfSearch.getText().equals(textFieldTip)) {
                 tfSearch.setText("");
                 tfSearch.setForeground(null); // reset colour to black
             }
             tfSearch.addFocusListener(new FocusListener() {
                 @Override
-                public void focusGained(FocusEvent e) {}
+                public void focusGained(FocusEvent e) {
+                }
+
                 @Override
                 public void focusLost(FocusEvent e) { // set the textFieldTip to be visible in text field on focus loss
-                    if (tfSearch.getText().equals("")){
+                    if (tfSearch.getText().equals("")) {
                         tfSearch.setText(textFieldTip);
                         tfSearch.setForeground(Color.GRAY);
                     }
@@ -104,11 +114,12 @@ public class OrderView extends JDialog implements MouseListener, ActionListener 
             });
         }
     }
-    public void actionPerformed(ActionEvent e){
-        if(e.getSource().equals(btnBack)){
+
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource().equals(btnBack)) {
             this.dispose();
+        } else if (e.getSource().equals(btnView)) {
+            OrderDetails od = new OrderDetails();
         }
     }
-
-
 }
