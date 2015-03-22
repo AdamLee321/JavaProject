@@ -16,17 +16,17 @@ public class Griddy {
 
     public static GridBagConstraints getConstraints(int gridx,int gridy,int gridwidth,int gridheight,int ipadxIn,int ipadyIn,int weightxIn,int weightyIn,int topInsetIn,int leftInsetIn,int rightInsetIn,int bottomInsetIn,int fillIn,int anchor) {
         GridBagConstraints c = new GridBagConstraints();
-        c.insets = new Insets(topInsetIn, leftInsetIn, bottomInsetIn, rightInsetIn);  // insets = control individual indents of components, usually 5 all around
-        c.ipadx = ipadxIn; // 0
-        c.ipady = ipadyIn; // 0
         c.gridx = gridx; // position x
         c.gridy = gridy; // position y
         c.gridwidth = gridwidth; // width of the cell
         c.gridheight = gridheight; // height of the cell
-        c.weightx = weightxIn;  // 0
+        c.ipadx = ipadxIn; // 0
+        c.ipady = ipadyIn; // 0
+        c.weightx = weightxIn;  // 0 - when centered (only component) push it all the way to the edges
         c.weighty = weightyIn;  // 0
-        c.fill = fillIn;  // vertical, horizontal, both - fill the cell
-        c.anchor = anchor; // east, west, center position in the cell
+        c.insets = new Insets(topInsetIn, leftInsetIn, bottomInsetIn, rightInsetIn);  // insets = control individual indents of components, usually 5 all around
+        c.fill = fillIn;  // vertical, horizontal, both - fill the cell, ex... GridBagConstraints.HORIZONTAL
+        c.anchor = anchor; // east, west, center position in the cell, ex... GridBagConstraints.EAST
         return c;
     }
 }
