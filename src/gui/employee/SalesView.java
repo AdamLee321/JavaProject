@@ -27,14 +27,14 @@ public class SalesView extends JDialog implements MouseListener, ActionListener 
         this.setLayout(new BorderLayout()); // tip: border(don't indicate position), grid or gridbag layouts will stretch a component to the whole screen
         this.setSize(580,650);
         this.setResizable(false);
-        this.getContentPane().setBackground(new Color(98, 169, 221));
+        this.getContentPane().setBackground(UIElements.getColour());
         this.setLocationRelativeTo(null);
 
 // NORTH
 
         pnlNorth = new JPanel(new FlowLayout(FlowLayout.CENTER, 10,10)); // center and add padding
         pnlNorth.setBorder(BorderFactory.createEtchedBorder());
-        pnlNorth.setBackground(new Color(98, 169, 221));
+        pnlNorth.setBackground(UIElements.getColour());
 
         tfSearch = new JTextField(30);
         tfSearch.setText(textFieldTip); // set initial text field search
@@ -44,6 +44,7 @@ public class SalesView extends JDialog implements MouseListener, ActionListener 
 
         btnSearch = new JButton("Search", new ImageIcon(UIElements.search16)); // initialize the search button, add a add and icon
         btnSearch.setPreferredSize(new Dimension(100, 26));
+        btnSearch.addActionListener(this);
         pnlNorth.add(btnSearch);
 
         btnView = new JButton("View", new ImageIcon(UIElements.open16));
@@ -63,7 +64,7 @@ public class SalesView extends JDialog implements MouseListener, ActionListener 
 
         pnlSouth = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 10));
         pnlSouth.setBorder(BorderFactory.createEtchedBorder());
-        pnlSouth.setBackground(new Color(98, 169, 221));
+        pnlSouth.setBackground(UIElements.getColour());
 
         btnBack = new JButton("Back", new ImageIcon(UIElements.cancel6)); // initialize the search button, add a add and icon);
         btnBack.setPreferredSize(new Dimension(100, 26));

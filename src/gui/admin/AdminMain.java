@@ -4,6 +4,7 @@ import gui.UIElements;
 import gui.employee.EmployeeMain;
 import gui.member.MemberMain;
 import gui.product.ProductMain;
+import gui.sale.Discount;
 
 import javax.swing.*;
 import java.awt.*;
@@ -39,7 +40,7 @@ public class AdminMain extends JFrame implements ActionListener {
         am.setResizable(false);
         am.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         am.setLayout(new BorderLayout());
-        am.getContentPane().setBackground(new Color(98, 169, 221));
+        am.getContentPane().setBackground(UIElements.getColour());
 
         // add menu bar to the frame
         menu = new JMenuBar();
@@ -232,7 +233,8 @@ public class AdminMain extends JFrame implements ActionListener {
             Soon sosoon = new Soon();
         } // Options Menu Item and Button ACTIONS
         else if (e.getSource().equals(optionsMI) || e.getSource().equals(optButton)){
-            AdminOptions ao = new AdminOptions(AdminMain.this);
+            //AdminOptions ao = new AdminOptions(AdminMain.this);
+            Discount d = new Discount();
         } // Help Button
         else if (e.getSource().equals(helpMI)){
 
