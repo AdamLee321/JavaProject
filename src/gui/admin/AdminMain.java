@@ -128,7 +128,7 @@ public class AdminMain extends JFrame implements ActionListener {
 
         // INNER NORTH - buttons
         innerNorth = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        innerNorth.setBackground(new Color(98, 169, 221));
+        innerNorth.setBackground(UIElements.getColour());
         innerNorth.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "System Control")); // set anonymous titled, etched border);
 
         empButton = new JButton("Employees");
@@ -177,7 +177,7 @@ public class AdminMain extends JFrame implements ActionListener {
 // OUTER SOUTH
 
         outerSouth = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        outerSouth.setBackground(new Color(98, 169, 221));
+        outerSouth.setBackground(UIElements.getColour());
         outerSouth.setBorder(BorderFactory.createEtchedBorder()); // set anonymous titled, etched border);
         logoutButton = new JButton("Log Out");
         logoutButton.setIcon(new ImageIcon(UIElements.logout16));
@@ -233,8 +233,7 @@ public class AdminMain extends JFrame implements ActionListener {
             Soon sosoon = new Soon();
         } // Options Menu Item and Button ACTIONS
         else if (e.getSource().equals(optionsMI) || e.getSource().equals(optButton)){
-            //AdminOptions ao = new AdminOptions(AdminMain.this);
-            Discount d = new Discount();
+            AdminOptions ao = new AdminOptions(AdminMain.this);
         } // Help Button
         else if (e.getSource().equals(helpMI)){
 
