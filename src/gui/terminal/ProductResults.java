@@ -24,6 +24,7 @@ public class ProductResults extends JPanel {
         tableModel = new ProductTableModel();
 
         productTable = new JTable(tableModel);
+        productTable.setRowHeight(30);
 
 
         // Set the table width, depending upon the width of

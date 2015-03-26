@@ -50,11 +50,13 @@ public class ProductOperations {
             sql = "SELECT prodId, prodMake, prodModel, prodSalePrice, prodCostPrice, prodQTY, "+
                     // Blob prodPic,\n" +
                     "prodType, cpu, ram, OperatingSystem, storage, screen, prodDesc FROM PRODUCT";
+            System.out.println(sql);
         }
         else
             sql = "SELECT prodId, prodMake, prodModel, prodSalePrice, prodCostPrice, prodQTY," +
                 "prodType, cpu, ram, OperatingSystem, storage, screen, prodDesc FROM PRODUCT WHERE prodType =" +
                 "'" + category + "'";
+        System.out.println(sql);
 
         try{
             stmt = conn.createStatement();

@@ -17,7 +17,6 @@ import java.sql.SQLException;
 public class MainFrame extends JFrame implements ActionListener {
 
   private ProductOperations po;
-
   public static MainFrame mf;
   private JLabel logoLabel;
   private JPanel centerPanel;

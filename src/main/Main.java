@@ -43,7 +43,7 @@ public class Main {
       cm.createMembersTable();
       sld.createSalesDetailsTable();
 
-    connDB.closeDB();
+    //connDB.closeDB();
 
       MainFrame mf = new MainFrame();
       mf.setVisible(true);

@@ -35,7 +35,7 @@ public class ProductView {
 
         JTextField priceTf = new JTextField();
         setTextBoxDefaults(priceTf);
-        priceTf.setText(Double.toString(p.getProdCostPrice()));
+        priceTf.setText("€" +Double.toString(p.getProdCostPrice()));
 
         JTextField qtyTf = new JTextField();
         setTextBoxDefaults(qtyTf);
