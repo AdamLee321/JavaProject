@@ -9,6 +9,7 @@ package main;/*2ndYearProject
 import database.ConnectionDB;
 import database.create.*;
 import gui.admin.AdminMain;
+import gui.sale.SaleMain;
 import gui.terminal.MainFrame;
 
 public class Main {
@@ -49,5 +50,6 @@ public class Main {
       mf.setVisible(true);
       MainFrame.setMf(mf);
       AdminMain am = new AdminMain();
+      SaleMain sm = new SaleMain();
   }
 }

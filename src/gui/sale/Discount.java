@@ -1,0 +1,82 @@
+package gui.sale;
+
+/*
+IT Tallaght - 2015, S2
+Computing - Year 2, Project
+Group 17 (George - 22/03/2015)
+*/
+
+import gui.UIElements;
+
+import javax.swing.*;
+import javax.swing.plaf.BorderUIResource;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Discount extends JDialog implements ActionListener {
+
+    JButton btnApply, btnCancel;
+    JTextField tfPercent, tfMemberId;
+    JRadioButton rbPercent, rbMemberId;
+    ButtonGroup radioGroup = new ButtonGroup(); // for mutual exclusivity of radio buttons
+    JPanel main;
+    
+    public Discount(){
+
+// SETUP JDIALOG
+
+        this.setTitle("Discount");
+        this.setLayout(new BorderLayout());
+        this.getContentPane().setBackground(UIElements.getColour());
+        this.setSize(240,240);
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
+
+// MAIN PANEL
+
+        main = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 10));
+        main.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Discount Type", 2, 2)); // set anonymous titled, etched border);
+        main.setBackground(UIElements.getColour());
+
+        rbPercent = new JRadioButton("percent");
+        rbPercent.setBackground(UIElements.getColour());
+        radioGroup.add(rbPercent);
+        rbPercent.addActionListener(this);
+        main.add(rbPercent);
+
+        tfPercent = new JTextField(18);
+        main.add(tfPercent);
+
+        rbMemberId = new JRadioButton("Member ID");
+        rbMemberId.setBackground(UIElements.getColour());
+        radioGroup.add(rbMemberId);
+        rbMemberId.addActionListener(this);
+        main.add(rbMemberId);
+
+        tfMemberId = new JTextField(18);
+        main.add(tfMemberId);
+
+        btnCancel = new JButton("Cancel", new ImageIcon(UIElements.cancel6));
+        btnCancel.setPreferredSize(new Dimension(96, 26));
+        btnCancel.addActionListener(this);
+        main.add(btnCancel);
+
+        btnApply = new JButton("Apply", new ImageIcon(UIElements.plus16)); // initialize the search button, add a add and icon
+        btnApply.setPreferredSize(new Dimension(96, 26));
+        btnApply.addActionListener(this);
+        main.add(btnApply);
+
+        this.add(main);
+
+        this.setVisible(true);
+    }
+
+// BUTTON ACTIONS
+
+    public void actionPerformed(ActionEvent e){
+        if (e.getSource().equals(btnCancel)){
+            this.dispose();
+        }
+    }
+}

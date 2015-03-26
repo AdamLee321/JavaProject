@@ -1,4 +1,4 @@
-package gui.terminal;
+package gui.report;
 
 import database.operations.ReportOperations;
 
