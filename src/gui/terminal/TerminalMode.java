@@ -5,6 +5,8 @@ package gui.terminal;/*2ndYearProject
 */
 
 import database.operations.ProductOperations;
+import gui.Griddy;
+import gui.UIElements;
 import model.Product;
 
 import javax.swing.*;
@@ -14,11 +16,10 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 
-public class MainFrame extends JFrame implements ActionListener {
+public class TerminalMode extends JFrame implements ActionListener {
 
   private ProductOperations po;
-
-  public static MainFrame mf;
+  public static TerminalMode mf;
   private JLabel logoLabel;
   private JPanel centerPanel;
   private JPanel southPanel;
@@ -28,7 +29,7 @@ public class MainFrame extends JFrame implements ActionListener {
   private boolean displayArea = false;
 
 
-  public MainFrame(){
+  public TerminalMode(){
     po = new ProductOperations();
 
     this.setTitle("DGA Computers");
@@ -37,7 +38,7 @@ public class MainFrame extends JFrame implements ActionListener {
     this.setResizable(true);
     this.setLocationRelativeTo(null);
     this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    this.getContentPane().setBackground(new Color(98, 169, 221));
+    this.getContentPane().setBackground(UIElements.getColour());
 
 
     help = new JButton("HELP", new ImageIcon("src/res/images/UI Elements/help64.png"));
@@ -54,10 +55,10 @@ public class MainFrame extends JFrame implements ActionListener {
     main = new JPanel(new BorderLayout());
     main.setMaximumSize(new Dimension(800,600));
 
-    logoLabel = new JLabel(new ImageIcon("src/res/images/UI Elements/banner.png"));
+    logoLabel = new JLabel(new ImageIcon(UIElements.banner));
 
     JPanel northPanel = new JPanel(new GridLayout(1, 1));
-    northPanel.setBackground(new Color(98, 169, 221));
+    northPanel.setBackground(Color.BLACK);
     northPanel.add(logoLabel);
 
     main.add(northPanel, BorderLayout.NORTH);
@@ -79,9 +80,11 @@ public class MainFrame extends JFrame implements ActionListener {
     search = new JButton(new ImageIcon("src/res/images/UI Elements/search150.png"));
     search.addActionListener(this);
 
-    centerPanel.setBackground(new Color(98, 169, 221));
-    centerPanel.add(browse, getConstraints(0,0,1,1, GridBagConstraints.WEST, 0,75,0,75));
-    centerPanel.add(search, getConstraints(1,0,1,1, GridBagConstraints.EAST, 0,75,0,75));
+    centerPanel.setBackground(UIElements.getColour());
+    //centerPanel.add(browse, getConstraints(0,0,1,1, GridBagConstraints.WEST, 0,75,0,75));
+    centerPanel.add(browse, Griddy.getConstraints(0,0,1,1,10,10,0,0,0,75,75,0,0,GridBagConstraints.WEST));
+    //centerPanel.add(search, getConstraints(1,0,1,1, GridBagConstraints.EAST, 0,75,0,75));
+    centerPanel.add(search, Griddy.getConstraints(1,0,1,1,10,10,0,0,0,75,75,0,0,GridBagConstraints.EAST));
 
     displayArea = true;
 
@@ -92,8 +95,9 @@ public class MainFrame extends JFrame implements ActionListener {
   // South Panel with help button
   public JPanel getMinSouthPanel(){
     southPanel = new JPanel(bl);
-    southPanel.setBackground(new Color(98, 169, 221));
-    southPanel.add(help, getConstraints(0,0,1,1,GridBagConstraints.CENTER, 20,0,20,0));
+    southPanel.setBackground(UIElements.getColour());
+    //southPanel.add(help, getConstraints(0,0,1,1,GridBagConstraints.CENTER, 20,0,20,0));
+    southPanel.add(help, Griddy.getConstraints(0,0,1,1,10,10,0,0,20,0,0,20,0,GridBagConstraints.CENTER));
 
     return southPanel;
   }
@@ -102,29 +106,33 @@ public class MainFrame extends JFrame implements ActionListener {
   //South Panel With back, home and help buttons
   public JPanel getFullSouthPanel(){
     southPanel = new JPanel(bl);
-    southPanel.setBackground(new Color(98, 169, 221));
-    southPanel.add(back, getConstraints(0,0,1,1,GridBagConstraints.WEST, 20,0,20,0));
-    southPanel.add(home, getConstraints(1,0,1,1,GridBagConstraints.WEST, 20,150,20,150));
-    southPanel.add(help, getConstraints(2,0,1,1,GridBagConstraints.EAST, 20,0,20,0));
+    southPanel.setBackground(UIElements.getColour());
+    //southPanel.add(back, getConstraints(0,0,1,1,GridBagConstraints.WEST, 20,0,20,0));
+    southPanel.add(back, Griddy.getConstraints(0, 0, 1, 1, 10, 10, 0, 0, 20, 0, 0, 20, 0, GridBagConstraints.WEST));
+    //southPanel.add(home, getConstraints(1,0,1,1,GridBagConstraints.WEST, 20,150,20,150));
+    southPanel.add(home, Griddy.getConstraints(1, 0, 1, 1, 10, 10, 0, 0, 20, 150, 150, 20, 0, GridBagConstraints.WEST));
+    //southPanel.add(help, getConstraints(2,0,1,1,GridBagConstraints.EAST, 20,0,20,0));
+    southPanel.add(help, Griddy.getConstraints(2,0,1,1,10,10,0,0,20,0,0,20,0,GridBagConstraints.EAST));
+
 
     return southPanel;
   }
 
-  //For setting the gridbagLayout constraints
-  public static GridBagConstraints getConstraints(int gridx, int gridy, int gridwidth, int gridheight, int anchor,
-                                            int nIns, int wIns, int sIns, int eIns)
-  {
-    GridBagConstraints c = new GridBagConstraints();
-    c.insets = new Insets(nIns, wIns, sIns, eIns);
-    c.ipadx = 10;
-    c.ipady = 10;
-    c.gridx = gridx;
-    c.gridy = gridy;
-    c.gridwidth = gridwidth;
-    c.gridheight = gridheight;
-    c.anchor = anchor;
-    return c;
-  }
+//  //For setting the gridbagLayout constraints
+//  public static GridBagConstraints getConstraints(int gridx, int gridy, int gridwidth, int gridheight, int anchor,
+//                                            int nIns, int wIns, int sIns, int eIns)
+//  {
+//    GridBagConstraints c = new GridBagConstraints();
+//    c.insets = new Insets(nIns, wIns, sIns, eIns);
+//    c.ipadx = 10;
+//    c.ipady = 10;
+//    c.gridx = gridx;
+//    c.gridy = gridy;
+//    c.gridwidth = gridwidth;
+//    c.gridheight = gridheight;
+//    c.anchor = anchor;
+//    return c;
+//  }
 
   @Override
   public void actionPerformed(ActionEvent e) {
@@ -223,8 +231,8 @@ public class MainFrame extends JFrame implements ActionListener {
     }
   }
 
-  public static void setMf(MainFrame mf) {
-    MainFrame.mf = mf;
+  public static void setMf(TerminalMode mf) {
+    TerminalMode.mf = mf;
   }
 
 

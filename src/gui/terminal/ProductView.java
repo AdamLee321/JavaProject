@@ -1,11 +1,10 @@
 package gui.terminal;
 
+import gui.Griddy;
 import model.Product;
 
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
-import javax.swing.border.MatteBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 
@@ -35,7 +34,7 @@ public class ProductView {
 
         JTextField priceTf = new JTextField();
         setTextBoxDefaults(priceTf);
-        priceTf.setText(Double.toString(p.getProdCostPrice()));
+        priceTf.setText("€" +Double.toString(p.getProdCostPrice()));
 
         JTextField qtyTf = new JTextField();
         setTextBoxDefaults(qtyTf);
@@ -86,48 +85,74 @@ public class ProductView {
         JPanel details = new JPanel(new GridBagLayout());
         details.setBorder(detailsTitleBorder);
 
-        details.add(new JLabel("Product ID"), MainFrame.getConstraints(0, 0, 1, 1, GridBagConstraints.EAST, 10, 0, 0, 0));
-        details.add(idTf, MainFrame.getConstraints(1, 0, 1, 1, GridBagConstraints.CENTER, 10, 0, 0, 0));
+        //details.add(new JLabel("Product ID"), TerminalMode.getConstraints(0, 0, 1, 1, GridBagConstraints.EAST, 10, 0, 0, 0));
+        details.add(new JLabel("Product ID"), Griddy.getConstraints(0,0,1,1,10,10,0,0,10,0,0,0,0,GridBagConstraints.EAST));
+        //details.add(idTf, TerminalMode.getConstraints(1, 0, 1, 1, GridBagConstraints.CENTER, 10, 0, 0, 0));
+        details.add(idTf, Griddy.getConstraints(1,0,1,1,10,10,0,0,10,0,0,0,0,GridBagConstraints.CENTER));
 
-        details.add(new JLabel("Make"), MainFrame.getConstraints(0, 1, 1, 1, GridBagConstraints.EAST, 10, 0, 0, 0));
-        details.add(makeTf, MainFrame.getConstraints(1, 1, 1, 1, GridBagConstraints.CENTER, 10, 0, 0, 0));
+        //details.add(new JLabel("Make"), TerminalMode.getConstraints(0, 1, 1, 1, GridBagConstraints.EAST, 10, 0, 0, 0));
+        details.add(new JLabel("Make"), Griddy.getConstraints(0,1,1,1,10,10,0,0,10,0,0,0,0,GridBagConstraints.EAST));
+        //details.add(makeTf, TerminalMode.getConstraints(1, 1, 1, 1, GridBagConstraints.CENTER, 10, 0, 0, 0));
+        details.add(makeTf, Griddy.getConstraints(1,1,1,1,10,10,0,0,10,0,0,0,0,GridBagConstraints.CENTER));
 
-        details.add(new JLabel("Model"), MainFrame.getConstraints(0, 2, 1, 1, GridBagConstraints.EAST, 10, 0, 0, 0));
-        details.add(modelTf, MainFrame.getConstraints(1, 2, 1, 1, GridBagConstraints.CENTER, 10, 0, 0, 0));
+        //details.add(new JLabel("Model"), TerminalMode.getConstraints(0, 2, 1, 1, GridBagConstraints.EAST, 10, 0, 0, 0));
+        details.add(new JLabel("Model"), Griddy.getConstraints(0,2,1,1,10,10,0,0,10,0,0,0,0, GridBagConstraints.EAST));
+        //details.add(modelTf, TerminalMode.getConstraints(1, 2, 1, 1, GridBagConstraints.CENTER, 10, 0, 0, 0));
+        details.add(modelTf, Griddy.getConstraints(1,2,1,1,10,10,0,0,10,0,0,0,0,GridBagConstraints.CENTER));
 
-        details.add(new JLabel("Price"), MainFrame.getConstraints(0, 3, 1, 1, GridBagConstraints.EAST, 10, 0, 0, 0));
-        details.add(priceTf, MainFrame.getConstraints(1, 3, 1, 1, GridBagConstraints.CENTER, 10, 0, 0, 0));
+        //details.add(new JLabel("Price"), TerminalMode.getConstraints(0, 3, 1, 1, GridBagConstraints.EAST, 10, 0, 0, 0));
+        details.add(new JLabel("Price"), Griddy.getConstraints(0,3,1,1,10,10,0,0,10,0,0,0,0,GridBagConstraints.EAST));
+        //details.add(priceTf, TerminalMode.getConstraints(1, 3, 1, 1, GridBagConstraints.CENTER, 10, 0, 0, 0));
+        details.add(priceTf, Griddy.getConstraints(1,3,1,1,10,10,0,0,10,0,0,0,0,GridBagConstraints.CENTER));
 
-        details.add(new JLabel("Quantity in Stock"), MainFrame.getConstraints(0, 4, 1, 1, GridBagConstraints.EAST, 10, 0, 0, 0));
-        details.add(qtyTf, MainFrame.getConstraints(1, 4, 1, 1, GridBagConstraints.CENTER, 10, 0, 0, 0));
+        //details.add(new JLabel("Quantity in Stock"), TerminalMode.getConstraints(0, 4, 1, 1, GridBagConstraints.EAST, 10, 0, 0, 0));
+        details.add(new JLabel("Quantity in Stock"), Griddy.getConstraints(0,4,1,1,10,10,0,0,10,0,0,0,0,GridBagConstraints.EAST));
+        //details.add(qtyTf, TerminalMode.getConstraints(1, 4, 1, 1, GridBagConstraints.CENTER, 10, 0, 0, 0));
+        details.add(qtyTf, Griddy.getConstraints(1,4,1,1,10,10,0,0,10,0,0,0,0,GridBagConstraints.CENTER));
+
 
         TitledBorder specificationsTitleBorder = new TitledBorder("Specifications");
         specificationsTitleBorder.setBorder(lineBorder);
         JPanel specifications = new JPanel(new GridBagLayout());
         specifications.setBorder(specificationsTitleBorder);
 
-        specifications.add(new JLabel("CPU"), MainFrame.getConstraints(0, 0, 1, 1, GridBagConstraints.FIRST_LINE_END, 10, 0, 0, 0));
-        specifications.add(cpuTf, MainFrame.getConstraints(1, 0, 1, 1, GridBagConstraints.FIRST_LINE_START, 10, 0, 0, 0));
+        //specifications.add(new JLabel("CPU"), TerminalMode.getConstraints(0, 0, 1, 1, GridBagConstraints.FIRST_LINE_END, 10, 0, 0, 0));
+        specifications.add(new JLabel("CPU"), Griddy.getConstraints(0,0,1,1,10,10,0,0,10,0,0,0,0, GridBagConstraints.FIRST_LINE_END));
+        //specifications.add(cpuTf, TerminalMode.getConstraints(1, 0, 1, 1, GridBagConstraints.FIRST_LINE_START, 10, 0, 0, 0));
+        specifications.add(cpuTf, Griddy.getConstraints(1,0,1,1,10,10,0,0,10,0,0,0,0, GridBagConstraints.FIRST_LINE_START));
 
-        specifications.add(new JLabel("RAM"), MainFrame.getConstraints(0, 1, 1, 1, GridBagConstraints.FIRST_LINE_END, 10, 0, 0, 0));
-        specifications.add(ramTf, MainFrame.getConstraints(1, 1, 1, 1, GridBagConstraints.FIRST_LINE_START, 10, 0, 0, 0));
+        //specifications.add(new JLabel("RAM"), TerminalMode.getConstraints(0, 1, 1, 1, GridBagConstraints.FIRST_LINE_END, 10, 0, 0, 0));
+        specifications.add(new JLabel("RAM"), Griddy.getConstraints(0,1,1,1,10,10,0,0,10,0,0,0,0, GridBagConstraints.FIRST_LINE_END));
+        //specifications.add(ramTf, TerminalMode.getConstraints(1, 1, 1, 1, GridBagConstraints.FIRST_LINE_START, 10, 0, 0, 0));
+        specifications.add(ramTf, Griddy.getConstraints(1,1,1,1,10,10,0,0,10,0,0,0,0,GridBagConstraints.FIRST_LINE_START));
 
-        specifications.add(new JLabel("Operating System"), MainFrame.getConstraints(0, 2, 1, 1, GridBagConstraints.FIRST_LINE_END, 10, 0, 0, 0));
-        specifications.add(osTf, MainFrame.getConstraints(1, 2, 1, 1, GridBagConstraints.FIRST_LINE_START, 10, 0, 0, 0));
+        //specifications.add(new JLabel("Operating System"), TerminalMode.getConstraints(0, 2, 1, 1, GridBagConstraints.FIRST_LINE_END, 10, 0, 0, 0));
+        specifications.add(new JLabel("Operating System"), Griddy.getConstraints(0,2,1,1,10,10,0,0,10,0,0,0,0,GridBagConstraints.FIRST_LINE_END));
+        //specifications.add(osTf, TerminalMode.getConstraints(1, 2, 1, 1, GridBagConstraints.FIRST_LINE_START, 10, 0, 0, 0));
+        specifications.add(osTf, Griddy.getConstraints(1,2,1,1,10,10,0,0,10,0,0,0,0,GridBagConstraints.FIRST_LINE_START));
 
-        specifications.add(new JLabel("HDD"), MainFrame.getConstraints(0, 3, 1, 1, GridBagConstraints.FIRST_LINE_END, 10, 0, 0, 0));
-        specifications.add(hddTf, MainFrame.getConstraints(1, 3, 1, 1, GridBagConstraints.FIRST_LINE_START, 10, 0, 0, 0));
 
-        specifications.add(new JLabel("Screen"), MainFrame.getConstraints(0, 4, 1, 1, GridBagConstraints.FIRST_LINE_END, 10, 0, 0, 0));
-        specifications.add(screenTf, MainFrame.getConstraints(1, 4, 1, 1, GridBagConstraints.FIRST_LINE_START, 10, 0, 0, 0));
+        //specifications.add(new JLabel("HDD"), TerminalMode.getConstraints(0, 3, 1, 1, GridBagConstraints.FIRST_LINE_END, 10, 0, 0, 0));
+        specifications.add(new JLabel("HDD"), Griddy.getConstraints(0,3,1,1,10,10,0,0,10,0,0,0,0,GridBagConstraints.FIRST_LINE_END));
+        //specifications.add(hddTf, TerminalMode.getConstraints(1, 3, 1, 1, GridBagConstraints.FIRST_LINE_START, 10, 0, 0, 0));
+        specifications.add(hddTf, Griddy.getConstraints(1,3,1,1,10,10,0,0,10,0,0,0,0,GridBagConstraints.FIRST_LINE_START));
+
+        //specifications.add(new JLabel("Screen"), TerminalMode.getConstraints(0, 4, 1, 1, GridBagConstraints.FIRST_LINE_END, 10, 0, 0, 0));
+        specifications.add(new JLabel("Screen"), Griddy.getConstraints(0,4,1,1,10,10,0,0,10,0,0,0,0,GridBagConstraints.FIRST_LINE_END));
+        //specifications.add(screenTf, TerminalMode.getConstraints(1, 4, 1, 1, GridBagConstraints.FIRST_LINE_START, 10, 0, 0, 0));
+        specifications.add(screenTf, Griddy.getConstraints(1,4,1,1,10,10,0,0,10,0,0,0,0,GridBagConstraints.FIRST_LINE_START));
 
         JPanel productDetails = new JPanel(new GridBagLayout());
         productDetails.setBorder(BorderFactory.createLineBorder(new Color(98, 169, 221), 20));
 
-        productDetails.add(productPicture, MainFrame.getConstraints(0, 0, 1, 1, GridBagConstraints.WEST, 0, 0, 0, 0));
-        productDetails.add(details, MainFrame.getConstraints(1, 0, 1, 1, GridBagConstraints.CENTER, 0, 0, 0, 0));
-        productDetails.add(specifications, MainFrame.getConstraints(2, 0, 1, 1, GridBagConstraints.EAST, 0, 0, 0, 0));
-        productDetails.add(description, MainFrame.getConstraints(1, 1, 2, 1, GridBagConstraints.CENTER, 0, 0, 0, 0));
+        //productDetails.add(productPicture, TerminalMode.getConstraints(0, 0, 1, 1, GridBagConstraints.WEST, 0, 0, 0, 0));
+        productDetails.add(productPicture, Griddy.getConstraints(0,0,1,1,10,10,0,0,0,0,0,0,0,GridBagConstraints.WEST));
+        //productDetails.add(details, TerminalMode.getConstraints(1, 0, 1, 1, GridBagConstraints.CENTER, 0, 0, 0, 0));
+        productDetails.add(details, Griddy.getConstraints(1,0,1,1,10,10,0,0,0,0,0,0,0,GridBagConstraints.CENTER));
+        //productDetails.add(specifications, TerminalMode.getConstraints(2, 0, 1, 1, GridBagConstraints.EAST, 0, 0, 0, 0));
+        productDetails.add(specifications, Griddy.getConstraints(2,0,1,1,10,10,0,0,0,0,0,0,0,GridBagConstraints.EAST));
+        //productDetails.add(description, TerminalMode.getConstraints(1, 1, 2, 1, GridBagConstraints.CENTER, 0, 0, 0, 0));
+        productDetails.add(description, Griddy.getConstraints(1,1,2,1,10,10,0,0,0,0,0,0,0,GridBagConstraints.CENTER));
 
 
         return productDetails;
