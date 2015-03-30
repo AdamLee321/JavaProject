@@ -16,8 +16,6 @@ public class ProductResults extends JPanel {
     private JTable productTable;
     ProductTableModel tableModel;
     protected static final int tableHeight = 200;
-    TerminalMode mf;
-
 
     public JPanel getResults(String category, String keyword) throws SQLException{
         productResultsPanel = new JPanel();

@@ -66,17 +66,17 @@ import java.awt.event.ActionListener;
     public JPanel getCenterPanel() {
       centerPanel = new JPanel(bl);
 
-      terminal = new JButton(new ImageIcon("src/res/images/UI Elements/product150.png"));
+      terminal = new JButton("TERMINAL MODE", new ImageIcon(UIElements.shoppingCart150));
+      terminal.setPreferredSize(new Dimension(400,150));
       terminal.addActionListener(this);
 
-      login = new JButton(new ImageIcon("src/res/images/UI Elements/search150.png"));
+      login = new JButton("         LOG IN          ", new ImageIcon(UIElements.login150));
+      login.setPreferredSize(new Dimension(400,150));
       login.addActionListener(this);
 
       centerPanel.setBackground(UIElements.getColour());
-      //centerPanel.add(browse, getConstraints(0,0,1,1, GridBagConstraints.WEST, 0,75,0,75));
-      centerPanel.add(terminal, Griddy.getConstraints(0, 0, 1, 1, 10, 10, 0, 0, 0, 75, 75, 0, 0, GridBagConstraints.WEST));
-      //centerPanel.add(search, getConstraints(1,0,1,1, GridBagConstraints.EAST, 0,75,0,75));
-      centerPanel.add(login, Griddy.getConstraints(1, 0, 1, 1, 10, 10, 0, 0, 0, 75, 75, 0, 0, GridBagConstraints.EAST));
+      centerPanel.add(terminal, Griddy.getConstraints(0, 0, 1, 1, 10, 10, 1, 0, 25, 0, 0, 0, 0, GridBagConstraints.CENTER));
+      centerPanel.add(login, Griddy.getConstraints(0, 1, 1, 1, 10, 10, 1, 0, 25, 0, 0, 25, 0, GridBagConstraints.CENTER));
 
       displayArea = true;
 
@@ -100,9 +100,8 @@ import java.awt.event.ActionListener;
     public void actionPerformed(ActionEvent e) {
       if (e.getSource().equals(terminal)) {
         TerminalMode tm = new TerminalMode();
-        tm.setVisible(true);
         TerminalMode.setMf(tm);
-        this.setVisible(false);
+        this.dispose();
       } else if (e.getSource().equals(login)) {
         AuthenticationPopUp apu = new AuthenticationPopUp(this);
       } else if (e.getSource().equals(help)) {

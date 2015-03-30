@@ -45,6 +45,10 @@ public class UIElements {
     public final static String person128 = "src/res/images/UI Elements/person128.png";
     public final static String product128 = "src/res/images/UI Elements/product128.png";
 
+    // 150 pixel icons
+    public final static String login150 = "src/res/images/UI Elements/login150.png";
+    public final static String shoppingCart150 = "src/res/images/UI Elements/shoppingCart150.png";
+
     // UI colour
     public static Color getColour(){
         return (new Color(98, 169, 221));

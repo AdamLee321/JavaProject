@@ -28,6 +28,11 @@ public class TerminalMode extends JFrame implements ActionListener {
   private GridBagLayout bl;
   private boolean displayArea = false;
 
+  private int windowNum;
+  String category, keyword;
+  int lastSearchType;  // 1 is a keyword and category; 2 is just category
+  int lastScreenType; // 1 is categories; 2 is a search
+
 
   public TerminalMode(){
     po = new ProductOperations();
@@ -70,7 +75,6 @@ public class TerminalMode extends JFrame implements ActionListener {
   }
 
 
-
   public JPanel getCenterPanel(){
     centerPanel = new JPanel(bl);
 
@@ -81,9 +85,7 @@ public class TerminalMode extends JFrame implements ActionListener {
     search.addActionListener(this);
 
     centerPanel.setBackground(UIElements.getColour());
-    //centerPanel.add(browse, getConstraints(0,0,1,1, GridBagConstraints.WEST, 0,75,0,75));
     centerPanel.add(browse, Griddy.getConstraints(0,0,1,1,10,10,0,0,0,75,75,0,0,GridBagConstraints.WEST));
-    //centerPanel.add(search, getConstraints(1,0,1,1, GridBagConstraints.EAST, 0,75,0,75));
     centerPanel.add(search, Griddy.getConstraints(1,0,1,1,10,10,0,0,0,75,75,0,0,GridBagConstraints.EAST));
 
     displayArea = true;
@@ -96,7 +98,6 @@ public class TerminalMode extends JFrame implements ActionListener {
   public JPanel getMinSouthPanel(){
     southPanel = new JPanel(bl);
     southPanel.setBackground(UIElements.getColour());
-    //southPanel.add(help, getConstraints(0,0,1,1,GridBagConstraints.CENTER, 20,0,20,0));
     southPanel.add(help, Griddy.getConstraints(0,0,1,1,10,10,0,0,20,0,0,20,0,GridBagConstraints.CENTER));
 
     return southPanel;
@@ -107,53 +108,56 @@ public class TerminalMode extends JFrame implements ActionListener {
   public JPanel getFullSouthPanel(){
     southPanel = new JPanel(bl);
     southPanel.setBackground(UIElements.getColour());
-    //southPanel.add(back, getConstraints(0,0,1,1,GridBagConstraints.WEST, 20,0,20,0));
     southPanel.add(back, Griddy.getConstraints(0, 0, 1, 1, 10, 10, 0, 0, 20, 0, 0, 20, 0, GridBagConstraints.WEST));
-    //southPanel.add(home, getConstraints(1,0,1,1,GridBagConstraints.WEST, 20,150,20,150));
     southPanel.add(home, Griddy.getConstraints(1, 0, 1, 1, 10, 10, 0, 0, 20, 150, 150, 20, 0, GridBagConstraints.WEST));
-    //southPanel.add(help, getConstraints(2,0,1,1,GridBagConstraints.EAST, 20,0,20,0));
     southPanel.add(help, Griddy.getConstraints(2,0,1,1,10,10,0,0,20,0,0,20,0,GridBagConstraints.EAST));
-
 
     return southPanel;
   }
 
-//  //For setting the gridbagLayout constraints
-//  public static GridBagConstraints getConstraints(int gridx, int gridy, int gridwidth, int gridheight, int anchor,
-//                                            int nIns, int wIns, int sIns, int eIns)
-//  {
-//    GridBagConstraints c = new GridBagConstraints();
-//    c.insets = new Insets(nIns, wIns, sIns, eIns);
-//    c.ipadx = 10;
-//    c.ipady = 10;
-//    c.gridx = gridx;
-//    c.gridy = gridy;
-//    c.gridwidth = gridwidth;
-//    c.gridheight = gridheight;
-//    c.anchor = anchor;
-//    return c;
-//  }
 
   @Override
   public void actionPerformed(ActionEvent e) {
     if(e.getSource().equals(search)){
       setToSearch();
+      windowNum = 1;
     }
     else if(e.getSource().equals(browse)){
       setToBrowse();
+      windowNum = 2;
     }
     else if(e.getSource().equals(home)){
       setToMain();
+      windowNum = 0;
     }
     else if(e.getSource().equals(help)){
-      //setToProductView();
     }
     else if(e.getSource().equals(back)){
+      if (windowNum == 1 || windowNum == 2){  // search window = 1  categories = 2  product results = 3
+        setToMain();
+      }
+      else if (windowNum == 3){
+        if (lastScreenType == 1) {
+          setToBrowse();
+        }
+        else if(lastScreenType == 2) {
+          setToSearch();
+        }
+      }
+      else if(windowNum == 4){
+        if(lastSearchType == 1){
+          setToProductResults(category,keyword, lastScreenType);
+        }
+        else if(lastSearchType == 2){
+          setToProductResults(category, lastScreenType);
+        }
+      }
     }
   }
 
   //To change the center pane to the search
   public void setToSearch(){
+    windowNum = 1;
     ProductSearch c = new ProductSearch();
     removePanels();
     centerPanel = c.getSearch();
@@ -164,6 +168,7 @@ public class TerminalMode extends JFrame implements ActionListener {
 
   //To change the center pane to the browse
   public void setToBrowse(){
+    windowNum = 2;
     ProductCategories c = new ProductCategories(po);
     removePanels();
     centerPanel = c.getCategories();
@@ -174,6 +179,7 @@ public class TerminalMode extends JFrame implements ActionListener {
 
   //To change the center pane to the home
   public void setToMain(){
+    windowNum = 0;
     removePanels();
     centerPanel = getCenterPanel();
     southPanel = getMinSouthPanel();
@@ -181,7 +187,11 @@ public class TerminalMode extends JFrame implements ActionListener {
   }
 
   //To change the center pane to the results of a product category picked
-  public void setToProductResults(String category){
+  public void setToProductResults(String category, int lastScreen){
+    windowNum = 3;
+    lastScreenType = lastScreen;
+    lastSearchType = 2;
+    this.category = category;
     ProductResults pr = new ProductResults();
     removePanels();
     try{
@@ -195,7 +205,12 @@ public class TerminalMode extends JFrame implements ActionListener {
   }
 
   //To change the center pane to the results of a product category picked
-  public void setToProductResults(String category, String keyword){
+  public void setToProductResults(String category, String keyword, int lastScreen){
+    windowNum = 3;
+    lastScreenType = lastScreen;
+    lastSearchType = 1;
+    this.category = category;
+    this.keyword = keyword;
     ProductResults pr = new ProductResults();
     removePanels();
     try{
@@ -209,6 +224,7 @@ public class TerminalMode extends JFrame implements ActionListener {
   }
 
   public void setToProductView(int productId){
+    windowNum = 4;
     ProductView pv = new ProductView();
     Product p = po.productByID(productId);
     removePanels();

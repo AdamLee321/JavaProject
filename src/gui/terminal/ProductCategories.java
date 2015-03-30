@@ -48,18 +48,13 @@ public class ProductCategories implements ActionListener {
         allInOne.setHorizontalTextPosition(SwingConstants.CENTER);
         allInOne.addActionListener(this);
 
-        //categoriesPanel.add(desktops, TerminalMode.getConstraints(0, 0, 1, 1, GridBagConstraints.CENTER, 0, 25, 0, 25));
+
         categoriesPanel.add(desktops, Griddy.getConstraints(0,0,1,1,10,10,0,0,0,25,25,0,0,GridBagConstraints.CENTER));
-        //categoriesPanel.add(laptops, TerminalMode.getConstraints(1, 0, 1, 1, GridBagConstraints.CENTER, 0, 25, 0, 25));
         categoriesPanel.add(laptops, Griddy.getConstraints(1,0,1,1,10,10,0,0,0,25,25,0,0,GridBagConstraints.CENTER));
-        //categoriesPanel.add(apple, TerminalMode.getConstraints(2, 0, 1, 1, GridBagConstraints.CENTER, 0, 25, 0, 25));
         categoriesPanel.add(apple, Griddy.getConstraints(2,0,1,1,10,10,0,0,0,25,25,0,0,GridBagConstraints.CENTER));
-        //categoriesPanel.add(allInOne, TerminalMode.getConstraints(3, 0, 1, 1, GridBagConstraints.CENTER, 0, 25, 0, 25));
         categoriesPanel.add(allInOne, Griddy.getConstraints(3,0,1,1,10,10,0,0,0,25,25,0,0,GridBagConstraints.CENTER));
 
         return categoriesPanel;
-
-
     }
 
 
@@ -78,7 +73,6 @@ public class ProductCategories implements ActionListener {
         else if(e.getSource().equals(allInOne)){
             category = allInOne.getText();
         };
-        TerminalMode.mf.setToProductResults(category);
-
+        TerminalMode.mf.setToProductResults(category, 1);
     }
 }

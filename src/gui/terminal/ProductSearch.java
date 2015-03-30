@@ -20,7 +20,6 @@ public class ProductSearch implements ActionListener{
     private JComboBox category;
     private JButton searchButton;
 
-
     public JPanel getSearch(){
         jp = new JPanel(new GridBagLayout());
         jp.setBackground(new Color(98, 169, 221));
@@ -71,8 +70,9 @@ public class ProductSearch implements ActionListener{
             System.out.println("Search1");
             String categoryName = (String) category.getSelectedItem();
 
-            TerminalMode.mf.setToProductResults(categoryName, searchText.getText());
+            TerminalMode.mf.setToProductResults(categoryName, searchText.getText(), 2);
         }
 
     }
+
 }
