@@ -24,7 +24,7 @@ public class ProductView implements ActionListener {
     private JTextArea descTA;
     private JPanel centerPanel, centerLeftPanel, centerRightPanel, southPanel;
 
-    AdminMain am;  // used for JDialogs as parent
+    private AdminMain am;  // used for JDialogs as parent
 
     public ProductView(JFrame parent){
 

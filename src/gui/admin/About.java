@@ -22,7 +22,6 @@ public class About implements ActionListener {
     private JPanel northPanel, centerPanel, southPanel, mainBigPanel;
     private Border paddingBorder = BorderFactory.createEmptyBorder(20,50,50,20);  // set the border inside the grid to move details away from the edges
 
-
     public About(){
 
         // setup the jdialog

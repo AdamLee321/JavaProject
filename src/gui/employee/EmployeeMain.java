@@ -41,9 +41,9 @@ public class EmployeeMain implements ActionListener {
     private JTable tblEmployee;
     private JScrollPane tblScroll;
 
-    AdminMain am;  // declare for usage with JDialogs as parent
-    EmployeeOperations eo;
-    Employee e;
+    private AdminMain am;  // declare for usage with JDialogs as parent
+    private EmployeeOperations eo;
+    private Employee e;
 
     String[] eempTypes = {"All", "Sales", "Management"};  // this just a placeholder, real info will be populated from DB
 

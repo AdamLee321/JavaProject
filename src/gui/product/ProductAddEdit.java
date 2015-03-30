@@ -23,7 +23,7 @@ public class ProductAddEdit implements ActionListener {
     private JTextArea descTA;
     private JPanel centerPanel, centerLeftPanel, centerRightPanel, southPanel;
 
-    AdminMain am;  // used for JDialogs as parent
+    private AdminMain am;  // used for JDialogs as parent
 
     public ProductAddEdit(JFrame parent, int choice){
 

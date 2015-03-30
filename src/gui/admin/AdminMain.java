@@ -19,17 +19,17 @@ Group 17 (George - 10/03/2015)
 
 public class AdminMain extends JFrame implements ActionListener {
 
-    JFrame am;
-    JMenuBar menu;
-    JMenu fileMenu, manageMenu, helpMenu;
-    JMenuItem exitMI, logOutMI, empMI, memIM, prodMI, reportMI, optionsMI, helpMI, aboutMI;
-    JSeparator fileSep, manageSep1, manageSep2;
-    JLabel mainLogo;
-    JPanel outerNorth, outerSouth, outerCenter, innerNorth, innerCenter;
-    JButton empButton, memButton, prodButton, reportButton, optButton, logoutButton;
+    private JFrame am;
+    private JMenuBar menu;
+    private JMenu fileMenu, manageMenu, helpMenu;
+    private JMenuItem exitMI, logOutMI, empMI, memIM, prodMI, reportMI, optionsMI, helpMI, aboutMI;
+    private JSeparator fileSep, manageSep1, manageSep2;
+    private JLabel mainLogo;
+    private JPanel outerNorth, outerSouth, outerCenter, innerNorth, innerCenter;
+    private JButton empButton, memButton, prodButton, reportButton, optButton, logoutButton;
 
     private boolean displayarea = true;
-    EmployeeMain em;
+    private EmployeeMain em;
 
     public AdminMain() {
 
