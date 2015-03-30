@@ -18,10 +18,10 @@ import java.util.EventListener;
 
 public class OrderView extends JDialog implements MouseListener, ActionListener {
 
-    JPanel pnlNorth, pnlCenter, pnlSouth;
-    JButton btnSearch, btnView, btnBack;
-    JTextField tfSearch;
-    String textFieldTip = "Type in the order number...";
+    private JPanel pnlNorth, pnlCenter, pnlSouth;
+    private JButton btnSearch, btnView, btnBack;
+    private JTextField tfSearch;
+    private String textFieldTip = "Type in the order number...";
 
     public OrderView() {
 

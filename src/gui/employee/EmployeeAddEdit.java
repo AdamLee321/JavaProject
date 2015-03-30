@@ -24,8 +24,8 @@ public class EmployeeAddEdit {
     private JComboBox<String> birthDayCBox, birthMonthCBox, birthYearCBox;;
     private JButton addButton, removeButton, cancelButton, previewButton, okButton;
 
-    DateGen dg;
-    AdminMain am;  // used for JDialogs as parent
+    private DateGen dg;
+    private AdminMain am;  // used for JDialogs as parent
 
     public EmployeeAddEdit(JFrame parent, int choice){
 

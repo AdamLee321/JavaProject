@@ -11,22 +11,24 @@ import gui.UIElements;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class SaleMain extends JFrame {
+public class SaleMain extends JFrame implements ActionListener {
 
-    JButton btnOne, btnTwo, btnThree, btnFour, btnFive, btnSix, btnSeven, btnEight, btnNine, btnZero, btnDoubleZero, btnClear, btnOK, btnRemove, btnRegister, btnDiscount, btnReturnProduct, btnCheckout, btnLogout;
-    JRadioButton rbCash, rbCC;
-    ButtonGroup radioGroup = new ButtonGroup(); // for mutual exclusivity of radio buttons
-    JTextField tfProdNum, tfQty;
-    JLabel lblSubtotal, lblVAT, lblDiscount, lblTotal, lblCustomer, lblSalesperson, lblDate, lblCashTender, lblChangeDue, lblLoggedName, lblLoggedUname, lblLoggedNumber, lblLoggedPosition;
-    JLabel lblSubtotalR, lblVATR, lblDiscountR, lblTotalR, lblCustomerR, lblSalespersonR, lblDateR, lblCashTenderR, lblChangeDueR;
-    JPanel pnlTable, pnlKeypad, pnlCheckout, pnlSaleInfo, pnlLoggedIn, pnlPaymentType;
+    private JButton btnAdd, btnRemove, btnRegister, btnDiscount, btnReturnProduct, btnCheckout, btnLogout;
+    private JRadioButton rbCash, rbCC;
+    private ButtonGroup radioGroup = new ButtonGroup(); // for mutual exclusivity of radio buttons
+    private JTextField tfProdNum, tfQty;
+    private JLabel lblSubtotal, lblVAT, lblDiscount, lblTotal, lblCustomer, lblSalesperson, lblDate, lblCashTender, lblChangeDue, lblLoggedName, lblLoggedUname, lblLoggedNumber, lblLoggedPosition;
+    private JLabel lblSubtotalR, lblVATR, lblDiscountR, lblTotalR, lblCustomerR, lblSalespersonR, lblDateR, lblCashTenderR, lblChangeDueR;
+    private JPanel pnlTable, pnlKeypad, pnlCheckout, pnlSaleInfo, pnlLoggedIn, pnlPaymentType;
 
-    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
-    Date date = new Date();
+    private DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
+    private Date date = new Date();
 
     public SaleMain(){
 
@@ -38,7 +40,7 @@ public class SaleMain extends JFrame {
         this.setLayout(new GridBagLayout());
         this.getContentPane().setBackground(UIElements.getColour());
 
-// KEYPAD PANEL
+// ADD PRODUCT PANEL
 
         pnlKeypad = new JPanel(new GridBagLayout());
         pnlKeypad.setBackground(UIElements.getColour());
@@ -47,52 +49,16 @@ public class SaleMain extends JFrame {
         tfProdNum = new JTextField();
         pnlKeypad.add(tfProdNum, Griddy.getConstraints(0,0,3,1,0,0,1,1,2,2,2,2,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
 
-        btnOne = new JButton("1");
-        pnlKeypad.add(btnOne, Griddy.getConstraints(0,1,1,1,0,0,1,1,2,2,2,2,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
-
-        btnTwo = new JButton("2");
-        pnlKeypad.add(btnTwo, Griddy.getConstraints(1,1,1,1,0,0,1,1,2,0,2,2,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
-
-        btnThree = new JButton("3");
-        pnlKeypad.add(btnThree, Griddy.getConstraints(2,1,1,1,0,0,1,1,2,0,2,2,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
-
-        btnFour = new JButton("4");
-        pnlKeypad.add(btnFour, Griddy.getConstraints(0,2,1,1,0,0,1,1,0,2,2,2,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
-
-        btnFive = new JButton("5");
-        pnlKeypad.add(btnFive, Griddy.getConstraints(1,2,1,1,0,0,1,1,0,0,2,2,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
-
-        btnSix = new JButton("6");
-        pnlKeypad.add(btnSix, Griddy.getConstraints(2,2,1,1,0,0,1,1,0,0,2,2,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
-
-        btnSeven = new JButton("7");
-        pnlKeypad.add(btnSeven, Griddy.getConstraints(0,3,1,1,0,0,1,1,0,2,2,2,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
-
-        btnEight = new JButton("8");
-        pnlKeypad.add(btnEight, Griddy.getConstraints(1,3,1,1,0,0,1,1,0,0,2,2,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
-
-        btnNine = new JButton("9");
-        pnlKeypad.add(btnNine, Griddy.getConstraints(2,3,1,1,0,0,1,1,0,0,2,2,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
-
-        btnDoubleZero = new JButton("00");
-        pnlKeypad.add(btnDoubleZero, Griddy.getConstraints(0,4,1,1,0,0,1,1,0,2,2,2,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
-
-        btnZero = new JButton("0");
-        pnlKeypad.add(btnZero, Griddy.getConstraints(1,4,1,1,0,0,1,1,0,0,2,2,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
-
-        btnClear = new JButton("C");
-        pnlKeypad.add(btnClear, Griddy.getConstraints(2,4,1,1,0,0,1,1,0,0,2,2,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
-
         tfQty = new JTextField();
-        pnlKeypad.add(tfQty, Griddy.getConstraints(0,5,3,1,0,0,1,1,2,2,2,2,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
+        pnlKeypad.add(tfQty, Griddy.getConstraints(0,1,3,1,0,0,1,1,2,2,2,2,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
 
-        btnOK = new JButton("OK", new ImageIcon(UIElements.plus16));
-        pnlKeypad.add(btnOK, Griddy.getConstraints(0,6,3,1,0,0,1,1,2,2,2,2,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
+        btnAdd = new JButton("Add", new ImageIcon(UIElements.plus16));
+        pnlKeypad.add(btnAdd, Griddy.getConstraints(0,2,1,1,0,0,1,1,2,2,2,2,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
 
         btnRemove = new JButton("Remove", new ImageIcon(UIElements.minus16));
-        pnlKeypad.add(btnRemove, Griddy.getConstraints(0,7,3,1,0,0,1,1,0,2,2,2,GridBagConstraints.BOTH,GridBagConstraints.EAST));
+        pnlKeypad.add(btnRemove, Griddy.getConstraints(1,2,1,1,0,0,0,0,2,2,2,2,GridBagConstraints.BOTH,GridBagConstraints.EAST));
 
-        this.add(pnlKeypad, Griddy.getConstraints(2,0,1,1,0,0,1,1,0,1,0,0,1,GridBagConstraints.CENTER));
+        this.add(pnlKeypad, Griddy.getConstraints(1,0,1,1,0,0,1,1,0,1,0,0,1,GridBagConstraints.CENTER));
 
 // CHECKOUT PANEL (right, bottom corner)
 
@@ -116,8 +82,10 @@ public class SaleMain extends JFrame {
 
             rbCash = new JRadioButton("Cash");
             rbCash.setBackground(UIElements.getColour());
+            rbCash.addActionListener(this);
             rbCC = new JRadioButton("Credit Card");
             rbCC.setBackground(UIElements.getColour());
+            rbCC.addActionListener(this);
 
             radioGroup.add(rbCash);
             radioGroup.add(rbCC);
@@ -130,7 +98,7 @@ public class SaleMain extends JFrame {
         btnCheckout = new JButton("Checkout", new ImageIcon(UIElements.save16));
         pnlCheckout.add(btnCheckout, Griddy.getConstraints(0,3,2,2,0,0,1,1,0,0,0,0,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
 
-        this.add(pnlCheckout, Griddy.getConstraints(2,1,1,1,0,0,1,1,0,1,0,0,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
+        this.add(pnlCheckout, Griddy.getConstraints(1,1,1,1,0,0,1,1,0,1,0,0,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
 
 // SALE INFO PANEL
 
@@ -183,7 +151,7 @@ public class SaleMain extends JFrame {
         lblChangeDueR = new JLabel("0");
         pnlSaleInfo.add(lblChangeDueR, Griddy.getConstraints(1,8,1,1,0,0,0,0,0,0,5,0,0,GridBagConstraints.EAST));
 
-        this.add(pnlSaleInfo, Griddy.getConstraints(1,1,1,1,0,0,1,1,0,0,0,0,GridBagConstraints.BOTH,GridBagConstraints.EAST));
+        this.add(pnlSaleInfo, Griddy.getConstraints(1,2,1,1,0,0,1,1,0,0,0,0,GridBagConstraints.BOTH,GridBagConstraints.EAST));
 
 // LOGGED IN PANEL
 
@@ -207,12 +175,31 @@ public class SaleMain extends JFrame {
         lblLoggedPosition = new JLabel("Sales");
         pnlLoggedIn.add(lblLoggedPosition, Griddy.getConstraints(1,3,1,1,0,0,0,0,0,5,10,5,0,GridBagConstraints.WEST));
 
-        this.add(pnlLoggedIn, Griddy.getConstraints(0,1,1,1,0,0,0,0,0,0,0,0,GridBagConstraints.BOTH,GridBagConstraints.WEST));
-
-
-
+        this.add(pnlLoggedIn, Griddy.getConstraints(1,3,1,1,0,0,0,0,0,0,0,0,GridBagConstraints.BOTH,GridBagConstraints.WEST));
 
         this.setVisible(true);
+    }
 
+// METHODS
+
+    // set cash tender from cash
+    public void setCashTenderR(double cashIn){
+        lblCashTenderR.setText(Double.toString(cashIn));
+    }
+
+    // set cash tender to CC
+    public void setCashTenderR(String approved){
+        lblCashTenderR.setText(approved);
+    }
+
+// BUTTON ACTIONS
+
+    public void actionPerformed(ActionEvent e){
+        if(e.getSource().equals(rbCash) && rbCash.isSelected()){
+            Cash cashola = new Cash();
+        }
+        else if (e.getSource().equals(rbCC) && rbCC.isSelected()){
+            CreditCard cc = new CreditCard(this);
+        }
     }
 }

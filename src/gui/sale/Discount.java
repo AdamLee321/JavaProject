@@ -16,11 +16,11 @@ import java.awt.event.ActionListener;
 
 public class Discount extends JDialog implements ActionListener {
 
-    JButton btnApply, btnCancel;
-    JTextField tfPercent, tfMemberId;
-    JRadioButton rbPercent, rbMemberId;
-    ButtonGroup radioGroup = new ButtonGroup(); // for mutual exclusivity of radio buttons
-    JPanel main;
+    private JButton btnApply, btnCancel;
+    private JTextField tfPercent, tfMemberId;
+    private JRadioButton rbPercent, rbMemberId;
+    private ButtonGroup radioGroup = new ButtonGroup(); // for mutual exclusivity of radio buttons
+    private JPanel main; // need main because can't set border on JFrame
     
     public Discount(){
 

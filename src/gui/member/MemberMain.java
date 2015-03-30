@@ -22,8 +22,8 @@ public class MemberMain implements ActionListener {
     private JTextField searchField;
     private JPanel northPanel, managePanel, searchPanel, southPanel, centerPanel;
 
-    AdminMain am;  // declare for usage with JDialogs as parent. No need to initialize
-    EmployeeOperations eo;
+    private AdminMain am;  // declare for usage with JDialogs as parent. No need to initialize
+    private EmployeeOperations eo;
   //  Employee e;
 
     public JPanel getMemberMain(){

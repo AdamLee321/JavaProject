@@ -22,11 +22,11 @@ public class ProductMain implements ActionListener {
     private JComboBox prodTypes, brandTypes, modelTypes;
     private JPanel managePanel, northPanel, southPanel, searchPanel, searchTopPanel, searchBottomPanel;
 
-    String[] prodTypess = {"All", "Sales", "Management"};  // this just a placeholder, real info will be populated from DB
-    String[] brandTypess = {"All", "DELL", "HP", "Apple"};  // this just a placeholder, real info will be populated from DB
-    String[] modelTypess = {"All", "Inpiron 5150", "Latitude 1350"};  // this just a placeholder, real info will be populated from DB
+    private String[] prodTypess = {"All", "Sales", "Management"};  // this just a placeholder, real info will be populated from DB
+    private String[] brandTypess = {"All", "DELL", "HP", "Apple"};  // this just a placeholder, real info will be populated from DB
+    private String[] modelTypess = {"All", "Inpiron 5150", "Latitude 1350"};  // this just a placeholder, real info will be populated from DB
 
-    AdminMain am;
+    private AdminMain am;
 
     public JPanel getProductMain(){
 
