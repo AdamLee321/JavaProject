@@ -92,41 +92,46 @@ public class CreateEmployee {
             pstmt.setInt(10, 1984); // employee dob year
             pstmt.setString(11, "ruth.ward@gmail.com");  //employee email
             pstmt.setInt(12, 12000); // employee salary
-            pstmt.setString(13, "ruthward"); // employee username
-            pstmt.setString(14, "1234"); // employee password
-            pstmt.setString(15, "0"); // employee picture
+            pstmt.setString(13, "0"); // employee picture
+            pstmt.setString(14, "ruthward"); // employee username
+            pstmt.setString(15, "1234"); // employee password
             pstmt.execute();
-/*
+
             pstmt.setInt(1,4);
             pstmt.setString(2, "Norma");
             pstmt.setString(3, "Brown");
-            pstmt.setString(4, "Sales");
+            pstmt.setString(4, "Admin");
             pstmt.setString(5, "2 Carriers Road");
             pstmt.setString(6, "Crumlin");
             pstmt.setString(7, "Dublin");
-            pstmt.setString(8, "08-MAY-1967");
-            pstmt.setString(9, "norma.brown@gmail.com");
-            pstmt.setInt(10, 19000);
-            pstmt.setString(11, null);
-            pstmt.setString(12, "normabrown");
-            pstmt.setString(13, "1234");
+            pstmt.setInt(8, 8);
+            pstmt.setString(9, "May");
+            pstmt.setInt(10, 1984);
+            pstmt.setString(11, "norma.brown@gmail.com");
+            pstmt.setInt(12, 19000);
+            pstmt.setString(13, "0");
+            pstmt.setString(14, "normabrown");
+            pstmt.setString(15, "1234");
             pstmt.execute();
 
-            pstmt.setInt(1, 5);
+            pstmt.setInt(1,5);
             pstmt.setString(2, "Teresa");
             pstmt.setString(3, "Griffin");
-            pstmt.setString(4, "Sales");
+            pstmt.setString(4, "Manager");
             pstmt.setString(5, "31 Monks Way");
             pstmt.setString(6, "Bluebell");
             pstmt.setString(7, "Dublin");
-            pstmt.setString(8, "09-JUL-1969");
-            pstmt.setString(9, "Teresa.griffin@outlook.com");
-            pstmt.setInt(10, 17000);
-            pstmt.setString(11, null);
-            pstmt.setString(12, "teresagriffin");
-            pstmt.setString(13, "1234");
+            pstmt.setInt(8, 9);
+            pstmt.setString(9, "JUL");
+            pstmt.setInt(10, 1969);
+            pstmt.setString(11, "Teresa.griffin@outlook.com");
+            pstmt.setInt(12, 17000);
+            pstmt.setString(13, "0");
+            pstmt.setString(14, "teresagriffin");
+            pstmt.setString(15, "1234");
             pstmt.execute();
 
+/*
             pstmt.setInt(1,3);
             pstmt.setString(2, "Arthur");
             pstmt.setString(3, "Watson");

@@ -48,7 +48,7 @@ public class Main {
     //connDB.closeDB();
 
 
-    StartWindow sw = new StartWindow();
+    new StartWindow();
      // AdminMain am = new AdminMain();
      // SaleMain sm = new SaleMain();
   }

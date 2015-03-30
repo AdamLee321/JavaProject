@@ -25,16 +25,12 @@ public class ProductOperations {
                   // Blob prodPic,\n" +
                   "prodType, cpu, ram, OperatingSystem, storage, screen, prodDesc FROM PRODUCT WHERE prodDesc " +
                   "like '%" +keyword +"%'";
-            System.out.println(sql);
-
         }
         else {
             sql = "SELECT prodId, prodMake, prodModel, prodSalePrice, prodCostPrice, prodQTY," +
                   "prodType, cpu, ram, OperatingSystem, storage, screen, prodDesc FROM PRODUCT WHERE prodDesc " +
                   "like '%" + keyword + "%' AND prodType = '" + category +"'";
-            System.out.println(sql);
         }
-
         try{
             stmt = conn.createStatement();
             rset = stmt.executeQuery(sql);
@@ -50,14 +46,11 @@ public class ProductOperations {
             sql = "SELECT prodId, prodMake, prodModel, prodSalePrice, prodCostPrice, prodQTY, "+
                     // Blob prodPic,\n" +
                     "prodType, cpu, ram, OperatingSystem, storage, screen, prodDesc FROM PRODUCT";
-            System.out.println(sql);
         }
         else
             sql = "SELECT prodId, prodMake, prodModel, prodSalePrice, prodCostPrice, prodQTY," +
                 "prodType, cpu, ram, OperatingSystem, storage, screen, prodDesc FROM PRODUCT WHERE prodType =" +
                 "'" + category + "'";
-        System.out.println(sql);
-
         try{
             stmt = conn.createStatement();
             rset = stmt.executeQuery(sql);
@@ -71,8 +64,6 @@ public class ProductOperations {
         Product p = null;
         String sql = "SELECT prodId, prodMake, prodModel, prodSalePrice, prodCostPrice, prodQTY," +
                 "prodType, cpu, ram, OperatingSystem, storage, screen, prodDesc FROM PRODUCT WHERE prodId = '"+id+"'";
-        System.out.println(sql);
-
         try{
             stmt = conn.createStatement();
             rset = stmt.executeQuery(sql);
@@ -83,7 +74,6 @@ public class ProductOperations {
                         rset.getString(7), rset.getString(8), rset.getString(9), rset.getString(10),
                         rset.getString(11), rset.getString(12), rset.getString(13));
             }
-
         }catch(SQLException sqlE){
             System.out.println("Error in ResultSet to product Conversion");
         }

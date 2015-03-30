@@ -1,8 +1,11 @@
 package gui.terminal;
 
-public class ProductRow {
+/*
+ * David Lawlor X00107563
+ * Date 30/03/2015
+ */
 
-    int Id;
+public class ProductRow {
 
     int productID;
     String make;
@@ -10,10 +13,7 @@ public class ProductRow {
     double price;
     int quantity;
 
-    final static int INSERTED = -1;
-
     public ProductRow() {
-        this.Id = INSERTED;
         this.productID = 0;
         this.make = new String();
         this.model = new String();

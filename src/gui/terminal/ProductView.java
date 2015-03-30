@@ -1,16 +1,18 @@
 package gui.terminal;
 
 import gui.Griddy;
+import gui.UIElements;
 import model.Product;
-
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 
-/**
- * Created by DL on 09/03/2015.
+/*
+ * David Lawlor X00107563
+ * Date 30/03/2015
  */
+
 public class ProductView {
 
 
@@ -32,7 +34,7 @@ public class ProductView {
 
         JTextField priceTf = new JTextField();
         setTextBoxDefaults(priceTf);
-        priceTf.setText("€" +Double.toString(p.getProdCostPrice()));
+        priceTf.setText("€" + Double.toString(p.getProdCostPrice()));
 
         JTextField qtyTf = new JTextField();
         setTextBoxDefaults(qtyTf);
@@ -84,7 +86,7 @@ public class ProductView {
         details.setBorder(detailsTitleBorder);
 
         details.add(new JLabel("Product ID"), Griddy.getConstraints(0,0,1,1,10,10,0,0,10,0,0,0,0,GridBagConstraints.EAST));
-        details.add(idTf, Griddy.getConstraints(1,0,1,1,10,10,0,0,10,0,0,0,0,GridBagConstraints.CENTER));
+        details.add(idTf, Griddy.getConstraints(1, 0, 1, 1, 10, 10, 0, 0, 10, 0, 0, 0, 0, GridBagConstraints.CENTER));
 
         details.add(new JLabel("Make"), Griddy.getConstraints(0,1,1,1,10,10,0,0,10,0,0,0,0,GridBagConstraints.EAST));
         details.add(makeTf, Griddy.getConstraints(1,1,1,1,10,10,0,0,10,0,0,0,0,GridBagConstraints.CENTER));
@@ -104,7 +106,7 @@ public class ProductView {
         specifications.setBorder(specificationsTitleBorder);
 
         specifications.add(new JLabel("CPU"), Griddy.getConstraints(0,0,1,1,10,10,0,0,10,0,0,0,0, GridBagConstraints.FIRST_LINE_END));
-        specifications.add(cpuTf, Griddy.getConstraints(1,0,1,1,10,10,0,0,10,0,0,0,0, GridBagConstraints.FIRST_LINE_START));
+        specifications.add(cpuTf, Griddy.getConstraints(1, 0, 1, 1, 10, 10, 0, 0, 10, 0, 0, 0, 0, GridBagConstraints.FIRST_LINE_START));
 
         specifications.add(new JLabel("RAM"), Griddy.getConstraints(0,1,1,1,10,10,0,0,10,0,0,0,0, GridBagConstraints.FIRST_LINE_END));
         specifications.add(ramTf, Griddy.getConstraints(1,1,1,1,10,10,0,0,10,0,0,0,0,GridBagConstraints.FIRST_LINE_START));
@@ -119,10 +121,10 @@ public class ProductView {
         specifications.add(screenTf, Griddy.getConstraints(1,4,1,1,10,10,0,0,10,0,0,0,0,GridBagConstraints.FIRST_LINE_START));
 
         JPanel productDetails = new JPanel(new GridBagLayout());
-        productDetails.setBorder(BorderFactory.createLineBorder(new Color(98, 169, 221), 20));
+        productDetails.setBorder(BorderFactory.createLineBorder(UIElements.getColour(), 20));
 
         productDetails.add(productPicture, Griddy.getConstraints(0,0,1,1,10,10,0,0,0,0,0,0,0,GridBagConstraints.WEST));
-        productDetails.add(details, Griddy.getConstraints(1,0,1,1,10,10,0,0,0,0,0,0,0,GridBagConstraints.CENTER));
+        productDetails.add(details, Griddy.getConstraints(1, 0, 1, 1, 10, 10, 0, 0, 0, 0, 0, 0, 0, GridBagConstraints.CENTER));
         productDetails.add(specifications, Griddy.getConstraints(2,0,1,1,10,10,0,0,0,0,0,0,0,GridBagConstraints.EAST));
         productDetails.add(description, Griddy.getConstraints(1,1,2,1,10,10,0,0,0,0,0,0,0,GridBagConstraints.CENTER));
 

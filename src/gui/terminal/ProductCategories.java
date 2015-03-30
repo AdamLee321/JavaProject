@@ -1,12 +1,13 @@
-package gui.terminal;/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+package gui.terminal;
+
+/*
+ * David Lawlor X00107563
+ * Date 30/03/2015
  */
+
 import database.operations.ProductOperations;
 import gui.Griddy;
 import gui.UIElements;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;

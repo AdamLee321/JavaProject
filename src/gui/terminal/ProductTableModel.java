@@ -1,17 +1,17 @@
 package gui.terminal;
 
-import database.operations.ProductOperations;
+/*
+ * David Lawlor X00107563
+ * Date 30/03/2015
+ */
 
-import javax.swing.*;
+import database.operations.ProductOperations;
 import javax.swing.event.TableModelEvent;
-import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 public class ProductTableModel extends DefaultTableModel {

@@ -1,8 +1,9 @@
-package gui.terminal;/*2ndYearProject
-  gui
-  Created by David
-  14:56   06/03/2015
-*/
+package gui.terminal;
+
+/*
+ * David Lawlor X00107563
+ * Date 30/03/2015
+ */
 
 import database.operations.ProductOperations;
 import gui.Griddy;
@@ -250,6 +251,4 @@ public class TerminalMode extends JFrame implements ActionListener {
   public static void setMf(TerminalMode mf) {
     TerminalMode.mf = mf;
   }
-
-
 }

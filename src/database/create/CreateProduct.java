@@ -1,12 +1,12 @@
 package database.create;
 
-import database.ConnectionDB;
+/*
+ * David Lawlor X00107563
+ * Date 02/03/2015
+ */
 
 import java.sql.*;
 
-/**
- * Created by DL on 02/03/2015.
- */
 public class CreateProduct {
     private PreparedStatement pstmt;
     private Statement stmt;
