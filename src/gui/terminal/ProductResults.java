@@ -16,7 +16,7 @@ public class ProductResults extends JPanel {
     private JTable productTable;
     ProductTableModel tableModel;
     protected static final int tableHeight = 200;
-    MainFrame mf;
+    TerminalMode mf;
 
 
     public JPanel getResults(String category, String keyword) throws SQLException{
@@ -57,7 +57,7 @@ public class ProductResults extends JPanel {
                 int i = row.getSelectedRow();
                 int productId = (Integer)productTable.getValueAt(i, 0);
                 System.out.println(productId);
-                MainFrame.mf.setToProductView(productId);
+                TerminalMode.mf.setToProductView(productId);
             }
         });
 

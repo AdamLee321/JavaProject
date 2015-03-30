@@ -8,9 +8,10 @@ package main;/*2ndYearProject
 
 import database.ConnectionDB;
 import database.create.*;
+import gui.StartWindow;
 import gui.admin.AdminMain;
 import gui.sale.SaleMain;
-import gui.terminal.MainFrame;
+import gui.terminal.TerminalMode;
 
 public class Main {
   public static void main(String[] args) {
@@ -46,10 +47,9 @@ public class Main {
 
     //connDB.closeDB();
 
-      MainFrame mf = new MainFrame();
-      mf.setVisible(true);
-      MainFrame.setMf(mf);
-      AdminMain am = new AdminMain();
-      SaleMain sm = new SaleMain();
+
+    StartWindow sw = new StartWindow();
+     // AdminMain am = new AdminMain();
+     // SaleMain sm = new SaleMain();
   }
 }

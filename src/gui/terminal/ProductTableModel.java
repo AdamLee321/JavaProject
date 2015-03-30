@@ -51,7 +51,6 @@ public class ProductTableModel extends DefaultTableModel {
 
     public void queryTableData(String category, String keyword) throws SQLException {
         ProductOperations po = new ProductOperations();
-        System.out.println("herewerrt");
         ResultSet rset = po.searchProducts(keyword, category);
         emptyArray();
         while (rset.next()) {

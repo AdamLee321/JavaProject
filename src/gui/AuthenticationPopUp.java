@@ -29,7 +29,7 @@ public class AuthenticationPopUp {
         auth.setLocationRelativeTo(null);
         auth.getContentPane().setBackground(new Color(98, 169, 221));
 
-        imageLabel = new JLabel(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\64\\user.png"));
+        imageLabel = new JLabel(new ImageIcon(UIElements.person32));
         auth.add(imageLabel, getConstraints(0,0,1,3, GridBagConstraints.CENTER));
 
         usernameLabel = new JLabel("Username");  // label

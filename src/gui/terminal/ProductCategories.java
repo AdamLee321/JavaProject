@@ -4,6 +4,8 @@ package gui.terminal;/*
  * and open the template in the editor.
  */
 import database.operations.ProductOperations;
+import gui.Griddy;
+import gui.UIElements;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,7 +26,7 @@ public class ProductCategories implements ActionListener {
 
     public JPanel getCategories(){
         categoriesPanel = new JPanel(new GridBagLayout());
-        categoriesPanel.setBackground(new Color(98, 169, 221));
+        categoriesPanel.setBackground(UIElements.getColour());
 
         desktops = new JButton("Desktops", new ImageIcon("src/res/images/Product Categories/desktop100.png"));
         desktops.setVerticalTextPosition(SwingConstants.BOTTOM);
@@ -46,10 +48,14 @@ public class ProductCategories implements ActionListener {
         allInOne.setHorizontalTextPosition(SwingConstants.CENTER);
         allInOne.addActionListener(this);
 
-        categoriesPanel.add(desktops, MainFrame.getConstraints(0, 0, 1, 1, GridBagConstraints.CENTER, 0, 25, 0, 25));
-        categoriesPanel.add(laptops, MainFrame.getConstraints(1, 0, 1, 1, GridBagConstraints.CENTER, 0, 25, 0, 25));
-        categoriesPanel.add(apple, MainFrame.getConstraints(2, 0, 1, 1, GridBagConstraints.CENTER, 0, 25, 0, 25));
-        categoriesPanel.add(allInOne, MainFrame.getConstraints(3, 0, 1, 1, GridBagConstraints.CENTER, 0, 25, 0, 25));
+        //categoriesPanel.add(desktops, TerminalMode.getConstraints(0, 0, 1, 1, GridBagConstraints.CENTER, 0, 25, 0, 25));
+        categoriesPanel.add(desktops, Griddy.getConstraints(0,0,1,1,10,10,0,0,0,25,25,0,0,GridBagConstraints.CENTER));
+        //categoriesPanel.add(laptops, TerminalMode.getConstraints(1, 0, 1, 1, GridBagConstraints.CENTER, 0, 25, 0, 25));
+        categoriesPanel.add(laptops, Griddy.getConstraints(1,0,1,1,10,10,0,0,0,25,25,0,0,GridBagConstraints.CENTER));
+        //categoriesPanel.add(apple, TerminalMode.getConstraints(2, 0, 1, 1, GridBagConstraints.CENTER, 0, 25, 0, 25));
+        categoriesPanel.add(apple, Griddy.getConstraints(2,0,1,1,10,10,0,0,0,25,25,0,0,GridBagConstraints.CENTER));
+        //categoriesPanel.add(allInOne, TerminalMode.getConstraints(3, 0, 1, 1, GridBagConstraints.CENTER, 0, 25, 0, 25));
+        categoriesPanel.add(allInOne, Griddy.getConstraints(3,0,1,1,10,10,0,0,0,25,25,0,0,GridBagConstraints.CENTER));
 
         return categoriesPanel;
 
@@ -72,7 +78,7 @@ public class ProductCategories implements ActionListener {
         else if(e.getSource().equals(allInOne)){
             category = allInOne.getText();
         };
-        MainFrame.mf.setToProductResults(category);
+        TerminalMode.mf.setToProductResults(category);
 
     }
 }

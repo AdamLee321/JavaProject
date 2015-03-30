@@ -1,14 +1,11 @@
 package gui.terminal;
 
-import database.operations.ProductOperations;
-import gui.terminal.MainFrame;
+import gui.Griddy;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.ResultSet;
 
 /**
  * Created by DL on 08/03/2015.
@@ -45,11 +42,21 @@ public class ProductSearch implements ActionListener{
         searchButton = new JButton("Search", new ImageIcon("src/res/images/UI Elements/search16.png"));
         searchButton.addActionListener(this);
 
-        jp.add(textboxLabel, MainFrame.getConstraints(0, 0, 2, 1, GridBagConstraints.CENTER, 0, 0, 10, 0));
-        jp.add(searchText, MainFrame.getConstraints(0, 1, 2, 1, GridBagConstraints.CENTER, 0, 0, 20, 0));
-        jp.add(categoryLabel, MainFrame.getConstraints(0, 2, 1, 1, GridBagConstraints.CENTER, 0, 0, 20, 0));
-        jp.add(category, MainFrame.getConstraints(1, 2, 1, 1, GridBagConstraints.LAST_LINE_END, 0, 0, 20, 0));
-        jp.add(searchButton, MainFrame.getConstraints(0, 3, 2, 1, GridBagConstraints.CENTER, 0, 0, 0, 0));
+        //jp.add(textboxLabel, TerminalMode.getConstraints(0, 0, 2, 1, GridBagConstraints.CENTER, 0, 0, 10, 0));
+        jp.add(textboxLabel, Griddy.getConstraints(0,0,2,1,10,10,0,0,0,0,0,10,0,GridBagConstraints.CENTER));
+
+        //jp.add(searchText, TerminalMode.getConstraints(0, 1, 2, 1, GridBagConstraints.CENTER, 0, 0, 20, 0));
+        jp.add(searchText, Griddy.getConstraints(0,1,2,1,10,10,0,0,0,0,0,20,0,GridBagConstraints.CENTER));
+
+        //jp.add(categoryLabel, TerminalMode.getConstraints(0, 2, 1, 1, GridBagConstraints.CENTER, 0, 0, 20, 0));
+        jp.add(categoryLabel, Griddy.getConstraints(0,2,1,1,10,10,0,0,0,0,0,20,0,GridBagConstraints.CENTER));
+
+        //jp.add(category, TerminalMode.getConstraints(1, 2, 1, 1, GridBagConstraints.LAST_LINE_END, 0, 0, 20, 0));
+        jp.add(category, Griddy.getConstraints(1,2,1,1,10,10,0,0,0,0,0,20,0,GridBagConstraints.LAST_LINE_END));
+
+
+        //jp.add(searchButton, TerminalMode.getConstraints(0, 3, 2, 1, GridBagConstraints.CENTER, 0, 0, 0, 0));
+        jp.add(searchButton, Griddy.getConstraints(0,3,2,1,10,10,0,0,0,0,0,0,0,GridBagConstraints.CENTER));
 
 
 
@@ -64,7 +71,7 @@ public class ProductSearch implements ActionListener{
             System.out.println("Search1");
             String categoryName = (String) category.getSelectedItem();
 
-            MainFrame.mf.setToProductResults(categoryName, searchText.getText());
+            TerminalMode.mf.setToProductResults(categoryName, searchText.getText());
         }
 
     }
