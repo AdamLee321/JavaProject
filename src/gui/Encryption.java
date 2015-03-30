@@ -1,9 +1,12 @@
 package gui;
 
-/**
- * @author Thomas Murphy
- */
-//Taken From the Sun Java Encryption Tutorial on the jva api Website [Java.sun.api Example 1 decryption]
+/*
+IT Tallaght - 2015, S2
+Computing - Year 2, Project
+Group 17 (Group - 30/03/2015)
+
+Sourced from Sun Java Encryption Tutorial on the java api Website [Java.sun.api Example 1 decryption]
+*/
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;

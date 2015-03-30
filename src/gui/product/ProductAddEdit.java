@@ -38,12 +38,12 @@ public class ProductAddEdit implements ActionListener {
 // CENTER PANEL
 
         centerPanel = new JPanel(new GridBagLayout()); // flow by default
-        centerPanel.setBackground(new Color(98, 169, 221));
+        centerPanel.setBackground(UIElements.getColour());
 
     // CENTER LEFT PANEL - Product Picture
 
         centerLeftPanel = new JPanel(new GridBagLayout());
-        centerLeftPanel.setBackground(new Color(98, 169, 221));
+        centerLeftPanel.setBackground(UIElements.getColour());
         centerLeftPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Product Picture", 2, 2)); // set anonymous titled, etched border, centered title
 
         imgLabel = new JLabel(new ImageIcon(UIElements.product128));
@@ -64,7 +64,7 @@ public class ProductAddEdit implements ActionListener {
     // CENTER RIGHT PANEL - Product Details
 
         centerRightPanel = new JPanel(new GridBagLayout());
-        centerRightPanel.setBackground(new Color(98, 169, 221));
+        centerRightPanel.setBackground(UIElements.getColour());
         centerRightPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Product Details", 2, 2)); // set anonymous titled, etched border, centered title
 
         // id
@@ -154,7 +154,7 @@ public class ProductAddEdit implements ActionListener {
 // SOUTH PANEL
 
         southPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        southPanel.setBackground(new Color(98, 169, 221));
+        southPanel.setBackground(UIElements.getColour());
 
         cancelButton = new JButton("Cancel");
         cancelButton.setPreferredSize(new Dimension(100, 26));

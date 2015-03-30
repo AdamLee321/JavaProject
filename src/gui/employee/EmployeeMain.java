@@ -1,6 +1,7 @@
 package gui.employee;
 
 import database.operations.EmployeeOperations;
+import gui.Griddy;
 import gui.UIElements;
 import gui.admin.AdminMain;
 import model.Employee;
@@ -83,6 +84,7 @@ public class EmployeeMain implements ActionListener {
         managePanel.add(deleteButton);
 
         northPanel.add(managePanel, getConstraints(0,0,1,1,1,0,0, GridBagConstraints.CENTER));
+//        northPanel.add(managePanel, Griddy.getConstraints(0,0,1,1,0,0,0,0,5,0,0,5,GridBagConstraints.HORIZONTAL,GridBagConstraints.CENTER));
 
     // search employees panel
 
@@ -104,6 +106,7 @@ public class EmployeeMain implements ActionListener {
 
         // add all the above to northPanel
         northPanel.add(searchPanel, getConstraints(1,0,1,1,1,0,0,GridBagConstraints.CENTER));
+//        northPanel.add(searchPanel, Griddy.getConstraints(1,0,1,1,0,0,0,0,5,0,0,5,GridBagConstraints.HORIZONTAL,GridBagConstraints.CENTER));
 
         // add northPanel to main
         empMain.add(northPanel, BorderLayout.NORTH);
@@ -124,7 +127,7 @@ public class EmployeeMain implements ActionListener {
 // SOUTH PANEL
 
         southPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        southPanel.setBackground(new Color(98, 169, 221));
+        southPanel.setBackground(UIElements.getColour());
 
     // bottom buttons
 

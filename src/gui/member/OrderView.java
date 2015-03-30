@@ -81,17 +81,10 @@ public class OrderView extends JDialog implements MouseListener, ActionListener 
 // BUTTON ACTIONS
 
     // have to implement these methods for MouseListener
-    public void mouseExited(MouseEvent e) {
-    }
-
-    public void mouseReleased(MouseEvent e) {
-    }
-
-    public void mousePressed(MouseEvent e) {
-    }
-
-    public void mouseEntered(MouseEvent e) {
-    }
+    public void mouseExited(MouseEvent e) {}
+    public void mouseReleased(MouseEvent e) {}
+    public void mousePressed(MouseEvent e) {}
+    public void mouseEntered(MouseEvent e) {}
 
     public void mouseClicked(MouseEvent e) {
         if (e.getSource().equals(tfSearch)) {

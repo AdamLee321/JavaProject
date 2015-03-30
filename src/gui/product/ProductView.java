@@ -39,15 +39,15 @@ public class ProductView implements ActionListener {
 // CENTER PANEL
 
         centerPanel = new JPanel(new GridBagLayout()); // flow by default
-        centerPanel.setBackground(new Color(98, 169, 221));
+        centerPanel.setBackground(UIElements.getColour());
 
     // CENTER LEFT PANEL - Product Picture
 
         centerLeftPanel = new JPanel(new GridBagLayout());
-        centerLeftPanel.setBackground(new Color(98, 169, 221));
+        centerLeftPanel.setBackground(UIElements.getColour());
         centerLeftPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Product Picture", 2, 2)); // set anonymous titled, etched border, centered title
 
-        imgLabel = new JLabel(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\128\\save.png"));
+        imgLabel = new JLabel(new ImageIcon(UIElements.product128));
         centerLeftPanel.add(imgLabel, Griddy.getConstraints(0,0,3,1,0,0,0,0,5,5,5,5,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
 
         addButton = new JButton("Add");
@@ -65,7 +65,7 @@ public class ProductView implements ActionListener {
     // CENTER RIGHT PANEL - Product Details
 
         centerRightPanel = new JPanel(new GridBagLayout());
-        centerRightPanel.setBackground(new Color(98, 169, 221));
+        centerRightPanel.setBackground(UIElements.getColour());
         centerRightPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Product Details", 2, 2)); // set anonymous titled, etched border, centered title
 
         // id
@@ -155,7 +155,7 @@ public class ProductView implements ActionListener {
 // SOUTH PANEL
 
         southPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        southPanel.setBackground(new Color(98, 169, 221));
+        southPanel.setBackground(UIElements.getColour());
 
         cancelButton = new JButton("Back");
         cancelButton.setPreferredSize(new Dimension(100, 26));
