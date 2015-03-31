@@ -70,6 +70,5 @@ public class Main {
         new StartWindow().setVisible(true);
       }
     });
-
   }
 }

@@ -21,7 +21,7 @@ public class EmployeeAddEdit implements ActionListener {
     private JLabel profilePictureLabel, empIdLabel, empFNameLabel, empLNameLabel, empStreetLabel, empCityLabel, empCountyLabel, empDOB, empEmailLabel, empUsernameLabel, empPasswordLabel, empPositionLabel, empSalaryLabel, empDeptLabel;
     private JTextField empIdField, empFNameField, empLNameField, empStreetField, empCityField, empCountyField, empEmailField, empUsernameField, empPasswordField, empPositionField, empSalaryField, empDeptField;
     private JComboBox<String> birthDayCBox, birthMonthCBox, birthYearCBox;;
-    private JButton addButton, removeButton, cancelButton, previewButton, okButton, passGenButton;
+    private JButton addButton, removeButton, cancelButton, previewButton, okButton, passGenButton, usernameGenButton;
 
     private DateGen dg;
     private AdminMain am;  // used for JDialogs as parent
@@ -75,6 +75,7 @@ public class EmployeeAddEdit implements ActionListener {
         empIdLabel = new JLabel("Employee ID");
         detailsPanel.add(empIdLabel, Griddy.getConstraints(0,0,1,1,0,0,0,0,5,15,5,5,0,GridBagConstraints.WEST));
         empIdField = new JTextField();
+        empIdField.setEditable(false);
         detailsPanel.add(empIdField, Griddy.getConstraints(1,0,1,1,0,0,0,0,5,15,15,5,GridBagConstraints.HORIZONTAL,GridBagConstraints.CENTER));
 
         // Name
@@ -139,7 +140,12 @@ public class EmployeeAddEdit implements ActionListener {
         empUsernameLabel = new JLabel("Employee Username");
         detailsPanel.add(empUsernameLabel, Griddy.getConstraints(0,8,1,1,0,0,0,0,5,15,5,5,0,GridBagConstraints.WEST));
         empUsernameField = new JTextField();
-        detailsPanel.add(empUsernameField, Griddy.getConstraints(1,8,1,1,0,0,0,0,5,15,15,5,GridBagConstraints.HORIZONTAL,GridBagConstraints.CENTER));
+        detailsPanel.add(empUsernameField, Griddy.getConstraints(1,8,1,1,0,0,0,0,5,15,110,5,GridBagConstraints.HORIZONTAL,GridBagConstraints.WEST));
+
+        // Username Generator
+        usernameGenButton = new JButton("Generate");
+        usernameGenButton.addActionListener(this);
+        detailsPanel.add(usernameGenButton, Griddy.getConstraints(1,8,1,1,0,0,0,0,5,15,15,5,0,GridBagConstraints.EAST));
 
         // Password
         empPasswordLabel = new JLabel("Employee Password");
@@ -216,14 +222,36 @@ public class EmployeeAddEdit implements ActionListener {
         else if (e.getSource().equals(birthMonthCBox)){
             birthDayCBox.setModel(new DefaultComboBoxModel<String>(dg.getMonthDays(birthMonthCBox.getSelectedIndex() + 1, Integer.parseInt(birthYearCBox.getSelectedItem().toString()))));
         }
+        else if (e.getSource().equals(usernameGenButton)){
+            if (empFNameField.getText().equals("") && empLNameField.getText().equals("")){
+                JOptionPane.showMessageDialog(null,"First Name And Last Name Must Be Entered","Username Error",JOptionPane.ERROR_MESSAGE);
+            }
+            else if (empFNameField.getText().equals("")){
+                JOptionPane.showMessageDialog(null,"First Name Must Be Entered","Username Error",JOptionPane.ERROR_MESSAGE);
+            }
+            else if (empLNameField.getText().equals("")){
+                JOptionPane.showMessageDialog(null,"Last Name Must Be Entered","Username Error",JOptionPane.ERROR_MESSAGE);
+            }
+//            else {
+//                // if  must first search the database, see if the username matches anything if it matches, add a random generator
+//                empUsernameField.setText(empFNameField.getText() + "." + empLNameField.getText());
+//
+////                else{
+////                    empUsernameField // get already existing id + 1
+//                }
+//            }
+        }
+        else if (e.getSource().equals(passGenButton)){
+            empPasswordField.setText(PasswordGenerator.generatePassword());
+        }
         else if (e.getSource().equals(cancelButton)){
             employeeAdd.dispose();
         }
         else if (e.getSource().equals(previewButton)){
             EmployeePreview ep = new EmployeePreview(am);
         }
-        else if (e.getSource().equals(passGenButton)){
-            empPasswordField.setText(PasswordGenerator.generatePassword());
+        else if (e.getSource().equals(okButton)){
+            // must search the database, to see if the username matches anything if it matches, let user know
         }
     }
 }

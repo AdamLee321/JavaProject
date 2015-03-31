@@ -36,7 +36,7 @@ public class OrderView extends JDialog implements MouseListener, ActionListener 
 
         pnlNorth = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10)); // center and add padding
         pnlNorth.setBorder(BorderFactory.createEtchedBorder()); // set empty etched border
-        pnlNorth.setBackground(new Color(98, 169, 221));
+        pnlNorth.setBackground(UIElements.getColour());
 
         tfSearch = new JTextField(30);
         tfSearch.setText(textFieldTip); // set initial text field search
@@ -65,7 +65,7 @@ public class OrderView extends JDialog implements MouseListener, ActionListener 
 
         pnlSouth = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 10));
         pnlSouth.setBorder(BorderFactory.createEtchedBorder());
-        pnlSouth.setBackground(new Color(98, 169, 221));
+        pnlSouth.setBackground(UIElements.getColour());
 
         btnBack = new JButton("Back", new ImageIcon(UIElements.cancel6)); // initialize the search button, add a add and icon);
         btnBack.setPreferredSize(new Dimension(100, 26));

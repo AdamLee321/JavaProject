@@ -11,16 +11,14 @@ import gui.StartWindow;
 import gui.UIElements;
 import gui.employee.SalesView;
 import gui.member.MemberAddEdit;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class SaleMain extends JFrame implements ActionListener {
+public class SaleMain extends JFrame implements ActionListener, MouseListener {
 
     private JButton btnAdd, btnRemove, btnRegister, btnDiscount, btnReturnProduct, btnCheckout, btnLogout;
     private JRadioButton rbCash, rbCC;
@@ -32,6 +30,9 @@ public class SaleMain extends JFrame implements ActionListener {
 
     private DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
     private Date date = new Date();
+
+    private String prodFieldTip = "product number...";
+    private String qtyFieldTip = "quantity...";
 
     public SaleMain(){
 
@@ -50,9 +51,15 @@ public class SaleMain extends JFrame implements ActionListener {
         pnlKeypad.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Add Product")); // set anonymous titled, etched border
 
         tfProdNum = new JTextField();
+        tfProdNum.setText(prodFieldTip); // set initial text field search
+        tfProdNum.setForeground(Color.GRAY); // set initial colour to gray
+        tfProdNum.addMouseListener(this);
         pnlKeypad.add(tfProdNum, Griddy.getConstraints(0,0,3,1,0,0,1,1,2,2,2,2,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
 
         tfQty = new JTextField();
+        tfQty.setText(qtyFieldTip); // set initial text field search
+        tfQty.setForeground(Color.GRAY); // set initial colour to gray
+        tfQty.addMouseListener(this);
         pnlKeypad.add(tfQty, Griddy.getConstraints(0,1,3,1,0,0,1,1,2,2,2,2,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
 
         btnAdd = new JButton("Add", new ImageIcon(UIElements.plus16));
@@ -109,59 +116,6 @@ public class SaleMain extends JFrame implements ActionListener {
 
         this.add(pnlCheckout, Griddy.getConstraints(1,1,1,1,0,0,1,1,0,1,0,0,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
 
-// SALE INFO PANEL
-
-        pnlSaleInfo = new JPanel(new GridBagLayout());
-        pnlSaleInfo.setBackground(UIElements.getColour());
-        pnlSaleInfo.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Sale Info")); // set anonymous titled, etched border
-
-        lblSubtotal = new JLabel("SubTotal");
-        pnlSaleInfo.add(lblSubtotal, Griddy.getConstraints(0,0,1,1,0,0,1,0,0,5,0,0,0,GridBagConstraints.WEST));
-        lblSubtotalR = new JLabel("0");
-        pnlSaleInfo.add(lblSubtotalR, Griddy.getConstraints(1,0,1,1,0,0,0,0,0,0,5,0,0,GridBagConstraints.EAST));
-
-        lblVAT = new JLabel("VAT");
-        pnlSaleInfo.add(lblVAT, Griddy.getConstraints(0,1,1,1,0,0,0,0,0,5,0,0,0,GridBagConstraints.WEST));
-        lblVATR = new JLabel("0");
-        pnlSaleInfo.add(lblVATR, Griddy.getConstraints(1,1,1,1,0,0,0,0,0,0,5,0,0,GridBagConstraints.EAST));
-
-        lblDiscount = new JLabel("Discount");
-        pnlSaleInfo.add(lblDiscount, Griddy.getConstraints(0,2,1,1,0,0,0,0,0,5,0,0,0,GridBagConstraints.WEST));
-        lblDiscountR = new JLabel("0");
-        pnlSaleInfo.add(lblDiscountR, Griddy.getConstraints(1,2,1,1,0,0,0,0,0,0,5,0,0,GridBagConstraints.EAST));
-
-        lblTotal = new JLabel("Total");
-        pnlSaleInfo.add(lblTotal, Griddy.getConstraints(0,3,1,1,0,0,0,0,0,5,0,0,0,GridBagConstraints.WEST));
-        lblTotalR = new JLabel("0");
-        pnlSaleInfo.add(lblTotalR, Griddy.getConstraints(1,3,1,1,0,0,0,0,0,0,5,0,0,GridBagConstraints.EAST));
-
-        lblCustomer = new JLabel("Customer");
-        pnlSaleInfo.add(lblCustomer, Griddy.getConstraints(0,4,1,1,0,0,0,0,0,5,0,0,0,GridBagConstraints.WEST));
-        lblCustomerR = new JLabel("-");
-        pnlSaleInfo.add(lblCustomerR, Griddy.getConstraints(1,4,1,1,0,0,0,0,0,0,5,0,0,GridBagConstraints.EAST));
-
-        lblSalesperson = new JLabel("Salesperson");
-        pnlSaleInfo.add(lblSalesperson, Griddy.getConstraints(0,5,1,1,0,0,0,0,0,5,0,0,0,GridBagConstraints.WEST));
-        lblSalespersonR = new JLabel("-");
-        pnlSaleInfo.add(lblSalespersonR, Griddy.getConstraints(1,5,1,1,0,0,0,0,0,0,5,0,0,GridBagConstraints.EAST));
-
-        lblDate = new JLabel("Date");
-        pnlSaleInfo.add(lblDate, Griddy.getConstraints(0,6,1,1,0,0,0,0,0,5,0,0,0,GridBagConstraints.WEST));
-        lblDateR = new JLabel(dateFormat.format(date));
-        pnlSaleInfo.add(lblDateR, Griddy.getConstraints(1,6,1,1,0,0,0,0,0,0,5,0,0,GridBagConstraints.EAST));
-
-        lblPaymentType = new JLabel("Payment");
-        pnlSaleInfo.add(lblPaymentType, Griddy.getConstraints(0,7,1,1,0,0,0,0,0,5,0,0,0,GridBagConstraints.WEST));
-        lblPaymentTypeR = new JLabel("0");
-        pnlSaleInfo.add(lblPaymentTypeR, Griddy.getConstraints(1,7,1,1,0,0,0,0,0,0,5,0,0,GridBagConstraints.EAST));
-
-        lblChangeDue = new JLabel("Change Due");
-        pnlSaleInfo.add(lblChangeDue, Griddy.getConstraints(0,8,1,1,0,0,0,0,0,5,0,0,0,GridBagConstraints.WEST));
-        lblChangeDueR = new JLabel("0");
-        pnlSaleInfo.add(lblChangeDueR, Griddy.getConstraints(1,8,1,1,0,0,0,0,0,0,5,0,0,GridBagConstraints.EAST));
-
-        this.add(pnlSaleInfo, Griddy.getConstraints(1,2,1,1,0,0,1,1,0,0,0,0,GridBagConstraints.BOTH,GridBagConstraints.EAST));
-
 // LOGGED IN PANEL
 
         pnlLoggedIn = new JPanel(new GridBagLayout());
@@ -182,13 +136,69 @@ public class SaleMain extends JFrame implements ActionListener {
 
         btnLogout = new JButton("Log Out", new ImageIcon(UIElements.logout16));
         btnLogout.addActionListener(this);
-        pnlLoggedIn.add(btnLogout, Griddy.getConstraints(0,2,2,1,0,0,0,0,5,5,5,5,GridBagConstraints.HORIZONTAL,GridBagConstraints.CENTER));
+        pnlLoggedIn.add(btnLogout, Griddy.getConstraints(0, 2, 2, 1, 0, 0, 0, 0, 5, 5, 5, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER));
 
-        this.add(pnlLoggedIn, Griddy.getConstraints(1,3,1,1,0,0,0,0,0,0,0,0,GridBagConstraints.BOTH,GridBagConstraints.WEST));
+        this.add(pnlLoggedIn, Griddy.getConstraints(1, 3, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, GridBagConstraints.BOTH, GridBagConstraints.WEST));
+
+// SALE INFO PANEL
+
+        pnlSaleInfo = new JPanel(new GridBagLayout());
+        pnlSaleInfo.setBackground(UIElements.getColour());
+        pnlSaleInfo.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Sale Info")); // set anonymous titled, etched border
+
+        lblSubtotal = new JLabel("SubTotal");
+        pnlSaleInfo.add(lblSubtotal, Griddy.getConstraints(0, 0, 1, 1, 0, 0, 1, 0, 0, 5, 0, 0, 0, GridBagConstraints.WEST));
+        lblSubtotalR = new JLabel("-");
+        pnlSaleInfo.add(lblSubtotalR, Griddy.getConstraints(1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 5, 0, 0, GridBagConstraints.EAST));
+
+        lblVAT = new JLabel("VAT");
+        pnlSaleInfo.add(lblVAT, Griddy.getConstraints(0, 1, 1, 1, 0, 0, 0, 0, 0, 5, 0, 0, 0, GridBagConstraints.WEST));
+        lblVATR = new JLabel("-");
+        pnlSaleInfo.add(lblVATR, Griddy.getConstraints(1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 5, 0, 0, GridBagConstraints.EAST));
+
+        lblDiscount = new JLabel("Discount");
+        pnlSaleInfo.add(lblDiscount, Griddy.getConstraints(0, 2, 1, 1, 0, 0, 0, 0, 0, 5, 0, 0, 0, GridBagConstraints.WEST));
+        lblDiscountR = new JLabel("-");
+        pnlSaleInfo.add(lblDiscountR, Griddy.getConstraints(1, 2, 1, 1, 0, 0, 0, 0, 0, 0, 5, 0, 0, GridBagConstraints.EAST));
+
+        lblTotal = new JLabel("Total");
+        pnlSaleInfo.add(lblTotal, Griddy.getConstraints(0, 3, 1, 1, 0, 0, 0, 0, 0, 5, 0, 0, 0, GridBagConstraints.WEST));
+        lblTotalR = new JLabel("-");
+        pnlSaleInfo.add(lblTotalR, Griddy.getConstraints(1, 3, 1, 1, 0, 0, 0, 0, 0, 0, 5, 0, 0, GridBagConstraints.EAST));
+
+        lblCustomer = new JLabel("Customer");
+        pnlSaleInfo.add(lblCustomer, Griddy.getConstraints(0, 4, 1, 1, 0, 0, 0, 0, 0, 5, 0, 0, 0, GridBagConstraints.WEST));
+        lblCustomerR = new JLabel("-");
+        pnlSaleInfo.add(lblCustomerR, Griddy.getConstraints(1, 4, 1, 1, 0, 0, 0, 0, 0, 0, 5, 0, 0, GridBagConstraints.EAST));
+
+        lblSalesperson = new JLabel("Salesperson");
+        pnlSaleInfo.add(lblSalesperson, Griddy.getConstraints(0, 5, 1, 1, 0, 0, 0, 0, 0, 5, 0, 0, 0, GridBagConstraints.WEST));
+        lblSalespersonR = new JLabel(lblLoggedName.getText());
+        pnlSaleInfo.add(lblSalespersonR, Griddy.getConstraints(1, 5, 1, 1, 0, 0, 0, 0, 0, 0, 5, 0, 0, GridBagConstraints.EAST));
+
+        lblDate = new JLabel("Date");
+        pnlSaleInfo.add(lblDate, Griddy.getConstraints(0, 6, 1, 1, 0, 0, 0, 0, 0, 5, 0, 0, 0, GridBagConstraints.WEST));
+        lblDateR = new JLabel(dateFormat.format(date));
+        pnlSaleInfo.add(lblDateR, Griddy.getConstraints(1, 6, 1, 1, 0, 0, 0, 0, 0, 0, 5, 0, 0, GridBagConstraints.EAST));
+
+        lblPaymentType = new JLabel("Payment");
+        pnlSaleInfo.add(lblPaymentType, Griddy.getConstraints(0, 7, 1, 1, 0, 0, 0, 0, 0, 5, 0, 0, 0, GridBagConstraints.WEST));
+        lblPaymentTypeR = new JLabel("-");
+        pnlSaleInfo.add(lblPaymentTypeR, Griddy.getConstraints(1, 7, 1, 1, 0, 0, 0, 0, 0, 0, 5, 0, 0, GridBagConstraints.EAST));
+
+        lblChangeDue = new JLabel("Change Due");
+        pnlSaleInfo.add(lblChangeDue, Griddy.getConstraints(0, 8, 1, 1, 0, 0, 0, 0, 0, 5, 0, 0, 0, GridBagConstraints.WEST));
+        lblChangeDueR = new JLabel("-");
+        pnlSaleInfo.add(lblChangeDueR, Griddy.getConstraints(1, 8, 1, 1, 0, 0, 0, 0, 0, 0, 5, 0, 0, GridBagConstraints.EAST));
+
+        this.add(pnlSaleInfo, Griddy.getConstraints(1,2,1,1,0,0,1,1,0,0,0,0,GridBagConstraints.BOTH,GridBagConstraints.EAST));
+
 
 // BASKET PANEL
 
         pnlBasket = new JPanel();
+        pnlBasket.setBackground(UIElements.getColour());
+        pnlBasket.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Basket")); // set anonymous titled, etched border
         this.add(pnlBasket, Griddy.getConstraints(0,0,1,4,0,0,0,0,0,0,0,0,GridBagConstraints.BOTH,GridBagConstraints.WEST));
 
         this.setVisible(true);
@@ -207,9 +217,63 @@ public class SaleMain extends JFrame implements ActionListener {
     }
 
 
-// BUTTON ACTIONS
+// BUTTON ACTIONS - don't forget to add action listeners to buttons and implement ActionListener class
 
-    // don't forget to add action listeners to buttons and implement ActionListener class
+    // have to implement these methods for MouseListener
+    public void mouseExited(MouseEvent e) {}
+    public void mouseReleased(MouseEvent e) {}
+    public void mousePressed(MouseEvent e) {}
+    public void mouseEntered(MouseEvent e) {}
+
+    public void mouseClicked(MouseEvent e) {
+        if (e.getSource().equals(tfProdNum)) {
+            if (tfProdNum.getText().equals(prodFieldTip)) { // if the product field textfield is populated with the preset text
+                tfProdNum.setText(""); // empty it
+                tfProdNum.setForeground(null);  // reset colour to black
+
+                if (tfQty.getText().equals("")) {
+                    tfQty.setText(prodFieldTip);
+                    tfQty.setForeground(Color.GRAY);
+                }
+                tfProdNum.addFocusListener(new FocusListener() {
+                    @Override
+                    public void focusGained(FocusEvent e) {
+                    }
+
+                    @Override
+                    public void focusLost(FocusEvent e) {
+                        if (tfProdNum.getText().equals("")) {
+                            tfProdNum.setText(prodFieldTip);
+                            tfProdNum.setForeground(Color.GRAY);
+                        }
+                    }
+                });
+            }
+            } else if (e.getSource().equals(tfQty)) {
+                if (tfQty.getText().equals(qtyFieldTip)) {
+                    tfQty.setText("");
+                    tfQty.setForeground(null);
+
+                    if (tfProdNum.getText().equals("")) {
+                        tfProdNum.setText(prodFieldTip);
+                        tfProdNum.setForeground(Color.GRAY);
+                    }
+                    tfQty.addFocusListener(new FocusListener() {
+                        @Override
+                        public void focusGained(FocusEvent e) {
+                        }
+                        @Override
+                        public void focusLost(FocusEvent e) {
+                            if (tfQty.getText().equals("")) {
+                                tfQty.setText(qtyFieldTip);
+                                tfQty.setForeground(Color.GRAY);
+                            }
+                        }
+                    });
+                }
+            }
+        }
+
     public void actionPerformed(ActionEvent e){
         if(e.getSource().equals(rbCash) && rbCash.isSelected()){
             Cash cashola = new Cash(this);
