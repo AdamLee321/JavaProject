@@ -56,7 +56,7 @@ public class CreateEmployee {
                     "empEmail VARCHAR2(70)," +
                     "salary NUMBER," +
                     "empUsername VARCHAR2(30)," +
-                    "empPassword VARCHAR2(8)," +
+                    "empPassword VARCHAR2(32)," +
                     "empPicUrl VARCHAR2(255)," +
                     "PRIMARY KEY(empId)," +
                     "FOREIGN KEY(deptId) references department(deptId) on delete set null" +
@@ -94,7 +94,8 @@ public class CreateEmployee {
             pstmt.setInt(12, 12000); // employee salary
             pstmt.setString(13, "0"); // employee picture
             pstmt.setString(14, "ruthward"); // employee username
-            pstmt.setString(15, "1234"); // employee password
+            //pstmt.setString(15, "1234"); // employee password
+            pstmt.setString(15, "81dc9bdb52d04dc20036dbd8313ed055"); // employee password
             pstmt.execute();
 
             pstmt.setInt(1,4);
@@ -111,7 +112,8 @@ public class CreateEmployee {
             pstmt.setInt(12, 19000);
             pstmt.setString(13, "0");
             pstmt.setString(14, "normabrown");
-            pstmt.setString(15, "1234");
+            //pstmt.setString(15, "12345");
+            pstmt.setString(15, "827ccb0eea8a706c4c34a16891f84e7b");
             pstmt.execute();
 
             pstmt.setInt(1,5);

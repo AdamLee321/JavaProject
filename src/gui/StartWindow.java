@@ -23,7 +23,6 @@ import java.awt.event.ActionListener;
     private JPanel main;
     private JButton terminal, login, help;
     private GridBagLayout bl;
-    private boolean displayArea = false;
 
 
     public StartWindow() {
@@ -51,41 +50,30 @@ import java.awt.event.ActionListener;
       northPanel.setBackground(Color.BLACK);
       northPanel.add(logoLabel);
 
-      main.add(northPanel, BorderLayout.NORTH);
-      main.add(getCenterPanel(), BorderLayout.CENTER);
-      main.add(getMinSouthPanel(), BorderLayout.SOUTH);
-
-      this.add(main, BorderLayout.CENTER);
-      this.setVisible(true);
-    }
-
-    public JPanel getCenterPanel() {
       centerPanel = new JPanel(bl);
 
       terminal = new JButton("TERMINAL MODE", new ImageIcon(UIElements.shoppingCart150));
-      terminal.setPreferredSize(new Dimension(400,150));
+      terminal.setPreferredSize(new Dimension(400, 150));
       terminal.addActionListener(this);
 
       login = new JButton("         LOG IN          ", new ImageIcon(UIElements.login150));
-      login.setPreferredSize(new Dimension(400,150));
+      login.setPreferredSize(new Dimension(400, 150));
       login.addActionListener(this);
 
       centerPanel.setBackground(UIElements.getColour());
       centerPanel.add(terminal, Griddy.getConstraints(0, 0, 1, 1, 10, 10, 1, 0, 25, 0, 0, 0, 0, GridBagConstraints.CENTER));
       centerPanel.add(login, Griddy.getConstraints(0, 1, 1, 1, 10, 10, 1, 0, 25, 0, 0, 25, 0, GridBagConstraints.CENTER));
 
-      displayArea = true;
-
-      return centerPanel;
-    }
-
-    // South Panel with help button
-    public JPanel getMinSouthPanel() {
       southPanel = new JPanel(bl);
       southPanel.setBackground(UIElements.getColour());
       southPanel.add(help, Griddy.getConstraints(0, 0, 1, 1, 10, 10, 0, 0, 20, 0, 0, 20, 0, GridBagConstraints.CENTER));
 
-      return southPanel;
+      main.add(northPanel, BorderLayout.NORTH);
+      main.add(centerPanel, BorderLayout.CENTER);
+      main.add(southPanel, BorderLayout.SOUTH);
+
+      this.add(main, BorderLayout.CENTER);
+      this.setVisible(true);
     }
 
     @Override
@@ -97,7 +85,6 @@ import java.awt.event.ActionListener;
       } else if (e.getSource().equals(login)) {
         new AuthenticationPopUp(this);
       } else if (e.getSource().equals(help)) {
-        //setToProductView();
       }
     }
   }

@@ -47,9 +47,14 @@ public class Main {
 
     //connDB.closeDB();
 
+<<<<<<< Updated upstream
      // AdminMain am = new AdminMain();
     StartWindow sw = new StartWindow();
     //  AdminMain am = new AdminMain();
      // SaleMain sm = new SaleMain();
+=======
+    new StartWindow();
+
+>>>>>>> Stashed changes
   }
 }

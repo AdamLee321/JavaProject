@@ -1,12 +1,16 @@
 package database.operations;
 
+
 import java.sql.*;
 import database.ConnectionDB;
+import gui.PasswordGenerator;
 
 /*
 IT Tallaght - 2015, S2
 Computing - Year 2, Project
 Group 17
+George
+David Lawlor x00107563
 */
 
 public class EmployeeOperations {
@@ -34,7 +38,7 @@ public class EmployeeOperations {
 
             //https://www.owasp.org/index.php/Preventing_SQL_Injection_in_Java
             pstmt.setString(1, uname);
-            pstmt.setString(2, new String(pword));
+            pstmt.setString(2, PasswordGenerator.hashPassword(new String(pword)));
             rset = pstmt.executeQuery();
 
         }catch (SQLException sqlE){

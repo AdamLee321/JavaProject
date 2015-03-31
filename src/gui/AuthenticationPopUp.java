@@ -17,6 +17,7 @@ import java.sql.SQLException;
 IT Tallaght - 2015, S2
 Computing - Year 2, Project
 Group 17 (George - 07/03/2015)
+David Lawlor x00107563
 */
 
 public class AuthenticationPopUp {
@@ -26,13 +27,9 @@ public class AuthenticationPopUp {
     private JLabel usernameLabel, passwordLabel, imageLabel;
     private JTextField usernameField;
     private JPasswordField passwordField;
-
     private ResultSet rset;
-    JFrame parent;
 
     public AuthenticationPopUp(final JFrame parent) {
-
-        this.parent = parent;
         auth = new JDialog(parent, true);
         auth.setTitle("Login");
         auth.setLayout(new GridBagLayout());
@@ -76,42 +73,41 @@ public class AuthenticationPopUp {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (passwordField.getPassword().length == 0 || usernameField.getText().isEmpty()) {
-                    JOptionPane.showMessageDialog(parent, "Please enter a username and a password", "ERROR", JOptionPane.OK_OPTION);
+                    JOptionPane.showMessageDialog(parent, "Please enter a username and a password", "ERROR", JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    String position = null;
-                    EmployeeOperations eo = new EmployeeOperations();
-                    rset = eo.validatePassword(usernameField.getText(), passwordField.getPassword());
                     try {
-                        while (rset.next()) {
-                            position = rset.getString(1);
+                        String position = null;
+                        EmployeeOperations eo = new EmployeeOperations();
+                        rset = eo.validatePassword(usernameField.getText(), passwordField.getPassword());
+                        try {
+                            while (rset.next()) {
+                                position = rset.getString(1);
+                            }
+                        } catch (SQLException sqlE) {
+                            System.out.println("Empty Resultset");
                         }
-                    } catch (SQLException sqlE) {
-                        System.out.println("Empty Resultset");
+                        if (position.equals("Sales")) {
+                            new SaleMain();
+                        } else if (position.equals("Admin")) {
+                            new AdminMain();
+                        } else if (position.equals("Manager")) {
+                            new Soon();
+                        }
+                        auth.dispose();
+                        parent.dispose();
+                    }catch(NullPointerException np){
+                        JOptionPane.showMessageDialog(parent, "Incorrect username or password", "ERROR", JOptionPane.ERROR_MESSAGE);
+                        usernameField.setText("");
+                        passwordField.setText("");
                     }
-                    if (position.equals("Sales")) {
-                        new SaleMain();
-                    }
-                    else if(position.equals("Admin")){
-                        new AdminMain();
-                    }
-                    else if(position.equals("Manager")){
-                        new Soon();
-                    }
-                    else
-                        System.out.println("END");
-                    auth.dispose();
-                    parent.dispose();
                 }
             }
         });
 
         okButton.setToolTipText("Enter Your Credentials And Click OK");
-        // if fields are empty and somebody clicks OK, then what?
-        // mnemonics???
         okButton.setPreferredSize(new Dimension(78, 30));
         auth.add(okButton, Griddy.getConstraints(3,2,1,0,0,0,0,0,5,5,5,5,0,GridBagConstraints.CENTER));
 
-// turns the lights on
         auth.setVisible(true);
     }
 }
