@@ -9,6 +9,7 @@ Group 17 (George - 22/03/2015)
 import gui.Griddy;
 import gui.StartWindow;
 import gui.UIElements;
+import gui.employee.SalesView;
 import gui.member.MemberAddEdit;
 
 import javax.swing.*;
@@ -38,7 +39,7 @@ public class SaleMain extends JFrame implements ActionListener {
         this.setSize(700, 600);
         this.setLocationRelativeTo(null);
         this.setResizable(true);
-        //this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setLayout(new GridBagLayout());
         this.getContentPane().setBackground(UIElements.getColour());
 
@@ -217,7 +218,7 @@ public class SaleMain extends JFrame implements ActionListener {
             MemberAddEdit mae = new MemberAddEdit(this, 0);
         }
         else if (e.getSource().equals(btnReturnProduct)){
-
+            SalesView sv = new SalesView();
         }
         else if (e.getSource().equals(btnAdd)){
 

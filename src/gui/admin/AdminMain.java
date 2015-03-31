@@ -1,5 +1,6 @@
 package gui.admin;
 
+import gui.StartWindow;
 import gui.UIElements;
 import gui.employee.EmployeeMain;
 import gui.member.MemberMain;
@@ -242,6 +243,7 @@ public class AdminMain extends JFrame implements ActionListener {
             About ab = new About();
         } // Logout Menu Item and Button ACTIONS
         else if (e.getSource().equals(logOutMI) || e.getSource().equals(logoutButton) ){
+            StartWindow sw = new StartWindow();
             am.dispose();
         } // Exit menuItem
         else if (e.getSource().equals(exitMI)){

@@ -223,8 +223,7 @@ public class EmployeeAddEdit implements ActionListener {
             EmployeePreview ep = new EmployeePreview(am);
         }
         else if (e.getSource().equals(passGenButton)){
-            PasswordGenerator pg = new PasswordGenerator();
-//                    empPasswordField.setText(pg.);
+            empPasswordField.setText(PasswordGenerator.generatePassword());
         }
     }
 }
