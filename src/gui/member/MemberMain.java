@@ -1,6 +1,7 @@
 package gui.member;
 
 import database.operations.EmployeeOperations;
+import gui.Griddy;
 import gui.UIElements;
 import gui.admin.AdminMain;
 import model.Employee;
@@ -62,7 +63,7 @@ public class MemberMain implements ActionListener {
         deleteButton.setIcon(new ImageIcon(UIElements.delete16));
         managePanel.add(deleteButton);
 
-        northPanel.add(managePanel, getConstraints(0,0,1,1,1,0,0, GridBagConstraints.CENTER));
+        northPanel.add(managePanel, Griddy.getConstraints(0,0,1,1,0,0,0,0,5,0,0,5,0,GridBagConstraints.CENTER));
 
     // search members panel
 
@@ -79,7 +80,7 @@ public class MemberMain implements ActionListener {
         searchPanel.add(searchButton);
 
         // add all the above to northPanel
-        northPanel.add(searchPanel, getConstraints(1,0,1,1,1,0,0,GridBagConstraints.CENTER));
+        northPanel.add(searchPanel, Griddy.getConstraints(1,0,1,1,0,0,0,0,5,0,0,5,0,GridBagConstraints.CENTER));
 
         // add northPanel to main
         memberMain.add(northPanel, BorderLayout.NORTH);
@@ -93,7 +94,7 @@ public class MemberMain implements ActionListener {
 // SOUTH PANEL
 
         southPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        southPanel.setBackground(new Color(98, 169, 221));
+        southPanel.setBackground(UIElements.getColour());
 
     // bottom buttons
 
@@ -121,23 +122,5 @@ public class MemberMain implements ActionListener {
         else if (e.getSource().equals(viewOrdersButton)){
             OrderView ov = new OrderView();
         }
-    }
-
-    // return GridBagConstraints for GridBagLayout
-
-    private GridBagConstraints getConstraints(int gridx, int gridy, int gridwidth, int gridheight, int weightxIn, int leftHorInsetIn, int rightHorInsetIn, int anchor) {
-        GridBagConstraints c = new GridBagConstraints();
-        c.insets = new Insets(5, leftHorInsetIn, 5, rightHorInsetIn);
-        c.ipadx = 0;
-        c.ipady = 0;
-        c.gridx = gridx;
-        c.gridy = gridy;
-        c.gridwidth = gridwidth;
-        c.gridheight = gridheight;
-        c.weightx = weightxIn;
-        c.weighty = 0;
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.anchor = anchor;
-        return c;
     }
 }

@@ -83,8 +83,7 @@ public class EmployeeMain implements ActionListener {
         deleteButton.setIcon(new ImageIcon(UIElements.delete16));
         managePanel.add(deleteButton);
 
-        northPanel.add(managePanel, getConstraints(0,0,1,1,1,0,0, GridBagConstraints.CENTER));
-//        northPanel.add(managePanel, Griddy.getConstraints(0,0,1,1,0,0,0,0,5,0,0,5,GridBagConstraints.HORIZONTAL,GridBagConstraints.CENTER));
+        northPanel.add(managePanel, Griddy.getConstraints(0,0,1,1,0,0,0,0,5,0,0,5,0,GridBagConstraints.CENTER));
 
     // search employees panel
 
@@ -96,6 +95,7 @@ public class EmployeeMain implements ActionListener {
         searchPanel.add(searchField);
 
         empTypes = new JComboBox(new DefaultComboBoxModel<String>(eempTypes));
+        empTypes.setPreferredSize(new Dimension(105,26)); // combo box resized to make all the components fit just perfectly!
 
         searchPanel.add(empTypes);
 
@@ -105,8 +105,7 @@ public class EmployeeMain implements ActionListener {
         searchPanel.add(searchButton);
 
         // add all the above to northPanel
-        northPanel.add(searchPanel, getConstraints(1,0,1,1,1,0,0,GridBagConstraints.CENTER));
-//        northPanel.add(searchPanel, Griddy.getConstraints(1,0,1,1,0,0,0,0,5,0,0,5,GridBagConstraints.HORIZONTAL,GridBagConstraints.CENTER));
+        northPanel.add(searchPanel, Griddy.getConstraints(1,0,1,1,0,0,0,0,5,0,0,5,0,GridBagConstraints.CENTER));
 
         // add northPanel to main
         empMain.add(northPanel, BorderLayout.NORTH);
@@ -156,23 +155,5 @@ public class EmployeeMain implements ActionListener {
         else if (e.getSource().equals(viewSalesButton)){
             SalesView sv = new SalesView();
         }
-    }
-
-    // return GridBagConstraints for GridBagLayout
-
-    private GridBagConstraints getConstraints(int gridx, int gridy, int gridwidth, int gridheight, int weightxIn, int leftHorInsetIn, int rightHorInsetIn, int anchor) {
-        GridBagConstraints c = new GridBagConstraints();
-        c.insets = new Insets(5, leftHorInsetIn, 5, rightHorInsetIn);
-        c.ipadx = 0;
-        c.ipady = 0;
-        c.gridx = gridx;
-        c.gridy = gridy;
-        c.gridwidth = gridwidth;
-        c.gridheight = gridheight;
-        c.weightx = weightxIn;
-        c.weighty = 0;
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.anchor = anchor;
-        return c;
     }
 }
