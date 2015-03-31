@@ -3,6 +3,7 @@ package gui;
 import database.operations.EmployeeOperations;
 import gui.admin.AdminMain;
 import gui.admin.Soon;
+import gui.report.ReportEmployee;
 import gui.sale.SaleMain;
 import model.Employee;
 
@@ -91,7 +92,7 @@ public class AuthenticationPopUp {
                         } else if (position.equals("Admin")) {
                             new AdminMain();
                         } else if (position.equals("Manager")) {
-                            new Soon();
+                            new ReportEmployee();
                         }
                         auth.dispose();
                         parent.dispose();
