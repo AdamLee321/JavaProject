@@ -32,6 +32,7 @@ public class Discount extends JDialog implements ActionListener {
         this.setSize(240,240);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
+        this.setModal(true);
 
 // MAIN PANEL
 
@@ -39,7 +40,7 @@ public class Discount extends JDialog implements ActionListener {
         main.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Discount Type", 2, 2)); // set anonymous titled, etched border);
         main.setBackground(UIElements.getColour());
 
-        rbPercent = new JRadioButton("percent");
+        rbPercent = new JRadioButton("Percent");
         rbPercent.setBackground(UIElements.getColour());
         radioGroup.add(rbPercent);
         rbPercent.addActionListener(this);

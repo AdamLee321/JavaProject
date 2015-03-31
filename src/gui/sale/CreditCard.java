@@ -124,7 +124,7 @@ public class CreditCard extends JDialog implements ActionListener {
         else if(e.getSource().equals(btnOK)){
             if(rbMaster.isSelected()){
                 if (ccv.isCreditCardValid(tfCCnumber.getText(), ccValidation.MASTERCARD)) {
-                    sm.setCashTenderR("MasterCard");
+                    sm.setPaymentTypeR("MasterCard");
                     this.dispose();
                 }
                 else{
@@ -134,7 +134,7 @@ public class CreditCard extends JDialog implements ActionListener {
             }
             else if (rbVisa.isSelected()){
                 if(ccv.isCreditCardValid(tfCCnumber.getText(), ccValidation.VISA)){
-                    sm.setCashTenderR("VISA");
+                    sm.setPaymentTypeR("VISA");
                     this.dispose();
                 }
                 else{

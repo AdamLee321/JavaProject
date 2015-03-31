@@ -1,8 +1,6 @@
 package gui.employee;
 
-import gui.DateGen;
-import gui.Griddy;
-import gui.UIElements;
+import gui.*;
 import gui.admin.AdminMain;
 
 import javax.swing.*;
@@ -23,7 +21,7 @@ public class EmployeeAddEdit implements ActionListener {
     private JLabel profilePictureLabel, empIdLabel, empFNameLabel, empLNameLabel, empStreetLabel, empCityLabel, empCountyLabel, empDOB, empEmailLabel, empUsernameLabel, empPasswordLabel, empPositionLabel, empSalaryLabel, empDeptLabel;
     private JTextField empIdField, empFNameField, empLNameField, empStreetField, empCityField, empCountyField, empEmailField, empUsernameField, empPasswordField, empPositionField, empSalaryField, empDeptField;
     private JComboBox<String> birthDayCBox, birthMonthCBox, birthYearCBox;;
-    private JButton addButton, removeButton, cancelButton, previewButton, okButton;
+    private JButton addButton, removeButton, cancelButton, previewButton, okButton, passGenButton;
 
     private DateGen dg;
     private AdminMain am;  // used for JDialogs as parent
@@ -146,8 +144,13 @@ public class EmployeeAddEdit implements ActionListener {
         // Password
         empPasswordLabel = new JLabel("Employee Password");
         detailsPanel.add(empPasswordLabel, Griddy.getConstraints(0,9,1,1,0,0,0,0,5,15,5,5,0,GridBagConstraints.WEST));
-        empPasswordField = new JTextField();
-        detailsPanel.add(empPasswordField, Griddy.getConstraints(1,9,1,1,0,0,0,0,5,15,15,5,GridBagConstraints.HORIZONTAL,GridBagConstraints.CENTER));
+        empPasswordField = new JTextField(5);
+        detailsPanel.add(empPasswordField, Griddy.getConstraints(1,9,1,1,0,0,0,0,5,15,110,5,GridBagConstraints.HORIZONTAL,GridBagConstraints.WEST)); // password field and button are in the "same" cell, the field get set to stretch horizontally, but padded in from the right to allow the password button to fit
+
+        // Password Generator
+        passGenButton = new JButton("Generate");
+        passGenButton.addActionListener(this);
+        detailsPanel.add(passGenButton, Griddy.getConstraints(1,9,1,1,0,0,0,0,5,15,15,5,0,GridBagConstraints.EAST));
 
         // Position
         empPositionLabel = new JLabel("Employee Position");
@@ -218,6 +221,10 @@ public class EmployeeAddEdit implements ActionListener {
         }
         else if (e.getSource().equals(previewButton)){
             EmployeePreview ep = new EmployeePreview(am);
+        }
+        else if (e.getSource().equals(passGenButton)){
+            PasswordGenerator pg = new PasswordGenerator();
+//                    empPasswordField.setText(pg.);
         }
     }
 }

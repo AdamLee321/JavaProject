@@ -7,7 +7,9 @@ Group 17 (George - 22/03/2015)
 */
 
 import gui.Griddy;
+import gui.StartWindow;
 import gui.UIElements;
+import gui.member.MemberAddEdit;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,9 +25,9 @@ public class SaleMain extends JFrame implements ActionListener {
     private JRadioButton rbCash, rbCC;
     private ButtonGroup radioGroup = new ButtonGroup(); // for mutual exclusivity of radio buttons
     private JTextField tfProdNum, tfQty;
-    private JLabel lblSubtotal, lblVAT, lblDiscount, lblTotal, lblCustomer, lblSalesperson, lblDate, lblCashTender, lblChangeDue, lblLoggedName, lblLoggedUname, lblLoggedNumber, lblLoggedPosition;
-    private JLabel lblSubtotalR, lblVATR, lblDiscountR, lblTotalR, lblCustomerR, lblSalespersonR, lblDateR, lblCashTenderR, lblChangeDueR;
-    private JPanel pnlTable, pnlKeypad, pnlCheckout, pnlSaleInfo, pnlLoggedIn, pnlPaymentType;
+    private JLabel lblSubtotal, lblVAT, lblDiscount, lblTotal, lblCustomer, lblSalesperson, lblDate, lblPaymentType, lblChangeDue, lblLoggedName, lblLoggedUname, lblLoggedNumber, lblLoggedPosition;
+    private JLabel lblSubtotalR, lblVATR, lblDiscountR, lblTotalR, lblCustomerR, lblSalespersonR, lblDateR, lblPaymentTypeR, lblChangeDueR;
+    private JPanel pnlBasket, pnlKeypad, pnlCheckout, pnlSaleInfo, pnlLoggedIn, pnlPaymentType;
 
     private DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
     private Date date = new Date();
@@ -53,9 +55,11 @@ public class SaleMain extends JFrame implements ActionListener {
         pnlKeypad.add(tfQty, Griddy.getConstraints(0,1,3,1,0,0,1,1,2,2,2,2,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
 
         btnAdd = new JButton("Add", new ImageIcon(UIElements.plus16));
+        btnAdd.addActionListener(this);
         pnlKeypad.add(btnAdd, Griddy.getConstraints(0,2,1,1,0,0,1,1,2,2,2,2,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
 
         btnRemove = new JButton("Remove", new ImageIcon(UIElements.minus16));
+        btnRemove.addActionListener(this);
         pnlKeypad.add(btnRemove, Griddy.getConstraints(1,2,1,1,0,0,0,0,2,2,2,2,GridBagConstraints.BOTH,GridBagConstraints.EAST));
 
         this.add(pnlKeypad, Griddy.getConstraints(1,0,1,1,0,0,1,1,0,1,0,0,1,GridBagConstraints.CENTER));
@@ -67,12 +71,15 @@ public class SaleMain extends JFrame implements ActionListener {
         pnlCheckout.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Checkout")); // set anonymous titled, etched border
 
         btnRegister = new JButton("Register", new ImageIcon(UIElements.person16));
+        btnRegister.addActionListener(this);
         pnlCheckout.add(btnRegister, Griddy.getConstraints(0,0,1,1,0,0,1,1,2,2,2,2,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
 
         btnDiscount = new JButton("Discount", new ImageIcon(UIElements.minus16));
+        btnDiscount.addActionListener(this);
         pnlCheckout.add(btnDiscount, Griddy.getConstraints(1,0,1,1,0,0,1,1,2,2,2,2,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
 
         btnReturnProduct = new JButton("Return Product", new ImageIcon(UIElements.product16));
+        btnReturnProduct.addActionListener(this);
         pnlCheckout.add(btnReturnProduct, Griddy.getConstraints(0,1,2,1,0,0,1,1,0,2,2,2,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
 
             // PAYMENT TYPE PANEL - panel in a panel... Inception!!!
@@ -96,6 +103,7 @@ public class SaleMain extends JFrame implements ActionListener {
             pnlCheckout.add(pnlPaymentType, Griddy.getConstraints(0,2,2,1,0,0,0,0,0,0,0,0,GridBagConstraints.HORIZONTAL,GridBagConstraints.CENTER));
 
         btnCheckout = new JButton("Checkout", new ImageIcon(UIElements.save16));
+        btnCheckout.addActionListener(this);
         pnlCheckout.add(btnCheckout, Griddy.getConstraints(0,3,2,2,0,0,1,1,0,0,0,0,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
 
         this.add(pnlCheckout, Griddy.getConstraints(1,1,1,1,0,0,1,1,0,1,0,0,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
@@ -141,10 +149,10 @@ public class SaleMain extends JFrame implements ActionListener {
         lblDateR = new JLabel(dateFormat.format(date));
         pnlSaleInfo.add(lblDateR, Griddy.getConstraints(1,6,1,1,0,0,0,0,0,0,5,0,0,GridBagConstraints.EAST));
 
-        lblCashTender = new JLabel("Cash Tendered");
-        pnlSaleInfo.add(lblCashTender, Griddy.getConstraints(0,7,1,1,0,0,0,0,0,5,0,0,0,GridBagConstraints.WEST));
-        lblCashTenderR = new JLabel("0");
-        pnlSaleInfo.add(lblCashTenderR, Griddy.getConstraints(1,7,1,1,0,0,0,0,0,0,5,0,0,GridBagConstraints.EAST));
+        lblPaymentType = new JLabel("Payment");
+        pnlSaleInfo.add(lblPaymentType, Griddy.getConstraints(0,7,1,1,0,0,0,0,0,5,0,0,0,GridBagConstraints.WEST));
+        lblPaymentTypeR = new JLabel("0");
+        pnlSaleInfo.add(lblPaymentTypeR, Griddy.getConstraints(1,7,1,1,0,0,0,0,0,0,5,0,0,GridBagConstraints.EAST));
 
         lblChangeDue = new JLabel("Change Due");
         pnlSaleInfo.add(lblChangeDue, Griddy.getConstraints(0,8,1,1,0,0,0,0,0,5,0,0,0,GridBagConstraints.WEST));
@@ -159,47 +167,70 @@ public class SaleMain extends JFrame implements ActionListener {
         pnlLoggedIn.setBackground(UIElements.getColour());
         pnlLoggedIn.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Currently Logged In")); // set anonymous titled, etched border
 
-        btnLogout = new JButton("Log Out", new ImageIcon(UIElements.logout16));
-        btnLogout.setPreferredSize(new Dimension(100,100));
-        pnlLoggedIn.add(btnLogout, Griddy.getConstraints(0,0,1,4,0,0,0,0,5,5,10,5,0,GridBagConstraints.EAST));
-
         lblLoggedName = new JLabel("John Smith");
-        pnlLoggedIn.add(lblLoggedName, Griddy.getConstraints(1,0,1,1,0,0,0,0,5,5,10,5,0,GridBagConstraints.WEST));
+        pnlLoggedIn.add(lblLoggedName, Griddy.getConstraints(0,0,1,1,0,0,1,0,5,5,5,5,0,GridBagConstraints.WEST));
 
         lblLoggedUname = new JLabel("j.smith1");
-        pnlLoggedIn.add(lblLoggedUname, Griddy.getConstraints(1,1,1,1,0,0,0,0,5,5,10,5,0,GridBagConstraints.WEST));
+        pnlLoggedIn.add(lblLoggedUname, Griddy.getConstraints(1,0,1,1,0,0,0,0,5,5,5,5,0,GridBagConstraints.EAST));
 
         lblLoggedNumber = new JLabel("0");
-        pnlLoggedIn.add(lblLoggedNumber, Griddy.getConstraints(1,2,1,1,0,0,0,0,5,5,10,5,0,GridBagConstraints.WEST));
+        pnlLoggedIn.add(lblLoggedNumber, Griddy.getConstraints(0,1,1,1,0,0,0,0,5,5,5,5,0,GridBagConstraints.WEST));
 
         lblLoggedPosition = new JLabel("Sales");
-        pnlLoggedIn.add(lblLoggedPosition, Griddy.getConstraints(1,3,1,1,0,0,0,0,0,5,10,5,0,GridBagConstraints.WEST));
+        pnlLoggedIn.add(lblLoggedPosition, Griddy.getConstraints(1,1,1,1,0,0,0,0,0,5,5,5,0,GridBagConstraints.EAST));
+
+        btnLogout = new JButton("Log Out", new ImageIcon(UIElements.logout16));
+        btnLogout.addActionListener(this);
+        pnlLoggedIn.add(btnLogout, Griddy.getConstraints(0,2,2,1,0,0,0,0,5,5,5,5,GridBagConstraints.HORIZONTAL,GridBagConstraints.CENTER));
 
         this.add(pnlLoggedIn, Griddy.getConstraints(1,3,1,1,0,0,0,0,0,0,0,0,GridBagConstraints.BOTH,GridBagConstraints.WEST));
+
+// BASKET PANEL
+
+        pnlBasket = new JPanel();
+        this.add(pnlBasket, Griddy.getConstraints(0,0,1,4,0,0,0,0,0,0,0,0,GridBagConstraints.BOTH,GridBagConstraints.WEST));
 
         this.setVisible(true);
     }
 
 // METHODS
 
-    // set cash tender from cash
-    public void setCashTenderR(double cashIn){
-        lblCashTenderR.setText(Double.toString(cashIn));
-    }
-
-    // set cash tender to CC
-    public void setCashTenderR(String approved){
-        lblCashTenderR.setText(approved);
+    // set payment type
+    public void setPaymentTypeR(String approved){
+        lblPaymentTypeR.setText(approved);
     }
 
 // BUTTON ACTIONS
 
+    // don't forget to add action listeners to buttons and implement ActionListener class
     public void actionPerformed(ActionEvent e){
         if(e.getSource().equals(rbCash) && rbCash.isSelected()){
-            Cash cashola = new Cash();
+            Cash cashola = new Cash(this);
         }
         else if (e.getSource().equals(rbCC) && rbCC.isSelected()){
             CreditCard cc = new CreditCard(this);
+        }
+        else if (e.getSource().equals(btnDiscount)){
+            Discount disc = new Discount();
+        }
+        else if (e.getSource().equals(btnRegister)){
+            MemberAddEdit mae = new MemberAddEdit(this, 0);
+        }
+        else if (e.getSource().equals(btnReturnProduct)){
+
+        }
+        else if (e.getSource().equals(btnAdd)){
+
+        }
+        else if (e.getSource().equals(btnRemove)){
+
+        }
+        else if (e.getSource().equals(btnCheckout)){
+
+        }
+        else if (e.getSource().equals(btnLogout)){
+            StartWindow sw = new StartWindow();
+            this.dispose();
         }
     }
 }

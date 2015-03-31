@@ -33,12 +33,12 @@ public class AuthenticationPopUp {
         auth = new JDialog(parent, true);
         auth.setTitle("Login");
         auth.setLayout(new GridBagLayout());
-        auth.setSize(400, 200);
+        auth.setSize(450, 200);
         auth.setResizable(false);
         auth.setLocationRelativeTo(null);
         auth.getContentPane().setBackground(UIElements.getColour());
 
-        imageLabel = new JLabel(new ImageIcon(UIElements.person32));
+        imageLabel = new JLabel(new ImageIcon(UIElements.person128));
         auth.add(imageLabel, Griddy.getConstraints(0,0,1,3,0,0,0,0,5,5,5,5,0,GridBagConstraints.CENTER));
 
         usernameLabel = new JLabel("Username");  // label

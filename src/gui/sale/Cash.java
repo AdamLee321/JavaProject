@@ -20,7 +20,9 @@ public class Cash extends JDialog implements ActionListener {
     private JTextField tfCash;
     private JPanel main;
 
-    public Cash(){
+    SaleMain sm;
+
+    public Cash(SaleMain sm){
 
 // SETUP JDIALOG
 
@@ -56,6 +58,8 @@ public class Cash extends JDialog implements ActionListener {
 
         this.add(main);
 
+        this.sm = sm;
+
         this.setVisible(true);
     }
 
@@ -69,6 +73,9 @@ public class Cash extends JDialog implements ActionListener {
         if (e.getSource().equals(btnCancel)){
             this.dispose();
         }
-
+        else if (e.getSource().equals(btnOK)){
+            sm.setPaymentTypeR("CASH €" + tfCash.getText());
+            this.dispose();
+        }
     }
 }
