@@ -31,8 +31,8 @@ public class AdminOptions implements ActionListener {
         adminOps = new JDialog(parent, true);
         adminOps.setTitle("Administrator Options");
         adminOps.setLayout(new BorderLayout());
-        adminOps.setSize(400, 315);
-        adminOps.setResizable(false);
+        adminOps.setSize(400, 335);
+        adminOps.setResizable(true);
         adminOps.setLocationRelativeTo(null);
         adminOps.getContentPane().setBackground(UIElements.getColour());  // there is really no point of this, it's hidden behind to panels (fieldsPanel, buttonsPanel)
 

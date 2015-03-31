@@ -36,9 +36,9 @@ public class AdminMain extends JFrame implements ActionListener {
 
         am = new JFrame();
         am.setTitle("DGA Administration");
-        am.setSize(800, 700);
+        am.setSize(800, 720);
         am.setLocationRelativeTo(null);
-        am.setResizable(false);
+        am.setResizable(true);
         am.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         am.setLayout(new BorderLayout());
         am.getContentPane().setBackground(UIElements.getColour());
