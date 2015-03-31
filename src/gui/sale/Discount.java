@@ -21,8 +21,10 @@ public class Discount extends JDialog implements ActionListener {
     private JRadioButton rbPercent, rbMemberId;
     private ButtonGroup radioGroup = new ButtonGroup(); // for mutual exclusivity of radio buttons
     private JPanel main; // need main because can't set border on JFrame
+
+    SaleMain sm;
     
-    public Discount(){
+    public Discount(SaleMain sm){
 
 // SETUP JDIALOG
 
@@ -70,6 +72,8 @@ public class Discount extends JDialog implements ActionListener {
 
         this.add(main);
 
+        this.sm = sm;
+
         this.setVisible(true);
     }
 
@@ -78,6 +82,15 @@ public class Discount extends JDialog implements ActionListener {
     public void actionPerformed(ActionEvent e){
         if (e.getSource().equals(btnCancel)){
             this.dispose();
+        }
+        else if (e.getSource().equals(btnApply)){
+            if (rbPercent.isSelected()){
+                sm.setDiscountR(tfPercent.getText() + "%");
+                this.dispose();
+            }
+            else if (rbMemberId.isSelected()){
+                // every 10th purchase, 15% off, must reset the purchase counter once it reaches 10
+            }
         }
     }
 }

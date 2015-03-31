@@ -194,12 +194,18 @@ public class SaleMain extends JFrame implements ActionListener {
         this.setVisible(true);
     }
 
-// METHODS
+// METHODS - SETTERS
 
     // set payment type
     public void setPaymentTypeR(String approved){
         lblPaymentTypeR.setText(approved);
     }
+
+    // set discount %
+    public void setDiscountR(String discount){
+        lblDiscountR.setText(discount);
+    }
+
 
 // BUTTON ACTIONS
 
@@ -212,7 +218,7 @@ public class SaleMain extends JFrame implements ActionListener {
             CreditCard cc = new CreditCard(this);
         }
         else if (e.getSource().equals(btnDiscount)){
-            Discount disc = new Discount();
+            Discount disc = new Discount(this);
         }
         else if (e.getSource().equals(btnRegister)){
             MemberAddEdit mae = new MemberAddEdit(this, 0);
