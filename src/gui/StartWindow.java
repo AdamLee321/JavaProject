@@ -1,9 +1,9 @@
-package gui;/*2ndYearProject
-  gui
-  Created by David
-  14:29   30/03/2015
-  Software Development 3
-*/
+package gui;
+
+/*
+ * David Lawlor X00107563
+ * Date 30/03/2015
+ */
 
 import database.operations.ProductOperations;
 import gui.terminal.TerminalMode;
@@ -12,8 +12,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-
 
   public class StartWindow extends JFrame implements ActionListener {
 
@@ -39,7 +37,6 @@ import java.awt.event.ActionListener;
       this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
       this.getContentPane().setBackground(UIElements.getColour());
 
-
       help = new JButton("HELP", new ImageIcon("src/res/images/UI Elements/help64.png"));
       help.addActionListener(this);
 
@@ -62,7 +59,6 @@ import java.awt.event.ActionListener;
       this.setVisible(true);
     }
 
-
     public JPanel getCenterPanel() {
       centerPanel = new JPanel(bl);
 
@@ -83,18 +79,14 @@ import java.awt.event.ActionListener;
       return centerPanel;
     }
 
-
     // South Panel with help button
     public JPanel getMinSouthPanel() {
       southPanel = new JPanel(bl);
       southPanel.setBackground(UIElements.getColour());
-      //southPanel.add(help, getConstraints(0,0,1,1,GridBagConstraints.CENTER, 20,0,20,0));
       southPanel.add(help, Griddy.getConstraints(0, 0, 1, 1, 10, 10, 0, 0, 20, 0, 0, 20, 0, GridBagConstraints.CENTER));
 
       return southPanel;
     }
-
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -103,12 +95,10 @@ import java.awt.event.ActionListener;
         TerminalMode.setMf(tm);
         this.dispose();
       } else if (e.getSource().equals(login)) {
-        AuthenticationPopUp apu = new AuthenticationPopUp(this);
+        new AuthenticationPopUp(this);
       } else if (e.getSource().equals(help)) {
         //setToProductView();
       }
     }
-
-
   }
 

@@ -1,9 +1,17 @@
 package gui;
 
+import database.operations.EmployeeOperations;
+import gui.admin.AdminMain;
+import gui.admin.Soon;
+import gui.sale.SaleMain;
+import model.Employee;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /*
 IT Tallaght - 2015, S2
@@ -19,28 +27,38 @@ public class AuthenticationPopUp {
     private JTextField usernameField;
     private JPasswordField passwordField;
 
-    public AuthenticationPopUp(JFrame parent) {
+    private ResultSet rset;
+    JFrame parent;
 
+    public AuthenticationPopUp(final JFrame parent) {
+
+        this.parent = parent;
         auth = new JDialog(parent, true);
         auth.setTitle("Login");
         auth.setLayout(new GridBagLayout());
-        auth.setSize(335, 140);
+        auth.setSize(400, 200);
         auth.setResizable(false);
         auth.setLocationRelativeTo(null);
-        auth.getContentPane().setBackground(new Color(98, 169, 221));
+        auth.getContentPane().setBackground(UIElements.getColour());
 
         imageLabel = new JLabel(new ImageIcon(UIElements.person32));
-        auth.add(imageLabel, getConstraints(0,0,1,3, GridBagConstraints.CENTER));
+        auth.add(imageLabel, Griddy.getConstraints(0,0,1,3,0,0,0,0,5,5,5,5,0,GridBagConstraints.CENTER));
 
         usernameLabel = new JLabel("Username");  // label
-        auth.add(usernameLabel, getConstraints(1,0,1,1, GridBagConstraints.CENTER));
+        usernameLabel.setFont(new Font("Calibri", 0, 18));
+        auth.add(usernameLabel, Griddy.getConstraints(1,0,1,1,0,0,0,0,5,5,5,5,0,GridBagConstraints.CENTER));
+
         usernameField = new JTextField(15);  // field
-        auth.add(usernameField, getConstraints(2,0,3,1, GridBagConstraints.WEST));
+        usernameField.setPreferredSize(new Dimension(200,25));
+        auth.add(usernameField, Griddy.getConstraints(2,0,3,1,0,0,0,0,5,5,5,5,0,GridBagConstraints.WEST));
 
         passwordLabel = new JLabel("Password");  // label
-        auth.add(passwordLabel, getConstraints(1,1,1,1, GridBagConstraints.CENTER));
+        passwordLabel.setFont(new Font("Calibri",0, 18));
+        auth.add(passwordLabel, Griddy.getConstraints(1,1,1,1,0,0,0,0,5,5,5,5,0,GridBagConstraints.CENTER));
+
         passwordField = new JPasswordField(15);  // field
-        auth.add(passwordField, getConstraints(2,1,3,1, GridBagConstraints.WEST));
+        passwordField.setPreferredSize(new Dimension(200, 25));
+        auth.add(passwordField, Griddy.getConstraints(2,1,3,1,0,0,0,0,5,5,5,5,0,GridBagConstraints.WEST));
 
         cancelButton = new JButton("Cancel");
         cancelButton.setToolTipText("Close Window");
@@ -48,34 +66,52 @@ public class AuthenticationPopUp {
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                auth.setVisible(false);
+                auth.dispose();
             }
         });
-        auth.add(cancelButton, getConstraints(2,2,1,0, GridBagConstraints.CENTER));
+        auth.add(cancelButton, Griddy.getConstraints(2,2,1,0,0,0,0,0,5,5,5,5,0,GridBagConstraints.CENTER));
 
         okButton = new JButton("OK");
+        okButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (passwordField.getPassword().length == 0 || usernameField.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(parent, "Please enter a username and a password", "ERROR", JOptionPane.OK_OPTION);
+                } else {
+                    String position = null;
+                    EmployeeOperations eo = new EmployeeOperations();
+                    rset = eo.validatePassword(usernameField.getText(), passwordField.getPassword());
+                    try {
+                        while (rset.next()) {
+                            position = rset.getString(1);
+                        }
+                    } catch (SQLException sqlE) {
+                        System.out.println("Empty Resultset");
+                    }
+                    if (position.equals("Sales")) {
+                        new SaleMain();
+                    }
+                    else if(position.equals("Admin")){
+                        new AdminMain();
+                    }
+                    else if(position.equals("Manager")){
+                        new Soon();
+                    }
+                    else
+                        System.out.println("END");
+                    auth.dispose();
+                    parent.dispose();
+                }
+            }
+        });
+
         okButton.setToolTipText("Enter Your Credentials And Click OK");
         // if fields are empty and somebody clicks OK, then what?
         // mnemonics???
         okButton.setPreferredSize(new Dimension(78, 30));
-        auth.add(okButton, getConstraints(3,2,1,0, GridBagConstraints.CENTER));
+        auth.add(okButton, Griddy.getConstraints(3,2,1,0,0,0,0,0,5,5,5,5,0,GridBagConstraints.CENTER));
 
 // turns the lights on
-
         auth.setVisible(true);
-    }
-
-    private GridBagConstraints getConstraints(int gridx, int gridy, int gridwidth, int gridheight, int anchor)
-    {
-        GridBagConstraints c = new GridBagConstraints();
-        c.insets = new Insets(5, 5, 5, 5);
-        c.ipadx = 0;
-        c.ipady = 0;
-        c.gridx = gridx;
-        c.gridy = gridy;
-        c.gridwidth = gridwidth;
-        c.gridheight = gridheight;
-        c.anchor = anchor;
-        return c;
     }
 }

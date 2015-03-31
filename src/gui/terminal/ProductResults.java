@@ -1,20 +1,23 @@
 package gui.terminal;
 
+import gui.UIElements;
+
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.SQLException;
 
-
-/**
- * Created by DL on 08/03/2015.
+/*
+ * David Lawlor X00107563
+ * Date 30/03/2015
  */
+
 public class ProductResults extends JPanel {
 
     private JPanel productResultsPanel;
     private JTable productTable;
-    ProductTableModel tableModel;
+    private ProductTableModel tableModel;
     protected static final int tableHeight = 200;
 
     public JPanel getResults(String category, String keyword) throws SQLException{
@@ -45,7 +48,7 @@ public class ProductResults extends JPanel {
 
         productResultsPanel.setLayout(new BorderLayout());
         productResultsPanel.add(scrollPane, BorderLayout.CENTER);
-        productResultsPanel.setBackground(new Color(98, 169, 221));
+        productResultsPanel.setBackground(UIElements.getColour());
 
 
         productTable.addMouseListener(new MouseAdapter() {
@@ -54,12 +57,10 @@ public class ProductResults extends JPanel {
                 JTable row = (JTable)e.getSource();
                 int i = row.getSelectedRow();
                 int productId = (Integer)productTable.getValueAt(i, 0);
-                System.out.println(productId);
                 TerminalMode.mf.setToProductView(productId);
             }
         });
 
-        System.out.println();
         return productResultsPanel;
     }
 }
