@@ -5,6 +5,8 @@ package database.create;
  * Date 02/03/2015
  */
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.sql.*;
 
 public class CreateProduct {
@@ -78,7 +80,7 @@ public class CreateProduct {
             pstmt.setDouble(3, 269.99);//prodSalePrice
             pstmt.setDouble(4, 229.99);//prodCostPrice
             pstmt.setInt(5, 11);//prodQTY
-            pstmt.setString(6, null);//prodPic
+            pstmt.setBinaryStream(6, savePic2DB(new File("src/res/images/Product Pictures/Desktops/Asus_Desktop_M32BF.jpg")));//prodPic
             pstmt.setString(7, "Desktops");//prodType
             pstmt.setString(8, "Intel Pentium G2030 Processor");//cpu
             pstmt.setString(9, "4 GB DDR3 - 1600 MHz");//ram
@@ -96,7 +98,7 @@ public class CreateProduct {
             pstmt.setDouble(3, 299.99);//prodSalePrice
             pstmt.setDouble(4, 254.99);//prodCostPrice
             pstmt.setInt(5, 12);//prodQTY
-            pstmt.setString(6, null);//prodPic
+            pstmt.setBinaryStream(6, savePic2DB(new File("src/res/images/Product Pictures/Desktops/Lenovo_Desktop_H500S.jpg")));//prodPic
             pstmt.setString(7, "Desktops");//prodType
             pstmt.setString(8, "Intel Pentium Processor J2900");//cpu
             pstmt.setString(9, "4 GB DDR3 - 1600 MHz");//ram
@@ -115,7 +117,7 @@ public class CreateProduct {
             pstmt.setDouble(3, 279.99);//prodSalePrice
             pstmt.setDouble(4, 237.99);//prodCostPrice
             pstmt.setInt(5, 13);//prodQTY
-            pstmt.setString(6, null);//prodPic
+            pstmt.setBinaryStream(6, savePic2DB(new File("src/res/images/Product Pictures/Desktops/LENOVO_Desktop_Q190.jpg")));//prodPic
             pstmt.setString(7, "Desktops");//prodType
             pstmt.setString(8, "Intel Pentium Processor J2900");//cpu
             pstmt.setString(9, "4 GB DDR3 - 1600 MHz");//ram
@@ -137,7 +139,7 @@ public class CreateProduct {
             pstmt.setDouble(3, 679.99);//prodSalePrice
             pstmt.setDouble(4, 577.99);//prodCostPrice
             pstmt.setInt(5, 14);//prodQTY
-            pstmt.setString(6, null);//prodPic
+            pstmt.setBinaryStream(6, savePic2DB(new File("src/res/images/Product Pictures/Desktops/Cyberpower_Desktop_Empire_Elite.jpg")));//prodPic
             pstmt.setString(7, "Desktops");//prodType
             pstmt.setString(8, "AMD FX 4300 processor");//cpu
             pstmt.setString(9, "8 GB DDR3 - 1600 MHz");//ram
@@ -158,7 +160,7 @@ public class CreateProduct {
             pstmt.setDouble(3, 669.99);//prodSalePrice
             pstmt.setDouble(4, 569.99);//prodCostPrice
             pstmt.setInt(5, 15);//prodQTY
-            pstmt.setString(6, null);//prodPic
+            pstmt.setBinaryStream(6, savePic2DB(new File("src/res/images/Product Pictures/Desktops/PC_Specialist_Vortex_Elite_GT.jpg")));//prodPic
             pstmt.setString(7, "Desktops");//prodType
             pstmt.setString(8, "Intel Core i3-4160 Processor");//cpu
             pstmt.setString(9, "8 GB DDR3 - 1600 MHz");//ram
@@ -178,7 +180,7 @@ public class CreateProduct {
             pstmt.setDouble(3, 649.00);//prodSalePrice
             pstmt.setDouble(4, 551.99);//prodCostPrice
             pstmt.setInt(5, 19);//prodQTY
-            pstmt.setString(6, null);//prodPic
+            pstmt.setBinaryStream(6, savePic2DB(new File("src/res/images/Product Pictures/Desktops/Acer_Aspire_TC605.jpg")));//prodPic
             pstmt.setString(7, "Desktops");//prodType
             pstmt.setString(8, "Intel Core i7-4770 processor");//cpu
             pstmt.setString(9, "8 GB DDR3 - 1600 MHz");//ram
@@ -199,7 +201,7 @@ public class CreateProduct {
             pstmt.setDouble(3, 499.99);//prodSalePrice
             pstmt.setDouble(4, 424.99);//prodCostPrice
             pstmt.setInt(5, 18);//prodQTY
-            pstmt.setString(6, null);//prodPic
+            pstmt.setBinaryStream(6, savePic2DB(new File("src/res/images/Product Pictures/Desktops/Acer_Aspire_XC703.jpg")));//prodPic
             pstmt.setString(7, "Desktops");//prodType
             pstmt.setString(8, "Intel Pentium Processor J2900");//cpu
             pstmt.setString(9, "8 GB DDR3 - 1600 MHz");//ram
@@ -220,7 +222,7 @@ public class CreateProduct {
             pstmt.setDouble(3, 529.99);//prodSalePrice
             pstmt.setDouble(4, 450.99);//prodCostPrice
             pstmt.setInt(5, 19);//prodQTY
-            pstmt.setString(6, null);//prodPic
+            pstmt.setBinaryStream(6, savePic2DB(new File("src/res/images/Product Pictures/Desktops/HP_Pavilion_500-326na.jpg")));//prodPic
             pstmt.setString(7, "Desktops");//prodType
             pstmt.setString(8, "AMD A8-6500 APU");//cpu
             pstmt.setString(9, "6 GB DDR3 - 1600 MHz");//ram
@@ -240,7 +242,7 @@ public class CreateProduct {
             pstmt.setDouble(3, 519.99);//prodSalePrice
             pstmt.setDouble(4, 229.99);//prodCostPrice
             pstmt.setInt(5, 9);//prodQTY
-            pstmt.setString(6, null);//prodPic
+            pstmt.setBinaryStream(6, savePic2DB(new File("src/res/images/Product Pictures/Desktops/Asus_Desktop_M11AD.jpg")));//prodPic
             pstmt.setString(7, "Desktops");//prodType
             pstmt.setString(8, "Intel Core i3-4150 Processor");//cpu
             pstmt.setString(9, "6 GB DDR3 - 1600 MHz");//ram
@@ -261,7 +263,7 @@ public class CreateProduct {
             pstmt.setDouble(3, 299.99);//prodSalePrice
             pstmt.setDouble(4, 254.99);//prodCostPrice
             pstmt.setInt(5, 23);//prodQTY
-            pstmt.setString(6, null);//prodPic
+            pstmt.setBinaryStream(6, savePic2DB(new File("src/res/images/Product Pictures/Desktops/PACKARD_BELL_Desktop_IMEDIAS_2185.jpg")));//prodPic
             pstmt.setString(7, "Desktops");//prodType
             pstmt.setString(8, "AMD E1-2500 Processor");//cpu
             pstmt.setString(9, "4 GB DDR3 - 1600 MHz");//ram
@@ -283,7 +285,7 @@ public class CreateProduct {
             pstmt.setDouble(3, 419.99);//prodSalePrice
             pstmt.setDouble(4, 356.99);//prodCostPrice
             pstmt.setInt(5, 21);//prodQTY
-            pstmt.setString(6, null);//prodPic
+            pstmt.setBinaryStream(6, savePic2DB(new File("src/res/images/Product Pictures/Laptops/Acer_Aspire_E5-511.jpg")));//prodPic
             pstmt.setString(7, "Laptops");//prodType
             pstmt.setString(8, "Intel Pentium N3540 Processor");//cpu
             pstmt.setString(9, "4 GB");//ram
@@ -303,7 +305,7 @@ public class CreateProduct {
             pstmt.setDouble(3, 1599.99);//prodSalePrice
             pstmt.setDouble(4, 1359.99);//prodCostPrice
             pstmt.setInt(5, 15);//prodQTY
-            pstmt.setString(6, null);//prodPic
+            pstmt.setBinaryStream(6, savePic2DB(new File("src/res/images/Product Pictures/Laptops/Dell_Latitude_E7440.jpg")));//prodPic
             pstmt.setString(7, "Laptops");//prodType
             pstmt.setString(8, "Intel Core i5 processor");//cpu
             pstmt.setString(9, "8 GB ");//ram
@@ -324,7 +326,7 @@ public class CreateProduct {
             pstmt.setDouble(3, 259.99);//prodSalePrice
             pstmt.setDouble(4, 220.99);//prodCostPrice
             pstmt.setInt(5, 19);//prodQTY
-            pstmt.setString(6, null);//prodPic
+            pstmt.setBinaryStream(6, savePic2DB(new File("src/res/images/Product Pictures/Laptops/ASUS_X200MA.jpg")));//prodPic
             pstmt.setString(7, "Laptops");//prodType
             pstmt.setString(8, "");//cpu
             pstmt.setString(9, "2 GB ");//ram
@@ -347,7 +349,7 @@ public class CreateProduct {
             pstmt.setDouble(3, 2055.99);//prodSalePrice
             pstmt.setDouble(4, 1747.59);//prodCostPrice
             pstmt.setInt(5, 14);//prodQTY
-            pstmt.setString(6, null);//prodPic
+            pstmt.setBinaryStream(6, savePic2DB(new File("src/res/images/Product Pictures/Laptops/Maingear_Pulse_17.jpg")));//prodPic
             pstmt.setString(7, "Laptops");//prodType
             pstmt.setString(8, "Intel Core i7 4700MQ");//cpu
             pstmt.setString(9, "16 GB");//ram
@@ -368,7 +370,7 @@ public class CreateProduct {
             pstmt.setDouble(3, 329.99);//prodSalePrice
             pstmt.setDouble(4, 280.49);//prodCostPrice
             pstmt.setInt(5, 11);//prodQTY
-            pstmt.setString(6, null);//prodPic
+            pstmt.setBinaryStream(6, savePic2DB(new File("src/res/images/Product Pictures/Laptops/LENOVO_FLEX.jpg")));//prodPic
             pstmt.setString(7, "Laptops");//prodType
             pstmt.setString(8, "Intel Celeron Processor N2840");//cpu
             pstmt.setString(9, "4GB");//ram
@@ -386,7 +388,7 @@ public class CreateProduct {
             pstmt.setDouble(3, 279.00);//prodSalePrice
             pstmt.setDouble(4, 237.00);//prodCostPrice
             pstmt.setInt(5, 14);//prodQTY
-            pstmt.setString(6, null);//prodPic
+            pstmt.setBinaryStream(6, savePic2DB(new File("src/res/images/Product Pictures/Laptops/TOSH_C50-B-14D.jpg")));//prodPic
             pstmt.setString(7, "Laptops");//prodType
             pstmt.setString(8, "Intel Celeron Processor N2830  ");//cpu
             pstmt.setString(9, "4 GB ");//ram
@@ -408,7 +410,7 @@ public class CreateProduct {
             pstmt.setDouble(3, 599.99);//prodSalePrice
             pstmt.setDouble(4, 509.99);//prodCostPrice
             pstmt.setInt(5, 14);//prodQTY
-            pstmt.setString(6, null);//prodPic
+            pstmt.setBinaryStream(6, savePic2DB(new File("src/res/images/Product Pictures/Laptops/SONY_VAOI_15E.jpg")));//prodPic
             pstmt.setString(7, "Laptops");//prodType
             pstmt.setString(8, "Intel  Core i3-3217U processor");//cpu
             pstmt.setString(9, "4 GB ");//ram
@@ -428,7 +430,7 @@ public class CreateProduct {
             pstmt.setDouble(3, 249.99);//prodSalePrice
             pstmt.setDouble(4, 225.99);//prodCostPrice
             pstmt.setInt(5, 19);//prodQTY
-            pstmt.setString(6, null);//prodPic
+            pstmt.setBinaryStream(6, savePic2DB(new File("src/res/images/Product Pictures/Laptops/HP_Stream_11-d0007na.jpg")));//prodPic
             pstmt.setString(7, "Laptops");//prodType
             pstmt.setString(8, "Intel Celeron Processor N2840");//cpu
             pstmt.setString(9, "2 GB ");//ram
@@ -448,7 +450,7 @@ public class CreateProduct {
             pstmt.setDouble(3, 1279.00);//prodSalePrice
             pstmt.setDouble(4, 1087.15);//prodCostPrice
             pstmt.setInt(5, 13);//prodQTY
-            pstmt.setString(6, null);//prodPic
+            pstmt.setBinaryStream(6, savePic2DB(new File("src/res/images/Product Pictures/Laptops/Optimus_VRS15.jpg")));//prodPic
             pstmt.setString(7, "Laptops");//prodType
             pstmt.setString(8, "Intel Core i7-4710MQ Processor ");//cpu
             pstmt.setString(9, "8 GB DDR3 - 1600 MHz");//ram
@@ -469,7 +471,7 @@ public class CreateProduct {
             pstmt.setDouble(3, 1899.99);//prodSalePrice
             pstmt.setDouble(4, 1600.59);//prodCostPrice
             pstmt.setInt(5, 17);//prodQTY
-            pstmt.setString(6, null);//prodPic
+            pstmt.setBinaryStream(6, savePic2DB(new File("src/res/images/Product Pictures/Laptops/XMG_P504.jpg")));//prodPic
             pstmt.setString(7, "Laptops");//prodType
             pstmt.setString(8, "Intel Core i7-4710MQ Processor");//cpu
             pstmt.setString(9, "8 GB DDR3");//ram
@@ -490,7 +492,7 @@ public class CreateProduct {
             pstmt.setDouble(3, 449.99);//prodSalePrice
             pstmt.setDouble(4, 379.99);//prodCostPrice
             pstmt.setInt(5, 16);//prodQTY
-            pstmt.setString(6, null);//prodPic
+            pstmt.setBinaryStream(6, savePic2DB(new File("src/res/images/Product Pictures/All_In_One/Lenovo_all_in_one_c260.jpg")));//prodPic
             pstmt.setString(7, "All-In-One");//prodType
             pstmt.setString(8, "Intel Pentium Processor J2900");//cpu
             pstmt.setString(9, "4 GB - 1600 MHz");//ram
@@ -512,7 +514,7 @@ public class CreateProduct {
             pstmt.setDouble(3, 2099.99);//prodSalePrice
             pstmt.setDouble(4, 1744.99);//prodCostPrice
             pstmt.setInt(5, 22);//prodQTY
-            pstmt.setString(6, null);//prodPic
+            pstmt.setBinaryStream(6, savePic2DB(new File("src/res/images/Product Pictures/All_In_One/Lenovo_all_in_one_A740.jpg")));//prodPic
             pstmt.setString(7, "All-In-One");//prodType
             pstmt.setString(8, "Intel Core i7-4558U Processor");//cpu
             pstmt.setString(9, "8 GB  - 1600 MHz");//ram
@@ -534,7 +536,7 @@ public class CreateProduct {
             pstmt.setDouble(3, 739.99);//prodSalePrice
             pstmt.setDouble(4, 629.99);//prodCostPrice
             pstmt.setInt(5, 7);//prodQTY
-            pstmt.setString(6, null);//prodPic
+            pstmt.setBinaryStream(6, savePic2DB(new File("src/res/images/Product Pictures/All_In_One/ASUS_all_in_one_ET2221AUTR.jpg")));//prodPic
             pstmt.setString(7, "All-In-One");//prodType
             pstmt.setString(8, "AMD A8-5550M APU");//cpu
             pstmt.setString(9, "6 GB  - 1600 MHz");//ram
@@ -554,7 +556,7 @@ public class CreateProduct {
             pstmt.setDouble(3, 899.99);//prodSalePrice
             pstmt.setDouble(4, 764.99);//prodCostPrice
             pstmt.setInt(5, 23);//prodQTY
-            pstmt.setString(6, null);//prodPic
+            pstmt.setBinaryStream(6, savePic2DB(new File("src/res/images/Product Pictures/All_In_One/ASUS_all_in_one_ET2221IUTH.jpg")));//prodPic
             pstmt.setString(7, "All-In-One");//prodType
             pstmt.setString(8, "Intel Core i3-4150T Processor");//cpu
             pstmt.setString(9, "8 GB  - 1600 MHz");//ram
@@ -574,7 +576,7 @@ public class CreateProduct {
             pstmt.setDouble(3, 899.99);//prodSalePrice
             pstmt.setDouble(4, 764.99);//prodCostPrice
             pstmt.setInt(5, 17);//prodQTY
-            pstmt.setString(6, null);//prodPic
+            pstmt.setBinaryStream(6, savePic2DB(new File("src/res/images/Product Pictures/All_In_One/HP_all_in_one_23-p030na.jpg")));//prodPic
             pstmt.setString(7, "All-In-One");//prodType
             pstmt.setString(8, "Intel Core i5-4590T Processor");//cpu
             pstmt.setString(9, "8 GB  - 1600 MHz");//ram
@@ -596,7 +598,7 @@ public class CreateProduct {
             pstmt.setDouble(3, 1299.99);//prodSalePrice
             pstmt.setDouble(4, 1004.99);//prodCostPrice
             pstmt.setInt(5, 11);//prodQTY
-            pstmt.setString(6, null);//prodPic
+            pstmt.setBinaryStream(6, savePic2DB(new File("src/res/images/Product Pictures/All_In_One/HP_all_in_one_23-k210na.jpg")));//prodPic
             pstmt.setString(7, "All-In-One");//prodType
             pstmt.setString(8, "Intel Core i5-4590T Processor");//cpu
             pstmt.setString(9, "8 GB  - 1600 MHz");//ram
@@ -617,7 +619,7 @@ public class CreateProduct {
             pstmt.setDouble(3, 1399.99);//prodSalePrice
             pstmt.setDouble(4, 1189.99);//prodCostPrice
             pstmt.setInt(5, 5);//prodQTY
-            pstmt.setString(6, null);//prodPic
+            pstmt.setBinaryStream(6, savePic2DB(new File("src/res/images/Product Pictures/All_In_One/ACER _all_in_one_Aspire_U5-630.jpg")));//prodPic
             pstmt.setString(7, "All-In-One");//prodType
             pstmt.setString(8, "Intel Core i7-4702 processor");//cpu
             pstmt.setString(9, "8 GB  - 1600 MHz");//ram
@@ -637,7 +639,7 @@ public class CreateProduct {
             pstmt.setDouble(3, 649.99);//prodSalePrice
             pstmt.setDouble(4, 549.99);//prodCostPrice
             pstmt.setInt(5, 14);//prodQTY
-            pstmt.setString(6, null);//prodPic
+            pstmt.setBinaryStream(6, savePic2DB(new File("src/res/images/Product Pictures/All_In_One/ACER _all_in_one_Aspire_ Z1-621.jpg")));//prodPic
             pstmt.setString(7, "All-In-One");//prodType
             pstmt.setString(8, "Intel Pentium Processor N3530");//cpu
             pstmt.setString(9, "4 GB  - 1600 MHz");//ram
@@ -658,7 +660,7 @@ public class CreateProduct {
             pstmt.setDouble(3, 449.99);//prodSalePrice
             pstmt.setDouble(4, 379.99);//prodCostPrice
             pstmt.setInt(5, 18);//prodQTY
-            pstmt.setString(6, null);//prodPic
+            pstmt.setBinaryStream(6, savePic2DB(new File("src/res/images/Product Pictures/All_In_One/PACKARD BELL _all_in_one_OneTwoS3280.jpg")));//prodPic
             pstmt.setString(7, "All-In-One");//prodType
             pstmt.setString(8, "AMD A4-6210 APU");//cpu
             pstmt.setString(9, "4 GB  - 1600 MHz");//ram
@@ -680,7 +682,7 @@ public class CreateProduct {
             pstmt.setDouble(3, 559.99);//prodSalePrice
             pstmt.setDouble(4, 379.99);//prodCostPrice
             pstmt.setInt(5, 17);//prodQTY
-            pstmt.setString(6, null);//prodPic
+            pstmt.setBinaryStream(6, savePic2DB(new File("src/res/images/Product Pictures/All_In_One/Lenovo_all_in_one_C40.jpg")));//prodPic
             pstmt.setString(7, "All-In-One");//prodType
             pstmt.setString(8, "Intel Pentium Processor 3558U");//cpu
             pstmt.setString(9, "6 GB - 1600 MHz");//ram
@@ -702,7 +704,7 @@ public class CreateProduct {
             pstmt.setDouble(3, 1349);//prodSalePrice
             pstmt.setDouble(4, 1146);//prodCostPrice
             pstmt.setInt(5, 17);//prodQTY
-            pstmt.setString(6, null);//prodPic
+            pstmt.setBinaryStream(6, savePic2DB(new File("src/res/images/Product Pictures/Apple/Apple_macbook_pro_13.jpg")));//prodPic
             pstmt.setString(7, "Apple");//prodType
             pstmt.setString(8, "Intel Core i5 processor");//cpu
             pstmt.setString(9, "8 GB DDR3 - 1600 MHz");//ram
@@ -722,7 +724,7 @@ public class CreateProduct {
             pstmt.setDouble(3, 1549.00);//prodSalePrice
             pstmt.setDouble(4, 1316.00);//prodCostPrice
             pstmt.setInt(5, 17);//prodQTY
-            pstmt.setString(6, null);//prodPic
+            pstmt.setBinaryStream(6, savePic2DB(new File("src/res/images/Product Pictures/Apple/Apple_macbook_pro_13.jpg")));//prodPic
             pstmt.setString(7, "Apple");//prodType
             pstmt.setString(8, "Intel Core i5 processor ");//cpu
             pstmt.setString(9, "8 GB DDR3 - 1600 MHz");//ram
@@ -742,7 +744,7 @@ public class CreateProduct {
             pstmt.setDouble(3, 1849.00);//prodSalePrice
             pstmt.setDouble(4, 1570.99);//prodCostPrice
             pstmt.setInt(5, 14);//prodQTY
-            pstmt.setString(6, null);//prodPic
+            pstmt.setBinaryStream(6, savePic2DB(new File("src/res/images/Product Pictures/Apple/Apple_macbook_pro_13.jpg")));//prodPic
             pstmt.setString(7, "Apple");//prodType
             pstmt.setString(8, "Intel Core i5 processor");//cpu
             pstmt.setString(9, "8 GB DDR3 - 1600 MHz");//ram
@@ -762,7 +764,7 @@ public class CreateProduct {
             pstmt.setDouble(3, 2049.00);//prodSalePrice
             pstmt.setDouble(4, 1741.00);//prodCostPrice
             pstmt.setInt(5, 11);//prodQTY
-            pstmt.setString(6, null);//prodPic
+            pstmt.setBinaryStream(6, savePic2DB(new File("src/res/images/Product Pictures/Apple/Apple_macbook_pro_15.jpg")));//prodPic
             pstmt.setString(7, "Apple");//prodType
             pstmt.setString(8, "Intel Core i7 processor ");//cpu
             pstmt.setString(9, "16 GB DDR3 - 1600 MHz");//ram
@@ -782,7 +784,7 @@ public class CreateProduct {
             pstmt.setDouble(3, 1349.00);//prodSalePrice
             pstmt.setDouble(4, 1146.00);//prodCostPrice
             pstmt.setInt(5, 19);//prodQTY
-            pstmt.setString(6, null);//prodPic
+            pstmt.setBinaryStream(6, savePic2DB(new File("src/res/images/Product Pictures/Apple/Apple_imac_215.jpg")));//prodPic
             pstmt.setString(7, "Apple");//prodType
             pstmt.setString(8, "Intel Core i5 processor ");//cpu
             pstmt.setString(9, "8 GB DDR3 - 1600 MHz");//ram
@@ -802,7 +804,7 @@ public class CreateProduct {
             pstmt.setDouble(3, 2099.00);//prodSalePrice
             pstmt.setDouble(4, 1784.00);//prodCostPrice
             pstmt.setInt(5, 17);//prodQTY
-            pstmt.setString(6, null);//prodPic
+            pstmt.setBinaryStream(6, savePic2DB(new File("src/res/images/Product Pictures/Apple/Apple_imac_27.jpg")));//prodPic
             pstmt.setString(7, "Apple");//prodType
             pstmt.setString(8, "Intel Core i5 processor");//cpu
             pstmt.setString(9, "8 GB DDR3 - 1600 MHz");//ram
@@ -822,7 +824,7 @@ public class CreateProduct {
             pstmt.setDouble(3, 1899.00);//prodSalePrice
             pstmt.setDouble(4, 1614.00);//prodCostPrice
             pstmt.setInt(5, 16);//prodQTY
-            pstmt.setString(6, null);//prodPic
+            pstmt.setBinaryStream(6, savePic2DB(new File("src/res/images/Product Pictures/Apple/Apple_imac_27.jpg")));//prodPic
             pstmt.setString(7, "Apple");//prodType
             pstmt.setString(8, "Intel Core i5 processor ");//cpu
             pstmt.setString(9, "8 GB DDR3 - 1600 MHz");//ram
@@ -842,7 +844,7 @@ public class CreateProduct {
             pstmt.setDouble(3, 929.00);//prodSalePrice
             pstmt.setDouble(4, 789.00);//prodCostPrice
             pstmt.setInt(5, 16);//prodQTY
-            pstmt.setString(6, null);//prodPic
+            pstmt.setBinaryStream(6, savePic2DB(new File("src/res/images/Product Pictures/Apple/Apple_air_11.jpg")));//prodPic
             pstmt.setString(7, "Apple");//prodType
             pstmt.setString(8, "Intel Core i5 processor");//cpu
             pstmt.setString(9, "4 GB DDR3 - 1600 MHz");//ram
@@ -862,7 +864,7 @@ public class CreateProduct {
             pstmt.setDouble(3, 1029.00);//prodSalePrice
             pstmt.setDouble(4, 875.00);//prodCostPrice
             pstmt.setInt(5, 12);//prodQTY
-            pstmt.setString(6, null);//prodPic
+            pstmt.setBinaryStream(6, savePic2DB(new File("src/res/images/Product Pictures/Apple/Apple_air_13.jpg")));//prodPic
             pstmt.setString(7, "Apple");//prodType
             pstmt.setString(8, "Intel Core i5 processor ");//cpu
             pstmt.setString(9, "4 GB DDR3 - 1600 MHz");//ram
@@ -882,7 +884,7 @@ public class CreateProduct {
             pstmt.setDouble(3, 2699.00);//prodSalePrice
             pstmt.setDouble(4, 2295.00);//prodCostPrice
             pstmt.setInt(5, 17);//prodQTY
-            pstmt.setString(6, null);//prodPic
+            pstmt.setBinaryStream(6, savePic2DB(new File("src/res/images/Product Pictures/Apple/Apple_imac_5k.jpg")));//prodPic
             pstmt.setString(7, "Apple");//prodType
             pstmt.setString(8, "Intel Core i7 processor (4.0GHz, 3MB cache)");//cpu
             pstmt.setString(9, "16 GB DDR3 - 1600 MHz");//ram
@@ -903,5 +905,15 @@ public class CreateProduct {
         } catch (SQLException e) {
             System.out.println("Error creating table");
         }
+    }
+
+    public FileInputStream savePic2DB(File pic) {
+        FileInputStream in = null;
+        try {
+            in = new FileInputStream(pic);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return in;
     }
 }

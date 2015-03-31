@@ -18,7 +18,7 @@ public class Product {
   private double prodSalePrice;
   private double prodCostPrice;
   private int prodQTY;
-  //private Blob prodPic;
+  private byte[] prodPic;
   private String prodType;
   private String cpu;
   private String ram;
@@ -34,7 +34,7 @@ public class Product {
     this.prodSalePrice = 0;
     this.prodCostPrice = 0;
     this.prodQTY = 0;
-    //this.prodPic = null;
+    this.prodPic = null;
     this.prodType = "";
     this.cpu = "";
     this.ram = "";
@@ -45,7 +45,7 @@ public class Product {
   }
 
   public Product(int prodId, String prodMake, String prodModel, double prodSalePrice, double prodCostPrice, int prodQTY,
-                // Blob prodPic,
+                byte[] prodPic,
                  String prodType, String cpu, String ram, String OS, String storage, String screen, String prodDesc){
     this.prodId = prodId;
     this.prodMake = prodMake;
@@ -53,7 +53,7 @@ public class Product {
     this.prodSalePrice = prodSalePrice;
     this.prodCostPrice = prodCostPrice;
     this.prodQTY = prodQTY;
-    //this.prodPic = prodPic;
+    this.prodPic = prodPic;
     this.prodType = prodType;
     this.cpu = cpu;
     this.ram = ram;
@@ -93,6 +93,10 @@ public class Product {
   // getter for description
   public String getProdDesc() {
     return prodDesc;
+  }
+
+  public byte[] getProdPic() {
+    return prodPic;
   }
 
   //getter for quantity in stock

@@ -63,16 +63,16 @@ public class ProductOperations {
     public Product productByID(int id){
         Product p = null;
         String sql = "SELECT prodId, prodMake, prodModel, prodSalePrice, prodCostPrice, prodQTY," +
-                "prodType, cpu, ram, OperatingSystem, storage, screen, prodDesc FROM PRODUCT WHERE prodId = '"+id+"'";
+                "prodPic, prodType, cpu, ram, OperatingSystem, storage, screen, prodDesc FROM PRODUCT WHERE prodId = '"+id+"'";
         try{
             stmt = conn.createStatement();
             rset = stmt.executeQuery(sql);
             while (rset.next()) {
                  p = new Product(rset.getInt(1), rset.getString(2), rset.getString(3), rset.getDouble(4), rset.getDouble(5),
                         rset.getInt(6),
-                        //rset.getBlob(7),
-                        rset.getString(7), rset.getString(8), rset.getString(9), rset.getString(10),
-                        rset.getString(11), rset.getString(12), rset.getString(13));
+                        rset.getBytes(7),
+                        rset.getString(8), rset.getString(9), rset.getString(10), rset.getString(11),
+                        rset.getString(12), rset.getString(13), rset.getString(14));
             }
         }catch(SQLException sqlE){
             System.out.println("Error in ResultSet to product Conversion");

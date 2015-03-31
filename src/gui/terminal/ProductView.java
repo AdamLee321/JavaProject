@@ -34,7 +34,7 @@ public class ProductView {
 
         JTextField priceTf = new JTextField();
         setTextBoxDefaults(priceTf);
-        priceTf.setText("€" + Double.toString(p.getProdCostPrice()));
+        priceTf.setText("€" + Double.toString(p.getProdSalePrice()));
 
         JTextField qtyTf = new JTextField();
         setTextBoxDefaults(qtyTf);
@@ -77,7 +77,7 @@ public class ProductView {
         description.setBorder(descriptionTitleBorder);
         description.add(descriptionTF);
 
-        JLabel productPicture = new JLabel(new ImageIcon("src/res/images/Product Categories/AllInOnePC150.png"));
+        JLabel productPicture = new JLabel(new ImageIcon(p.getProdPic()));
 
 
         TitledBorder detailsTitleBorder = new TitledBorder("Details");
@@ -123,7 +123,7 @@ public class ProductView {
         JPanel productDetails = new JPanel(new GridBagLayout());
         productDetails.setBorder(BorderFactory.createLineBorder(UIElements.getColour(), 20));
 
-        productDetails.add(productPicture, Griddy.getConstraints(0,0,1,1,10,10,0,0,0,0,0,0,0,GridBagConstraints.WEST));
+        productDetails.add(productPicture, Griddy.getConstraints(0,0,1,4,10,10,0,0,0,0,0,0,0,GridBagConstraints.WEST));
         productDetails.add(details, Griddy.getConstraints(1, 0, 1, 1, 10, 10, 0, 0, 0, 0, 0, 0, 0, GridBagConstraints.CENTER));
         productDetails.add(specifications, Griddy.getConstraints(2,0,1,1,10,10,0,0,0,0,0,0,0,GridBagConstraints.EAST));
         productDetails.add(description, Griddy.getConstraints(1,1,2,1,10,10,0,0,0,0,0,0,0,GridBagConstraints.CENTER));
@@ -132,7 +132,7 @@ public class ProductView {
     }
 
     public void setTextBoxDefaults(JTextField tf){
-        Dimension textboxSize = new Dimension(175,10);
+        Dimension textboxSize = new Dimension(175,15);
         tf.setPreferredSize(textboxSize);
         tf.setEditable(false);
     }
