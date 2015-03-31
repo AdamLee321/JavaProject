@@ -52,7 +52,9 @@ public class CreateMember {
                     "memberStreet VARCHAR2(80)," +
                     "memberCity VARCHAR2(20)," +
                     "memberCounty VARCHAR2(20)," +
-                    "memberDOB DATE," +
+                    "memberDOBd INTEGER," +
+                    "memberDOBm VARCHAR2(20)," +
+                    "memberDOBy INTEGER," +
                     "memberEmail VARCHAR2(70)," +
                     "memberNumber INTEGER," +
                     "memberPoints INTEGER," +
@@ -66,7 +68,7 @@ public class CreateMember {
 
             // prepared statement
             String sql = "INSERT INTO member (memberId, memberFName, memberLName, memberStreet, memberCity, memberCounty," +
-                    "memberDOB, memberEmail, memberNumber, memberPoints, memPicUrl)" +
+                    "memberDOBd, memberDOBm, memberDOBy, memberEmail, memberNumber, memberPoints, memPicUrl)" +
                     "VALUES (memberSeq.nextVal,?,?,?,?,?,?,?,?,?,?,?,?)";
             pstmt = conn.prepareStatement(sql);
 
