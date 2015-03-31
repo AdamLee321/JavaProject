@@ -27,7 +27,7 @@ public class About implements ActionListener {
         // setup the jdialog
         about = new JDialog();
         about.setTitle("DGA Computers");
-        about.getContentPane().setBackground(new Color(98, 169, 221));
+        about.getContentPane().setBackground(UIElements.getColour());
         about.setLayout(new GridLayout());
         about.setSize(500, 400);
         about.setResizable(false);
@@ -36,14 +36,14 @@ public class About implements ActionListener {
 
         mainBigPanel = new JPanel(new BorderLayout());
         mainBigPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "About",2,2)); // set anonymous, titled, centered, etched border
-        mainBigPanel.setBackground(new Color(98, 169, 221));
+        mainBigPanel.setBackground(UIElements.getColour());
 
 // NORTH PANEL
 
         northPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         northPanel.setBorder(paddingBorder);
 
-        devPic = new JLabel(new ImageIcon("D:\\Dropbox\\Shares\\ITT Adam.David\\Part 2\\Icons\\UI Elements\\128\\save.png"));
+        devPic = new JLabel(new ImageIcon(UIElements.person128));
         northPanel.add(devPic);
 
         mainBigPanel.add(devPic, BorderLayout.NORTH);
@@ -52,7 +52,7 @@ public class About implements ActionListener {
 // CENTER PANEL
 
         centerPanel = new JPanel(new GridLayout(4,1));
-        centerPanel.setBackground(new Color(98, 169, 221));
+        centerPanel.setBackground(UIElements.getColour());
         centerPanel.setBorder(paddingBorder);
 
         progNameLabel = new JLabel("Application Name: DGA Computers");
@@ -72,7 +72,7 @@ public class About implements ActionListener {
 // SOUTH PANEL
 
         southPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        southPanel.setBackground(new Color(98, 169, 221));
+        southPanel.setBackground(UIElements.getColour());
 
         closeButton = new JButton("Close");
         closeButton.setIcon(new ImageIcon(UIElements.remove16));

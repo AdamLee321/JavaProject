@@ -115,10 +115,10 @@ public class AdminMain extends JFrame implements ActionListener {
 // OUTER NORTH - logo
 
         outerNorth = new JPanel(new GridBagLayout());
-        outerNorth.setBackground(new Color(98, 169, 221));
+        outerNorth.setBackground(UIElements.getColour());
         mainLogo = new JLabel();
         mainLogo.setIcon(new ImageIcon(UIElements.banner));
-        mainLogo.setBackground(new Color(98, 169, 221));
+        mainLogo.setBackground(UIElements.getColour());
         outerNorth.add(mainLogo);
         am.add(outerNorth, BorderLayout.NORTH);  // add to frame
 
