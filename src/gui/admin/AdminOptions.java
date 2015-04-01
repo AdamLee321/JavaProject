@@ -114,20 +114,20 @@ public class AdminOptions implements ActionListener {
         if (e.getSource().equals(cancelButton)) {
             adminOps.dispose();
         } else if (e.getSource().equals(okButton)) {
-            if (FormValidator.emptyField(nameField.getText())
-                || FormValidator.emptyField(surnameField.getText())
-                || FormValidator.emptyField(emailField.getText())
-                || FormValidator.emptyPassField(currPassField.getPassword())
-                || FormValidator.emptyPassField(newPassField.getPassword())
-                || FormValidator.emptyPassField(repeatPassField.getPassword())) {
+            if (FormValidator.isEmptyField(nameField.getText())
+                || FormValidator.isEmptyField(surnameField.getText())
+                || FormValidator.isEmptyField(emailField.getText())
+                || FormValidator.isEmptyPassField(currPassField.getPassword())
+                || FormValidator.isEmptyPassField(newPassField.getPassword())
+                || FormValidator.isEmptyPassField(repeatPassField.getPassword())) {
                 JOptionPane.showMessageDialog(null, "Please Fill-In All Fields", "Empty Fields", JOptionPane.WARNING_MESSAGE);
             }
             else {
-                if (!FormValidator.isNumber(nameField.getText()) && !FormValidator.isNumber(surnameField.getText())) {
+                if (FormValidator.isNumber(nameField.getText()) && FormValidator.isNumber(surnameField.getText())) {
                     JOptionPane.showMessageDialog(null, "Please Enter Valid Data For Each Field", "Invalid Data", JOptionPane.WARNING_MESSAGE);
                 }
-                else if (!FormValidator.validEmail(emailField.getText())) {
-                    JOptionPane.showMessageDialog(null, "Please Enter Valid Email", "Invalid Email", JOptionPane.WARNING_MESSAGE);
+                else if (!FormValidator.isValidEmail(emailField.getText())) {
+                    JOptionPane.showMessageDialog(null, "Please Enter A Valid Email Address", "Invalid Email", JOptionPane.WARNING_MESSAGE);
                 }
             }
         }

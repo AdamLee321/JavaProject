@@ -252,37 +252,36 @@ public class EmployeeAddEdit implements ActionListener {
             EmployeePreview ep = new EmployeePreview(am);
         }
         else if (e.getSource().equals(okButton)){
-            if (!FormValidator.isNumber(empFNameField.getText())
-             && !FormValidator.isNumber(empLNameField.getText())
-             && !FormValidator.isNumber(empStreetField.getText())
-             && !FormValidator.isNumber(empCityField.getText())
-             && !FormValidator.isNumber(empCountyField.getText())
-             && !FormValidator.validEmail(empEmailField.getText())
-             && !FormValidator.isNumber(empPositionField.getText())
-             &&  FormValidator.isNumber(empSalaryField.getText())
-             && !FormValidator.isNumber(empDeptField.getText())){
+            if (FormValidator.isNumber(empFNameField.getText())
+             && FormValidator.isNumber(empLNameField.getText())
+             && FormValidator.isNumber(empStreetField.getText())
+             && FormValidator.isNumber(empCityField.getText())
+             && FormValidator.isNumber(empCountyField.getText())
+             && FormValidator.isValidEmail(empEmailField.getText())
+             && FormValidator.isNumber(empPositionField.getText())
+             && !FormValidator.isNumber(empSalaryField.getText())
+             && FormValidator.isNumber(empDeptField.getText())){
                 // do something
+                // must search the database, to see if the username matches anything if it matches, let user know
             }
             else {
-                if (!FormValidator.emptyField(empFNameField.getText())
-                    || !FormValidator.emptyField(empLNameField.getText())
-                    || !FormValidator.emptyField(empStreetField.getText())
-                    || !FormValidator.emptyField(empCityField.getText())
-                    || !FormValidator.emptyField(empCountyField.getText())
-                    || !FormValidator.emptyField(empUsernameField.getText())
-                    || !FormValidator.emptyField(empPasswordField.getText())
-                    || !FormValidator.emptyField(empPositionField.getText())
-                    || !FormValidator.emptyField(empSalaryField.getText())
-                    || !FormValidator.emptyField(empDeptField.getText())){
-                        JOptionPane.showMessageDialog(null,"Please Fill-In All Fields","Empty Fields",JOptionPane.WARNING_MESSAGE);
-                } else if (!FormValidator.validEmail(empEmailField.getText())){
-                    JOptionPane.showMessageDialog(null,"Please Enter A Valid Email","Invalid Email",JOptionPane.WARNING_MESSAGE);
+                if (FormValidator.isEmptyField(empFNameField.getText())
+                    || FormValidator.isEmptyField(empLNameField.getText())
+                    || FormValidator.isEmptyField(empStreetField.getText())
+                    || FormValidator.isEmptyField(empCityField.getText())
+                    || FormValidator.isEmptyField(empCountyField.getText())
+                    || FormValidator.isEmptyField(empUsernameField.getText())
+                    || FormValidator.isEmptyField(empPasswordField.getText())
+                    || FormValidator.isEmptyField(empPositionField.getText())
+                    || FormValidator.isEmptyField(empSalaryField.getText())
+                    || FormValidator.isEmptyField(empDeptField.getText())){
+                        JOptionPane.showMessageDialog(null,"Please Fill-In All Fields Of The Form","Empty Fields", JOptionPane.WARNING_MESSAGE);
+                } else if (!FormValidator.isValidEmail(empEmailField.getText())){
+                    JOptionPane.showMessageDialog(null,"Please Enter A Valid Email Address","Invalid Email",JOptionPane.WARNING_MESSAGE);
                 } else {
                     JOptionPane.showMessageDialog(null,"Please Enter Valid Data For Each Field","Invalid Data",JOptionPane.WARNING_MESSAGE);
                 }
             }
-
-            // must search the database, to see if the username matches anything if it matches, let user know
         }
     }
 }

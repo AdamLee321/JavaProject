@@ -196,26 +196,26 @@ public class ProductAddEdit implements ActionListener {
             prodAdd.dispose();
         }
         else if (e.getSource().equals(okButton)){
-            if(!FormValidator.isNumber(makeTF.getText())
-            && !FormValidator.isNumber(modelTF.getText())
-            && FormValidator.isNumber(salePriceTF.getText())
-            && FormValidator.isNumber(costPriceTF.getText())
-            && FormValidator.isNumber(qtyTF.getText())) {
+            if(FormValidator.isNumber(makeTF.getText())
+            && FormValidator.isNumber(modelTF.getText())
+            && !FormValidator.isNumber(salePriceTF.getText())
+            && !FormValidator.isNumber(costPriceTF.getText())
+            && !FormValidator.isNumber(qtyTF.getText())) {
                 // do action
             }
                 else {
-                    if (!FormValidator.emptyField(makeTF.getText())
-                     || !FormValidator.emptyField(modelTF.getText())
-                     || !FormValidator.emptyField(salePriceTF.getText())
-                     || !FormValidator.emptyField(costPriceTF.getText())
-                     || !FormValidator.emptyField(qtyTF.getText())
-                     || !FormValidator.emptyField(typeTF.getText())
-                     || !FormValidator.emptyField(cpuTF.getText())
-                     || !FormValidator.emptyField(ramTF.getText())
-                     || !FormValidator.emptyField(osTF.getText())
-                     || !FormValidator.emptyField(storageTF.getText())
-                     || !FormValidator.emptyField(screenTF.getText())){
-                        JOptionPane.showMessageDialog(null,"Please Fill-In All Fields","Empty Fields",JOptionPane.WARNING_MESSAGE);
+                    if (FormValidator.isEmptyField(makeTF.getText())
+                     || FormValidator.isEmptyField(modelTF.getText())
+                     || FormValidator.isEmptyField(salePriceTF.getText())
+                     || FormValidator.isEmptyField(costPriceTF.getText())
+                     || FormValidator.isEmptyField(qtyTF.getText())
+                     || FormValidator.isEmptyField(typeTF.getText())
+                     || FormValidator.isEmptyField(cpuTF.getText())
+                     || FormValidator.isEmptyField(ramTF.getText())
+                     || FormValidator.isEmptyField(osTF.getText())
+                     || FormValidator.isEmptyField(storageTF.getText())
+                     || FormValidator.isEmptyField(screenTF.getText())){
+                        JOptionPane.showMessageDialog(null,"Please Fill-In All Fields Of The Form","Empty Fields",JOptionPane.WARNING_MESSAGE);
                     } else {
                         JOptionPane.showMessageDialog(null,"Please Enter Valid Data For Each Field","Invalid Data",JOptionPane.WARNING_MESSAGE);
                     }

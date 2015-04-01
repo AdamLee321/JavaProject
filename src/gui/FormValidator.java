@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 
 public class FormValidator {
 
-    public static boolean emptyField(String field) {
+    public static boolean isEmptyField(String field) {
         if (field.isEmpty()) {
             return true;
         }
@@ -20,7 +20,7 @@ public class FormValidator {
         }
     }
 
-    public static boolean emptyPassField(char[] pw){
+    public static boolean isEmptyPassField(char[] pw){
         if (pw.length == 0){
             return true;
         }
@@ -29,17 +29,14 @@ public class FormValidator {
         }
     }
 
-    public static boolean validEmail(String email){
+    public static boolean isValidEmail(String email){
 
         String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(email);
         if (matcher.matches()){
-
-            System.out.println("true");
             return true;
         } else {
-            System.out.println("false");
             return false;
         }
     }
@@ -49,8 +46,8 @@ public class FormValidator {
         try {
             Long.parseLong(string);
         } catch (Exception e) {
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 }
