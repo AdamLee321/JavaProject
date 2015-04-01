@@ -3,6 +3,7 @@ package main;
 import database.ConnectionDB;
 import database.create.*;
 import gui.StartWindow;
+import gui.admin.AdminMain;
 import gui.report.ReportEmployee;
 import gui.report.ReportMembers;
 import gui.report.ReportProduct;
@@ -71,7 +72,8 @@ public class Main {
     }
 
 //    new StartWindow();
-    new SaleMain();
+//    new SaleMain();
+      new AdminMain();
   }
 
 }

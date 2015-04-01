@@ -23,7 +23,7 @@ public class EmployeeAddEdit implements ActionListener {
     private JComboBox<String> birthDayCBox, birthMonthCBox, birthYearCBox;;
     private JButton addButton, removeButton, cancelButton, previewButton, okButton, passGenButton, usernameGenButton;
 
-    private DateGen dg;
+    private DateGenenerator dg;
     private AdminMain am;  // used for JDialogs as parent
 
     public EmployeeAddEdit(JFrame parent, int choice){
@@ -97,7 +97,7 @@ public class EmployeeAddEdit implements ActionListener {
         detailsPanel.add(empEmailField, Griddy.getConstraints(1,2,1,1,0,0,0,0,5,15,15,5,GridBagConstraints.HORIZONTAL,GridBagConstraints.CENTER));
 
         // DOB
-        dg = new DateGen();  // this needs DateGen class, to get correct days, months and years
+        dg = new DateGenenerator();  // this needs DateGen class, to get correct days, months and years
 
         empDOB = new JLabel("Date Of Birth");
         detailsPanel.add(empDOB, Griddy.getConstraints(0,3,1,1,0,0,0,0,5,15,5,5,0,GridBagConstraints.WEST));
@@ -109,9 +109,11 @@ public class EmployeeAddEdit implements ActionListener {
         birthYearCBox.addActionListener(this);
 
         birthMonthCBox = new JComboBox<String>(new DefaultComboBoxModel<String>(dg.getMonths()));
+        birthMonthCBox.setEnabled(false);
         birthMonthCBox.addActionListener(this);
 
         birthDayCBox = new JComboBox<String>(dg.getMonthDays(birthMonthCBox.getSelectedIndex() + 1, Integer.parseInt(birthYearCBox.getSelectedItem().toString())));
+        birthDayCBox.setEnabled(false);
 
             // add day, month, year comboboxes to details panel
         detailsPanel.add(birthYearCBox, Griddy.getConstraints(1,3,1,1,0,0,0,0,5,115,125,5,0,GridBagConstraints.WEST));
@@ -207,6 +209,9 @@ public class EmployeeAddEdit implements ActionListener {
         if (choice == 1) {
             empFNameField.setText("Mario");
             empCityField.setText("Mario Land");
+
+            birthDayCBox.setEnabled(true);
+            birthMonthCBox.setEnabled(true);
         }
 
 // turns the lights on
@@ -219,9 +224,11 @@ public class EmployeeAddEdit implements ActionListener {
     public void actionPerformed(ActionEvent e){
         if (e.getSource().equals(birthYearCBox)){
             birthDayCBox.setModel(new DefaultComboBoxModel<String>(dg.getMonthDays(birthMonthCBox.getSelectedIndex() + 1, Integer.parseInt(birthYearCBox.getSelectedItem().toString()))));
+            birthMonthCBox.setEnabled(true);
         }
         else if (e.getSource().equals(birthMonthCBox)){
             birthDayCBox.setModel(new DefaultComboBoxModel<String>(dg.getMonthDays(birthMonthCBox.getSelectedIndex() + 1, Integer.parseInt(birthYearCBox.getSelectedItem().toString()))));
+            birthDayCBox.setEnabled(true);
         }
         else if (e.getSource().equals(usernameGenButton)){
             if (empFNameField.getText().equals("") && empLNameField.getText().equals("")){

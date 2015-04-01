@@ -1,6 +1,6 @@
 package gui.member;
 
-import gui.DateGen;
+import gui.DateGenenerator;
 import gui.FormValidator;
 import gui.Griddy;
 import gui.UIElements;
@@ -25,7 +25,7 @@ public class MemberAddEdit implements ActionListener {
     private JComboBox<String> birthDayCBox, birthMonthCBox, birthYearCBox;;
     private JButton addButton, removeButton, cancelButton, previewButton, okButton;
 
-    private DateGen dg;
+    private DateGenenerator dg;
     private AdminMain am;  // used for JDialogs as parent
 
     public MemberAddEdit(JFrame parent, int choice){
@@ -100,7 +100,7 @@ public class MemberAddEdit implements ActionListener {
 
         // DOB
 
-        dg = new DateGen();  // this needs DateGen class, to get correct days, months and years
+        dg = new DateGenenerator();  // this needs DateGen class, to get correct days, months and years
 
         memberDOB = new JLabel("Date Of Birth");
         detailsPanel.add(memberDOB, Griddy.getConstraints(0,3,1,1,0,0,0,0,5,15,5,5,0,GridBagConstraints.WEST));
@@ -112,10 +112,12 @@ public class MemberAddEdit implements ActionListener {
         birthYearCBox.addActionListener(this);
 
         birthMonthCBox = new JComboBox<String>(new DefaultComboBoxModel<String>(dg.getMonths()));
+        birthMonthCBox.setEnabled(false);
         birthMonthCBox.addActionListener(this);
 
         birthDayCBox = new JComboBox<String>(dg.getMonthDays(birthMonthCBox.getSelectedIndex() + 1, Integer.parseInt(birthYearCBox.getSelectedItem().toString())));
-
+        birthDayCBox.setEnabled(false);
+        
             // add day, month, year comboboxes to details panel
         detailsPanel.add(birthYearCBox, Griddy.getConstraints(1,3,1,1,0,0,0,0,5,125,140,5,0,GridBagConstraints.WEST));
         detailsPanel.add(birthMonthCBox, Griddy.getConstraints(1,3,1,1,0,0,0,0,5,65,200,5,0,GridBagConstraints.WEST));
@@ -176,6 +178,9 @@ public class MemberAddEdit implements ActionListener {
         if (choice == 1) {
             memberFNameField.setText("Luigi");
             memberCityField.setText("Mario Land");
+
+            birthDayCBox.setEnabled(true);
+            birthMonthCBox.setEnabled(true);
         }
 
 // turns the lights on
@@ -188,9 +193,11 @@ public class MemberAddEdit implements ActionListener {
     public void actionPerformed(ActionEvent e){
         if (e.getSource() == birthYearCBox){
             birthDayCBox.setModel(new DefaultComboBoxModel<String>(dg.getMonthDays(birthMonthCBox.getSelectedIndex() + 1, Integer.parseInt(birthYearCBox.getSelectedItem().toString()))));
+            birthMonthCBox.setEnabled(true);
         }
         else if(e.getSource() == birthMonthCBox){
             birthDayCBox.setModel(new DefaultComboBoxModel<String>(dg.getMonthDays(birthMonthCBox.getSelectedIndex() + 1, Integer.parseInt(birthYearCBox.getSelectedItem().toString()))));
+            birthDayCBox.setEnabled(true);
         }
         else if(e.getSource() == cancelButton){
             memberAdd.dispose();

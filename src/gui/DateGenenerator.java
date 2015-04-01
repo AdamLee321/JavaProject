@@ -12,9 +12,9 @@ It returns String arrays of months, past 100 years (-16),
 and correct number of days... meaning days correctly reflect leap years and months
 */
 
-public class DateGen {
+public class DateGenenerator {
 
-    private String[] months = {"Jan", "Fed", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+    private String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 
     public String[] getMonthDays(int monthIn, int yearIn){
 
@@ -55,7 +55,7 @@ public class DateGen {
     }
 
     public String[] getPastCentury() {
-        String[] years = new String[100];
+        String[] years = new String[101];
 
         Calendar cal = Calendar.getInstance();
         int thisYear = cal.get(Calendar.YEAR);
