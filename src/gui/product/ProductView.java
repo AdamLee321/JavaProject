@@ -32,8 +32,8 @@ public class ProductView implements ActionListener {
         prodAdd = new JDialog(parent, true);
         prodAdd.setTitle("Add New Product");
         prodAdd.setLayout(new BorderLayout());
-        prodAdd.setSize(780, 400);
-        prodAdd.setResizable(true);
+        prodAdd.setSize(820, 470);
+        prodAdd.setResizable(false);
         prodAdd.setLocationRelativeTo(null);
 
 // CENTER PANEL

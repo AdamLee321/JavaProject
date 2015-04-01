@@ -36,7 +36,7 @@ public class AdminMain extends JFrame implements ActionListener {
 
         am = new JFrame();
         am.setTitle("DGA Administration");
-        am.setSize(800, 720);
+        am.setSize(810, 700);
         am.setLocationRelativeTo(null);
         am.setResizable(true);
         am.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -116,10 +116,9 @@ public class AdminMain extends JFrame implements ActionListener {
 // OUTER NORTH - logo
 
         outerNorth = new JPanel(new GridBagLayout());
-        outerNorth.setBackground(UIElements.getColour());
+        outerNorth.setBackground(Color.BLACK);
         mainLogo = new JLabel();
         mainLogo.setIcon(new ImageIcon(UIElements.banner));
-        mainLogo.setBackground(UIElements.getColour());
         outerNorth.add(mainLogo);
         am.add(outerNorth, BorderLayout.NORTH);  // add to frame
 

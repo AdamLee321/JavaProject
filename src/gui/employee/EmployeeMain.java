@@ -67,19 +67,19 @@ public class EmployeeMain implements ActionListener {
         managePanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Manage Employees")); // set anonymous titled, etched border
 
         addButton = new JButton("Add");
-        addButton.setPreferredSize(new Dimension(100, 26));
+        addButton.setPreferredSize(new Dimension(100, 28));
         addButton.setIcon(new ImageIcon(UIElements.plus16));
         addButton.addActionListener(this);
         managePanel.add(addButton);
 
         editButton = new JButton("Edit");
-        editButton.setPreferredSize(new Dimension(100, 26));
+        editButton.setPreferredSize(new Dimension(100, 28));
         editButton.setIcon(new ImageIcon(UIElements.edit16));
         editButton.addActionListener(this);
         managePanel.add(editButton);
 
         deleteButton = new JButton("Delete");
-        deleteButton.setPreferredSize(new Dimension(100, 26));
+        deleteButton.setPreferredSize(new Dimension(100, 28));
         deleteButton.setIcon(new ImageIcon(UIElements.delete16));
         managePanel.add(deleteButton);
 
@@ -100,7 +100,7 @@ public class EmployeeMain implements ActionListener {
         searchPanel.add(empTypes);
 
         searchButton = new JButton("Search");
-        searchButton.setPreferredSize(new Dimension(105, 26));
+        searchButton.setPreferredSize(new Dimension(105, 28));
         searchButton.setIcon(new ImageIcon(UIElements.search16));
         searchPanel.add(searchButton);
 
@@ -131,7 +131,7 @@ public class EmployeeMain implements ActionListener {
     // bottom buttons
 
         viewSalesButton = new JButton("View Sales");
-        viewSalesButton.setPreferredSize(new Dimension(150, 26));
+        viewSalesButton.setPreferredSize(new Dimension(150, 28));
         viewSalesButton.setIcon(new ImageIcon(UIElements.open16));
         viewSalesButton.addActionListener(this);
         southPanel.add(viewSalesButton);

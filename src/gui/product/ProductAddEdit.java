@@ -6,6 +6,7 @@ Computing - Year 2, Project
 Group 17 (George - 17/03/2015)
 */
 
+import gui.FormValidator;
 import gui.Griddy;
 import gui.UIElements;
 import gui.admin.AdminMain;
@@ -31,7 +32,7 @@ public class ProductAddEdit implements ActionListener {
         prodAdd = new JDialog(parent, true);
         prodAdd.setTitle("Add New Product");
         prodAdd.setLayout(new BorderLayout());
-        prodAdd.setSize(790, 410);
+        prodAdd.setSize(820, 470);
         prodAdd.setResizable(true);
         prodAdd.setLocationRelativeTo(null);
 
@@ -71,6 +72,7 @@ public class ProductAddEdit implements ActionListener {
         idLabel = new JLabel("ID");
         centerRightPanel.add(idLabel, Griddy.getConstraints(0,0,1,1,0,0,0,0,5,5,5,5,GridBagConstraints.BOTH,GridBagConstraints.WEST));
         idTF = new JTextField(15);
+        idTF.setEditable(false);
         centerRightPanel.add(idTF, Griddy.getConstraints(1,0,1,1,0,0,0,0,5,5,5,5,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
 
         // make
@@ -194,7 +196,30 @@ public class ProductAddEdit implements ActionListener {
             prodAdd.dispose();
         }
         else if (e.getSource().equals(okButton)){
-
+            if(!FormValidator.isNumber(makeTF.getText())
+            && !FormValidator.isNumber(modelTF.getText())
+            && FormValidator.isNumber(salePriceTF.getText())
+            && FormValidator.isNumber(costPriceTF.getText())
+            && FormValidator.isNumber(qtyTF.getText())) {
+                // do action
+            }
+                else {
+                    if (!FormValidator.emptyField(makeTF.getText())
+                     || !FormValidator.emptyField(modelTF.getText())
+                     || !FormValidator.emptyField(salePriceTF.getText())
+                     || !FormValidator.emptyField(costPriceTF.getText())
+                     || !FormValidator.emptyField(qtyTF.getText())
+                     || !FormValidator.emptyField(typeTF.getText())
+                     || !FormValidator.emptyField(cpuTF.getText())
+                     || !FormValidator.emptyField(ramTF.getText())
+                     || !FormValidator.emptyField(osTF.getText())
+                     || !FormValidator.emptyField(storageTF.getText())
+                     || !FormValidator.emptyField(screenTF.getText())){
+                        JOptionPane.showMessageDialog(null,"Please Fill-In All Fields","Empty Fields",JOptionPane.WARNING_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null,"Please Enter Valid Data For Each Field","Invalid Data",JOptionPane.WARNING_MESSAGE);
+                    }
+                }
+            }
         }
     }
-}

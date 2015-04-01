@@ -1,5 +1,6 @@
 package gui.admin;
 
+import gui.FormValidator;
 import gui.Griddy;
 import gui.UIElements;
 
@@ -31,7 +32,7 @@ public class AdminOptions implements ActionListener {
         adminOps = new JDialog(parent, true);
         adminOps.setTitle("Administrator Options");
         adminOps.setLayout(new BorderLayout());
-        adminOps.setSize(400, 335);
+        adminOps.setSize(470, 400);
         adminOps.setResizable(true);
         adminOps.setLocationRelativeTo(null);
         adminOps.getContentPane().setBackground(UIElements.getColour());  // there is really no point of this, it's hidden behind to panels (fieldsPanel, buttonsPanel)
@@ -42,7 +43,7 @@ public class AdminOptions implements ActionListener {
         fieldsPanel.setBackground(UIElements.getColour());
 
         Border etched = BorderFactory.createEtchedBorder();
-        Border titled = BorderFactory.createTitledBorder(etched, "Edit");
+        Border titled = BorderFactory.createTitledBorder(etched, "Edit", 2, 2);
         fieldsPanel.setBorder(titled);
 
         // name
@@ -50,36 +51,36 @@ public class AdminOptions implements ActionListener {
         fieldsPanel.add(nameLabel, Griddy.getConstraints(0, 0, 1, 1, 0, 0, 0, 0, 5, 15, 15, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.WEST));
         nameField = new JTextField();
         fieldsPanel.add(nameField, Griddy.getConstraints(1, 0, 1, 1, 0, 0, 0, 0, 5, 15, 15, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER));
+
         // surname
         surnameLabel = new JLabel("Admin Surname");
         fieldsPanel.add(surnameLabel, Griddy.getConstraints(0, 1, 1, 1, 0, 0, 0, 0, 5, 15, 15, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.WEST));
         surnameField = new JTextField(15);
         fieldsPanel.add(surnameField, Griddy.getConstraints(1, 1, 1, 1, 0, 0, 0, 0, 5, 15, 15, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER));
-        // contact
-        contactLabel = new JLabel("Admin Phone");
-        fieldsPanel.add(contactLabel, Griddy.getConstraints(0, 2, 1, 1, 0, 0, 0, 0, 5, 15, 15, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.WEST));
-        contactField = new JTextField(15);
-        fieldsPanel.add(contactField, Griddy.getConstraints(1, 2, 1, 1, 0, 0, 0, 0, 5, 15, 15, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER));
+
         // email
         emailLabel = new JLabel("Admin Email");
-        fieldsPanel.add(emailLabel, Griddy.getConstraints(0, 3, 1, 1, 0, 0, 0, 0, 5, 15, 15, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.WEST));
+        fieldsPanel.add(emailLabel, Griddy.getConstraints(0, 2, 1, 1, 0, 0, 0, 0, 5, 15, 15, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.WEST));
         emailField = new JTextField(15);
-        fieldsPanel.add(emailField, Griddy.getConstraints(1, 3, 1, 1, 0, 0, 0, 0, 5, 15, 15, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER));
+        fieldsPanel.add(emailField, Griddy.getConstraints(1, 2, 1, 1, 0, 0, 0, 0, 5, 15, 15, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER));
+
         // current pass
         currPassLabel = new JLabel("Current Password");
-        fieldsPanel.add(currPassLabel, Griddy.getConstraints(0, 4, 1, 1, 0, 0, 0, 0, 5, 15, 15, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.WEST));
+        fieldsPanel.add(currPassLabel, Griddy.getConstraints(0, 3, 1, 1, 0, 0, 0, 0, 5, 15, 15, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.WEST));
         currPassField = new JPasswordField(15);
-        fieldsPanel.add(currPassField, Griddy.getConstraints(1, 4, 1, 1, 0, 0, 0, 0, 5, 15, 15, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER));
+        fieldsPanel.add(currPassField, Griddy.getConstraints(1, 3, 1, 1, 0, 0, 0, 0, 5, 15, 15, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER));
+
         // new password
         newPassLabel = new JLabel("New Password");
-        fieldsPanel.add(newPassLabel, Griddy.getConstraints(0, 5, 1, 1, 0, 0, 0, 0, 5, 15, 15, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.WEST));
+        fieldsPanel.add(newPassLabel, Griddy.getConstraints(0, 4, 1, 1, 0, 0, 0, 0, 5, 15, 15, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.WEST));
         newPassField = new JPasswordField(15);
-        fieldsPanel.add(newPassField, Griddy.getConstraints(1, 5, 1, 1, 0, 0, 0, 0, 5, 15, 15, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER));
+        fieldsPanel.add(newPassField, Griddy.getConstraints(1, 4, 1, 1, 0, 0, 0, 0, 5, 15, 15, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER));
+
         // repeat new password
         repeatPassLabel = new JLabel("Repeat New Password");
-        fieldsPanel.add(repeatPassLabel, Griddy.getConstraints(0, 6, 1, 1, 0, 0, 0, 0, 5, 15, 15, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.WEST));
+        fieldsPanel.add(repeatPassLabel, Griddy.getConstraints(0, 5, 1, 1, 0, 0, 0, 0, 5, 15, 15, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.WEST));
         repeatPassField = new JPasswordField(15);
-        fieldsPanel.add(repeatPassField, Griddy.getConstraints(1, 6, 1, 1, 0, 0, 0, 0, 5, 15, 15, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER));
+        fieldsPanel.add(repeatPassField, Griddy.getConstraints(1, 5, 1, 1, 0, 0, 0, 0, 5, 15, 15, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER));
 
         adminOps.add(fieldsPanel, BorderLayout.CENTER);
 
@@ -113,7 +114,22 @@ public class AdminOptions implements ActionListener {
         if (e.getSource().equals(cancelButton)) {
             adminOps.dispose();
         } else if (e.getSource().equals(okButton)) {
-
+            if (FormValidator.emptyField(nameField.getText())
+                || FormValidator.emptyField(surnameField.getText())
+                || FormValidator.emptyField(emailField.getText())
+                || FormValidator.emptyPassField(currPassField.getPassword())
+                || FormValidator.emptyPassField(newPassField.getPassword())
+                || FormValidator.emptyPassField(repeatPassField.getPassword())) {
+                JOptionPane.showMessageDialog(null, "Please Fill-In All Fields", "Empty Fields", JOptionPane.WARNING_MESSAGE);
+            }
+            else {
+                if (!FormValidator.isNumber(nameField.getText()) && !FormValidator.isNumber(surnameField.getText())) {
+                    JOptionPane.showMessageDialog(null, "Please Enter Valid Data For Each Field", "Invalid Data", JOptionPane.WARNING_MESSAGE);
+                }
+                else if (!FormValidator.validEmail(emailField.getText())) {
+                    JOptionPane.showMessageDialog(null, "Please Enter Valid Email", "Invalid Email", JOptionPane.WARNING_MESSAGE);
+                }
+            }
         }
     }
 }

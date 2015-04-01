@@ -4,6 +4,7 @@ package database.operations;
 import java.sql.*;
 import database.ConnectionDB;
 import gui.PasswordGenerator;
+import model.Employee;
 
 /*
 IT Tallaght - 2015, S2
@@ -19,6 +20,11 @@ public class EmployeeOperations {
     PreparedStatement pstmt;
     ResultSet rset;
 
+    ConnectionDB conn;
+
+    public EmployeeOperations(){
+        this.conn = conn;
+    }
 
     public ResultSet getEmployees(){
         try {

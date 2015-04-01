@@ -3,6 +3,11 @@ package main;
 import database.ConnectionDB;
 import database.create.*;
 import gui.StartWindow;
+import gui.report.ReportEmployee;
+import gui.report.ReportMembers;
+import gui.report.ReportProduct;
+import gui.report.ReportSales;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.logging.Level;
