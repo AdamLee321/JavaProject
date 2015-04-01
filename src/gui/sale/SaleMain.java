@@ -3,7 +3,7 @@ package gui.sale;
 /*
 IT Tallaght - 2015, S2
 Computing - Year 2, Project
-Group 17 (George - 22/03/2015)
+Group 17 (George, David - 22/03/2015)
 */
 
 import gui.FormValidator;
@@ -12,9 +12,13 @@ import gui.StartWindow;
 import gui.UIElements;
 import gui.employee.SalesView;
 import gui.member.MemberAddEdit;
+import gui.terminal.TerminalMode;
+
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -35,10 +39,14 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
     private String prodFieldTip = "product number...";
     private String qtyFieldTip = "quantity...";
 
-    public SaleMain(){
+    private JTable saleTable;
+    private SaleTableModel tableModel;
+    protected static final int tableHeight = 200;
+
+    public SaleMain() {
 
         super("DGA Sale");
-        this.setSize(700, 600);
+        this.setSize(1000, 700);
         this.setLocationRelativeTo(null);
         this.setResizable(true);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -71,7 +79,7 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
         btnRemove.addActionListener(this);
         pnlKeypad.add(btnRemove, Griddy.getConstraints(1,2,1,1,0,0,0,0,2,2,2,2,GridBagConstraints.BOTH,GridBagConstraints.EAST));
 
-        this.add(pnlKeypad, Griddy.getConstraints(1,0,1,1,0,0,1,1,0,1,0,0,1,GridBagConstraints.CENTER));
+        this.add(pnlKeypad, Griddy.getConstraints(1,0,1,1,0,0,1,1,0,1,0,0,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
 
 // CHECKOUT PANEL (right, bottom corner)
 
@@ -137,9 +145,9 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
 
         btnLogout = new JButton("Log Out", new ImageIcon(UIElements.logout16));
         btnLogout.addActionListener(this);
-        pnlLoggedIn.add(btnLogout, Griddy.getConstraints(0, 2, 2, 1, 0, 0, 0, 0, 5, 5, 5, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER));
+        pnlLoggedIn.add(btnLogout, Griddy.getConstraints(0, 2, 2, 1, 0, 0, 0, 0, 5, 5, 5, 5, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
 
-        this.add(pnlLoggedIn, Griddy.getConstraints(1, 3, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, GridBagConstraints.BOTH, GridBagConstraints.WEST));
+        this.add(pnlLoggedIn, Griddy.getConstraints(1, 3, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, GridBagConstraints.BOTH, GridBagConstraints.EAST));
 
 // SALE INFO PANEL
 
@@ -150,6 +158,7 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
         lblSubtotal = new JLabel("SubTotal");
         pnlSaleInfo.add(lblSubtotal, Griddy.getConstraints(0, 0, 1, 1, 0, 0, 1, 0, 0, 5, 0, 0, 0, GridBagConstraints.WEST));
         lblSubtotalR = new JLabel("-");
+        lblSubtotalR.setFont(new Font("Tahoma", 1, 18));
         pnlSaleInfo.add(lblSubtotalR, Griddy.getConstraints(1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 5, 0, 0, GridBagConstraints.EAST));
 
         lblVAT = new JLabel("VAT");
@@ -197,10 +206,27 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
 
 // BASKET PANEL
 
-        pnlBasket = new JPanel();
+        tableModel = new SaleTableModel();
+        saleTable = new JTable(tableModel);
+        saleTable.setRowHeight(30);
+
+        // Set the table width, depending upon the width of
+        // the columns
+        int tableWidth = 0;
+        int columnCount = tableModel.columnModel.getColumnCount();
+        for (int i = 0; i < columnCount; i++)
+            tableWidth += tableModel.columnModel.getColumn(i).getWidth();
+
+        JScrollPane scrollPane = new JScrollPane(saleTable);
+        scrollPane.setBorder(new BevelBorder(BevelBorder.LOWERED));
+        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+        pnlBasket = new JPanel(new GridLayout());
         pnlBasket.setBackground(UIElements.getColour());
+        pnlBasket.setPreferredSize(new Dimension(700,500));
         pnlBasket.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Basket")); // set anonymous titled, etched border
-        this.add(pnlBasket, Griddy.getConstraints(0,0,1,4,0,0,0,0,0,0,0,0,GridBagConstraints.BOTH,GridBagConstraints.WEST));
+        pnlBasket.add(scrollPane);
+        this.add(pnlBasket, Griddy.getConstraints(0,0,1,4,0,0,10,0,0,0,0,0,GridBagConstraints.BOTH,GridBagConstraints.WEST));
 
         this.setVisible(true);
     }
@@ -217,6 +243,25 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
         lblDiscountR.setText(discount);
     }
 
+// METHODS
+
+    public void addToBasket() {
+        // Get the data!
+        try {
+            tableModel.queryTableData(Integer.parseInt(tfProdNum.getText()), Integer.parseInt(tfQty.getText()));
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "SQL Problem");
+        }
+//        productTable.addMouseListener(new MouseAdapter() {
+//            @Override
+//            public void mousePressed(MouseEvent e) {
+//                JTable row = (JTable)e.getSource();
+//                int i = row.getSelectedRow();
+//                int productId = (Integer)productTable.getValueAt(i, 0);
+//                TerminalMode.mf.setToProductView(productId);
+//            }
+//        });
+    }
 
 // BUTTON ACTIONS - don't forget to add action listeners to buttons and implement ActionListener class
 
@@ -294,6 +339,12 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
         else if (e.getSource().equals(btnAdd)){
             if(!FormValidator.isNumber(tfProdNum.getText()) || !FormValidator.isNumber(tfQty.getText())){
                 JOptionPane.showMessageDialog(this,"Please Enter A Number In Both Fields","Invalid Entry",JOptionPane.WARNING_MESSAGE);
+            }
+//         //   else if (Double.parseDouble(tfQty.getText()) < 0 || Double.parseDouble(tfQty.getText())){
+//
+//            }
+            else{
+                addToBasket();
             }
         }
         else if (e.getSource().equals(btnRemove)){

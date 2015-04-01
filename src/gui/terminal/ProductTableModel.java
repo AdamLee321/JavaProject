@@ -6,6 +6,8 @@ package gui.terminal;
  */
 
 import database.operations.ProductOperations;
+import gui.sale.SaleRow;
+
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
@@ -21,7 +23,7 @@ public class ProductTableModel extends DefaultTableModel {
     final static int model = 2;
     final static int price = 3;
     final static int quantity = 4;
-    final static String[] columnNames = { "Product ID", "Make", "Model", "Price €", "Quantity" };
+    final static String[] columnNames = {"Product ID", "Make", "Model", "Price €", "Quantity"};
 
     private static ArrayList<Object> productRows = new ArrayList();
 
@@ -43,7 +45,7 @@ public class ProductTableModel extends DefaultTableModel {
         ResultSet rset = po.productCategory(category);
         emptyArray();
         while (rset.next()) {
-            productRows.add( new ProductRow(rset.getInt(1), rset.getString(2), rset.getString(3), rset.getDouble(4), rset.getInt(6)));
+            productRows.add(new ProductRow(rset.getInt(1), rset.getString(2), rset.getString(3), rset.getDouble(4), rset.getInt(6)));
         }
         rset.close();
         fireTableChanged(new TableModelEvent(this, -1, -1));
@@ -54,12 +56,11 @@ public class ProductTableModel extends DefaultTableModel {
         ResultSet rset = po.searchProducts(keyword, category);
         emptyArray();
         while (rset.next()) {
-            productRows.add( new ProductRow(rset.getInt(1), rset.getString(2), rset.getString(3), rset.getDouble(4), rset.getInt(6)));
+            productRows.add(new ProductRow(rset.getInt(1), rset.getString(2), rset.getString(3), rset.getDouble(4), rset.getInt(6)));
         }
         rset.close();
         fireTableChanged(new TableModelEvent(this, -1, -1));
     }
-
 
     //a method just to pass in a column number and row and return that cell value
     public Object getValueAt(int rowNum, int colNum) {
@@ -88,17 +89,18 @@ public class ProductTableModel extends DefaultTableModel {
             return "";
     }
 
-    public void reset(){
+    public void reset() {
 
     }
 
-    public void emptyArray(){
-        if (productRows.size()>0){
-            for (int i = productRows.size(); i>0; i--){
-                productRows.remove(i-1);
+    public void emptyArray() {
+        if (productRows.size() > 0) {
+            for (int i = productRows.size(); i > 0; i--) {
+                productRows.remove(i - 1);
             }
         }
     }
+
 
     public boolean isCellEditable(int row, int column) {
         return false;

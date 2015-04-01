@@ -7,6 +7,7 @@ import gui.report.ReportEmployee;
 import gui.report.ReportMembers;
 import gui.report.ReportProduct;
 import gui.report.ReportSales;
+import gui.sale.SaleMain;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,7 +18,7 @@ public class Main {
   public static void main(String[] args) {
 
     ConnectionDB connDB = new ConnectionDB();
-
+/*
     CreateShop cs = new CreateShop(connDB.getConn());
     CreateDepartment cd = new CreateDepartment(connDB.getConn());
     CreateShopDepartment sd = new CreateShopDepartment(connDB.getConn());
@@ -44,7 +45,7 @@ public class Main {
     cp.createProductTable();
     cm.createMembersTable();
     sld.createSalesDetailsTable();
-
+*/
     //connDB.closeDB();
 
     /* Set the Nimbus look and feel */
@@ -69,11 +70,8 @@ public class Main {
       Logger.getLogger(StartWindow.class.getName()).log(Level.SEVERE, null, ex);
     }
 
-        /* Create and display the form */
-    EventQueue.invokeLater(new Runnable() {
-      public void run() {
-        new StartWindow().setVisible(true);
-      }
-    });
+//    new StartWindow();
+    new SaleMain();
   }
+
 }

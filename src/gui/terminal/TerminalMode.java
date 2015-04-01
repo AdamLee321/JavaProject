@@ -227,7 +227,7 @@ public class TerminalMode extends JFrame implements ActionListener {
   public void setToProductView(int productId){
     windowNum = 4;
     ProductView pv = new ProductView();
-    Product p = po.productByID(productId);
+    Product p = po.productByIDO(productId);
     removePanels();
     centerPanel = pv.getProductView(p);
     southPanel = getFullSouthPanel();

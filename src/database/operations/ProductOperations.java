@@ -60,7 +60,7 @@ public class ProductOperations {
         return rset;
     }
 
-    public Product productByID(int id){
+    public Product productByIDO(int id){
         Product p = null;
         String sql = "SELECT prodId, prodMake, prodModel, prodSalePrice, prodCostPrice, prodQTY," +
                 "prodPic, prodType, cpu, ram, OperatingSystem, storage, screen, prodDesc FROM PRODUCT WHERE prodId = '"+id+"'";
@@ -78,5 +78,16 @@ public class ProductOperations {
             System.out.println("Error in ResultSet to product Conversion");
         }
         return p;
+    }
+
+    public ResultSet productByIDR(int id){
+        String sql = "SELECT prodId, prodMake, prodModel, prodSalePrice FROM PRODUCT WHERE prodId = '"+id+"'";
+        try{
+            stmt = conn.createStatement();
+            rset = stmt.executeQuery(sql);
+        }catch(SQLException sqlE){
+            System.out.println("Error in ResultSet to product Conversion");
+        }
+        return rset;
     }
 }
