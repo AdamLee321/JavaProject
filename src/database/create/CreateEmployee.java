@@ -94,7 +94,7 @@ public class CreateEmployee {
             pstmt.setInt(10, 1984); // employee dob year
             pstmt.setString(11, "ermac.ward@gmail.com");  //employee email
             pstmt.setInt(12, 12000); // employee salary
-            pstmt.setBinaryStream(13, savePic2DB(new File("src/res/images/Employees/ermac.png"))); // employee picture BLOB
+            pstmt.setBinaryStream(13, savePic2DB(new File("src/res/images/EmployeePictures/ermac.png"))); // employee picture BLOB
             pstmt.setString(14, "ruthward"); // employee username
             pstmt.setString(15, "81dc9bdb52d04dc20036dbd8313ed055"); // employee password
             pstmt.execute();
@@ -111,7 +111,7 @@ public class CreateEmployee {
             pstmt.setInt(10, 1984);
             pstmt.setString(11, "sub.zero@gmail.com");
             pstmt.setInt(12, 19000);
-            pstmt.setBinaryStream(13, savePic2DB(new File("src/res/images/Employees/subzero.png")));
+            pstmt.setBinaryStream(13, savePic2DB(new File("src/res/images/EmployeePictures/subzero.png")));
             pstmt.setString(14, "normabrown");
             pstmt.setString(15, "827ccb0eea8a706c4c34a16891f84e7b");
             pstmt.execute();
@@ -128,7 +128,7 @@ public class CreateEmployee {
             pstmt.setInt(10, 1969);
             pstmt.setString(11, "sonya.blade@outlook.com");
             pstmt.setInt(12, 17000);
-            pstmt.setBinaryStream(13, savePic2DB(new File("src/res/images/Employees/sonya.png")));
+            pstmt.setBinaryStream(13, savePic2DB(new File("src/res/images/EmployeePictures/sonya.png")));
             pstmt.setString(14, "sonyablade");
             pstmt.setString(15, "81dc9bdb52d04dc20036dbd8313ed055");
             pstmt.execute();
@@ -145,7 +145,7 @@ public class CreateEmployee {
             pstmt.setInt(10, 1971);
             pstmt.setString(11, "striker.watson@yahoo.co.uk");
             pstmt.setInt(12, 24000);
-            pstmt.setBinaryStream(13, savePic2DB(new File("src/res/images/Employees/striker.png")));
+            pstmt.setBinaryStream(13, savePic2DB(new File("src/res/images/EmployeePictures/striker.png")));
             pstmt.setString(14, "strikerwatson");
             pstmt.setString(15, "81dc9bdb52d04dc20036dbd8313ed055");
             pstmt.execute();
@@ -162,7 +162,7 @@ public class CreateEmployee {
             pstmt.setInt(10, 1974);
             pstmt.setString(11, "smoke.martin@hotmail.com");
             pstmt.setInt(12, 12000);
-            pstmt.setBinaryStream(13, savePic2DB(new File("src/res/images/Employees/smoke.png")));
+            pstmt.setBinaryStream(13, savePic2DB(new File("src/res/images/EmployeePictures/smoke.png")));
             pstmt.setString(14, "smokemartin");
             pstmt.setString(15, "81dc9bdb52d04dc20036dbd8313ed055");
             pstmt.execute();
@@ -179,7 +179,7 @@ public class CreateEmployee {
             pstmt.setInt(10, 1973);
             pstmt.setString(11, "mileena.brooks@gmail.com");
             pstmt.setInt(12, 23500);
-            pstmt.setBinaryStream(13, savePic2DB(new File("src/res/images/Employees/mileena.png")));
+            pstmt.setBinaryStream(13, savePic2DB(new File("src/res/images/EmployeePictures/mileena.png")));
             pstmt.setString(14, "mileenabrooks");
             pstmt.setString(15, "81dc9bdb52d04dc20036dbd8313ed055");
             pstmt.execute();
@@ -196,7 +196,7 @@ public class CreateEmployee {
             pstmt.setInt(10, 1993);
             pstmt.setString(11, "sindel.reed@gmail.com");
             pstmt.setInt(12, 16000);
-            pstmt.setBinaryStream(13, savePic2DB(new File("src/res/images/Employees/sindel.png")));
+            pstmt.setBinaryStream(13, savePic2DB(new File("src/res/images/EmployeePictures/sindel.png")));
             pstmt.setString(14, "sindelreed");
             pstmt.setString(15, "81dc9bdb52d04dc20036dbd8313ed055");
             pstmt.execute();
@@ -213,7 +213,7 @@ public class CreateEmployee {
             pstmt.setInt(10, 1971);
             pstmt.setString(11, "liu.kang@hotmail.com");
             pstmt.setInt(12, 12000);
-            pstmt.setBinaryStream(13, savePic2DB(new File("src/res/images/Employees/liukang.png")));
+            pstmt.setBinaryStream(13, savePic2DB(new File("src/res/images/EmployeePictures/liukang.png")));
             pstmt.setString(14, "liukang");
             pstmt.setString(15, "81dc9bdb52d04dc20036dbd8313ed055");
             pstmt.execute();
@@ -230,7 +230,7 @@ public class CreateEmployee {
             pstmt.setInt(10, 1979);
             pstmt.setString(11, "jade.hernandez@yahoo.co.uk");
             pstmt.setInt(12, 12000);
-            pstmt.setBinaryStream(13, savePic2DB(new File("src/res/images/Employees/jade.png")));
+            pstmt.setBinaryStream(13, savePic2DB(new File("src/res/images/EmployeePictures/jade.png")));
             pstmt.setString(14, "jadehernandez");
             pstmt.setString(15, "81dc9bdb52d04dc20036dbd8313ed055");
             pstmt.execute();
@@ -247,7 +247,7 @@ public class CreateEmployee {
             pstmt.setInt(10, 1981);
             pstmt.setString(11, "kano.bailey@yahoo.co.uk");
             pstmt.setInt(12, 12000);
-            pstmt.setBinaryStream(13, savePic2DB(new File("src/res/images/Employees/kano.png")));
+            pstmt.setBinaryStream(13, savePic2DB(new File("src/res/images/EmployeePictures/kano.png")));
             pstmt.setString(14, "kanobailey");
             pstmt.setString(15, "81dc9bdb52d04dc20036dbd8313ed055");
             pstmt.execute();
@@ -264,7 +264,7 @@ public class CreateEmployee {
             pstmt.setInt(10, 1987);
             pstmt.setString(11, "noob.saibot@outlook.com");
             pstmt.setInt(12, 19000);
-            pstmt.setBinaryStream(13, savePic2DB(new File("src/res/images/Employees/noobsaibot.png")));
+            pstmt.setBinaryStream(13, savePic2DB(new File("src/res/images/EmployeePictures/noobsaibot.png")));
             pstmt.setString(14, "noobsaibot");
             pstmt.setString(15, "81dc9bdb52d04dc20036dbd8313ed055");
             pstmt.execute();
@@ -281,7 +281,7 @@ public class CreateEmployee {
             pstmt.setInt(10, 1984);
             pstmt.setString(11, "kobal.jones@gmail.com");
             pstmt.setInt(12,14500);
-            pstmt.setBinaryStream(13, savePic2DB(new File("src/res/images/Employees/kabal.png")));
+            pstmt.setBinaryStream(13, savePic2DB(new File("src/res/images/EmployeePictures/kabal.png")));
             pstmt.setString(14, "kabaljones");
             pstmt.setString(15, "81dc9bdb52d04dc20036dbd8313ed055");
             pstmt.execute();
@@ -298,7 +298,7 @@ public class CreateEmployee {
             pstmt.setInt(10, 1989);
             pstmt.setString(11, "kitana.miller@hotmail.com");
             pstmt.setInt(12,12000);
-            pstmt.setBinaryStream(13, savePic2DB(new File("src/res/images/Employees/kitana.png")));
+            pstmt.setBinaryStream(13, savePic2DB(new File("src/res/images/EmployeePictures/kitana.png")));
             pstmt.setString(14, "kitanamiller");
             pstmt.setString(15, "81dc9bdb52d04dc20036dbd8313ed055");
             pstmt.execute();
@@ -315,7 +315,7 @@ public class CreateEmployee {
             pstmt.setInt(10, 1993);
             pstmt.setString(11, "reptile.evans@yahoo.co.uk");
             pstmt.setInt(12, 22000);
-            pstmt.setBinaryStream(13, savePic2DB(new File("src/res/images/Employees/reptile.png")));
+            pstmt.setBinaryStream(13, savePic2DB(new File("src/res/images/EmployeePictures/reptile.png")));
             pstmt.setString(14, "reptileevans");
             pstmt.setString(15, "81dc9bdb52d04dc20036dbd8313ed055");
             pstmt.execute();
@@ -332,7 +332,7 @@ public class CreateEmployee {
             pstmt.setInt(10, 1992);
             pstmt.setString(11, "smoke.garcia@outlook.com");
             pstmt.setInt(12, 12000);
-            pstmt.setBinaryStream(13, savePic2DB(new File("src/res/images/Employees/cyrax.png")));
+            pstmt.setBinaryStream(13, savePic2DB(new File("src/res/images/EmployeePictures/cyrax.png")));
             pstmt.setString(14, "smokegarcia");
             pstmt.setString(15, "81dc9bdb52d04dc20036dbd8313ed055");
             pstmt.execute();
@@ -349,7 +349,7 @@ public class CreateEmployee {
             pstmt.setInt(10, 1979);
             pstmt.setString(11, "scorpion.perry@gmail.com");
             pstmt.setInt(12, 22000);
-            pstmt.setBinaryStream(13, savePic2DB(new File("src/res/images/Employees/scorpion.png")));
+            pstmt.setBinaryStream(13, savePic2DB(new File("src/res/images/EmployeePictures/scorpion.png")));
             pstmt.setString(14, "scorpionperry");
             pstmt.setString(15, "81dc9bdb52d04dc20036dbd8313ed055");
             pstmt.execute();
@@ -366,7 +366,7 @@ public class CreateEmployee {
             pstmt.setInt(10, 1981);
             pstmt.setString(11, "jax.jones@outlook.com");
             pstmt.setInt(12, 16000);
-            pstmt.setBinaryStream(13, savePic2DB(new File("src/res/images/Employees/jax.png")));
+            pstmt.setBinaryStream(13, savePic2DB(new File("src/res/images/EmployeePictures/jax.png")));
             pstmt.setString(14, "jaxjames");
             pstmt.setString(15, "81dc9bdb52d04dc20036dbd8313ed055");
             pstmt.execute();
@@ -383,7 +383,7 @@ public class CreateEmployee {
             pstmt.setInt(10, 1985);
             pstmt.setString(11, "kung.lao@hotmail.com");
             pstmt.setInt(12, 17500);
-            pstmt.setBinaryStream(13, savePic2DB(new File("src/res/images/Employees/kunglao.png")));
+            pstmt.setBinaryStream(13, savePic2DB(new File("src/res/images/EmployeePictures/kunglao.png")));
             pstmt.setString(14, "kunglao");
             pstmt.setString(15, "81dc9bdb52d04dc20036dbd8313ed055");
             pstmt.execute();
@@ -400,7 +400,7 @@ public class CreateEmployee {
             pstmt.setInt(10, 1984);
             pstmt.setString(11, "nightwolf.lee@gmail.com");
             pstmt.setInt(12, 12000);
-            pstmt.setBinaryStream(13, savePic2DB(new File("src/res/images/Employees/nightwolf.png")));
+            pstmt.setBinaryStream(13, savePic2DB(new File("src/res/images/EmployeePictures/nightwolf.png")));
             pstmt.setString(14, "nightwolflee");
             pstmt.setString(15, "81dc9bdb52d04dc20036dbd8313ed055");
             pstmt.execute();
@@ -417,7 +417,7 @@ public class CreateEmployee {
             pstmt.setInt(10, 1980);
             pstmt.setString(11, "shang.tsung@gmail.com");
             pstmt.setInt(12, 12000);
-            pstmt.setBinaryStream(13, savePic2DB(new File("src/res/images/Employees/shangtsung.png")));
+            pstmt.setBinaryStream(13, savePic2DB(new File("src/res/images/EmployeePictures/shangtsung.png")));
             pstmt.setString(14, "shangtsung");
             pstmt.setString(15, "81dc9bdb52d04dc20036dbd8313ed055");
             pstmt.execute();
