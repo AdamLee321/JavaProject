@@ -65,7 +65,7 @@ public class About implements ActionListener {
         devsLabel = new JLabel("Developed By: ");
         centerPanel.add(devsLabel);
 
-        thanksLabel = new JLabel("Special Thanks To: ITT, our lecturers, StackOverflow community, YouTube");
+        thanksLabel = new JLabel("Thanks To: Our lecturers @ ITT, StackOverflow community, YouTube");
         centerPanel.add(thanksLabel);
 
         mainBigPanel.add(centerPanel, BorderLayout.CENTER);

@@ -7,6 +7,7 @@ Computing - Year 2, Project
 Group 17 (George - 22/03/2015)
 */
 
+import gui.FormValidator;
 import gui.OrderDetails;
 import gui.UIElements;
 
@@ -111,7 +112,15 @@ public class SalesView extends JDialog implements MouseListener, ActionListener 
         else if (e.getSource().equals(btnView)){
             OrderDetails od = new OrderDetails();
         }
+        else if (e.getSource().equals(btnSearch)){
+            if (FormValidator.isNumber(tfSearch.getText()) && FormValidator.isCorrectLength(tfSearch.getText(),6)){
+                // do action
+            } else if (tfSearch.getText().equals(textFieldTip)){
+                JOptionPane.showMessageDialog(this,"Please Enter The Order Number","No Order Number",JOptionPane.WARNING_MESSAGE);
+            }
+            else{
+                JOptionPane.showMessageDialog(this,"Please Enter The Correct Order Number (ex: 101010)","Invalid Number",JOptionPane.WARNING_MESSAGE);
+            }
+        }
     }
-
-
 }

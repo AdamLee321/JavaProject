@@ -12,21 +12,11 @@ import java.util.regex.Pattern;
 public class FormValidator {
 
     public static boolean isEmptyField(String field) {
-        if (field.isEmpty()) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return (field.isEmpty());
     }
 
     public static boolean isEmptyPassField(char[] pw){
-        if (pw.length == 0){
-            return true;
-        }
-        else {
-            return false;
-        }
+        return (pw.length == 0);
     }
 
     public static boolean isValidEmail(String email){
@@ -34,13 +24,8 @@ public class FormValidator {
         String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(email);
-        if (matcher.matches()){
-            return true;
-        } else {
-            return false;
-        }
-    }
-    // http://howtodoinjava.com/2014/11/11/java-regex-validate-email-address/
+        return (matcher.matches());
+    } // http://howtodoinjava.com/2014/11/11/java-regex-validate-email-address/
 
     public static boolean isNumber(String string) {
         try {
@@ -49,5 +34,9 @@ public class FormValidator {
             return false;
         }
         return true;
+    }
+
+    public static boolean isCorrectLength(String string, int length){
+        return (string.length() == length);
     }
 }

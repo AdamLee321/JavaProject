@@ -5,6 +5,7 @@ import gui.UIElements;
 import gui.employee.EmployeeMain;
 import gui.member.MemberMain;
 import gui.product.ProductMain;
+import gui.report.ReportEmployee;
 import gui.sale.Discount;
 
 import javax.swing.*;
@@ -230,7 +231,8 @@ public class AdminMain extends JFrame implements ActionListener {
             am.setVisible(true);
         } // Report Menu Item and Button ACTIONS
         else if (e.getSource().equals(reportMI) || e.getSource().equals(reportButton)){
-            Soon sosoon = new Soon();
+            //Soon sosoon = new Soon();
+             new ReportEmployee();
         } // Options Menu Item and Button ACTIONS
         else if (e.getSource().equals(optionsMI) || e.getSource().equals(optButton)){
             AdminOptions ao = new AdminOptions(AdminMain.this);

@@ -38,7 +38,8 @@ public class CreateSalesDetails {
                     "prodId INTEGER," +
                     "saleId INTEGER," +
                     "memberId INTEGER," +
-                    "PRIMARY KEY(prodId, saleId, memberId)," +
+                    "qty INTEGER NOT NULL," +
+                    "PRIMARY KEY(prodId, saleId)," +
                     "FOREIGN KEY(prodId)REFERENCES product(prodId)," +
                     "FOREIGN KEY (saleId) REFERENCES sales (saleId)," +
                     "FOREIGN KEY (memberId) REFERENCES member (memberId))");
@@ -47,21 +48,25 @@ public class CreateSalesDetails {
         }
         try {
             // insert data into salesdetails
-            String sqlData = "INSERT INTO salesdetails (prodId, saleId, memberId) VALUES (?,?,?)";
+            String sqlData = "INSERT INTO salesdetails (prodId, saleId, memberId, qty) VALUES (?,?,?,?)";
             pstmt = conn.prepareStatement(sqlData);
 
             pstmt.setInt(1,100000);
             pstmt.setInt(2,1);
             pstmt.setInt(3,1);
+            pstmt.setInt(4,1);
+            pstmt.execute();
 
             pstmt.setInt(1,100003);
             pstmt.setInt(2,5);
             pstmt.setInt(3,4);
+            pstmt.setInt(4,4);
+            pstmt.execute();
 
             pstmt.setInt(1,100005);
             pstmt.setInt(2,2);
             pstmt.setInt(3,8);
-
+            pstmt.setInt(4,8);
             pstmt.execute();
 
         } catch (SQLException e){

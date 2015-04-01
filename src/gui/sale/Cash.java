@@ -29,21 +29,21 @@ public class Cash extends JDialog implements ActionListener {
         this.setTitle("Take Payment");
         this.setLayout(new BorderLayout());
         this.getContentPane().setBackground(UIElements.getColour());
-        this.setSize(260, 130);
-        this.setResizable(false);
+        this.setSize(246, 125);
+        this.setResizable(true);
         this.setLocationRelativeTo(null);
         this.setModal(true); // lock this dialog into view, don't allow clicking behind this
 
 // MAIN PANEL
 
-        main = new JPanel(new FlowLayout(FlowLayout.LEFT, 10,10));
+        main = new JPanel(new FlowLayout(FlowLayout.LEFT, 5,5));
         main.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Amount Tendered", 2, 2)); // set anonymous titled, etched border);
         main.setBackground(UIElements.getColour());
 
         lblEuro = new JLabel("€");
         main.add(lblEuro);
 
-        tfCash = new JTextField(18);
+        tfCash = new JTextField(17);
         main.add(tfCash);
 
         btnCancel = new JButton("Cancel", new ImageIcon(UIElements.cancel6));

@@ -7,6 +7,7 @@ Computing - Year 2, Project
 Group 17 (George - 22/03/2015)
 */
 
+import gui.FormValidator;
 import gui.OrderDetails;
 import gui.UIElements;
 import gui.admin.AdminMain;
@@ -46,6 +47,7 @@ public class OrderView extends JDialog implements MouseListener, ActionListener 
 
         btnSearch = new JButton("Search", new ImageIcon(UIElements.search16)); // initialize the search button, add a add and icon
         btnSearch.setPreferredSize(new Dimension(100, 26));
+        btnSearch.addActionListener(this);
         pnlNorth.add(btnSearch);
 
         btnView = new JButton("View", new ImageIcon(UIElements.open16));
@@ -111,8 +113,19 @@ public class OrderView extends JDialog implements MouseListener, ActionListener 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(btnBack)) {
             this.dispose();
-        } else if (e.getSource().equals(btnView)) {
+        }
+        else if (e.getSource().equals(btnView)) {
             OrderDetails od = new OrderDetails();
+        }
+        else if (e.getSource().equals(btnSearch)){
+            if (FormValidator.isNumber(tfSearch.getText()) && FormValidator.isCorrectLength(tfSearch.getText(),6)){
+                // do action
+            } else if (tfSearch.getText().equals(textFieldTip)){
+                JOptionPane.showMessageDialog(this,"Please Enter The Order Number","No Order Number",JOptionPane.WARNING_MESSAGE);
+            }
+            else{
+                JOptionPane.showMessageDialog(this,"Please Enter The Correct Order Number (ex: 101010)","Invalid Number",JOptionPane.WARNING_MESSAGE);
+            }
         }
     }
 }

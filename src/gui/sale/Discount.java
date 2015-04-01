@@ -31,7 +31,7 @@ public class Discount extends JDialog implements ActionListener {
         this.setTitle("Discount");
         this.setLayout(new BorderLayout());
         this.getContentPane().setBackground(UIElements.getColour());
-        this.setSize(240,240);
+        this.setSize(247,240);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setModal(true);
@@ -61,12 +61,12 @@ public class Discount extends JDialog implements ActionListener {
         main.add(tfMemberId);
 
         btnCancel = new JButton("Cancel", new ImageIcon(UIElements.cancel6));
-        btnCancel.setPreferredSize(new Dimension(96, 26));
+        btnCancel.setPreferredSize(new Dimension(100, 26));
         btnCancel.addActionListener(this);
         main.add(btnCancel);
 
         btnApply = new JButton("Apply", new ImageIcon(UIElements.plus16)); // initialize the search button, add a add and icon
-        btnApply.setPreferredSize(new Dimension(96, 26));
+        btnApply.setPreferredSize(new Dimension(100, 26));
         btnApply.addActionListener(this);
         main.add(btnApply);
 
