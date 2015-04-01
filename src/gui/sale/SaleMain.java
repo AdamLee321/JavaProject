@@ -6,6 +6,7 @@ Computing - Year 2, Project
 Group 17 (George - 22/03/2015)
 */
 
+import gui.FormValidator;
 import gui.Griddy;
 import gui.StartWindow;
 import gui.UIElements;
@@ -291,7 +292,9 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
             SalesView sv = new SalesView();
         }
         else if (e.getSource().equals(btnAdd)){
-
+            if(!FormValidator.isNumber(tfProdNum.getText()) || !FormValidator.isNumber(tfQty.getText())){
+                JOptionPane.showMessageDialog(this,"Please Enter A Number In Both Fields","Invalid Entry",JOptionPane.WARNING_MESSAGE);
+            }
         }
         else if (e.getSource().equals(btnRemove)){
 

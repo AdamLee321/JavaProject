@@ -1,6 +1,7 @@
 package gui.member;
 
 import gui.DateGen;
+import gui.FormValidator;
 import gui.Griddy;
 import gui.UIElements;
 import gui.admin.AdminMain;
@@ -166,6 +167,7 @@ public class MemberAddEdit implements ActionListener {
         okButton = new JButton("OK");
         okButton.setPreferredSize(new Dimension(100, 26));
         okButton.setIcon(new ImageIcon(UIElements.save16));
+        okButton.addActionListener(this);
         buttonsPanel.add(okButton);
 
         memberAdd.add(buttonsPanel, BorderLayout.SOUTH);
@@ -197,7 +199,30 @@ public class MemberAddEdit implements ActionListener {
             MemberPreview mp = new MemberPreview(am);
         }
         else if(e.getSource() == okButton){
+            if (!FormValidator.isNumber(memberFNameField.getText())
+             && !FormValidator.isNumber(memberLNameField.getText())
+             && !FormValidator.isNumber(memberCityField.getText())
+             && FormValidator.isValidEmail(memberEmailField.getText())
+             && FormValidator.isNumber(memberPointsField.getText())){
+                JOptionPane.showMessageDialog(null,"ALL GOOD!");
+            }
+            else {
+                if (FormValidator.isEmptyField(memberIdField.getText())
+                 || FormValidator.isEmptyField(memberFNameField.getText())
+                 || FormValidator.isEmptyField(memberLNameField.getText())
+                 || FormValidator.isEmptyField(memberStreetField.getText())
+                 || FormValidator.isEmptyField(memberCityField.getText())
+                 || FormValidator.isEmptyField(memberCountyField.getText())
+                 || FormValidator.isEmptyField(memberPointsField.getText())){
+                    JOptionPane.showMessageDialog(null,"Please Fill-In All Fields Of The Form","Empty Fields", JOptionPane.WARNING_MESSAGE);
+                } else if (!FormValidator.isValidEmail(memberEmailField.getText())){
+                    JOptionPane.showMessageDialog(null,"Please Enter A Valid Email Address","Invalid Email",JOptionPane.WARNING_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null,"Please Enter Valid Data For Each Field","Invalid Data",JOptionPane.WARNING_MESSAGE);
+                }
+//     private JTextField , , , , , , memberEmailField, ;
 
+            }
         }
     }
 }

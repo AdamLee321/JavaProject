@@ -33,6 +33,7 @@ public class About implements ActionListener {
         about.setResizable(false);
         about.setLocationRelativeTo(null);
         about.getContentPane().setBounds(20,20,20,20);
+        about.setModal(true);
 
         mainBigPanel = new JPanel(new BorderLayout());
         mainBigPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "About",2,2)); // set anonymous, titled, centered, etched border
@@ -64,7 +65,7 @@ public class About implements ActionListener {
         devsLabel = new JLabel("Developed By: ");
         centerPanel.add(devsLabel);
 
-        thanksLabel = new JLabel("Special Thanks To: ");
+        thanksLabel = new JLabel("Special Thanks To: ITT, our lecturers, StackOverflow community, YouTube");
         centerPanel.add(thanksLabel);
 
         mainBigPanel.add(centerPanel, BorderLayout.CENTER);

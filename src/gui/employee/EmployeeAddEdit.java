@@ -252,16 +252,15 @@ public class EmployeeAddEdit implements ActionListener {
             EmployeePreview ep = new EmployeePreview(am);
         }
         else if (e.getSource().equals(okButton)){
-            if (FormValidator.isNumber(empFNameField.getText())
-             && FormValidator.isNumber(empLNameField.getText())
-             && FormValidator.isNumber(empStreetField.getText())
-             && FormValidator.isNumber(empCityField.getText())
-             && FormValidator.isNumber(empCountyField.getText())
+            if (!FormValidator.isNumber(empFNameField.getText())
+             && !FormValidator.isNumber(empLNameField.getText())
+             && !FormValidator.isNumber(empCityField.getText())
              && FormValidator.isValidEmail(empEmailField.getText())
-             && FormValidator.isNumber(empPositionField.getText())
-             && !FormValidator.isNumber(empSalaryField.getText())
-             && FormValidator.isNumber(empDeptField.getText())){
+             && !FormValidator.isNumber(empPositionField.getText())
+             && FormValidator.isNumber(empSalaryField.getText())
+             && !FormValidator.isNumber(empDeptField.getText())){
                 // do something
+                JOptionPane.showMessageDialog(null,"ALL GOOD");
                 // must search the database, to see if the username matches anything if it matches, let user know
             }
             else {

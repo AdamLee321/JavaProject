@@ -33,7 +33,7 @@ public class ProductAddEdit implements ActionListener {
         prodAdd.setTitle("Add New Product");
         prodAdd.setLayout(new BorderLayout());
         prodAdd.setSize(820, 470);
-        prodAdd.setResizable(true);
+        prodAdd.setResizable(false);
         prodAdd.setLocationRelativeTo(null);
 
 // CENTER PANEL

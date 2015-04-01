@@ -33,7 +33,7 @@ public class AdminOptions implements ActionListener {
         adminOps.setTitle("Administrator Options");
         adminOps.setLayout(new BorderLayout());
         adminOps.setSize(470, 400);
-        adminOps.setResizable(true);
+        adminOps.setResizable(false);
         adminOps.setLocationRelativeTo(null);
         adminOps.getContentPane().setBackground(UIElements.getColour());  // there is really no point of this, it's hidden behind to panels (fieldsPanel, buttonsPanel)
 

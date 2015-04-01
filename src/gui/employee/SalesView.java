@@ -26,7 +26,7 @@ public class SalesView extends JDialog implements MouseListener, ActionListener 
         this.setTitle("Sales Records");
         this.setLayout(new BorderLayout()); // tip: border(don't indicate position), grid or gridbag layouts will stretch a component to the whole screen
         this.setSize(650,650);
-        this.setResizable(true);
+        this.setResizable(false);
         this.getContentPane().setBackground(UIElements.getColour());
         this.setLocationRelativeTo(null);
 
