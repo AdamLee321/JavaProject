@@ -196,11 +196,11 @@ public class ProductAddEdit implements ActionListener {
             prodAdd.dispose();
         }
         else if (e.getSource().equals(okButton)){
-            if(FormValidator.isNumber(makeTF.getText())
-            && FormValidator.isNumber(modelTF.getText())
-            && !FormValidator.isNumber(salePriceTF.getText())
-            && !FormValidator.isNumber(costPriceTF.getText())
-            && !FormValidator.isNumber(qtyTF.getText())) {
+            if(!FormValidator.isNumber(makeTF.getText())
+            && !FormValidator.isNumber(modelTF.getText())
+            && FormValidator.isNumber(salePriceTF.getText())
+            && FormValidator.isNumber(costPriceTF.getText())
+            && FormValidator.isNumber(qtyTF.getText())) {
                 // do action
             }
                 else {

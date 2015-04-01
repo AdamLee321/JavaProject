@@ -27,7 +27,7 @@ public class OrderView extends JDialog implements MouseListener, ActionListener 
 
         this.setTitle("Order History");
         this.setLayout(new BorderLayout()); // tip: border(don't indicate position), grid or gridbag layouts will stretch a component to the whole screen
-        this.setSize(580, 650);
+        this.setSize(650, 650);
         this.setResizable(false);
         this.getContentPane().setBackground(UIElements.getColour());
         this.setLocationRelativeTo(null);
