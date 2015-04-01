@@ -207,21 +207,19 @@ public class MemberAddEdit implements ActionListener {
                 JOptionPane.showMessageDialog(null,"ALL GOOD!");
             }
             else {
-                if (FormValidator.isEmptyField(memberIdField.getText())
-                 || FormValidator.isEmptyField(memberFNameField.getText())
+                if (FormValidator.isEmptyField(memberFNameField.getText())
                  || FormValidator.isEmptyField(memberLNameField.getText())
                  || FormValidator.isEmptyField(memberStreetField.getText())
                  || FormValidator.isEmptyField(memberCityField.getText())
                  || FormValidator.isEmptyField(memberCountyField.getText())
-                 || FormValidator.isEmptyField(memberPointsField.getText())){
-                    JOptionPane.showMessageDialog(null,"Please Fill-In All Fields Of The Form","Empty Fields", JOptionPane.WARNING_MESSAGE);
-                } else if (!FormValidator.isValidEmail(memberEmailField.getText())){
+                 || FormValidator.isEmptyField(memberPointsField.getText())) {
+                    JOptionPane.showMessageDialog(null, "Please Fill-In All Fields Of The Form", "Empty Fields", JOptionPane.WARNING_MESSAGE);
+                }
+                else if (!FormValidator.isValidEmail(memberEmailField.getText())){
                     JOptionPane.showMessageDialog(null,"Please Enter A Valid Email Address","Invalid Email",JOptionPane.WARNING_MESSAGE);
                 } else {
                     JOptionPane.showMessageDialog(null,"Please Enter Valid Data For Each Field","Invalid Data",JOptionPane.WARNING_MESSAGE);
                 }
-//     private JTextField , , , , , , memberEmailField, ;
-
             }
         }
     }
