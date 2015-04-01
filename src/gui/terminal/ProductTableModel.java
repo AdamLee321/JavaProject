@@ -67,15 +67,15 @@ public class ProductTableModel extends DefaultTableModel {
         ProductRow row = (ProductRow)productRows.get(rowNum);//casting a product from the object arraylist to a row type
         switch (colNum) {
             case id:
-                return row.productID;
+                return row.getProductID();
             case make:
-                return row.make;
+                return row.getMake();
             case model:
-                return row.model;
+                return row.getModel();
             case price:
-                return row.price;
+                return row.getPrice();
             case quantity:
-                return row.quantity;
+                return row.getQuantity();
             default:
                 return "";
         }

@@ -90,4 +90,34 @@ public class ProductOperations {
         }
         return rset;
     }
+
+    public int checkQuantity(int id){
+        int quantityInStock = 0;
+        String sql = "SELECT prodQty FROM product WHERE prodId = '"+id+"'";
+        try{
+            stmt = conn.createStatement();
+            rset = stmt.executeQuery(sql);
+            while (rset.next()){
+                quantityInStock = rset.getInt(1);
+            }
+
+        }catch (SQLException sqlE){
+            System.out.println(sqlE.getMessage());
+        }
+        System.out.println(quantityInStock);
+        return quantityInStock;
+    }
+    public boolean checkProduct(int id){
+        boolean x = false;
+        String sql = "SELECT prodQty FROM product WHERE prodId = '"+id+"'";
+        try{
+            stmt = conn.createStatement();
+            rset = stmt.executeQuery(sql);
+        }catch (SQLException sqlE){
+            System.out.println(sqlE.getMessage());
+            x = false;
+        }
+        System.out.println(x);
+        return x;
+    }
 }

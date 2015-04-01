@@ -26,6 +26,10 @@ public class SaleTableModel extends DefaultTableModel {
 
   private static ArrayList<Object> saleRows = new ArrayList();
 
+  public static ArrayList<Object> getList(){
+    return saleRows;
+  }
+
   DefaultTableColumnModel columnModel = new DefaultTableColumnModel();
 
   public SaleTableModel() {
@@ -54,15 +58,15 @@ public class SaleTableModel extends DefaultTableModel {
     SaleRow row = (SaleRow)saleRows.get(rowNum);//casting a product from the object arraylist to a row type
     switch (colNum) {
       case id:
-        return row.productCode;
+        return row.getProductCode();
       case make:
-        return row.prodMake;
+        return row.getProdMake();
       case model:
-        return row.prodModel;
+        return row.getProdModel();
       case price:
-        return row.price;
+        return row.getPrice();
       case qty:
-        return row.qty;
+        return row.getQty();
       default:
         return "";
     }

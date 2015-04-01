@@ -7,11 +7,11 @@ package gui.terminal;
 
 public class ProductRow {
 
-    int productID;
-    String make;
-    String model;
-    double price;
-    int quantity;
+    private int productID;
+    private String make;
+    private String model;
+    private double price;
+    private int quantity;
 
     public ProductRow() {
         this.productID = 0;
@@ -27,5 +27,25 @@ public class ProductRow {
         this.model = model;
         this.price = price;
         this.quantity = quantity;
+    }
+
+    public int getProductID() {
+        return productID;
+    }
+
+    public String getMake() {
+        return make;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public int getQuantity() {
+        return quantity;
     }
 }

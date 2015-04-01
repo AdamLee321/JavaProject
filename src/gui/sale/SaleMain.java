@@ -6,6 +6,7 @@ Computing - Year 2, Project
 Group 17 (George, David - 22/03/2015)
 */
 
+import database.operations.ProductOperations;
 import gui.FormValidator;
 import gui.Griddy;
 import gui.StartWindow;
@@ -18,12 +19,15 @@ import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.geom.Arc2D;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class SaleMain extends JFrame implements ActionListener, MouseListener {
+
+    private ProductOperations po;
 
     private JButton btnAdd, btnRemove, btnRegister, btnDiscount, btnReturnProduct, btnCheckout, btnLogout;
     private JRadioButton rbCash, rbCC;
@@ -41,7 +45,8 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
 
     private JTable saleTable;
     private SaleTableModel tableModel;
-    protected static final int tableHeight = 200;
+
+    final private double VAT_RATE = .21;
 
     public SaleMain() {
 
@@ -228,6 +233,8 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
         pnlBasket.add(scrollPane);
         this.add(pnlBasket, Griddy.getConstraints(0,0,1,4,0,0,10,0,0,0,0,0,GridBagConstraints.BOTH,GridBagConstraints.WEST));
 
+        po = new ProductOperations();
+
         this.setVisible(true);
     }
 
@@ -244,6 +251,19 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
     }
 
 // METHODS
+
+    public  void updatePrice(){
+        double vat = 0;
+        double total = 0;
+        for (int i = 0; i < SaleTableModel.getList().size(); i++) {
+            SaleRow sr = (SaleRow) SaleTableModel.getList().get(i);
+            total += sr.getPrice() * sr.getQty();
+        }
+        vat = total * VAT_RATE;
+        lblSubtotalR.setText(Double.toString(total - vat));
+        lblVATR.setText(Double.toString(vat));
+        lblTotalR.setText(Double.toString(total));
+    }
 
     public void addToBasket() {
         // Get the data!
@@ -337,14 +357,17 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
             SalesView sv = new SalesView();
         }
         else if (e.getSource().equals(btnAdd)){
-            if(!FormValidator.isNumber(tfProdNum.getText()) || !FormValidator.isNumber(tfQty.getText())){
+            if(!FormValidator.isNumber(tfProdNum.getText()) || !FormValidator.isNumber(tfQty.getText()))
                 JOptionPane.showMessageDialog(this,"Please Enter A Number In Both Fields","Invalid Entry",JOptionPane.WARNING_MESSAGE);
-            }
-//         //   else if (Double.parseDouble(tfQty.getText()) < 0 || Double.parseDouble(tfQty.getText())){
-//
-//            }
             else{
-                addToBasket();
+                if(po.checkQuantity(Integer.parseInt(tfProdNum.getText())) > Integer.parseInt(tfQty.getText())) {
+                    addToBasket();
+                    updatePrice();
+                    po.checkProduct(100000);
+                    po.checkProduct(999999);
+                }
+                else
+                    JOptionPane.showMessageDialog(this,"Not enough in stock","Quantity",JOptionPane.WARNING_MESSAGE);
             }
         }
         else if (e.getSource().equals(btnRemove)){
