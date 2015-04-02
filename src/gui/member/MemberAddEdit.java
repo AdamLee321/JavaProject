@@ -225,8 +225,11 @@ public class MemberAddEdit implements ActionListener {
             MemberPreview mp = new MemberPreview(am);
         }
         else if(e.getSource() == addButton){
-            fc = new JFileChooser();
+            fc = new JFileChooser(); // initialize the JFileChooser - Initializing on button action because if initialized in the constructor, it slows down the UI response to the button
             fc.setFileFilter(UIElements.imageFilter); // set image filter on JFileChooser
+            fc.setPreferredSize(new Dimension(600, 400)); // JFileChooser size
+            fc.setMultiSelectionEnabled(false); // don't allow multifile selection
+            fc.setDialogTitle("Select Employee Image"); // title
             fc.setAcceptAllFileFilterUsed(false); // turn off viewing of all files
             int open = fc.showOpenDialog(memberAdd); // could've done "this" if I was extending the JDialog
             if (open == JFileChooser.APPROVE_OPTION) {  // if JFileChooser is open (int 1)

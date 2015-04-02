@@ -192,8 +192,11 @@ public class ProductAddEdit implements ActionListener {
 
     public void actionPerformed(ActionEvent e){
         if (e.getSource().equals(addButton)){
-            fc = new JFileChooser(); // initialize the JFileChooser
+            fc = new JFileChooser(); // initialize the JFileChooser - Initializing on button action because if initialized in the constructor, it slows down the UI response to the button
             fc.setFileFilter(UIElements.imageFilter); // set image filter on JFileChooser
+            fc.setPreferredSize(new Dimension(600, 400)); // JFileChooser size
+            fc.setMultiSelectionEnabled(false); // don't allow multifile selection
+            fc.setDialogTitle("Select Employee Image"); // title
             fc.setAcceptAllFileFilterUsed(false); // turn off viewing of all files
             int open = fc.showOpenDialog(prodAdd); // could've done "this" if I was extending the JDialog, option dialog returns int
             if (open == JFileChooser.APPROVE_OPTION) { // if JFileChooser is open (int 1)
