@@ -11,8 +11,13 @@ this class was created to allow reuse of various user interface elements through
 attributes are set to static to allow access without the need for reference object creation
 */
 
+import javax.imageio.ImageIO;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.Color;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class UIElements {
 
@@ -58,4 +63,15 @@ public class UIElements {
     public static Color getColour(){
         return color;
     }
+
+    // Image Scaler - Takes an image file, sets widths and height and returns it scaled
+    public static Image fitImage(File fileIn, int widthIn, int heightIn) throws IOException {
+
+        BufferedImage img = ImageIO.read(fileIn);
+        Image scaled = img.getScaledInstance(widthIn, heightIn, Image.SCALE_SMOOTH);
+        return scaled;
+    }
+
+    // Image Filter - Used with JFileChooser to filter out all the non image files from the view
+    public final static FileNameExtensionFilter imageFilter = new FileNameExtensionFilter("Image files", ImageIO.getReaderFileSuffixes());
 }

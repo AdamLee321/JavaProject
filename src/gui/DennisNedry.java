@@ -50,6 +50,7 @@ public class DennisNedry {
             JOptionPane.showMessageDialog(null,"Problem Playing Audio");
         }
 
+        // clicking the picture plays audio again (once again)
         nedry = new JLabel(new ImageIcon("src/res/images/UI Elements/nedry.gif"));
         nedry.addMouseListener(new MouseAdapter() {
             @Override

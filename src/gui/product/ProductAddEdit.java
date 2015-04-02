@@ -14,6 +14,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
 public class ProductAddEdit implements ActionListener {
 
@@ -23,7 +25,8 @@ public class ProductAddEdit implements ActionListener {
     private JTextField idTF, makeTF, modelTF, salePriceTF, costPriceTF, qtyTF, typeTF, cpuTF, ramTF, osTF, storageTF, screenTF;
     private JTextArea descTA;
     private JPanel centerPanel, centerLeftPanel, centerRightPanel, southPanel;
-
+    private File fImg;
+    private JFileChooser fc;
     private AdminMain am;  // used for JDialogs as parent
 
     public ProductAddEdit(JFrame parent, int choice){
@@ -53,11 +56,13 @@ public class ProductAddEdit implements ActionListener {
         addButton = new JButton("Add");
         addButton.setIcon(new ImageIcon(UIElements.plus16));
         addButton.setPreferredSize(new Dimension(100, 26));
+        addButton.addActionListener(this);
         centerLeftPanel.add(addButton, Griddy.getConstraints(1,1,1,1,0,0,0,0,5,5,5,5,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
 
         removeButton = new JButton("Remove");
         removeButton.setIcon(new ImageIcon(UIElements.minus16));
         removeButton.setPreferredSize(new Dimension(100, 26));
+        removeButton.addActionListener(this);
         centerLeftPanel.add(removeButton, Griddy.getConstraints(2,1,1,1,0,0,0,0,5,5,5,5,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
 
         centerPanel.add(centerLeftPanel, Griddy.getConstraints(0,0,1,1,0,0,0,0,5,5,5,5,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
@@ -187,10 +192,22 @@ public class ProductAddEdit implements ActionListener {
 
     public void actionPerformed(ActionEvent e){
         if (e.getSource().equals(addButton)){
-
+            fc = new JFileChooser(); // initialize the JFileChooser
+            fc.setFileFilter(UIElements.imageFilter); // set image filter on JFileChooser
+            fc.setAcceptAllFileFilterUsed(false); // turn off viewing of all files
+            int open = fc.showOpenDialog(prodAdd); // could've done "this" if I was extending the JDialog, option dialog returns int
+            if (open == JFileChooser.APPROVE_OPTION) { // if JFileChooser is open (int 1)
+                fImg = fc.getSelectedFile(); // select the file
+                try{
+                    imgLabel.setIcon(new ImageIcon(UIElements.fitImage(fImg, 128, 128))); // scale the picture and set it
+                } catch (IOException ee){
+                    JOptionPane.showMessageDialog(null, "Image Problem");
+                }
+            }
         }
         else if (e.getSource().equals(removeButton)){
-
+            imgLabel.setIcon(new ImageIcon(UIElements.person128));
+            fImg = null;
         }
         else if (e.getSource().equals(cancelButton)){
             prodAdd.dispose();

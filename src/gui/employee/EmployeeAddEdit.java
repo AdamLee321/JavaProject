@@ -7,6 +7,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
 /*
 IT Tallaght - 2015, S2
@@ -22,7 +24,8 @@ public class EmployeeAddEdit implements ActionListener {
     private JTextField empIdField, empFNameField, empLNameField, empStreetField, empCityField, empCountyField, empEmailField, empUsernameField, empPasswordField, empPositionField, empSalaryField, empDeptField;
     private JComboBox<String> birthDayCBox, birthMonthCBox, birthYearCBox;;
     private JButton addButton, removeButton, cancelButton, previewButton, okButton, passGenButton, usernameGenButton;
-
+    private File fImg;
+    private JFileChooser fc;
     private DateGenenerator dg;
     private AdminMain am;  // used for JDialogs as parent
 
@@ -54,11 +57,13 @@ public class EmployeeAddEdit implements ActionListener {
         addButton = new JButton("Add");
         addButton.setPreferredSize(new Dimension(100, 26));
         addButton.setIcon(new ImageIcon(UIElements.plus16));
+        addButton.addActionListener(this);
         pictureButtonsPanel.add(addButton);
 
         removeButton = new JButton("Remove");
         removeButton.setPreferredSize(new Dimension(100, 26));
         removeButton.setIcon(new ImageIcon(UIElements.minus16));
+        removeButton.addActionListener(this);
         pictureButtonsPanel.add(removeButton);
 
         picturePanel.add(pictureButtonsPanel, BorderLayout.SOUTH);
@@ -257,6 +262,24 @@ public class EmployeeAddEdit implements ActionListener {
         }
         else if (e.getSource().equals(previewButton)){
             EmployeePreview ep = new EmployeePreview(am);
+        }
+        else if (e.getSource().equals(addButton)){
+            fc = new JFileChooser(); // initialize the JFileChooser
+            fc.setFileFilter(UIElements.imageFilter); // set image filter on JFileChooser
+            fc.setAcceptAllFileFilterUsed(false); // turn off viewing of all files
+            int open = fc.showOpenDialog(employeeAdd); // could've done "this" if I was extending the JDialog, option dialog returns int
+            if (open == JFileChooser.APPROVE_OPTION) {  // if JFileChooser is open (int 1)
+                fImg = fc.getSelectedFile(); // select the file
+                try{
+                    profilePictureLabel.setIcon(new ImageIcon(UIElements.fitImage(fImg, 128, 128))); // scale the picture and set it
+                } catch (IOException ee){
+                    JOptionPane.showMessageDialog(null, "Image Problem");
+                }
+            }
+        }
+        else if (e.getSource().equals(removeButton)){
+            profilePictureLabel.setIcon(new ImageIcon(UIElements.person128));
+            fImg = null;
         }
         else if (e.getSource().equals(okButton)){
             if (!FormValidator.isNumber(empFNameField.getText())

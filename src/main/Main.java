@@ -66,8 +66,8 @@ public class Main {
       Logger.getLogger(StartWindow.class.getName()).log(Level.SEVERE, null, ex);
     }
 
-        new StartWindow();
+//        new StartWindow();
 //        new SaleMain();
-//        new AdminMain();
+        new AdminMain();
   }
 }

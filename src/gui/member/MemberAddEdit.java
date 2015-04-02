@@ -5,10 +5,17 @@ import gui.FormValidator;
 import gui.Griddy;
 import gui.UIElements;
 import gui.admin.AdminMain;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.awt.image.ImageFilter;
+import java.io.*;
+import java.util.prefs.Preferences;
 
 /*
 IT Tallaght - 2015, S2
@@ -24,7 +31,8 @@ public class MemberAddEdit implements ActionListener {
     private JTextField memberIdField, memberFNameField, memberLNameField, memberStreetField, memberCityField, memberCountyField, memberEmailField, memberPointsField;
     private JComboBox<String> birthDayCBox, birthMonthCBox, birthYearCBox;;
     private JButton addButton, removeButton, cancelButton, previewButton, okButton;
-
+    private File fImg;
+    private JFileChooser fc;
     private DateGenenerator dg;
     private AdminMain am;  // used for JDialogs as parent
 
@@ -56,11 +64,13 @@ public class MemberAddEdit implements ActionListener {
         addButton = new JButton("Add");
         addButton.setPreferredSize(new Dimension(100, 26));
         addButton.setIcon(new ImageIcon(UIElements.plus16));
+        addButton.addActionListener(this);
         pictureButtonsPanel.add(addButton);
 
         removeButton = new JButton("Remove");
         removeButton.setPreferredSize(new Dimension(100, 26));
         removeButton.setIcon(new ImageIcon(UIElements.minus16));
+        removeButton.addActionListener(this);
         pictureButtonsPanel.add(removeButton);
 
         picturePanel.add(pictureButtonsPanel, BorderLayout.SOUTH);
@@ -188,6 +198,15 @@ public class MemberAddEdit implements ActionListener {
         memberAdd.setVisible(true);
     }
 
+// METHODS
+
+//    public Image fitImage(File fileIn, int widthIn, int heightIn) throws IOException {
+//
+//            BufferedImage img = ImageIO.read(fileIn);
+//            Image scaled = img.getScaledInstance(widthIn, heightIn, Image.SCALE_SMOOTH);
+//            return scaled;
+//    }
+
 // BUTTION ACTIONS
 
     public void actionPerformed(ActionEvent e){
@@ -205,6 +224,24 @@ public class MemberAddEdit implements ActionListener {
         else if(e.getSource() == previewButton){
             MemberPreview mp = new MemberPreview(am);
         }
+        else if(e.getSource() == addButton){
+            fc = new JFileChooser();
+            fc.setFileFilter(UIElements.imageFilter); // set image filter on JFileChooser
+            fc.setAcceptAllFileFilterUsed(false); // turn off viewing of all files
+            int open = fc.showOpenDialog(memberAdd); // could've done "this" if I was extending the JDialog
+            if (open == JFileChooser.APPROVE_OPTION) {  // if JFileChooser is open (int 1)
+                fImg = fc.getSelectedFile();
+                try{
+                    profilePictureLabel.setIcon(new ImageIcon(UIElements.fitImage(fImg, 128, 128)));
+                } catch (IOException ee){
+                    JOptionPane.showMessageDialog(null, "Image Problem");
+                }
+            }
+        }
+        else if(e.getSource() == removeButton){
+            profilePictureLabel.setIcon(new ImageIcon(UIElements.person128));
+            fImg = null;
+        }
         else if(e.getSource() == okButton){
             if (!FormValidator.isNumber(memberFNameField.getText())
              && !FormValidator.isNumber(memberLNameField.getText())
@@ -212,6 +249,7 @@ public class MemberAddEdit implements ActionListener {
              && FormValidator.isValidEmail(memberEmailField.getText())
              && FormValidator.isNumber(memberPointsField.getText())){
                 JOptionPane.showMessageDialog(null,"ALL GOOD!");
+                // do action
             }
             else {
                 if (FormValidator.isEmptyField(memberFNameField.getText())
