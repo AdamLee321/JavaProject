@@ -14,7 +14,6 @@ import gui.UIElements;
 import gui.employee.SalesView;
 import gui.member.MemberAddEdit;
 import gui.terminal.TerminalMode;
-
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import java.awt.*;

@@ -4,11 +4,15 @@ import database.operations.EmployeeOperations;
 import gui.Griddy;
 import gui.UIElements;
 import gui.admin.AdminMain;
-import model.Employee;
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.EtchedBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 
 /*
 IT Tallaght - 2015, S2
@@ -22,6 +26,8 @@ public class MemberMain implements ActionListener {
     private JButton addButton, editButton, deleteButton, searchButton, viewOrdersButton;
     private JTextField searchField;
     private JPanel northPanel, managePanel, searchPanel, southPanel, centerPanel;
+    private JTable memTable;
+    private MemberTableModel memTableModel;
 
     private AdminMain am;  // declare for usage with JDialogs as parent. No need to initialize
     private EmployeeOperations eo;
@@ -86,7 +92,31 @@ public class MemberMain implements ActionListener {
         memberMain.add(northPanel, BorderLayout.NORTH);
 
 // CENTER PANEL - results table panel
-        centerPanel = new JPanel(new FlowLayout());
+        memTableModel = new MemberTableModel();
+        memTable = new JTable(memTableModel);
+        memTable.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                JOptionPane.showMessageDialog(null,"hello");
+            }
+        });
+//        memTable.setRowHeight(50);
+
+//        int tableWidth = 50;
+//        int columnCount = memTableModel.columnModel.getColumnCount();
+//        for (int i = 0; i < columnCount; i++)
+//            tableWidth += memTableModel.columnModel.getColumn(i).getWidth();
+
+
+        memTableModel.getMainList();
+
+        JScrollPane scroll = new JScrollPane(memTable);
+        scroll.setBorder(new BevelBorder(BevelBorder.LOWERED));
+        scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+        centerPanel = new JPanel(new GridLayout());
+        centerPanel.add(scroll);
 
 
         memberMain.add(centerPanel, BorderLayout.CENTER);

@@ -74,7 +74,7 @@ public class Cash extends JDialog implements ActionListener {
             this.dispose();
         }
         else if (e.getSource().equals(btnOK)){
-            sm.setPaymentTypeR("CASH €" + tfCash.getText());
+            sm.setPaymentTypeR("€" + tfCash.getText());
             this.dispose();
         }
     }

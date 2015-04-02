@@ -4,6 +4,9 @@ import database.ConnectionDB;
 import gui.DennisNedry;
 import gui.StartWindow;
 import gui.admin.AdminMain;
+import gui.report.ReportEmployee;
+import gui.report.ReportMembers;
+import gui.report.ReportProduct;
 import gui.sale.SaleMain;
 
 import javax.swing.*;

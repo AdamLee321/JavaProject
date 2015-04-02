@@ -16,46 +16,33 @@ public class Member {
     private String memberStreet;
     private String memberCity;
     private String memberCounty;
-    private String dob;
+    private int dobd;
+    private String dobm;
+    private int doby;
     private String memberEmail;
     private String memberNumber;
     private int memberPoints;
-    private String memPicUrl;
+    private byte[] memberPic;
 
-// default constructor
+// OVERLOADED CONSTRUCTOR
 
-    public Member(){
-
-        memberId = 0;
-        memberFName = "";
-        memberLName = "";
-        memberStreet = "";
-        memberCity = "";
-        memberCounty = "";
-        dob = "";
-        memberEmail = "";
-        memberNumber = "";
-        memberPoints = 0;
-        memPicUrl = "";
+    public Member(int memberId, String memberFName, String memberLName, String memberStreet, String memberCity, String memberCounty, int dobd, String dobm, int doby, String memberEmail, String memberNumber, int memberPoints, byte[] memberPic) {
+        this.memberId = memberId;
+        this.memberFName = memberFName;
+        this.memberLName = memberLName;
+        this.memberStreet = memberStreet;
+        this.memberCity = memberCity;
+        this.memberCounty = memberCounty;
+        this.dobd = dobd;
+        this.dobm = dobm;
+        this.doby = doby;
+        this.memberEmail = memberEmail;
+        this.memberNumber = memberNumber;
+        this.memberPoints = memberPoints;
+        this.memberPic = memberPic;
     }
 
-// overloaded constructor NEEDS AN ID PASS FROM THE DATABASE
-
-    public Member(String memberFNameIn,String memberLNameIn,String memberStreetIn,String memberCityIn,String memberCountyIn,String dobIn,String memberEmailIn,String memberNumberIn,int memberPointsIn,String memPicUrlIn){
-
-        memberFName = memberFNameIn;
-        memberLName = memberLNameIn;
-        memberStreet = memberStreetIn;
-        memberCity = memberCityIn;
-        memberCounty = memberCountyIn;
-        dob = dobIn;
-        memberEmail = memberEmailIn;
-        memberNumber = memberNumberIn;
-        memberPoints = memberPointsIn;
-        memPicUrl = memPicUrlIn;
-    }
-
-// getters
+// GETTERS
 
     public int getMemberId() {
         return memberId;
@@ -81,8 +68,16 @@ public class Member {
         return memberCounty;
     }
 
-    public String getDob() {
-        return dob;
+    public int getDobd() {
+        return dobd;
+    }
+
+    public String getDobm() {
+        return dobm;
+    }
+
+    public int getDoby() {
+        return doby;
     }
 
     public String getMemberEmail() {
@@ -97,54 +92,61 @@ public class Member {
         return memberPoints;
     }
 
-    public String getMemPicUrl() {
-        return memPicUrl;
+    public byte[] getMemberPic() {
+        return memberPic;
     }
 
-// setters
+// SETTERS
 
-
-    public void setMemberId(int memberIdIn) {
-        this.memberId = memberIdIn;
+    public void setMemberId(int memberId) {
+        this.memberId = memberId;
     }
 
-    public void setMemberFName(String memberFNameIn) {
-        this.memberFName = memberFNameIn;
+    public void setMemberFName(String memberFName) {
+        this.memberFName = memberFName;
     }
 
-    public void setMemberLName(String memberLNameIn) {
-        this.memberLName = memberLNameIn;
+    public void setMemberLName(String memberLName) {
+        this.memberLName = memberLName;
     }
 
-    public void setMemberStreet(String memberStreetIn) {
-        this.memberStreet = memberStreetIn;
+    public void setMemberStreet(String memberStreet) {
+        this.memberStreet = memberStreet;
     }
 
-    public void setMemberCity(String memberCityIn) {
-        this.memberCity = memberCityIn;
+    public void setMemberCity(String memberCity) {
+        this.memberCity = memberCity;
     }
 
-    public void setMemberCounty(String memberCountyIn) {
-        this.memberCounty = memberCountyIn;
+    public void setMemberCounty(String memberCounty) {
+        this.memberCounty = memberCounty;
     }
 
-    public void setDob(String dobIn) {
-        this.dob = dobIn;
+    public void setDobd(int dobd) {
+        this.dobd = dobd;
     }
 
-    public void setMemberEmail(String memberEmailIn) {
-        this.memberEmail = memberEmailIn;
+    public void setDobm(String dobm) {
+        this.dobm = dobm;
     }
 
-    public void setMemberNumber(String memberNumberIn) {
-        this.memberNumber = memberNumberIn;
+    public void setDoby(int doby) {
+        this.doby = doby;
     }
 
-    public void setMemberPoints(int memberPointsIn) {
-        this.memberPoints = memberPointsIn;
+    public void setMemberEmail(String memberEmail) {
+        this.memberEmail = memberEmail;
     }
 
-    public void setMemPicUrl(String memPicUrlIn) {
-        this.memPicUrl = memPicUrlIn;
+    public void setMemberNumber(String memberNumber) {
+        this.memberNumber = memberNumber;
+    }
+
+    public void setMemberPoints(int memberPoints) {
+        this.memberPoints = memberPoints;
+    }
+
+    public void setMemberPic(byte[] memberPic) {
+        this.memberPic = memberPic;
     }
 }

@@ -10,8 +10,7 @@ import gui.sale.Discount;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 /*
 IT Tallaght - 2015, S2
@@ -28,6 +27,8 @@ public class AdminMain extends JFrame implements ActionListener {
     private JLabel mainLogo;
     private JPanel outerNorth, outerSouth, outerCenter, innerNorth, innerCenter;
     private JButton empButton, memButton, prodButton, reportButton, optButton, logoutButton;
+    private Object[] options = {"Yes","No"}; // choices for closing dialog - these are buttons that appear on the dialog
+
 
     private boolean displayarea = true;
     private EmployeeMain em;
@@ -39,9 +40,16 @@ public class AdminMain extends JFrame implements ActionListener {
         am.setSize(810, 700);
         am.setLocationRelativeTo(null);
         am.setResizable(false);
-        am.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        am.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         am.setLayout(new BorderLayout());
         am.getContentPane().setBackground(UIElements.getColour());
+        am.addWindowListener(new WindowAdapter() { // add window listener for when clicking X to close the window
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                exitProgram();
+            }
+        });
 
         // add menu bar to the frame
         menu = new JMenuBar();
@@ -207,6 +215,15 @@ public class AdminMain extends JFrame implements ActionListener {
         am.setVisible(true);
     }
 
+// METHODS
+
+    public void exitProgram(){ // object(frame), main text of the dialog, dialog window name, type of dialog, type of message, icon, arrayofoptions(buttons), default selected option from arrayofoptions (ex... options[1])
+        int choice = JOptionPane.showOptionDialog(am, "Are You Sure You Want To Exit The Application?", "Exit Application",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE,null,options,null);
+        if (choice == 0){
+            System.exit(0);
+        }
+    }
+
 // BUTTON ACTIONS
 
     public void actionPerformed(ActionEvent e) {
@@ -264,8 +281,8 @@ public class AdminMain extends JFrame implements ActionListener {
             StartWindow sw = new StartWindow();
             am.dispose();
         } // Exit menuItem
-        else if (e.getSource().equals(exitMI)){
-            System.exit(0);
+        else if (e.getSource().equals(exitMI) || e.getSource().equals(WindowConstants.EXIT_ON_CLOSE)){
+            exitProgram();
         }
     }
 }
