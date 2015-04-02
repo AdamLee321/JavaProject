@@ -117,7 +117,7 @@ public class MemberAddEdit implements ActionListener {
 
         birthDayCBox = new JComboBox<String>(dg.getMonthDays(birthMonthCBox.getSelectedIndex() + 1, Integer.parseInt(birthYearCBox.getSelectedItem().toString())));
         birthDayCBox.setEnabled(false);
-        
+
             // add day, month, year comboboxes to details panel
         detailsPanel.add(birthYearCBox, Griddy.getConstraints(1,3,1,1,0,0,0,0,5,125,140,5,0,GridBagConstraints.WEST));
         detailsPanel.add(birthMonthCBox, Griddy.getConstraints(1,3,1,1,0,0,0,0,5,65,200,5,0,GridBagConstraints.WEST));

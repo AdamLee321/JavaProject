@@ -1,17 +1,12 @@
 package main;
 
 import database.ConnectionDB;
-import database.create.*;
+import gui.DennisNedry;
 import gui.StartWindow;
 import gui.admin.AdminMain;
-import gui.report.ReportEmployee;
-import gui.report.ReportMembers;
-import gui.report.ReportProduct;
-import gui.report.ReportSales;
 import gui.sale.SaleMain;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -71,9 +66,8 @@ public class Main {
       Logger.getLogger(StartWindow.class.getName()).log(Level.SEVERE, null, ex);
     }
 
-//    new StartWindow();
-//    new SaleMain();
-      new AdminMain();
+        new StartWindow();
+//        new SaleMain();
+//        new AdminMain();
   }
-
 }

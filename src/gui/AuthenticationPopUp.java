@@ -29,6 +29,7 @@ public class AuthenticationPopUp {
     private JTextField usernameField;
     private JPasswordField passwordField;
     private ResultSet rset;
+    int count = 0;
 
     public AuthenticationPopUp(final JFrame parent) {
         auth = new JDialog(parent, true);
@@ -97,9 +98,16 @@ public class AuthenticationPopUp {
                         auth.dispose();
                         parent.dispose();
                     }catch(NullPointerException np){
-                        JOptionPane.showMessageDialog(parent, "Incorrect username or password", "ERROR", JOptionPane.ERROR_MESSAGE);
-                        usernameField.setText("");
-                        passwordField.setText("");
+                        if(count > 1) {
+                            new DennisNedry();
+                            count = 0;
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(parent, "Incorrect username or password", "ERROR", JOptionPane.ERROR_MESSAGE);
+                            usernameField.setText("");
+                            passwordField.setText("");
+                            count++;
+                        }
                     }
                 }
             }
