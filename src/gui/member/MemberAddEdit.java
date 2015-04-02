@@ -231,7 +231,7 @@ public class MemberAddEdit implements ActionListener {
                 fImg = fc.getSelectedFile();
                 try{
                     profilePictureLabel.setIcon(new ImageIcon(UIElements.fitImage(fImg, 128, 128)));
-                } catch (IOException ee){
+                } catch (IOException ip){
                     JOptionPane.showMessageDialog(null, "Image Problem");
                 }
             }
@@ -246,7 +246,7 @@ public class MemberAddEdit implements ActionListener {
              && !FormValidator.isNumber(memberCityField.getText())
              && FormValidator.isValidEmail(memberEmailField.getText())
              && FormValidator.isNumber(memberPointsField.getText())){
-                JOptionPane.showMessageDialog(null,"ALL GOOD!");
+                JOptionPane.showMessageDialog(null,birthDayCBox.getSelectedItem()); // just a temp test
                 // do action
             }
             else {

@@ -25,7 +25,6 @@ public class AdminMain extends JFrame implements ActionListener {
     private JMenuBar menu;
     private JMenu fileMenu, manageMenu, helpMenu;
     private JMenuItem exitMI, logOutMI, empMI, memIM, prodMI, reportMI, optionsMI, helpMI, aboutMI;
-    private JSeparator fileSep, manageSep1, manageSep2;
     private JLabel mainLogo;
     private JPanel outerNorth, outerSouth, outerCenter, innerNorth, innerCenter;
     private JButton empButton, memButton, prodButton, reportButton, optButton, logoutButton;
@@ -53,14 +52,15 @@ public class AdminMain extends JFrame implements ActionListener {
         menu.add(fileMenu);
 
         logOutMI = new JMenuItem("Log Out");
+        logOutMI.setPreferredSize(new Dimension(120,25));
         logOutMI.setIcon(new ImageIcon(UIElements.logout16));
         fileMenu.add(logOutMI);
         logOutMI.addActionListener(this);
 
-        fileSep = new JSeparator();
-        fileMenu.add(fileSep);
+        fileMenu.add(new JSeparator()); // separator - anonymous object, because won't need to reference anywhere else
 
         exitMI = new JMenuItem("Exit");
+        exitMI.setPreferredSize(new Dimension(0,25));
         exitMI.setIcon(new ImageIcon(UIElements.remove16));
         fileMenu.add(exitMI);
         exitMI.addActionListener(this);
@@ -70,46 +70,55 @@ public class AdminMain extends JFrame implements ActionListener {
         menu.add(manageMenu);
 
         empMI = new JMenuItem("Employees");
+        empMI.setPreferredSize(new Dimension(120,25)); // this menuItem controls the width (longest word) for all the rest of the menuItems in the Manage menu, so can set the rest to 0, does not matter anywya
         empMI.setIcon(new ImageIcon(UIElements.person16));
         empMI.addActionListener(this);
         manageMenu.add(empMI);
 
         memIM = new JMenuItem("Members");
+        memIM.setPreferredSize(new Dimension(0,25));
         memIM.setIcon(new ImageIcon(UIElements.person16));
         memIM.addActionListener(this);
         manageMenu.add(memIM);
 
         prodMI = new JMenuItem("Products");
+        prodMI.setPreferredSize(new Dimension(0,25));
         prodMI.setIcon(new ImageIcon(UIElements.product16));
         prodMI.addActionListener(this);
         manageMenu.add(prodMI);
 
-        manageSep1 = new JSeparator();
-        manageMenu.add(manageSep1);
+        manageMenu.add(new JSeparator());
 
         reportMI = new JMenuItem("Report");
+        reportMI.setPreferredSize(new Dimension(0,25));
         reportMI.setIcon(new ImageIcon(UIElements.report16));
         reportMI.addActionListener(this);
         manageMenu.add(reportMI);
 
-        manageSep2 = new JSeparator();
-        manageMenu.add(manageSep2);
+        manageMenu.add(new JSeparator());
 
         optionsMI = new JMenuItem("Options");
+        optionsMI.setPreferredSize(new Dimension(100,25));
         optionsMI.setIcon(new ImageIcon(UIElements.info16));
         optionsMI.addActionListener(this);
         manageMenu.add(optionsMI);
 
         // help menu and its items
         helpMenu = new JMenu("Help");
+//        helpMenu.setPreferredSize(new Dimension(50,20));
+
         menu.add(helpMenu);
 
         helpMI = new JMenuItem("View Help");
+        helpMI.setPreferredSize(new Dimension(120,25));
         helpMI.setIcon(new ImageIcon(UIElements.info16));
         helpMI.addActionListener(this);
         helpMenu.add(helpMI);
 
+        helpMenu.add(new JSeparator());
+
         aboutMI = new JMenuItem("About");
+        aboutMI.setPreferredSize(new Dimension(120,25));
         aboutMI.setIcon(new ImageIcon(UIElements.info16));
         aboutMI.addActionListener(this);
         helpMenu.add(aboutMI);
@@ -135,30 +144,35 @@ public class AdminMain extends JFrame implements ActionListener {
         empButton = new JButton("Employees");
         empButton.setPreferredSize(new Dimension(150, 40));
         empButton.setIcon(new ImageIcon(UIElements.person32));
+        empButton.setToolTipText("View Employee Information");
         empButton.addActionListener(this);
         innerNorth.add(empButton);
 
         memButton = new JButton("Members");
         memButton.setPreferredSize(new Dimension(150, 40));
         memButton.setIcon(new ImageIcon(UIElements.person32));
+        memButton.setToolTipText("View Member Information");
         memButton.addActionListener(this);
         innerNorth.add(memButton);
 
         prodButton = new JButton("Products");
         prodButton.setPreferredSize(new Dimension(150, 40));
         prodButton.setIcon(new ImageIcon(UIElements.product32));
+        prodButton.setToolTipText("View Product Information");
         prodButton.addActionListener(this);
         innerNorth.add(prodButton);
 
         reportButton = new JButton("Report");
         reportButton.setPreferredSize(new Dimension(150, 40));
         reportButton.setIcon(new ImageIcon(UIElements.report32));
+        reportButton.setToolTipText("View Reports");
         reportButton.addActionListener(this);
         innerNorth.add(reportButton);
 
         optButton = new JButton("Options");
         optButton.setPreferredSize(new Dimension(150, 40));
         optButton.setIcon(new ImageIcon(UIElements.info32));
+        optButton.setToolTipText("View System Options");
         optButton.addActionListener(this);
         innerNorth.add(optButton);
 
@@ -180,8 +194,11 @@ public class AdminMain extends JFrame implements ActionListener {
         outerSouth = new JPanel(new FlowLayout(FlowLayout.LEFT));
         outerSouth.setBackground(UIElements.getColour());
         outerSouth.setBorder(BorderFactory.createEtchedBorder()); // set anonymous titled, etched border);
+
         logoutButton = new JButton("Log Out");
+        logoutButton.setPreferredSize(new Dimension(100,40));
         logoutButton.setIcon(new ImageIcon(UIElements.logout16));
+        logoutButton.setToolTipText("Log Out Of The Administration Window");
         logoutButton.addActionListener(this);
         outerSouth.add(logoutButton);
         am.add(outerSouth, BorderLayout.SOUTH);  // add outer south to frame

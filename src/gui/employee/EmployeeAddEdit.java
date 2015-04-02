@@ -275,7 +275,7 @@ public class EmployeeAddEdit implements ActionListener {
                 fImg = fc.getSelectedFile(); // select the file
                 try{
                     profilePictureLabel.setIcon(new ImageIcon(UIElements.fitImage(fImg, 128, 128))); // scale the picture and set it
-                } catch (IOException ee){
+                } catch (IOException ip){
                     JOptionPane.showMessageDialog(null, "Image Problem");
                 }
             }

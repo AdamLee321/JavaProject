@@ -6,6 +6,8 @@ Computing - Year 2, Project
 Group 17
 */
 
-public class memberOperations {
+public class MemberOperations {
+
+
  //Insert here
 }
