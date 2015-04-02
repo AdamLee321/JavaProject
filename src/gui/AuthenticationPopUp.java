@@ -29,7 +29,7 @@ public class AuthenticationPopUp {
     private JTextField usernameField;
     private JPasswordField passwordField;
     private ResultSet rset;
-    int count = 0;
+    private int count = 0;
 
     public AuthenticationPopUp(final JFrame parent) {
         auth = new JDialog(parent, true);
