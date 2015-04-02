@@ -98,15 +98,15 @@ public class AuthenticationPopUp {
                         auth.dispose();
                         parent.dispose();
                     }catch(NullPointerException np){
-                        if(count > 1) {
-                            new DennisNedry();
-                            count = 0;
-                        }
-                        else{
+                        if(count < 2) {
                             JOptionPane.showMessageDialog(parent, "Incorrect username or password", "ERROR", JOptionPane.ERROR_MESSAGE);
                             usernameField.setText("");
                             passwordField.setText("");
                             count++;
+                        }
+                        else{
+                            new DennisNedry();
+                            count = 0;
                         }
                     }
                 }
