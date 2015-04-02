@@ -1,21 +1,16 @@
 package gui.member;
 
-import gui.DateGenenerator;
+import gui.DateGenerator;
 import gui.FormValidator;
 import gui.Griddy;
 import gui.UIElements;
 import gui.admin.AdminMain;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.awt.image.ImageFilter;
 import java.io.*;
-import java.util.prefs.Preferences;
 
 /*
 IT Tallaght - 2015, S2
@@ -33,7 +28,7 @@ public class MemberAddEdit implements ActionListener {
     private JButton addButton, removeButton, cancelButton, previewButton, okButton;
     private File fImg;
     private JFileChooser fc;
-    private DateGenenerator dg;
+    private DateGenerator dg;
     private AdminMain am;  // used for JDialogs as parent
 
     public MemberAddEdit(JFrame parent, int choice){
@@ -110,7 +105,7 @@ public class MemberAddEdit implements ActionListener {
 
         // DOB
 
-        dg = new DateGenenerator();  // this needs DateGen class, to get correct days, months and years
+        dg = new DateGenerator();  // this needs DateGen class, to get correct days, months and years
 
         memberDOB = new JLabel("Date Of Birth");
         detailsPanel.add(memberDOB, Griddy.getConstraints(0,3,1,1,0,0,0,0,5,15,5,5,0,GridBagConstraints.WEST));

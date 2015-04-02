@@ -26,7 +26,7 @@ public class EmployeeAddEdit implements ActionListener {
     private JButton addButton, removeButton, cancelButton, previewButton, okButton, passGenButton, usernameGenButton;
     private File fImg;
     private JFileChooser fc;
-    private DateGenenerator dg;
+    private DateGenerator dg;
     private AdminMain am;  // used for JDialogs as parent
 
     public EmployeeAddEdit(JFrame parent, int choice){
@@ -102,7 +102,7 @@ public class EmployeeAddEdit implements ActionListener {
         detailsPanel.add(empEmailField, Griddy.getConstraints(1,2,1,1,0,0,0,0,5,15,15,5,GridBagConstraints.HORIZONTAL,GridBagConstraints.CENTER));
 
         // DOB
-        dg = new DateGenenerator();  // this needs DateGen class, to get correct days, months and years
+        dg = new DateGenerator();  // this needs DateGen class, to get correct days, months and years
 
         empDOB = new JLabel("Date Of Birth");
         detailsPanel.add(empDOB, Griddy.getConstraints(0,3,1,1,0,0,0,0,5,15,5,5,0,GridBagConstraints.WEST));

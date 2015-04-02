@@ -12,7 +12,7 @@ It returns String arrays of months, past 100 years (-16),
 and correct number of days... meaning days correctly reflect leap years and months
 */
 
-public class DateGenenerator {
+public class DateGenerator {
 
     private String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 
