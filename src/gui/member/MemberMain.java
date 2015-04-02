@@ -93,6 +93,7 @@ public class MemberMain implements ActionListener {
 
 // CENTER PANEL - results table panel
         memTableModel = new MemberTableModel();
+        memTableModel.emptyArray();
         memTable = new JTable(memTableModel);
         memTable.addMouseListener(new MouseAdapter() {
             @Override
