@@ -6,6 +6,7 @@ Computing - Year 2, Project
 Group 17 (George - 17/03/2015)
 */
 
+import gui.DataProcess;
 import gui.FormValidator;
 import gui.Griddy;
 import gui.UIElements;
@@ -193,7 +194,7 @@ public class ProductAddEdit implements ActionListener {
     public void actionPerformed(ActionEvent e){
         if (e.getSource().equals(addButton)){
             fc = new JFileChooser(); // initialize the JFileChooser - Initializing on button action because if initialized in the constructor, it slows down the UI response to the button
-            fc.setFileFilter(UIElements.imageFilter); // set image filter on JFileChooser
+            fc.setFileFilter(DataProcess.imageFilter); // set image filter on JFileChooser
             fc.setPreferredSize(new Dimension(600, 400)); // JFileChooser size
             fc.setMultiSelectionEnabled(false); // don't allow multifile selection
             fc.setDialogTitle("Select Employee Image"); // title
@@ -202,7 +203,7 @@ public class ProductAddEdit implements ActionListener {
             if (open == JFileChooser.APPROVE_OPTION) { // if JFileChooser is open (int 1)
                 fImg = fc.getSelectedFile(); // select the file
                 try{
-                    imgLabel.setIcon(new ImageIcon(UIElements.fitImageFile(fImg, 128, 128))); // scale the picture and set it
+                    imgLabel.setIcon(new ImageIcon(DataProcess.fitImageFile(fImg, 128, 128))); // scale the picture and set it
                 } catch (IOException ip){
                     JOptionPane.showMessageDialog(null, "Image Problem");
                 }

@@ -265,7 +265,7 @@ public class EmployeeAddEdit implements ActionListener {
         }
         else if (e.getSource().equals(addButton)){
             fc = new JFileChooser(); // initialize the JFileChooser - Initializing on button action because if initialized in the constructor, it slows down the UI response to the button
-            fc.setFileFilter(UIElements.imageFilter); // set image filter on JFileChooser
+            fc.setFileFilter(DataProcess.imageFilter); // set image filter on JFileChooser
             fc.setPreferredSize(new Dimension(600, 400)); // JFileChooser size
             fc.setMultiSelectionEnabled(false); // don't allow multifile selection
             fc.setDialogTitle("Select Employee Image"); // title
@@ -274,7 +274,7 @@ public class EmployeeAddEdit implements ActionListener {
             if (open == JFileChooser.APPROVE_OPTION) {  // if JFileChooser is open (int 1)
                 fImg = fc.getSelectedFile(); // select the file
                 try{
-                    profilePictureLabel.setIcon(new ImageIcon(UIElements.fitImageFile(fImg, 128, 128))); // scale the picture and set it
+                    profilePictureLabel.setIcon(new ImageIcon(DataProcess.fitImageFile(fImg, 128, 128))); // scale the picture and set it
                 } catch (IOException ip){
                     JOptionPane.showMessageDialog(null, "Image Problem");
                 }

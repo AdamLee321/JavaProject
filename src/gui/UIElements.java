@@ -62,27 +62,8 @@ public class UIElements {
 
     // UI colour
     public static Color color = new Color(98, 169, 221);
-    public static Color getColour(){
+
+    public static Color getColour() {
         return color;
     }
-
-    // Image Scaler - Takes an image file, sets widths and height and returns it scaled
-    public static Image fitImageFile(File fileIn, int widthIn, int heightIn) throws IOException {
-
-        BufferedImage img = ImageIO.read(fileIn);
-        Image scaled = img.getScaledInstance(widthIn, heightIn, Image.SCALE_SMOOTH);
-        return scaled;
-    }
-
-    // Image Scaler - Takes an image file, sets widths and height and returns it scaled
-    public static Image fitImageByte(byte[] image, int widthIn, int heightIn) throws IOException {
-
-        ByteArrayInputStream in = new ByteArrayInputStream(image);
-        BufferedImage img = ImageIO.read(in);
-        Image scaled = img.getScaledInstance(widthIn, heightIn, Image.SCALE_SMOOTH);
-        return scaled;
-    }
-
-    // Image Filter - Used with JFileChooser to filter out all the non image files from the view
-    public final static FileNameExtensionFilter imageFilter = new FileNameExtensionFilter("Image files", ImageIO.getReaderFileSuffixes());
 }

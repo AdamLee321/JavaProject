@@ -1,10 +1,7 @@
 package gui.member;
 
 import database.operations.MemberOperations;
-import gui.DateGenerator;
-import gui.FormValidator;
-import gui.Griddy;
-import gui.UIElements;
+import gui.*;
 import gui.admin.AdminMain;
 import model.Member;
 
@@ -202,8 +199,8 @@ public class MemberAddEdit implements ActionListener {
             birthMonthCBox.setEnabled(true);
 
             try {
-                profilePictureLabel.setIcon(new ImageIcon(UIElements.fitImageByte(m.getMemberPic(),128,128)));
-//                fImg = UIElements.fitImageByte(m.getMemberPic(),128,128);
+                profilePictureLabel.setIcon(new ImageIcon(DataProcess.fitImageByte(m.getMemberPic(), 128, 128)));
+                fImg = DataProcess.byteToFile(m.getMemberPic(),fImg);
             } catch (IOException e){
                 JOptionPane.showMessageDialog(memberAdd,"Image Problem");
             }
@@ -227,9 +224,15 @@ public class MemberAddEdit implements ActionListener {
 
 // METHODS
 
+    public File getfImg() {
+        return fImg;
+    }
 
+    public void setfImg(File fImg) {
+        this.fImg = fImg;
+    }
 
-// BUTTION ACTIONS
+    // BUTTION ACTIONS
 
     public void actionPerformed(ActionEvent e){
         if (e.getSource() == birthYearCBox){
@@ -248,7 +251,7 @@ public class MemberAddEdit implements ActionListener {
         }
         else if(e.getSource() == addButton){
             fc = new JFileChooser(); // initialize the JFileChooser - Initializing on button action because if initialized in the constructor, it slows down the UI response to the button
-            fc.setFileFilter(UIElements.imageFilter); // set image filter on JFileChooser
+            fc.setFileFilter(DataProcess.imageFilter); // set image filter on JFileChooser
             fc.setPreferredSize(new Dimension(600, 400)); // JFileChooser size
             fc.setMultiSelectionEnabled(false); // don't allow multifile selection
             fc.setDialogTitle("Select Employee Image"); // title
@@ -257,7 +260,7 @@ public class MemberAddEdit implements ActionListener {
             if (open == JFileChooser.APPROVE_OPTION) {  // if JFileChooser is open (int 1)
                 fImg = fc.getSelectedFile();
                 try{
-                    profilePictureLabel.setIcon(new ImageIcon(UIElements.fitImageFile(fImg, 128, 128)));
+                    profilePictureLabel.setIcon(new ImageIcon(DataProcess.fitImageFile(fImg, 128, 128)));
                 } catch (IOException ip){
                     JOptionPane.showMessageDialog(null, "Image Problem");
                 }
@@ -288,6 +291,7 @@ public class MemberAddEdit implements ActionListener {
                     // initialize member ops, add a new member(pass all the paramemters), display message
                     mo = new MemberOperations();
                     mo.updateMember(m.getMemberId(), memberFNameField.getText(), memberLNameField.getText(), memberStreetField.getText(), memberCityField.getText(), memberCountyField.getText(), birthDayCBox.getSelectedIndex() + 1, birthMonthCBox.getItemAt(birthMonthCBox.getSelectedIndex()), birthYearCBox.getItemAt(birthYearCBox.getSelectedIndex()), memberEmailField.getText(), Integer.parseInt(memberNumberField.getText()), Integer.parseInt(memberPointsField.getText()), fImg);
+//                    if (memberPointsField.revalidate());
                     JOptionPane.showMessageDialog(null, "Member Information Updated", "Information", JOptionPane.INFORMATION_MESSAGE);
                     // refresh the MemberMain list after adding a new member
                     mm.displayMembers();
