@@ -199,8 +199,8 @@ public class MemberAddEdit implements ActionListener {
             birthMonthCBox.setEnabled(true);
 
             try {
-                profilePictureLabel.setIcon(new ImageIcon(DataProcess.fitImageByte(m.getMemberPic(), 128, 128)));
-                fImg = DataProcess.byteToFile(m.getMemberPic(),fImg);
+                profilePictureLabel.setIcon(new ImageIcon(DataProcessor.fitImageByte(m.getMemberPic(), 128, 128)));
+                fImg = DataProcessor.byteToFile(m.getMemberPic(), fImg);
             } catch (IOException e){
                 JOptionPane.showMessageDialog(memberAdd,"Image Problem");
             }
@@ -251,7 +251,7 @@ public class MemberAddEdit implements ActionListener {
         }
         else if(e.getSource() == addButton){
             fc = new JFileChooser(); // initialize the JFileChooser - Initializing on button action because if initialized in the constructor, it slows down the UI response to the button
-            fc.setFileFilter(DataProcess.imageFilter); // set image filter on JFileChooser
+            fc.setFileFilter(DataProcessor.imageFilter); // set image filter on JFileChooser
             fc.setPreferredSize(new Dimension(600, 400)); // JFileChooser size
             fc.setMultiSelectionEnabled(false); // don't allow multifile selection
             fc.setDialogTitle("Select Employee Image"); // title
@@ -260,7 +260,7 @@ public class MemberAddEdit implements ActionListener {
             if (open == JFileChooser.APPROVE_OPTION) {  // if JFileChooser is open (int 1)
                 fImg = fc.getSelectedFile();
                 try{
-                    profilePictureLabel.setIcon(new ImageIcon(DataProcess.fitImageFile(fImg, 128, 128)));
+                    profilePictureLabel.setIcon(new ImageIcon(DataProcessor.fitImageFile(fImg, 128, 128)));
                 } catch (IOException ip){
                     JOptionPane.showMessageDialog(null, "Image Problem");
                 }

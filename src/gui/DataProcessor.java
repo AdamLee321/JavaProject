@@ -15,7 +15,7 @@ Computing - Year 2, Project
 Group 17 (George - 03/04/2015)
 */
 
-public class DataProcess {
+public class DataProcessor {
 
     // Image Scaler - Takes an image file, sets widths and height and returns it scaled
     public static Image fitImageFile(File fileIn, int widthIn, int heightIn) throws IOException {
