@@ -202,7 +202,7 @@ public class ProductAddEdit implements ActionListener {
             if (open == JFileChooser.APPROVE_OPTION) { // if JFileChooser is open (int 1)
                 fImg = fc.getSelectedFile(); // select the file
                 try{
-                    imgLabel.setIcon(new ImageIcon(UIElements.fitImage(fImg, 128, 128))); // scale the picture and set it
+                    imgLabel.setIcon(new ImageIcon(UIElements.fitImageFile(fImg, 128, 128))); // scale the picture and set it
                 } catch (IOException ip){
                     JOptionPane.showMessageDialog(null, "Image Problem");
                 }

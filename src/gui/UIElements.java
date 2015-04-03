@@ -11,13 +11,15 @@ this class was created to allow reuse of various user interface elements through
 attributes are set to static to allow access without the need for reference object creation
 */
 
+import org.omg.CORBA.portable.ApplicationException;
+import sun.misc.IOUtils;
+
 import javax.imageio.ImageIO;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.Color;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 
 public class UIElements {
 
@@ -65,9 +67,18 @@ public class UIElements {
     }
 
     // Image Scaler - Takes an image file, sets widths and height and returns it scaled
-    public static Image fitImage(File fileIn, int widthIn, int heightIn) throws IOException {
+    public static Image fitImageFile(File fileIn, int widthIn, int heightIn) throws IOException {
 
         BufferedImage img = ImageIO.read(fileIn);
+        Image scaled = img.getScaledInstance(widthIn, heightIn, Image.SCALE_SMOOTH);
+        return scaled;
+    }
+
+    // Image Scaler - Takes an image file, sets widths and height and returns it scaled
+    public static Image fitImageByte(byte[] image, int widthIn, int heightIn) throws IOException {
+
+        ByteArrayInputStream in = new ByteArrayInputStream(image);
+        BufferedImage img = ImageIO.read(in);
         Image scaled = img.getScaledInstance(widthIn, heightIn, Image.SCALE_SMOOTH);
         return scaled;
     }

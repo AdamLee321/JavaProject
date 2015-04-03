@@ -103,30 +103,15 @@ public class MemberMain implements ActionListener, MouseListener {
         memTableModel = new MemberTableModel();
         displayMembers();
         memTable = new JTable(memTableModel);
-        memTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        memTable.setFillsViewportHeight(true); // fill out the height of the table
+        memTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // don't allow multirow selection
         memTable.addMouseListener(this);
-
-        memTable.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                if (e.getClickCount() == 2) { // double click event
-                    e.consume();
-                    JOptionPane.showMessageDialog(null, "hello");
-                }
-            }
-//            public void
-        });
-//        memTable.setRowHeight(50);
 
 //        int tableWidth = 50;
 //        int columnCount = memTableModel.columnModel.getColumnCount();
 //        for (int i = 0; i < columnCount; i++)
 //            tableWidth += memTableModel.columnModel.getColumn(i).getWidth();
 
-
-
-//        memTable.setFillsViewportHeight(true); - fill out the height of the table
 
         JScrollPane scroll = new JScrollPane(memTable);
         scroll.setBorder(new BevelBorder(BevelBorder.LOWERED));
@@ -156,11 +141,23 @@ public class MemberMain implements ActionListener, MouseListener {
         return memberMain;
     }
 
-// DISPLAY MEMBER LIST
+//  METHODS
 
+    // display main members list
     public void displayMembers(){
         memTableModel.emptyArray(); // clear object array (rows) so it does not keep duplicating entries to the table on every call
         memTableModel.getMainList();
+    }
+
+    //
+    public void displayEdit() {
+        MemberOperations mo = new MemberOperations();
+        Member m = mo.getMemberById(row);
+        if (row != 0) {
+            new MemberAddEdit(am, 1, this, m);
+        } else {
+            JOptionPane.showMessageDialog(null, "Please Select The Member First", "Member Not Selected", JOptionPane.WARNING_MESSAGE);
+        }
     }
 
 // BUTTON ACTIONS
@@ -172,7 +169,7 @@ public class MemberMain implements ActionListener, MouseListener {
     public void mouseEntered(MouseEvent e){}
 
     public void mouseClicked(MouseEvent e){
-        if(e.getSource().equals(searchField)){
+        if(e.getSource().equals(searchField)){ // search text tip actions
             if (searchField.getText().equals(textFieldTip)) {
                 searchField.setText("");
                 searchField.setForeground(null); // reset colour to black
@@ -189,7 +186,10 @@ public class MemberMain implements ActionListener, MouseListener {
                 }
             });
         }
-        else if (e.getSource().equals(memTable)){
+        else if (e.getSource().equals(memTable)){  // main table actions
+            if (e.getClickCount() == 2) { // double click event
+                displayEdit();
+            }
             row = memTable.getSelectedRow()+1;
         }
     }
@@ -198,16 +198,8 @@ public class MemberMain implements ActionListener, MouseListener {
         if (e.getSource().equals(addButton)){
             MemberAddEdit mae = new MemberAddEdit(am,0,this,null);
         } // edit member
-        else if (e.getSource().equals(editButton)){
-            // search
-            MemberOperations mo = new MemberOperations();
-            Member m = mo.getMemberById(row);
-            if (row != 0){
-                new MemberAddEdit(am,1,this,m);
-            }
-            else {
-                JOptionPane.showMessageDialog(null,"Please Select The Member First","Member Not Selected",JOptionPane.WARNING_MESSAGE);
-            }
+        else if (e.getSource().equals(editButton)) {
+            displayEdit();
         }
         else if (e.getSource().equals(viewOrdersButton)){
             OrderView ov = new OrderView();

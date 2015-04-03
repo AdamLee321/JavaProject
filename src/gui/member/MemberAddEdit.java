@@ -35,6 +35,7 @@ public class MemberAddEdit implements ActionListener {
     private MemberOperations mo;
     private MemberMain mm;
     private Member m;
+    private int choice = 0;
 
     public MemberAddEdit(JFrame parent, int choice, MemberMain mm, Member m){
 
@@ -192,6 +193,7 @@ public class MemberAddEdit implements ActionListener {
 
         this.mm = mm; // pass MemberMain to refresh the list but button click
         this.m = m; // pass Member object from Member to set details
+        this.choice = choice; // declared a class variable and initialized for reuse with buttons (edit/add decision)
 
         // choice - add(clean fields) or edit(populate fields (1))
         if (choice == 1) {
@@ -199,7 +201,12 @@ public class MemberAddEdit implements ActionListener {
             birthDayCBox.setEnabled(true);
             birthMonthCBox.setEnabled(true);
 
-            profilePictureLabel.setIcon(new ImageIcon(m.getMemberPic()));
+            try {
+                profilePictureLabel.setIcon(new ImageIcon(UIElements.fitImageByte(m.getMemberPic(),128,128)));
+                fImg = UIElements.fitImageByte(m.getMemberPic(),128,128);
+            } catch (IOException e){
+                JOptionPane.showMessageDialog(memberAdd,"Image Problem");
+            }
             memberFNameField.setText(m.getMemberFName());
             memberLNameField.setText(m.getMemberLName());
             memberEmailField.setText(m.getMemberEmail());
@@ -250,7 +257,7 @@ public class MemberAddEdit implements ActionListener {
             if (open == JFileChooser.APPROVE_OPTION) {  // if JFileChooser is open (int 1)
                 fImg = fc.getSelectedFile();
                 try{
-                    profilePictureLabel.setIcon(new ImageIcon(UIElements.fitImage(fImg, 128, 128)));
+                    profilePictureLabel.setIcon(new ImageIcon(UIElements.fitImageFile(fImg, 128, 128)));
                 } catch (IOException ip){
                     JOptionPane.showMessageDialog(null, "Image Problem");
                 }
@@ -267,14 +274,26 @@ public class MemberAddEdit implements ActionListener {
              && FormValidator.isNumber(memberPointsField.getText())
              && birthDayCBox.isEnabled()
              && birthMonthCBox.isEnabled()){
-                // initialize member ops, add a new member(pass all the paramemters), display message
-                mo = new MemberOperations();
-                mo.addMember(memberFNameField.getText(),memberLNameField.getText(),memberStreetField.getText(),memberCityField.getText(),memberCountyField.getText(),birthDayCBox.getSelectedIndex()+1, birthMonthCBox.getItemAt(birthMonthCBox.getSelectedIndex()), birthYearCBox.getItemAt(birthYearCBox.getSelectedIndex()), memberEmailField.getText(), Integer.parseInt(memberNumberField.getText()), Integer.parseInt(memberPointsField.getText()), fImg);
-                JOptionPane.showMessageDialog(null, "New Member Added", "Information", JOptionPane.INFORMATION_MESSAGE);
-                // refresh the MemberMain list after adding a new member
-                mm.displayMembers();
-                // close window
-                memberAdd.dispose();
+                if(choice == 0) { // if all the above validation is OK, and the choice is 0, add a new member
+                    // initialize member ops, add a new member(pass all the paramemters), display message
+                    mo = new MemberOperations();
+                    mo.addMember(memberFNameField.getText(), memberLNameField.getText(), memberStreetField.getText(), memberCityField.getText(), memberCountyField.getText(), birthDayCBox.getSelectedIndex() + 1, birthMonthCBox.getItemAt(birthMonthCBox.getSelectedIndex()), birthYearCBox.getItemAt(birthYearCBox.getSelectedIndex()), memberEmailField.getText(), Integer.parseInt(memberNumberField.getText()), Integer.parseInt(memberPointsField.getText()), fImg);
+                    JOptionPane.showMessageDialog(null, "New Member Added", "Information", JOptionPane.INFORMATION_MESSAGE);
+                    // refresh the MemberMain list after adding a new member
+                    mm.displayMembers();
+                    // close window
+                    memberAdd.dispose();
+                }
+                else if (choice == 1){ // if all the above validation is OK, and the choice is 1, update existing member
+                    // initialize member ops, add a new member(pass all the paramemters), display message
+                    mo = new MemberOperations();
+                    mo.updateMember(m.getMemberId(), memberFNameField.getText(), memberLNameField.getText(), memberStreetField.getText(), memberCityField.getText(), memberCountyField.getText(), birthDayCBox.getSelectedIndex() + 1, birthMonthCBox.getItemAt(birthMonthCBox.getSelectedIndex()), birthYearCBox.getItemAt(birthYearCBox.getSelectedIndex()), memberEmailField.getText(), Integer.parseInt(memberNumberField.getText()), Integer.parseInt(memberPointsField.getText()), fImg);
+                    JOptionPane.showMessageDialog(null, "Member Information Updated", "Information", JOptionPane.INFORMATION_MESSAGE);
+                    // refresh the MemberMain list after adding a new member
+                    mm.displayMembers();
+                    // close window
+                    memberAdd.dispose();
+                }
             }
             else {
                 if (FormValidator.isEmptyField(memberFNameField.getText())

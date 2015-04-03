@@ -78,6 +78,35 @@ public class MemberOperations {
         }
     }
 
+    // Update existing member (their id is used a "bite")
+    public void updateMember(int id, String fname, String lname, String street, String city, String county, int bDay, String bMonth, String bYear, String email, int memNum, int memPoints, File memPic) {
+        String query = "UPDATE member SET memberFName = ?, memberLName = ?, memberStreet = ?, memberCity = ?, memberCounty = ?," +
+                "memberDOBd = ?, memberDOBm = ?, memberDOBy = ?, memberEmail = ?, memberNumber = ?, memberPoints = ?, memPic = ?  WHERE memberId = " + id;
+        try {
+
+            pstmt = conn.prepareStatement(query);
+
+            pstmt.setString(1, fname);
+            pstmt.setString(2, lname);
+            pstmt.setString(3, street);
+            pstmt.setString(4, city);
+            pstmt.setString(5, county);
+            pstmt.setInt(6, bDay);
+            pstmt.setString(7, bMonth);
+            pstmt.setString(8, bYear);
+            pstmt.setString(9, email);
+            pstmt.setInt(10, memNum);
+            pstmt.setInt(11, memPoints);
+            pstmt.setBinaryStream(12, new FileInputStream(memPic));
+            pstmt.execute();
+        } catch (SQLException q) {
+            JOptionPane.showMessageDialog(null, "MemberOperations - updateMember 1");
+        } catch (FileNotFoundException fnf) {
+            JOptionPane.showMessageDialog(null, "MemberOperations - updateMember 2");
+        }
+    }
+
+
     // return a member object based on id
     public Member getMemberById(int idIn){
         Member m = null;
