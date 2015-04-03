@@ -26,7 +26,7 @@ public class Member {
 
 // OVERLOADED CONSTRUCTOR
 
-    public Member(int memberId, String memberFName, String memberLName, String memberStreet, String memberCity, String memberCounty, int dobd, String dobm, int doby, String memberEmail, String memberNumber, int memberPoints, byte[] memberPic) {
+    public Member(int memberId, String memberFName, String memberLName, String memberStreet, String memberCity, String memberCounty, int dobd, String dobm, String doby, String memberEmail, String memberNumber, int memberPoints, byte[] memberPic) {
         this.memberId = memberId;
         this.memberFName = memberFName;
         this.memberLName = memberLName;
@@ -76,7 +76,7 @@ public class Member {
         return dobm;
     }
 
-    public int getDoby() {
+    public String getDoby() {
         return doby;
     }
 
@@ -130,7 +130,7 @@ public class Member {
         this.dobm = dobm;
     }
 
-    public void setDoby(int doby) {
+    public void setDoby(String doby) {
         this.doby = doby;
     }
 
