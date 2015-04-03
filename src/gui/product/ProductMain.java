@@ -6,8 +6,7 @@ import gui.admin.AdminMain;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 /*
 IT Tallaght - 2015, S2
@@ -15,7 +14,7 @@ Computing - Year 2, Project
 Group 17 (George - 07/03/2015)
 */
 
-public class ProductMain implements ActionListener {
+public class ProductMain implements ActionListener, MouseListener {
 
     private JPanel prodMain;
     private JButton addButton, editButton, deleteButton, searchButton, viewButton;
@@ -26,6 +25,8 @@ public class ProductMain implements ActionListener {
     private String[] prodTypess = {"All", "Sales", "Management"};  // this just a placeholder, real info will be populated from DB
     private String[] brandTypess = {"All", "DELL", "HP", "Apple"};  // this just a placeholder, real info will be populated from DB
     private String[] modelTypess = {"All", "Inpiron 5150", "Latitude 1350"};  // this just a placeholder, real info will be populated from DB
+
+    private String textFieldTip = "type your search query...";
 
     private AdminMain am;
 
@@ -77,6 +78,9 @@ public class ProductMain implements ActionListener {
         searchTopPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         //searchTopPanel.setBackground(new Color(98, 169, 221));
         searchField = new JTextField(29);
+        searchField.setText(textFieldTip); // set initial text field search
+        searchField.setForeground(Color.GRAY); // set initial colour to gray
+        searchField.addMouseListener(this);
         searchTopPanel.add(searchField);
 
         searchButton = new JButton("Search");
@@ -129,6 +133,32 @@ public class ProductMain implements ActionListener {
     }
 
 // BUTTON ACTIONS
+
+    // have to implement these methods for MouseListener
+    public void mouseExited(MouseEvent e){}
+    public void mouseReleased(MouseEvent e){}
+    public void mousePressed(MouseEvent e){}
+    public void mouseEntered(MouseEvent e){}
+
+    public void mouseClicked(MouseEvent e){
+        if(e.getSource().equals(searchField)){
+            if (searchField.getText().equals(textFieldTip)) {
+                searchField.setText("");
+                searchField.setForeground(null); // reset colour to black
+            }
+            searchField.addFocusListener(new FocusListener() {
+                @Override
+                public void focusGained(FocusEvent e) {}
+                @Override
+                public void focusLost(FocusEvent e) { // set the textFieldTip to be visible in text field on focus loss
+                    if (searchField.getText().equals("")){
+                        searchField.setText(textFieldTip);
+                        searchField.setForeground(Color.GRAY);
+                    }
+                }
+            });
+        }
+    }
 
     public void actionPerformed(ActionEvent e){
         if (e.getSource().equals(addButton)){

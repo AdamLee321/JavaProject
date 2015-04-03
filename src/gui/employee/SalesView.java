@@ -20,7 +20,7 @@ public class SalesView extends JDialog implements MouseListener, ActionListener 
     private JPanel pnlNorth, pnlCenter, pnlSouth;
     private JButton btnSearch, btnView, btnBack;
     private JTextField tfSearch;
-    private String textFieldTip = "Type in the order number...";
+    private String textFieldTip = "type in the order number...";
 
     public SalesView(){
 
