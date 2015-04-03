@@ -203,7 +203,7 @@ public class MemberAddEdit implements ActionListener {
 
             try {
                 profilePictureLabel.setIcon(new ImageIcon(UIElements.fitImageByte(m.getMemberPic(),128,128)));
-                fImg = UIElements.fitImageByte(m.getMemberPic(),128,128);
+//                fImg = UIElements.fitImageByte(m.getMemberPic(),128,128);
             } catch (IOException e){
                 JOptionPane.showMessageDialog(memberAdd,"Image Problem");
             }
