@@ -52,7 +52,7 @@ public class CreateEmployee {
                     "empStreet VARCHAR2(255)," +
                     "empCity VARCHAR2(255)," +
                     "empCounty VARCHAR2(255)," +
-                    "empDOBd INTEGER," +
+                    "empDOBd VARCHAR2(255) ," +
                     "empDOBm VARCHAR2(255)," +
                     "empDOBy VARCHAR2 (255)," +
                     "empEmail VARCHAR2(255)," +
@@ -89,7 +89,7 @@ public class CreateEmployee {
             pstmt.setString(5, "Wright Court"); // employee street
             pstmt.setString(6, "Tallaght"); // employee city
             pstmt.setString(7, "Dublin"); // employee county
-            pstmt.setInt(8, 1); // employee dob day
+            pstmt.setString(8, "1"); // employee dob day
             pstmt.setString(9, "Feb"); // employee dob month
             pstmt.setString(10, "1984"); // employee dob year
             pstmt.setString(11, "ermac.ward@gmail.com");  //employee email
@@ -106,7 +106,7 @@ public class CreateEmployee {
             pstmt.setString(5, "2 Carriers Road");
             pstmt.setString(6, "Crumlin");
             pstmt.setString(7, "Dublin");
-            pstmt.setInt(8, 8);
+            pstmt.setString(8, "8");
             pstmt.setString(9, "May");
             pstmt.setString(10, "1984");
             pstmt.setString(11, "sub.zero@gmail.com");
@@ -123,8 +123,8 @@ public class CreateEmployee {
             pstmt.setString(5, "31 Monks Way");
             pstmt.setString(6, "Bluebell");
             pstmt.setString(7, "Dublin");
-            pstmt.setInt(8, 9);
-            pstmt.setString(9, "JUL");
+            pstmt.setString(8, "10");
+            pstmt.setString(9, "Jul");
             pstmt.setString(10, "1969");
             pstmt.setString(11, "sonya.blade@outlook.com");
             pstmt.setInt(12, 17000);
@@ -140,8 +140,8 @@ public class CreateEmployee {
             pstmt.setString(5, "76 Bridge Street");
             pstmt.setString(6, "Ranlagh");
             pstmt.setString(7, "Dublin");
-            pstmt.setInt(8, 17);
-            pstmt.setString(9, "APR");
+            pstmt.setString(8, "17");
+            pstmt.setString(9, "Apr");
             pstmt.setString(10, "1971");
             pstmt.setString(11, "striker.watson@yahoo.co.uk");
             pstmt.setInt(12, 24000);
@@ -157,8 +157,8 @@ public class CreateEmployee {
             pstmt.setString(5, "4 Shore Street");
             pstmt.setString(6, "Terenure");
             pstmt.setString(7, "Dublin");
-            pstmt.setInt(8, 30);
-            pstmt.setString(9, "APR");
+            pstmt.setString(8, "30");
+            pstmt.setString(9, "Apr");
             pstmt.setString(10, "1974");
             pstmt.setString(11, "smoke.martin@hotmail.com");
             pstmt.setInt(12, 12000);
@@ -174,8 +174,8 @@ public class CreateEmployee {
             pstmt.setString(5, "7 London Road");
             pstmt.setString(6, "Finglas");
             pstmt.setString(7 ,"Dublin");
-            pstmt.setInt(8, 26);
-            pstmt.setString(9, "DEC");
+            pstmt.setString(8, "26");
+            pstmt.setString(9, "Dec");
             pstmt.setString(10, "1973");
             pstmt.setString(11, "mileena.brooks@gmail.com");
             pstmt.setInt(12, 23500);
@@ -191,8 +191,8 @@ public class CreateEmployee {
             pstmt.setString(5, "3 Middlewich Road");
             pstmt.setString(6, "Coolock");
             pstmt.setString(7, "Dublin");
-            pstmt.setInt(8, 15);
-            pstmt.setString(9, "JUN");
+            pstmt.setString(8, "15");
+            pstmt.setString(9, "Jun");
             pstmt.setString(10, "1993");
             pstmt.setString(11, "sindel.reed@gmail.com");
             pstmt.setInt(12, 16000);
@@ -208,8 +208,8 @@ public class CreateEmployee {
             pstmt.setString(5, "76 Jubilee Drive");
             pstmt.setString(6, "Dundrum");
             pstmt.setString(7, "Dublin");
-            pstmt.setInt(8, 21);
-            pstmt.setString(9, "JUN");
+            pstmt.setString(8, "21");
+            pstmt.setString(9, "Jun");
             pstmt.setString(10, "1971");
             pstmt.setString(11, "liu.kang@hotmail.com");
             pstmt.setInt(12, 12000);
@@ -225,8 +225,8 @@ public class CreateEmployee {
             pstmt.setString(5, "42 Wressle Road");
             pstmt.setString(6, "Rathcoole");
             pstmt.setString(7, "Dublin");
-            pstmt.setInt(8, 28);
-            pstmt.setString(9, "APR");
+            pstmt.setString(8, "27");
+            pstmt.setString(9, "Apr");
             pstmt.setString(10, "1979");
             pstmt.setString(11, "jade.hernandez@yahoo.co.uk");
             pstmt.setInt(12, 12000);
@@ -242,8 +242,8 @@ public class CreateEmployee {
             pstmt.setString(5, "14 Berkeley Rd");
             pstmt.setString(6, "Ballyfermot");
             pstmt.setString(7, "Dublin");
-            pstmt.setInt(8, 11);
-            pstmt.setString(9, "JUL");
+            pstmt.setString(8, "11");
+            pstmt.setString(9, "Jul");
             pstmt.setString(10, "1981");
             pstmt.setString(11, "kano.bailey@yahoo.co.uk");
             pstmt.setInt(12, 12000);
@@ -259,8 +259,8 @@ public class CreateEmployee {
             pstmt.setString(5, "87 Middlewich Road");
             pstmt.setString(6, "Palmerstown");
             pstmt.setString(7, "Dublin");
-            pstmt.setInt(8, 11);
-            pstmt.setString(9, "JUL");
+            pstmt.setString(8, "12");
+            pstmt.setString(9, "Jul");
             pstmt.setString(10, "1987");
             pstmt.setString(11, "noob.saibot@outlook.com");
             pstmt.setInt(12, 19000);
@@ -276,8 +276,8 @@ public class CreateEmployee {
             pstmt.setString(5, "71 Russell Rd");
             pstmt.setString(6, "Blackrock");
             pstmt.setString(7, "Dublin");
-            pstmt.setInt(8, 11);
-            pstmt.setString(9, "MAR");
+            pstmt.setString(8, "17");
+            pstmt.setString(9, "Mar");
             pstmt.setString(10, "1984");
             pstmt.setString(11, "kobal.jones@gmail.com");
             pstmt.setInt(12,14500);
@@ -293,8 +293,8 @@ public class CreateEmployee {
             pstmt.setString(5, "82 Broad Street");
             pstmt.setString(6, "Rathmines");
             pstmt.setString(7, "Dublin");
-            pstmt.setInt(8, 4);
-            pstmt.setString(9, "JAN");
+            pstmt.setString(8, "3");
+            pstmt.setString(9, "Jan");
             pstmt.setString(10, "1989");
             pstmt.setString(11, "kitana.miller@hotmail.com");
             pstmt.setInt(12,12000);
@@ -310,8 +310,8 @@ public class CreateEmployee {
             pstmt.setString(5, "48 Red Lane");
             pstmt.setString(6, "Inchicore");
             pstmt.setString(7, "Dublin");
-            pstmt.setInt(8, 28);
-            pstmt.setString(9, "DEC");
+            pstmt.setString(8, "28");
+            pstmt.setString(9, "Dec");
             pstmt.setString(10, "1993");
             pstmt.setString(11, "reptile.evans@yahoo.co.uk");
             pstmt.setInt(12, 22000);
@@ -327,8 +327,8 @@ public class CreateEmployee {
             pstmt.setString(5, "7 Helland Bridge");
             pstmt.setString(6, "Crumlin");
             pstmt.setString(7, "Dublin");
-            pstmt.setInt(8, 10);
-            pstmt.setString(9, "MAY");
+            pstmt.setString(8, "10");
+            pstmt.setString(9, "May");
             pstmt.setString(10, "1992");
             pstmt.setString(11, "smoke.garcia@outlook.com");
             pstmt.setInt(12, 12000);
@@ -344,8 +344,8 @@ public class CreateEmployee {
             pstmt.setString(5, "40 Fraserburgh Rd");
             pstmt.setString(6, "Terenure");
             pstmt.setString(7, "Dublin");
-            pstmt.setInt(8, 10);
-            pstmt.setString(9, "MAY");
+            pstmt.setString(8, "14");
+            pstmt.setString(9, "May");
             pstmt.setString(10, "1979");
             pstmt.setString(11, "scorpion.perry@gmail.com");
             pstmt.setInt(12, 22000);
@@ -361,8 +361,8 @@ public class CreateEmployee {
             pstmt.setString(5, "92 Horsefair Green");
             pstmt.setString(6, "Terenure");
             pstmt.setString(7, "Dublin");
-            pstmt.setInt(8, 10);
-            pstmt.setString(9, "MAY");
+            pstmt.setString(8, "8");
+            pstmt.setString(9, "May");
             pstmt.setString(10, "1981");
             pstmt.setString(11, "jax.jones@outlook.com");
             pstmt.setInt(12, 16000);
@@ -378,8 +378,8 @@ public class CreateEmployee {
             pstmt.setString(5, "94 Iffley Road");
             pstmt.setString(6, "Finglas");
             pstmt.setString(7, "Dublin");
-            pstmt.setInt(8, 10);
-            pstmt.setString(9, "MAY");
+            pstmt.setString(8, "21");
+            pstmt.setString(9, "Aug");
             pstmt.setString(10, "1985");
             pstmt.setString(11, "kung.lao@hotmail.com");
             pstmt.setInt(12, 17500);
@@ -395,8 +395,8 @@ public class CreateEmployee {
             pstmt.setString(5, "7 Southern Way");
             pstmt.setString(6, "Ranlagh");
             pstmt.setString(7, "Dublin");
-            pstmt.setInt(8, 26);
-            pstmt.setString(9, "SEP");
+            pstmt.setString(8, "12");
+            pstmt.setString(9, "Sep");
             pstmt.setString(10, "1984");
             pstmt.setString(11, "nightwolf.lee@gmail.com");
             pstmt.setInt(12, 12000);
@@ -412,8 +412,8 @@ public class CreateEmployee {
             pstmt.setString(5, "7 Southern Way");
             pstmt.setString(6, "Ranlagh");
             pstmt.setString(7, "Dublin");
-            pstmt.setInt(8, 12);
-            pstmt.setString(9, "OCT");
+            pstmt.setString(8, "23");
+            pstmt.setString(9, "Oct");
             pstmt.setString(10, "1980");
             pstmt.setString(11, "shang.tsung@gmail.com");
             pstmt.setInt(12, 12000);
