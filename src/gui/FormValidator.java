@@ -6,6 +6,9 @@ Computing - Year 2, Project
 Group 17 (George - 01/04/2015)
 */
 
+import javax.swing.*;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -38,5 +41,23 @@ public class FormValidator {
 
     public static boolean isCorrectLength(String string, int length){
         return (string.length() == length);
+    }
+
+    // validate images are the same
+    public static boolean isSameImage(byte[] bytesIn, File f) {
+
+        boolean same = false;
+
+        File outputFile = new File("src/res/temp0");
+
+        try ( FileOutputStream outputStream = new FileOutputStream(outputFile)) {
+
+            outputStream.write(bytesIn);  //write the bytes and your done.
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Image Error");
+        }
+
+        return (outputFile == f);
     }
 }

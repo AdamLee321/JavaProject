@@ -1,6 +1,7 @@
 package gui;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -35,7 +36,7 @@ public class DataProcessor {
     }
 
     // convert byte array to File
-    public static File byteToFile(byte[] bytesIn, File f)throws IOException {
+    public static File byteToFile(byte[] bytesIn)throws IOException {
 
         File outputFile = new File("src/res/temp");
 
@@ -44,7 +45,7 @@ public class DataProcessor {
             outputStream.write(bytesIn);  //write the bytes and your done.
 
         } catch (Exception e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null,"Image Error");
         }
         return outputFile;
     }

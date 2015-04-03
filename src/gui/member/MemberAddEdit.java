@@ -200,7 +200,7 @@ public class MemberAddEdit implements ActionListener {
 
             try {
                 profilePictureLabel.setIcon(new ImageIcon(DataProcessor.fitImageByte(m.getMemberPic(), 128, 128)));
-                fImg = DataProcessor.byteToFile(m.getMemberPic(), fImg);
+                fImg = DataProcessor.byteToFile(m.getMemberPic());
             } catch (IOException e){
                 JOptionPane.showMessageDialog(memberAdd,"Image Problem");
             }
@@ -224,13 +224,20 @@ public class MemberAddEdit implements ActionListener {
 
 // METHODS
 
-    public File getfImg() {
-        return fImg;
-    }
-
-    public void setfImg(File fImg) {
-        this.fImg = fImg;
-    }
+   public boolean noChanges() {
+       return (memberFNameField.getText().equals(m.getMemberFName())
+               && memberLNameField.getText().equals(m.getMemberLName())
+               && memberEmailField.getText().equals(m.getMemberEmail())
+               && memberNumberField.getText().equals(m.getMemberNumber())
+               && birthDayCBox.getSelectedItem().equals(m.getDobd())
+               && birthMonthCBox.getSelectedItem().equals(m.getDobm())
+               && birthYearCBox.getSelectedItem().equals(m.getDoby())
+               && memberStreetField.getText().equals(m.getMemberStreet())
+               && memberCityField.getText().equals(m.getMemberCity())
+               && memberCountyField.getText().equals(m.getMemberCounty())
+               && memberPointsField.getText().equals(Integer.toString(m.getMemberPoints()))
+               && FormValidator.isSameImage(m.getMemberPic(),fImg));
+   }
 
     // BUTTION ACTIONS
 
@@ -288,15 +295,20 @@ public class MemberAddEdit implements ActionListener {
                     memberAdd.dispose();
                 }
                 else if (choice == 1){ // if all the above validation is OK, and the choice is 1, update existing member
+                    System.out.println(FormValidator.isSameImage(m.getMemberPic(),fImg));
+
                     // initialize member ops, add a new member(pass all the paramemters), display message
-                    mo = new MemberOperations();
-                    mo.updateMember(m.getMemberId(), memberFNameField.getText(), memberLNameField.getText(), memberStreetField.getText(), memberCityField.getText(), memberCountyField.getText(), birthDayCBox.getSelectedIndex() + 1, birthMonthCBox.getItemAt(birthMonthCBox.getSelectedIndex()), birthYearCBox.getItemAt(birthYearCBox.getSelectedIndex()), memberEmailField.getText(), Integer.parseInt(memberNumberField.getText()), Integer.parseInt(memberPointsField.getText()), fImg);
-//                    if (memberPointsField.revalidate());
-                    JOptionPane.showMessageDialog(null, "Member Information Updated", "Information", JOptionPane.INFORMATION_MESSAGE);
-                    // refresh the MemberMain list after adding a new member
-                    mm.displayMembers();
-                    // close window
-                    memberAdd.dispose();
+                    if (noChanges()){ // if there were no changes just close the window
+                        memberAdd.dispose();
+                    } else{ // if something changed then prompt and update the info
+                        mo = new MemberOperations();
+                        mo.updateMember(m.getMemberId(), memberFNameField.getText(), memberLNameField.getText(), memberStreetField.getText(), memberCityField.getText(), memberCountyField.getText(), birthDayCBox.getSelectedIndex() + 1, birthMonthCBox.getItemAt(birthMonthCBox.getSelectedIndex()), birthYearCBox.getItemAt(birthYearCBox.getSelectedIndex()), memberEmailField.getText(), Integer.parseInt(memberNumberField.getText()), Integer.parseInt(memberPointsField.getText()), fImg);
+                        JOptionPane.showMessageDialog(null, "Member Information Updated", "Information", JOptionPane.INFORMATION_MESSAGE);
+                        // refresh the MemberMain list after adding a new member
+                        mm.displayMembers();
+                        // close window
+                        memberAdd.dispose();
+                    }
                 }
             }
             else {

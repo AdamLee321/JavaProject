@@ -3,7 +3,7 @@ package database.operations;
 /*
 IT Tallaght - 2015, S2
 Computing - Year 2, Project
-Group 17
+Group 17 (George - 03/04/2015)
 */
 
 import database.ConnectionDB;
