@@ -8,7 +8,7 @@ import oracle.jdbc.pool.OracleDataSource;
 /*
 IT Tallaght - 2015, S2
 Computing - Year 2, Project
-Group 17
+Group 17 (George)
 */
 
 public class CreateMember {
@@ -52,7 +52,7 @@ public class CreateMember {
                     "memberStreet VARCHAR2(255)," +
                     "memberCity VARCHAR2(255)," +
                     "memberCounty VARCHAR2(255)," +
-                    "memberDOBd INTEGER," +
+                    "memberDOBd VARCHAR2(255)," +
                     "memberDOBm VARCHAR2(255)," +
                     "memberDOBy VARCHAR2(255)," +
                     "memberEmail VARCHAR2(255)," +
@@ -78,8 +78,8 @@ public class CreateMember {
             pstmt.setString(3, "14 Ballinteer"); //Street
             pstmt.setString(4, "Dundrum"); //City
             pstmt.setString(5, "Dublin"); //County
-            pstmt.setInt(6, 24);//Day
-            pstmt.setString(7, "MAR"); //Month
+            pstmt.setString(6, "23");//Day
+            pstmt.setString(7, "Mar"); //Month
             pstmt.setString(8, "1989");//Year
             pstmt.setString(9, "HJenkins@gmail.com"); //Email
             pstmt.setInt(10, 1); //MemNumber
@@ -92,8 +92,8 @@ public class CreateMember {
             pstmt.setString(3, "28 Main Street"); //Street
             pstmt.setString(4, "Naas"); //City
             pstmt.setString(5, "Kildare"); //County
-            pstmt.setInt(6, 17);//Day
-            pstmt.setString(7, "SEP"); //Month
+            pstmt.setString(6, "16");//Day
+            pstmt.setString(7, "Sep"); //Month
             pstmt.setString(8, "1994");//Year
             pstmt.setString(9, "LMorris@hotmail.com"); //Email
             pstmt.setInt(10, 2); //MemNumber
@@ -106,8 +106,8 @@ public class CreateMember {
             pstmt.setString(3, "16 Main Street"); //Street
             pstmt.setString(4, "Kilbride"); //City
             pstmt.setString(5, "Wicklow"); //County
-            pstmt.setInt(6, 11);//Day
-            pstmt.setString(7, "SEP"); //Month
+            pstmt.setString(6, "3");//Day
+            pstmt.setString(7, "Sep"); //Month
             pstmt.setString(8, "2001");//Year
             pstmt.setString(9, "BettyT123@yahoo.co.uk"); //Email
             pstmt.setInt(10, 3); //MemNumber
@@ -120,8 +120,8 @@ public class CreateMember {
             pstmt.setString(3, "202 Cherrywood"); //Street
             pstmt.setString(4, "Clondalkin"); //City
             pstmt.setString(5, "Dublin"); //County
-            pstmt.setInt(6, 22);//Day
-            pstmt.setString(7, "NOV"); //Month
+            pstmt.setString(6, "12");//Day
+            pstmt.setString(7, "Nov"); //Month
             pstmt.setString(8, "1988");//Year
             pstmt.setString(9, "LBaker@gmail.com"); //Email
             pstmt.setInt(10, 4); //MemNumber
@@ -134,8 +134,8 @@ public class CreateMember {
             pstmt.setString(3, "29 Jobstown"); //Street
             pstmt.setString(4, "Tallaght"); //City
             pstmt.setString(5, "Dublin"); //County
-            pstmt.setInt(6, 30);//Day
-            pstmt.setString(7, "APR"); //Month
+            pstmt.setString(6, "30");//Day
+            pstmt.setString(7, "Apr"); //Month
             pstmt.setString(8, "1965");//Year
             pstmt.setString(9, "DanHendo@hotmail.com"); //Email
             pstmt.setInt(10, 5); //MemNumber
@@ -148,8 +148,8 @@ public class CreateMember {
             pstmt.setString(3, "98 Springfield"); //Street
             pstmt.setString(4, "Tallaght"); //City
             pstmt.setString(5, "Dublin"); //County
-            pstmt.setInt(6, 4);//Day
-            pstmt.setString(7, "MAY"); //Month
+            pstmt.setString(6, "4");//Day
+            pstmt.setString(7, "May"); //Month
             pstmt.setString(8, "1982");//Year
             pstmt.setString(9, "KatPerry@yahoo.co.uk"); //Email
             pstmt.setInt(10, 6); //MemNumber
@@ -162,8 +162,8 @@ public class CreateMember {
             pstmt.setString(3, "132 Church Road"); //Street
             pstmt.setString(4, "Leixlip"); //City
             pstmt.setString(5, "Kildare"); //County
-            pstmt.setInt(6, 22);//Day
-            pstmt.setString(7, "NOV"); //Month
+            pstmt.setString(6, "22");//Day
+            pstmt.setString(7, "Nov"); //Month
             pstmt.setString(8, "1971");//Year
             pstmt.setString(9, "A.Stewart@hotmail.com"); //Email
             pstmt.setInt(10, 7); //MemNumber
@@ -176,8 +176,8 @@ public class CreateMember {
             pstmt.setString(3, "187 Magna Park"); //Street
             pstmt.setString(4, "Citywest"); //City
             pstmt.setString(5, "Dublin"); //County
-            pstmt.setInt(6, 16);//Day
-            pstmt.setString(7, "AUG"); //Month
+            pstmt.setString(6, "5");//Day
+            pstmt.setString(7, "Aug"); //Month
             pstmt.setString(8, "1989");//Year
             pstmt.setString(9, "sAdams@gmail.com"); //Email
             pstmt.setInt(10, 8); //MemNumber
@@ -190,8 +190,8 @@ public class CreateMember {
             pstmt.setString(3, "78 Corbally Downs"); //Street
             pstmt.setString(4, "Crumlin"); //City
             pstmt.setString(5, "Dublin"); //County
-            pstmt.setInt(6, 16);//Day
-            pstmt.setString(7, "DEC"); //Month
+            pstmt.setString(6, "14");//Day
+            pstmt.setString(7, "Dec"); //Month
             pstmt.setString(8, "1970");//Year
             pstmt.setString(9, "S.Green@aol.com"); //Email
             pstmt.setInt(10, 9); //MemNumber
@@ -204,8 +204,8 @@ public class CreateMember {
             pstmt.setString(3, "45 Forest Hills"); //Street
             pstmt.setString(4, "Swords"); //City
             pstmt.setString(5, "Dublin"); //County
-            pstmt.setInt(6, 23);//Day
-            pstmt.setString(7, "JUL"); //Month
+            pstmt.setString(6, "18");//Day
+            pstmt.setString(7, "Jul"); //Month
             pstmt.setString(8, "1981");//Year
             pstmt.setString(9, "Emalone@gmail.com"); //Email
             pstmt.setInt(10, 10); //MemNumber
@@ -218,8 +218,8 @@ public class CreateMember {
             pstmt.setString(3, "14 The Lane"); //Street
             pstmt.setString(4, "Rathmines"); //City
             pstmt.setString(5, "Dublin"); //County
-            pstmt.setInt(6, 31);//Day
-            pstmt.setString(7, "JUN"); //Month
+            pstmt.setString(6, "14");//Day
+            pstmt.setString(7, "Jun"); //Month
             pstmt.setString(8, "1990");//Year
             pstmt.setString(9, "gDavid@hotmail.com"); //Email
             pstmt.setInt(10, 11); //MemNumber
@@ -232,8 +232,8 @@ public class CreateMember {
             pstmt.setString(3, "12 Fettercairn"); //Street
             pstmt.setString(4, "Tallaght"); //City
             pstmt.setString(5, "Dublin"); //County
-            pstmt.setInt(6, 10);//Day
-            pstmt.setString(7, "MAR"); //Month
+            pstmt.setString(6, "20");//Day
+            pstmt.setString(7, "Mar"); //Month
             pstmt.setString(8, "1984");//Year
             pstmt.setString(9, "bGeorge@hotmail.com"); //Email
             pstmt.setInt(10, 12); //MemNumber
@@ -246,8 +246,8 @@ public class CreateMember {
             pstmt.setString(3, "2A The Glen"); //Street
             pstmt.setString(4, "Newcastle"); //City
             pstmt.setString(5, "Dublin"); //County
-            pstmt.setInt(6, 3);//Day
-            pstmt.setString(7, "DEC"); //Month
+            pstmt.setString(6, "1");//Day
+            pstmt.setString(7, "Dec"); //Month
             pstmt.setString(8, "1967");//Year
             pstmt.setString(9, "MarieH@yahoo.co.uk"); //Email
             pstmt.setInt(10, 13); //MemNumber
@@ -260,8 +260,8 @@ public class CreateMember {
             pstmt.setString(3, "41 Forest Hills"); //Street
             pstmt.setString(4, "Citywest"); //City
             pstmt.setString(5, "Dublin"); //County
-            pstmt.setInt(6, 31);//Day
-            pstmt.setString(7, "MAY"); //Month
+            pstmt.setString(6, "31");//Day
+            pstmt.setString(7, "May"); //Month
             pstmt.setString(8, "1992");//Year
             pstmt.setString(9, "BWilk142@gmail.com"); //Email
             pstmt.setInt(10, 14); //MemNumber
@@ -274,8 +274,8 @@ public class CreateMember {
             pstmt.setString(3, "156 Stoney Lane"); //Street
             pstmt.setString(4, "Lucan"); //City
             pstmt.setString(5, "Dublin"); //County
-            pstmt.setInt(6, 31);//Day
-            pstmt.setString(7, "JAN"); //Month
+            pstmt.setString(6, "26");//Day
+            pstmt.setString(7, "Jan"); //Month
             pstmt.setString(8, "1994"); //Year
             pstmt.setString(9, "AReilly156@hotmail.com\n"); //Email
             pstmt.setInt(10, 15); //MemNumber

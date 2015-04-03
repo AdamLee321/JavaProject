@@ -87,7 +87,7 @@ public class MemberOperations {
             rset = stmt.executeQuery(query);
             while (rset.next()) {
                 m = new Member(rset.getInt(1), rset.getString(2), rset.getString(3), rset.getString(4), rset.getString(5),
-                        rset.getString(6), rset.getInt(7), rset.getString(8), rset.getString(9), rset.getString(10),
+                        rset.getString(6), rset.getString(7), rset.getString(8), rset.getString(9), rset.getString(10),
                         rset.getString(11),rset.getInt(12), rset.getBytes(13));
             }
         }catch(SQLException sq){

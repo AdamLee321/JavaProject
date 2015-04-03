@@ -99,9 +99,11 @@ public class MemberMain implements ActionListener, MouseListener {
         memberMain.add(northPanel, BorderLayout.NORTH);
 
 // CENTER PANEL - results table panel
+
         memTableModel = new MemberTableModel();
         displayMembers();
         memTable = new JTable(memTableModel);
+        memTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         memTable.addMouseListener(this);
 
         memTable.addMouseListener(new MouseAdapter() {

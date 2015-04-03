@@ -190,27 +190,27 @@ public class MemberAddEdit implements ActionListener {
 
         memberAdd.add(buttonsPanel, BorderLayout.SOUTH);
 
-        this.mm = mm;
-        this.m = m;
+        this.mm = mm; // pass MemberMain to refresh the list but button click
+        this.m = m; // pass Member object from Member to set details
 
         // choice - add(clean fields) or edit(populate fields (1))
         if (choice == 1) {
+
+            birthDayCBox.setEnabled(true);
+            birthMonthCBox.setEnabled(true);
 
             profilePictureLabel.setIcon(new ImageIcon(m.getMemberPic()));
             memberFNameField.setText(m.getMemberFName());
             memberLNameField.setText(m.getMemberLName());
             memberEmailField.setText(m.getMemberEmail());
             memberNumberField.setText(m.getMemberNumber());
-
+            birthYearCBox.setSelectedItem(m.getDoby());
+            birthMonthCBox.setSelectedItem(m.getDobm());
+            birthDayCBox.setSelectedItem(m.getDobd());
             memberStreetField.setText(m.getMemberStreet());
             memberCityField.setText(m.getMemberCity());
             memberCountyField.setText(m.getMemberCounty());
             memberPointsField.setText(Integer.toString(m.getMemberPoints()));
-
-//            memberCityField.setText(mem);
-
-            birthDayCBox.setEnabled(true);
-            birthMonthCBox.setEnabled(true);
         }
 
 // turns the lights on
