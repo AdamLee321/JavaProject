@@ -6,6 +6,7 @@ import gui.FormValidator;
 import gui.Griddy;
 import gui.UIElements;
 import gui.admin.AdminMain;
+import model.Member;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,8 +34,9 @@ public class MemberAddEdit implements ActionListener {
     private AdminMain am;  // used for JDialogs as parent
     private MemberOperations mo;
     private MemberMain mm;
+    private Member m;
 
-    public MemberAddEdit(JFrame parent, int choice, MemberMain mm){
+    public MemberAddEdit(JFrame parent, int choice, MemberMain mm, Member m){
 
     // setup the jdialog
 
@@ -189,11 +191,23 @@ public class MemberAddEdit implements ActionListener {
         memberAdd.add(buttonsPanel, BorderLayout.SOUTH);
 
         this.mm = mm;
+        this.m = m;
 
         // choice - add(clean fields) or edit(populate fields (1))
         if (choice == 1) {
-            memberFNameField.setText("Luigi");
-            memberCityField.setText("Mario Land");
+
+            profilePictureLabel.setIcon(new ImageIcon(m.getMemberPic()));
+            memberFNameField.setText(m.getMemberFName());
+            memberLNameField.setText(m.getMemberLName());
+            memberEmailField.setText(m.getMemberEmail());
+            memberNumberField.setText(m.getMemberNumber());
+
+            memberStreetField.setText(m.getMemberStreet());
+            memberCityField.setText(m.getMemberCity());
+            memberCountyField.setText(m.getMemberCounty());
+            memberPointsField.setText(Integer.toString(m.getMemberPoints()));
+
+//            memberCityField.setText(mem);
 
             birthDayCBox.setEnabled(true);
             birthMonthCBox.setEnabled(true);

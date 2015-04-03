@@ -350,7 +350,7 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
             Discount disc = new Discount(this);
         }
         else if (e.getSource().equals(btnRegister)){
-            MemberAddEdit mae = new MemberAddEdit(this, 0,null);
+            MemberAddEdit mae = new MemberAddEdit(this, 0,null,null);
         }
         else if (e.getSource().equals(btnReturnProduct)){
             SalesView sv = new SalesView();

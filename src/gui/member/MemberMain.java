@@ -1,15 +1,20 @@
 package gui.member;
 
 import database.operations.EmployeeOperations;
+import database.operations.MemberOperations;
 import gui.Griddy;
 import gui.UIElements;
 import gui.admin.AdminMain;
+import model.Member;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EtchedBorder;
+import javax.swing.event.TableModelEvent;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /*
 IT Tallaght - 2015, S2
@@ -25,10 +30,10 @@ public class MemberMain implements ActionListener, MouseListener {
     private JPanel northPanel, managePanel, searchPanel, southPanel, centerPanel;
     private JTable memTable;
     private MemberTableModel memTableModel;
-
     private String textFieldTip = "type your search query...";
     private AdminMain am;  // declare for usage with JDialogs as parent. No need to initialize
     private EmployeeOperations eo;
+    private int row = 0;
   //  Employee e;
 
     public JPanel getMemberMain(){
@@ -65,6 +70,7 @@ public class MemberMain implements ActionListener, MouseListener {
         deleteButton = new JButton("Delete");
         deleteButton.setPreferredSize(new Dimension(100, 28));
         deleteButton.setIcon(new ImageIcon(UIElements.delete16));
+        deleteButton.addActionListener(this);
         managePanel.add(deleteButton);
 
         northPanel.add(managePanel, Griddy.getConstraints(0,0,1,1,0,0,0,0,5,0,0,5,0,GridBagConstraints.CENTER));
@@ -96,13 +102,18 @@ public class MemberMain implements ActionListener, MouseListener {
         memTableModel = new MemberTableModel();
         displayMembers();
         memTable = new JTable(memTableModel);
+        memTable.addMouseListener(this);
 
         memTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                JOptionPane.showMessageDialog(null,"hello");
+                if (e.getClickCount() == 2) { // double click event
+                    e.consume();
+                    JOptionPane.showMessageDialog(null, "hello");
+                }
             }
+//            public void
         });
 //        memTable.setRowHeight(50);
 
@@ -176,17 +187,41 @@ public class MemberMain implements ActionListener, MouseListener {
                 }
             });
         }
+        else if (e.getSource().equals(memTable)){
+            row = memTable.getSelectedRow()+1;
+        }
     }
 
     public void actionPerformed(ActionEvent e){
         if (e.getSource().equals(addButton)){
-            MemberAddEdit mae = new MemberAddEdit(am,0,this);
+            MemberAddEdit mae = new MemberAddEdit(am,0,this,null);
         } // edit member
         else if (e.getSource().equals(editButton)){
-            MemberAddEdit mae = new MemberAddEdit(am,1,this);
+            // search
+            MemberOperations mo = new MemberOperations();
+            Member m = mo.getMemberById(row);
+            if (row != 0){
+                new MemberAddEdit(am,1,this,m);
+            }
+            else {
+                JOptionPane.showMessageDialog(null,"Please Select The Member First","Member Not Selected",JOptionPane.WARNING_MESSAGE);
+            }
         }
         else if (e.getSource().equals(viewOrdersButton)){
             OrderView ov = new OrderView();
+        }
+        else if (e.getSource().equals(editButton)){
+
+        }
+        else if (e.getSource().equals(deleteButton)){
+            Object[] options = {"Yes","No"};
+            int choice = JOptionPane.showOptionDialog(am, "Are You Sure?", "Delete Member",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE,null,options,null);
+            if (choice == 0){
+
+                JOptionPane.showMessageDialog(am,"Member Deleted");
+            } else {
+
+            }
         }
     }
 }

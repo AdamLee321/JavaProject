@@ -7,8 +7,6 @@ Group 17 (George - 02/04/2015)
 */
 
 import database.operations.MemberOperations;
-import database.operations.ProductOperations;
-import gui.sale.SaleRow;
 
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
@@ -51,7 +49,7 @@ public class MemberTableModel extends DefaultTableModel {
     public void getMainList() {
         try {
             MemberOperations mo = new MemberOperations();
-            ResultSet rset = mo.getAllMembers();
+            ResultSet rset = mo.getAllMembersMinusBlobs();
             while (rset.next()) {
                 memberRows.add(new MemberRow(rset.getInt(1), rset.getString(2), rset.getString(3), rset.getString(4), rset.getString(5), rset.getString(6), rset.getInt(7), rset.getString(8), rset.getString(9), rset.getString(10), rset.getString(11), rset.getInt(12)));
             }

@@ -168,7 +168,14 @@ public class ProductMain implements ActionListener, MouseListener {
             ProductAddEdit pae = new ProductAddEdit(am,1);
         }
         else if (e.getSource().equals(deleteButton)){
+            Object[] options = {"Yes","No"};
+            int choice = JOptionPane.showOptionDialog(prodMain, "Are You Sure?", "Delete Product",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE,null,options,null);
+            if (choice == 0){
 
+                JOptionPane.showMessageDialog(prodMain,"Product Deleted");
+            } else {
+
+            }
         }
         else if (e.getSource().equals(viewButton)){
             ProductView pv = new ProductView(am);

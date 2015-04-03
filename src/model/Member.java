@@ -6,6 +6,8 @@ Computing - Year 2, Project
 Group 17
 */
 
+import java.io.File;
+
 public class Member {
 
 // instance variables
@@ -23,6 +25,8 @@ public class Member {
     private String memberNumber;
     private int memberPoints;
     private byte[] memberPic;
+
+    public Member(){}
 
 // OVERLOADED CONSTRUCTOR
 
