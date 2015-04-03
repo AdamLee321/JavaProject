@@ -47,18 +47,18 @@ public class CreateMember {
 
             stmt.execute("CREATE TABLE member(" +
                     "memberId INTEGER, " +
-                    "memberFName VARCHAR(30)," +
-                    "memberLName VARCHAR(30)," +
-                    "memberStreet VARCHAR2(80)," +
-                    "memberCity VARCHAR2(20)," +
-                    "memberCounty VARCHAR2(20)," +
+                    "memberFName VARCHAR2(255)," +
+                    "memberLName VARCHAR2(255)," +
+                    "memberStreet VARCHAR2(255)," +
+                    "memberCity VARCHAR2(255)," +
+                    "memberCounty VARCHAR2(255)," +
                     "memberDOBd INTEGER," +
-                    "memberDOBm VARCHAR2(20)," +
-                    "memberDOBy INTEGER," +
-                    "memberEmail VARCHAR2(70)," +
+                    "memberDOBm VARCHAR2(255)," +
+                    "memberDOBy VARCHAR2(255)," +
+                    "memberEmail VARCHAR2(255)," +
                     "memberNumber INTEGER," +
                     "memberPoints INTEGER," +
-                    "memPicUrl BLOB," +
+                    "memPic BLOB," +
                     "PRIMARY KEY(memberId))");
             System.out.println("Member table created successfully");
 
@@ -68,7 +68,7 @@ public class CreateMember {
 
             // prepared statement
             String sql = "INSERT INTO member (memberId, memberFName, memberLName, memberStreet, memberCity, memberCounty," +
-                    "memberDOBd, memberDOBm, memberDOBy, memberEmail, memberNumber, memberPoints, memPicUrl)" +
+                    "memberDOBd, memberDOBm, memberDOBy, memberEmail, memberNumber, memberPoints, memPic)" +
                     "VALUES (memberSeq.nextVal,?,?,?,?,?,?,?,?,?,?,?,?)";
             pstmt = conn.prepareStatement(sql);
 
@@ -177,7 +177,7 @@ public class CreateMember {
             pstmt.setString(4, "Citywest"); //City
             pstmt.setString(5, "Dublin"); //County
             pstmt.setInt(6, 16);//Day
-            pstmt.setString(7, "16-AUG-1989"); //Month
+            pstmt.setString(7, "AUG"); //Month
             pstmt.setInt(8, 1989);//Year
             pstmt.setString(9, "sAdams@gmail.com"); //Email
             pstmt.setInt(10, 8); //MemNumber
@@ -210,7 +210,7 @@ public class CreateMember {
             pstmt.setString(9, "Emalone@gmail.com"); //Email
             pstmt.setInt(10, 10); //MemNumber
             pstmt.setInt(11, 0); //MemPoints
-            pstmt.setBinaryStream(12, savePic2DB(new File("src/res/images/MemberPictures/HarleyQuinn.jpg"))); //MemPicURL
+            pstmt.setBinaryStream(12, savePic2DB(new File("src/res/images/MemberPictures/HarleyQuinn.jpg"))); //memPic
             pstmt.execute();
 //Member11
             pstmt.setString(1, "Greg"); //FirstName
@@ -219,7 +219,7 @@ public class CreateMember {
             pstmt.setString(4, "Rathmines"); //City
             pstmt.setString(5, "Dublin"); //County
             pstmt.setInt(6, 31);//Day
-            pstmt.setString(7, "27-JUN-1994"); //Month
+            pstmt.setString(7, "JUN"); //Month
             pstmt.setInt(8, 31);//Year
             pstmt.setString(9, "gDavid@hotmail.com"); //Email
             pstmt.setInt(10, 11); //MemNumber
@@ -252,7 +252,7 @@ public class CreateMember {
             pstmt.setString(9, "MarieH@yahoo.co.uk"); //Email
             pstmt.setInt(10, 13); //MemNumber
             pstmt.setInt(11, 0); //MemPoints
-            pstmt.setBinaryStream(12, savePic2DB(new File("src/res/images/MemberPictures/Spiderman.jpg"))); //MemPicURL
+            pstmt.setBinaryStream(12, savePic2DB(new File("src/res/images/MemberPictures/Spiderman.jpg"))); //memPic
             pstmt.execute();
 //Member14
             pstmt.setString(1, "Brendan"); //FirstName
@@ -266,7 +266,7 @@ public class CreateMember {
             pstmt.setString(9, "BWilk142@gmail.com"); //Email
             pstmt.setInt(10, 14); //MemNumber
             pstmt.setInt(11, 0); //MemPoints
-            pstmt.setBinaryStream(12, savePic2DB(new File("src/res/images/MemberPictures/Thor.jpg"))); //MemPicURL
+            pstmt.setBinaryStream(12, savePic2DB(new File("src/res/images/MemberPictures/Thor.jpg"))); //memPic
             pstmt.execute();
 //Member15
             pstmt.setString(1, "Aoife "); //FirstName
@@ -280,7 +280,7 @@ public class CreateMember {
             pstmt.setString(9, "AReilly156@hotmail.com\n"); //Email
             pstmt.setInt(10, 15); //MemNumber
             pstmt.setInt(11, 0); //MemPoints
-            pstmt.setBinaryStream(12, savePic2DB(new File("src/res/images/MemberPictures/Wolverine.jpg"))); //MemPicURL
+            pstmt.setBinaryStream(12, savePic2DB(new File("src/res/images/MemberPictures/Wolverine.jpg"))); //memPic
             pstmt.execute();
 
         } catch (SQLException e) {

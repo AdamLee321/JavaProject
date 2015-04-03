@@ -18,7 +18,7 @@ public class Member {
     private String memberCounty;
     private int dobd;
     private String dobm;
-    private int doby;
+    private String doby;
     private String memberEmail;
     private String memberNumber;
     private int memberPoints;

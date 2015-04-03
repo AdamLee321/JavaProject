@@ -16,12 +16,12 @@ public class MemberRow {
     private String memberCounty;
     private int dobd;
     private String dobm;
-    private int doby;
+    private String doby;
     private String memberEmail;
     private String memberNumber;
     private int memberPoints;
 
-    public MemberRow(int memberId, String memberFName, String memberLName, String memberStreet, String memberCity, String memberCounty, int dobd, String dobm, int doby, String memberEmail, String memberNumber, int memberPoints) {
+    public MemberRow(int memberId, String memberFName, String memberLName, String memberStreet, String memberCity, String memberCounty, int dobd, String dobm, String doby, String memberEmail, String memberNumber, int memberPoints) {
         this.memberId = memberId;
         this.memberFName = memberFName;
         this.memberLName = memberLName;
@@ -44,7 +44,7 @@ public class MemberRow {
     public String getMemberCounty() { return memberCounty; }
     public int getDobd() { return dobd; }
     public String getDobm() { return dobm; }
-    public int getDoby() { return doby; }
+    public String getDoby() { return doby; }
     public String getMemberEmail() { return memberEmail; }
     public String getMemberNumber() { return memberNumber; }
     public int getMemberPoints() { return memberPoints; }

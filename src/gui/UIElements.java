@@ -51,7 +51,7 @@ public class UIElements {
     public final static String person64 = "src/res/images/UI Elements/person64.png";
 
     // 128 pixel icons
-    public     static String person128 = "src/res/images/UI Elements/person128.png";
+    public final static String person128 = "src/res/images/UI Elements/person128.png";
     public final static String product128 = "src/res/images/UI Elements/product128.png";
 
     // 150 pixel icons

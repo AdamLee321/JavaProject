@@ -18,7 +18,7 @@ public class Employee {
     private String empCounty;
     private int empDOBd;
     private String empDOBm;
-    private int empDOBy;
+    private String empDOBy;
     private String empEmail;
     private double salary;
     private String empUsername;
@@ -27,7 +27,7 @@ public class Employee {
 
 // overloaded constructor
     public Employee(int empId, int empDeptId, String empFName, String empLName, String position, String empStreet,
-                    String empCity, String empCounty, int empDOBd, String empDOBm, int empDOBy, String empEmail,
+                    String empCity, String empCounty, int empDOBd, String empDOBm, String empDOBy, String empEmail,
                     double salary, String empUsername, String empPassword, String empPic) {
         this.empId = empId;
         this.empDeptId = empDeptId;
@@ -89,7 +89,7 @@ public class Employee {
         return empDOBm;
     }
 
-    public int getEmpDOBy() {
+    public String getEmpDOBy() {
         return empDOBy;
     }
 
@@ -155,7 +155,7 @@ public class Employee {
         this.empDOBm = empDOBm;
     }
 
-    public void setEmpDOBy(int empDOBy) {
+    public void setEmpDOBy(String empDOBy) {
         this.empDOBy = empDOBy;
     }
 

@@ -93,8 +93,9 @@ public class MemberMain implements ActionListener {
 
 // CENTER PANEL - results table panel
         memTableModel = new MemberTableModel();
-        memTableModel.emptyArray();
+        displayMembers();
         memTable = new JTable(memTableModel);
+
         memTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -110,7 +111,8 @@ public class MemberMain implements ActionListener {
 //            tableWidth += memTableModel.columnModel.getColumn(i).getWidth();
 
 
-        memTableModel.getMainList();
+
+//        memTable.setFillsViewportHeight(true); - fill out the height of the table
 
         JScrollPane scroll = new JScrollPane(memTable);
         scroll.setBorder(new BevelBorder(BevelBorder.LOWERED));
@@ -118,7 +120,6 @@ public class MemberMain implements ActionListener {
 
         centerPanel = new JPanel(new GridLayout());
         centerPanel.add(scroll);
-
 
         memberMain.add(centerPanel, BorderLayout.CENTER);
 
@@ -141,14 +142,21 @@ public class MemberMain implements ActionListener {
         return memberMain;
     }
 
+// DISPLAY MEMBER LIST
+
+    public void displayMembers(){
+        memTableModel.emptyArray(); // clear object array (rows) so it does not keep duplicating entries to the table on every call
+        memTableModel.getMainList();
+    }
+
 // BUTTON ACTIONS
 
     public void actionPerformed(ActionEvent e){
         if (e.getSource().equals(addButton)){
-            MemberAddEdit mae = new MemberAddEdit(am,0);
+            MemberAddEdit mae = new MemberAddEdit(am,0,this);
         } // edit member
         else if (e.getSource().equals(editButton)){
-            MemberAddEdit mae = new MemberAddEdit(am,1);
+            MemberAddEdit mae = new MemberAddEdit(am,1,this);
         }
         else if (e.getSource().equals(viewOrdersButton)){
             OrderView ov = new OrderView();
