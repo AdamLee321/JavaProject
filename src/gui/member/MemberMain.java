@@ -126,8 +126,8 @@ public class MemberMain implements ActionListener, MouseListener {
 
     // bottom buttons
 
-        viewOrdersButton = new JButton("View Orders");
-        viewOrdersButton.setPreferredSize(new Dimension(150, 28));
+        viewOrdersButton = new JButton("View Purchase History");
+        viewOrdersButton.setPreferredSize(new Dimension(200, 28));
         viewOrdersButton.setIcon(new ImageIcon(UIElements.open16));
         viewOrdersButton.addActionListener(this);
         southPanel.add(viewOrdersButton);
@@ -198,7 +198,7 @@ public class MemberMain implements ActionListener, MouseListener {
             displayEdit();
         }
         else if (e.getSource().equals(viewOrdersButton)){
-            OrderHistory ov = new OrderHistory();
+            PurchaseHistory ov = new PurchaseHistory();
         }
         else if (e.getSource().equals(searchButton)){
             if (searchField.getText().equals(textFieldTip)){

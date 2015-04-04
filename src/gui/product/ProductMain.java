@@ -3,7 +3,7 @@ package gui.product;
 import gui.Griddy;
 import gui.UIElements;
 import gui.admin.AdminMain;
-import gui.member.ProductHistory;
+import gui.member.OrderHistory;
 
 import javax.swing.*;
 import java.awt.*;
@@ -121,8 +121,8 @@ public class ProductMain implements ActionListener, MouseListener {
         southPanel.setBackground(UIElements.getColour());
 
         // bottom buttons
-        viewButton = new JButton("View Product");
-        viewButton.setPreferredSize(new Dimension(150, 28));
+        viewButton = new JButton("View Order History");
+        viewButton.setPreferredSize(new Dimension(200, 28));
         viewButton.setIcon(new ImageIcon(UIElements.product16));
         southPanel.add(viewButton);
         viewButton.addActionListener(this);
@@ -179,7 +179,7 @@ public class ProductMain implements ActionListener, MouseListener {
             }
         }
         else if (e.getSource().equals(viewButton)){
-            ProductHistory pv = new ProductHistory();
+            OrderHistory pv = new OrderHistory();
         }
     }
 }

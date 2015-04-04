@@ -26,7 +26,7 @@ public class OrderHistory extends JDialog implements MouseListener, ActionListen
 
     public OrderHistory() {
 
-        this.setTitle("Order History");
+        this.setTitle("Product History");
         this.setLayout(new BorderLayout()); // tip: border(don't indicate position), grid or gridbag layouts will stretch a component to the whole screen
         this.setSize(650, 650);
         this.setResizable(false);
@@ -121,10 +121,10 @@ public class OrderHistory extends JDialog implements MouseListener, ActionListen
             if (FormValidator.isNumber(tfSearch.getText()) && FormValidator.isCorrectLength(tfSearch.getText(),6)){
                 // do action
             } else if (tfSearch.getText().equals(textFieldTip)){
-                JOptionPane.showMessageDialog(this,"Please Enter The Order Number","No Order Number",JOptionPane.WARNING_MESSAGE);
+//                JOptionPane.showMessageDialog(this,"Please Enter The Order Number","No Order Number",JOptionPane.WARNING_MESSAGE);
             }
             else{
-                JOptionPane.showMessageDialog(this,"Please Enter The Correct Order Number (ex: 101010)","Invalid Number",JOptionPane.WARNING_MESSAGE);
+//                JOptionPane.showMessageDialog(this,"Please Enter The Correct Order Number (ex: 101010)","Invalid Number",JOptionPane.WARNING_MESSAGE);
             }
         }
     }

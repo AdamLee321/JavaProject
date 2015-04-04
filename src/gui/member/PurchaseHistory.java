@@ -17,16 +17,16 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.EventListener;
 
-public class ProductHistory extends JDialog implements MouseListener, ActionListener {
+public class PurchaseHistory extends JDialog implements MouseListener, ActionListener {
 
     private JPanel pnlNorth, pnlCenter, pnlSouth;
     private JButton btnSearch, btnView, btnBack;
     private JTextField tfSearch;
     private String textFieldTip = "type in the order number...";
 
-    public ProductHistory() {
+    public PurchaseHistory() {
 
-        this.setTitle("Product History");
+        this.setTitle("Order History");
         this.setLayout(new BorderLayout()); // tip: border(don't indicate position), grid or gridbag layouts will stretch a component to the whole screen
         this.setSize(650, 650);
         this.setResizable(false);
@@ -121,10 +121,10 @@ public class ProductHistory extends JDialog implements MouseListener, ActionList
             if (FormValidator.isNumber(tfSearch.getText()) && FormValidator.isCorrectLength(tfSearch.getText(),6)){
                 // do action
             } else if (tfSearch.getText().equals(textFieldTip)){
-//                JOptionPane.showMessageDialog(this,"Please Enter The Order Number","No Order Number",JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this,"Please Enter The Order Number","No Order Number",JOptionPane.WARNING_MESSAGE);
             }
             else{
-//                JOptionPane.showMessageDialog(this,"Please Enter The Correct Order Number (ex: 101010)","Invalid Number",JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this,"Please Enter The Correct Order Number (ex: 101010)","Invalid Number",JOptionPane.WARNING_MESSAGE);
             }
         }
     }

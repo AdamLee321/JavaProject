@@ -133,8 +133,8 @@ public class EmployeeMain implements ActionListener, MouseListener {
 
     // bottom buttons
 
-        viewSalesButton = new JButton("View Sales");
-        viewSalesButton.setPreferredSize(new Dimension(150, 28));
+        viewSalesButton = new JButton("View Sales History");
+        viewSalesButton.setPreferredSize(new Dimension(200, 28));
         viewSalesButton.setIcon(new ImageIcon(UIElements.open16));
         viewSalesButton.addActionListener(this);
         southPanel.add(viewSalesButton);
