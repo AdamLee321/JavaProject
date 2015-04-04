@@ -49,7 +49,21 @@ public class MemberTableModel extends DefaultTableModel {
     public void getMainList() {
         try {
             MemberOperations mo = new MemberOperations();
-            ResultSet rset = mo.getAllMembersMinusBlobs();
+            ResultSet rset = mo.getAllMembers();
+            while (rset.next()) {
+                memberRows.add(new MemberRow(rset.getInt(1), rset.getString(2), rset.getString(3), rset.getString(4), rset.getString(5), rset.getString(6), rset.getString(7), rset.getString(8), rset.getString(9), rset.getString(10), rset.getString(11), rset.getInt(12)));
+            }
+            rset.close();
+            fireTableChanged(new TableModelEvent(this, -1, -1));
+        } catch (SQLException e){
+            JOptionPane.showMessageDialog(null,e);
+        }
+    }
+
+    public void searchMainList(String param) {
+        try {
+            MemberOperations mo = new MemberOperations();
+            ResultSet rset = mo.searchMember(param);
             while (rset.next()) {
                 memberRows.add(new MemberRow(rset.getInt(1), rset.getString(2), rset.getString(3), rset.getString(4), rset.getString(5), rset.getString(6), rset.getString(7), rset.getString(8), rset.getString(9), rset.getString(10), rset.getString(11), rset.getInt(12)));
             }

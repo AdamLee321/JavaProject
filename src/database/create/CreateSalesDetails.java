@@ -44,7 +44,7 @@ public class CreateSalesDetails {
                     "PRIMARY KEY(prodId, saleId)," +
                     "FOREIGN KEY(prodId)REFERENCES product(prodId)," +
                     "FOREIGN KEY (saleId) REFERENCES sales (saleId)," +
-                    "FOREIGN KEY (memberId) REFERENCES member (memberId))");
+                    "FOREIGN KEY (memberId) REFERENCES member (memberId)ON DELETE SET NULL)");
         } catch (SQLException e) {
             System.out.println(e);
         }

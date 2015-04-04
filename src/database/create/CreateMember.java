@@ -108,7 +108,7 @@ public class CreateMember {
             pstmt.setString(5, "Wicklow"); //County
             pstmt.setString(6, "3");//Day
             pstmt.setString(7, "Sep"); //Month
-            pstmt.setString(8, "2001");//Year
+            pstmt.setString(8, "1976");//Year
             pstmt.setString(9, "BettyT123@yahoo.co.uk"); //Email
             pstmt.setInt(10, 3); //MemNumber
             pstmt.setInt(11, 0); //MemPoints

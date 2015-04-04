@@ -33,6 +33,7 @@ public class MemberMain implements ActionListener, MouseListener {
     private String textFieldTip = "type your search query...";
     private AdminMain am;  // declare for usage with JDialogs as parent. No need to initialize
     private EmployeeOperations eo;
+    MemberOperations mo = new MemberOperations();
     private int row = 0;
   //  Employee e;
 
@@ -90,6 +91,7 @@ public class MemberMain implements ActionListener, MouseListener {
         searchButton = new JButton("Search");
         searchButton.setPreferredSize(new Dimension(105, 28));
         searchButton.setIcon(new ImageIcon(UIElements.search16));
+        searchButton.addActionListener(this);
         searchPanel.add(searchButton);
 
         // add all the above to northPanel
@@ -143,15 +145,14 @@ public class MemberMain implements ActionListener, MouseListener {
 
 //  METHODS
 
-    // display main members list
+    // display main members list (aka refresh the list)
     public void displayMembers(){
         memTableModel.emptyArray(); // clear object array (rows) so it does not keep duplicating entries to the table on every call
         memTableModel.getMainList();
     }
 
-    //
+    // open the edit window (created a method because it's used in two places - mouse and action listener
     public void displayEdit() {
-        MemberOperations mo = new MemberOperations();
         Member m = mo.getMemberById(row);
         if (row != 0) {
             new MemberAddEdit(am, 1, this, m);
@@ -204,17 +205,23 @@ public class MemberMain implements ActionListener, MouseListener {
         else if (e.getSource().equals(viewOrdersButton)){
             OrderView ov = new OrderView();
         }
-        else if (e.getSource().equals(editButton)){
-
+        else if (e.getSource().equals(searchButton)){
+            if (searchField.getText().equals(textFieldTip)){
+//                JOptionPane.showMessageDialog(null,"Please Type In The The Search Query","Nothing Typed",JOptionPane.ERROR_MESSAGE);
+                displayMembers();
+            } else {
+                memTableModel.emptyArray();
+                memTableModel.searchMainList(searchField.getText());
+            }
         }
         else if (e.getSource().equals(deleteButton)){
             Object[] options = {"Yes","No"};
-            int choice = JOptionPane.showOptionDialog(am, "Are You Sure?", "Delete Member",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE,null,options,null);
+            memTable.getValueAt(row,2);
+            int choice = JOptionPane.showOptionDialog(am, "Are You Sure You Want To Delete : " + memTable.getValueAt(row,1) + " " + memTable.getValueAt(row,2) + " ("+ memTable.getValueAt(row,0) +") ?", "Delete Member",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE,null,options,null);
             if (choice == 0){
-
+                mo.deleteMember(row);
                 JOptionPane.showMessageDialog(am,"Member Deleted");
-            } else {
-
+                displayMembers();
             }
         }
     }

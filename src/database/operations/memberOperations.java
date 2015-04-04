@@ -8,7 +8,6 @@ Group 17 (George - 03/04/2015)
 
 import database.ConnectionDB;
 import model.Member;
-
 import javax.swing.*;
 import java.io.*;
 import java.sql.*;
@@ -24,27 +23,39 @@ public class MemberOperations {
         this.conn = ConnectionDB.getConn();
     }
 
-    // Get all members in the databage
+    // Get all members in the table
     public ResultSet getAllMembers() {
         String query = "SELECT * FROM member";
         try {
             stmt = conn.createStatement();
             rset = stmt.executeQuery(query);
         } catch (SQLException e) {
-            System.out.println(JOptionPane.showConfirmDialog(null, "MemberOperations - getAllMembers"));
+            JOptionPane.showMessageDialog(null, "MemberOperations - getAllMembers");
         }
         return rset;
     }
 
-    // Get all members and all their details (except blobs) to display on the main members window
-    public ResultSet getAllMembersMinusBlobs() {
-        String query = "SELECT memberid, memberfname, memberlname, memberstreet, membercity, membercounty," +
-                " memberdobd, memberdobm, memberdoby, memberemail, membernumber, memberpoints FROM member";
+//    // Get all members and all their details (except blobs) to display on the main members window
+//    public ResultSet getAllMembersMinusBlobs() {
+//        String query = "SELECT memberid, memberfname, memberlname, memberstreet, membercity, membercounty," +
+//                " memberdobd, memberdobm, memberdoby, memberemail, membernumber, memberpoints FROM member";
+//        try {
+//            stmt = conn.createStatement();
+//            rset = stmt.executeQuery(query);
+//        } catch (SQLException e) {
+//            System.out.println(JOptionPane.showConfirmDialog(null, "MemberOperations - getAllMembersMinusBlobs"));
+//        }
+//        return rset;
+//    }
+
+    // search through members
+    public ResultSet searchMember(String param) {
+        String query = "SELECT * FROM member WHERE UPPER(memberfname) like UPPER('%" + param + "%') or UPPER(memberlname) like UPPER('%" + param + "%') or UPPER(memberstreet) like UPPER('%" + param + "%') or UPPER(membercity) like UPPER('%" + param + "%') or UPPER(membercounty) like UPPER('%" + param + "%') or UPPER(memberemail) like UPPER('%" + param + "%')";
         try {
             stmt = conn.createStatement();
             rset = stmt.executeQuery(query);
         } catch (SQLException e) {
-            System.out.println(JOptionPane.showConfirmDialog(null, "MemberOperations - getAllMembersMinusBlobs"));
+            JOptionPane.showMessageDialog(null, "MemberOperations - getAllMembers");
         }
         return rset;
     }
@@ -106,22 +117,33 @@ public class MemberOperations {
         }
     }
 
+    // Delete a member
+    public void deleteMember(int idIn) {
+        String query = "DELETE FROM member WHERE memberid =" + idIn;
+        try {
+            stmt = conn.createStatement();
+            rset = stmt.executeQuery(query);
+        } catch (SQLException q) {
+            JOptionPane.showMessageDialog(null, "MemberOperations - deleteMember");
+        }
+    }
 
     // return a member object based on id
-    public Member getMemberById(int idIn){
+    public Member getMemberById(int idIn) {
         Member m = null;
-        String query = "SELECT memberId, memberFName, memberLName, memberStreet, memberCity, memberCounty, memberDOBd, memberDOBm, memberDOBy, memberEmail, memberNumber, memberPoints, memPic FROM member WHERE memberId = '"+idIn+"'";
-        try{
+        String query = "SELECT memberId, memberFName, memberLName, memberStreet, memberCity, memberCounty, memberDOBd, memberDOBm, memberDOBy, memberEmail, memberNumber, memberPoints, memPic FROM member WHERE memberId = '" + idIn + "'";
+        try {
             stmt = conn.createStatement();
             rset = stmt.executeQuery(query);
             while (rset.next()) {
                 m = new Member(rset.getInt(1), rset.getString(2), rset.getString(3), rset.getString(4), rset.getString(5),
                         rset.getString(6), rset.getString(7), rset.getString(8), rset.getString(9), rset.getString(10),
-                        rset.getString(11),rset.getInt(12), rset.getBytes(13));
+                        rset.getString(11), rset.getInt(12), rset.getBytes(13));
             }
-        }catch(SQLException sq){
+        } catch (SQLException sq) {
             JOptionPane.showMessageDialog(null, "MemberOperations - memberById");
         }
         return m;
     }
 }
+

@@ -282,6 +282,7 @@ public class MemberAddEdit implements ActionListener {
              && !FormValidator.isNumber(memberCityField.getText())
              && FormValidator.isValidEmail(memberEmailField.getText())
              && FormValidator.isNumber(memberPointsField.getText())
+             && FormValidator.isNumber(memberNumberField.getText())
              && birthDayCBox.isEnabled()
              && birthMonthCBox.isEnabled()){
                 if(choice == 0) { // if all the above validation is OK, and the choice is 0, add a new member
