@@ -8,13 +8,8 @@ import gui.admin.AdminMain;
 import model.Member;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
-import javax.swing.border.EtchedBorder;
-import javax.swing.event.TableModelEvent;
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 
 /*
 IT Tallaght - 2015, S2
@@ -203,7 +198,7 @@ public class MemberMain implements ActionListener, MouseListener {
             displayEdit();
         }
         else if (e.getSource().equals(viewOrdersButton)){
-            OrderView ov = new OrderView();
+            OrderHistory ov = new OrderHistory();
         }
         else if (e.getSource().equals(searchButton)){
             if (searchField.getText().equals(textFieldTip)){

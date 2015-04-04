@@ -11,14 +11,13 @@ import gui.FormValidator;
 import gui.Griddy;
 import gui.StartWindow;
 import gui.UIElements;
-import gui.employee.SalesView;
+import gui.employee.SalesHistory;
 import gui.member.MemberAddEdit;
-import gui.terminal.TerminalMode;
+
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.geom.Arc2D;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -353,7 +352,7 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
             MemberAddEdit mae = new MemberAddEdit(this, 0,null,null);
         }
         else if (e.getSource().equals(btnReturnProduct)){
-            SalesView sv = new SalesView();
+            SalesHistory sv = new SalesHistory();
         }
         else if (e.getSource().equals(btnAdd)){
             if(!FormValidator.isNumber(tfProdNum.getText()) || !FormValidator.isNumber(tfQty.getText()))

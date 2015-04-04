@@ -21,7 +21,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
-import java.awt.Insets;
 import java.awt.event.*;
 import java.lang.String;
 
@@ -183,7 +182,7 @@ public class EmployeeMain implements ActionListener, MouseListener {
             EmployeeAddEdit eae = new EmployeeAddEdit(am,1);
         }
         else if (e.getSource().equals(viewSalesButton)){
-            SalesView sv = new SalesView();
+            SalesHistory sv = new SalesHistory();
         }
     }
 }

@@ -3,6 +3,7 @@ package gui.product;
 import gui.Griddy;
 import gui.UIElements;
 import gui.admin.AdminMain;
+import gui.member.ProductHistory;
 
 import javax.swing.*;
 import java.awt.*;
@@ -178,7 +179,7 @@ public class ProductMain implements ActionListener, MouseListener {
             }
         }
         else if (e.getSource().equals(viewButton)){
-            ProductView pv = new ProductView(am);
+            ProductHistory pv = new ProductHistory();
         }
     }
 }
