@@ -3,6 +3,8 @@ package database.operations;
 import database.ConnectionDB;
 import model.Product;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.sql.*;
 
 /**
@@ -21,13 +23,12 @@ public class ProductOperations {
     public ResultSet searchProducts(String keyword, String category){
         String sql = " ";
         if (category.equals("All")){
-            sql = "SELECT prodId, prodMake, prodModel, prodSalePrice, prodCostPrice, prodQTY, "+
-                  // Blob prodPic,\n" +
+            sql = "SELECT prodId, prodMake, prodModel, prodSalePrice, prodCostPrice, prodQTY, " +
                   "prodType, cpu, ram, OperatingSystem, storage, screen, prodDesc FROM PRODUCT WHERE prodDesc " +
                   "like '%" +keyword +"%'";
         }
         else {
-            sql = "SELECT prodId, prodMake, prodModel, prodSalePrice, prodCostPrice, prodQTY," +
+            sql = "SELECT prodId, prodMake, prodModel, prodSalePrice, prodCostPrice, prodQTY, prodPic," +
                   "prodType, cpu, ram, OperatingSystem, storage, screen, prodDesc FROM PRODUCT WHERE prodDesc " +
                   "like '%" + keyword + "%' AND prodType = '" + category +"'";
         }
@@ -43,12 +44,11 @@ public class ProductOperations {
     public ResultSet productCategory(String category){
         String sql = new String();
         if (category.equals("All")){
-            sql = "SELECT prodId, prodMake, prodModel, prodSalePrice, prodCostPrice, prodQTY, "+
-                    // Blob prodPic,\n" +
+            sql = "SELECT prodId, prodMake, prodModel, prodSalePrice, prodCostPrice, prodQTY, prodPic," +
                     "prodType, cpu, ram, OperatingSystem, storage, screen, prodDesc FROM PRODUCT";
         }
         else
-            sql = "SELECT prodId, prodMake, prodModel, prodSalePrice, prodCostPrice, prodQTY," +
+            sql = "SELECT prodId, prodMake, prodModel, prodSalePrice, prodCostPrice, prodQTY, prodPic," +
                 "prodType, cpu, ram, OperatingSystem, storage, screen, prodDesc FROM PRODUCT WHERE prodType =" +
                 "'" + category + "'";
         try{
@@ -68,11 +68,10 @@ public class ProductOperations {
             stmt = conn.createStatement();
             rset = stmt.executeQuery(sql);
             while (rset.next()) {
-                 p = new Product(rset.getInt(1), rset.getString(2), rset.getString(3), rset.getDouble(4), rset.getDouble(5),
-                        rset.getInt(6),
-                        rset.getBytes(7),
-                        rset.getString(8), rset.getString(9), rset.getString(10), rset.getString(11),
-                        rset.getString(12), rset.getString(13), rset.getString(14));
+                 p = new Product(rset.getInt(1), rset.getString(2), rset.getString(3), rset.getDouble(4),
+                         rset.getDouble(5), rset.getInt(6), rset.getBytes(7), rset.getString(8), rset.getString(9),
+                         rset.getString(10),rset.getString(11), rset.getString(12), rset.getString(13),
+                         rset.getString(14));
             }
         }catch(SQLException sqlE){
             System.out.println("Error in ResultSet to product Conversion");
@@ -119,5 +118,46 @@ public class ProductOperations {
         }
         System.out.println(x);
         return x;
+    }
+
+    public void insertProduct(String make, String model, double salePrice, double costPrice, int qty, String prodPic,
+                              String prodType, String cpu, String ram, String os, String storage, String screen,
+                              String description){
+
+        String sql = "INSERT INTO Product (prodId, prodMake, prodModel, prodSalePrice, prodCostPrice, " +
+                "prodQTY, prodPic, prodType, cpu, ram, operatingSystem, storage, screen, prodDesc) VALUES " +
+                "(productSeq.nextVal,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        try{
+            pstmt = conn.prepareStatement(sql);
+
+            pstmt.setString(1, make);//prodMake
+            pstmt.setString(2, model);//prodModel
+            pstmt.setDouble(3, salePrice);//prodSalePrice
+            pstmt.setDouble(4, costPrice);//prodCostPrice
+            pstmt.setInt(5, qty);//prodQTY
+            pstmt.setBinaryStream(6, savePic2DB(new File(prodPic)));//prodPic
+            pstmt.setString(7, prodType);//prodType
+            pstmt.setString(8, cpu);//cpu
+            pstmt.setString(9, ram);//ram
+            pstmt.setString(10, os);//operatingSystem
+            pstmt.setString(11, storage);//storage
+            pstmt.setString(12, screen);//screen
+            pstmt.setString(13, description);//prodDesc
+            pstmt.execute();
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    
+
+    public FileInputStream savePic2DB(File pic) {
+        FileInputStream in = null;
+        try {
+            in = new FileInputStream(pic);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return in;
     }
 }
