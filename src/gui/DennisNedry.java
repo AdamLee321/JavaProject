@@ -43,7 +43,7 @@ public class DennisNedry {
 
         // create audio file, pass it to clip player(sound)
         try{
-            audioFile = AudioSystem.getAudioInputStream(new File("src/res/images/UI Elements/magicword.wav").getAbsoluteFile());
+            audioFile = AudioSystem.getAudioInputStream(UIElements.pwAudio);
             sound = AudioSystem.getClip();
             sound.open(audioFile);
         } catch (Exception e){
@@ -51,7 +51,7 @@ public class DennisNedry {
         }
 
         // clicking the picture plays audio again (once again)
-        nedry = new JLabel(new ImageIcon("src/res/images/UI Elements/nedry.gif"));
+        nedry = new JLabel(new ImageIcon(UIElements.pwPicture));
         nedry.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
