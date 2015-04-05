@@ -15,6 +15,7 @@ import org.omg.CORBA.portable.ApplicationException;
 import sun.misc.IOUtils;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.Color;
 import java.awt.*;
@@ -63,14 +64,19 @@ public class UIElements {
     // UI colour
     public static Color color = new Color(98, 169, 221);
 
-    // Prompt Text
-//    public final static String m
-
     public static Color getColour() {
         return color;
+    }
+
+    public static void setColour(){
+        color = JColorChooser.showDialog(null, "Pick System Colour",new Color(98, 169, 221));
     }
 
     // Password verification sound + graphic
     public final static File pwAudio = new File("src/res/images/UI Elements/magicword.wav");
     public final static String pwPicture = "src/res/images/UI Elements/nedry.gif";
+
+    // Prompt Text - would be good idea to move text prompts here
+//    public final static String m
+
 }

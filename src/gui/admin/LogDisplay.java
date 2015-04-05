@@ -148,7 +148,7 @@ public class LogDisplay extends JDialog implements ActionListener {
                     File tempFile = new File(saver.getSelectedFile() + ""); // "cheat" to turn getSelectedFile into string
                     if (tempFile.exists()) { // if a user clicks an existing file by accident, "get" its name and warn that it'll be overwritten. tempFile above was created for this
                         choice = JOptionPane.showConfirmDialog(this, "File with such name already exists. Do you want to replace it?"); // pop this menu up and ask if the user wants to replace the file
-                        if (choice == JOptionPane.YES_OPTION) { // if they click yes, then overwrite the existing file
+                        if (choice == JOptionPane.YES_NO_OPTION) { // if they click yes, then overwrite the existing file
                             saveLogFile(); // call the method write the file. If "No" is clicked, close window
                         }
                     } else {

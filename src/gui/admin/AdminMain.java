@@ -23,7 +23,7 @@ public class AdminMain extends JFrame implements ActionListener {
     private JFrame am;
     private JMenuBar menu;
     private JMenu fileMenu, manageMenu, helpMenu;
-    private JMenuItem exitMI, logOutMI, empMI, memIM, prodMI, reportMI, optionsMI, helpMI, aboutMI;
+    private JMenuItem exitMI, logOutMI, empMI, memIM, prodMI, reportMI, optionsMI, helpMI, aboutMI, systemColourMI;
     private JLabel mainLogo;
     private JPanel outerNorth, outerSouth, outerCenter, innerNorth, innerCenter;
     private JButton empButton, memButton, prodButton, reportButton, optButton, logoutButton;
@@ -103,6 +103,14 @@ public class AdminMain extends JFrame implements ActionListener {
         manageMenu.add(reportMI);
 
         manageMenu.add(new JSeparator()); // or this way
+
+        systemColourMI = new JMenuItem("System Colour");
+        systemColourMI.setPreferredSize(new Dimension(100,25));
+        systemColourMI.setIcon(new ImageIcon(UIElements.info16));
+        systemColourMI.addActionListener(this);
+        manageMenu.add(systemColourMI);
+
+        manageMenu.addSeparator();
 
         optionsMI = new JMenuItem("Options");
         optionsMI.setPreferredSize(new Dimension(100,25));
@@ -223,6 +231,15 @@ public class AdminMain extends JFrame implements ActionListener {
         }
     }
 
+    public void changeSystemColor(){
+        int choice = JOptionPane.showOptionDialog(am, "Please note you will need to re-login , do you want to proceed?", "Change System Colour",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE,null,options,null);
+        if (choice == 0){
+            UIElements.setColour();
+            StartWindow sw = new StartWindow();
+            am.dispose();
+        }
+    }
+
 // BUTTON ACTIONS
 
     public void actionPerformed(ActionEvent e) {
@@ -265,11 +282,15 @@ public class AdminMain extends JFrame implements ActionListener {
         } // Report Menu Item and Button ACTIONS
         else if (e.getSource().equals(reportMI) || e.getSource().equals(reportButton)){
             //Soon sosoon = new Soon();
-             new ReportEmployee();
+//             new ReportEmployee();
         } // Options Menu Item and Button ACTIONS
         else if (e.getSource().equals(optionsMI) || e.getSource().equals(optButton)){
-            new AdminOptions(AdminMain.this);
-        } // Help Button
+            new AdminOptions(this); // can also write AdminMain.this
+        }
+        else if (e.getSource().equals(systemColourMI)){
+            changeSystemColor();
+        }
+         // Help Button
         else if (e.getSource().equals(helpMI)){
 
         } // About Button

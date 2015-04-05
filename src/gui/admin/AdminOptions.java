@@ -2,11 +2,13 @@ package gui.admin;
 
 import gui.FormValidator;
 import gui.Griddy;
+import gui.StartWindow;
 import gui.UIElements;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
+import javax.swing.colorchooser.AbstractColorChooserPanel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,7 +26,10 @@ public class AdminOptions implements ActionListener {
     private JTextField nameField, surnameField, contactField, emailField;
     private JPasswordField newPassField, repeatPassField, currPassField;
     private JButton cancelButton, okButton, logButton;
+    private JColorChooser picasso;
     private JPanel fieldsPanel, buttonsPanel, buttonsPanelTop;
+    private Color color = (Color.BLACK);
+    private JFrame am;
 
     public AdminOptions(JFrame parent) {
 
@@ -112,6 +117,7 @@ public class AdminOptions implements ActionListener {
 
         adminOps.add(buttonsPanel, BorderLayout.SOUTH);
 
+        this.am = parent;
         // turns the lights on
 
         adminOps.setVisible(true);
@@ -141,7 +147,9 @@ public class AdminOptions implements ActionListener {
             }
         }
         else if (e.getSource().equals(logButton)){
-            new LogDisplay(adminOps);
+//            new LogDisplay(adminOps);
+            am = new JFrame();
+
         }
     }
 }
