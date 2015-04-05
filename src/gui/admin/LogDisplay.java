@@ -120,11 +120,17 @@ public class LogDisplay extends JDialog implements ActionListener {
     }
 
     public void cleanLog() {
-        try {
-            FileWriter logCleaner = new FileWriter(logFile);
-            logCleaner.write("");
-        } catch (IOException o) {
-            JOptionPane.showMessageDialog(null, "Problem clearing log");
+        if (FormValidator.isEmptyField(taMain.getText())) {
+            JOptionPane.showMessageDialog(null, "Log file is empty. Nothing to clear");
+        } else {
+            try {
+                FileWriter logCleaner = new FileWriter(logFile);
+                logCleaner.write(""); // clears the log file
+                taMain.setText(""); // clears the text area
+                JOptionPane.showMessageDialog(null, "Log file cleared");
+            } catch (IOException o) {
+                JOptionPane.showMessageDialog(null, "Problem clearing log");
+            }
         }
     }
 
@@ -134,9 +140,7 @@ public class LogDisplay extends JDialog implements ActionListener {
         if (e.getSource().equals(btnBack)) {
             log.dispose();
         } else if (e.getSource().equals(btnClear)) {
-            taMain.setText("");
             cleanLog();
-            JOptionPane.showMessageDialog(null, "Log file cleared");
         } else if (e.getSource().equals(btnSave)) {
             if (!FormValidator.isEmptyField(taMain.getText())) {
                 saver = new JFileChooser();

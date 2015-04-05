@@ -147,9 +147,7 @@ public class AdminOptions implements ActionListener {
             }
         }
         else if (e.getSource().equals(logButton)){
-//            new LogDisplay(adminOps);
-            am = new JFrame();
-
+            new LogDisplay(adminOps);
         }
     }
 }

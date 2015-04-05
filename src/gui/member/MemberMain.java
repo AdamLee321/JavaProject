@@ -17,7 +17,7 @@ Computing - Year 2, Project
 Group 17 (George - 07/03/2015)
 */
 
-public class MemberMain implements ActionListener, MouseListener {
+public class MemberMain implements ActionListener, MouseListener, KeyListener {
 
     private JPanel memberMain;
     private JButton addButton, editButton, deleteButton, searchButton, viewOrdersButton;
@@ -81,6 +81,7 @@ public class MemberMain implements ActionListener, MouseListener {
         searchField.setText(textFieldTip); // set initial text field search
         searchField.setForeground(Color.GRAY); // set initial colour to gray
         searchField.addMouseListener(this);
+        searchField.addKeyListener(this);
         searchPanel.add(searchField);
 
         searchButton = new JButton("Search");
@@ -165,8 +166,19 @@ public class MemberMain implements ActionListener, MouseListener {
         }
     }
 
+    public void searchMembers(){
+        if (searchField.getText().equals(textFieldTip)){
+//                JOptionPane.showMessageDialog(null,"Please Type In The The Search Query","Nothing Typed",JOptionPane.ERROR_MESSAGE);
+            displayMembers();
+        } else {
+            memTableModel.emptyArray();
+            memTableModel.searchMainList(searchField.getText());
+        }
+    }
+
 // BUTTON ACTIONS
 
+    // MOUSE
     // have to implement these methods for MouseListener
     public void mouseExited(MouseEvent e){}
     public void mouseReleased(MouseEvent e){}
@@ -199,6 +211,22 @@ public class MemberMain implements ActionListener, MouseListener {
         }
     }
 
+    // KEYBOARD
+
+    // have to implement these methods for KeyboardListener
+    public void keyTyped(KeyEvent e){}
+    public void keyPressed(KeyEvent e){}
+    
+    public void keyReleased(KeyEvent e){
+        if (e.getSource().equals(searchField)){
+            int key = e.getKeyCode();
+            if (key == KeyEvent.VK_ENTER) {
+                searchMembers();
+            }
+        }
+    }
+
+    // ACTIONEVENT
     public void actionPerformed(ActionEvent e){
         if (e.getSource().equals(addButton)){
             MemberAddEdit mae = new MemberAddEdit(am,0,this,null);
@@ -210,13 +238,7 @@ public class MemberMain implements ActionListener, MouseListener {
             PurchaseHistory ov = new PurchaseHistory();
         }
         else if (e.getSource().equals(searchButton)){
-            if (searchField.getText().equals(textFieldTip)){
-//                JOptionPane.showMessageDialog(null,"Please Type In The The Search Query","Nothing Typed",JOptionPane.ERROR_MESSAGE);
-                displayMembers();
-            } else {
-                memTableModel.emptyArray();
-                memTableModel.searchMainList(searchField.getText());
-            }
+            searchMembers();
         }
         else if (e.getSource().equals(deleteButton)){
             Object[] options = {"Yes","No"};

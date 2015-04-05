@@ -33,6 +33,8 @@ public class MemberAddEdit implements ActionListener {
     private MemberMain mm;
     private Member m;
     private int choice = 0;
+    private int dayBefore;
+
 
     public MemberAddEdit(JFrame parent, int choice, MemberMain mm, Member m){
 
@@ -241,13 +243,17 @@ public class MemberAddEdit implements ActionListener {
 
     // BUTTION ACTIONS
 
-    public void actionPerformed(ActionEvent e){
+    public void actionPerformed(ActionEvent e){ // the two methods below set the correct day, based on year and month, both month and year comboboxes set correct days. "dayBefore" is to remember what day was set before and set it again, otherwise it resets to 1 ... ex, Person A, birthday 4th, this way when selecting month,year, it stays at 4th, without beforeDay, day combobox would reset to 1
         if (e.getSource() == birthYearCBox){
+            dayBefore = birthDayCBox.getSelectedIndex();
             birthDayCBox.setModel(new DefaultComboBoxModel<String>(dg.getMonthDays(birthMonthCBox.getSelectedIndex() + 1, Integer.parseInt(birthYearCBox.getSelectedItem().toString()))));
+            birthDayCBox.setSelectedIndex(dayBefore);
             birthMonthCBox.setEnabled(true);
         }
         else if(e.getSource() == birthMonthCBox){
+            dayBefore = birthDayCBox.getSelectedIndex();
             birthDayCBox.setModel(new DefaultComboBoxModel<String>(dg.getMonthDays(birthMonthCBox.getSelectedIndex() + 1, Integer.parseInt(birthYearCBox.getSelectedItem().toString()))));
+            birthDayCBox.setSelectedIndex(dayBefore);
             birthDayCBox.setEnabled(true);
         }
         else if(e.getSource() == cancelButton){
