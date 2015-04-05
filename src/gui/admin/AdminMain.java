@@ -29,7 +29,6 @@ public class AdminMain extends JFrame implements ActionListener {
     private JButton empButton, memButton, prodButton, reportButton, optButton, logoutButton;
     private Object[] options = {"Yes","No"}; // choices for closing dialog - these are buttons that appear on the dialog
 
-
     private boolean displayarea = true;
     private EmployeeMain em;
 
@@ -95,7 +94,7 @@ public class AdminMain extends JFrame implements ActionListener {
         prodMI.addActionListener(this);
         manageMenu.add(prodMI);
 
-        manageMenu.add(new JSeparator());
+        manageMenu.addSeparator(); // can do a separator this way
 
         reportMI = new JMenuItem("Report");
         reportMI.setPreferredSize(new Dimension(0,25));
@@ -103,7 +102,7 @@ public class AdminMain extends JFrame implements ActionListener {
         reportMI.addActionListener(this);
         manageMenu.add(reportMI);
 
-        manageMenu.add(new JSeparator());
+        manageMenu.add(new JSeparator()); // or this way
 
         optionsMI = new JMenuItem("Options");
         optionsMI.setPreferredSize(new Dimension(100,25));
@@ -269,7 +268,7 @@ public class AdminMain extends JFrame implements ActionListener {
              new ReportEmployee();
         } // Options Menu Item and Button ACTIONS
         else if (e.getSource().equals(optionsMI) || e.getSource().equals(optButton)){
-            AdminOptions ao = new AdminOptions(AdminMain.this);
+            new AdminOptions(AdminMain.this);
         } // Help Button
         else if (e.getSource().equals(helpMI)){
 

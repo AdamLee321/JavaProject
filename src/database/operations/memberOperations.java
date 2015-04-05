@@ -49,8 +49,8 @@ public class MemberOperations {
 //    }
 
     // search through members
-    public ResultSet searchMember(String param) {
-        String query = "SELECT * FROM member WHERE UPPER(memberfname) like UPPER('%" + param + "%') or UPPER(memberlname) like UPPER('%" + param + "%') or UPPER(memberstreet) like UPPER('%" + param + "%') or UPPER(membercity) like UPPER('%" + param + "%') or UPPER(membercounty) like UPPER('%" + param + "%') or UPPER(memberemail) like UPPER('%" + param + "%')";
+    public ResultSet searchMember(String keyword) {
+        String query = "SELECT * FROM member WHERE UPPER(memberfname) like UPPER('%" + keyword + "%') or UPPER(memberlname) like UPPER('%" + keyword + "%') or UPPER(memberstreet) like UPPER('%" + keyword + "%') or UPPER(membercity) like UPPER('%" + keyword + "%') or UPPER(membercounty) like UPPER('%" + keyword + "%') or UPPER(memberemail) like UPPER('%" + keyword + "%')";
         try {
             stmt = conn.createStatement();
             rset = stmt.executeQuery(query);

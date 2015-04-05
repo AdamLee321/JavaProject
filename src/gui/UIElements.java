@@ -63,6 +63,9 @@ public class UIElements {
     // UI colour
     public static Color color = new Color(98, 169, 221);
 
+    // Prompt Text
+//    public final static String m
+
     public static Color getColour() {
         return color;
     }
@@ -70,5 +73,4 @@ public class UIElements {
     // Password verification sound + graphic
     public final static File pwAudio = new File("src/res/images/UI Elements/magicword.wav");
     public final static String pwPicture = "src/res/images/UI Elements/nedry.gif";
-
 }

@@ -98,16 +98,17 @@ public class MemberMain implements ActionListener, MouseListener {
 // CENTER PANEL - results table panel
 
         memTableModel = new MemberTableModel();
-        displayMembers();
         memTable = new JTable(memTableModel);
+        displayMembers(); // this must come AFTER the above two lines
         memTable.setFillsViewportHeight(true); // fill out the height of the table
         memTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // don't allow multirow selection
-        memTable.addMouseListener(this);
 
-//        int tableWidth = 50;
+        //        int tableWidth = 50;
 //        int columnCount = memTableModel.columnModel.getColumnCount();
 //        for (int i = 0; i < columnCount; i++)
 //            tableWidth += memTableModel.columnModel.getColumn(i).getWidth();
+        memTable.addMouseListener(this);
+
 
 
         JScrollPane scroll = new JScrollPane(memTable);
@@ -142,8 +143,16 @@ public class MemberMain implements ActionListener, MouseListener {
 
     // display main members list (aka refresh the list)
     public void displayMembers(){
+
         memTableModel.emptyArray(); // clear object array (rows) so it does not keep duplicating entries to the table on every call
         memTableModel.getMainList();
+        memTable.getColumnModel().getColumn(0).setPreferredWidth(10); // id // set width on columns of the JTable
+        memTable.getColumnModel().getColumn(1).setPreferredWidth(50); // name // these widths have to be here because on every refresh the width resets to default
+        memTable.getColumnModel().getColumn(2).setPreferredWidth(50); // surname
+        memTable.getColumnModel().getColumn(3).setPreferredWidth(150); // street
+        memTable.getColumnModel().getColumn(4).setPreferredWidth(50); // city
+        memTable.getColumnModel().getColumn(5).setPreferredWidth(50); // county
+        memTable.getColumnModel().getColumn(6).setPreferredWidth(150); // email
     }
 
     // open the edit window (created a method because it's used in two places - mouse and action listener

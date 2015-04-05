@@ -12,7 +12,6 @@ public class SaleRow {
   private String prodMake;
   private String prodModel;
   private int qty;
-
   private double price;
 
   public SaleRow(){

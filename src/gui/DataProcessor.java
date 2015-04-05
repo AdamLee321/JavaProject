@@ -52,4 +52,5 @@ public class DataProcessor {
 
     // Image Filter - Used with JFileChooser to filter out all the non image files from the view
     public final static FileNameExtensionFilter imageFilter = new FileNameExtensionFilter("Image files", ImageIO.getReaderFileSuffixes());
+    public final static FileNameExtensionFilter logFilter = new FileNameExtensionFilter("Log files", "log");
 }

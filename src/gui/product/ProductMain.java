@@ -1,13 +1,19 @@
 package gui.product;
 
+import database.operations.ProductOperations;
 import gui.Griddy;
 import gui.UIElements;
 import gui.admin.AdminMain;
+import gui.member.MemberAddEdit;
 import gui.member.OrderHistory;
+import model.Member;
+import model.Product;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.SQLException;
 
 /*
 IT Tallaght - 2015, S2
@@ -31,17 +37,17 @@ public class ProductMain implements ActionListener, MouseListener {
 
     private AdminMain am;
 
+    private JTable products;
+    private ProductTableModel productTableModel;
+    ProductOperations po;
+    private int selectedRow = 0;
+
     public JPanel getProductMain(){
-
-    // setup the frame
-
+// setup the frame
         prodMain = new JPanel(new BorderLayout());
-        //prodMain.getContentPane().setBackground(new Color(98, 169, 221));
-
 // north panel
-
         northPanel = new JPanel(new GridBagLayout());
-        //northPanel.setBackground(new Color(98, 169, 221));
+//northPanel.setBackground(new Color(98, 169, 221));
 
     // manage products panel
 
@@ -113,8 +119,27 @@ public class ProductMain implements ActionListener, MouseListener {
         prodMain.add(northPanel, BorderLayout.NORTH);
 
     // results panel
-/////////////////////////////////////////////////////////////////////////////////////
+        productTableModel = new ProductTableModel();
+        products = new JTable(productTableModel);
+        products.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        products.addMouseListener(this);
+        po = new ProductOperations();
 
+        // Set the table width, depending upon the width of
+        // the columns
+        int tableWidth = 0;
+        int columnCount = productTableModel.columnModel.getColumnCount();
+        for (int i = 0; i < columnCount; i++)
+            tableWidth += productTableModel.columnModel.getColumn(i).getWidth();
+
+        JScrollPane scrollPane = new JScrollPane(products);
+        scrollPane.setBorder(new BevelBorder(BevelBorder.LOWERED));
+        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+        //productTableModel.getAllProductsTable();
+        refreshList();
+
+        prodMain.add(scrollPane, BorderLayout.CENTER);
 // south panel
 
         southPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -129,8 +154,22 @@ public class ProductMain implements ActionListener, MouseListener {
 
         prodMain.add(southPanel, BorderLayout.SOUTH);
 
-        // turns the lights on
         return prodMain;
+    }
+
+    public void refreshList(){
+        productTableModel.emptyArray();
+        productTableModel.getAllProductsTable();
+    }
+
+    // open the edit window (created a method because it's used in two places - mouse and action listener
+    public void displayEdit() {
+        Product p = po.productByIDO(selectedRow);
+        if (selectedRow != 0) {
+            new ProductAddEdit(am, 1, this, p);
+        } else {
+            JOptionPane.showMessageDialog(null, "Please Select The Product First", "Product Not Selected", JOptionPane.WARNING_MESSAGE);
+        }
     }
 
 // BUTTON ACTIONS
@@ -159,14 +198,20 @@ public class ProductMain implements ActionListener, MouseListener {
                 }
             });
         }
+        else if(e.getSource().equals(products)){
+            if (e.getClickCount() == 2) {
+                displayEdit();
+            }
+            selectedRow = (Integer) products.getValueAt(products.getSelectedRow(), 0);
+        }
     }
 
     public void actionPerformed(ActionEvent e){
         if (e.getSource().equals(addButton)){
-            ProductAddEdit pae = new ProductAddEdit(am,0);
+            new ProductAddEdit(am , 0, this, null);
         } // edit product
         else if (e.getSource().equals(editButton)){
-            ProductAddEdit pae = new ProductAddEdit(am,1);
+            displayEdit();
         }
         else if (e.getSource().equals(deleteButton)){
             Object[] options = {"Yes","No"};

@@ -6,7 +6,6 @@ package gui.terminal;
  */
 
 import database.operations.ProductOperations;
-import gui.sale.SaleRow;
 
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableColumnModel;
@@ -45,7 +44,7 @@ public class ProductTableModel extends DefaultTableModel {
         ResultSet rset = po.productCategory(category);
         emptyArray();
         while (rset.next()) {
-            productRows.add(new ProductRow(rset.getInt(1), rset.getString(2), rset.getString(3), rset.getDouble(4), rset.getInt(6)));
+            productRows.add(new TerminalProductRow(rset.getInt(1), rset.getString(2), rset.getString(3), rset.getDouble(4), rset.getInt(6)));
         }
         rset.close();
         fireTableChanged(new TableModelEvent(this, -1, -1));
@@ -56,7 +55,7 @@ public class ProductTableModel extends DefaultTableModel {
         ResultSet rset = po.searchProducts(keyword, category);
         emptyArray();
         while (rset.next()) {
-            productRows.add(new ProductRow(rset.getInt(1), rset.getString(2), rset.getString(3), rset.getDouble(4), rset.getInt(6)));
+            productRows.add(new TerminalProductRow(rset.getInt(1), rset.getString(2), rset.getString(3), rset.getDouble(4), rset.getInt(6)));
         }
         rset.close();
         fireTableChanged(new TableModelEvent(this, -1, -1));
@@ -64,7 +63,7 @@ public class ProductTableModel extends DefaultTableModel {
 
     //a method just to pass in a column number and row and return that cell value
     public Object getValueAt(int rowNum, int colNum) {
-        ProductRow row = (ProductRow)productRows.get(rowNum);//casting a product from the object arraylist to a row type
+        TerminalProductRow row = (TerminalProductRow)productRows.get(rowNum);//casting a product from the object arraylist to a row type
         switch (colNum) {
             case id:
                 return row.getProductID();
