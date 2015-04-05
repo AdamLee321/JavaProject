@@ -1,5 +1,6 @@
 package gui.terminal;
 
+import gui.DataProcessor;
 import gui.Griddy;
 import gui.UIElements;
 import model.Product;
@@ -7,6 +8,7 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.io.IOException;
 
 /*
  * David Lawlor X00107563
@@ -17,6 +19,7 @@ public class ProductView {
 
 
     private JTextArea descriptionTF;
+    JLabel productPicture;
 
     public JPanel getProductView(Product p){
 
@@ -60,24 +63,37 @@ public class ProductView {
         setTextBoxDefaults(screenTf);
         screenTf.setText(p.getScreen());
 
-        JScrollPane scrollPane = new JScrollPane(descriptionTF);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
         LineBorder lineBorder = new LineBorder(Color.BLACK);
 
         descriptionTF  = new JTextArea();
         descriptionTF.setLineWrap(true);
-        descriptionTF.setSize(600, 100);
+        descriptionTF.setWrapStyleWord(true);
+        descriptionTF.setSize(580, 60);//Size(580, 60);
         descriptionTF.setText(p.getProdDesc());
         descriptionTF.setEditable(false);
 
+        JScrollPane scrollPane = new JScrollPane(descriptionTF);
+        scrollPane.setPreferredSize(new Dimension(600,65));
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
         TitledBorder descriptionTitleBorder = new TitledBorder("Description");
         descriptionTitleBorder.setBorder(lineBorder);
-        JPanel description = new JPanel(new FlowLayout());
+        JPanel description = new JPanel(new GridLayout());
         description.setBorder(descriptionTitleBorder);
-        description.add(descriptionTF);
+        description.add(scrollPane);
 
-        JLabel productPicture = new JLabel(new ImageIcon(p.getProdPic()));
+
+        try {
+            productPicture = new JLabel(new ImageIcon(DataProcessor.fitImageByte(p.getProdPic(), 280, 280)));
+        }catch (IOException ioe){
+
+        }
+        JPanel picturePanel = new JPanel(new GridLayout());
+        TitledBorder titledBorder = new TitledBorder(p.getProdMake() + " " + p.getProdModel());
+        titledBorder.setBorder(lineBorder);
+        picturePanel.setBorder(titledBorder);
+        picturePanel.add(productPicture, BorderLayout.CENTER);
 
 
         TitledBorder detailsTitleBorder = new TitledBorder("Details");
@@ -123,7 +139,7 @@ public class ProductView {
         JPanel productDetails = new JPanel(new GridBagLayout());
         productDetails.setBorder(BorderFactory.createLineBorder(UIElements.getColour(), 20));
 
-        productDetails.add(productPicture, Griddy.getConstraints(0,0,1,4,10,10,0,0,0,0,0,0,0,GridBagConstraints.WEST));
+        productDetails.add(picturePanel, Griddy.getConstraints(0,0,1,4,10,10,0,0,0,0,0,0,0,GridBagConstraints.WEST));
         productDetails.add(details, Griddy.getConstraints(1, 0, 1, 1, 10, 10, 0, 0, 0, 0, 0, 0, 0, GridBagConstraints.CENTER));
         productDetails.add(specifications, Griddy.getConstraints(2,0,1,1,10,10,0,0,0,0,0,0,0,GridBagConstraints.EAST));
         productDetails.add(description, Griddy.getConstraints(1,1,2,1,10,10,0,0,0,0,0,0,0,GridBagConstraints.CENTER));

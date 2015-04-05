@@ -106,6 +106,7 @@ public class ProductOperations {
         System.out.println(quantityInStock);
         return quantityInStock;
     }
+
     public boolean checkProduct(int id){
         boolean x = false;
         String sql = "SELECT prodQty FROM product WHERE prodId = '"+id+"'";
@@ -120,7 +121,7 @@ public class ProductOperations {
         return x;
     }
 
-    public void insertProduct(String make, String model, double salePrice, double costPrice, int qty, String prodPic,
+    public void insertProduct(String make, String model, double salePrice, double costPrice, int qty, File prodPic,
                               String prodType, String cpu, String ram, String os, String storage, String screen,
                               String description){
 
@@ -135,7 +136,7 @@ public class ProductOperations {
             pstmt.setDouble(3, salePrice);//prodSalePrice
             pstmt.setDouble(4, costPrice);//prodCostPrice
             pstmt.setInt(5, qty);//prodQTY
-            pstmt.setBinaryStream(6, savePic2DB(new File(prodPic)));//prodPic
+            pstmt.setBinaryStream(6, savePic2DB(prodPic));//prodPic
             pstmt.setString(7, prodType);//prodType
             pstmt.setString(8, cpu);//cpu
             pstmt.setString(9, ram);//ram
@@ -147,6 +148,63 @@ public class ProductOperations {
         }catch(SQLException e){
             System.out.println(e.getMessage());
         }
+    }
+
+    public ResultSet getAllProducts(){
+        String sql ="SELECT prodId, prodMake, prodModel, prodSalePrice, prodCostPrice, prodQTY, " +
+                "prodType, cpu, ram, OperatingSystem, storage, screen, prodDesc FROM PRODUCT";
+        try{
+            stmt = conn.createStatement();
+            rset = stmt.executeQuery(sql);
+        }catch (SQLException sqlE){
+            System.out.println(sqlE.getMessage());
+        }
+        return rset;
+    }
+
+    public void updateProduct(String make, String model, double salePrice, double costPrice, int qty, File prodPic,
+                              String prodType, String cpu, String ram, String os, String storage, String screen,
+                              String description, int id){
+        String sql = "Update Product SET prodMake = ?, prodModel = ?, prodSalePrice = ?, prodCostPrice = ?," +
+                "prodQTY  = ?, prodPic = ?, prodType = ?, cpu = ?, ram = ?, operatingSystem = ?, storage = ?, screen = ?, " +
+                "prodDesc = ? WHERE prodId = ?";
+        try{
+            pstmt = conn.prepareStatement(sql);
+
+            pstmt.setString(1, make);//prodMake
+            pstmt.setString(2, model);//prodModel
+            pstmt.setDouble(3, salePrice);//prodSalePrice
+            pstmt.setDouble(4, costPrice);//prodCostPrice
+            pstmt.setInt(5, qty);//prodQTY
+            pstmt.setBinaryStream(6, savePic2DB(prodPic));//prodPic
+            pstmt.setString(7, prodType);//prodType
+            pstmt.setString(8, cpu);//cpu
+            pstmt.setString(9, ram);//ram
+            pstmt.setString(10, os);//operatingSystem
+            pstmt.setString(11, storage);//storage
+            pstmt.setString(12, screen);//screen
+            pstmt.setString(13, description);//prodDesc
+            pstmt.setInt(14, id);
+            pstmt.execute();
+            System.out.println("Successful update");
+        }catch(SQLException e){
+            System.out.println("fuck");
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public int getNextID(){
+        int max = 0;
+        try{
+            stmt = conn.createStatement();
+            rset = stmt.executeQuery("SELECT MAX(prodId) FROM product");
+            while (rset.next()){
+                max = rset.getInt(1);
+            }
+        }catch (SQLException sqlE){
+            System.out.println("Error getting the maximum id");
+        }
+        return (max +1);
     }
 
     

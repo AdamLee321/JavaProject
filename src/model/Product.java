@@ -4,6 +4,7 @@ package model;
 IT Tallaght - 2015, S2
 Computing - Year 2, Project
 Group 17
+David
 */
 
 import oracle.sql.BLOB;
@@ -127,6 +128,11 @@ public class Product {
   // getter for screen type
   public String getScreen() {
     return screen;
+  }
+
+  // getter for product Type
+  public String getProdType() {
+    return prodType;
   }
 
   //Setters for all attributes

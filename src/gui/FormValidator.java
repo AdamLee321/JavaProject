@@ -39,6 +39,15 @@ public class FormValidator {
         return true;
     }
 
+    public static boolean isDouble(String string){
+        try{
+            Double.parseDouble(string);
+        }catch (NumberFormatException e){
+            return false;
+        }
+        return true;
+    }
+
     public static boolean isCorrectLength(String string, int length){
         return (string.length() == length);
     }
