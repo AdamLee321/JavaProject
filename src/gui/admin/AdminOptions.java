@@ -2,10 +2,13 @@ package gui.admin;
 
 import gui.FormValidator;
 import gui.Griddy;
+import gui.StartWindow;
 import gui.UIElements;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.border.EtchedBorder;
+import javax.swing.colorchooser.AbstractColorChooserPanel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,8 +25,11 @@ public class AdminOptions implements ActionListener {
     private JLabel nameLabel, surnameLabel, contactLabel, emailLabel, newPassLabel, repeatPassLabel, currPassLabel;
     private JTextField nameField, surnameField, contactField, emailField;
     private JPasswordField newPassField, repeatPassField, currPassField;
-    private JButton cancelButton, okButton;
-    private JPanel fieldsPanel, buttonsPanel;
+    private JButton cancelButton, okButton, logButton;
+    private JColorChooser picasso;
+    private JPanel fieldsPanel, buttonsPanel, buttonsPanelTop;
+    private Color color = (Color.BLACK);
+    private JFrame am;
 
     public AdminOptions(JFrame parent) {
 
@@ -82,6 +88,14 @@ public class AdminOptions implements ActionListener {
         repeatPassField = new JPasswordField(15);
         fieldsPanel.add(repeatPassField, Griddy.getConstraints(1, 5, 1, 1, 0, 0, 0, 0, 5, 15, 15, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER));
 
+        // separator
+        fieldsPanel.add(new JSeparator(), Griddy.getConstraints(0,6,2,1,0,0,0,0,5,15,15,5,GridBagConstraints.HORIZONTAL,GridBagConstraints.CENTER));
+
+        // log button
+        logButton = new JButton("View System Log");
+        logButton.addActionListener(this);
+        fieldsPanel.add(logButton, Griddy.getConstraints(0,7,2,1,0,0,0,0,5,15,15,5,GridBagConstraints.HORIZONTAL,GridBagConstraints.CENTER));
+
         adminOps.add(fieldsPanel, BorderLayout.CENTER);
 
         // buttons panel - flow layout - south on JDialog
@@ -103,6 +117,7 @@ public class AdminOptions implements ActionListener {
 
         adminOps.add(buttonsPanel, BorderLayout.SOUTH);
 
+        this.am = parent;
         // turns the lights on
 
         adminOps.setVisible(true);
@@ -130,6 +145,9 @@ public class AdminOptions implements ActionListener {
                     JOptionPane.showMessageDialog(null, "Please Enter A Valid Email Address", "Invalid Email", JOptionPane.WARNING_MESSAGE);
                 }
             }
+        }
+        else if (e.getSource().equals(logButton)){
+            new LogDisplay(adminOps);
         }
     }
 }

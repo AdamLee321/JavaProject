@@ -33,6 +33,8 @@ public class MemberAddEdit implements ActionListener {
     private MemberMain mm;
     private Member m;
     private int choice = 0;
+    private int dayBefore;
+
 
     public MemberAddEdit(JFrame parent, int choice, MemberMain mm, Member m){
 
@@ -174,11 +176,11 @@ public class MemberAddEdit implements ActionListener {
         cancelButton.addActionListener(this);
         buttonsPanel.add(cancelButton);
 
-        previewButton = new JButton("Preview");
-        previewButton.setPreferredSize(new Dimension(100, 26));
-        previewButton.setIcon(new ImageIcon(UIElements.person16));
-        previewButton.addActionListener(this);
-        buttonsPanel.add(previewButton);
+//        previewButton = new JButton("Preview");
+//        previewButton.setPreferredSize(new Dimension(100, 26));
+//        previewButton.setIcon(new ImageIcon(UIElements.person16));
+//        previewButton.addActionListener(this);
+//        buttonsPanel.add(previewButton);
 
         okButton = new JButton("OK");
         okButton.setPreferredSize(new Dimension(100, 26));
@@ -241,21 +243,25 @@ public class MemberAddEdit implements ActionListener {
 
     // BUTTION ACTIONS
 
-    public void actionPerformed(ActionEvent e){
+    public void actionPerformed(ActionEvent e){ // the two methods below set the correct day, based on year and month, both month and year comboboxes set correct days. "dayBefore" is to remember what day was set before and set it again, otherwise it resets to 1 ... ex, Person A, birthday 4th, this way when selecting month,year, it stays at 4th, without beforeDay, day combobox would reset to 1
         if (e.getSource() == birthYearCBox){
+            dayBefore = birthDayCBox.getSelectedIndex();
             birthDayCBox.setModel(new DefaultComboBoxModel<String>(dg.getMonthDays(birthMonthCBox.getSelectedIndex() + 1, Integer.parseInt(birthYearCBox.getSelectedItem().toString()))));
+            birthDayCBox.setSelectedIndex(dayBefore);
             birthMonthCBox.setEnabled(true);
         }
         else if(e.getSource() == birthMonthCBox){
+            dayBefore = birthDayCBox.getSelectedIndex();
             birthDayCBox.setModel(new DefaultComboBoxModel<String>(dg.getMonthDays(birthMonthCBox.getSelectedIndex() + 1, Integer.parseInt(birthYearCBox.getSelectedItem().toString()))));
+            birthDayCBox.setSelectedIndex(dayBefore);
             birthDayCBox.setEnabled(true);
         }
         else if(e.getSource() == cancelButton){
             memberAdd.dispose();
         }
-        else if(e.getSource() == previewButton){
-            MemberPreview mp = new MemberPreview(am);
-        }
+//        else if(e.getSource() == previewButton){
+//            MemberPreview mp = new MemberPreview(am);
+//        }
         else if(e.getSource() == addButton){
             fc = new JFileChooser(); // initialize the JFileChooser - Initializing on button action because if initialized in the constructor, it slows down the UI response to the button
             fc.setFileFilter(DataProcessor.imageFilter); // set image filter on JFileChooser
