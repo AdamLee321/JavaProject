@@ -19,6 +19,7 @@ public class About implements ActionListener {
     private JDialog about;
     private JButton closeButton;
     private JLabel progNameLabel, versionNumLabel, devsLabel, devPic, thanksLabel;
+    private JTextArea toolsUsed;
     private JPanel northPanel, centerPanel, southPanel, mainBigPanel;
     private Border paddingBorder = BorderFactory.createEmptyBorder(20,50,50,20);  // set the border inside the grid to move details away from the edges
 
@@ -30,7 +31,7 @@ public class About implements ActionListener {
         about.getContentPane().setBackground(UIElements.getColour());
         about.setLayout(new GridLayout());
         about.setSize(500, 400);
-        about.setResizable(false);
+        about.setResizable(true);
         about.setLocationRelativeTo(null);
         about.getContentPane().setBounds(20,20,20,20);
         about.setModal(true);
@@ -49,7 +50,6 @@ public class About implements ActionListener {
 
         mainBigPanel.add(devPic, BorderLayout.NORTH);
 
-
 // CENTER PANEL
 
         centerPanel = new JPanel(new GridLayout(4,1));
@@ -65,8 +65,15 @@ public class About implements ActionListener {
         devsLabel = new JLabel("Developed By: ");
         centerPanel.add(devsLabel);
 
-        thanksLabel = new JLabel("Thanks To: Our lecturers @ ITT, StackOverflow community, YouTube");
+//        thanksLabel = new JLabel("Thanks To: Our lecturers @ ITT, <\b> StackOverflow community, YouTube");
+        thanksLabel = new JLabel("<html><p> <b>This text is bold</b>Some verrrry long text  Some verrrry long  Some verrrry long text dsa ads oiosi o</p>");
         centerPanel.add(thanksLabel);
+
+        toolsUsed = new JTextArea("wefewfewfwe");
+        toolsUsed.setEditable(false);
+        toolsUsed.setOpaque(true);
+        toolsUsed.setBackground(UIElements.getColour());
+        centerPanel.add(toolsUsed);
 
         mainBigPanel.add(centerPanel, BorderLayout.CENTER);
 

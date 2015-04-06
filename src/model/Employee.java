@@ -23,12 +23,12 @@ public class Employee {
     private double salary;
     private String empUsername;
     private String empPassword;
-    private String empPic;
+    private byte[] empPic;
 
 // overloaded constructor
     public Employee(int empId, int empDeptId, String empFName, String empLName, String position, String empStreet,
                     String empCity, String empCounty, String empDOBd, String empDOBm, String empDOBy, String empEmail,
-                    double salary, String empUsername, String empPassword, String empPic) {
+                    double salary, String empUsername, String empPassword, byte[] empPic) {
         this.empId = empId;
         this.empDeptId = empDeptId;
         this.empFName = empFName;
@@ -109,7 +109,7 @@ public class Employee {
         return empPassword;
     }
 
-    public String getEmpPic() {
+    public byte[] getEmpPic() {
         return empPic;
     }
 
@@ -175,7 +175,7 @@ public class Employee {
         this.empPassword = empPassword;
     }
 
-    public void setEmpPic(String empPic) {
+    public void setEmpPic(byte[] empPic) {
         this.empPic = empPic;
     }
 }

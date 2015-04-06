@@ -4,9 +4,13 @@ package gui.sale;
 IT Tallaght - 2015, S2
 Computing - Year 2, Project
 Group 17 (George - 22/03/2015)
+David
 */
 
+import database.operations.MemberOperations;
+import gui.FormValidator;
 import gui.UIElements;
+import model.Member;
 
 import javax.swing.*;
 import javax.swing.plaf.BorderUIResource;
@@ -22,16 +26,18 @@ public class Discount extends JDialog implements ActionListener {
     private ButtonGroup radioGroup = new ButtonGroup(); // for mutual exclusivity of radio buttons
     private JPanel main; // need main because can't set border on JFrame
 
+    final double[] DISCOUNT_RATES = {2, 4, 6, 8, 10};
+
     SaleMain sm;
-    
-    public Discount(SaleMain sm){
+
+    public Discount(SaleMain sm) {
 
 // SETUP JDIALOG
 
         this.setTitle("Discount");
         this.setLayout(new BorderLayout());
         this.getContentPane().setBackground(UIElements.getColour());
-        this.setSize(247,240);
+        this.setSize(247, 240);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setModal(true);
@@ -43,6 +49,7 @@ public class Discount extends JDialog implements ActionListener {
         main.setBackground(UIElements.getColour());
 
         rbPercent = new JRadioButton("Percent");
+        rbPercent.setSelected(true);
         rbPercent.setBackground(UIElements.getColour());
         radioGroup.add(rbPercent);
         rbPercent.addActionListener(this);
@@ -56,6 +63,7 @@ public class Discount extends JDialog implements ActionListener {
         radioGroup.add(rbMemberId);
         rbMemberId.addActionListener(this);
         main.add(rbMemberId);
+
 
         tfMemberId = new JTextField(18);
         main.add(tfMemberId);
@@ -79,17 +87,45 @@ public class Discount extends JDialog implements ActionListener {
 
 // BUTTON ACTIONS
 
-    public void actionPerformed(ActionEvent e){
-        if (e.getSource().equals(btnCancel)){
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource().equals(btnCancel)) {
             this.dispose();
-        }
-        else if (e.getSource().equals(btnApply)){
-            if (rbPercent.isSelected()){
-                sm.setDiscountR(tfPercent.getText() + "%");
-                this.dispose();
-            }
-            else if (rbMemberId.isSelected()){
-                // every 10th purchase, 15% off, must reset the purchase counter once it reaches 10
+        } else if (e.getSource().equals(btnApply)) {
+            MemberOperations mo = new MemberOperations();
+            if (FormValidator.isEmptyField(tfMemberId.getText()) && FormValidator.isEmptyField(tfPercent.getText()))
+                JOptionPane.showMessageDialog(this, "Enter a value", "No values", JOptionPane.WARNING_MESSAGE);
+            else if (rbPercent.isSelected()) {
+                if (!FormValidator.isNumber(tfPercent.getText()))
+                    JOptionPane.showMessageDialog(this, "Not a number", "Invalid Entry", JOptionPane.WARNING_MESSAGE);
+                else {
+                    this.dispose();
+                    sm.setDiscountR(Double.parseDouble(tfPercent.getText()));
+                }
+            } else if (rbMemberId.isSelected()) {
+//                tfMemberId.setFocu
+                if (!FormValidator.isNumber(tfMemberId.getText()))
+                    JOptionPane.showMessageDialog(this, "Not a number", "Invalid Entry", JOptionPane.WARNING_MESSAGE);
+                else {
+                    if (mo.checkMember(Integer.parseInt(tfMemberId.getText()))) {
+                        Member m = mo.getMemberById(Integer.parseInt(tfMemberId.getText()));
+                        sm.setCustomerName(m.getMemberFName() +" " + m.getMemberLName());
+                        int points = m.getMemberPoints();
+                        double rate = 0;
+                        if (points < 8)
+                            sm.setDiscountR(DISCOUNT_RATES[0]);
+                        else if (points < 16)
+                            sm.setDiscountR(DISCOUNT_RATES[1]);
+                        else if (points < 32)
+                            sm.setDiscountR(DISCOUNT_RATES[2]);
+                        else if (points < 64)
+                            sm.setDiscountR(DISCOUNT_RATES[3]);
+                        else
+                            sm.setDiscountR(DISCOUNT_RATES[4]);
+                        this.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Member does not exist", "Member", JOptionPane.WARNING_MESSAGE);
+                    }
+                }
             }
         }
     }

@@ -96,28 +96,25 @@ public class ProductOperations {
         try{
             stmt = conn.createStatement();
             rset = stmt.executeQuery(sql);
-            while (rset.next()){
+            while (rset.next())
                 quantityInStock = rset.getInt(1);
-            }
-
         }catch (SQLException sqlE){
             System.out.println(sqlE.getMessage());
         }
-        System.out.println(quantityInStock);
         return quantityInStock;
     }
 
     public boolean checkProduct(int id){
-        boolean x = false;
-        String sql = "SELECT prodQty FROM product WHERE prodId = '"+id+"'";
+        boolean x = true;
+        String sql = "SELECT * FROM product WHERE prodId = '"+id+"'";
         try{
             stmt = conn.createStatement();
             rset = stmt.executeQuery(sql);
+            if(!rset.next())
+                x = false;
         }catch (SQLException sqlE){
             System.out.println(sqlE.getMessage());
-            x = false;
         }
-        System.out.println(x);
         return x;
     }
 

@@ -26,7 +26,7 @@ public class SaleTableModel extends DefaultTableModel {
 
   private static ArrayList<Object> saleRows = new ArrayList();
 
-  public static ArrayList<Object> getList(){
+  public ArrayList<Object> getList(){
     return saleRows;
   }
 
@@ -52,6 +52,7 @@ public class SaleTableModel extends DefaultTableModel {
     rset.close();
     fireTableChanged(new TableModelEvent(this, -1, -1));
   }
+
 
   //a method just to pass in a column number and row and return that cell value
   public Object getValueAt(int rowNum, int colNum) {

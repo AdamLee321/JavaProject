@@ -76,20 +76,16 @@ public class AuthenticationPopUp {
             public void actionPerformed(ActionEvent e) {
                 if (passwordField.getPassword().length == 0 || usernameField.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(parent, "Please enter a username and a password", "ERROR", JOptionPane.INFORMATION_MESSAGE);
-                } else {
+                }
+                else {
                     try {
                         String position = null;
                         EmployeeOperations eo = new EmployeeOperations();
-                        rset = eo.validatePassword(usernameField.getText(), passwordField.getPassword());
-                        try {
-                            while (rset.next()) {
-                                position = rset.getString(1);
-                            }
-                        } catch (SQLException sqlE) {
-                            System.out.println("Empty Resultset");
-                        }
+                        Employee em = eo.validatePassword(usernameField.getText(), passwordField.getPassword());
+                        position = em.getPosition();
+                        System.out.println(em.getEmpCity());
                         if (position.equals("Sales")) {
-                            new SaleMain();
+                            new SaleMain(em);
                         } else if (position.equals("Admin")) {
                             new AdminMain();
                         } else if (position.equals("Manager")) {

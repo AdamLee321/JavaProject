@@ -54,7 +54,6 @@ public class ProductTableModel extends DefaultTableModel{
             }
             rset.close();
         }catch (SQLException sqlE){
-            System.out.println("fuck this");
             System.out.println(sqlE.getMessage());
         }
         fireTableChanged(new TableModelEvent(this, -1, -1));

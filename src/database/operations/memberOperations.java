@@ -145,5 +145,19 @@ public class MemberOperations {
         }
         return m;
     }
+
+    public boolean checkMember(int id){
+        boolean x = true;
+        String sql = "SELECT * FROM member WHERE memberid = '"+id+"'";
+        try{
+            stmt = conn.createStatement();
+            rset = stmt.executeQuery(sql);
+            if(!rset.next())
+                x = false;
+        }catch (SQLException sqlE){
+            System.out.println(sqlE.getMessage());
+        }
+        return x;
+    }
 }
 

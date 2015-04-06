@@ -13,13 +13,16 @@ import gui.StartWindow;
 import gui.UIElements;
 import gui.employee.SalesHistory;
 import gui.member.MemberAddEdit;
+import model.Employee;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
+import javax.swing.event.TableModelEvent;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.SQLException;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -38,15 +41,24 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
     private DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
     private Date date = new Date();
 
+    private double total = 0;
+    private double changeDue = 0;
+    private double cashPaid = 0;
+    private double subTotal = 0;
+    private double discountApplied = 0;
+    private double vat = 0;
+    final private double VAT_RATE = .21;
+
     private String prodFieldTip = "product number...";
     private String qtyFieldTip = "quantity...";
 
     private JTable saleTable;
     private SaleTableModel tableModel;
+    DecimalFormat decimalFormat = new DecimalFormat("€###,###.00");
+    Employee loggedOn;
 
-    final private double VAT_RATE = .21;
 
-    public SaleMain() {
+    public SaleMain(Employee e) {
 
         super("DGA Sale");
         this.setSize(1000, 700);
@@ -56,6 +68,7 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
         this.setLayout(new GridBagLayout());
         this.getContentPane().setBackground(UIElements.getColour());
 
+        loggedOn = e;
 // ADD PRODUCT PANEL
 
         pnlKeypad = new JPanel(new GridBagLayout());
@@ -66,23 +79,23 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
         tfProdNum.setText(prodFieldTip); // set initial text field search
         tfProdNum.setForeground(Color.GRAY); // set initial colour to gray
         tfProdNum.addMouseListener(this);
-        pnlKeypad.add(tfProdNum, Griddy.getConstraints(0,0,3,1,0,0,1,1,2,2,2,2,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
+        pnlKeypad.add(tfProdNum, Griddy.getConstraints(0, 0, 3, 1, 0, 0, 1, 1, 2, 2, 2, 2, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
 
         tfQty = new JTextField();
         tfQty.setText(qtyFieldTip); // set initial text field search
         tfQty.setForeground(Color.GRAY); // set initial colour to gray
         tfQty.addMouseListener(this);
-        pnlKeypad.add(tfQty, Griddy.getConstraints(0,1,3,1,0,0,1,1,2,2,2,2,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
+        pnlKeypad.add(tfQty, Griddy.getConstraints(0, 1, 3, 1, 0, 0, 1, 1, 2, 2, 2, 2, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
 
         btnAdd = new JButton("Add", new ImageIcon(UIElements.plus16));
         btnAdd.addActionListener(this);
-        pnlKeypad.add(btnAdd, Griddy.getConstraints(0,2,1,1,0,0,1,1,2,2,2,2,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
+        pnlKeypad.add(btnAdd, Griddy.getConstraints(0, 2, 1, 1, 0, 0, 1, 1, 2, 2, 2, 2, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
 
         btnRemove = new JButton("Remove", new ImageIcon(UIElements.minus16));
         btnRemove.addActionListener(this);
-        pnlKeypad.add(btnRemove, Griddy.getConstraints(1,2,1,1,0,0,0,0,2,2,2,2,GridBagConstraints.BOTH,GridBagConstraints.EAST));
+        pnlKeypad.add(btnRemove, Griddy.getConstraints(1, 2, 1, 1, 0, 0, 0, 0, 2, 2, 2, 2, GridBagConstraints.BOTH, GridBagConstraints.EAST));
 
-        this.add(pnlKeypad, Griddy.getConstraints(1,0,1,1,0,0,1,1,0,1,0,0,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
+        this.add(pnlKeypad, Griddy.getConstraints(1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
 
 // CHECKOUT PANEL (right, bottom corner)
 
@@ -92,41 +105,41 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
 
         btnRegister = new JButton("Register", new ImageIcon(UIElements.person16));
         btnRegister.addActionListener(this);
-        pnlCheckout.add(btnRegister, Griddy.getConstraints(0,0,1,1,0,0,1,1,2,2,2,2,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
+        pnlCheckout.add(btnRegister, Griddy.getConstraints(0, 0, 1, 1, 0, 0, 1, 1, 2, 2, 2, 2, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
 
         btnDiscount = new JButton("Discount", new ImageIcon(UIElements.minus16));
         btnDiscount.addActionListener(this);
-        pnlCheckout.add(btnDiscount, Griddy.getConstraints(1,0,1,1,0,0,1,1,2,2,2,2,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
+        pnlCheckout.add(btnDiscount, Griddy.getConstraints(1, 0, 1, 1, 0, 0, 1, 1, 2, 2, 2, 2, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
 
         btnReturnProduct = new JButton("Return Product", new ImageIcon(UIElements.product16));
         btnReturnProduct.addActionListener(this);
-        pnlCheckout.add(btnReturnProduct, Griddy.getConstraints(0,1,2,1,0,0,1,1,0,2,2,2,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
+        pnlCheckout.add(btnReturnProduct, Griddy.getConstraints(0, 1, 2, 1, 0, 0, 1, 1, 0, 2, 2, 2, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
 
-            // PAYMENT TYPE PANEL - panel in a panel... Inception!!!
-            pnlPaymentType = new JPanel(new FlowLayout(FlowLayout.CENTER));
-            pnlPaymentType.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Payment Type")); // set anonymous titled, etched border
-            pnlPaymentType.setBackground(UIElements.getColour());
+        // PAYMENT TYPE PANEL - panel in a panel... Inception!!!
+        pnlPaymentType = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        pnlPaymentType.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Payment Type")); // set anonymous titled, etched border
+        pnlPaymentType.setBackground(UIElements.getColour());
 
-            rbCash = new JRadioButton("Cash");
-            rbCash.setBackground(UIElements.getColour());
-            rbCash.addActionListener(this);
-            rbCC = new JRadioButton("Credit Card");
-            rbCC.setBackground(UIElements.getColour());
-            rbCC.addActionListener(this);
+        rbCash = new JRadioButton("Cash");
+        rbCash.setBackground(UIElements.getColour());
+        rbCash.addActionListener(this);
+        rbCC = new JRadioButton("Credit Card");
+        rbCC.setBackground(UIElements.getColour());
+        rbCC.addActionListener(this);
 
-            radioGroup.add(rbCash);
-            radioGroup.add(rbCC);
+        radioGroup.add(rbCash);
+        radioGroup.add(rbCC);
 
-            pnlPaymentType.add(rbCash);
-            pnlPaymentType.add(rbCC);
+        pnlPaymentType.add(rbCash);
+        pnlPaymentType.add(rbCC);
 
-            pnlCheckout.add(pnlPaymentType, Griddy.getConstraints(0,2,2,1,0,0,0,0,0,0,0,0,GridBagConstraints.HORIZONTAL,GridBagConstraints.CENTER));
+        pnlCheckout.add(pnlPaymentType, Griddy.getConstraints(0, 2, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER));
 
         btnCheckout = new JButton("Checkout", new ImageIcon(UIElements.save16));
         btnCheckout.addActionListener(this);
-        pnlCheckout.add(btnCheckout, Griddy.getConstraints(0,3,2,2,0,0,1,1,0,0,0,0,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
+        pnlCheckout.add(btnCheckout, Griddy.getConstraints(0, 3, 2, 2, 0, 0, 1, 1, 0, 0, 0, 0, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
 
-        this.add(pnlCheckout, Griddy.getConstraints(1,1,1,1,0,0,1,1,0,1,0,0,GridBagConstraints.BOTH,GridBagConstraints.CENTER));
+        this.add(pnlCheckout, Griddy.getConstraints(1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
 
 // LOGGED IN PANEL
 
@@ -134,17 +147,17 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
         pnlLoggedIn.setBackground(UIElements.getColour());
         pnlLoggedIn.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Currently Logged In")); // set anonymous titled, etched border
 
-        lblLoggedName = new JLabel("John Smith");
-        pnlLoggedIn.add(lblLoggedName, Griddy.getConstraints(0,0,1,1,0,0,1,0,5,5,5,5,0,GridBagConstraints.WEST));
+        lblLoggedName = new JLabel(loggedOn.getEmpFName() +" " + loggedOn.getEmpLName());
+        pnlLoggedIn.add(lblLoggedName, Griddy.getConstraints(0, 0, 1, 1, 0, 0, 1, 0, 5, 5, 5, 5, 0, GridBagConstraints.WEST));
 
-        lblLoggedUname = new JLabel("j.smith1");
-        pnlLoggedIn.add(lblLoggedUname, Griddy.getConstraints(1,0,1,1,0,0,0,0,5,5,5,5,0,GridBagConstraints.EAST));
+        lblLoggedUname = new JLabel(loggedOn.getEmpUsername());
+        pnlLoggedIn.add(lblLoggedUname, Griddy.getConstraints(1, 0, 1, 1, 0, 0, 0, 0, 5, 5, 5, 5, 0, GridBagConstraints.EAST));
 
-        lblLoggedNumber = new JLabel("0");
-        pnlLoggedIn.add(lblLoggedNumber, Griddy.getConstraints(0,1,1,1,0,0,0,0,5,5,5,5,0,GridBagConstraints.WEST));
+        lblLoggedNumber = new JLabel(Integer.toString(loggedOn.getEmpId()));
+        pnlLoggedIn.add(lblLoggedNumber, Griddy.getConstraints(0, 1, 1, 1, 0, 0, 0, 0, 5, 5, 5, 5, 0, GridBagConstraints.WEST));
 
-        lblLoggedPosition = new JLabel("Sales");
-        pnlLoggedIn.add(lblLoggedPosition, Griddy.getConstraints(1,1,1,1,0,0,0,0,0,5,5,5,0,GridBagConstraints.EAST));
+        lblLoggedPosition = new JLabel(loggedOn.getPosition());
+        pnlLoggedIn.add(lblLoggedPosition, Griddy.getConstraints(1, 1, 1, 1, 0, 0, 0, 0, 0, 5, 5, 5, 0, GridBagConstraints.EAST));
 
         btnLogout = new JButton("Log Out", new ImageIcon(UIElements.logout16));
         btnLogout.addActionListener(this);
@@ -204,7 +217,7 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
         lblChangeDueR = new JLabel("-");
         pnlSaleInfo.add(lblChangeDueR, Griddy.getConstraints(1, 8, 1, 1, 0, 0, 0, 0, 0, 0, 5, 0, 0, GridBagConstraints.EAST));
 
-        this.add(pnlSaleInfo, Griddy.getConstraints(1,2,1,1,0,0,1,1,0,0,0,0,GridBagConstraints.BOTH,GridBagConstraints.EAST));
+        this.add(pnlSaleInfo, Griddy.getConstraints(1, 2, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, GridBagConstraints.BOTH, GridBagConstraints.EAST));
 
 
 // BASKET PANEL
@@ -226,41 +239,71 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
 
         pnlBasket = new JPanel(new GridLayout());
         pnlBasket.setBackground(UIElements.getColour());
-        pnlBasket.setPreferredSize(new Dimension(700,500));
+        pnlBasket.setPreferredSize(new Dimension(700, 500));
         pnlBasket.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Basket")); // set anonymous titled, etched border
         pnlBasket.add(scrollPane);
-        this.add(pnlBasket, Griddy.getConstraints(0,0,1,4,0,0,10,0,0,0,0,0,GridBagConstraints.BOTH,GridBagConstraints.WEST));
+        this.add(pnlBasket, Griddy.getConstraints(0, 0, 1, 4, 0, 0, 10, 0, 0, 0, 0, 0, GridBagConstraints.BOTH, GridBagConstraints.WEST));
 
         po = new ProductOperations();
 
         this.setVisible(true);
     }
 
-// METHODS - SETTERS
-
-    // set payment type
-    public void setPaymentTypeR(String approved){
-        lblPaymentTypeR.setText(approved);
-    }
+    // update all the labels
+    public void updateLabels(){
+        lblSubtotalR.setText(decimalFormat.format(subTotal));
+        lblVATR.setText(decimalFormat.format(vat));
+        lblDiscountR.setText(Double.toString(discountApplied) + "%");
+        lblTotalR.setText(decimalFormat.format(total));
+        lblPaymentTypeR.setText(decimalFormat.format(cashPaid));
+        lblChangeDueR.setText(decimalFormat.format(changeDue));
+ }
 
     // set discount %
-    public void setDiscountR(String discount){
-        lblDiscountR.setText(discount);
+    public void setDiscountR(double discount) {
+        discountApplied = discount;
+        total -= (discountApplied / 100) * total;
+        updateLabels();
     }
+
+    // set payment type
+    public void setPaymentTypeR(String cashOrCard) {
+        if (FormValidator.isNumber(cashOrCard)) {
+            cashPaid = Double.parseDouble(cashOrCard);
+            changeDue = cashPaid - total;
+        } else {
+            lblPaymentTypeR.setText(cashOrCard);
+        }
+        updateLabels();
+    }
+
+    public void calcChangeDue(){
+        changeDue = cashPaid - total;
+    }
+
+    public void setCustomerName(String name) {
+        lblCustomerR.setText(name);
+    }
+
 
 // METHODS
 
-    public  void updatePrice(){
-        double vat = 0;
-        double total = 0;
-        for (int i = 0; i < SaleTableModel.getList().size(); i++) {
-            SaleRow sr = (SaleRow) SaleTableModel.getList().get(i);
+    public void updatePrice() {
+        total = 0;
+        for (int i = 0; i < tableModel.getList().size(); i++) {
+            SaleRow sr = (SaleRow) tableModel.getList().get(i);
             total += sr.getPrice() * sr.getQty();
         }
+        if (tableModel.getList().size() == 0) {
+            total = 0;
+            cashPaid = 0;
+            calcChangeDue();
+            discountApplied = 0;
+            setCustomerName("-");
+        }
         vat = total * VAT_RATE;
-        lblSubtotalR.setText(Double.toString(total - vat));
-        lblVATR.setText(Double.toString(vat));
-        lblTotalR.setText(Double.toString(total));
+        subTotal = (total - vat);
+        updateLabels();
     }
 
     public void addToBasket() {
@@ -270,24 +313,25 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "SQL Problem");
         }
-//        productTable.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mousePressed(MouseEvent e) {
-//                JTable row = (JTable)e.getSource();
-//                int i = row.getSelectedRow();
-//                int productId = (Integer)productTable.getValueAt(i, 0);
-//                TerminalMode.mf.setToProductView(productId);
-//            }
-//        });
     }
 
+    public void refreshBasket() {
+        tableModel.fireTableChanged(new TableModelEvent(tableModel, -1, -1));
+    }
 // BUTTON ACTIONS - don't forget to add action listeners to buttons and implement ActionListener class
 
     // have to implement these methods for MouseListener
-    public void mouseExited(MouseEvent e) {}
-    public void mouseReleased(MouseEvent e) {}
-    public void mousePressed(MouseEvent e) {}
-    public void mouseEntered(MouseEvent e) {}
+    public void mouseExited(MouseEvent e) {
+    }
+
+    public void mouseReleased(MouseEvent e) {
+    }
+
+    public void mousePressed(MouseEvent e) {
+    }
+
+    public void mouseEntered(MouseEvent e) {
+    }
 
     public void mouseClicked(MouseEvent e) {
         if (e.getSource().equals(tfProdNum)) {
@@ -313,70 +357,77 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
                     }
                 });
             }
-            } else if (e.getSource().equals(tfQty)) {
-                if (tfQty.getText().equals(qtyFieldTip)) {
-                    tfQty.setText("");
-                    tfQty.setForeground(null);
+        } else if (e.getSource().equals(tfQty)) {
+            if (tfQty.getText().equals(qtyFieldTip)) {
+                tfQty.setText("");
+                tfQty.setForeground(null);
 
-                    if (tfProdNum.getText().equals("")) {
-                        tfProdNum.setText(prodFieldTip);
-                        tfProdNum.setForeground(Color.GRAY);
-                    }
-                    tfQty.addFocusListener(new FocusListener() {
-                        @Override
-                        public void focusGained(FocusEvent e) {
-                        }
-                        @Override
-                        public void focusLost(FocusEvent e) {
-                            if (tfQty.getText().equals("")) {
-                                tfQty.setText(qtyFieldTip);
-                                tfQty.setForeground(Color.GRAY);
-                            }
-                        }
-                    });
+                if (tfProdNum.getText().equals("")) {
+                    tfProdNum.setText(prodFieldTip);
+                    tfProdNum.setForeground(Color.GRAY);
                 }
+                tfQty.addFocusListener(new FocusListener() {
+                    @Override
+                    public void focusGained(FocusEvent e) {
+                    }
+
+                    @Override
+                    public void focusLost(FocusEvent e) {
+                        if (tfQty.getText().equals("")) {
+                            tfQty.setText(qtyFieldTip);
+                            tfQty.setForeground(Color.GRAY);
+                        }
+                    }
+                });
             }
         }
+    }
 
-    public void actionPerformed(ActionEvent e){
-        if(e.getSource().equals(rbCash) && rbCash.isSelected()){
-            Cash cashola = new Cash(this);
-        }
-        else if (e.getSource().equals(rbCC) && rbCC.isSelected()){
-            CreditCard cc = new CreditCard(this);
-        }
-        else if (e.getSource().equals(btnDiscount)){
-            Discount disc = new Discount(this);
-        }
-        else if (e.getSource().equals(btnRegister)){
-            MemberAddEdit mae = new MemberAddEdit(this, 0,null,null);
-        }
-        else if (e.getSource().equals(btnReturnProduct)){
-            SalesHistory sv = new SalesHistory();
-        }
-        else if (e.getSource().equals(btnAdd)){
-            if(!FormValidator.isNumber(tfProdNum.getText()) || !FormValidator.isNumber(tfQty.getText()))
-                JOptionPane.showMessageDialog(this,"Please Enter A Number In Both Fields","Invalid Entry",JOptionPane.WARNING_MESSAGE);
-            else{
-                if(po.checkQuantity(Integer.parseInt(tfProdNum.getText())) > Integer.parseInt(tfQty.getText())) {
-                    addToBasket();
-                    updatePrice();
-                    po.checkProduct(100000);
-                    po.checkProduct(999999);
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource().equals(btnAdd)) {
+            if (!FormValidator.isNumber(tfProdNum.getText()) || !FormValidator.isNumber(tfQty.getText()))
+                JOptionPane.showMessageDialog(this, "Please Enter A Number In Both Fields", "Invalid Entry", JOptionPane.WARNING_MESSAGE);
+            else {
+                if (po.checkProduct(Integer.parseInt(tfProdNum.getText()))) {
+                    if (po.checkQuantity(Integer.parseInt(tfProdNum.getText())) > Integer.parseInt(tfQty.getText())) {
+                        addToBasket();
+                        updatePrice();
+                    }
+                    else
+                        JOptionPane.showMessageDialog(this, "Not enough in stock", "Quantity", JOptionPane.WARNING_MESSAGE);
                 }
                 else
-                    JOptionPane.showMessageDialog(this,"Not enough in stock","Quantity",JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Item does not exist", "Quantity", JOptionPane.WARNING_MESSAGE);
+
             }
-        }
-        else if (e.getSource().equals(btnRemove)){
-
-        }
-        else if (e.getSource().equals(btnCheckout)){
-
-        }
-        else if (e.getSource().equals(btnLogout)){
-            StartWindow sw = new StartWindow();
+        } else if (e.getSource().equals(btnLogout)) {
+            new StartWindow();
             this.dispose();
+        } else if (e.getSource().equals(btnRegister)) {
+            new MemberAddEdit(this, 0, null, null);
+        } else if (e.getSource().equals(btnReturnProduct)) {
+            new SalesHistory();
+        } else {
+            if (tableModel.getList().size() == 0)
+                JOptionPane.showMessageDialog(this, "Nothing in the basket", "Invalid Entry", JOptionPane.WARNING_MESSAGE);
+            else if (e.getSource().equals(rbCash) && rbCash.isSelected())
+                new Cash(this);
+            else if (e.getSource().equals(rbCC) && rbCC.isSelected())
+                new CreditCard(this);
+            else if (e.getSource().equals(btnDiscount))
+                new Discount(this);
+            else if (e.getSource().equals(btnRemove)) {
+                if (saleTable.getSelectedRow() == -1)
+                    JOptionPane.showMessageDialog(this, "Select item to remove", "Invalid choice", JOptionPane.WARNING_MESSAGE);
+                else {
+                    tableModel.getList().remove(saleTable.getSelectedRow());
+                    refreshBasket();
+                    updatePrice();
+                    calcChangeDue();
+                    updateLabels();
+                }
+            } else if (e.getSource().equals(btnCheckout)) {
+            }
         }
     }
 }

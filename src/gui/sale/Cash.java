@@ -4,8 +4,10 @@ package gui.sale;
 IT Tallaght - 2015, S2
 Computing - Year 2, Project
 Group 17 (George - 30/03/2015)
+David
 */
 
+import gui.FormValidator;
 import gui.UIElements;
 
 import javax.swing.*;
@@ -74,8 +76,14 @@ public class Cash extends JDialog implements ActionListener {
             this.dispose();
         }
         else if (e.getSource().equals(btnOK)){
-            sm.setPaymentTypeR("€" + tfCash.getText());
-            this.dispose();
+            if (FormValidator.isEmptyField(tfCash.getText()))
+                JOptionPane.showMessageDialog(this, "Empty Field", "No data", JOptionPane.WARNING_MESSAGE);
+            else if(!FormValidator.isNumber(tfCash.getText()))
+                JOptionPane.showMessageDialog(this, "Not a valid number", "Invalid", JOptionPane.WARNING_MESSAGE);
+            else {
+                sm.setPaymentTypeR(tfCash.getText());
+                this.dispose();
+            }
         }
     }
 }
