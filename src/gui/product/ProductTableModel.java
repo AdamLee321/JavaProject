@@ -1,6 +1,5 @@
 package gui.product;
 
-import com.sun.org.apache.xpath.internal.SourceTree;
 import database.operations.ProductOperations;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableColumnModel;
@@ -8,29 +7,32 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
  * Created by DL on 04/04/2015.
  */
 public class ProductTableModel extends DefaultTableModel{
-    final static int prodId = 0;
-    final static int prodMake = 1;
-    final static int prodModel = 2;
-    final static int salePrice = 3;
-    final static int costPrice = 4;
-    final static int quantity = 5;
-    final static int prodtype = 6;
+    final static int ID = 0;
+    final static int MAKE = 1;
+    final static int MODEL = 2;
+    final static int SALEPRICE = 3;
+    final static int COSTPRICE = 4;
+    final static int QUANTITY = 5;
+    final static int TYPE = 6;
 
     final static String[] columnNames = {"Product ID", "Make", "Model", "Cost Price", "Sale Price", "Quantity", "Product Type"};
 
-    private static ArrayList<Object> AdminProductRows = new ArrayList();
+    private static ArrayList<Object> adminProductRows = new ArrayList();
 
     public static ArrayList<Object> getList(){
-        return AdminProductRows;
+        return adminProductRows;
     }
 
     DefaultTableColumnModel columnModel = new DefaultTableColumnModel();
+
+    DecimalFormat decimalFormat = new DecimalFormat("€###,###.00");
 
     public ProductTableModel() {
         TableColumn col;
@@ -46,39 +48,35 @@ public class ProductTableModel extends DefaultTableModel{
     public void getAllProductsTable(){
         try{
             ResultSet rset = new ProductOperations().getAllProducts();
-
             while (rset.next()) {
-                AdminProductRows.add(new AdminProductRow(rset.getInt(1), rset.getString(2), rset.getString(3),
+                adminProductRows.add(new AdminProductTableTableRow(rset.getInt(1), rset.getString(2), rset.getString(3),
                         rset.getDouble(4), rset.getDouble(5), rset.getInt(6), rset.getString(7)));
             }
-            System.out.println("???");
             rset.close();
         }catch (SQLException sqlE){
             System.out.println("fuck this");
             System.out.println(sqlE.getMessage());
         }
-        System.out.println("so is it here");
         fireTableChanged(new TableModelEvent(this, -1, -1));
-        System.out.println("or here");
     }
 
     //a method just to pass in a column number and row and return that cell value
     public Object getValueAt(int rowNum, int colNum) {
-        AdminProductRow row = (AdminProductRow)AdminProductRows.get(rowNum);//casting a product from the object arraylist to a row type
+        AdminProductTableTableRow row = (AdminProductTableTableRow)adminProductRows.get(rowNum);//casting a product from the object arraylist to a row type
         switch (colNum) {
-            case prodId:
+            case ID:
                 return row.getProductID();
-            case prodMake:
+            case MAKE:
                 return row.getMake();
-            case prodModel:
+            case MODEL:
                 return row.getModel();
-            case costPrice:
-                return row.getCostPrice();
-            case salePrice:
-                return row.getPrice();
-            case quantity:
+            case COSTPRICE:
+                return decimalFormat.format(row.getCostPrice());
+            case SALEPRICE:
+                return decimalFormat.format(row.getPrice());
+            case QUANTITY:
                 return row.getQuantity();
-            case prodtype:
+            case TYPE:
                 return row.getProductType();
             default:
                 return "";
@@ -93,14 +91,10 @@ public class ProductTableModel extends DefaultTableModel{
             return "";
     }
 
-    public void reset() {
-
-    }
-
     public void emptyArray() {
-        if (AdminProductRows.size() > 0) {
-            for (int i = AdminProductRows.size(); i > 0; i--) {
-                AdminProductRows.remove(i - 1);
+        if (adminProductRows.size() > 0) {
+            for (int i = adminProductRows.size(); i > 0; i--) {
+                adminProductRows.remove(i-1);
             }
         }
     }
@@ -119,7 +113,7 @@ public class ProductTableModel extends DefaultTableModel{
     }
 
     public int getRowCount() {
-        return AdminProductRows.size();
+        return adminProductRows.size();
     }
 }
 

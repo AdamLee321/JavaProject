@@ -19,6 +19,7 @@ import java.sql.SQLException;
 IT Tallaght - 2015, S2
 Computing - Year 2, Project
 Group 17 (George - 07/03/2015)
+Dav
 */
 
 public class ProductMain implements ActionListener, MouseListener {
@@ -41,6 +42,7 @@ public class ProductMain implements ActionListener, MouseListener {
     private ProductTableModel productTableModel;
     ProductOperations po;
     private int selectedRow = 0;
+    private int selectedRowId = 0;
 
     public JPanel getProductMain(){
 // setup the frame
@@ -164,8 +166,8 @@ public class ProductMain implements ActionListener, MouseListener {
 
     // open the edit window (created a method because it's used in two places - mouse and action listener
     public void displayEdit() {
-        Product p = po.productByIDO(selectedRow);
-        if (selectedRow != 0) {
+        Product p = po.productByIDO(selectedRowId);
+        if (selectedRow != -1) {
             new ProductAddEdit(am, 1, this, p);
         } else {
             JOptionPane.showMessageDialog(null, "Please Select The Product First", "Product Not Selected", JOptionPane.WARNING_MESSAGE);
@@ -199,10 +201,11 @@ public class ProductMain implements ActionListener, MouseListener {
             });
         }
         else if(e.getSource().equals(products)){
+            selectedRow = products.getSelectedRow();
+            selectedRowId = (Integer) products.getValueAt(products.getSelectedRow(), 0);
             if (e.getClickCount() == 2) {
                 displayEdit();
             }
-            selectedRow = (Integer) products.getValueAt(products.getSelectedRow(), 0);
         }
     }
 

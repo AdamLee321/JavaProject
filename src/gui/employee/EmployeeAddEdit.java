@@ -2,6 +2,9 @@ package gui.employee;
 
 import gui.*;
 import gui.admin.AdminMain;
+import gui.product.ProductMain;
+import model.Employee;
+import model.Product;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,7 +32,7 @@ public class EmployeeAddEdit implements ActionListener {
     private DateGenerator dg;
     private AdminMain am;  // used for JDialogs as parent
 
-    public EmployeeAddEdit(JFrame parent, int choice){
+    public EmployeeAddEdit(JFrame parent, int choice, EmployeeMain employeeMain, Employee employee){
 
     // setup the jdialog
 

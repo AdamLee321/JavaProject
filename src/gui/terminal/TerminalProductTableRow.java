@@ -5,7 +5,7 @@ package gui.terminal;
  * Date 30/03/2015
  */
 
-public class TerminalProductRow {
+public class TerminalProductTableRow {
 
     private int productID;
     private String make;
@@ -13,7 +13,7 @@ public class TerminalProductRow {
     private double price;
     private int quantity;
 
-    public TerminalProductRow() {
+    public TerminalProductTableRow() {
         this.productID = 0;
         this.make = new String();
         this.model = new String();
@@ -21,7 +21,7 @@ public class TerminalProductRow {
         this.quantity = 0;
     }
 
-    public TerminalProductRow(int productID, String make, String model, double price, int quantity) {
+    public TerminalProductTableRow(int productID, String make, String model, double price, int quantity) {
         this.productID = productID;
         this.make = make;
         this.model = model;

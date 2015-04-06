@@ -1,20 +1,17 @@
 package gui.employee;
 
 import database.operations.EmployeeOperations;
+import database.operations.ProductOperations;
 import gui.Griddy;
 import gui.UIElements;
 import gui.admin.AdminMain;
+import gui.product.ProductAddEdit;
+import gui.product.ProductTableModel;
 import model.Employee;
+import model.Product;
 
-import javax.swing.BorderFactory;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
+import javax.swing.*;
+import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -46,9 +43,15 @@ public class EmployeeMain implements ActionListener, MouseListener {
     private EmployeeOperations eo;
     private Employee e;
 
+    private JTable employees;
+    private EmployeeTableModel employeeTableModel;
+    private int selectedRow = 0;
+    private int selectedRowId = 0;
+
     String[] eempTypes = {"All", "Sales", "Management"};  // this just a placeholder, real info will be populated from DB
 
     public JPanel getEmployeeMain(){
+
 
     // setup the frame
 
@@ -115,14 +118,43 @@ public class EmployeeMain implements ActionListener, MouseListener {
 
 // CENTER PANEL - table panel
 
-        centerPanel = new JPanel(new FlowLayout());
+        centerPanel = new JPanel(new GridLayout());
+        // results panel
+        employeeTableModel = new EmployeeTableModel();
+        employees = new JTable(employeeTableModel);
+        employees.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        employees.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        employees.addMouseListener(this);
 
-        tblEmployee = new JTable();
-       // DefaultTableModel tblModel = new DefaultTableModel(new Object[][]{{null, null, null, null}, {null, null, null, null}, {null, null, null, null}, {null, null, null, null}});
-     //   String titles[] = {"Title 1", "Title 2", "Title 3", "Title 4"};
-     //   tblEmployee.setModel(tblModel,titles[]);
-//        tblScroll.setViewportView(tblEmployee);
-                centerPanel.add(tblEmployee);
+
+
+        employees.getColumnModel().getColumn(0).setPreferredWidth(27);
+        employees.getColumnModel().getColumn(1).setPreferredWidth(120);
+        employees.getColumnModel().getColumn(2).setPreferredWidth(100);
+        employees.getColumnModel().getColumn(3).setPreferredWidth(90);
+        employees.getColumnModel().getColumn(4).setPreferredWidth(90);
+        employees.getColumnModel().getColumn(6).setPreferredWidth(120);
+        employees.getColumnModel().getColumn(7).setPreferredWidth(100);
+        employees.getColumnModel().getColumn(8).setPreferredWidth(95);
+        employees.getColumnModel().getColumn(9).setPreferredWidth(40);
+
+                // Set the table width, depending upon the width of
+        // the columns
+        int tableWidth = 0;
+        int columnCount = employeeTableModel.columnModel.getColumnCount();
+        for (int i = 0; i < columnCount; i++) {
+            tableWidth += employeeTableModel.columnModel.getColumn(i).getPreferredWidth();
+            System.out.println(employeeTableModel.columnModel.getColumn(i).getPreferredWidth());
+        }
+
+        JScrollPane scrollPane = new JScrollPane(employees);
+        scrollPane.setBorder(new BevelBorder(BevelBorder.LOWERED));
+        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+
+        //productTableModel.getAllProductsTable();
+        refreshList();
+        centerPanel.add(scrollPane);
 
         empMain.add(centerPanel, BorderLayout.CENTER);
 
@@ -143,6 +175,26 @@ public class EmployeeMain implements ActionListener, MouseListener {
 
     // return to AdminMain
         return empMain;
+    }
+
+    public void refreshList(){
+        employeeTableModel.emptyArray();
+        employeeTableModel.getAllEmployeesTable();
+    }
+
+    // open the edit window (created a method because it's used in two places - mouse and action listener
+    public void displayEdit() {
+        //Product p = po.productByIDO(selectedRowId);
+//        for (int i = 0; i < employeeTableModel.getList().size(); i++) {
+//            EmployeeTableRow x =  (EmployeeTableRow) employeeTableModel.getList().get(i);
+//            if(x.getEmpId() == selectedRowId)
+//                e = x;
+//        }
+        if (selectedRow != -1) {
+            new EmployeeAddEdit(am, 1, this, e);
+        } else {
+            JOptionPane.showMessageDialog(null, "Please Select The Product First", "Product Not Selected", JOptionPane.WARNING_MESSAGE);
+        }
     }
 
 // BUTTON ACTIONS
@@ -176,10 +228,10 @@ public class EmployeeMain implements ActionListener, MouseListener {
     public void actionPerformed(ActionEvent e) {
         // add button
         if (e.getSource().equals(addButton)) {
-            EmployeeAddEdit eae = new EmployeeAddEdit(am,0);
+            EmployeeAddEdit eae = new EmployeeAddEdit(am,0, this, null);
         } // edit button
         else if (e.getSource().equals(editButton)){
-            EmployeeAddEdit eae = new EmployeeAddEdit(am,1);
+            displayEdit();
         }
         else if (e.getSource().equals(viewSalesButton)){
             SalesHistory sv = new SalesHistory();

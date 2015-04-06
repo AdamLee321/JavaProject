@@ -44,7 +44,7 @@ public class ProductTableModel extends DefaultTableModel {
         ResultSet rset = po.productCategory(category);
         emptyArray();
         while (rset.next()) {
-            productRows.add(new TerminalProductRow(rset.getInt(1), rset.getString(2), rset.getString(3), rset.getDouble(4), rset.getInt(6)));
+            productRows.add(new TerminalProductTableRow(rset.getInt(1), rset.getString(2), rset.getString(3), rset.getDouble(4), rset.getInt(6)));
         }
         rset.close();
         fireTableChanged(new TableModelEvent(this, -1, -1));
@@ -55,7 +55,7 @@ public class ProductTableModel extends DefaultTableModel {
         ResultSet rset = po.searchProducts(keyword, category);
         emptyArray();
         while (rset.next()) {
-            productRows.add(new TerminalProductRow(rset.getInt(1), rset.getString(2), rset.getString(3), rset.getDouble(4), rset.getInt(6)));
+            productRows.add(new TerminalProductTableRow(rset.getInt(1), rset.getString(2), rset.getString(3), rset.getDouble(4), rset.getInt(6)));
         }
         rset.close();
         fireTableChanged(new TableModelEvent(this, -1, -1));
@@ -63,7 +63,7 @@ public class ProductTableModel extends DefaultTableModel {
 
     //a method just to pass in a column number and row and return that cell value
     public Object getValueAt(int rowNum, int colNum) {
-        TerminalProductRow row = (TerminalProductRow)productRows.get(rowNum);//casting a product from the object arraylist to a row type
+        TerminalProductTableRow row = (TerminalProductTableRow)productRows.get(rowNum);//casting a product from the object arraylist to a row type
         switch (colNum) {
             case id:
                 return row.getProductID();

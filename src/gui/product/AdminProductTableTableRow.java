@@ -1,23 +1,23 @@
 package gui.product;
 
-import gui.terminal.TerminalProductRow;
+import gui.terminal.TerminalProductTableRow;
 
 /**
- * Created by DL on 04/04/2015.
+ * David 05/04/2015
  */
-public class AdminProductRow extends TerminalProductRow{
+public class AdminProductTableTableRow extends TerminalProductTableRow {
 
     private double costPrice;
     private String productType;
 
-    public AdminProductRow(){
+    public AdminProductTableTableRow(){
         super();
         costPrice = 0;
         productType = "";
     }
 
-    public AdminProductRow(int productID, String make, String model, double price, double costPrice,
-                           int quantity, String productType){
+    public AdminProductTableTableRow(int productID, String make, String model, double price, double costPrice,
+                                     int quantity, String productType){
         super(productID, make, model, price, quantity);
         this.costPrice = costPrice;
         this.productType = productType;
