@@ -6,7 +6,7 @@ Computing - Year 2, Project
 Group 17 (George - 02/04/2015)
 */
 
-import database.operations.MemberOperations;
+import database.operations.MemberOpera;
 
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
@@ -44,7 +44,7 @@ public class MemberTableModel extends DefaultTableModel {
     // return the main list of employees from the database
     public void getMainList() {
         try {
-            MemberOperations mo = new MemberOperations();
+            MemberOpera mo = new MemberOpera();
             ResultSet rset = mo.getAllMembers();
             while (rset.next()) {
                 memberRows.add(new MemberRow(rset.getInt(1), rset.getString(2), rset.getString(3), rset.getString(4), rset.getString(5), rset.getString(6), rset.getString(7), rset.getString(8), rset.getString(9), rset.getString(10), rset.getString(11), rset.getInt(12)));
@@ -59,7 +59,7 @@ public class MemberTableModel extends DefaultTableModel {
     // return the searched list from the database
     public void searchMainList(String keyword) {
         try {
-            MemberOperations mo = new MemberOperations();
+            MemberOpera mo = new MemberOpera();
             ResultSet rset = mo.searchMember(keyword);
             while (rset.next()) {
                 memberRows.add(new MemberRow(rset.getInt(1), rset.getString(2), rset.getString(3), rset.getString(4), rset.getString(5), rset.getString(6), rset.getString(7), rset.getString(8), rset.getString(9), rset.getString(10), rset.getString(11), rset.getInt(12)));

@@ -7,13 +7,12 @@ Group 17 (George - 22/03/2015)
 David
 */
 
-import database.operations.MemberOperations;
+import database.operations.MemberOpera;
 import gui.FormValidator;
 import gui.UIElements;
 import model.Member;
 
 import javax.swing.*;
-import javax.swing.plaf.BorderUIResource;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -91,7 +90,7 @@ public class Discount extends JDialog implements ActionListener {
         if (e.getSource().equals(btnCancel)) {
             this.dispose();
         } else if (e.getSource().equals(btnApply)) {
-            MemberOperations mo = new MemberOperations();
+            MemberOpera mo = new MemberOpera();
             if (FormValidator.isEmptyField(tfMemberId.getText()) && FormValidator.isEmptyField(tfPercent.getText()))
                 JOptionPane.showMessageDialog(this, "Enter a value", "No values", JOptionPane.WARNING_MESSAGE);
             else if (rbPercent.isSelected()) {
