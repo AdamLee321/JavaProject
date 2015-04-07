@@ -31,8 +31,8 @@ public class Cash extends JDialog implements ActionListener {
         this.setTitle("Take Payment");
         this.setLayout(new BorderLayout());
         this.getContentPane().setBackground(UIElements.getColour());
-        this.setSize(246, 125);
-        this.setResizable(true);
+        this.setSize(250, 125);
+        this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setModal(true); // lock this dialog into view, don't allow clicking behind this
 

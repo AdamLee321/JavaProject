@@ -101,7 +101,6 @@ public class Discount extends JDialog implements ActionListener {
                     sm.setMemberDetails(Double.parseDouble(tfPercent.getText()), "-", 0, 0);
                 }
             } else if (rbMemberId.isSelected()) {
-//                tfMemberId.setFocu
                 if (!FormValidator.isNumber(tfMemberId.getText()))
                     JOptionPane.showMessageDialog(this, "Not a number", "Invalid Entry", JOptionPane.WARNING_MESSAGE);
                 else {
