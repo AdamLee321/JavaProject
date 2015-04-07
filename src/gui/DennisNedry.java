@@ -83,7 +83,7 @@ public class DennisNedry {
         main.add(btnClose);
         dn.add(main);
 
-        playMagicWord(2); // play the audio
+        playMagicWord(2); // play the audio (2 times)
 
         dn.setVisible(true);
     }

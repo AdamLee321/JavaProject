@@ -200,11 +200,11 @@ public class EmployeeAddEdit implements ActionListener {
         cancelButton.addActionListener(this);
         buttonsPanel.add(cancelButton);
 
-        previewButton = new JButton("Preview");
-        previewButton.setPreferredSize(new Dimension(100, 26));
-        previewButton.setIcon(new ImageIcon(UIElements.person16));
-        previewButton.addActionListener(this);
-        buttonsPanel.add(previewButton);
+//        previewButton = new JButton("Preview");
+//        previewButton.setPreferredSize(new Dimension(100, 26));
+//        previewButton.setIcon(new ImageIcon(UIElements.person16));
+//        previewButton.addActionListener(this);
+//        buttonsPanel.add(previewButton);
 
         okButton = new JButton("OK");
         okButton.setPreferredSize(new Dimension(100, 26));
@@ -267,9 +267,6 @@ public class EmployeeAddEdit implements ActionListener {
         }
         else if (e.getSource().equals(cancelButton)){
             employeeAdd.dispose();
-        }
-        else if (e.getSource().equals(previewButton)){
-            EmployeePreview ep = new EmployeePreview(am);
         }
         else if (e.getSource().equals(addButton)){
             fc = new JFileChooser(); // initialize the JFileChooser - Initializing on button action because if initialized in the constructor, it slows down the UI response to the button

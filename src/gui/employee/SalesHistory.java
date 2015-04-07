@@ -48,10 +48,10 @@ public class SalesHistory extends JDialog implements MouseListener, ActionListen
         btnSearch.addActionListener(this);
         pnlNorth.add(btnSearch);
 
-        btnView = new JButton("View", new ImageIcon(UIElements.open16));
-        btnView.setPreferredSize(new Dimension(100, 26));
-        btnView.addActionListener(this);
-        pnlNorth.add(btnView);
+//        btnView = new JButton("View", new ImageIcon(UIElements.open16));
+//        btnView.setPreferredSize(new Dimension(100, 26));
+//        btnView.addActionListener(this);
+//        pnlNorth.add(btnView);
 
         this.add(pnlNorth, BorderLayout.NORTH);
 

@@ -60,7 +60,7 @@ public class MemberOperations {
         return rset;
     }
 
-    // Insert (add) a new member
+    // insert (add) a new member
     public void addMember(String fname, String lname, String street, String city, String county, int bDay, String bMonth, String bYear, String email, int memNum, int memPoints, File memPic) {
         String query = "INSERT INTO member (memberId, memberFName, memberLName, memberStreet, memberCity, memberCounty," +
                 "memberDOBd, memberDOBm, memberDOBy, memberEmail, memberNumber, memberPoints, memPic)" +
@@ -89,7 +89,7 @@ public class MemberOperations {
         }
     }
 
-    // Update existing member (their id is used a "bite")
+    // update existing member (their id is used as a search parameter)
     public void updateMember(int id, String fname, String lname, String street, String city, String county, int bDay, String bMonth, String bYear, String email, int memNum, int memPoints, File memPic) {
         String query = "UPDATE member SET memberFName = ?, memberLName = ?, memberStreet = ?, memberCity = ?, memberCounty = ?," +
                 "memberDOBd = ?, memberDOBm = ?, memberDOBy = ?, memberEmail = ?, memberNumber = ?, memberPoints = ?, memPic = ?  WHERE memberId = " + id;
@@ -117,7 +117,7 @@ public class MemberOperations {
         }
     }
 
-    // Delete a member
+    // delete a member
     public void deleteMember(int idIn) {
         String query = "DELETE FROM member WHERE memberid =" + idIn;
         try {
@@ -146,6 +146,7 @@ public class MemberOperations {
         return m;
     }
 
+    // check if member exists
     public boolean checkMember(int id){
         boolean x = true;
         String sql = "SELECT * FROM member WHERE memberid = '"+id+"'";
@@ -158,6 +159,20 @@ public class MemberOperations {
             System.out.println(sqlE.getMessage());
         }
         return x;
+    }
+
+    // Update points for member (their id is used as a search parameter)
+    public void updateMemberPoints(int id, int points) {
+        String query = "UPDATE member SET memberPoints = ? WHERE memberId = " + id;
+        try {
+
+            pstmt = conn.prepareStatement(query);
+
+            pstmt.setInt(1, points);
+            pstmt.execute();
+        } catch (SQLException q) {
+            JOptionPane.showMessageDialog(null, "MemberOperations - updateMemberPoints");
+        }
     }
 }
 

@@ -7,10 +7,7 @@ Group 17 (George, David - 22/03/2015)
 */
 
 import database.operations.ProductOperations;
-import gui.FormValidator;
-import gui.Griddy;
-import gui.StartWindow;
-import gui.UIElements;
+import gui.*;
 import gui.employee.SalesHistory;
 import gui.member.MemberAddEdit;
 import model.Employee;
@@ -64,11 +61,17 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
         this.setSize(1000, 700);
         this.setLocationRelativeTo(null);
         this.setResizable(true);
-        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setLayout(new GridBagLayout());
         this.getContentPane().setBackground(UIElements.getColour());
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.addWindowListener(new WindowAdapter() { // add window listener for when clicking X to close the window
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                UIPrompts.exitProgram();
+            }
+        });
 
-        loggedOn = e;
 // ADD PRODUCT PANEL
 
         pnlKeypad = new JPanel(new GridBagLayout());
@@ -174,7 +177,7 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
         lblSubtotal = new JLabel("SubTotal");
         pnlSaleInfo.add(lblSubtotal, Griddy.getConstraints(0, 0, 1, 1, 0, 0, 1, 0, 0, 5, 0, 0, 0, GridBagConstraints.WEST));
         lblSubtotalR = new JLabel("-");
-        lblSubtotalR.setFont(new Font("Tahoma", 1, 18));
+//        lblSubtotalR.setFont(new Font("Tahoma", 1, 18));
         pnlSaleInfo.add(lblSubtotalR, Griddy.getConstraints(1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 5, 0, 0, GridBagConstraints.EAST));
 
         lblVAT = new JLabel("VAT");
@@ -245,6 +248,7 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
         this.add(pnlBasket, Griddy.getConstraints(0, 0, 1, 4, 0, 0, 10, 0, 0, 0, 0, 0, GridBagConstraints.BOTH, GridBagConstraints.WEST));
 
         po = new ProductOperations();
+        loggedOn = e;
 
         this.setVisible(true);
     }
