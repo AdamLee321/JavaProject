@@ -2,6 +2,7 @@ package gui.admin;
 
 import gui.StartWindow;
 import gui.UIElements;
+import gui.UIPrompts;
 import gui.employee.EmployeeMain;
 import gui.member.MemberMain;
 import gui.product.ProductMain;
@@ -27,7 +28,6 @@ public class AdminMain extends JFrame implements ActionListener {
     private JLabel mainLogo;
     private JPanel outerNorth, outerSouth, outerCenter, innerNorth, innerCenter;
     private JButton empButton, memButton, prodButton, reportButton, optButton, logoutButton;
-    private Object[] options = {"Yes","No"}; // choices for closing dialog - these are buttons that appear on the dialog
 
     private boolean displayarea = true;
     private EmployeeMain em;
@@ -46,7 +46,7 @@ public class AdminMain extends JFrame implements ActionListener {
             @Override
             public void windowClosing(WindowEvent e) {
                 super.windowClosing(e);
-                exitProgram();
+                UIPrompts.exitProgram();
             }
         });
 
@@ -224,14 +224,8 @@ public class AdminMain extends JFrame implements ActionListener {
 
 // METHODS
 
-    public void exitProgram(){ // object(frame), main text of the dialog, dialog window name, type of dialog, type of message, icon, arrayofoptions(buttons), default selected option from arrayofoptions (ex... options[1])
-        int choice = JOptionPane.showOptionDialog(am, "Are You Sure You Want To Exit The Application?", "Exit Application",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE,null,options,null);
-        if (choice == 0){
-            System.exit(0);
-        }
-    }
-
     public void changeSystemColor(){
+        Object[] options = {"Yes","No"}; // choices for closing dialog - these are buttons that appear on the dialog
         int choice = JOptionPane.showOptionDialog(am, "Please note you will need to re-login , do you want to proceed?", "Change System Colour",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE,null,options,null);
         if (choice == 0){
             UIElements.setColour();
@@ -302,7 +296,7 @@ public class AdminMain extends JFrame implements ActionListener {
             am.dispose();
         } // Exit menuItem
         else if (e.getSource().equals(exitMI) || e.getSource().equals(WindowConstants.EXIT_ON_CLOSE)){
-            exitProgram();
+            UIPrompts.exitProgram();
         }
     }
 }

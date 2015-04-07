@@ -68,6 +68,7 @@ public class UIElements {
         return color;
     }
 
+    // setting colour here instead of the adminMain because colour object is already created here. Did not want to create a new object just for the prompt
     public static void setColour(){
         color = JColorChooser.showDialog(null, "Pick System Colour",new Color(98, 169, 221));
     }
@@ -76,7 +77,9 @@ public class UIElements {
     public final static File pwAudio = new File("src/res/images/UI Elements/magicword.wav");
     public final static String pwPicture = "src/res/images/UI Elements/nedry.gif";
 
-    // Prompt Text - would be good idea to move text prompts here
-//    public final static String m
+    // System messages
+//    public final static String pExitApplication = "Are you sure you want to exit the application?";
+//    public final static String phExitApplication = "Exit";
+
 
 }

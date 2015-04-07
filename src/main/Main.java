@@ -70,7 +70,7 @@ public class Main {
 
 //        new StartWindow();
 
-       //new SaleMain(null);
+//       new SaleMain();
       new AdminMain();
 
 

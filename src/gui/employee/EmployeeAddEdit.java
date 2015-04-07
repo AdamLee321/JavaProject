@@ -30,6 +30,7 @@ public class EmployeeAddEdit implements ActionListener {
     private File fImg;
     private JFileChooser fc;
     private DateGenerator dg;
+    private int dayBefore;
     private AdminMain am;  // used for JDialogs as parent
 
     public EmployeeAddEdit(JFrame parent, int choice, EmployeeMain employeeMain, Employee employee){
@@ -229,13 +230,17 @@ public class EmployeeAddEdit implements ActionListener {
 
 // BUTTON ACTIONS
 
-    public void actionPerformed(ActionEvent e){
+    public void actionPerformed(ActionEvent e){ // the two methods below set the correct day, based on year and month, both month and year comboboxes set correct days. "dayBefore" is to remember what day was set before and set it again, otherwise it resets to 1 ... ex, Person A, birthday 4th, this way when selecting month,year, it stays at 4th, without beforeDay, day combobox would reset to 1 because month and year combobox trigger it
         if (e.getSource().equals(birthYearCBox)){
+            dayBefore = birthDayCBox.getSelectedIndex();
             birthDayCBox.setModel(new DefaultComboBoxModel<String>(dg.getMonthDays(birthMonthCBox.getSelectedIndex() + 1, Integer.parseInt(birthYearCBox.getSelectedItem().toString()))));
+            birthDayCBox.setSelectedIndex(dayBefore);
             birthMonthCBox.setEnabled(true);
         }
         else if (e.getSource().equals(birthMonthCBox)){
+            dayBefore = birthDayCBox.getSelectedIndex();
             birthDayCBox.setModel(new DefaultComboBoxModel<String>(dg.getMonthDays(birthMonthCBox.getSelectedIndex() + 1, Integer.parseInt(birthYearCBox.getSelectedItem().toString()))));
+            birthDayCBox.setSelectedIndex(dayBefore);
             birthDayCBox.setEnabled(true);
         }
         else if (e.getSource().equals(usernameGenButton)){
