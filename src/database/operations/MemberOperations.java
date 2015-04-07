@@ -12,14 +12,14 @@ import javax.swing.*;
 import java.io.*;
 import java.sql.*;
 
-public class MemberOpera {
+public class MemberOperations {
 
     Connection conn;
     Statement stmt;
     PreparedStatement pstmt;
     ResultSet rset;
 
-    public MemberOpera() {
+    public MemberOperations() {
         this.conn = ConnectionDB.getConn();
     }
 
@@ -30,7 +30,7 @@ public class MemberOpera {
             stmt = conn.createStatement();
             rset = stmt.executeQuery(query);
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "MemberOpera - getAllMembers");
+            JOptionPane.showMessageDialog(null, "MemberOperations - getAllMembers");
         }
         return rset;
     }
@@ -43,7 +43,7 @@ public class MemberOpera {
 //            stmt = conn.createStatement();
 //            rset = stmt.executeQuery(query);
 //        } catch (SQLException e) {
-//            System.out.println(JOptionPane.showConfirmDialog(null, "MemberOpera - getAllMembersMinusBlobs"));
+//            System.out.println(JOptionPane.showConfirmDialog(null, "MemberOperations - getAllMembersMinusBlobs"));
 //        }
 //        return rset;
 //    }
@@ -55,7 +55,7 @@ public class MemberOpera {
             stmt = conn.createStatement();
             rset = stmt.executeQuery(query);
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "MemberOpera - getAllMembers");
+            JOptionPane.showMessageDialog(null, "MemberOperations - getAllMembers");
         }
         return rset;
     }
@@ -83,9 +83,9 @@ public class MemberOpera {
             pstmt.setBinaryStream(12, new FileInputStream(memPic));
             pstmt.execute();
         } catch (SQLException q) {
-            JOptionPane.showMessageDialog(null, "MemberOpera - addMember 1");
+            JOptionPane.showMessageDialog(null, "MemberOperations - addMember 1");
         } catch (FileNotFoundException fnf) {
-            JOptionPane.showMessageDialog(null, "MemberOpera - addMember 2");
+            JOptionPane.showMessageDialog(null, "MemberOperations - addMember 2");
         }
     }
 
@@ -111,9 +111,9 @@ public class MemberOpera {
             pstmt.setBinaryStream(12, new FileInputStream(memPic));
             pstmt.execute();
         } catch (SQLException q) {
-            JOptionPane.showMessageDialog(null, "MemberOpera - updateMember 1");
+            JOptionPane.showMessageDialog(null, "MemberOperations - updateMember 1");
         } catch (FileNotFoundException fnf) {
-            JOptionPane.showMessageDialog(null, "MemberOpera - updateMember 2");
+            JOptionPane.showMessageDialog(null, "MemberOperations - updateMember 2");
         }
     }
 
@@ -124,7 +124,7 @@ public class MemberOpera {
             stmt = conn.createStatement();
             rset = stmt.executeQuery(query);
         } catch (SQLException q) {
-            JOptionPane.showMessageDialog(null, "MemberOpera - deleteMember");
+            JOptionPane.showMessageDialog(null, "MemberOperations - deleteMember");
         }
     }
 
@@ -141,7 +141,7 @@ public class MemberOpera {
                         rset.getString(11), rset.getInt(12), rset.getBytes(13));
             }
         } catch (SQLException sq) {
-            JOptionPane.showMessageDialog(null, "MemberOpera - memberById");
+            JOptionPane.showMessageDialog(null, "MemberOperations - memberById");
         }
         return m;
     }
@@ -171,7 +171,7 @@ public class MemberOpera {
             pstmt.setInt(1, points);
             pstmt.execute();
         } catch (SQLException q) {
-            JOptionPane.showMessageDialog(null, "MemberOpera - updateMemberPoints");
+            JOptionPane.showMessageDialog(null, "MemberOperations - updateMemberPoints");
         }
     }
 }

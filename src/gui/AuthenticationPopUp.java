@@ -83,7 +83,6 @@ public class AuthenticationPopUp {
                         EmployeeOperations eo = new EmployeeOperations();
                         Employee em = eo.validatePassword(usernameField.getText(), passwordField.getPassword());
                         position = em.getPosition();
-                        System.out.println(em.getEmpCity());
                         if (position.equals("Sales")) {
                             new SaleMain(em);
                         } else if (position.equals("Admin")) {

@@ -7,7 +7,7 @@ Group 17 (George - 22/03/2015)
 David
 */
 
-import database.operations.MemberOpera;
+import database.operations.MemberOperations;
 import gui.FormValidator;
 import gui.UIElements;
 import model.Member;
@@ -90,7 +90,7 @@ public class Discount extends JDialog implements ActionListener {
         if (e.getSource().equals(btnCancel)) {
             this.dispose();
         } else if (e.getSource().equals(btnApply)) {
-            MemberOpera mo = new MemberOpera();
+            MemberOperations mo = new MemberOperations();
             if (FormValidator.isEmptyField(tfMemberId.getText()) && FormValidator.isEmptyField(tfPercent.getText()))
                 JOptionPane.showMessageDialog(this, "Enter a value", "No values", JOptionPane.WARNING_MESSAGE);
             else if (rbPercent.isSelected()) {
@@ -98,7 +98,7 @@ public class Discount extends JDialog implements ActionListener {
                     JOptionPane.showMessageDialog(this, "Not a number", "Invalid Entry", JOptionPane.WARNING_MESSAGE);
                 else {
                     this.dispose();
-                    sm.setDiscountR(Double.parseDouble(tfPercent.getText()));
+                    sm.setMemberDetails(Double.parseDouble(tfPercent.getText()), "-", 0, 0);
                 }
             } else if (rbMemberId.isSelected()) {
 //                tfMemberId.setFocu
@@ -107,19 +107,19 @@ public class Discount extends JDialog implements ActionListener {
                 else {
                     if (mo.checkMember(Integer.parseInt(tfMemberId.getText()))) {
                         Member m = mo.getMemberById(Integer.parseInt(tfMemberId.getText()));
-                        sm.setCustomerName(m.getMemberFName() +" " + m.getMemberLName());
                         int points = m.getMemberPoints();
                         double rate = 0;
                         if (points < 8)
-                            sm.setDiscountR(DISCOUNT_RATES[0]);
+                            rate = DISCOUNT_RATES[0];
                         else if (points < 16)
-                            sm.setDiscountR(DISCOUNT_RATES[1]);
+                            rate = DISCOUNT_RATES[1];
                         else if (points < 32)
-                            sm.setDiscountR(DISCOUNT_RATES[2]);
+                            rate = DISCOUNT_RATES[2];
                         else if (points < 64)
-                            sm.setDiscountR(DISCOUNT_RATES[3]);
+                            rate = DISCOUNT_RATES[3];
                         else
-                            sm.setDiscountR(DISCOUNT_RATES[4]);
+                            rate = DISCOUNT_RATES[4];
+                        sm.setMemberDetails(rate, m.getMemberFName() +" " + m.getMemberLName(), points, m.getMemberPoints());
                         this.dispose();
                     } else {
                         JOptionPane.showMessageDialog(this, "Member does not exist", "Member", JOptionPane.WARNING_MESSAGE);

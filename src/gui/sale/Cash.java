@@ -80,8 +80,10 @@ public class Cash extends JDialog implements ActionListener {
                 JOptionPane.showMessageDialog(this, "Empty Field", "No data", JOptionPane.WARNING_MESSAGE);
             else if(!FormValidator.isNumber(tfCash.getText()))
                 JOptionPane.showMessageDialog(this, "Not a valid number", "Invalid", JOptionPane.WARNING_MESSAGE);
+            else if(sm.getTotal()> Double.parseDouble(tfCash.getText()))
+                JOptionPane.showMessageDialog(this, "Not enough cash tendered", "Cash", JOptionPane.INFORMATION_MESSAGE);
             else {
-                sm.setPaymentTypeR(tfCash.getText());
+                sm.setPaymentTypeR(tfCash.getText(), "Cash");
                 this.dispose();
             }
         }

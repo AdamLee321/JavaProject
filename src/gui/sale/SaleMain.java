@@ -6,18 +6,27 @@ Computing - Year 2, Project
 Group 17 (George, David - 22/03/2015)
 */
 
+import database.operations.MemberOperations;
 import database.operations.ProductOperations;
+import database.operations.SaleOperations;
+import database.operations.SalesDetailsOperations;
 import gui.*;
 import gui.employee.SalesHistory;
 import gui.member.MemberAddEdit;
 import model.Employee;
+import model.Sale;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import javax.swing.event.TableModelEvent;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -31,12 +40,15 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
     private JRadioButton rbCash, rbCC;
     private ButtonGroup radioGroup = new ButtonGroup(); // for mutual exclusivity of radio buttons
     private JTextField tfProdNum, tfQty;
-    private JLabel lblSubtotal, lblVAT, lblDiscount, lblTotal, lblCustomer, lblSalesperson, lblDate, lblPaymentType, lblChangeDue, lblLoggedName, lblLoggedUname, lblLoggedNumber, lblLoggedPosition;
+    private JLabel lblSubtotal, lblVAT, lblDiscount, lblTotal, lblCustomer, lblSalesperson, lblDate, lblPaymentType, lblChangeDue, lblLoggedName, lblLoggedUname, lblLoggedNumber, lblLoggedPosition, lblPaymentMethod, lblPaymentMethodR;
     private JLabel lblSubtotalR, lblVATR, lblDiscountR, lblTotalR, lblCustomerR, lblSalespersonR, lblDateR, lblPaymentTypeR, lblChangeDueR;
     private JPanel pnlBasket, pnlKeypad, pnlCheckout, pnlSaleInfo, pnlLoggedIn, pnlPaymentType;
 
-    private DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
+    private DateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
     private Date date = new Date();
+
+    private DateFormat timeFormat = new SimpleDateFormat("hh-mm-ss");
+    private Time time = new Time(System.currentTimeMillis());
 
     private double total = 0;
     private double changeDue = 0;
@@ -44,6 +56,7 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
     private double subTotal = 0;
     private double discountApplied = 0;
     private double vat = 0;
+    private String cashOrCard = "";
     final private double VAT_RATE = .21;
 
     private String prodFieldTip = "product number...";
@@ -51,8 +64,14 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
 
     private JTable saleTable;
     private SaleTableModel tableModel;
-    DecimalFormat decimalFormat = new DecimalFormat("€###,###.00");
-    Employee loggedOn;
+    private DecimalFormat decimalFormat = new DecimalFormat("€###,###.00");
+    private Employee loggedOn;
+    private int memberPoints;
+    private int memberid;
+    private double runningTotal;
+    private String loggedInTime;
+    private String loggedInDate;
+
 
 
     public SaleMain(Employee e) {
@@ -71,6 +90,9 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
                 UIPrompts.exitProgram();
             }
         });
+
+        po = new ProductOperations();
+        loggedOn = e;
 
 // ADD PRODUCT PANEL
 
@@ -215,10 +237,15 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
         lblPaymentTypeR = new JLabel("-");
         pnlSaleInfo.add(lblPaymentTypeR, Griddy.getConstraints(1, 7, 1, 1, 0, 0, 0, 0, 0, 0, 5, 0, 0, GridBagConstraints.EAST));
 
+        lblPaymentMethod = new JLabel("Payment Type");
+        pnlSaleInfo.add(lblPaymentMethod, Griddy.getConstraints(0, 8, 1, 1, 0, 0, 0, 0, 0, 5, 0, 0, 0, GridBagConstraints.WEST));
+        lblPaymentMethodR = new JLabel("-");
+        pnlSaleInfo.add(lblPaymentMethodR, Griddy.getConstraints(1, 8, 1, 1, 0, 0, 0, 0, 0, 0, 5, 0, 0, GridBagConstraints.EAST));
+
         lblChangeDue = new JLabel("Change Due");
-        pnlSaleInfo.add(lblChangeDue, Griddy.getConstraints(0, 8, 1, 1, 0, 0, 0, 0, 0, 5, 0, 0, 0, GridBagConstraints.WEST));
+        pnlSaleInfo.add(lblChangeDue, Griddy.getConstraints(0, 9, 1, 1, 0, 0, 0, 0, 0, 5, 0, 0, 0, GridBagConstraints.WEST));
         lblChangeDueR = new JLabel("-");
-        pnlSaleInfo.add(lblChangeDueR, Griddy.getConstraints(1, 8, 1, 1, 0, 0, 0, 0, 0, 0, 5, 0, 0, GridBagConstraints.EAST));
+        pnlSaleInfo.add(lblChangeDueR, Griddy.getConstraints(1, 9, 1, 1, 0, 0, 0, 0, 0, 0, 5, 0, 0, GridBagConstraints.EAST));
 
         this.add(pnlSaleInfo, Griddy.getConstraints(1, 2, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, GridBagConstraints.BOTH, GridBagConstraints.EAST));
 
@@ -247,10 +274,19 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
         pnlBasket.add(scrollPane);
         this.add(pnlBasket, Griddy.getConstraints(0, 0, 1, 4, 0, 0, 10, 0, 0, 0, 0, 0, GridBagConstraints.BOTH, GridBagConstraints.WEST));
 
-        po = new ProductOperations();
-        loggedOn = e;
+        setLoggedInTime();
+        System.out.println(loggedInDate +" "+ loggedInTime);
 
         this.setVisible(true);
+    }
+
+
+
+// METHODS
+
+    public void setLoggedInTime(){
+        loggedInTime = String.valueOf(new Time(System.currentTimeMillis()));
+        loggedInDate = dateFormat.format(date);
     }
 
     // update all the labels
@@ -264,20 +300,29 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
  }
 
     // set discount %
-    public void setDiscountR(double discount) {
+    public void setMemberDetails(double discount, String name, int points, int id) {
+        memberid = id;
+        lblCustomerR.setText(name);
+        memberPoints = points;
         discountApplied = discount;
         total -= (discountApplied / 100) * total;
         updateLabels();
     }
 
     // set payment type
-    public void setPaymentTypeR(String cashOrCard) {
+    public void setPaymentTypeR(String cashOrCard, String cash) {
         if (FormValidator.isNumber(cashOrCard)) {
             cashPaid = Double.parseDouble(cashOrCard);
             changeDue = cashPaid - total;
-        } else {
-            lblPaymentTypeR.setText(cashOrCard);
+            lblPaymentMethodR.setText(cash);
         }
+        updateLabels();
+    }
+
+    public void setPaymentTypeR(String cash) {
+        cashPaid = total;
+        changeDue = cashPaid - total;
+        lblPaymentMethodR.setText(cash);
         updateLabels();
     }
 
@@ -285,12 +330,11 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
         changeDue = cashPaid - total;
     }
 
-    public void setCustomerName(String name) {
-        lblCustomerR.setText(name);
+
+
+    public double getTotal(){
+        return total;
     }
-
-
-// METHODS
 
     public void updatePrice() {
         total = 0;
@@ -303,7 +347,7 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
             cashPaid = 0;
             calcChangeDue();
             discountApplied = 0;
-            setCustomerName("-");
+            lblCustomerR.setText("-");
         }
         vat = total * VAT_RATE;
         subTotal = (total - vat);
@@ -313,7 +357,17 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
     public void addToBasket() {
         // Get the data!
         try {
-            tableModel.queryTableData(Integer.parseInt(tfProdNum.getText()), Integer.parseInt(tfQty.getText()));
+            boolean found = false;
+            for (int i = 0; i < tableModel.getList().size() ; i++) {
+                SaleRow s = (SaleRow) tableModel.getList().get(i);
+                    if(s.getProductCode() ==  Integer.parseInt(tfProdNum.getText())){
+                        s.setQty(s.getQty()+Integer.parseInt(tfQty.getText()));
+                        found = true;
+                        tableModel.fireTableDataChanged();
+                    }
+                }
+            if(!found)
+                tableModel.queryTableData(Integer.parseInt(tfProdNum.getText()), Integer.parseInt(tfQty.getText()));
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "SQL Problem");
         }
@@ -404,7 +458,22 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
                     JOptionPane.showMessageDialog(this, "Item does not exist", "Quantity", JOptionPane.WARNING_MESSAGE);
 
             }
+            tfProdNum.setText(prodFieldTip);
+            tfProdNum.setForeground(Color.GRAY);
+            tfQty.setText(qtyFieldTip);
+            tfQty.setForeground(Color.GRAY);
         } else if (e.getSource().equals(btnLogout)) {
+            try (BufferedWriter bf = new BufferedWriter(new FileWriter("src/res/log.txt",true))) {
+                bf.append("Login\t" + loggedInTime + " " + loggedInDate + "\r\n");
+                bf.append("Name:\t" + loggedOn.getEmpFName() + " " + loggedOn.getEmpLName() + "\r\n");
+                bf.append("ID:\t" + loggedOn.getEmpId() + "\r\n");
+                bf.append("");
+                bf.append("Logout\t" + String.valueOf(new Time(System.currentTimeMillis())) + " " + dateFormat.format(new Date()) + "\r\n");
+                bf.append("Sales\t" + runningTotal + "\r\n");
+                bf.append("\r\n");
+            } catch(IOException io){
+                System.out.println("File not found");
+            }
             new StartWindow();
             this.dispose();
         } else if (e.getSource().equals(btnRegister)) {
@@ -431,6 +500,29 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
                     updateLabels();
                 }
             } else if (e.getSource().equals(btnCheckout)) {
+                if (cashPaid == -1) {
+                    lblPaymentTypeR.setText(cashOrCard);
+                    JOptionPane.showMessageDialog(this, "Please enter cash payment first", "Sales", JOptionPane.INFORMATION_MESSAGE);
+                }
+                else{
+                    new MemberOperations().updateMemberPoints(memberid, (memberPoints + 1));
+                    SaleOperations so = new SaleOperations();
+                    so.insertSale(loggedOn.getEmpId(), String.valueOf(dateFormat.format(date)), String.valueOf(new Time(System.currentTimeMillis())), discountApplied, total);
+                    SalesDetailsOperations sd = new SalesDetailsOperations();
+                    int saleId = so.getMaxId();
+                    for (int i = 0; i < tableModel.getList().size(); i++) {
+                        SaleRow s = (SaleRow) tableModel.getList().get(i);
+                        if (memberid == 0)
+                            sd.insertSalesDetails(s.getProductCode(), saleId, s.getQty());
+                        else
+                            sd.insertSalesDetails(s.getProductCode(), saleId, memberid, s.getQty());
+                    }
+                    JOptionPane.showMessageDialog(this, "Sale completed!", "Sales", JOptionPane.INFORMATION_MESSAGE);
+                    tableModel.emptyArray();
+                    tableModel.fireTableDataChanged();
+                    runningTotal += total;
+                    updatePrice();
+                }
             }
         }
     }

@@ -96,7 +96,7 @@ public class CreateEmployee {
             pstmt.setInt(12, 12000); // employee salary
             pstmt.setBinaryStream(13, savePic2DB(new File("src/res/images/EmployeePictures/ermac.png"))); // employee picture BLOB
             pstmt.setString(14, "ruthward"); // employee username
-            pstmt.setString(15, "81dc9bdb52d04dc20036dbd8313ed055"); // employee password
+            pstmt.setString(15, "827ccb0eea8a706c4c34a16891f84e7b"); // employee password
             pstmt.execute();
 
             pstmt.setInt(1, 4);

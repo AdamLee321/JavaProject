@@ -1,7 +1,7 @@
 package gui.member;
 
 import database.operations.EmployeeOperations;
-import database.operations.MemberOpera;
+import database.operations.MemberOperations;
 import gui.Griddy;
 import gui.UIElements;
 import gui.admin.AdminMain;
@@ -28,7 +28,7 @@ public class MemberMain implements ActionListener, MouseListener, KeyListener {
     private String textFieldTip = "type your search query...";
     private AdminMain am;  // declare for usage with JDialogs as parent. No need to initialize
     private EmployeeOperations eo;
-    MemberOpera mo = new MemberOpera();
+    MemberOperations mo = new MemberOperations();
     private int row = 0;
   //  Employee e;
 

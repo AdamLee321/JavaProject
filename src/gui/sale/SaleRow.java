@@ -34,6 +34,10 @@ public class SaleRow {
     return qty;
   }
 
+  public void setQty(int qtyIn) {
+    qty = qtyIn;
+  }
+
   public String getProdModel() {
     return prodModel;
   }

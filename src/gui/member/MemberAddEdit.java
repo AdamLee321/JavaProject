@@ -1,6 +1,6 @@
 package gui.member;
 
-import database.operations.MemberOpera;
+import database.operations.MemberOperations;
 import gui.*;
 import gui.admin.AdminMain;
 import model.Member;
@@ -29,7 +29,7 @@ public class MemberAddEdit implements ActionListener {
     private JFileChooser fc;
     private DateGenerator dg;
     private AdminMain am;  // used for JDialogs as parent
-    private MemberOpera mo;
+    private MemberOperations mo;
     private MemberMain mm;
     private Member m;
     private int choice = 0;
@@ -293,7 +293,7 @@ public class MemberAddEdit implements ActionListener {
              && birthMonthCBox.isEnabled()){
                 if(choice == 0) { // if all the above validation is OK, and the choice is 0, add a new member
                     // initialize member ops, add a new member(pass all the paramemters), display message
-                    mo = new MemberOpera();
+                    mo = new MemberOperations();
                     mo.addMember(memberFNameField.getText(), memberLNameField.getText(), memberStreetField.getText(), memberCityField.getText(), memberCountyField.getText(), birthDayCBox.getSelectedIndex() + 1, birthMonthCBox.getItemAt(birthMonthCBox.getSelectedIndex()), birthYearCBox.getItemAt(birthYearCBox.getSelectedIndex()), memberEmailField.getText(), Integer.parseInt(memberNumberField.getText()), Integer.parseInt(memberPointsField.getText()), fImg);
                     JOptionPane.showMessageDialog(null, "New Member Added", "Information", JOptionPane.INFORMATION_MESSAGE);
                     // refresh the MemberMain list after adding a new member
@@ -308,7 +308,7 @@ public class MemberAddEdit implements ActionListener {
                     if (noChanges()){ // if there were no changes just close the window
                         memberAdd.dispose();
                     } else{ // if something changed then prompt and update the info
-                        mo = new MemberOpera();
+                        mo = new MemberOperations();
                         mo.updateMember(m.getMemberId(), memberFNameField.getText(), memberLNameField.getText(), memberStreetField.getText(), memberCityField.getText(), memberCountyField.getText(), birthDayCBox.getSelectedIndex() + 1, birthMonthCBox.getItemAt(birthMonthCBox.getSelectedIndex()), birthYearCBox.getItemAt(birthYearCBox.getSelectedIndex()), memberEmailField.getText(), Integer.parseInt(memberNumberField.getText()), Integer.parseInt(memberPointsField.getText()), fImg);
                         JOptionPane.showMessageDialog(null, "Member Information Updated", "Information", JOptionPane.INFORMATION_MESSAGE);
                         // refresh the MemberMain list after adding a new member
