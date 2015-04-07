@@ -32,7 +32,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class SaleMain extends JFrame implements ActionListener, MouseListener {
+public class SaleMain extends JFrame implements ActionListener/*, MouseListener*/, KeyListener, FocusListener {
 
     private ProductOperations po;
 
@@ -80,9 +80,10 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
         this.setSize(1000, 700);
         this.setLocationRelativeTo(null);
         this.setResizable(true);
+        this.setMinimumSize(new Dimension(1000,700));
         this.setLayout(new GridBagLayout());
         this.getContentPane().setBackground(UIElements.getColour());
-        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         this.addWindowListener(new WindowAdapter() { // add window listener for when clicking X to close the window
             @Override
             public void windowClosing(WindowEvent e) {
@@ -103,24 +104,32 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
         tfProdNum = new JTextField();
         tfProdNum.setText(prodFieldTip); // set initial text field search
         tfProdNum.setForeground(Color.GRAY); // set initial colour to gray
+/*
         tfProdNum.addMouseListener(this);
-        pnlKeypad.add(tfProdNum, Griddy.getConstraints(0, 0, 3, 1, 0, 0, 1, 1, 2, 2, 2, 2, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
+*/
+        tfProdNum.addFocusListener(this);
+        pnlKeypad.add(tfProdNum, Griddy.getConstraints(0, 0, 2, 1, 0, 0, 1, 1, 2, 2, 2, 2, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
 
         tfQty = new JTextField();
         tfQty.setText(qtyFieldTip); // set initial text field search
         tfQty.setForeground(Color.GRAY); // set initial colour to gray
+/*
         tfQty.addMouseListener(this);
-        pnlKeypad.add(tfQty, Griddy.getConstraints(0, 1, 3, 1, 0, 0, 1, 1, 2, 2, 2, 2, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
+*/
+        tfQty.addFocusListener(this);
+        pnlKeypad.add(tfQty, Griddy.getConstraints(0, 1, 2, 1, 0, 0, 1, 1, 2, 2, 2, 2, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
 
-        btnAdd = new JButton("Add", new ImageIcon(UIElements.plus16));
+        btnAdd = new JButton("Add Item", new ImageIcon(UIElements.plus16));
+//        btnAdd.setMaximumSize(new Dimension(30,5));
         btnAdd.addActionListener(this);
-        pnlKeypad.add(btnAdd, Griddy.getConstraints(0, 2, 1, 1, 0, 0, 1, 1, 2, 2, 2, 2, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
+        pnlKeypad.add(btnAdd, Griddy.getConstraints(0, 2, 1, 1, 0, 10, 1, 1, 2, 2, 0, 2, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
 
-        btnRemove = new JButton("Remove", new ImageIcon(UIElements.minus16));
+        btnRemove = new JButton("Remove ", new ImageIcon(UIElements.minus16));
+//        btnRemove.setMaximumSize(new Dimension(30,5));
         btnRemove.addActionListener(this);
-        pnlKeypad.add(btnRemove, Griddy.getConstraints(1, 2, 1, 1, 0, 0, 0, 0, 2, 2, 2, 2, GridBagConstraints.BOTH, GridBagConstraints.EAST));
+        pnlKeypad.add(btnRemove, Griddy.getConstraints(1, 2, 1, 1, 0, 0, 1, 1, 2, 0, 2, 2, GridBagConstraints.BOTH, GridBagConstraints.EAST));
 
-        this.add(pnlKeypad, Griddy.getConstraints(1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
+        this.add(pnlKeypad, Griddy.getConstraints(1, 0, 2, 1, 0, 0, 0, 1, 0, 0, 0, 0, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
 
 // CHECKOUT PANEL (right, bottom corner)
 
@@ -130,15 +139,15 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
 
         btnRegister = new JButton("Register", new ImageIcon(UIElements.person16));
         btnRegister.addActionListener(this);
-        pnlCheckout.add(btnRegister, Griddy.getConstraints(0, 0, 1, 1, 0, 0, 1, 1, 2, 2, 2, 2, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
+        pnlCheckout.add(btnRegister, Griddy.getConstraints(0, 0, 1, 1, 0, 10, 1, 1, 2, 2, 0, 2, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
 
         btnDiscount = new JButton("Discount", new ImageIcon(UIElements.minus16));
         btnDiscount.addActionListener(this);
-        pnlCheckout.add(btnDiscount, Griddy.getConstraints(1, 0, 1, 1, 0, 0, 1, 1, 2, 2, 2, 2, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
+        pnlCheckout.add(btnDiscount, Griddy.getConstraints(1, 0, 1, 1, 0, 0, 1, 1, 2, 0, 2, 2, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
 
         btnReturnProduct = new JButton("Return Product", new ImageIcon(UIElements.product16));
         btnReturnProduct.addActionListener(this);
-        pnlCheckout.add(btnReturnProduct, Griddy.getConstraints(0, 1, 2, 1, 0, 0, 1, 1, 0, 2, 2, 2, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
+        pnlCheckout.add(btnReturnProduct, Griddy.getConstraints(0, 1, 2, 1, 0, 10, 1, 1, 0, 2, 2, 2, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
 
         // PAYMENT TYPE PANEL - panel in a panel... Inception!!!
         pnlPaymentType = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -158,13 +167,13 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
         pnlPaymentType.add(rbCash);
         pnlPaymentType.add(rbCC);
 
-        pnlCheckout.add(pnlPaymentType, Griddy.getConstraints(0, 2, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER));
+        pnlCheckout.add(pnlPaymentType, Griddy.getConstraints(0, 2, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
 
         btnCheckout = new JButton("Checkout", new ImageIcon(UIElements.save16));
         btnCheckout.addActionListener(this);
-        pnlCheckout.add(btnCheckout, Griddy.getConstraints(0, 3, 2, 2, 0, 0, 1, 1, 0, 0, 0, 0, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
+        pnlCheckout.add(btnCheckout, Griddy.getConstraints(0, 3, 2, 2, 0, 20, 1, 1, 2, 0, 0, 0, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
 
-        this.add(pnlCheckout, Griddy.getConstraints(1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
+        this.add(pnlCheckout, Griddy.getConstraints(1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
 
 // LOGGED IN PANEL
 
@@ -173,22 +182,22 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
         pnlLoggedIn.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Currently Logged In")); // set anonymous titled, etched border
 
         lblLoggedName = new JLabel(loggedOn.getEmpFName() +" " + loggedOn.getEmpLName());
-        pnlLoggedIn.add(lblLoggedName, Griddy.getConstraints(0, 0, 1, 1, 0, 0, 1, 0, 5, 5, 5, 5, 0, GridBagConstraints.WEST));
+        pnlLoggedIn.add(lblLoggedName, Griddy.getConstraints(0, 0, 1, 1, 0, 0, 1, 0, 10, 5, 5, 5, GridBagConstraints.BOTH, GridBagConstraints.WEST));
 
         lblLoggedUname = new JLabel(loggedOn.getEmpUsername());
-        pnlLoggedIn.add(lblLoggedUname, Griddy.getConstraints(1, 0, 1, 1, 0, 0, 0, 0, 5, 5, 5, 5, 0, GridBagConstraints.EAST));
+        pnlLoggedIn.add(lblLoggedUname, Griddy.getConstraints(1, 0, 1, 1, 0, 0, 0, 0, 10, 5, 5, 5, GridBagConstraints.BOTH, GridBagConstraints.EAST));
 
         lblLoggedNumber = new JLabel(Integer.toString(loggedOn.getEmpId()));
-        pnlLoggedIn.add(lblLoggedNumber, Griddy.getConstraints(0, 1, 1, 1, 0, 0, 0, 0, 5, 5, 5, 5, 0, GridBagConstraints.WEST));
+        pnlLoggedIn.add(lblLoggedNumber, Griddy.getConstraints(0, 1, 1, 1, 0, 0, 0, 0, 5, 5, 5, 5, GridBagConstraints.BOTH, GridBagConstraints.WEST));
 
         lblLoggedPosition = new JLabel(loggedOn.getPosition());
-        pnlLoggedIn.add(lblLoggedPosition, Griddy.getConstraints(1, 1, 1, 1, 0, 0, 0, 0, 0, 5, 5, 5, 0, GridBagConstraints.EAST));
+        pnlLoggedIn.add(lblLoggedPosition, Griddy.getConstraints(1, 1, 1, 1, 0, 0, 0, 0, 0, 5, 5, 5, GridBagConstraints.BOTH, GridBagConstraints.EAST));
 
         btnLogout = new JButton("Log Out", new ImageIcon(UIElements.logout16));
         btnLogout.addActionListener(this);
-        pnlLoggedIn.add(btnLogout, Griddy.getConstraints(0, 2, 2, 1, 0, 0, 0, 0, 5, 5, 5, 5, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
+        pnlLoggedIn.add(btnLogout, Griddy.getConstraints(0, 3, 2, 1, 0, 10, 0, 0, 0, 0, 0, 0, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
 
-        this.add(pnlLoggedIn, Griddy.getConstraints(1, 3, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, GridBagConstraints.BOTH, GridBagConstraints.EAST));
+        this.add(pnlLoggedIn, Griddy.getConstraints(1, 3, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
 
 // SALE INFO PANEL
 
@@ -197,10 +206,9 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
         pnlSaleInfo.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Sale Info")); // set anonymous titled, etched border
 
         lblSubtotal = new JLabel("SubTotal");
-        pnlSaleInfo.add(lblSubtotal, Griddy.getConstraints(0, 0, 1, 1, 0, 0, 1, 0, 0, 5, 0, 0, 0, GridBagConstraints.WEST));
+        pnlSaleInfo.add(lblSubtotal, Griddy.getConstraints(0, 0, 1, 1, 0, 0, 1, 0, 10, 5, 0, 0, 0, GridBagConstraints.WEST));
         lblSubtotalR = new JLabel("-");
-//        lblSubtotalR.setFont(new Font("Tahoma", 1, 18));
-        pnlSaleInfo.add(lblSubtotalR, Griddy.getConstraints(1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 5, 0, 0, GridBagConstraints.EAST));
+        pnlSaleInfo.add(lblSubtotalR, Griddy.getConstraints(1, 0, 1, 1, 0, 0, 0, 0, 0, 10, 5, 0, 0, GridBagConstraints.EAST));
 
         lblVAT = new JLabel("VAT");
         pnlSaleInfo.add(lblVAT, Griddy.getConstraints(0, 1, 1, 1, 0, 0, 0, 0, 0, 5, 0, 0, 0, GridBagConstraints.WEST));
@@ -243,11 +251,11 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
         pnlSaleInfo.add(lblPaymentMethodR, Griddy.getConstraints(1, 8, 1, 1, 0, 0, 0, 0, 0, 0, 5, 0, 0, GridBagConstraints.EAST));
 
         lblChangeDue = new JLabel("Change Due");
-        pnlSaleInfo.add(lblChangeDue, Griddy.getConstraints(0, 9, 1, 1, 0, 0, 0, 0, 0, 5, 0, 0, 0, GridBagConstraints.WEST));
+        pnlSaleInfo.add(lblChangeDue, Griddy.getConstraints(0, 9, 1, 1, 0, 0, 0, 0, 0, 5, 0, 10, 0, GridBagConstraints.WEST));
         lblChangeDueR = new JLabel("-");
-        pnlSaleInfo.add(lblChangeDueR, Griddy.getConstraints(1, 9, 1, 1, 0, 0, 0, 0, 0, 0, 5, 0, 0, GridBagConstraints.EAST));
+        pnlSaleInfo.add(lblChangeDueR, Griddy.getConstraints(1, 9, 1, 1, 0, 0, 0, 0, 0, 0, 5, 10, 0, GridBagConstraints.EAST));
 
-        this.add(pnlSaleInfo, Griddy.getConstraints(1, 2, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, GridBagConstraints.BOTH, GridBagConstraints.EAST));
+        this.add(pnlSaleInfo, Griddy.getConstraints(1, 2, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, GridBagConstraints.BOTH, GridBagConstraints.EAST));
 
 
 // BASKET PANEL
@@ -272,7 +280,7 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
         pnlBasket.setPreferredSize(new Dimension(700, 500));
         pnlBasket.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Basket")); // set anonymous titled, etched border
         pnlBasket.add(scrollPane);
-        this.add(pnlBasket, Griddy.getConstraints(0, 0, 1, 4, 0, 0, 10, 0, 0, 0, 0, 0, GridBagConstraints.BOTH, GridBagConstraints.WEST));
+        this.add(pnlBasket, Griddy.getConstraints(0, 0, 1, 4, 0, 0, 5, 1, 0, 0, 0, 0, GridBagConstraints.BOTH, GridBagConstraints.WEST));
 
         setLoggedInTime();
         System.out.println(loggedInDate +" "+ loggedInTime);
@@ -376,68 +384,42 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
     public void refreshBasket() {
         tableModel.fireTableChanged(new TableModelEvent(tableModel, -1, -1));
     }
+
 // BUTTON ACTIONS - don't forget to add action listeners to buttons and implement ActionListener class
 
-    // have to implement these methods for MouseListener
-    public void mouseExited(MouseEvent e) {
-    }
 
-    public void mouseReleased(MouseEvent e) {
-    }
-
-    public void mousePressed(MouseEvent e) {
-    }
-
-    public void mouseEntered(MouseEvent e) {
-    }
-
-    public void mouseClicked(MouseEvent e) {
+    public void focusGained(FocusEvent e) {
         if (e.getSource().equals(tfProdNum)) {
-            if (tfProdNum.getText().equals(prodFieldTip)) { // if the product field textfield is populated with the preset text
-                tfProdNum.setText(""); // empty it
-                tfProdNum.setForeground(null);  // reset colour to black
+            tfProdNum.setText(""); // empty it
+            tfProdNum.setForeground(null);  // reset colour to black
+        }
+        else if (e.getSource().equals(tfQty)){
+            tfQty.setText(""); // empty it
+            tfQty.setForeground(null);  // reset colour to black
+        }
+    }
 
-                if (tfQty.getText().equals("")) {
-                    tfQty.setText(prodFieldTip);
-                    tfQty.setForeground(Color.GRAY);
-                }
-                tfProdNum.addFocusListener(new FocusListener() {
-                    @Override
-                    public void focusGained(FocusEvent e) {
-                    }
-
-                    @Override
-                    public void focusLost(FocusEvent e) {
-                        if (tfProdNum.getText().equals("")) {
-                            tfProdNum.setText(prodFieldTip);
-                            tfProdNum.setForeground(Color.GRAY);
-                        }
-                    }
-                });
-            }
+    public void focusLost(FocusEvent e) {
+        if (e.getSource().equals(tfProdNum)) {
+            tfProdNum.setText(prodFieldTip);
+            tfProdNum.setForeground(Color.GRAY);
         } else if (e.getSource().equals(tfQty)) {
-            if (tfQty.getText().equals(qtyFieldTip)) {
-                tfQty.setText("");
-                tfQty.setForeground(null);
+            tfQty.setText(qtyFieldTip);
+            tfQty.setForeground(Color.GRAY);
+        }
+    }
 
-                if (tfProdNum.getText().equals("")) {
-                    tfProdNum.setText(prodFieldTip);
-                    tfProdNum.setForeground(Color.GRAY);
-                }
-                tfQty.addFocusListener(new FocusListener() {
-                    @Override
-                    public void focusGained(FocusEvent e) {
-                    }
+    // have to implement these methods for KeyboardListener
+    public void keyTyped(KeyEvent e){}
+    public void keyPressed(KeyEvent e){}
 
-                    @Override
-                    public void focusLost(FocusEvent e) {
-                        if (tfQty.getText().equals("")) {
-                            tfQty.setText(qtyFieldTip);
-                            tfQty.setForeground(Color.GRAY);
-                        }
-                    }
-                });
-            }
+    public void keyReleased(KeyEvent e){
+        if (e.getSource().equals(tfProdNum)) {
+            int key = e.getKeyCode();
+            if (key == KeyEvent.VK_TAB)
+                if (tfProdNum.getText().equals(prodFieldTip)) // if the product field textfield is populated with the preset text
+                    tfProdNum.setText(""); // empty it
+                    tfProdNum.setForeground(null); // reset colour to black            }
         }
     }
 
