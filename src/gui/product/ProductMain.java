@@ -4,22 +4,18 @@ import database.operations.ProductOperations;
 import gui.Griddy;
 import gui.UIElements;
 import gui.admin.AdminMain;
-import gui.member.MemberAddEdit;
 import gui.member.OrderHistory;
-import model.Member;
 import model.Product;
-
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.SQLException;
 
 /*
 IT Tallaght - 2015, S2
 Computing - Year 2, Project
 Group 17 (George - 07/03/2015)
-Dav
+David
 */
 
 public class ProductMain implements ActionListener, MouseListener {
@@ -41,17 +37,17 @@ public class ProductMain implements ActionListener, MouseListener {
     private JTable products;
     private ProductTableModel productTableModel;
     ProductOperations po;
-    private int selectedRow = 0;
+    private int selectedRow = -1;
     private int selectedRowId = 0;
 
-    public JPanel getProductMain(){
+    public JPanel getProductMain() {
 // setup the frame
         prodMain = new JPanel(new BorderLayout());
 // north panel
         northPanel = new JPanel(new GridBagLayout());
 //northPanel.setBackground(new Color(98, 169, 221));
 
-    // manage products panel
+        // manage products panel
 
         managePanel = new JPanel(new FlowLayout());
         //managePanel.setBackground(new Color(98, 169, 221));
@@ -75,9 +71,9 @@ public class ProductMain implements ActionListener, MouseListener {
         deleteButton.addActionListener(this);
         managePanel.add(deleteButton);
 
-        northPanel.add(managePanel, Griddy.getConstraints(0,0,1,1,0,0,0,0,5,0,0,5,0,GridBagConstraints.CENTER));
+        northPanel.add(managePanel, Griddy.getConstraints(0, 0, 1, 1, 0, 0, 0, 0, 5, 0, 0, 5, 0, GridBagConstraints.CENTER));
 
-    // search products panel
+        // search products panel
 
         searchPanel = new JPanel(new BorderLayout());
         //searchPanel.setBackground(new Color(98, 169, 221));
@@ -115,12 +111,12 @@ public class ProductMain implements ActionListener, MouseListener {
         searchPanel.add(searchBottomPanel, BorderLayout.SOUTH);
 
         // add all the above to northPanel
-        northPanel.add(searchPanel, Griddy.getConstraints(1,0,1,2,0,0,0,0,5,0,0,5,0,GridBagConstraints.CENTER));
+        northPanel.add(searchPanel, Griddy.getConstraints(1, 0, 1, 2, 0, 0, 0, 0, 5, 0, 0, 5, 0, GridBagConstraints.CENTER));
 
         // add the above to the northPanel
         prodMain.add(northPanel, BorderLayout.NORTH);
 
-    // results panel
+        // results panel
         productTableModel = new ProductTableModel();
         products = new JTable(productTableModel);
         products.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -159,7 +155,7 @@ public class ProductMain implements ActionListener, MouseListener {
         return prodMain;
     }
 
-    public void refreshList(){
+    public void refreshList() {
         productTableModel.emptyArray();
         productTableModel.getAllProductsTable();
     }
@@ -167,40 +163,44 @@ public class ProductMain implements ActionListener, MouseListener {
     // open the edit window (created a method because it's used in two places - mouse and action listener
     public void displayEdit() {
         Product p = po.productByIDO(selectedRowId);
-        if (selectedRow != -1) {
             new ProductAddEdit(am, 1, this, p);
-        } else {
-            JOptionPane.showMessageDialog(null, "Please Select The Product First", "Product Not Selected", JOptionPane.WARNING_MESSAGE);
-        }
     }
 
 // BUTTON ACTIONS
 
     // have to implement these methods for MouseListener
-    public void mouseExited(MouseEvent e){}
-    public void mouseReleased(MouseEvent e){}
-    public void mousePressed(MouseEvent e){}
-    public void mouseEntered(MouseEvent e){}
+    public void mouseExited(MouseEvent e) {
+    }
 
-    public void mouseClicked(MouseEvent e){
-        if(e.getSource().equals(searchField)){
+    public void mouseReleased(MouseEvent e) {
+    }
+
+    public void mousePressed(MouseEvent e) {
+    }
+
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    public void mouseClicked(MouseEvent e) {
+        if (e.getSource().equals(searchField)) {
             if (searchField.getText().equals(textFieldTip)) {
                 searchField.setText("");
                 searchField.setForeground(null); // reset colour to black
             }
             searchField.addFocusListener(new FocusListener() {
                 @Override
-                public void focusGained(FocusEvent e) {}
+                public void focusGained(FocusEvent e) {
+                }
+
                 @Override
                 public void focusLost(FocusEvent e) { // set the textFieldTip to be visible in text field on focus loss
-                    if (searchField.getText().equals("")){
+                    if (searchField.getText().equals("")) {
                         searchField.setText(textFieldTip);
                         searchField.setForeground(Color.GRAY);
                     }
                 }
             });
-        }
-        else if(e.getSource().equals(products)){
+        } else if (e.getSource().equals(products)) {
             selectedRow = products.getSelectedRow();
             selectedRowId = (Integer) products.getValueAt(products.getSelectedRow(), 0);
             if (e.getClickCount() == 2) {
@@ -209,25 +209,29 @@ public class ProductMain implements ActionListener, MouseListener {
         }
     }
 
-    public void actionPerformed(ActionEvent e){
-        if (e.getSource().equals(addButton)){
-            new ProductAddEdit(am , 0, this, null);
-        } // edit product
-        else if (e.getSource().equals(editButton)){
-            displayEdit();
-        }
-        else if (e.getSource().equals(deleteButton)){
-            Object[] options = {"Yes","No"};
-            int choice = JOptionPane.showOptionDialog(prodMain, "Are You Sure?", "Delete Product",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE,null,options,null);
-            if (choice == 0){
-
-                JOptionPane.showMessageDialog(prodMain,"Product Deleted");
-            } else {
-
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource().equals(addButton))
+            new ProductAddEdit(am, 0, this, null);
+        else if (e.getSource().equals(viewButton))
+            new OrderHistory();
+        else {
+            if (selectedRow == -1)
+                JOptionPane.showMessageDialog(null, "Please Select The Product First", "Product Not Selected", JOptionPane.WARNING_MESSAGE);
+            else {
+                if (e.getSource().equals(editButton))// edit product
+                    displayEdit();
+                else if (e.getSource().equals(deleteButton)) {
+                    Object[] options = {"Yes", "No"};
+                    int choice = JOptionPane.showOptionDialog(prodMain, "Are You Sure?", "Delete Product", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, null);
+                    if (choice == 0) {
+                        po.deleteProduct((Integer) products.getValueAt(products.getSelectedRow(), 0));
+                        JOptionPane.showMessageDialog(prodMain, "Product Deleted");
+                        selectedRow = -1;
+                        refreshList();
+                    }
+                }
             }
-        }
-        else if (e.getSource().equals(viewButton)){
-            OrderHistory pv = new OrderHistory();
+
         }
     }
 }

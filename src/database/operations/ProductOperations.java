@@ -60,6 +60,18 @@ public class ProductOperations {
         return rset;
     }
 
+    public ResultSet getAllProducts(){
+        String sql ="SELECT prodId, prodMake, prodModel, prodSalePrice, prodCostPrice, prodQTY, " +
+                "prodType, cpu, ram, OperatingSystem, storage, screen, prodDesc FROM PRODUCT";
+        try{
+            stmt = conn.createStatement();
+            rset = stmt.executeQuery(sql);
+        }catch (SQLException sqlE){
+            System.out.println(sqlE.getMessage());
+        }
+        return rset;
+    }
+
     public Product productByIDO(int id){
         Product p = null;
         String sql = "SELECT prodId, prodMake, prodModel, prodSalePrice, prodCostPrice, prodQTY," +
@@ -118,9 +130,9 @@ public class ProductOperations {
         return x;
     }
 
-    public void insertProduct(String make, String model, double salePrice, double costPrice, int qty, File prodPic,
-                              String prodType, String cpu, String ram, String os, String storage, String screen,
-                              String description){
+    public void addProduct(String make, String model, double salePrice, double costPrice, int qty, File prodPic,
+                           String prodType, String cpu, String ram, String os, String storage, String screen,
+                           String description){
 
         String sql = "INSERT INTO Product (prodId, prodMake, prodModel, prodSalePrice, prodCostPrice, " +
                 "prodQTY, prodPic, prodType, cpu, ram, operatingSystem, storage, screen, prodDesc) VALUES " +
@@ -145,18 +157,6 @@ public class ProductOperations {
         }catch(SQLException e){
             System.out.println(e.getMessage());
         }
-    }
-
-    public ResultSet getAllProducts(){
-        String sql ="SELECT prodId, prodMake, prodModel, prodSalePrice, prodCostPrice, prodQTY, " +
-                "prodType, cpu, ram, OperatingSystem, storage, screen, prodDesc FROM PRODUCT";
-        try{
-            stmt = conn.createStatement();
-            rset = stmt.executeQuery(sql);
-        }catch (SQLException sqlE){
-            System.out.println(sqlE.getMessage());
-        }
-        return rset;
     }
 
     public void updateProduct(String make, String model, double salePrice, double costPrice, int qty, File prodPic,
@@ -185,8 +185,17 @@ public class ProductOperations {
             pstmt.execute();
             System.out.println("Successful update");
         }catch(SQLException e){
-            System.out.println("fuck");
             System.out.println(e.getMessage());
+        }
+    }
+
+    public void deleteProduct(int id){
+        String sql = "DELETE FROM product WHERE prodid = '"+id+"'";
+        try{
+            stmt = conn.createStatement();
+            stmt.execute(sql);
+        }catch (SQLException sqlE){
+            System.out.println(sqlE.getMessage());
         }
     }
 

@@ -138,14 +138,14 @@ public class EmployeeMain implements ActionListener, MouseListener {
         employees.getColumnModel().getColumn(8).setPreferredWidth(95);
         employees.getColumnModel().getColumn(9).setPreferredWidth(40);
 
-                // Set the table width, depending upon the width of
-        // the columns
-        int tableWidth = 0;
-        int columnCount = employeeTableModel.columnModel.getColumnCount();
-        for (int i = 0; i < columnCount; i++) {
-            tableWidth += employeeTableModel.columnModel.getColumn(i).getPreferredWidth();
-            System.out.println(employeeTableModel.columnModel.getColumn(i).getPreferredWidth());
-        }
+//                // Set the table width, depending upon the width of
+//        // the columns
+//        int tableWidth = 0;
+//        int columnCount = employeeTableModel.columnModel.getColumnCount();
+//        for (int i = 0; i < columnCount; i++) {
+//            tableWidth += employeeTableModel.columnModel.getColumn(i).getPreferredWidth();
+//            System.out.println(employeeTableModel.columnModel.getColumn(i).getPreferredWidth());
+//        }
 
         JScrollPane scrollPane = new JScrollPane(employees);
         scrollPane.setBorder(new BevelBorder(BevelBorder.LOWERED));

@@ -42,7 +42,7 @@ public class CreateSalesDetails {
                     "memberId INTEGER," +
                     "qty INTEGER NOT NULL," +
                     "PRIMARY KEY(prodId, saleId)," +
-                    "FOREIGN KEY(prodId)REFERENCES product(prodId)," +
+                    "FOREIGN KEY(prodId)REFERENCES product(prodId) ON DELETE CASCADE," +
                     "FOREIGN KEY (saleId) REFERENCES sales (saleId)," +
                     "FOREIGN KEY (memberId) REFERENCES member (memberId)ON DELETE SET NULL)");
         } catch (SQLException e) {

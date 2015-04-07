@@ -34,6 +34,7 @@ public class ProductAddEdit implements ActionListener {
     private JFileChooser fc;
     private AdminMain am;  // used for JDialogs as parent
     private int choice;
+    private int open = 1;
     private ProductOperations po;
     private ProductMain productMain;
 
@@ -228,7 +229,7 @@ public class ProductAddEdit implements ActionListener {
             fc.setMultiSelectionEnabled(false); // don't allow multifile selection
             fc.setDialogTitle("Select Product Image"); // title
             fc.setAcceptAllFileFilterUsed(false); // turn off viewing of all files
-            int open = fc.showOpenDialog(prodAdd); // could've done "this" if I was extending the JDialog, option dialog returns int
+            open = fc.showOpenDialog(prodAdd); // could've done "this" if I was extending the JDialog, option dialog returns int
             if (open == JFileChooser.APPROVE_OPTION) { // if JFileChooser is open (int 1)
                 fImg = fc.getSelectedFile(); // select the file
                 try {
@@ -237,12 +238,12 @@ public class ProductAddEdit implements ActionListener {
                     JOptionPane.showMessageDialog(null, "Image Problem");
                 }
             }
-        } else if (e.getSource().equals(removeButton)) {
+        }
+        else if (e.getSource().equals(removeButton))
             imgLabel.setIcon(new ImageIcon(UIElements.person128));
-            fImg = null;
-        } else if (e.getSource().equals(cancelButton)) {
+        else if (e.getSource().equals(cancelButton))
             prodAdd.dispose();
-        } else if (e.getSource().equals(okButton)) {
+        else if (e.getSource().equals(okButton)) {
             if (FormValidator.isEmptyField(makeTF.getText())
                     || FormValidator.isEmptyField(modelTF.getText())
                     || FormValidator.isEmptyField(salePriceTF.getText())
@@ -255,32 +256,31 @@ public class ProductAddEdit implements ActionListener {
                     || FormValidator.isEmptyField(storageTF.getText())
                     || FormValidator.isEmptyField(screenTF.getText())
                     || FormValidator.isEmptyField(descTA.getText())) {
-                System.out.println("here");
                 JOptionPane.showMessageDialog(null, "Please Fill-In All Fields Of The Form", "Empty Fields", JOptionPane.WARNING_MESSAGE);
-            } else if (!FormValidator.isNumber(makeTF.getText())
-                    && !FormValidator.isNumber(modelTF.getText())
-                    && FormValidator.isDouble(salePriceTF.getText())
-                    && FormValidator.isDouble(costPriceTF.getText())
-                    && FormValidator.isNumber(qtyTF.getText())){
-                // do action
-                if(choice == 0){
-                    po.insertProduct(makeTF.getText(), modelTF.getText(),
-                            Double.parseDouble(salePriceTF.getText()), Double.parseDouble(costPriceTF.getText()),
-                            Integer.parseInt(qtyTF.getText()), fImg, typeTF.getText(), cpuTF.getText(), ramTF.getText(),
-                            osTF.getText(), storageTF.getText(), screenTF.getText(), descTA.getText());
+            }
+            else if (open == 1)
+                JOptionPane.showMessageDialog(null, "You have not selected a picture", "Empty Fields", JOptionPane.WARNING_MESSAGE);
+            else if(!FormValidator.isDouble(salePriceTF.getText())
+                    || !FormValidator.isDouble(costPriceTF.getText())
+                    || !FormValidator.isNumber(qtyTF.getText()))
+                JOptionPane.showMessageDialog(null, "Price and quantity must be numbers", "Invalid entries", JOptionPane.WARNING_MESSAGE);
+            else {
+                if(choice == 0){ // to create a new product
+                    po.addProduct(makeTF.getText(), modelTF.getText(), Double.parseDouble(salePriceTF.getText()),
+                            Double.parseDouble(costPriceTF.getText()), Integer.parseInt(qtyTF.getText()), fImg, typeTF.getText(),
+                            cpuTF.getText(), ramTF.getText(), osTF.getText(), storageTF.getText(), screenTF.getText(), descTA.getText());
                     productMain.refreshList();
                     prodAdd.dispose();
                 }
-                else if (choice ==1){
+                else if (choice ==1){ // to update an existing product
                     po.updateProduct(makeTF.getText(), modelTF.getText(),
                             Double.parseDouble(salePriceTF.getText()), Double.parseDouble(costPriceTF.getText()),
-                            Integer.parseInt(qtyTF.getText()), fImg, typeTF.getText(), cpuTF.getText(), ramTF.getText(),
-                            osTF.getText(), storageTF.getText(), screenTF.getText(), descTA.getText(),
-                            Integer.parseInt(idTF.getText()));
+                            Integer.parseInt(qtyTF.getText()), fImg, typeTF.getText(), cpuTF.getText(), ramTF.getText(), osTF.getText(),
+                            storageTF.getText(), screenTF.getText(), descTA.getText(), Integer.parseInt(idTF.getText()));
                     productMain.refreshList();
                     prodAdd.dispose();
                 }
-            }
             }
         }
     }
+}
