@@ -10,6 +10,7 @@ import database.operations.MemberOperations;
 
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -30,6 +31,8 @@ public class MemberTableModel extends DefaultTableModel {
 
     DefaultTableColumnModel columnModel = new DefaultTableColumnModel();
     private static ArrayList<Object> memberRows = new ArrayList();
+
+
 
     public MemberTableModel() {
         TableColumn col;
@@ -109,9 +112,9 @@ public class MemberTableModel extends DefaultTableModel {
         }
     }
 
-//    public static ArrayList<Object> getList(){
-//        return memberRows;
-//    }
+    public ArrayList<Object> getArray(){
+        return memberRows;
+    }
 
     // don't allow editing cells when double clicked
     public boolean isCellEditable(int row, int column) {

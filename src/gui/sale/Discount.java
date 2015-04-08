@@ -14,10 +14,9 @@ import model.Member;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
-public class Discount extends JDialog implements ActionListener {
+public class Discount extends JDialog implements ActionListener, MouseListener {
 
     private JButton btnApply, btnCancel;
     private JTextField tfPercent, tfMemberId;
@@ -30,6 +29,8 @@ public class Discount extends JDialog implements ActionListener {
     SaleMain sm;
 
     public Discount(SaleMain sm) {
+
+        this.sm = sm;
 
 // SETUP JDIALOG
 
@@ -52,19 +53,24 @@ public class Discount extends JDialog implements ActionListener {
         rbPercent.setBackground(UIElements.getColour());
         radioGroup.add(rbPercent);
         rbPercent.addActionListener(this);
+        rbPercent.addMouseListener(this);
         main.add(rbPercent);
 
         tfPercent = new JTextField(18);
+        tfPercent.addMouseListener(this);
         main.add(tfPercent);
 
         rbMemberId = new JRadioButton("Member ID");
         rbMemberId.setBackground(UIElements.getColour());
         radioGroup.add(rbMemberId);
         rbMemberId.addActionListener(this);
+        rbMemberId.addMouseListener(this);
         main.add(rbMemberId);
 
-
         tfMemberId = new JTextField(18);
+        tfMemberId.setBackground(Color.LIGHT_GRAY);
+        tfMemberId.setEnabled(false);
+
         main.add(tfMemberId);
 
         btnCancel = new JButton("Cancel", new ImageIcon(UIElements.cancel6));
@@ -79,12 +85,53 @@ public class Discount extends JDialog implements ActionListener {
 
         this.add(main);
 
-        this.sm = sm;
-
         this.setVisible(true);
     }
 
 // BUTTON ACTIONS
+
+    // MOUSE
+    // have to implement these methods for MouseListener
+    public void mouseExited(MouseEvent e){}
+    public void mouseReleased(MouseEvent e){}
+    public void mousePressed(MouseEvent e){}
+    public void mouseEntered(MouseEvent e){}
+
+    public void mouseClicked(MouseEvent e) {
+       if (e.getSource().equals(rbPercent)){
+           tfPercent.setEnabled(true);
+           tfPercent.setBackground(Color.WHITE);
+           tfPercent.requestFocus();
+           tfMemberId.setEnabled(false);
+           tfMemberId.setBackground(Color.LIGHT_GRAY);
+        }
+        else if (e.getSource().equals(rbMemberId)){
+           tfMemberId.setEnabled(true);
+           tfMemberId.setBackground(Color.WHITE);
+           tfMemberId.requestFocus();
+           tfPercent.setEnabled(false);
+           tfPercent.setBackground(Color.LIGHT_GRAY);
+       }
+    }
+
+//    public void focusGained(FocusEvent e) {
+//        if (e.getSource().equals(rbMemberId) || e.getSource().equals(tfMemberId)) {
+//            tfPercent.setEnabled(false);
+//            tfPercent.setBackground(Color.LIGHT_GRAY);
+//        } else if (e.getSource().equals(rbPercent) || e.getSource().equals(tfPercent)) {
+//            tfMemberId.setEnabled(false);
+//            tfMemberId.setBackground(Color.LIGHT_GRAY);
+//        }
+//    }
+//    public void focusLost(FocusEvent e){
+//        if (e.getSource().equals(rbMemberId) || e.getSource().equals(tfMemberId)) {
+//            tfPercent.setEnabled(true);
+//            tfPercent.setBackground(Color.WHITE);
+//        } else if (e.getSource().equals(rbPercent) || e.getSource().equals(tfPercent)) {
+//            tfMemberId.setEnabled(true);
+//            tfMemberId.setBackground(Color.white);
+//        }
+//    }
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(btnCancel)) {

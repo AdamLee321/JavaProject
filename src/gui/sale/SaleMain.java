@@ -263,6 +263,8 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
         tableModel = new SaleTableModel();
         saleTable = new JTable(tableModel);
         saleTable.setRowHeight(30);
+        saleTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // don't allow multirow selection
+
 
         // Set the table width, depending upon the width of
         // the columns
@@ -369,10 +371,12 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
                         s.setQty(s.getQty()+Integer.parseInt(tfQty.getText()));
                         found = true;
                         tableModel.fireTableDataChanged();
+                        resetProductFields();
                     }
                 }
             if(!found)
                 tableModel.queryTableData(Integer.parseInt(tfProdNum.getText()), Integer.parseInt(tfQty.getText()));
+                resetProductFields();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "SQL Problem");
         }
@@ -380,6 +384,13 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
 
     public void refreshBasket() {
         tableModel.fireTableChanged(new TableModelEvent(tableModel, -1, -1));
+    }
+
+    public void resetProductFields(){
+        tfProdNum.setText(prodFieldTip);
+        tfProdNum.setForeground(Color.GRAY);
+        tfQty.setText(qtyFieldTip);
+        tfQty.setForeground(Color.GRAY);
     }
 
 // BUTTON ACTIONS - don't forget to add action listeners to buttons and implement ActionListener class

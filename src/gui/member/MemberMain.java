@@ -30,6 +30,8 @@ public class MemberMain implements ActionListener, MouseListener, KeyListener {
     private EmployeeOperations eo;
     MemberOperations mo = new MemberOperations();
     private int row = 0;
+    private int rowMemId = 0;
+
   //  Employee e;
 
     public JPanel getMemberMain(){
@@ -158,11 +160,11 @@ public class MemberMain implements ActionListener, MouseListener, KeyListener {
 
     // open the edit window (created a method because it's used in two places - mouse and action listener
     public void displayEdit() {
-        Member m = mo.getMemberById(row);
+        Member m = mo.getMemberById(rowMemId);
         if (row != 0) {
             new MemberAddEdit(am, 1, this, m);
         } else {
-            JOptionPane.showMessageDialog(null, "Please Select The Member First", "Member Not Selected", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Please select the member first", "Nothing selected", JOptionPane.WARNING_MESSAGE);
         }
     }
 
@@ -208,6 +210,7 @@ public class MemberMain implements ActionListener, MouseListener, KeyListener {
                 displayEdit();
             }
             row = memTable.getSelectedRow()+1;
+            rowMemId = (Integer) memTable.getValueAt(memTable.getSelectedRow(),0);
         }
     }
 
@@ -242,11 +245,10 @@ public class MemberMain implements ActionListener, MouseListener, KeyListener {
         }
         else if (e.getSource().equals(deleteButton)){
             Object[] options = {"Yes","No"};
-            memTable.getValueAt(row,2);
             int choice = JOptionPane.showOptionDialog(am, "Are you sure you want to delete : " + memTable.getValueAt(row-1,1) + " " + memTable.getValueAt(row-1,2) + " ("+ memTable.getValueAt(row-1,0) +") ?", "Delete Member",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE,null,options,null);
             if (choice == 0){
-                mo.deleteMember(row);
-                JOptionPane.showMessageDialog(am,"Member Deleted");
+                mo.deleteMember(rowMemId);
+                JOptionPane.showMessageDialog(am,"Member deleted");
                 displayMembers();
             }
         }
