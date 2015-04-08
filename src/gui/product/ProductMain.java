@@ -4,7 +4,7 @@ import database.operations.ProductOperations;
 import gui.Griddy;
 import gui.UIElements;
 import gui.admin.AdminMain;
-import gui.member.OrderHistory;
+import gui.product.OrderHistory;
 import model.Product;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
