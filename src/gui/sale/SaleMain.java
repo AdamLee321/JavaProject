@@ -32,7 +32,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class SaleMain extends JFrame implements ActionListener/*, MouseListener*/, KeyListener, FocusListener {
+public class SaleMain extends JFrame implements ActionListener, MouseListener {
 
     private ProductOperations po;
 
@@ -104,19 +104,13 @@ public class SaleMain extends JFrame implements ActionListener/*, MouseListener*
         tfProdNum = new JTextField();
         tfProdNum.setText(prodFieldTip); // set initial text field search
         tfProdNum.setForeground(Color.GRAY); // set initial colour to gray
-/*
         tfProdNum.addMouseListener(this);
-*/
-        tfProdNum.addFocusListener(this);
         pnlKeypad.add(tfProdNum, Griddy.getConstraints(0, 0, 2, 1, 0, 0, 1, 1, 2, 2, 2, 2, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
 
         tfQty = new JTextField();
         tfQty.setText(qtyFieldTip); // set initial text field search
         tfQty.setForeground(Color.GRAY); // set initial colour to gray
-/*
         tfQty.addMouseListener(this);
-*/
-        tfQty.addFocusListener(this);
         pnlKeypad.add(tfQty, Griddy.getConstraints(0, 1, 2, 1, 0, 0, 1, 1, 2, 2, 2, 2, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
 
         btnAdd = new JButton("Add Item", new ImageIcon(UIElements.plus16));
@@ -387,46 +381,73 @@ public class SaleMain extends JFrame implements ActionListener/*, MouseListener*
 
 // BUTTON ACTIONS - don't forget to add action listeners to buttons and implement ActionListener class
 
-
-    public void focusGained(FocusEvent e) {
-        if (e.getSource().equals(tfProdNum)) {
-            tfProdNum.setText(""); // empty it
-            tfProdNum.setForeground(null);  // reset colour to black
-        }
-        else if (e.getSource().equals(tfQty)){
-            tfQty.setText(""); // empty it
-            tfQty.setForeground(null);  // reset colour to black
-        }
+    // have to implement these methods for MouseListener
+    public void mouseExited(MouseEvent e) {
     }
 
-    public void focusLost(FocusEvent e) {
+    public void mouseReleased(MouseEvent e) {
+    }
+
+    public void mousePressed(MouseEvent e) {
+    }
+
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    public void mouseClicked(MouseEvent e) {
         if (e.getSource().equals(tfProdNum)) {
-            tfProdNum.setText(prodFieldTip);
-            tfProdNum.setForeground(Color.GRAY);
+            if (tfProdNum.getText().equals(prodFieldTip)) { // if the product field textfield is populated with the preset text
+                tfProdNum.setText(""); // empty it
+                tfProdNum.setForeground(null);  // reset colour to black
+
+                if (tfQty.getText().equals("")) {
+                    tfQty.setText(prodFieldTip);
+                    tfQty.setForeground(Color.GRAY);
+                }
+                tfProdNum.addFocusListener(new FocusListener() {
+                    @Override
+                    public void focusGained(FocusEvent e) {
+                    }
+
+                    @Override
+                    public void focusLost(FocusEvent e) {
+                        if (tfProdNum.getText().equals("")) {
+                            tfProdNum.setText(prodFieldTip);
+                            tfProdNum.setForeground(Color.GRAY);
+                        }
+                    }
+                });
+            }
         } else if (e.getSource().equals(tfQty)) {
-            tfQty.setText(qtyFieldTip);
-            tfQty.setForeground(Color.GRAY);
-        }
-    }
+            if (tfQty.getText().equals(qtyFieldTip)) {
+                tfQty.setText("");
+                tfQty.setForeground(null);
 
-    // have to implement these methods for KeyboardListener
-    public void keyTyped(KeyEvent e){}
-    public void keyPressed(KeyEvent e){}
+                if (tfProdNum.getText().equals("")) {
+                    tfProdNum.setText(prodFieldTip);
+                    tfProdNum.setForeground(Color.GRAY);
+                }
+                tfQty.addFocusListener(new FocusListener() {
+                    @Override
+                    public void focusGained(FocusEvent e) {
+                    }
 
-    public void keyReleased(KeyEvent e){
-        if (e.getSource().equals(tfProdNum)) {
-            int key = e.getKeyCode();
-            if (key == KeyEvent.VK_TAB)
-                if (tfProdNum.getText().equals(prodFieldTip)) // if the product field textfield is populated with the preset text
-                    tfProdNum.setText(""); // empty it
-                    tfProdNum.setForeground(null); // reset colour to black            }
+                    @Override
+                    public void focusLost(FocusEvent e) {
+                        if (tfQty.getText().equals("")) {
+                            tfQty.setText(qtyFieldTip);
+                            tfQty.setForeground(Color.GRAY);
+                        }
+                    }
+                });
+            }
         }
     }
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(btnAdd)) {
             if (!FormValidator.isNumber(tfProdNum.getText()) || !FormValidator.isNumber(tfQty.getText()))
-                JOptionPane.showMessageDialog(this, "Please Enter A Number In Both Fields", "Invalid Entry", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Please enter a number in both fields", "Invalid Entry", JOptionPane.WARNING_MESSAGE);
             else {
                 if (po.checkProduct(Integer.parseInt(tfProdNum.getText()))) {
                     if (po.checkQuantity(Integer.parseInt(tfProdNum.getText())) > Integer.parseInt(tfQty.getText())) {
@@ -438,12 +459,11 @@ public class SaleMain extends JFrame implements ActionListener/*, MouseListener*
                 }
                 else
                     JOptionPane.showMessageDialog(this, "Item does not exist", "Quantity", JOptionPane.WARNING_MESSAGE);
-
             }
-            tfProdNum.setText(prodFieldTip);
-            tfProdNum.setForeground(Color.GRAY);
-            tfQty.setText(qtyFieldTip);
-            tfQty.setForeground(Color.GRAY);
+//            tfProdNum.setText(prodFieldTip);
+//            tfProdNum.setForeground(Color.GRAY);
+//            tfQty.setText(qtyFieldTip);
+//            tfQty.setForeground(Color.GRAY);
         } else if (e.getSource().equals(btnLogout)) {
             try (BufferedWriter bf = new BufferedWriter(new FileWriter("src/res/log.txt",true))) {
                 bf.append("Login\t" + loggedInTime + " " + loggedInDate + "\r\n");

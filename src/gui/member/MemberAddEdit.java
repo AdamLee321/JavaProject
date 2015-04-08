@@ -43,7 +43,7 @@ public class MemberAddEdit implements ActionListener {
         memberAdd = new JDialog(parent, true);
         memberAdd.setTitle("Add New Member");
         memberAdd.setLayout(new BorderLayout());
-        memberAdd.setSize(450, 620);
+        memberAdd.setSize(450, 680);
         memberAdd.setResizable(false);
         memberAdd.setLocationRelativeTo(null);
 
@@ -83,43 +83,44 @@ public class MemberAddEdit implements ActionListener {
         detailsPanel = new JPanel(new GridBagLayout());
         detailsPanel.setBackground(UIElements.getColour());
 
-//        // ID
-//        memberIdLabel = new JLabel("Member ID");
-//        detailsPanel.add(memberIdLabel, Griddy.getConstraints(0,0,1,1,0,0,0,0,5,15,5,5,0,GridBagConstraints.WEST));
-//        memberIdField = new JTextField();
-//        memberIdField.setEditable(false);
-//        detailsPanel.add(memberIdField, Griddy.getConstraints(1,0,1,1,0,0,0,0,5,15,15,5,GridBagConstraints.HORIZONTAL,GridBagConstraints.CENTER));
+        // ID
+        memberIdLabel = new JLabel("Member ID");
+        detailsPanel.add(memberIdLabel, Griddy.getConstraints(0,0,1,1,0,0,0,0,5,15,5,5,0,GridBagConstraints.WEST));
+        memberIdField = new JTextField();
+        memberIdField.setEditable(false);
+        memberIdField.setBackground(Color.LIGHT_GRAY);
+        detailsPanel.add(memberIdField, Griddy.getConstraints(1,0,1,1,0,0,0,0,5,15,15,5,GridBagConstraints.HORIZONTAL,GridBagConstraints.CENTER));
 
         // Name
         memberFNameLabel = new JLabel("Member Name");
-        detailsPanel.add(memberFNameLabel, Griddy.getConstraints(0,0,1,1,0,0,0,0,5,15,5,5,0,GridBagConstraints.WEST));
+        detailsPanel.add(memberFNameLabel, Griddy.getConstraints(0,1,1,1,0,0,0,0,5,15,5,5,0,GridBagConstraints.WEST));
         memberFNameField = new JTextField();
-        detailsPanel.add(memberFNameField, Griddy.getConstraints(1,0,1,1,0,0,0,0,5,15,15,5,GridBagConstraints.HORIZONTAL,GridBagConstraints.CENTER));
+        detailsPanel.add(memberFNameField, Griddy.getConstraints(1,1,1,1,0,0,0,0,5,15,15,5,GridBagConstraints.HORIZONTAL,GridBagConstraints.CENTER));
 
         // Surname
         memberLNameLabel = new JLabel("Member Surname");
-        detailsPanel.add(memberLNameLabel, Griddy.getConstraints(0,1,1,1,0,0,0,0,5,15,5,5,0,GridBagConstraints.WEST));
+        detailsPanel.add(memberLNameLabel, Griddy.getConstraints(0,2,1,1,0,0,0,0,5,15,5,5,0,GridBagConstraints.WEST));
         memberLNameField = new JTextField();
-        detailsPanel.add(memberLNameField, Griddy.getConstraints(1,1,1,1,0,0,0,0,5,15,15,5,GridBagConstraints.HORIZONTAL,GridBagConstraints.CENTER));
+        detailsPanel.add(memberLNameField, Griddy.getConstraints(1,2,1,1,0,0,0,0,5,15,15,5,GridBagConstraints.HORIZONTAL,GridBagConstraints.CENTER));
 
         // Email
         memberEmailLabel = new JLabel("Member Email");
-        detailsPanel.add(memberEmailLabel, Griddy.getConstraints(0,2,1,1,0,0,0,0,5,15,5,5,0,GridBagConstraints.WEST));
+        detailsPanel.add(memberEmailLabel, Griddy.getConstraints(0,3,1,1,0,0,0,0,5,15,5,5,0,GridBagConstraints.WEST));
         memberEmailField = new JTextField();
-        detailsPanel.add(memberEmailField, Griddy.getConstraints(1,2,1,1,0,0,0,0,5,15,15,5,GridBagConstraints.HORIZONTAL,GridBagConstraints.CENTER));
+        detailsPanel.add(memberEmailField, Griddy.getConstraints(1,3,1,1,0,0,0,0,5,15,15,5,GridBagConstraints.HORIZONTAL,GridBagConstraints.CENTER));
 
         // Phone Number
         memberNumberLabel = new JLabel("Phone Number");
-        detailsPanel.add(memberNumberLabel, Griddy.getConstraints(0,3,1,1,0,0,0,0,5,15,5,5,0,GridBagConstraints.WEST));
+        detailsPanel.add(memberNumberLabel, Griddy.getConstraints(0,4,1,1,0,0,0,0,5,15,5,5,0,GridBagConstraints.WEST));
         memberNumberField = new JTextField();
-        detailsPanel.add(memberNumberField, Griddy.getConstraints(1,3,1,1,0,0,0,0,5,15,15,5,GridBagConstraints.HORIZONTAL,GridBagConstraints.CENTER));
+        detailsPanel.add(memberNumberField, Griddy.getConstraints(1,4,1,1,0,0,0,0,5,15,15,5,GridBagConstraints.HORIZONTAL,GridBagConstraints.CENTER));
 
         // DOB
 
         dg = new DateGenerator();  // this needs DateGen class, to get correct days, months and years
 
         memberDOB = new JLabel("Date Of Birth");
-        detailsPanel.add(memberDOB, Griddy.getConstraints(0,4,1,1,0,0,0,0,5,15,5,5,0,GridBagConstraints.WEST));
+        detailsPanel.add(memberDOB, Griddy.getConstraints(0,5,1,1,0,0,0,0,5,15,5,5,0,GridBagConstraints.WEST));
 
         birthYearCBox = new JComboBox<String>(new DefaultComboBoxModel<String>(dg.getPastCentury()));
         // can either directly pass the parameters as displayed above, or do separately as displayed below
@@ -135,33 +136,33 @@ public class MemberAddEdit implements ActionListener {
         birthDayCBox.setEnabled(false);
 
             // add day, month, year comboboxes to details panel
-        detailsPanel.add(birthYearCBox, Griddy.getConstraints(1,4,1,1,0,0,0,0,5,125,140,5,0,GridBagConstraints.WEST));
-        detailsPanel.add(birthMonthCBox, Griddy.getConstraints(1,4,1,1,0,0,0,0,5,65,200,5,0,GridBagConstraints.WEST));
-        detailsPanel.add(birthDayCBox, Griddy.getConstraints(1,4,1,1,0,0,0,0,5,15,260,5,0,GridBagConstraints.WEST));
+        detailsPanel.add(birthYearCBox, Griddy.getConstraints(1,5,1,1,0,0,0,0,5,125,140,5,0,GridBagConstraints.WEST));
+        detailsPanel.add(birthMonthCBox, Griddy.getConstraints(1,5,1,1,0,0,0,0,5,65,200,5,0,GridBagConstraints.WEST));
+        detailsPanel.add(birthDayCBox, Griddy.getConstraints(1,5,1,1,0,0,0,0,5,15,260,5,0,GridBagConstraints.WEST));
 
         // Street
         memberStreetLabel = new JLabel("Member Street");
-        detailsPanel.add(memberStreetLabel, Griddy.getConstraints(0,5,1,1,0,0,0,0,5,15,5,5,0,GridBagConstraints.WEST));
+        detailsPanel.add(memberStreetLabel, Griddy.getConstraints(0,6,1,1,0,0,0,0,5,15,5,5,0,GridBagConstraints.WEST));
         memberStreetField = new JTextField();
-        detailsPanel.add(memberStreetField, Griddy.getConstraints(1,5,1,1,0,0,0,0,5,15,15,5,GridBagConstraints.HORIZONTAL,GridBagConstraints.CENTER));
+        detailsPanel.add(memberStreetField, Griddy.getConstraints(1,6,1,1,0,0,0,0,5,15,15,5,GridBagConstraints.HORIZONTAL,GridBagConstraints.CENTER));
 
         // City
         memberCityLabel = new JLabel("Member City");
-        detailsPanel.add(memberCityLabel, Griddy.getConstraints(0,6,1,1,0,0,0,0,5,15,5,5,0,GridBagConstraints.WEST));
+        detailsPanel.add(memberCityLabel, Griddy.getConstraints(0,7,1,1,0,0,0,0,5,15,5,5,0,GridBagConstraints.WEST));
         memberCityField = new JTextField();
-        detailsPanel.add(memberCityField, Griddy.getConstraints(1,6,1,1,0,0,0,0,5,15,15,5,GridBagConstraints.HORIZONTAL,GridBagConstraints.CENTER));
+        detailsPanel.add(memberCityField, Griddy.getConstraints(1,7,1,1,0,0,0,0,5,15,15,5,GridBagConstraints.HORIZONTAL,GridBagConstraints.CENTER));
 
         // County
         memberCountyLabel = new JLabel("Member County");
-        detailsPanel.add(memberCountyLabel, Griddy.getConstraints(0,7,1,1,0,0,0,0,5,15,5,5,0,GridBagConstraints.WEST));
+        detailsPanel.add(memberCountyLabel, Griddy.getConstraints(0,8,1,1,0,0,0,0,5,15,5,5,0,GridBagConstraints.WEST));
         memberCountyField = new JTextField();
-        detailsPanel.add(memberCountyField, Griddy.getConstraints(1,7,1,1,0,0,0,0,5,15,15,5,GridBagConstraints.HORIZONTAL,GridBagConstraints.CENTER));
+        detailsPanel.add(memberCountyField, Griddy.getConstraints(1,8,1,1,0,0,0,0,5,15,15,5,GridBagConstraints.HORIZONTAL,GridBagConstraints.CENTER));
 
         // Points
         memberPointsLabel = new JLabel("Member Points");
-        detailsPanel.add(memberPointsLabel, Griddy.getConstraints(0,8,1,1,0,0,0,0,5,15,5,5,0,GridBagConstraints.WEST));
+        detailsPanel.add(memberPointsLabel, Griddy.getConstraints(0,9,1,1,0,0,0,0,5,15,5,5,0,GridBagConstraints.WEST));
         memberPointsField = new JTextField();
-        detailsPanel.add(memberPointsField, Griddy.getConstraints(1,8,1,1,0,0,0,0,5,15,15,5,GridBagConstraints.HORIZONTAL,GridBagConstraints.CENTER));
+        detailsPanel.add(memberPointsField, Griddy.getConstraints(1,9,1,1,0,0,0,0,5,15,15,5,GridBagConstraints.HORIZONTAL,GridBagConstraints.CENTER));
 
         memberAdd.add(detailsPanel, BorderLayout.CENTER);
 
@@ -206,6 +207,7 @@ public class MemberAddEdit implements ActionListener {
             } catch (IOException e){
                 JOptionPane.showMessageDialog(memberAdd,"Image Problem");
             }
+            memberIdField.setText(Integer.toString(m.getMemberId()));
             memberFNameField.setText(m.getMemberFName());
             memberLNameField.setText(m.getMemberLName());
             memberEmailField.setText(m.getMemberEmail());
@@ -325,17 +327,21 @@ public class MemberAddEdit implements ActionListener {
                  || FormValidator.isEmptyField(memberCityField.getText())
                  || FormValidator.isEmptyField(memberCountyField.getText())
                  || FormValidator.isEmptyField(memberPointsField.getText())) {
-                    JOptionPane.showMessageDialog(null, "Please Fill-In All Fields Of The Form", "Empty Fields", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Please fill-in all the fields of the form", "Empty fields", JOptionPane.WARNING_MESSAGE);
                 }
                 else if (!FormValidator.isValidEmail(memberEmailField.getText())){
-                    JOptionPane.showMessageDialog(null,"Please Enter A Valid Email Address","Invalid Email",JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null,"Please enter a valid email address","Invalid email",JOptionPane.WARNING_MESSAGE);
                 }
                 else if(!birthDayCBox.isEnabled() || !birthMonthCBox.isEnabled()){
-                    JOptionPane.showMessageDialog(null, "Please Pick The Full Date", "Date Invalid", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Please pick a full date", "Invalid data", JOptionPane.WARNING_MESSAGE);
                 }
-                else {
-                    JOptionPane.showMessageDialog(null,"Please Enter Valid Data For Each Field","Invalid Data",JOptionPane.WARNING_MESSAGE);
+                else if(!FormValidator.isNumber(memberNumberField.getText())){
+                    JOptionPane.showMessageDialog(null,"Number must be numbers only","Not number",JOptionPane.WARNING_MESSAGE);
                 }
+                else if(!FormValidator.isNumber(memberPointsField.getText())) {
+                    JOptionPane.showMessageDialog(null,"Points must be numbers only","Not number",JOptionPane.WARNING_MESSAGE);
+                }
+
             }
         }
     }

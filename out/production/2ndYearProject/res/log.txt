@@ -1,6 +1,0 @@
-Login	00:06:36 08-Apr-2015
-Name:	Ermac Ward
-ID:	1
-Logout	00:07:00 08-Apr-2015
-Sales	0.0
-

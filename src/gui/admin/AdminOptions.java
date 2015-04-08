@@ -93,6 +93,7 @@ public class AdminOptions implements ActionListener {
 
         // log button
         logButton = new JButton("View System Log");
+        logButton.setIcon(new ImageIcon(UIElements.report16));
         logButton.addActionListener(this);
         fieldsPanel.add(logButton, Griddy.getConstraints(0,7,2,1,0,0,0,0,5,15,15,5,GridBagConstraints.HORIZONTAL,GridBagConstraints.CENTER));
 
