@@ -8,6 +8,7 @@ import gui.member.MemberMain;
 import gui.product.ProductMain;
 import gui.report.ReportEmployee;
 import gui.sale.Discount;
+import model.Employee;
 
 import javax.swing.*;
 import java.awt.*;
@@ -31,8 +32,9 @@ public class AdminMain extends JFrame implements ActionListener {
 
     private boolean displayarea = true;
     private EmployeeMain em;
+    private Employee admin;
 
-    public AdminMain() {
+    public AdminMain(Employee admin) {
 
         am = new JFrame();
         am.setTitle("DGA Administration");
@@ -49,6 +51,8 @@ public class AdminMain extends JFrame implements ActionListener {
                 UIPrompts.exitProgram();
             }
         });
+
+        this.admin = admin;
 
         // add menu bar to the frame
         menu = new JMenuBar();
@@ -276,10 +280,10 @@ public class AdminMain extends JFrame implements ActionListener {
         } // Report Menu Item and Button ACTIONS
         else if (e.getSource().equals(reportMI) || e.getSource().equals(reportButton)){
             //Soon sosoon = new Soon();
-//             new ReportEmployee();
+             new ReportEmployee();
         } // Options Menu Item and Button ACTIONS
         else if (e.getSource().equals(optionsMI) || e.getSource().equals(optButton)){
-            new AdminOptions(this); // can also write AdminMain.this
+            new AdminOptions(this, admin); // can also write AdminMain.this
         }
         else if (e.getSource().equals(systemColourMI)){
             changeSystemColor();
@@ -289,10 +293,10 @@ public class AdminMain extends JFrame implements ActionListener {
 
         } // About Button
         else if (e.getSource().equals(aboutMI)){
-            About ab = new About();
+            new About();
         } // Logout Menu Item and Button ACTIONS
         else if (e.getSource().equals(logOutMI) || e.getSource().equals(logoutButton) ){
-            StartWindow sw = new StartWindow();
+            new StartWindow();
             am.dispose();
         } // Exit menuItem
         else if (e.getSource().equals(exitMI) || e.getSource().equals(WindowConstants.EXIT_ON_CLOSE)){

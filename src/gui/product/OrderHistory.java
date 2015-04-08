@@ -1,4 +1,4 @@
-package gui.member;
+package gui.product;
 
 
 /*

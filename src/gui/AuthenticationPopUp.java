@@ -32,6 +32,7 @@ public class AuthenticationPopUp {
     private int count = 0;
 
     public AuthenticationPopUp(final JFrame parent) {
+
         auth = new JDialog(parent, true);
         auth.setTitle("Login");
         auth.setLayout(new GridBagLayout());
@@ -86,7 +87,7 @@ public class AuthenticationPopUp {
                         if (position.equals("Sales")) {
                             new SaleMain(em);
                         } else if (position.equals("Admin")) {
-                            new AdminMain();
+                            new AdminMain(em);
                         } else if (position.equals("Manager")) {
                             new ReportEmployee();
                         }

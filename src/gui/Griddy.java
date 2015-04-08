@@ -20,10 +20,10 @@ public class Griddy {
         c.gridy = gridy; // position y
         c.gridwidth = gridwidth; // width of the cell
         c.gridheight = gridheight; // height of the cell
-        c.ipadx = ipadxIn; // 0
-        c.ipady = ipadyIn; // 0
-        c.weightx = weightxIn;  // 0 - when centered (only component) push it all the way to the edges
-        c.weighty = weightyIn;  // 0
+        c.ipadx = ipadxIn; // 0 - padding
+        c.ipady = ipadyIn; // 0 - padding
+        c.weightx = weightxIn;  // 0 - when centered (only component) push it all the way to the edges horizontally
+        c.weighty = weightyIn;  // 0 - when centered push the component vertically -- this one and the above, work in conjunction with fill (GridBagConstraints.HORIZONTAL, etc...) if either is not set, neither work
         c.insets = new Insets(topInsetIn, leftInsetIn, bottomInsetIn, rightInsetIn);  // insets = control individual indents of components, usually 5 all around
         c.fill = fillIn;  // vertical, horizontal, both - fill the cell, ex... GridBagConstraints.HORIZONTAL
         c.anchor = anchor; // east, west, center position in the cell, ex... GridBagConstraints.EAST
