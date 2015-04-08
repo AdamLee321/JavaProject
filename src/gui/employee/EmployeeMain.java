@@ -45,7 +45,7 @@ public class EmployeeMain implements ActionListener, MouseListener {
 
     private JTable employees;
     private EmployeeTableModel employeeTableModel;
-    private int selectedRow = 0;
+    private int selectedRow = -1;
     private int selectedRowId = 0;
 
     String[] eempTypes = {"All", "Sales", "Management"};  // this just a placeholder, real info will be populated from DB
@@ -84,6 +84,7 @@ public class EmployeeMain implements ActionListener, MouseListener {
         deleteButton = new JButton("Delete");
         deleteButton.setPreferredSize(new Dimension(100, 28));
         deleteButton.setIcon(new ImageIcon(UIElements.delete16));
+        deleteButton.addActionListener(this);
         managePanel.add(deleteButton);
 
         northPanel.add(managePanel, Griddy.getConstraints(0,0,1,1,0,0,0,0,5,0,0,5,0,GridBagConstraints.CENTER));
@@ -172,7 +173,7 @@ public class EmployeeMain implements ActionListener, MouseListener {
         southPanel.add(viewSalesButton);
 
         empMain.add(southPanel, BorderLayout.SOUTH);
-
+        eo = new EmployeeOperations();
     // return to AdminMain
         return empMain;
     }
@@ -184,17 +185,8 @@ public class EmployeeMain implements ActionListener, MouseListener {
 
     // open the edit window (created a method because it's used in two places - mouse and action listener
     public void displayEdit() {
-        //Product p = po.productByIDO(selectedRowId);
-//        for (int i = 0; i < employeeTableModel.getList().size(); i++) {
-//            EmployeeTableRow x =  (EmployeeTableRow) employeeTableModel.getList().get(i);
-//            if(x.getEmpId() == selectedRowId)
-//                e = x;
-//        }
-        if (selectedRow != -1) {
-            new EmployeeAddEdit(am, 1, this, e);
-        } else {
-            JOptionPane.showMessageDialog(null, "Please Select The Product First", "Product Not Selected", JOptionPane.WARNING_MESSAGE);
-        }
+        Employee e = eo.getEmployeeOb(selectedRowId);
+        new EmployeeAddEdit(am, 1, this, e);
     }
 
 // BUTTON ACTIONS
@@ -222,19 +214,43 @@ public class EmployeeMain implements ActionListener, MouseListener {
                     }
                 }
             });
+        }else if (e.getSource().equals(employees)) {
+            selectedRow = employees.getSelectedRow();
+            System.out.println(selectedRow);
+            selectedRowId = (Integer) employees.getValueAt(employees.getSelectedRow(), 0);
+            System.out.println(selectedRowId);
+            if (e.getClickCount() == 2) {
+                displayEdit();
+            }
         }
     }
 
     public void actionPerformed(ActionEvent e) {
         // add button
-        if (e.getSource().equals(addButton)) {
+        if (e.getSource().equals(viewSalesButton)){
+            SalesHistory sv = new SalesHistory();
+        }
+        else if (e.getSource().equals(addButton)) {
             EmployeeAddEdit eae = new EmployeeAddEdit(am,0, this, null);
         } // edit button
-        else if (e.getSource().equals(editButton)){
-            displayEdit();
-        }
-        else if (e.getSource().equals(viewSalesButton)){
-            SalesHistory sv = new SalesHistory();
+        else {
+            if (selectedRow == -1)
+                JOptionPane.showMessageDialog(null, "Select an employee", "Employee not selected", JOptionPane.WARNING_MESSAGE);
+            else {
+                if (e.getSource().equals(editButton))// edit product
+                    displayEdit();
+                else if (e.getSource().equals(deleteButton)) {
+                    Object[] options = {"Yes", "No"};
+                    int choice = JOptionPane.showOptionDialog(empMain, "Are You Sure?", "Delete Product", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, null);
+                    if (choice == 0) {
+                        eo.deleteEmployee((Integer) employees.getValueAt(employees.getSelectedRow(), 0));
+                        JOptionPane.showMessageDialog(empMain, "Product Deleted");
+                        selectedRow = -1;
+                        refreshList();
+                    }
+                }
+            }
+
         }
     }
 }

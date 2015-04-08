@@ -1,5 +1,7 @@
 package gui.employee;
 
+import database.operations.DepartmentOperations;
+import database.operations.EmployeeOperations;
 import gui.*;
 import gui.admin.AdminMain;
 import gui.product.ProductMain;
@@ -33,6 +35,9 @@ public class EmployeeAddEdit implements ActionListener {
     private int dayBefore;
     private AdminMain am;  // used for JDialogs as parent
 
+    EmployeeOperations eo;
+
+
     public EmployeeAddEdit(JFrame parent, int choice, EmployeeMain employeeMain, Employee employee){
 
     // setup the jdialog
@@ -40,8 +45,8 @@ public class EmployeeAddEdit implements ActionListener {
         employeeAdd = new JDialog(parent, true);
         employeeAdd.setTitle("Add New Employee");
         employeeAdd.setLayout(new BorderLayout());
-        employeeAdd.setSize(450, 730);
-        employeeAdd.setResizable(false);
+        employeeAdd.setSize(760, 550);
+        employeeAdd.setResizable(true);
         employeeAdd.setLocationRelativeTo(null);
 
     // picture panel + picture buttons  panel inside it
@@ -52,7 +57,7 @@ public class EmployeeAddEdit implements ActionListener {
 
         // profile picture
         profilePictureLabel = new JLabel(new ImageIcon(UIElements.person128));
-        picturePanel.add(profilePictureLabel, BorderLayout.NORTH);
+        picturePanel.add(profilePictureLabel, BorderLayout.CENTER);
 
         // buttons panel
         pictureButtonsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER,10,10));  // alignment, hgap, vgap
@@ -73,19 +78,12 @@ public class EmployeeAddEdit implements ActionListener {
         picturePanel.add(pictureButtonsPanel, BorderLayout.SOUTH);
 
         // add picture panel to the main JDialog
-        employeeAdd.add(picturePanel, BorderLayout.NORTH);
+        employeeAdd.add(picturePanel, BorderLayout.WEST);
 
     // detailsPanel - GridBagLayout
 
         detailsPanel = new JPanel(new GridBagLayout());
         detailsPanel.setBackground(UIElements.getColour());
-
-//        // ID
-//        empIdLabel = new JLabel("Employee ID");
-//        detailsPanel.add(empIdLabel, Griddy.getConstraints(0,0,1,1,0,0,0,0,5,15,5,5,0,GridBagConstraints.WEST));
-//        empIdField = new JTextField();
-//        empIdField.setEditable(false);
-//        detailsPanel.add(empIdField, Griddy.getConstraints(1,0,1,1,0,0,0,0,5,15,15,5,GridBagConstraints.HORIZONTAL,GridBagConstraints.CENTER));
 
         // Name
         empFNameLabel = new JLabel("Employee Name");
@@ -151,6 +149,8 @@ public class EmployeeAddEdit implements ActionListener {
         empUsernameLabel = new JLabel("Employee Username");
         detailsPanel.add(empUsernameLabel, Griddy.getConstraints(0,7,1,1,0,0,0,0,5,15,5,5,0,GridBagConstraints.WEST));
         empUsernameField = new JTextField();
+        empUsernameField.setEditable(false);
+        empUsernameField.setBackground(Color.LIGHT_GRAY);
         detailsPanel.add(empUsernameField, Griddy.getConstraints(1,7,1,1,0,0,0,0,5,15,110,5,GridBagConstraints.HORIZONTAL,GridBagConstraints.WEST));
 
         // Username Generator
@@ -200,12 +200,6 @@ public class EmployeeAddEdit implements ActionListener {
         cancelButton.addActionListener(this);
         buttonsPanel.add(cancelButton);
 
-//        previewButton = new JButton("Preview");
-//        previewButton.setPreferredSize(new Dimension(100, 26));
-//        previewButton.setIcon(new ImageIcon(UIElements.person16));
-//        previewButton.addActionListener(this);
-//        buttonsPanel.add(previewButton);
-
         okButton = new JButton("OK");
         okButton.setPreferredSize(new Dimension(100, 26));
         okButton.setIcon(new ImageIcon(UIElements.save16));
@@ -214,13 +208,29 @@ public class EmployeeAddEdit implements ActionListener {
 
         employeeAdd.add(buttonsPanel, BorderLayout.SOUTH);
 
+        eo = new EmployeeOperations();
         // choice - add(clean fields) or edit(populate fields (1))
-        if (choice == 1) {
-            empFNameField.setText("Mario");
-            empCityField.setText("Mario Land");
-
-            birthDayCBox.setEnabled(true);
-            birthMonthCBox.setEnabled(true);
+        if (choice == 1){
+            try{
+                profilePictureLabel.setIcon(new ImageIcon(DataProcessor.fitImageByte(employee.getEmpPic(), 200, 200)));
+                fImg = DataProcessor.byteToFile(employee.getEmpPic());
+            }catch (IOException ioE){
+                System.out.println("Problem with picture");
+            }
+            empFNameField.setText(employee.getEmpFName());
+            empLNameField.setText(employee.getEmpLName());
+            empEmailField.setText(employee.getEmpEmail());
+            birthYearCBox.setSelectedItem(employee.getEmpDOBy());
+            birthMonthCBox.setSelectedItem(employee.getEmpDOBm());
+            birthDayCBox.setSelectedItem(employee.getEmpDOBd());
+            empStreetField.setText(employee.getEmpStreet());
+            empCityField.setText(employee.getEmpCity());
+            empCountyField.setText(employee.getEmpCounty());
+            empUsernameField.setText(employee.getEmpUsername());
+            empPasswordField.setText("********");
+            empPositionField.setText(employee.getPosition());
+            empSalaryField.setText(Double.toString(employee.getSalary()));
+            empDeptField.setText(new DepartmentOperations().getDepartmentName(employee.getEmpId()));
         }
 
 // turns the lights on
@@ -244,23 +254,10 @@ public class EmployeeAddEdit implements ActionListener {
             birthDayCBox.setEnabled(true);
         }
         else if (e.getSource().equals(usernameGenButton)){
-            if (empFNameField.getText().equals("") && empLNameField.getText().equals("")){
+            if (empFNameField.getText().equals("") || empLNameField.getText().equals(""))
                 JOptionPane.showMessageDialog(null,"First Name And Last Name Must Be Entered","Username Error",JOptionPane.ERROR_MESSAGE);
-            }
-            else if (empFNameField.getText().equals("")){
-                JOptionPane.showMessageDialog(null,"First Name Must Be Entered","Username Error",JOptionPane.ERROR_MESSAGE);
-            }
-            else if (empLNameField.getText().equals("")){
-                JOptionPane.showMessageDialog(null,"Last Name Must Be Entered","Username Error",JOptionPane.ERROR_MESSAGE);
-            }
-//            else {
-//                // if  must first search the database, see if the username matches anything if it matches, add a random generator
-//                empUsernameField.setText(empFNameField.getText() + "." + empLNameField.getText());
-//
-////                else{
-////                    empUsernameField // get already existing id + 1
-//                }
-//            }
+            else
+                empUsernameField.setText(empFNameField.getText()+empLNameField.getText()+eo.getNextID());
         }
         else if (e.getSource().equals(passGenButton)){
             empPasswordField.setText(PasswordGenerator.generatePassword());
@@ -295,10 +292,11 @@ public class EmployeeAddEdit implements ActionListener {
              && !FormValidator.isNumber(empCityField.getText())
              && FormValidator.isValidEmail(empEmailField.getText())
              && !FormValidator.isNumber(empPositionField.getText())
-             && FormValidator.isNumber(empSalaryField.getText())
+             && FormValidator.isDouble(empSalaryField.getText())
              && !FormValidator.isNumber(empDeptField.getText())){
                 // do something
                 JOptionPane.showMessageDialog(null,"ALL GOOD");
+
                 // must search the database, to see if the username matches anything if it matches, let user know
             }
             else {

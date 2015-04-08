@@ -23,7 +23,6 @@ public class PasswordGenerator {
 
         for (int i = 0; i < 8; i++) {
             int x = r.nextInt(3);
-            System.out.println(x);
             if (x == 0) {
                 password += lower[r.nextInt(26)];
             } else if (x == 1) {

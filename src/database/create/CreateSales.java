@@ -48,7 +48,8 @@ public class CreateSales {
                     "saleTime VARCHAR(20)," +
                     "saleDiscount NUMBER(4,2)," +
                     "saleAmount NUMBER(6,2)," +
-                    "PRIMARY KEY (saleId)" +
+                    "PRIMARY KEY (saleId)," +
+                    "FOREIGN KEY (empId) references employee(empId) ON DELETE SET NULL" +
                     ")";
             System.out.println("Sales table created successfully");
             stmt.execute(sqlTable);
