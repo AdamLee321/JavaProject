@@ -36,7 +36,7 @@ public class Log extends JDialog implements ActionListener {
         log.setSize(500, 400);
         log.setLocationRelativeTo(null);
 //        log.setResizable(false);
-//        log.setModal(true);
+        log.setModal(true);
         log.setLayout(new BorderLayout());
 
 // MAIN PANEL

@@ -2,6 +2,7 @@ package gui.admin;
 
 import gui.FormValidator;
 import gui.Griddy;
+import gui.PasswordGenerator;
 import gui.UIElements;
 import model.Employee;
 
@@ -37,7 +38,7 @@ public class AdminOptions implements ActionListener {
         adminOps = new JDialog(parent, true);
         adminOps.setTitle("Administrator Options");
         adminOps.setLayout(new BorderLayout());
-        adminOps.setSize(470, 400);
+        adminOps.setSize(380, 400);
         adminOps.setResizable(true);
         adminOps.setLocationRelativeTo(null);
         adminOps.getContentPane().setBackground(UIElements.getColour());  // there is really no point of this, it's hidden behind to panels (mainPanel, buttonsPanel)
@@ -117,12 +118,12 @@ public class AdminOptions implements ActionListener {
         // log button
         logButton = new JButton("View System Log");
         logButton.setIcon(new ImageIcon(UIElements.report16));
-        logButton.setPreferredSize(new Dimension(50,40));
+        logButton.setPreferredSize(new Dimension(50, 40));
         logButton.addActionListener(this);
-        mainPanel.add(logButton, Griddy.getConstraints(0,3,2,1,0,0,0,0,5,15,15,5,GridBagConstraints.HORIZONTAL,GridBagConstraints.CENTER));
+        mainPanel.add(logButton, Griddy.getConstraints(0, 3, 2, 1, 0, 0, 0, 0, 5, 15, 15, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER));
 
         // separator
-        mainPanel.add(new JSeparator(), Griddy.getConstraints(0,4,2,1,0,0,0,0,5,15,15,5,GridBagConstraints.HORIZONTAL,GridBagConstraints.CENTER));
+        mainPanel.add(new JSeparator(), Griddy.getConstraints(0, 4, 2, 1, 0, 0, 0, 0, 5, 15, 15, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER));
 
         adminOps.add(mainPanel, BorderLayout.CENTER);
 
@@ -151,25 +152,58 @@ public class AdminOptions implements ActionListener {
         adminOps.setVisible(true);
     }
 
+// METHODS
+
+    public boolean newPasswordsMatch() {
+        if (new String(newPassField.getPassword()).equals(new String(repeatPassField.getPassword()))) {
+            System.out.println("success!");
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean passwordValid() {
+        String storedPass = admin.getEmpPassword();
+        String matchPass = PasswordGenerator.hashPassword(new String(currPassField.getPassword())); // have to use new String because a String is a character array and hashPassword requires a char array
+        if (storedPass.equals(matchPass)) {
+            System.out.println("true");
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 // BUTTON ACTIONS
 
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource().equals(cancelButton)) {
+        if (e.getSource().equals(cancelButton))
             adminOps.dispose();
-        } else if (e.getSource().equals(okButton)) {
-            if (FormValidator.isEmptyField(nameField.getText())
-                || FormValidator.isEmptyField(surnameField.getText())
-                || FormValidator.isEmptyField(usernameField.getText())){
-                JOptionPane.showMessageDialog(null, "Please Fill-In All Fields", "Empty Fields", JOptionPane.WARNING_MESSAGE);
-            }
-            else {
-                if (FormValidator.isNumber(nameField.getText()) && FormValidator.isNumber(surnameField.getText())) {
-                    JOptionPane.showMessageDialog(null, "Please Enter Valid Data For Each Field", "Invalid Data", JOptionPane.WARNING_MESSAGE);
-                }
-            }
-        }
-        else if (e.getSource().equals(logButton)){
+        else if (e.getSource().equals(logButton))
             new Log(adminOps);
+        else if (e.getSource().equals(okButton)) {
+            // change just the username. needs password
+            if (!usernameField.getText().equals(admin.getEmpUsername()) || !nameField.getText().equals(admin.getEmpFName()) || !surnameField.getText().equals(admin.getEmpLName())) {
+                if (FormValidator.isEmptyPassField(currPassField.getPassword())) {
+                    JOptionPane.showMessageDialog(null, "Enter the current password to save changes", "Empty Fields", JOptionPane.INFORMATION_MESSAGE);
+//                } else if () {
+
+//                }
+                    if (FormValidator.isEmptyPassField(currPassField.getPassword()) || FormValidator.isEmptyPassField(newPassField.getPassword())) {
+                        JOptionPane.showMessageDialog(null, "New password fields are empty", "Empty Fields", JOptionPane.INFORMATION_MESSAGE);
+                        if (!newPasswordsMatch()) {
+                            JOptionPane.showMessageDialog(null, "New passwords don't match", "Empty Fields", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                    }
+                }
+            } else if (!passwordValid()) {
+                JOptionPane.showMessageDialog(null, "Password does not match", "Empty Fields", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                adminOps.dispose();
+            }
+            if(e.getSource().equals(logButton)) {
+                new Log(adminOps);
+            }
         }
     }
 }

@@ -30,6 +30,7 @@ public class Restock extends JDialog implements MouseListener, ActionListener  {
         this.setResizable(false);
         this.getContentPane().setBackground(UIElements.getColour());
         this.setLocationRelativeTo(null);
+        this.setModal(true);
 
 // NORTH
 
