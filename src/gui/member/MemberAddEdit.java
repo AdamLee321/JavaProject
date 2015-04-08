@@ -38,7 +38,12 @@ public class MemberAddEdit implements ActionListener {
 
     public MemberAddEdit(JFrame parent, int choice, MemberMain mm, Member m){
 
-    // setup the jdialog
+        // initializing all the passed parameters
+        this.mm = mm; // pass MemberMain to refresh the list but button click
+        this.m = m; // pass Member object from Member to set details
+        this.choice = choice; // declared a class variable and initialized for reuse with buttons (edit/add decision)
+
+        // setup the jdialog
 
         memberAdd = new JDialog(parent, true);
         memberAdd.setTitle("Add New Member");
@@ -190,10 +195,6 @@ public class MemberAddEdit implements ActionListener {
         buttonsPanel.add(okButton);
 
         memberAdd.add(buttonsPanel, BorderLayout.SOUTH);
-
-        this.mm = mm; // pass MemberMain to refresh the list but button click
-        this.m = m; // pass Member object from Member to set details
-        this.choice = choice; // declared a class variable and initialized for reuse with buttons (edit/add decision)
 
         // choice - add(clean fields) or edit(populate fields (1))
         if (choice == 1) {

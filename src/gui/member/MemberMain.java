@@ -229,13 +229,13 @@ public class MemberMain implements ActionListener, MouseListener, KeyListener {
     // ACTIONEVENT
     public void actionPerformed(ActionEvent e){
         if (e.getSource().equals(addButton)){
-            MemberAddEdit mae = new MemberAddEdit(am,0,this,null);
+            new MemberAddEdit(am,0,this,null);
         } // edit member
         else if (e.getSource().equals(editButton)) {
             displayEdit();
         }
         else if (e.getSource().equals(viewOrdersButton)){
-            PurchaseHistory ov = new PurchaseHistory();
+            new PurchaseHistory();
         }
         else if (e.getSource().equals(searchButton)){
             searchMembers();

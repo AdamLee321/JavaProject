@@ -90,6 +90,7 @@ public class ProductAddEdit implements ActionListener {
         centerRightPanel.add(idLabel, Griddy.getConstraints(0, 0, 1, 1, 0, 0, 0, 0, 5, 5, 5, 5, GridBagConstraints.BOTH, GridBagConstraints.WEST));
         idTF = new JTextField(15);
         idTF.setEditable(false);
+        idTF.setBackground(Color.LIGHT_GRAY);
         centerRightPanel.add(idTF, Griddy.getConstraints(1, 0, 1, 1, 0, 0, 0, 0, 5, 5, 5, 5, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
 
         // make
