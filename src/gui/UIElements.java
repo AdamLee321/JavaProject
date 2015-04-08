@@ -80,6 +80,4 @@ public class UIElements {
     // System messages
 //    public final static String pExitApplication = "Are you sure you want to exit the application?";
 //    public final static String phExitApplication = "Exit";
-
-
 }

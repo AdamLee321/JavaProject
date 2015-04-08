@@ -114,12 +114,12 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
         pnlKeypad.add(tfQty, Griddy.getConstraints(0, 1, 2, 1, 0, 0, 1, 1, 2, 2, 2, 2, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
 
         btnAdd = new JButton("Add Item", new ImageIcon(UIElements.plus16));
-//        btnAdd.setMaximumSize(new Dimension(30,5));
+        btnAdd.setToolTipText("Add item to the basket");
         btnAdd.addActionListener(this);
         pnlKeypad.add(btnAdd, Griddy.getConstraints(0, 2, 1, 1, 0, 10, 1, 1, 2, 2, 0, 2, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
 
         btnRemove = new JButton("Remove ", new ImageIcon(UIElements.minus16));
-//        btnRemove.setMaximumSize(new Dimension(30,5));
+        btnRemove.setToolTipText("Remove item from the basket");
         btnRemove.addActionListener(this);
         pnlKeypad.add(btnRemove, Griddy.getConstraints(1, 2, 1, 1, 0, 0, 1, 1, 2, 0, 2, 2, GridBagConstraints.BOTH, GridBagConstraints.EAST));
 
@@ -132,14 +132,17 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
         pnlCheckout.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Checkout")); // set anonymous titled, etched border
 
         btnRegister = new JButton("Register", new ImageIcon(UIElements.person16));
+        btnRegister.setToolTipText("Register a new member");
         btnRegister.addActionListener(this);
         pnlCheckout.add(btnRegister, Griddy.getConstraints(0, 0, 1, 1, 0, 10, 1, 1, 2, 2, 0, 2, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
 
         btnDiscount = new JButton("Discount", new ImageIcon(UIElements.minus16));
+        btnDiscount.setToolTipText("Apply a discount to the sale");
         btnDiscount.addActionListener(this);
         pnlCheckout.add(btnDiscount, Griddy.getConstraints(1, 0, 1, 1, 0, 0, 1, 1, 2, 0, 2, 2, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
 
-        btnReturnProduct = new JButton("Return Product", new ImageIcon(UIElements.product16));
+        btnReturnProduct = new JButton("Restock Product", new ImageIcon(UIElements.product16));
+        btnReturnProduct.setToolTipText("Restock a product");
         btnReturnProduct.addActionListener(this);
         pnlCheckout.add(btnReturnProduct, Griddy.getConstraints(0, 1, 2, 1, 0, 10, 1, 1, 0, 2, 2, 2, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
 
@@ -149,9 +152,11 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
         pnlPaymentType.setBackground(UIElements.getColour());
 
         rbCash = new JRadioButton("Cash");
+        rbCash.setToolTipText("Pay by cash");
         rbCash.setBackground(UIElements.getColour());
         rbCash.addActionListener(this);
         rbCC = new JRadioButton("Credit Card");
+        rbCC.setToolTipText("Pay by credit card");
         rbCC.setBackground(UIElements.getColour());
         rbCC.addActionListener(this);
 
@@ -164,6 +169,7 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
         pnlCheckout.add(pnlPaymentType, Griddy.getConstraints(0, 2, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
 
         btnCheckout = new JButton("Checkout", new ImageIcon(UIElements.save16));
+        btnCheckout.setToolTipText("Finalize the sale");
         btnCheckout.addActionListener(this);
         pnlCheckout.add(btnCheckout, Griddy.getConstraints(0, 3, 2, 2, 0, 20, 1, 1, 2, 0, 0, 0, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
 
@@ -277,12 +283,9 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
         this.add(pnlBasket, Griddy.getConstraints(0, 0, 1, 4, 0, 0, 5, 1, 0, 0, 0, 0, GridBagConstraints.BOTH, GridBagConstraints.WEST));
 
         setLoggedInTime();
-        System.out.println(loggedInDate +" "+ loggedInTime);
 
         this.setVisible(true);
     }
-
-
 
 // METHODS
 
@@ -471,7 +474,7 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
                 bf.append("ID:\t" + loggedOn.getEmpId() + "\r\n");
                 bf.append("");
                 bf.append("Logout\t" + String.valueOf(new Time(System.currentTimeMillis())) + " " + dateFormat.format(new Date()) + "\r\n");
-                bf.append("Sales\t" + runningTotal + "\r\n");
+                bf.append("Sales\t" + decimalFormat.format(runningTotal) + "\r\n");
                 bf.append("\r\n");
             } catch(IOException io){
                 System.out.println("File not found");
@@ -479,9 +482,9 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
             new StartWindow();
             this.dispose();
         } else if (e.getSource().equals(btnRegister)) {
-            new MemberAddEdit(this, 0, null, null);
+            new MemberAddEdit(this, 2, null, null);
         } else if (e.getSource().equals(btnReturnProduct)) {
-            new SalesHistory();
+            new Restock();
         } else {
             if (tableModel.getList().size() == 0)
                 JOptionPane.showMessageDialog(this, "Nothing in the basket", "Invalid Entry", JOptionPane.WARNING_MESSAGE);

@@ -42,6 +42,7 @@ public class MemberAddEdit implements ActionListener {
         this.mm = mm; // pass MemberMain to refresh the list but button click
         this.m = m; // pass Member object from Member to set details
         this.choice = choice; // declared a class variable and initialized for reuse with buttons (edit/add decision)
+        mo = new MemberOperations();
 
         // setup the jdialog
 
@@ -93,6 +94,7 @@ public class MemberAddEdit implements ActionListener {
         detailsPanel.add(memberIdLabel, Griddy.getConstraints(0,0,1,1,0,0,0,0,5,15,5,5,0,GridBagConstraints.WEST));
         memberIdField = new JTextField();
         memberIdField.setEditable(false);
+        memberIdField.setText(Integer.toString(mo.getNextId()));
         memberIdField.setBackground(Color.LIGHT_GRAY);
         detailsPanel.add(memberIdField, Griddy.getConstraints(1,0,1,1,0,0,0,0,5,15,15,5,GridBagConstraints.HORIZONTAL,GridBagConstraints.CENTER));
 
@@ -320,6 +322,14 @@ public class MemberAddEdit implements ActionListener {
                         memberAdd.dispose();
                     }
                 }
+                else if (choice == 2){
+                    // initialize member ops, add a new member(pass all the paramemters), display message
+                    mo = new MemberOperations();
+                    mo.addMember(memberFNameField.getText(), memberLNameField.getText(), memberStreetField.getText(), memberCityField.getText(), memberCountyField.getText(), birthDayCBox.getSelectedIndex() + 1, birthMonthCBox.getItemAt(birthMonthCBox.getSelectedIndex()), birthYearCBox.getItemAt(birthYearCBox.getSelectedIndex()), memberEmailField.getText(), Integer.parseInt(memberNumberField.getText()), Integer.parseInt(memberPointsField.getText()), fImg);
+                    JOptionPane.showMessageDialog(null, "New Member Added", "Information", JOptionPane.INFORMATION_MESSAGE);
+                    // close window
+                    memberAdd.dispose();
+                }
             }
             else {
                 if (FormValidator.isEmptyField(memberFNameField.getText())
@@ -342,7 +352,15 @@ public class MemberAddEdit implements ActionListener {
                 else if(!FormValidator.isNumber(memberPointsField.getText())) {
                     JOptionPane.showMessageDialog(null,"Points must be numbers only","Not number",JOptionPane.WARNING_MESSAGE);
                 }
-
+                else if(FormValidator.isNumber(memberFNameField.getText())){
+                    JOptionPane.showMessageDialog(null,"First name must be letters only","Not number",JOptionPane.WARNING_MESSAGE);
+                }
+                else if (FormValidator.isNumber(memberLNameField.getText())){
+                    JOptionPane.showMessageDialog(null,"Last  name must be letters only","Not number",JOptionPane.WARNING_MESSAGE);
+                }
+                else if (FormValidator.isNumber(memberCityField.getText())) {
+                    JOptionPane.showMessageDialog(null, "City name must be letters only", "Not number", JOptionPane.WARNING_MESSAGE);
+                }
             }
         }
     }

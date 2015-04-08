@@ -1,4 +1,4 @@
-package gui.employee;
+package gui.sale;
 
 
 /*
@@ -15,16 +15,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class SalesHistory extends JDialog implements MouseListener, ActionListener  {
+public class Restock extends JDialog implements MouseListener, ActionListener  {
 
     private JPanel pnlNorth, pnlCenter, pnlSouth;
     private JButton btnSearch, btnView, btnBack;
     private JTextField tfSearch;
     private String textFieldTip = "type in the order number...";
 
-    public SalesHistory(){
+    public Restock(){
 
-        this.setTitle("Sales History");
+        this.setTitle("Restock Product");
         this.setLayout(new BorderLayout()); // tip: border(don't indicate position), grid or gridbag layouts will stretch a component to the whole screen
         this.setSize(650,650);
         this.setResizable(false);
@@ -116,10 +116,10 @@ public class SalesHistory extends JDialog implements MouseListener, ActionListen
             if (FormValidator.isNumber(tfSearch.getText()) && FormValidator.isCorrectLength(tfSearch.getText(),6)){
                 // do action
             } else if (tfSearch.getText().equals(textFieldTip)){
-                JOptionPane.showMessageDialog(this,"Please Enter The Order Number","No Order Number",JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this,"Please enter the order number","No order number",JOptionPane.WARNING_MESSAGE);
             }
             else{
-                JOptionPane.showMessageDialog(this,"Please Enter The Correct Order Number (ex: 101010)","Invalid Number",JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this,"Please enter the correct order number (ex: 101010)","Number not recognized",JOptionPane.WARNING_MESSAGE);
             }
         }
     }

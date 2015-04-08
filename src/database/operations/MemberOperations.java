@@ -174,5 +174,19 @@ public class MemberOperations {
             JOptionPane.showMessageDialog(null, "MemberOperations - updateMemberPoints");
         }
     }
+
+    public int getNextId(){
+        int max = 0;
+        try{
+            stmt = conn.createStatement();
+            rset = stmt.executeQuery("SELECT MAX(memberId) FROM member");
+            while (rset.next()){
+                max = rset.getInt(1);
+            }
+        }catch (SQLException sqlE){
+            JOptionPane.showMessageDialog(null,"Max ID not found");
+        }
+        return (max +1);
+    }
 }
 

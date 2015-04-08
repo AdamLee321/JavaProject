@@ -60,13 +60,13 @@ public class CreateSalesDetails {
             pstmt.execute();
 
             pstmt.setInt(1,100003);
-            pstmt.setInt(2,5);
+            pstmt.setInt(2,2);
             pstmt.setInt(3,4);
             pstmt.setInt(4,4);
             pstmt.execute();
 
             pstmt.setInt(1,100005);
-            pstmt.setInt(2,2);
+            pstmt.setInt(2,3);
             pstmt.setInt(3,8);
             pstmt.setInt(4,8);
             pstmt.execute();

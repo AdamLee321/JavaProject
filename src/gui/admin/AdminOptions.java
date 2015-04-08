@@ -2,13 +2,10 @@ package gui.admin;
 
 import gui.FormValidator;
 import gui.Griddy;
-import gui.StartWindow;
 import gui.UIElements;
 
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.border.EtchedBorder;
-import javax.swing.colorchooser.AbstractColorChooserPanel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -148,7 +145,7 @@ public class AdminOptions implements ActionListener {
             }
         }
         else if (e.getSource().equals(logButton)){
-            new LogDisplay(adminOps);
+            new Log(adminOps);
         }
     }
 }

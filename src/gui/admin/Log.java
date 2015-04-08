@@ -18,7 +18,7 @@ import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.Scanner;
 
-public class LogDisplay extends JDialog implements ActionListener {
+public class Log extends JDialog implements ActionListener {
 
     private JDialog log;
     private JTextArea taMain;
@@ -29,7 +29,7 @@ public class LogDisplay extends JDialog implements ActionListener {
     File logFileOut = new File("System.log");
     Scanner in;
 
-    public LogDisplay(JDialog parent) { // passing in the parent keeps this window above it and inherits parents characteristics (on top for example), but allows click access to parent. to disallow click access log.setModal(true)
+    public Log(JDialog parent) { // passing in the parent keeps this window above it and inherits parents characteristics (on top for example), but allows click access to parent. to disallow click access log.setModal(true)
 
         log = new JDialog(parent);
         log.setTitle("System Log");
