@@ -49,12 +49,12 @@ public class Cash extends JDialog implements ActionListener {
         main.add(tfCash);
 
         btnCancel = new JButton("Cancel", new ImageIcon(UIElements.cancel6));
-        btnCancel.setPreferredSize(new Dimension(105, 26));
+        btnCancel.setPreferredSize(new Dimension(105, 28));
         btnCancel.addActionListener(this);
         main.add(btnCancel);
 
         btnOK = new JButton("OK", new ImageIcon(UIElements.plus16));
-        btnOK.setPreferredSize(new Dimension(105, 26));
+        btnOK.setPreferredSize(new Dimension(105, 28));
         btnOK.addActionListener(this);
         main.add(btnOK);
 

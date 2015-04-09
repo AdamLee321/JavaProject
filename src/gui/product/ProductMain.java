@@ -4,7 +4,6 @@ import database.operations.ProductOperations;
 import gui.Griddy;
 import gui.UIElements;
 import gui.admin.AdminMain;
-import gui.product.OrderHistory;
 import model.Product;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
@@ -144,7 +143,7 @@ public class ProductMain implements ActionListener, MouseListener {
         southPanel.setBackground(UIElements.getColour());
 
         // bottom buttons
-        viewButton = new JButton("View Order History");
+        viewButton = new JButton("View Purchase History");
         viewButton.setPreferredSize(new Dimension(200, 28));
         viewButton.setIcon(new ImageIcon(UIElements.product16));
         southPanel.add(viewButton);
@@ -212,8 +211,9 @@ public class ProductMain implements ActionListener, MouseListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(addButton))
             new ProductAddEdit(am, 0, this, null);
-        else if (e.getSource().equals(viewButton))
-            new OrderHistory();
+        else if (e.getSource().equals(viewButton)){
+            new PurchaseHistory(selectedRowId);
+        }
         else {
             if (selectedRow == -1)
                 JOptionPane.showMessageDialog(null, "Please Select The Product First", "Product Not Selected", JOptionPane.WARNING_MESSAGE);

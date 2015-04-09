@@ -7,35 +7,31 @@ Group 17 (George - 22/03/2015)
 */
 
 import gui.FormValidator;
-import gui.OrderDetails;
 import gui.UIElements;
-import gui.admin.AdminMain;
-
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.EventListener;
 
-public class PurchaseHistory extends JDialog implements MouseListener, ActionListener, KeyListener {
+public class OrderHistory extends JDialog implements MouseListener, ActionListener, KeyListener {
 
     private JPanel pnlNorth, pnlCenter, pnlSouth;
     private JButton btnSearch, btnBack;
     private JTextField tfSearch;
     private String textFieldTip = "type in the order number...";
-    PurchaseHistoryTableModel purhisModel;
-    JTable purTable;
+    OrderHistoryTableModel ordersTableModel;
+    JTable ordersTable;
     int memberId;
 
-    public PurchaseHistory(int memberId) {
+    public OrderHistory(int memberId) {
 
         this.memberId = memberId;
 
-        this.setTitle("Order History");
+        this.setTitle("Member History");
         this.setLayout(new BorderLayout()); // tip: border(don't indicate position), grid or gridbag layouts will stretch a component to the whole screen
         this.setSize(1000, 500);
-        this.setResizable(true);
         this.setModal(true);
+        this.setResizable(true);
         this.getContentPane().setBackground(UIElements.getColour());
         this.setLocationRelativeTo(null);
 
@@ -61,14 +57,14 @@ public class PurchaseHistory extends JDialog implements MouseListener, ActionLis
 
 // CENTER - Tables
 
-        purhisModel = new PurchaseHistoryTableModel();
-        purTable = new JTable(purhisModel);
-        purhisModel.emptyArray();
-        purhisModel.getPurchaseList(memberId);
-        purTable.setFillsViewportHeight(true); // fill out the height of the table
-        purTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // don't allow multirow selection
+        ordersTableModel = new OrderHistoryTableModel();
+        ordersTable = new JTable(ordersTableModel);
+        ordersTableModel.emptyArray();
+        ordersTableModel.getPurchaseList(memberId);
+        ordersTable.setFillsViewportHeight(true); // fill out the height of the table
+        ordersTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // don't allow multirow selection
 
-        JScrollPane scroll = new JScrollPane(purTable);
+        JScrollPane scroll = new JScrollPane(ordersTable);
         scroll.setBorder(new BevelBorder(BevelBorder.LOWERED));
         scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
@@ -91,15 +87,16 @@ public class PurchaseHistory extends JDialog implements MouseListener, ActionLis
         this.add(pnlSouth, BorderLayout.SOUTH);
 
 // turns the lights on
+
         this.setVisible(true);
     }
 
 // METHODS
 
-    // display all purchases with a passed member id
-    public void displayPurchases(){
-        purhisModel.emptyArray(); // clear object array (rows) so it does not keep duplicating entries to the table on every call
-        purhisModel.getPurchaseList(memberId);
+    // display all orders with a passed member id
+    public void displayOrders(){
+        ordersTableModel.emptyArray(); // clear object array (rows) so it does not keep duplicating entries to the table on every call
+        ordersTableModel.getPurchaseList(memberId);
     }
 
     // search for a specific order - used for: keyboard listener and mouse listener
@@ -107,14 +104,13 @@ public class PurchaseHistory extends JDialog implements MouseListener, ActionLis
         if (FormValidator.isNumber(tfSearch.getText()) || tfSearch.getText().equals(textFieldTip)) {
 
             if (tfSearch.getText().equals("")) {
-                displayPurchases();
+                displayOrders();
             }
             if (tfSearch.getText().equals(textFieldTip)) {
-                displayPurchases();
+                displayOrders();
             } else {
-                purhisModel.emptyArray();
-                System.out.println(memberId + " " + Integer.parseInt(tfSearch.getText()));
-                purhisModel.getPurchaseList(memberId, Integer.parseInt(tfSearch.getText()));
+                ordersTableModel.emptyArray();
+                ordersTableModel.getPurchaseList(memberId, Integer.parseInt(tfSearch.getText()));
                 resetSearchField();
             }
         } else {

@@ -11,15 +11,8 @@ this class was created to allow reuse of various user interface elements through
 attributes are set to static to allow access without the need for reference object creation
 */
 
-import org.omg.CORBA.portable.ApplicationException;
-import sun.misc.IOUtils;
-
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.Color;
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.*;
 
 public class UIElements {

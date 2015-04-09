@@ -67,13 +67,13 @@ public class ProductAddEdit implements ActionListener {
 
         addButton = new JButton("Add");
         addButton.setIcon(new ImageIcon(UIElements.plus16));
-        addButton.setPreferredSize(new Dimension(100, 26));
+        addButton.setPreferredSize(new Dimension(100, 28));
         addButton.addActionListener(this);
         centerLeftPanel.add(addButton, Griddy.getConstraints(1, 1, 1, 1, 0, 0, 0, 0, 5, 5, 5, 5, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
 
         removeButton = new JButton("Remove");
         removeButton.setIcon(new ImageIcon(UIElements.minus16));
-        removeButton.setPreferredSize(new Dimension(100, 26));
+        removeButton.setPreferredSize(new Dimension(100, 28));
         removeButton.addActionListener(this);
         centerLeftPanel.add(removeButton, Griddy.getConstraints(2, 1, 1, 1, 0, 0, 0, 0, 5, 5, 5, 5, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
 
@@ -179,13 +179,13 @@ public class ProductAddEdit implements ActionListener {
         southPanel.setBackground(UIElements.getColour());
 
         cancelButton = new JButton("Cancel");
-        cancelButton.setPreferredSize(new Dimension(100, 26));
+        cancelButton.setPreferredSize(new Dimension(100, 28));
         cancelButton.setIcon(new ImageIcon(UIElements.cancel6));
         cancelButton.addActionListener(this);
         southPanel.add(cancelButton);
 
         okButton = new JButton("OK");
-        okButton.setPreferredSize(new Dimension(100, 26));
+        okButton.setPreferredSize(new Dimension(100, 28));
         okButton.setIcon(new ImageIcon(UIElements.save16));
         okButton.addActionListener(this);
         southPanel.add(okButton);

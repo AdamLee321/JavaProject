@@ -130,7 +130,7 @@ public class MemberMain implements ActionListener, MouseListener, KeyListener {
 
     // bottom buttons
 
-        viewOrdersButton = new JButton("View Purchase History");
+        viewOrdersButton = new JButton("View Order History");
         viewOrdersButton.setPreferredSize(new Dimension(200, 28));
         viewOrdersButton.setIcon(new ImageIcon(UIElements.open16));
         viewOrdersButton.addActionListener(this);
@@ -240,7 +240,7 @@ public class MemberMain implements ActionListener, MouseListener, KeyListener {
             displayEdit();
         }
         else if (e.getSource().equals(viewOrdersButton)){
-            new PurchaseHistory(rowMemId);
+            new OrderHistory(rowMemId);
         }
         else if (e.getSource().equals(searchButton)){
             searchMembers();

@@ -68,13 +68,13 @@ public class MemberAddEdit implements ActionListener {
         pictureButtonsPanel.setBackground(UIElements.getColour());
 
         addButton = new JButton("Add");
-        addButton.setPreferredSize(new Dimension(100, 26));
+        addButton.setPreferredSize(new Dimension(100, 28));
         addButton.setIcon(new ImageIcon(UIElements.plus16));
         addButton.addActionListener(this);
         pictureButtonsPanel.add(addButton);
 
         removeButton = new JButton("Remove");
-        removeButton.setPreferredSize(new Dimension(100, 26));
+        removeButton.setPreferredSize(new Dimension(100, 28));
         removeButton.setIcon(new ImageIcon(UIElements.minus16));
         removeButton.addActionListener(this);
         pictureButtonsPanel.add(removeButton);
@@ -179,7 +179,7 @@ public class MemberAddEdit implements ActionListener {
         buttonsPanel.setBackground(UIElements.getColour());
 
         cancelButton = new JButton("Cancel");
-        cancelButton.setPreferredSize(new Dimension(100, 26));
+        cancelButton.setPreferredSize(new Dimension(100, 28));
         cancelButton.setIcon(new ImageIcon(UIElements.cancel6));
         cancelButton.addActionListener(this);
         buttonsPanel.add(cancelButton);
@@ -191,7 +191,7 @@ public class MemberAddEdit implements ActionListener {
 //        buttonsPanel.add(previewButton);
 
         okButton = new JButton("OK");
-        okButton.setPreferredSize(new Dimension(100, 26));
+        okButton.setPreferredSize(new Dimension(100, 28));
         okButton.setIcon(new ImageIcon(UIElements.save16));
         okButton.addActionListener(this);
         buttonsPanel.add(okButton);

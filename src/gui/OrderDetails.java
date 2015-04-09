@@ -39,18 +39,18 @@ public class OrderDetails extends JDialog implements ActionListener {
         pnlSouth.setBackground(UIElements.getColour());
 
         btnBack = new JButton("Back");
-        btnBack.setPreferredSize(new Dimension(100, 26));
+        btnBack.setPreferredSize(new Dimension(100, 28));
         btnBack.setIcon(new ImageIcon(UIElements.cancel6));
         btnBack.addActionListener(this);
         pnlSouth.add(btnBack);
 
         btnEdit = new JButton("Edit");
-        btnEdit.setPreferredSize(new Dimension(100, 26));
+        btnEdit.setPreferredSize(new Dimension(100, 28));
         btnEdit.setIcon(new ImageIcon(UIElements.edit16));
         pnlSouth.add(btnEdit);
 
         btnPrint = new JButton("Print");
-        btnPrint.setPreferredSize(new Dimension(100, 26));
+        btnPrint.setPreferredSize(new Dimension(100, 28));
         btnPrint.setIcon(new ImageIcon(UIElements.print16));
         pnlSouth.add(btnPrint);
 

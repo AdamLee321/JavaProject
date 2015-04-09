@@ -84,7 +84,7 @@ public class About implements ActionListener {
 
         closeButton = new JButton("Close");
         closeButton.setIcon(new ImageIcon(UIElements.remove16));
-        closeButton.setPreferredSize(new Dimension(100, 26));
+        closeButton.setPreferredSize(new Dimension(100, 28));
         closeButton.addActionListener(this);
 
         southPanel.add(closeButton);

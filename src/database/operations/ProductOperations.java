@@ -3,6 +3,7 @@ package database.operations;
 import database.ConnectionDB;
 import model.Product;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.sql.*;
@@ -213,8 +214,6 @@ public class ProductOperations {
         return (max +1);
     }
 
-    
-
     public FileInputStream savePic2DB(File pic) {
         FileInputStream in = null;
         try {
@@ -223,5 +222,40 @@ public class ProductOperations {
             System.out.println(e);
         }
         return in;
+    }
+
+    // get all the purchase history for a specific product
+    public ResultSet getPurchases(int pid) {
+        String query = "SELECT s.saleid, s.saletime, s.saledate, e.empfname, e.emplname, m.memberfname, m.memberlname\n" +
+                "FROM sales s, salesdetails sd, member m, employee e, product p\n" +
+                "WHERE e.empid = s.empid AND s.saleid = sd.saleid AND m.memberId = sd.memberId AND sd.prodId = p.prodId AND p.prodId = ?";
+        try {
+            pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, pid);
+            pstmt.execute();
+            rset = pstmt.executeQuery();
+
+        } catch (SQLException q) {
+            JOptionPane.showMessageDialog(null, "ProductOperations - getPurchases 1");
+        }
+        return rset;
+    }
+
+    // get all the purchase history for a specific product, filter by sale id
+    public ResultSet getPurchases(int pid, int sid) {
+        String query = "SELECT s.saleid, s.saletime, s.saledate, e.empfname, e.emplname, m.memberfname, m.memberlname\n" +
+                "FROM sales s, salesdetails sd, member m, employee e, product p\n" +
+                "WHERE e.empid = s.empid AND s.saleid = sd.saleid AND m.memberId = sd.memberId AND sd.prodId = p.prodId AND p.prodId = ? AND s.saleid = ?";
+        try {
+            pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, pid);
+            pstmt.setInt(2, sid);
+            pstmt.execute();
+            rset = pstmt.executeQuery();
+
+        } catch (SQLException q) {
+            JOptionPane.showMessageDialog(null, "ProductOperations - getPurchases 2");
+        }
+        return rset;
     }
 }

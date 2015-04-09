@@ -98,12 +98,12 @@ public class CreditCard extends JDialog implements ActionListener {
         pnlSouth.setBackground(UIElements.getColour());
 
         btnCancel = new JButton("Cancel", new ImageIcon(UIElements.cancel6));
-        btnCancel.setPreferredSize(new Dimension(100, 26));
+        btnCancel.setPreferredSize(new Dimension(100, 28));
         btnCancel.addActionListener(this);
         pnlSouth.add(btnCancel);
 
         btnOK = new JButton("OK", new ImageIcon(UIElements.save16));
-        btnOK.setPreferredSize(new Dimension(100, 26));
+        btnOK.setPreferredSize(new Dimension(100, 28));
         btnOK.addActionListener(this);
         pnlSouth.add(btnOK);
 

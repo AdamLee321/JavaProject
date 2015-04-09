@@ -44,7 +44,7 @@ public class SalesHistory extends JDialog implements MouseListener, ActionListen
         pnlNorth.add(tfSearch);
 
         btnSearch = new JButton("Search", new ImageIcon(UIElements.search16)); // initialize the search button, add a add and icon
-        btnSearch.setPreferredSize(new Dimension(100, 26));
+        btnSearch.setPreferredSize(new Dimension(100, 28));
         btnSearch.addActionListener(this);
         pnlNorth.add(btnSearch);
 
@@ -68,7 +68,7 @@ public class SalesHistory extends JDialog implements MouseListener, ActionListen
         pnlSouth.setBackground(UIElements.getColour());
 
         btnBack = new JButton("Back", new ImageIcon(UIElements.cancel6)); // initialize the search button, add a add and icon);
-        btnBack.setPreferredSize(new Dimension(100, 26));
+        btnBack.setPreferredSize(new Dimension(100, 28));
         btnBack.addActionListener(this);
         pnlSouth.add(btnBack);
 
