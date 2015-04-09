@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.sql.*;
+import java.util.ArrayList;
 
 /**
  * Created by DL on 08/03/2015.
@@ -71,6 +72,25 @@ public class ProductOperations {
             System.out.println(sqlE.getMessage());
         }
         return rset;
+    }
+
+    public ArrayList<Product> allProductsArray(){
+        ArrayList<Product> p = new ArrayList<Product>();
+        String sql = "SELECT prodId, prodMake, prodModel, prodSalePrice, prodCostPrice, prodQTY," +
+                "prodPic, prodType, cpu, ram, OperatingSystem, storage, screen, prodDesc FROM PRODUCT";
+        try{
+            stmt = conn.createStatement();
+            rset = stmt.executeQuery(sql);
+            while (rset.next()) {
+                p.add( new Product(rset.getInt(1), rset.getString(2), rset.getString(3), rset.getDouble(4),
+                        rset.getDouble(5), rset.getInt(6), rset.getBytes(7), rset.getString(8), rset.getString(9),
+                        rset.getString(10),rset.getString(11), rset.getString(12), rset.getString(13),
+                        rset.getString(14)));
+            }
+        }catch(SQLException sqlE) {
+            System.out.println("Error in ResultSet to product Conversion");
+        }
+        return p;
     }
 
     public Product productByIDO(int id){
@@ -183,6 +203,20 @@ public class ProductOperations {
             pstmt.setString(12, screen);//screen
             pstmt.setString(13, description);//prodDesc
             pstmt.setInt(14, id);
+            pstmt.execute();
+            System.out.println("Successful update");
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void updateProduct(int id, int qty){
+        String sql = "Update Product SET prodQTY  = ? WHERE prodId = ?";
+        try{
+            pstmt = conn.prepareStatement(sql);
+
+            pstmt.setInt(1, qty);//prodQTY
+            pstmt.setInt(2, id); // product to update
             pstmt.execute();
             System.out.println("Successful update");
         }catch(SQLException e){

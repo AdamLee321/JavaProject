@@ -6,6 +6,7 @@ package gui.sale;/*2ndYearProject
 */
 
 import database.operations.ProductOperations;
+import model.Product;
 
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableColumnModel;
@@ -43,13 +44,18 @@ public class SaleTableModel extends DefaultTableModel {
     }
   }
 
-  public void queryTableData(int id, int qty) throws SQLException {
-    ProductOperations po = new ProductOperations();
-    ResultSet rset = po.productByIDR(id);
-    while (rset.next()) {
-      saleRows.add(new SaleRow(rset.getInt(1), rset.getString(2), rset.getString(3), qty, rset.getDouble(4)));
-    }
-    rset.close();
+//  public void queryTableData(int id, int qty) throws SQLException {
+//    ProductOperations po = new ProductOperations();
+//    ResultSet rset = po.productByIDR(id);
+//    while (rset.next()) {
+//      saleRows.add(new SaleRow(rset.getInt(1), rset.getString(2), rset.getString(3), qty, rset.getDouble(4)));
+//    }
+//    rset.close();
+//    fireTableChanged(new TableModelEvent(this, -1, -1));
+//  }
+
+  public void queryTableData(Product p, int qty) throws SQLException {
+    saleRows.add(new SaleRow(p.getProdId(), p.getProdMake(), p.getProdModel(), qty, p.getProdSalePrice()));
     fireTableChanged(new TableModelEvent(this, -1, -1));
   }
 
