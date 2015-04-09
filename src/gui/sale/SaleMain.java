@@ -14,6 +14,7 @@ import gui.*;
 import gui.employee.SalesHistory;
 import gui.member.MemberAddEdit;
 import model.Employee;
+import model.Product;
 import model.Sale;
 
 import javax.swing.*;
@@ -25,11 +26,13 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class SaleMain extends JFrame implements ActionListener, MouseListener {
@@ -47,9 +50,6 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
     private DateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
     private Date date = new Date();
 
-    private DateFormat timeFormat = new SimpleDateFormat("hh-mm-ss");
-    private Time time = new Time(System.currentTimeMillis());
-
     private double total = 0;
     private double changeDue = 0;
     private double cashPaid = 0;
@@ -58,6 +58,8 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
     private double vat = 0;
     private String cashOrCard = "";
     final private double VAT_RATE = .21;
+    private ArrayList<Product> products;
+    private ArrayList<Integer> indexes;
 
     private String prodFieldTip = "product number...";
     private String qtyFieldTip = "quantity...";
@@ -71,6 +73,7 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
     private double runningTotal;
     private String loggedInTime;
     private String loggedInDate;
+
 
 
 
@@ -93,6 +96,9 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
         });
 
         po = new ProductOperations();
+        products = po.allProductsArray();
+        indexes = new ArrayList<Integer>();
+
         loggedOn = e;
 
 // ADD PRODUCT PANEL
@@ -361,7 +367,7 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
         updateLabels();
     }
 
-    public void addToBasket() {
+    public void addToBasket(int index) {
         // Get the data!
         try {
             boolean found = false;
@@ -371,15 +377,28 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
                         s.setQty(s.getQty()+Integer.parseInt(tfQty.getText()));
                         found = true;
                         tableModel.fireTableDataChanged();
-                        resetProductFields();
+//                        resetProductFields();
                     }
                 }
-            if(!found)
-                tableModel.queryTableData(Integer.parseInt(tfProdNum.getText()), Integer.parseInt(tfQty.getText()));
-                resetProductFields();
+            if(!found) {
+                tableModel.queryTableData(products.get(index), Integer.parseInt(tfQty.getText()));
+                indexes.add(index);
+            }
+            resetProductFields();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "SQL Problem");
         }
+    }
+
+    public int searchArray(int x){
+        int index = -1;
+        for (int i = 0; i < products.size(); i++) {
+            if(products.get(i).getProdId() == x) {
+                index = i;
+                break;
+            }
+        }
+        return index;
     }
 
     public void refreshBasket() {
@@ -463,9 +482,11 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
             if (!FormValidator.isNumber(tfProdNum.getText()) || !FormValidator.isNumber(tfQty.getText()))
                 JOptionPane.showMessageDialog(this, "Please enter a number in both fields", "Invalid Entry", JOptionPane.WARNING_MESSAGE);
             else {
-                if (po.checkProduct(Integer.parseInt(tfProdNum.getText()))) {
-                    if (po.checkQuantity(Integer.parseInt(tfProdNum.getText())) > Integer.parseInt(tfQty.getText())) {
-                        addToBasket();
+                int index = searchArray(Integer.parseInt(tfProdNum.getText()));
+                if ( index != -1) {
+                    if (products.get(index).getprodQTY() >= Integer.parseInt(tfQty.getText())) {
+                        products.get(index).setProdQTY(products.get(index).getprodQTY() - Integer.parseInt(tfQty.getText()));
+                        addToBasket(index);
                         updatePrice();
                     }
                     else
@@ -474,10 +495,6 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
                 else
                     JOptionPane.showMessageDialog(this, "Item does not exist", "Quantity", JOptionPane.WARNING_MESSAGE);
             }
-//            tfProdNum.setText(prodFieldTip);
-//            tfProdNum.setForeground(Color.GRAY);
-//            tfQty.setText(qtyFieldTip);
-//            tfQty.setForeground(Color.GRAY);
         } else if (e.getSource().equals(btnLogout)) {
             try (BufferedWriter bf = new BufferedWriter(new FileWriter("src/res/log.txt",true))) {
                 bf.append("Login\t" + loggedInTime + " " + loggedInDate + "\r\n");
@@ -510,15 +527,16 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
                     JOptionPane.showMessageDialog(this, "Select item to remove", "Invalid choice", JOptionPane.WARNING_MESSAGE);
                 else {
                     tableModel.getList().remove(saleTable.getSelectedRow());
+                    indexes.remove(saleTable.getSelectedRow());
                     refreshBasket();
                     updatePrice();
                     calcChangeDue();
                     updateLabels();
                 }
             } else if (e.getSource().equals(btnCheckout)) {
-                if (cashPaid == -1) {
+                if (cashPaid < total) {
                     lblPaymentTypeR.setText(cashOrCard);
-                    JOptionPane.showMessageDialog(this, "Please enter cash payment first", "Sales", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Please enter payment first", "Sales", JOptionPane.INFORMATION_MESSAGE);
                 }
                 else{
                     new MemberOperations().updateMemberPoints(memberid, (memberPoints + 1));
@@ -532,6 +550,7 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
                             sd.insertSalesDetails(s.getProductCode(), saleId, s.getQty());
                         else
                             sd.insertSalesDetails(s.getProductCode(), saleId, memberid, s.getQty()); // this needs to be fixed - pushes the total quantity
+                        po.updateProduct(s.getProductCode(), products.get(indexes.get(i)).getprodQTY());
                     }
                     JOptionPane.showMessageDialog(this, "Sale completed!", "Sales", JOptionPane.INFORMATION_MESSAGE);
                     tableModel.emptyArray();
