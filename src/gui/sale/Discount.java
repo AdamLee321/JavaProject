@@ -165,7 +165,7 @@ public class Discount extends JDialog implements ActionListener, MouseListener {
                             rate = DISCOUNT_RATES[3];
                         else
                             rate = DISCOUNT_RATES[4];
-                        sm.setMemberDetails(rate, m.getMemberFName() +" " + m.getMemberLName(), points, m.getMemberPoints());
+                        sm.setMemberDetails(rate, m.getMemberFName() + " " + m.getMemberLName(), points, m.getMemberId());
                         this.dispose();
                     } else {
                         JOptionPane.showMessageDialog(this, "Member does not exist", "Member", JOptionPane.WARNING_MESSAGE);

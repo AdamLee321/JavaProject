@@ -76,7 +76,6 @@ public class MemberMain implements ActionListener, MouseListener, KeyListener {
     // search members panel
 
         searchPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        //searchPanel.setBackground(new Color(98, 169, 221));
         searchPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Search Members")); // set anonymous titled, etched border
 
         searchField = new JTextField(29);
@@ -103,6 +102,7 @@ public class MemberMain implements ActionListener, MouseListener, KeyListener {
         memTableModel = new MemberTableModel();
         memTable = new JTable(memTableModel);
         displayMembers(); // this must come AFTER the above two lines
+        sortTables(); // this methods sorts table columns nicely
         memTable.setFillsViewportHeight(true); // fill out the height of the table
         memTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // don't allow multirow selection
 
@@ -146,9 +146,11 @@ public class MemberMain implements ActionListener, MouseListener, KeyListener {
 
     // display main members list (aka refresh the list)
     public void displayMembers(){
-
         memTableModel.emptyArray(); // clear object array (rows) so it does not keep duplicating entries to the table on every call
         memTableModel.getMainList();
+    }
+
+    public void sortTables(){
         memTable.getColumnModel().getColumn(0).setPreferredWidth(10); // id // set width on columns of the JTable
         memTable.getColumnModel().getColumn(1).setPreferredWidth(50); // name // these widths have to be here because on every refresh the width resets to default
         memTable.getColumnModel().getColumn(2).setPreferredWidth(50); // surname
@@ -215,7 +217,6 @@ public class MemberMain implements ActionListener, MouseListener, KeyListener {
     }
 
     // KEYBOARD
-
     // have to implement these methods for KeyboardListener
     public void keyTyped(KeyEvent e){}
     public void keyPressed(KeyEvent e){}
@@ -225,6 +226,7 @@ public class MemberMain implements ActionListener, MouseListener, KeyListener {
             int key = e.getKeyCode();
             if (key == KeyEvent.VK_ENTER) {
                 searchMembers();
+                sortTables();
             }
         }
     }
@@ -238,7 +240,7 @@ public class MemberMain implements ActionListener, MouseListener, KeyListener {
             displayEdit();
         }
         else if (e.getSource().equals(viewOrdersButton)){
-            new PurchaseHistory();
+            new PurchaseHistory(rowMemId);
         }
         else if (e.getSource().equals(searchButton)){
             searchMembers();
@@ -250,6 +252,7 @@ public class MemberMain implements ActionListener, MouseListener, KeyListener {
                 mo.deleteMember(rowMemId);
                 JOptionPane.showMessageDialog(am,"Member deleted");
                 displayMembers();
+                sortTables();
             }
         }
     }

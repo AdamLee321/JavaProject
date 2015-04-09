@@ -531,7 +531,7 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
                         if (memberid == 0)
                             sd.insertSalesDetails(s.getProductCode(), saleId, s.getQty());
                         else
-                            sd.insertSalesDetails(s.getProductCode(), saleId, memberid, s.getQty());
+                            sd.insertSalesDetails(s.getProductCode(), saleId, memberid, s.getQty()); // this needs to be fixed - pushes the total quantity
                     }
                     JOptionPane.showMessageDialog(this, "Sale completed!", "Sales", JOptionPane.INFORMATION_MESSAGE);
                     tableModel.emptyArray();

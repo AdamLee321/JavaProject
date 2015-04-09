@@ -147,15 +147,15 @@ public class MemberOperations {
     }
 
     // check if member exists
-    public boolean checkMember(int id){
+    public boolean checkMember(int id) {
         boolean x = true;
-        String sql = "SELECT * FROM member WHERE memberid = '"+id+"'";
-        try{
+        String sql = "SELECT * FROM member WHERE memberid = '" + id + "'";
+        try {
             stmt = conn.createStatement();
             rset = stmt.executeQuery(sql);
-            if(!rset.next())
+            if (!rset.next())
                 x = false;
-        }catch (SQLException sqlE){
+        } catch (SQLException sqlE) {
             System.out.println(sqlE.getMessage());
         }
         return x;
@@ -165,7 +165,6 @@ public class MemberOperations {
     public void updateMemberPoints(int id, int points) {
         String query = "UPDATE member SET memberPoints = ? WHERE memberId = " + id;
         try {
-
             pstmt = conn.prepareStatement(query);
 
             pstmt.setInt(1, points);
@@ -175,18 +174,52 @@ public class MemberOperations {
         }
     }
 
-    public int getNextId(){
+    // for population of the id field in the member registration
+    public int getNextId() {
         int max = 0;
-        try{
+        try {
             stmt = conn.createStatement();
             rset = stmt.executeQuery("SELECT MAX(memberId) FROM member");
-            while (rset.next()){
+            while (rset.next()) {
                 max = rset.getInt(1);
             }
-        }catch (SQLException sqlE){
-            JOptionPane.showMessageDialog(null,"Max ID not found");
+        } catch (SQLException sqlE) {
+            JOptionPane.showMessageDialog(null, "Max ID not found");
         }
-        return (max +1);
+        return (max + 1);
     }
+
+    // get all the purchases by a specific member
+    public ResultSet getPurchases(int mid) {
+        String query = "SELECT sd.saleid, s.saledate, p.prodMake, p.prodModel, p.prodSalePrice, p.prodQTY, s.saleamount FROM product p, sales s, salesdetails sd WHERE p.prodId = sd.prodId AND sd.saleid = s.saleid and sd.memberid = ?";
+        try {
+            pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, mid);
+            pstmt.execute();
+            rset = pstmt.executeQuery();
+
+        } catch (SQLException q) {
+            JOptionPane.showMessageDialog(null, "MemberOperations - getPurchases 1");
+        }
+        return rset;
+    }
+
+    // get specific purchases by a member and sale id
+    public ResultSet getPurchases(int mid, int sid) {
+        String query = "SELECT sd.saleid, s.saledate, p.prodMake, p.prodModel, p.prodSalePrice, p.prodQTY, s.saleamount FROM product p, sales s, salesdetails sd WHERE p.prodId = sd.prodId AND sd.saleid = s.saleid and sd.memberid = ? and s.saleid = ?";
+        try {
+            pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, mid);
+            pstmt.setInt(2, sid);
+            pstmt.execute();
+            rset = pstmt.executeQuery();
+
+        } catch (SQLException q) {
+            JOptionPane.showMessageDialog(null, "MemberOperations - getPurchases 2");
+        }
+        return rset;
+    }
+
+
 }
 
