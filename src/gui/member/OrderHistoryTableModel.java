@@ -19,7 +19,7 @@ import java.util.Date;
 
 public class OrderHistoryTableModel extends DefaultTableModel {
 
-    // Model (PurchaseHistoryTableModel) variables
+    // Model (OrderHistoryTableModel) variables
     int saleid;
     Date date;
     String prodMake;

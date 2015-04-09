@@ -13,6 +13,8 @@ import model.Employee;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.IOException;
 
 /*
 IT Tallaght - 2015, S2
@@ -290,7 +292,14 @@ public class AdminMain extends JFrame implements ActionListener {
         }
          // Help Button
         else if (e.getSource().equals(helpMI)){
-
+            if (Desktop.isDesktopSupported()) {
+                try {
+                    File myFile = new File("src/res/AdminManual.pdf");
+                    Desktop.getDesktop().open(myFile);
+                } catch (IOException ex) {
+                    System.out.println("No supported application");
+                }
+            }
         } // About Button
         else if (e.getSource().equals(aboutMI)){
             new About();

@@ -40,7 +40,7 @@ public class ConnectionDB {
     return this.conn;
   }
 
-  public void closeDB() {
+  public static void closeDB() {
     try {
       conn.close();
       System.out.print("Connection closed");

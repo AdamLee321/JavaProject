@@ -6,7 +6,10 @@ Computing - Year 2, Project
 Group 17 (George - 10/03/2015)
 */
 
+import database.ConnectionDB;
+
 import javax.swing.*;
+import java.sql.SQLException;
 
 public class UIPrompts {
 
@@ -15,5 +18,6 @@ public class UIPrompts {
         int choice = JOptionPane.showOptionDialog(null, "Are you sure you want to exit the application?", "Exit", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, null);
         if (choice == 0)
             System.exit(0);
+            ConnectionDB.closeDB();
     }
 }

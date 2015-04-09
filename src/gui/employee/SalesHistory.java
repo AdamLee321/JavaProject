@@ -1,6 +1,5 @@
 package gui.employee;
 
-
 /*
 IT Tallaght - 2015, S2
 Computing - Year 2, Project
@@ -18,7 +17,7 @@ import java.awt.event.*;
 public class SalesHistory extends JDialog implements MouseListener, ActionListener  {
 
     private JPanel pnlNorth, pnlCenter, pnlSouth;
-    private JButton btnSearch, btnView, btnBack;
+    private JButton btnSearch, btnBack;
     private JTextField tfSearch;
     private String textFieldTip = "type in the order number...";
 
@@ -47,11 +46,6 @@ public class SalesHistory extends JDialog implements MouseListener, ActionListen
         btnSearch.setPreferredSize(new Dimension(100, 28));
         btnSearch.addActionListener(this);
         pnlNorth.add(btnSearch);
-
-//        btnView = new JButton("View", new ImageIcon(UIElements.open16));
-//        btnView.setPreferredSize(new Dimension(100, 26));
-//        btnView.addActionListener(this);
-//        pnlNorth.add(btnView);
 
         this.add(pnlNorth, BorderLayout.NORTH);
 
@@ -108,9 +102,6 @@ public class SalesHistory extends JDialog implements MouseListener, ActionListen
     public void actionPerformed(ActionEvent e){
         if (e.getSource().equals(btnBack)){
             this.dispose();
-        }
-        else if (e.getSource().equals(btnView)){
-            OrderDetails od = new OrderDetails();
         }
         else if (e.getSource().equals(btnSearch)){
             if (FormValidator.isNumber(tfSearch.getText()) && FormValidator.isCorrectLength(tfSearch.getText(),6)){
