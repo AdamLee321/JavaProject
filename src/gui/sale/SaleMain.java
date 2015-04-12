@@ -147,8 +147,8 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
         btnDiscount.addActionListener(this);
         pnlCheckout.add(btnDiscount, Griddy.getConstraints(1, 0, 1, 1, 0, 0, 1, 1, 2, 0, 2, 2, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
 
-        btnReturnProduct = new JButton("Restock Product", new ImageIcon(UIElements.product16));
-        btnReturnProduct.setToolTipText("Restock a product");
+        btnReturnProduct = new JButton("Void Sale", new ImageIcon(UIElements.product16));
+        btnReturnProduct.setToolTipText("Clears the current sale");
         btnReturnProduct.addActionListener(this);
         pnlCheckout.add(btnReturnProduct, Griddy.getConstraints(0, 1, 2, 1, 0, 10, 1, 1, 0, 2, 2, 2, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
 
@@ -512,7 +512,9 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
         } else if (e.getSource().equals(btnRegister)) {
             new MemberAddEdit(this, 2, null, null);
         } else if (e.getSource().equals(btnReturnProduct)) {
-            new Restock();
+            tableModel.emptyArray();
+            refreshBasket();
+            updatePrice();
         } else {
             if (tableModel.getList().size() == 0)
                 JOptionPane.showMessageDialog(this, "Nothing in the basket", "Invalid Entry", JOptionPane.WARNING_MESSAGE);
