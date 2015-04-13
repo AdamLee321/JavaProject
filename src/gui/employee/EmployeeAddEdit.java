@@ -35,7 +35,12 @@ public class EmployeeAddEdit implements ActionListener {
     private int dayBefore;
     private AdminMain am;  // used for JDialogs as parent
 
-    EmployeeOperations eo;
+    private EmployeeOperations eo;
+    private int open = 1;
+    private int choice;
+    EmployeeMain empMain;
+    Employee emp;
+
 
 
     public EmployeeAddEdit(JFrame parent, int choice, EmployeeMain employeeMain, Employee employee){
@@ -48,6 +53,10 @@ public class EmployeeAddEdit implements ActionListener {
         employeeAdd.setSize(760, 550);
         employeeAdd.setResizable(true);
         employeeAdd.setLocationRelativeTo(null);
+
+        this.emp = employee;
+        this.empMain = employeeMain;
+        this.choice = choice;
 
     // picture panel + picture buttons  panel inside it
 
@@ -230,7 +239,8 @@ public class EmployeeAddEdit implements ActionListener {
             empPasswordField.setText("********");
             empPositionField.setText(employee.getPosition());
             empSalaryField.setText(Double.toString(employee.getSalary()));
-            empDeptField.setText(new DepartmentOperations().getDepartmentName(employee.getEmpId()));
+            empDeptField.setText(new DepartmentOperations().getDepartmentName(employee.getEmpDeptId()));
+            open = 0;
         }
 
 // turns the lights on
@@ -259,12 +269,8 @@ public class EmployeeAddEdit implements ActionListener {
             else
                 empUsernameField.setText(empFNameField.getText()+empLNameField.getText()+eo.getNextID());
         }
-        else if (e.getSource().equals(passGenButton)){
+        else if (e.getSource().equals(passGenButton))
             empPasswordField.setText(PasswordGenerator.generatePassword());
-        }
-        else if (e.getSource().equals(cancelButton)){
-            employeeAdd.dispose();
-        }
         else if (e.getSource().equals(addButton)){
             fc = new JFileChooser(); // initialize the JFileChooser - Initializing on button action because if initialized in the constructor, it slows down the UI response to the button
             fc.setFileFilter(DataProcessor.imageFilter); // set image filter on JFileChooser
@@ -272,7 +278,7 @@ public class EmployeeAddEdit implements ActionListener {
             fc.setMultiSelectionEnabled(false); // don't allow multifile selection
             fc.setDialogTitle("Select Employee Image"); // title
             fc.setAcceptAllFileFilterUsed(false); // turn off viewing of all files
-            int open = fc.showOpenDialog(employeeAdd); // could've done "this" if I was extending the JDialog, option dialog returns int
+            open = fc.showOpenDialog(employeeAdd); // could've done "this" if I was extending the JDialog, option dialog returns int
             if (open == JFileChooser.APPROVE_OPTION) {  // if JFileChooser is open (int 1)
                 fImg = fc.getSelectedFile(); // select the file
                 try{
@@ -282,26 +288,14 @@ public class EmployeeAddEdit implements ActionListener {
                 }
             }
         }
-        else if (e.getSource().equals(removeButton)){
+        else if (e.getSource().equals(removeButton))
             profilePictureLabel.setIcon(new ImageIcon(UIElements.person128));
-            fImg = null;
-        }
+        else if (e.getSource().equals(cancelButton))
+            employeeAdd.dispose();
         else if (e.getSource().equals(okButton)){
-            if (!FormValidator.isNumber(empFNameField.getText())
-             && !FormValidator.isNumber(empLNameField.getText())
-             && !FormValidator.isNumber(empCityField.getText())
-             && FormValidator.isValidEmail(empEmailField.getText())
-             && !FormValidator.isNumber(empPositionField.getText())
-             && FormValidator.isDouble(empSalaryField.getText())
-             && !FormValidator.isNumber(empDeptField.getText())){
-                // do something
-                JOptionPane.showMessageDialog(null,"ALL GOOD");
-
-                // must search the database, to see if the username matches anything if it matches, let user know
-            }
-            else {
-                if (FormValidator.isEmptyField(empFNameField.getText())
+            if(FormValidator.isEmptyField(empFNameField.getText())
                     || FormValidator.isEmptyField(empLNameField.getText())
+                    || FormValidator.isEmptyField(empEmailField.getText())
                     || FormValidator.isEmptyField(empStreetField.getText())
                     || FormValidator.isEmptyField(empCityField.getText())
                     || FormValidator.isEmptyField(empCountyField.getText())
@@ -309,14 +303,50 @@ public class EmployeeAddEdit implements ActionListener {
                     || FormValidator.isEmptyField(empPasswordField.getText())
                     || FormValidator.isEmptyField(empPositionField.getText())
                     || FormValidator.isEmptyField(empSalaryField.getText())
-                    || FormValidator.isEmptyField(empDeptField.getText())){
-                        JOptionPane.showMessageDialog(null,"Please Fill-In All Fields Of The Form","Empty Fields", JOptionPane.WARNING_MESSAGE);
-                } else if (!FormValidator.isValidEmail(empEmailField.getText())){
-                    JOptionPane.showMessageDialog(null,"Please Enter A Valid Email Address","Invalid Email",JOptionPane.WARNING_MESSAGE);
-                } else {
-                    JOptionPane.showMessageDialog(null,"Please Enter Valid Data For Each Field","Invalid Data",JOptionPane.WARNING_MESSAGE);
+                    || FormValidator.isEmptyField(empDeptField.getText()))
+                JOptionPane.showMessageDialog(null,"Please Fill-In All Fields Of The Form","Empty Fields", JOptionPane.WARNING_MESSAGE);
+            else if(FormValidator.isNumber(empFNameField.getText())
+                    || FormValidator.isNumber(empLNameField.getText())
+                    || FormValidator.isNumber(empStreetField.getText())
+                    || FormValidator.isNumber(empCityField.getText())
+                    || FormValidator.isNumber(empCountyField.getText())
+                    || FormValidator.isNumber(empPositionField.getText()))
+                JOptionPane.showMessageDialog(null,"Please Enter Valid Data For Each Field","Invalid Data",JOptionPane.WARNING_MESSAGE);
+            else if (!FormValidator.isValidEmail(empEmailField.getText()))
+                JOptionPane.showMessageDialog(null,"Please Enter A Valid Email Address","Invalid Email",JOptionPane.WARNING_MESSAGE);
+            else if(!empPositionField.getText().equals("Sales") && !empPositionField.getText().equals("Manager") &&
+                    !empPositionField.getText().equals("Admin") )
+                JOptionPane.showMessageDialog(null,"Valid Positions are Sales /nManager","Invalid Position",JOptionPane.WARNING_MESSAGE);
+            else if(!empDeptField.getText().equals("Administration") && !empDeptField.getText().equals("Sales") &&
+                    !empDeptField.getText().equals("HR") && !empDeptField.getText().equals("Maintenance") &&
+                    !empDeptField.getText().equals("Management")) {
+                String s = "<html>Valid departments are: </br>" +
+                        "<ol><li>Administration</li><li>Maintenance</li><li>Management</li><li>Sales</li><li>HR</li></ol></html>";
+                JOptionPane.showMessageDialog(null, s, "Invalid Department", JOptionPane.WARNING_MESSAGE);
+            }
+            else if (open == 1)
+                JOptionPane.showMessageDialog(null, "You have not selected a picture", "Empty Fields", JOptionPane.WARNING_MESSAGE);
+            else if (!FormValidator.isDouble(empSalaryField.getText()))
+                JOptionPane.showMessageDialog(null,"Salary must be a number","Invalid Salary",JOptionPane.WARNING_MESSAGE);
+            else{
+                int deptId = new DepartmentOperations().getDepartmentId(empDeptField.getText());
+                if(choice == 0){ // to create a new employee
+                    eo.addEmployee(deptId, empFNameField.getText(), empLNameField.getText(), empPositionField.getText(),
+                            empStreetField.getText(), empCityField.getText(), empCountyField.getText(), birthDayCBox.getSelectedIndex() + 1,
+                            birthMonthCBox.getItemAt(birthMonthCBox.getSelectedIndex()), birthYearCBox.getItemAt(birthYearCBox.getSelectedIndex()),
+                            empEmailField.getText(), Double.parseDouble(empSalaryField.getText()), fImg, empUsernameField.getText(),
+                            empPasswordField.getText());
                 }
+                else if (choice == 1){ // to update an existing employee
+                    eo.updateEmployee(emp.getEmpId(),deptId, empFNameField.getText(), empLNameField.getText(), empPositionField.getText(),
+                            empStreetField.getText(), empCityField.getText(), empCountyField.getText(), birthDayCBox.getSelectedIndex() + 1,
+                            birthMonthCBox.getItemAt(birthMonthCBox.getSelectedIndex()), birthYearCBox.getItemAt(birthYearCBox.getSelectedIndex()),
+                            empEmailField.getText(), Double.parseDouble(empSalaryField.getText()), fImg, empUsernameField.getText(),
+                            empPasswordField.getText());
+                }
+                empMain.refreshList();
+                employeeAdd.dispose();
+            }
             }
         }
     }
-}

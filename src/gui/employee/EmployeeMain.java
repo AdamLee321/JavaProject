@@ -137,7 +137,7 @@ public class EmployeeMain implements ActionListener, MouseListener {
         employees.getColumnModel().getColumn(6).setPreferredWidth(120);
         employees.getColumnModel().getColumn(7).setPreferredWidth(100);
         employees.getColumnModel().getColumn(8).setPreferredWidth(95);
-        employees.getColumnModel().getColumn(9).setPreferredWidth(40);
+//        employees.getColumnModel().getColumn(9).setPreferredWidth(40);
 
 //                // Set the table width, depending upon the width of
 //        // the columns
@@ -241,10 +241,10 @@ public class EmployeeMain implements ActionListener, MouseListener {
                     displayEdit();
                 else if (e.getSource().equals(deleteButton)) {
                     Object[] options = {"Yes", "No"};
-                    int choice = JOptionPane.showOptionDialog(empMain, "Are You Sure?", "Delete Product", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, null);
+                    int choice = JOptionPane.showOptionDialog(empMain, "Are You Sure?", "Delete Employee", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, null);
                     if (choice == 0) {
                         eo.deleteEmployee((Integer) employees.getValueAt(employees.getSelectedRow(), 0));
-                        JOptionPane.showMessageDialog(empMain, "Product Deleted");
+                        JOptionPane.showMessageDialog(empMain, "Employee Deleted");
                         selectedRow = -1;
                         refreshList();
                     }

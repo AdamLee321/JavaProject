@@ -31,4 +31,18 @@ public class DepartmentOperations {
     }
     return department;
   }
+
+  public int getDepartmentId(String department){
+    int id = 0;
+    String sql = "SELECT deptid FROM department WHERE deptname = '"+department+"'";
+    try{
+      stmt = ConnectionDB.getConn().createStatement();
+      rset = stmt.executeQuery(sql);
+      while (rset.next())
+        id = rset.getInt(1);
+    }catch (SQLException sqlE){
+      System.out.println(sqlE.getMessage());
+    }
+    return id;
+  }
 }
