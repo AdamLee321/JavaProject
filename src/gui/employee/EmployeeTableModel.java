@@ -1,5 +1,6 @@
 package gui.employee;
 
+import database.operations.DepartmentOperations;
 import database.operations.EmployeeOperations;
 import database.operations.ProductOperations;
 import gui.employee.EmployeeTableRow;
@@ -86,6 +87,7 @@ public class EmployeeTableModel extends DefaultTableModel{
             case POSITION:
                 return row.getPosition();
             case DEPARTMENT:
+                //return new DepartmentOperations().getDepartmentName(row.getDepartment());
                 return row.getDepartment();
             case STREET:
                 return row.getStreet();

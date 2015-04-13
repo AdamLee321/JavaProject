@@ -214,6 +214,7 @@ public class ProductAddEdit implements ActionListener {
             cpuTF.setText(product.getCpu());
             typeTF.setText(product.getProdType());
             descTA.setText(product.getProdDesc());
+            open = 0;
         }
 
 

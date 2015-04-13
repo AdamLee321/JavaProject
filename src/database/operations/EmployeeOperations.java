@@ -82,11 +82,42 @@ public class EmployeeOperations {
         return x;
     }
 
-    public void updateEmployee(int id, int dId, String fName, String lName, String position, String street, String city, String county,
-                               String day, String month, String year, String email, double salary, File pic, String  uname, char[] pass) {
+    public void updateEmployee(int empId, int dId, String fName, String lName, String position, String street, String city, String county,
+                               int day, String month, String year, String email, double salary, File pic, String  uname, String pass) {
         try {
-            String sql = "Update employee SET empId = ?, deptId = ?, empFName = ?, empLName = ?, position = ?, empStreet = ?, empCity = ?," +
-                    "empCounty = ?, empDOBd = ?, empDOBm = ?, empDOBy = ?, empEmail = ?, salary = ?, empPic = ?, empUsername = ?, empPassword = ?" +
+            String sql = "Update employee SET  deptId = ?, empFName = ?, empLName = ?, position = ?, " +
+                    "empStreet = ?, empCity = ?, empCounty = ?, empDOBd = ?, empDOBm = ?, empDOBy = ?, empEmail = ?," +
+                    " salary = ?, empPic = ?, empUsername = ?, empPassword = ? WHERE empid = '" + empId + "'";
+            pstmt = ConnectionDB.getConn().prepareStatement(sql);
+
+            // employee id SEQUENCE
+            pstmt.setInt(1, dId); // department id
+            pstmt.setString(2, fName); // employee first name
+            pstmt.setString(3, lName); // employee last name
+            pstmt.setString(4, position); // employee position
+            pstmt.setString(5, street); // employee street
+            pstmt.setString(6, city); // employee city
+            pstmt.setString(7, county); // employee county
+            pstmt.setInt(8, day); // employee dob day
+            pstmt.setString(9, month); // employee dob month
+            pstmt.setString(10, year); // employee dob year
+            pstmt.setString(11, email);  //employee email
+            pstmt.setDouble(12, salary); // employee salary
+            pstmt.setBinaryStream(13, savePic2DB(pic)); // employee picture BLOB
+            pstmt.setString(14, uname); // employee username
+            pstmt.setString(15, PasswordGenerator.hashPassword(pass)); // employee password
+            pstmt.execute();
+            System.out.println("Update Successful");
+        }
+        catch (SQLException sqlE){
+            System.out.println(sqlE);
+        }
+    }
+
+    public void addEmployee(int dId, String fName, String lName, String position, String street, String city, String county,
+                               int day, String month, String year, String email, double salary, File pic, String  uname, String pass) {
+        try {
+            String sql = "INSERT INTO employee (empId, deptId, empFName, empLName, position, empStreet, empCity, empCounty, empDOBd, empDOBm, empDOBy, empEmail, salary, empPic, empUsername, empPassword)" +
                     "VALUES (empSeq.nextVal,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             pstmt = ConnectionDB.getConn().prepareStatement(sql);
 
@@ -98,19 +129,19 @@ public class EmployeeOperations {
             pstmt.setString(5, street); // employee street
             pstmt.setString(6, city); // employee city
             pstmt.setString(7, county); // employee county
-            pstmt.setString(8, day); // employee dob day
+            pstmt.setInt(8, day); // employee dob day
             pstmt.setString(9, month); // employee dob month
             pstmt.setString(10, year); // employee dob year
             pstmt.setString(11, email);  //employee email
             pstmt.setDouble(12, salary); // employee salary
             pstmt.setBinaryStream(13, savePic2DB(pic)); // employee picture BLOB
-            pstmt.setString(14, "ruthward"); // employee username
-            pstmt.setString(15, "827ccb0eea8a706c4c34a16891f84e7b"); // employee password
+            pstmt.setString(14, uname); // employee username
+            pstmt.setString(15, PasswordGenerator.hashPassword(pass)); // employee password
             pstmt.execute();
-
+            System.out.println("Insert Successful");
         }
         catch (SQLException sqlE){
-            System.out.println("Update Successful");
+            System.out.println(sqlE);
         }
     }
 

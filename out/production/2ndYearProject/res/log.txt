@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 Login	15:41:44 09-Apr-2015
 Name:	Ermac Ward
 ID:	1
@@ -14,5 +15,11 @@ Login	15:49:46 09-Apr-2015
 Name:	Ermac Ward
 ID:	1
 Logout	15:50:43 09-Apr-2015
+=======
+Login	19:54:55 12-Apr-2015
+Name:	Ermac Ward
+ID:	1
+Logout	19:55:30 12-Apr-2015
+>>>>>>> Stashed changes
 Sales	€.00
 
