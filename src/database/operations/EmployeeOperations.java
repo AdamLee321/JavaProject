@@ -36,7 +36,7 @@ public class EmployeeOperations {
     }
 
     public Employee validatePassword(String uname, char[] pword){
-        Employee x = null;
+        Employee x = new Employee();
         try{
             String sql = "SELECT empId, deptId, empFName, empLName, position, empStreet, empCity, empCounty, empDOBd, " +
                     "empDOBm, empDOBy, empEmail, salary, empUsername, empPassword, empPic FROM EMPLOYEE " +

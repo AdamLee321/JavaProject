@@ -45,6 +45,7 @@ public class CreateSalesDetails {
                     "FOREIGN KEY(prodId)REFERENCES product(prodId) ON DELETE CASCADE," +
                     "FOREIGN KEY (saleId) REFERENCES sales (saleId)," +
                     "FOREIGN KEY (memberId) REFERENCES member (memberId)ON DELETE SET NULL)");
+            System.out.println("SalesDetails table created successfully");
         } catch (SQLException e) {
             System.out.println(e);
         }

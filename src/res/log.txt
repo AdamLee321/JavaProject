@@ -23,3 +23,21 @@ Logout	19:55:30 12-Apr-2015
 >>>>>>> Stashed changes
 Sales	€.00
 
+Login	22:31:49 13-Apr-2015
+Name:	Ermac Ward
+ID:	1
+Logout	22:31:53 13-Apr-2015
+Sales	€.00
+
+Login	23:12:29 13-Apr-2015
+Name:	Ermac Ward
+ID:	1
+Logout	23:12:35 13-Apr-2015
+Sales	€.00
+
+Login	23:51:21 13-Apr-2015
+Name:	Ermac Ward
+ID:	1
+Logout	23:51:26 13-Apr-2015
+Sales	€.00
+
