@@ -28,7 +28,6 @@ public class AuthenticationPopUp {
     private JLabel usernameLabel, passwordLabel, imageLabel;
     private JTextField usernameField;
     private JPasswordField passwordField;
-    private ResultSet rset;
     private int count = 0;
 
     public AuthenticationPopUp(final JFrame parent) {
@@ -79,35 +78,31 @@ public class AuthenticationPopUp {
                     JOptionPane.showMessageDialog(parent, "Please enter a username and a password", "ERROR", JOptionPane.INFORMATION_MESSAGE);
                 }
                 else {
-                    try {
-                        String position = null;
-                        EmployeeOperations eo = new EmployeeOperations();
-                        Employee em = eo.validatePassword(usernameField.getText(), passwordField.getPassword());
-                        position = em.getPosition();
-                        if (position.equals("Sales")) {
+                    String position = null;
+                    EmployeeOperations eo = new EmployeeOperations();
+                    Employee em = eo.validatePassword(usernameField.getText(), passwordField.getPassword());
+                    position = em.getPosition();
+                    if (!position.equals("")) {
+                        if (position.equals("Sales"))
                             new SaleMain(em);
-                        } else if (position.equals("Admin")) {
+                        else if (position.equals("Admin"))
                             new AdminMain(em);
-                        } else if (position.equals("Manager")) {
+                        else if (position.equals("Manager"))
                             new ReportEmployee();
-                        }
                         auth.dispose();
                         parent.dispose();
-                    }catch(NullPointerException np){
-                        if(count < 2) {
-                            JOptionPane.showMessageDialog(parent, "Incorrect username or password", "ERROR", JOptionPane.ERROR_MESSAGE);
-                            usernameField.setText("");
-                            passwordField.setText("");
-                            count++;
-                        }
-                        else{
-                            new DennisNedry();
-                            count = 0;
-                        }
                     }
-                }
+                    else if(count < 2) {
+                        JOptionPane.showMessageDialog(parent, "Incorrect username or password", "ERROR", JOptionPane.ERROR_MESSAGE);
+                        count++;
+                    } else{
+                        new DennisNedry();
+                        count = 0;
+                    }
+                    usernameField.setText("");
+                    passwordField.setText("");
             }
-        });
+        }});
 
         okButton.setToolTipText("Enter Your Credentials And Click OK");
         okButton.setPreferredSize(new Dimension(78, 30));

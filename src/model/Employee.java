@@ -25,6 +25,25 @@ public class Employee {
     private String empPassword;
     private byte[] empPic;
 
+    public Employee(){
+        this.empId = 0;
+        this.empDeptId = 0;
+        this.empFName = "";
+        this.empLName = "";
+        this.position = "";
+        this.empStreet = "";
+        this.empCity = "";
+        this.empCounty = "";
+        this.empDOBd = "";
+        this.empDOBm = "";
+        this.empDOBy = "";
+        this.empEmail = "";
+        this.salary = 0;
+        this.empUsername = "";
+        this.empPassword = "";
+        this.empPic = null;
+    }
+
 // overloaded constructor
     public Employee(int empId, int empDeptId, String empFName, String empLName, String position, String empStreet,
                     String empCity, String empCounty, String empDOBd, String empDOBm, String empDOBy, String empEmail,
