@@ -87,7 +87,7 @@ public class EmployeeTableModel extends DefaultTableModel{
             case POSITION:
                 return row.getPosition();
             case DEPARTMENT:
-                //return new DepartmentOperations().getDepartmentName(row.getDepartment());
+//                return new DepartmentOperations().getDepartmentName(row.getDepartment());
                 return row.getDepartment();
             case STREET:
                 return row.getStreet();

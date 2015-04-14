@@ -78,10 +78,9 @@ public class AuthenticationPopUp {
                     JOptionPane.showMessageDialog(parent, "Please enter a username and a password", "ERROR", JOptionPane.INFORMATION_MESSAGE);
                 }
                 else {
-                    String position = null;
                     EmployeeOperations eo = new EmployeeOperations();
                     Employee em = eo.validatePassword(usernameField.getText(), passwordField.getPassword());
-                    position = em.getPosition();
+                    String position = em.getPosition();
                     if (!position.equals("")) {
                         if (position.equals("Sales"))
                             new SaleMain(em);

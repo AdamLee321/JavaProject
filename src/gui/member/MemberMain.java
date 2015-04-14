@@ -208,11 +208,11 @@ public class MemberMain implements ActionListener, MouseListener, KeyListener {
             });
         }
         else if (e.getSource().equals(memTable)){  // main table actions
+            row = memTable.getSelectedRow()+1;
+            rowMemId = (Integer) memTable.getValueAt(memTable.getSelectedRow(),0);
             if (e.getClickCount() == 2) { // double click event
                 displayEdit();
             }
-            row = memTable.getSelectedRow()+1;
-            rowMemId = (Integer) memTable.getValueAt(memTable.getSelectedRow(),0);
         }
     }
 

@@ -78,7 +78,7 @@ public class Main {
 
      new SaleMain(x);
      new AdminMain(x);
-    //new StartWindow();
+//    new StartWindow();
 
   }
 }
