@@ -23,7 +23,7 @@ public class Log extends JDialog implements ActionListener {
     private JDialog log;
     private JTextArea taMain;
     private JPanel pnlMain, pnlSouth;
-    private JButton btnBack, btnSave, btnClear;
+    private JButton btnBack, btnSave, btnClear, btnPrint;
     private JFileChooser saver;
     File logFile = new File("src/res/log.txt");
     File logFileOut = new File("System.log");
@@ -73,6 +73,10 @@ public class Log extends JDialog implements ActionListener {
         btnBack.setIcon(new ImageIcon(UIElements.cancel6));
         btnBack.addActionListener(this);
         pnlSouth.add(btnBack);
+
+        btnPrint = new JButton("Print");
+        btnPrint.setPreferredSize(new Dimension(100, 28));
+        btnPrint.setIcon(new Im);
 
         btnSave = new JButton("Save");
         btnSave.setPreferredSize(new Dimension(100, 28));
