@@ -21,13 +21,14 @@
 //public class SaleHistoryTableModel extends DefaultTableModel {
 //
 //    // Model (SaleHistoryTableModel) variables
-//    int saleid;
-//    String time;
-//    Date date;
-//    String prodMake;
-//    String prodModel;
-//    double salePrice;
-//    int quantity;
+//    private int saleid;
+//    private String time;
+//    private Date date;
+//    private String prodMake;
+//    private String prodModel;
+//    private double salePrice;
+//    private double tPrice;
+//    private int quantity;
 //
 //    // Table columns
 //    final static int id = 0;
@@ -36,7 +37,8 @@
 //    final static int make = 3;
 //    final static int model = 4;
 //    final static int price = 5;
-//    final static int qty = 6;
+//    final static int totalPrice = 6;
+//    final static int qty = 7;
 //    final static String[] columnNames = {"Sale ID", "Sale Time", "Sale Date", "Make", "Model", "Price", "Quantity"};
 //
 //    // column model
@@ -63,7 +65,7 @@
 //        this.prodMake = prodMake;
 //        this.prodModel = prodModel;
 //        this.salePrice = salePrice;
-//        this.totalPrice = totalPrice;
+//        this.tPrice = totalPrice;
 //        this.quantity = quantity;
 //    }
 //
@@ -97,6 +99,14 @@
 //        }
 //    }
 //
+//    public String getTime() {
+//        return time;
+//    }
+//
+//    public void setTime(String time) {
+//        this.time = time;
+//    }
+//
 //    //a method just to pass in a column number and row and return that cell value
 //    public Object getValueAt(int rowNum, int colNum) {
 //        SaleHistoryTableModel row = (SaleHistoryTableModel) pHistoryRows.get(rowNum);//casting a product from the object arraylist to a row type
@@ -105,6 +115,8 @@
 //                return row.getSaleid();
 //            case saleDate:
 //                return row.getDate();
+//            case saleTime:
+//                return row.getTime();
 //            case make:
 //                return row.getProdMake();
 //            case model:
@@ -113,7 +125,7 @@
 //                return row.getQuantity();
 //            case price:
 //                return row.getSalePrice();
-//            case paid:
+//            case totalPrice:
 //                return row.getTotalPrice();
 //            default:
 //                return "";

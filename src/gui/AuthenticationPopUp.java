@@ -94,7 +94,8 @@ public class AuthenticationPopUp {
                     else if(count < 2) {
                         JOptionPane.showMessageDialog(parent, "Incorrect username or password", "ERROR", JOptionPane.ERROR_MESSAGE);
                         count++;
-                    } else{
+                    }
+                    else{
                         new DennisNedry();
                         count = 0;
                     }

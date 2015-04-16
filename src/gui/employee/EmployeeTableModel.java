@@ -1,10 +1,6 @@
 package gui.employee;
 
-import database.operations.DepartmentOperations;
 import database.operations.EmployeeOperations;
-import database.operations.ProductOperations;
-import gui.employee.EmployeeTableRow;
-
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
