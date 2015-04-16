@@ -5,14 +5,11 @@ package gui.sale;/*2ndYearProject
   Software Development 3
 */
 
-import database.operations.ProductOperations;
 import model.Product;
-
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
