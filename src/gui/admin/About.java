@@ -6,6 +6,8 @@ Computing - Year 2, Project
 Group 17 (George - 17/03/2015)
 */
 
+import gui.DataProcessor;
+import gui.Griddy;
 import gui.UIElements;
 
 import javax.swing.*;
@@ -13,15 +15,15 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class About implements ActionListener {
 
     private JDialog about;
-    private JButton closeButton;
-    private JLabel progNameLabel, versionNumLabel, devsLabel, devPic, thanksLabel;
-    private JTextArea toolsUsed;
-    private JPanel northPanel, centerPanel, southPanel, mainBigPanel;
-    private Border paddingBorder = BorderFactory.createEmptyBorder(20,50,50,20);  // set the border inside the grid to move details away from the edges
+    private JButton btnClose;
+    private JLabel lblInfo, lblPic;
+    private JPanel pnlNorth, pnlCenter, pnlSouth, pnlCanvas;
+    private Border paddingBorder = BorderFactory.createEmptyBorder(20,20,20,20);  // set the border inside the grid to move details away from the edges
 
     public About(){
 
@@ -30,67 +32,66 @@ public class About implements ActionListener {
         about.setTitle("DGA Computers");
         about.getContentPane().setBackground(UIElements.getColour());
         about.setLayout(new GridLayout());
-        about.setSize(500, 400);
+        about.setMinimumSize(new Dimension(700, 450));
         about.setResizable(true);
         about.setLocationRelativeTo(null);
         about.getContentPane().setBounds(20,20,20,20);
         about.setModal(true);
 
-        mainBigPanel = new JPanel(new BorderLayout());
-        mainBigPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "About",2,2)); // set anonymous, titled, centered, etched border
-        mainBigPanel.setBackground(UIElements.getColour());
+        pnlCanvas = new JPanel(new BorderLayout());
+        pnlCanvas.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "About",2,2)); // set anonymous, titled, centered, etched border
+        pnlCanvas.setBackground(UIElements.getColour());
 
 // NORTH PANEL
 
-        northPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        northPanel.setBorder(paddingBorder);
+        pnlNorth = new JPanel(new GridBagLayout());
+        pnlNorth.setBackground(UIElements.getColour());
+        pnlNorth.setBorder(paddingBorder);
 
-        devPic = new JLabel(new ImageIcon(UIElements.person128));
-        northPanel.add(devPic);
+        try {
+            lblPic = new JLabel(new ImageIcon(DataProcessor.fitImageString(UIElements.ittLogo, 200, 200)));
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Image does not exist", "Image Error", JOptionPane.ERROR_MESSAGE);
+        }
+        pnlNorth.add(lblPic);
 
-        mainBigPanel.add(devPic, BorderLayout.NORTH);
+        pnlCanvas.add(pnlNorth, BorderLayout.WEST);
 
 // CENTER PANEL
 
-        centerPanel = new JPanel(new GridLayout(4,1));
-        centerPanel.setBackground(UIElements.getColour());
-        centerPanel.setBorder(paddingBorder);
+        pnlCenter = new JPanel(new GridLayout());
+        pnlCenter.setBackground(UIElements.getColour());
+        pnlCenter.setBorder(paddingBorder);
 
-        progNameLabel = new JLabel("Application Name: DGA Computers");
-        centerPanel.add(progNameLabel);
+        lblInfo = new JLabel("<html>" +
+                "<b>Application Name:</b> DGA Computers<br><br>" +
+                "<b>Application Version:</b> 0.9b<br><br>" +
+                "<b>Developed By:</b> Group 17 @ IT Tallaght<br><br>" +
+                "<b>Tools Used:</b> IntelliJ IDE, Oracle Developer 11gEE, SQLDeveloper, Github<br><br>" +
+                "<b>Date:</b> 2015, Semester 2<br><br>" +
+                "<b>Notes:</b> This application was developed as a second year, group project for IT-Tallaght Computing course<br><br>" +
+                "<b>Special Thanks To:</b> <br><br>" +
+                "<ul><li>Our lecturers @ ITT</li><li>StackOverflow community</li><li>YouTube</li></ul>" +
+                "</html>");
+        pnlCenter.add(lblInfo);
 
-        versionNumLabel = new JLabel("Application Version: 1.0b");
-        centerPanel.add(versionNumLabel);
-
-        devsLabel = new JLabel("Developed By: ");
-        centerPanel.add(devsLabel);
-
-//        thanksLabel = new JLabel("Thanks To: Our lecturers @ ITT, <\b> StackOverflow community, YouTube");
-        thanksLabel = new JLabel("<html><p> <b>This text is bold</b>Some verrrry long text  Some verrrry long  Some verrrry long text dsa ads oiosi o</p>");
-        centerPanel.add(thanksLabel);
-
-        toolsUsed = new JTextArea("wefewfewfwe");
-        toolsUsed.setEditable(false);
-        toolsUsed.setOpaque(true);
-        toolsUsed.setBackground(UIElements.getColour());
-        centerPanel.add(toolsUsed);
-
-        mainBigPanel.add(centerPanel, BorderLayout.CENTER);
+        pnlCanvas.add(pnlCenter, BorderLayout.CENTER);
 
 // SOUTH PANEL
 
-        southPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        southPanel.setBackground(UIElements.getColour());
+        pnlSouth = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        pnlSouth.setBackground(UIElements.getColour());
 
-        closeButton = new JButton("Close");
-        closeButton.setIcon(new ImageIcon(UIElements.remove16));
-        closeButton.setPreferredSize(new Dimension(100, 28));
-        closeButton.addActionListener(this);
+        btnClose = new JButton("Close");
+        btnClose.setIcon(new ImageIcon(UIElements.remove16));
+        btnClose.setPreferredSize(new Dimension(100, 28));
+        btnClose.addActionListener(this);
 
-        southPanel.add(closeButton);
-        mainBigPanel.add(southPanel, BorderLayout.SOUTH);
+        pnlSouth.add(btnClose);
 
-        about.add(mainBigPanel);
+        pnlCanvas.add(pnlSouth, BorderLayout.SOUTH);
+
+        about.add(pnlCanvas);
 
         // make about window visible
         about.setVisible(true);

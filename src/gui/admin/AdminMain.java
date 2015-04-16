@@ -297,7 +297,7 @@ public class AdminMain extends JFrame implements ActionListener {
                     File myFile = new File("src/res/AdminManual.pdf");
                     Desktop.getDesktop().open(myFile);
                 } catch (IOException ex) {
-                    System.out.println("No supported application");
+                    JOptionPane.showMessageDialog(null, "Cannot open file", "No supported application", JOptionPane.ERROR_MESSAGE);
                 }
             }
         } // About Button

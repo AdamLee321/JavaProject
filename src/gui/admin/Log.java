@@ -76,7 +76,9 @@ public class Log extends JDialog implements ActionListener {
 
         btnPrint = new JButton("Print");
         btnPrint.setPreferredSize(new Dimension(100, 28));
-        btnPrint.setIcon(new Im);
+        btnPrint.setIcon(new ImageIcon(UIElements.print16));
+        btnPrint.addActionListener(this);
+        pnlSouth.add(btnPrint);
 
         btnSave = new JButton("Save");
         btnSave.setPreferredSize(new Dimension(100, 28));

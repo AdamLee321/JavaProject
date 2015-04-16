@@ -20,6 +20,9 @@ public class UIElements {
     // DGA banner
     public final static String banner = "src/res/images/UI Elements/banner.png";
 
+    // ITT Logo
+    public final static String ittLogo = "src/res/images/ittlogo.jpg";
+
     // 16 pixel icons
     public final static String save16 = "src/res/images/UI Elements/save16.png";
     public final static String cancel6 = "src/res/images/UI Elements/cancel16.png";

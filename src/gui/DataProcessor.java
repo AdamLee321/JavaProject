@@ -18,7 +18,7 @@ Group 17 (George - 03/04/2015)
 
 public class DataProcessor {
 
-    // Image Scaler - Takes an image file, sets widths and height and returns it scaled
+    // Image Scaler - Takes an image in File format, sets widths and height and returns it scaled
     public static Image fitImageFile(File fileIn, int widthIn, int heightIn) throws IOException {
 
         BufferedImage img = ImageIO.read(fileIn);
@@ -26,11 +26,21 @@ public class DataProcessor {
         return scaled;
     }
 
-    // Image Scaler - Takes an image file, sets widths and height and returns it scaled
+    // Image Scaler - Takes an image in byte format, sets widths and height and returns it scaled
     public static Image fitImageByte(byte[] image, int widthIn, int heightIn) throws IOException {
 
         ByteArrayInputStream in = new ByteArrayInputStream(image);
         BufferedImage img = ImageIO.read(in);
+        Image scaled = img.getScaledInstance(widthIn, heightIn, Image.SCALE_SMOOTH);
+        return scaled;
+    }
+
+    // Image Scaler - Takes an image file in String format, sets widths and height and returns it scaled
+    public static Image fitImageString(String imgIn, int widthIn, int heightIn) throws IOException {
+
+        File tempFile = new File(imgIn);
+
+        BufferedImage img = ImageIO.read(tempFile);
         Image scaled = img.getScaledInstance(widthIn, heightIn, Image.SCALE_SMOOTH);
         return scaled;
     }

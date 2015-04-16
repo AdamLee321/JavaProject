@@ -39,7 +39,7 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
 
     private ProductOperations po;
 
-    private JButton btnAdd, btnRemove, btnRegister, btnDiscount, btnReturnProduct, btnCheckout, btnLogout;
+    private JButton btnAdd, btnRemove, btnRegister, btnDiscount, btnVoidSale, btnCheckout, btnLogout, btnHelp;
     private JRadioButton rbCash, rbCC;
     private ButtonGroup radioGroup = new ButtonGroup(); // for mutual exclusivity of radio buttons
     private JTextField tfProdNum, tfQty;
@@ -147,10 +147,10 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
         btnDiscount.addActionListener(this);
         pnlCheckout.add(btnDiscount, Griddy.getConstraints(1, 0, 1, 1, 0, 0, 1, 1, 2, 0, 2, 2, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
 
-        btnReturnProduct = new JButton("Void Sale", new ImageIcon(UIElements.product16));
-        btnReturnProduct.setToolTipText("Clears the current sale");
-        btnReturnProduct.addActionListener(this);
-        pnlCheckout.add(btnReturnProduct, Griddy.getConstraints(0, 1, 2, 1, 0, 10, 1, 1, 0, 2, 2, 2, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
+        btnVoidSale = new JButton("Void Sale", new ImageIcon(UIElements.product16));
+        btnVoidSale.setToolTipText("Clears the current sale");
+        btnVoidSale.addActionListener(this);
+        pnlCheckout.add(btnVoidSale, Griddy.getConstraints(0, 1, 2, 1, 0, 10, 1, 1, 0, 2, 2, 2, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
 
         // PAYMENT TYPE PANEL - panel in a panel... Inception!!!
         pnlPaymentType = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -201,7 +201,11 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
 
         btnLogout = new JButton("Log Out", new ImageIcon(UIElements.logout16));
         btnLogout.addActionListener(this);
-        pnlLoggedIn.add(btnLogout, Griddy.getConstraints(0, 3, 2, 1, 0, 10, 0, 0, 0, 0, 0, 0, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
+        pnlLoggedIn.add(btnLogout, Griddy.getConstraints(0, 3, 1, 1, 0, 10, 0, 0, 0, 0, 0, 0, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
+
+        btnHelp = new JButton("", new ImageIcon(UIElements.info16));
+        btnHelp.addActionListener(this);
+        pnlLoggedIn.add(btnHelp, Griddy.getConstraints(1, 3, 1, 1, 0, 10, 0, 0, 0, 0, 0, 0, GridBagConstraints.BOTH, GridBagConstraints.EAST));
 
         this.add(pnlLoggedIn, Griddy.getConstraints(1, 3, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
 
@@ -511,10 +515,19 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
             this.dispose();
         } else if (e.getSource().equals(btnRegister)) {
             new MemberAddEdit(this, 2, null, null);
-        } else if (e.getSource().equals(btnReturnProduct)) {
+        } else if (e.getSource().equals(btnVoidSale)) {
             tableModel.emptyArray();
             refreshBasket();
             updatePrice();
+        } else if (e.getSource().equals(btnHelp)){
+            if (Desktop.isDesktopSupported()) {
+                try {
+                    File myFile = new File("src/res/SaleManual.pdf");
+                    Desktop.getDesktop().open(myFile);
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(null,"Cannot open file","No supported application",JOptionPane.ERROR_MESSAGE);
+                }
+            }
         } else {
             if (tableModel.getList().size() == 0)
                 JOptionPane.showMessageDialog(this, "Nothing in the basket", "Invalid Entry", JOptionPane.WARNING_MESSAGE);
