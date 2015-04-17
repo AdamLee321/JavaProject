@@ -20,8 +20,8 @@ Group 17 (George - 01/04/2015)
 public class DennisNedry {
 
     private JDialog dn;
-    private JPanel main;
-    private JLabel nedry;
+    private JPanel pnlMain;
+    private JLabel lblNedryImage;
     private JButton btnClose;
     private AudioInputStream audioFile;
     private Clip sound;
@@ -38,8 +38,8 @@ public class DennisNedry {
         dn.setLocationRelativeTo(null);
         dn.setModal(true);
 
-        main = new JPanel(new FlowLayout());
-        main.setBackground(UIElements.getColour());
+        pnlMain = new JPanel(new FlowLayout());
+        pnlMain.setBackground(UIElements.getColour());
 
         // create audio file, pass it to clip player(sound)
         try{
@@ -51,8 +51,8 @@ public class DennisNedry {
         }
 
         // clicking the picture plays audio again (once again)
-        nedry = new JLabel(new ImageIcon(UIElements.pwPicture));
-        nedry.addMouseListener(new MouseAdapter() {
+        lblNedryImage = new JLabel(new ImageIcon(UIElements.pwPicture));
+        lblNedryImage.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
@@ -79,9 +79,9 @@ public class DennisNedry {
         };
         new Timer(delay, taskPerformer).start();
 
-        main.add(nedry);
-        main.add(btnClose);
-        dn.add(main);
+        pnlMain.add(lblNedryImage);
+        pnlMain.add(btnClose);
+        dn.add(pnlMain);
 
         playMagicWord(2); // play the audio (2 times)
 

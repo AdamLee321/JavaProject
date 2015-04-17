@@ -4,9 +4,7 @@ package gui;
 IT Tallaght - 2015, S2
 Computing - Year 2, Project
 Group 17 (George - 21/03/2015)
-*/
 
-/*
 this class was created to allow reuse of various user interface elements throughout the UI
 attributes are set to static to allow access without the need for reference object creation
 */

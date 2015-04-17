@@ -10,6 +10,12 @@ import gui.DataProcessor;
 import gui.FormValidator;
 import gui.UIElements;
 
+import javax.print.*;
+import javax.print.attribute.AttributeSet;
+import javax.print.attribute.HashAttributeSet;
+import javax.print.attribute.standard.PrinterName;
+import javax.print.event.PrintJobAdapter;
+import javax.print.event.PrintJobEvent;
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import java.awt.*;
@@ -26,8 +32,12 @@ public class Log extends JDialog implements ActionListener {
     private JButton btnBack, btnSave, btnClear, btnPrint;
     private JFileChooser saver;
     File logFile = new File("src/res/log.txt");
-    File logFileOut = new File("System.log");
     Scanner in;
+
+    // Read more: http://www.javaexperience.com/java-file-printing-example-to-print-files-in-java/#ixzz3XabTfK5i
+    PrintJobWatcher watcher;
+    InputStream fileIn;
+    DocFlavor flavor;
 
     public Log(JDialog parent) { // passing in the parent keeps this window above it and inherits parents characteristics (on top for example), but allows click access to parent. to disallow click access log.setModal(true)
 
@@ -147,10 +157,47 @@ public class Log extends JDialog implements ActionListener {
             log.dispose();
         } else if (e.getSource().equals(btnClear)) {
             cleanLog();
-        } else if (e.getSource().equals(btnSave)) {
+        } else if (e.getSource().equals(btnPrint)) {
+            if (!FormValidator.isEmptyField(taMain.getText())) {
+
+                try {
+                    fileIn = new FileInputStream(logFile);
+                } catch (FileNotFoundException fnf) {
+                    JOptionPane.showMessageDialog(null, "File not found", "Non-existent file", JOptionPane.ERROR_MESSAGE);
+                }
+
+                PrintService defaultPrinter = PrintServiceLookup.lookupDefaultPrintService();
+
+                if (defaultPrinter != null) {
+                    flavor = DocFlavor.INPUT_STREAM.AUTOSENSE;
+                    // AttributeSet attributeSet = new HashAttributeSet();
+                    //  attributeSet.add(new PrinterName("Default Printer", null));
+                    DocPrintJob job = defaultPrinter.createPrintJob();
+                    Doc doc = new SimpleDoc(fileIn, flavor, null);
+                    watcher = new PrintJobWatcher(job);
+                    try {
+                        job.print(doc, null);
+                    } catch (PrintException pe) {
+                        JOptionPane.showMessageDialog(null, "Problem with printer", "Printer does not work", JOptionPane.ERROR_MESSAGE);
+                    }
+                    watcher.waitForDone();
+                    try {
+                        fileIn.close();
+                    } catch (IOException io) {
+                        JOptionPane.showMessageDialog(null, "Could not close file", "File in use", JOptionPane.ERROR_MESSAGE);
+                    }
+                    JOptionPane.showMessageDialog(null, "Printing in progress", "Print", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "No default print service found", "Print", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Log file is empty. Nothing to print");
+            }
+        }
+        else if (e.getSource().equals(btnSave)) {
             if (!FormValidator.isEmptyField(taMain.getText())) {
                 saver = new JFileChooser();
-//            saver.setCurrentDirectory(new File("%UserProfile%\\Desktop"));
+                //saver.setCurrentDirectory(new File("%UserProfile%\\Desktop")); // save default location
                 saver.setFileFilter(DataProcessor.logFilter);
                 saver.setSelectedFile(new File("System.log")); // open the window opens up, populate filename field with "System.log, basically open the save dialog with "System.log" written into it already
                 int choice = saver.showSaveDialog(this); // what button did the user click? save choice in int
@@ -165,8 +212,53 @@ public class Log extends JDialog implements ActionListener {
                         saveLogFile(); // if existing file has not been clicked, call the method, write the file
                     }
                 }
-            } else {
+            }
+            else {
                 JOptionPane.showMessageDialog(null, "Log file is empty. Nothing to save");
+            }
+        }
+    }
+
+    // inner static class for printing
+    static class PrintJobWatcher {
+        // true iff it is safe to close the print job's input stream
+        boolean done = false;
+
+        PrintJobWatcher(DocPrintJob job) {
+            // Add a listener to the print job
+            job.addPrintJobListener(new PrintJobAdapter() {
+                public void printJobCanceled(PrintJobEvent pje) {
+                    allDone();
+                }
+
+                public void printJobCompleted(PrintJobEvent pje) {
+                    allDone();
+                }
+
+                public void printJobFailed(PrintJobEvent pje) {
+                    allDone();
+                }
+
+                public void printJobNoMoreEvents(PrintJobEvent pje) {
+                    allDone();
+                }
+
+                void allDone() {
+                    synchronized (PrintJobWatcher.this) {
+                        done = true;
+                        PrintJobWatcher.this.notify();
+                    }
+                }
+            });
+        }
+
+        public synchronized void waitForDone() {
+            try {
+                while (!done) {
+                    wait();
+                }
+            } catch (InterruptedException e) {
+                System.out.println("Wait interrupted");
             }
         }
     }

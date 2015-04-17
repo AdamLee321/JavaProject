@@ -164,7 +164,7 @@ public class OrderHistory extends JDialog implements MouseListener, ActionListen
             int key = e.getKeyCode();
             if (key == KeyEvent.VK_ENTER) {
                 searchOrders();
-//                sortTables(); --- do I need this?
+//                alignTables(); --- do I need this?
             }
         }
     }

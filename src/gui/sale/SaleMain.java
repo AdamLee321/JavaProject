@@ -74,9 +74,6 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
     private String loggedInTime;
     private String loggedInDate;
 
-
-
-
     public SaleMain(Employee e) {
 
         super("DGA Sale");

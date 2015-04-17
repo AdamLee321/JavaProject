@@ -24,10 +24,10 @@ David Lawlor x00107563
 public class AuthenticationPopUp {
 
     private JDialog auth;
-    private JButton cancelButton, okButton;
-    private JLabel usernameLabel, passwordLabel, imageLabel;
-    private JTextField usernameField;
-    private JPasswordField passwordField;
+    private JButton btnCancel, btnOK;
+    private JLabel lblUsername, lblPassword, lblImage;
+    private JTextField tfUsername;
+    private JPasswordField pfPassword;
     private int count = 0;
 
     public AuthenticationPopUp(final JFrame parent) {
@@ -40,46 +40,46 @@ public class AuthenticationPopUp {
         auth.setLocationRelativeTo(null);
         auth.getContentPane().setBackground(UIElements.getColour());
 
-        imageLabel = new JLabel(new ImageIcon(UIElements.person128));
-        auth.add(imageLabel, Griddy.getConstraints(0,0,1,3,0,0,0,0,5,5,5,5,0,GridBagConstraints.CENTER));
+        lblImage = new JLabel(new ImageIcon(UIElements.person128));
+        auth.add(lblImage, Griddy.getConstraints(0,0,1,3,0,0,0,0,5,5,5,5,0,GridBagConstraints.CENTER));
 
-        usernameLabel = new JLabel("Username");  // label
-        usernameLabel.setFont(new Font("Calibri", 0, 18));
-        auth.add(usernameLabel, Griddy.getConstraints(1,0,1,1,0,0,0,0,5,5,5,5,0,GridBagConstraints.CENTER));
+        lblUsername = new JLabel("Username");  // label
+        lblUsername.setFont(new Font("Calibri", 0, 18));
+        auth.add(lblUsername, Griddy.getConstraints(1,0,1,1,0,0,0,0,5,5,5,5,0,GridBagConstraints.CENTER));
 
-        usernameField = new JTextField(15);  // field
-        usernameField.setPreferredSize(new Dimension(200,25));
-        auth.add(usernameField, Griddy.getConstraints(2,0,3,1,0,0,0,0,5,5,5,5,0,GridBagConstraints.WEST));
+        tfUsername = new JTextField(15);  // field
+        tfUsername.setPreferredSize(new Dimension(200,25));
+        auth.add(tfUsername, Griddy.getConstraints(2,0,3,1,0,0,0,0,5,5,5,5,0,GridBagConstraints.WEST));
 
-        passwordLabel = new JLabel("Password");  // label
-        passwordLabel.setFont(new Font("Calibri",0, 18));
-        auth.add(passwordLabel, Griddy.getConstraints(1,1,1,1,0,0,0,0,5,5,5,5,0,GridBagConstraints.CENTER));
+        lblPassword = new JLabel("Password");  // label
+        lblPassword.setFont(new Font("Calibri",0, 18));
+        auth.add(lblPassword, Griddy.getConstraints(1,1,1,1,0,0,0,0,5,5,5,5,0,GridBagConstraints.CENTER));
 
-        passwordField = new JPasswordField(15);  // field
-        passwordField.setPreferredSize(new Dimension(200, 25));
-        auth.add(passwordField, Griddy.getConstraints(2,1,3,1,0,0,0,0,5,5,5,5,0,GridBagConstraints.WEST));
+        pfPassword = new JPasswordField(15);  // field
+        pfPassword.setPreferredSize(new Dimension(200, 25));
+        auth.add(pfPassword, Griddy.getConstraints(2,1,3,1,0,0,0,0,5,5,5,5,0,GridBagConstraints.WEST));
 
-        cancelButton = new JButton("Cancel");
-        cancelButton.setToolTipText("Close Window");
-        cancelButton.setPreferredSize(new Dimension(78,30));
-        cancelButton.addActionListener(new ActionListener() {
+        btnCancel = new JButton("Cancel");
+        btnCancel.setToolTipText("Close Window");
+        btnCancel.setPreferredSize(new Dimension(78,30));
+        btnCancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 auth.dispose();
             }
         });
-        auth.add(cancelButton, Griddy.getConstraints(2,2,1,0,0,0,0,0,5,5,5,5,0,GridBagConstraints.CENTER));
+        auth.add(btnCancel, Griddy.getConstraints(2,2,1,0,0,0,0,0,5,5,5,5,0,GridBagConstraints.CENTER));
 
-        okButton = new JButton("OK");
-        okButton.addActionListener(new ActionListener() {
+        btnOK = new JButton("OK");
+        btnOK.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (passwordField.getPassword().length == 0 || usernameField.getText().isEmpty()) {
+                if (pfPassword.getPassword().length == 0 || tfUsername.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(parent, "Please enter a username and a password", "ERROR", JOptionPane.INFORMATION_MESSAGE);
                 }
                 else {
                     EmployeeOperations eo = new EmployeeOperations();
-                    Employee em = eo.validatePassword(usernameField.getText(), passwordField.getPassword());
+                    Employee em = eo.validatePassword(tfUsername.getText(), pfPassword.getPassword());
                     String position = em.getPosition();
                     if (!position.equals("")) {
                         if (position.equals("Sales"))
@@ -99,14 +99,14 @@ public class AuthenticationPopUp {
                         new DennisNedry();
                         count = 0;
                     }
-                    usernameField.setText("");
-                    passwordField.setText("");
+                    tfUsername.setText("");
+                    pfPassword.setText("");
             }
         }});
 
-        okButton.setToolTipText("Enter Your Credentials And Click OK");
-        okButton.setPreferredSize(new Dimension(78, 30));
-        auth.add(okButton, Griddy.getConstraints(3,2,1,0,0,0,0,0,5,5,5,5,0,GridBagConstraints.CENTER));
+        btnOK.setToolTipText("Enter Your Credentials And Click OK");
+        btnOK.setPreferredSize(new Dimension(78, 30));
+        auth.add(btnOK, Griddy.getConstraints(3,2,1,0,0,0,0,0,5,5,5,5,0,GridBagConstraints.CENTER));
 
         auth.setVisible(true);
     }

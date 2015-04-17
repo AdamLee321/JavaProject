@@ -32,8 +32,6 @@ public class MemberTableModel extends DefaultTableModel {
     DefaultTableColumnModel columnModel = new DefaultTableColumnModel();
     private static ArrayList<Object> memberRows = new ArrayList();
 
-
-
     public MemberTableModel() {
         TableColumn col;
         for (int i = 0; i < columnNames.length; i++) {
@@ -121,8 +119,16 @@ public class MemberTableModel extends DefaultTableModel {
         return false;
     }
 
-    public Class getColumnClass(int column) {
-        return String.class;
+//    public Class getColumnClass(int column) {
+//        return String.class;
+//    }
+
+    // this method uses generics to return an integer object, if column is 0, otherwise return the column, if this method is not used, sorting by Integer throws an error
+    public Class<?> getColumnClass(int column) {
+        if (column == 0) {
+            return Integer.class;
+        }
+        return super.getColumnClass(column);
     }
 
     public int getColumnCount() {

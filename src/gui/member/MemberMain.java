@@ -102,17 +102,20 @@ public class MemberMain implements ActionListener, MouseListener, KeyListener {
         memTableModel = new MemberTableModel();
         memTable = new JTable(memTableModel);
         displayMembers(); // this must come AFTER the above two lines
-        sortTables(); // this methods sorts table columns nicely
+        alignTables(); // this methods sorts table columns nicely
         memTable.setFillsViewportHeight(true); // fill out the height of the table
         memTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // don't allow multirow selection
 
-        //        int tableWidth = 50;
-//        int columnCount = memTableModel.columnModel.getColumnCount();
-//        for (int i = 0; i < columnCount; i++)
-//            tableWidth += memTableModel.columnModel.getColumn(i).getWidth();
+        memTable.setAutoCreateRowSorter(true); // this is to enable row sorting, works in conjunction with getColumnClass method in MemberTableModel
+        memTable.getRowSorter().toggleSortOrder(0);
+
+//        DefaultRowSorter sorter = ((DefaultRowSorter)memTable.getRowSorter());
+//        ArrayList list = new ArrayList();
+//        list.add(new RowSorter.SortKey(2, SortOrder.ASCENDING) );
+//        sorter.setSortKeys(list);
+//        sorter.sort();
+
         memTable.addMouseListener(this);
-
-
 
         JScrollPane scroll = new JScrollPane(memTable);
         scroll.setBorder(new BevelBorder(BevelBorder.LOWERED));
@@ -150,7 +153,7 @@ public class MemberMain implements ActionListener, MouseListener, KeyListener {
         memTableModel.getMainList();
     }
 
-    public void sortTables(){
+    public void alignTables(){
         memTable.getColumnModel().getColumn(0).setPreferredWidth(10); // id // set width on columns of the JTable
         memTable.getColumnModel().getColumn(1).setPreferredWidth(50); // name // these widths have to be here because on every refresh the width resets to default
         memTable.getColumnModel().getColumn(2).setPreferredWidth(50); // surname
@@ -226,7 +229,7 @@ public class MemberMain implements ActionListener, MouseListener, KeyListener {
             int key = e.getKeyCode();
             if (key == KeyEvent.VK_ENTER) {
                 searchMembers();
-                sortTables();
+                alignTables();
             }
         }
     }
@@ -244,6 +247,7 @@ public class MemberMain implements ActionListener, MouseListener, KeyListener {
         }
         else if (e.getSource().equals(searchButton)){
             searchMembers();
+            alignTables();
         }
         else if (e.getSource().equals(deleteButton)){
             Object[] options = {"Yes","No"};
@@ -252,7 +256,7 @@ public class MemberMain implements ActionListener, MouseListener, KeyListener {
                 mo.deleteMember(rowMemId);
                 JOptionPane.showMessageDialog(am,"Member deleted");
                 displayMembers();
-                sortTables();
+                alignTables();
             }
         }
     }

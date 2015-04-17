@@ -26,11 +26,11 @@ public class AdminMain extends JFrame implements ActionListener {
 
     private JFrame am;
     private JMenuBar menu;
-    private JMenu fileMenu, manageMenu, helpMenu;
-    private JMenuItem exitMI, logOutMI, empMI, memIM, prodMI, reportMI, optionsMI, helpMI, aboutMI, systemColourMI;
-    private JLabel mainLogo;
-    private JPanel outerNorth, outerSouth, outerCenter, innerNorth, innerCenter;
-    private JButton empButton, memButton, prodButton, reportButton, optButton, logoutButton;
+    private JMenu mFile, mManage, mHelp;
+    private JMenuItem miExit, miLogOut, miEmployee, miMember, miProduct, miReport, miOptions, miHelp, miAbout, miSystemColour;
+    private JLabel lblMainLogo;
+    private JPanel pnlOuterNorth, pnlOuterSouth, pnlOuterCenter, pnlInnerNorth, pnlInnerCenter;
+    private JButton btnEmployee, btnMember, btnProduct, btnReport, btnOptions, btnLogout;
 
     private boolean displayarea = true;
     private EmployeeMain em;
@@ -61,168 +61,168 @@ public class AdminMain extends JFrame implements ActionListener {
         am.setJMenuBar(menu);
 
         // file menu and its menu items
-        fileMenu = new JMenu("File");
-        menu.add(fileMenu);
+        mFile = new JMenu("File");
+        menu.add(mFile);
 
-        logOutMI = new JMenuItem("Log Out");
-        logOutMI.setPreferredSize(new Dimension(120,25));
-        logOutMI.setIcon(new ImageIcon(UIElements.logout16));
-        fileMenu.add(logOutMI);
-        logOutMI.addActionListener(this);
+        miLogOut = new JMenuItem("Log Out");
+        miLogOut.setPreferredSize(new Dimension(120,25));
+        miLogOut.setIcon(new ImageIcon(UIElements.logout16));
+        mFile.add(miLogOut);
+        miLogOut.addActionListener(this);
 
-        fileMenu.add(new JSeparator()); // separator - anonymous object, because won't need to reference anywhere else
+        mFile.add(new JSeparator()); // separator - anonymous object, because won't need to reference anywhere else
 
-        exitMI = new JMenuItem("Exit");
-        exitMI.setPreferredSize(new Dimension(0,25));
-        exitMI.setIcon(new ImageIcon(UIElements.remove16));
-        fileMenu.add(exitMI);
-        exitMI.addActionListener(this);
+        miExit = new JMenuItem("Exit");
+        miExit.setPreferredSize(new Dimension(0,25));
+        miExit.setIcon(new ImageIcon(UIElements.remove16));
+        mFile.add(miExit);
+        miExit.addActionListener(this);
 
         // manage menu and its menu items
-        manageMenu = new JMenu("Manage");
-        menu.add(manageMenu);
+        mManage = new JMenu("Manage");
+        menu.add(mManage);
 
-        empMI = new JMenuItem("Employees");
-        empMI.setPreferredSize(new Dimension(120,25)); // this menuItem controls the width (longest word) for all the rest of the menuItems in the Manage menu, so can set the rest to 0, does not matter anywya
-        empMI.setIcon(new ImageIcon(UIElements.person16));
-        empMI.addActionListener(this);
-        manageMenu.add(empMI);
+        miEmployee = new JMenuItem("Employees");
+        miEmployee.setPreferredSize(new Dimension(120,25)); // this menuItem controls the width (longest word) for all the rest of the menuItems in the Manage menu, so can set the rest to 0, does not matter anywya
+        miEmployee.setIcon(new ImageIcon(UIElements.person16));
+        miEmployee.addActionListener(this);
+        mManage.add(miEmployee);
 
-        memIM = new JMenuItem("Members");
-        memIM.setPreferredSize(new Dimension(0,25));
-        memIM.setIcon(new ImageIcon(UIElements.person16));
-        memIM.addActionListener(this);
-        manageMenu.add(memIM);
+        miMember = new JMenuItem("Members");
+        miMember.setPreferredSize(new Dimension(0,25));
+        miMember.setIcon(new ImageIcon(UIElements.person16));
+        miMember.addActionListener(this);
+        mManage.add(miMember);
 
-        prodMI = new JMenuItem("Products");
-        prodMI.setPreferredSize(new Dimension(0,25));
-        prodMI.setIcon(new ImageIcon(UIElements.product16));
-        prodMI.addActionListener(this);
-        manageMenu.add(prodMI);
+        miProduct = new JMenuItem("Products");
+        miProduct.setPreferredSize(new Dimension(0,25));
+        miProduct.setIcon(new ImageIcon(UIElements.product16));
+        miProduct.addActionListener(this);
+        mManage.add(miProduct);
 
-        manageMenu.addSeparator(); // can do a separator this way
+        mManage.addSeparator(); // can do a separator this way
 
-        reportMI = new JMenuItem("Report");
-        reportMI.setPreferredSize(new Dimension(0,25));
-        reportMI.setIcon(new ImageIcon(UIElements.report16));
-        reportMI.addActionListener(this);
-        manageMenu.add(reportMI);
+        miReport = new JMenuItem("Report");
+        miReport.setPreferredSize(new Dimension(0,25));
+        miReport.setIcon(new ImageIcon(UIElements.report16));
+        miReport.addActionListener(this);
+        mManage.add(miReport);
 
-        manageMenu.add(new JSeparator()); // or this way
+        mManage.add(new JSeparator()); // or this way
 
-        systemColourMI = new JMenuItem("System Colour");
-        systemColourMI.setPreferredSize(new Dimension(100,25));
-        systemColourMI.setIcon(new ImageIcon(UIElements.info16));
-        systemColourMI.addActionListener(this);
-        manageMenu.add(systemColourMI);
+        miSystemColour = new JMenuItem("System Colour");
+        miSystemColour.setPreferredSize(new Dimension(100,25));
+        miSystemColour.setIcon(new ImageIcon(UIElements.info16));
+        miSystemColour.addActionListener(this);
+        mManage.add(miSystemColour);
 
-        manageMenu.addSeparator();
+        mManage.addSeparator();
 
-        optionsMI = new JMenuItem("Options");
-        optionsMI.setPreferredSize(new Dimension(100,25));
-        optionsMI.setIcon(new ImageIcon(UIElements.info16));
-        optionsMI.addActionListener(this);
-        manageMenu.add(optionsMI);
+        miOptions = new JMenuItem("Options");
+        miOptions.setPreferredSize(new Dimension(100,25));
+        miOptions.setIcon(new ImageIcon(UIElements.info16));
+        miOptions.addActionListener(this);
+        mManage.add(miOptions);
 
         // help menu and its items
-        helpMenu = new JMenu("Help");
-//        helpMenu.setPreferredSize(new Dimension(50,20));
+        mHelp = new JMenu("Help");
+//        mHelp.setPreferredSize(new Dimension(50,20));
 
-        menu.add(helpMenu);
+        menu.add(mHelp);
 
-        helpMI = new JMenuItem("View Help");
-        helpMI.setPreferredSize(new Dimension(120,25));
-        helpMI.setIcon(new ImageIcon(UIElements.info16));
-        helpMI.addActionListener(this);
-        helpMenu.add(helpMI);
+        miHelp = new JMenuItem("View Help");
+        miHelp.setPreferredSize(new Dimension(120,25));
+        miHelp.setIcon(new ImageIcon(UIElements.info16));
+        miHelp.addActionListener(this);
+        mHelp.add(miHelp);
 
-        helpMenu.add(new JSeparator());
+        mHelp.add(new JSeparator());
 
-        aboutMI = new JMenuItem("About");
-        aboutMI.setPreferredSize(new Dimension(120,25));
-        aboutMI.setIcon(new ImageIcon(UIElements.info16));
-        aboutMI.addActionListener(this);
-        helpMenu.add(aboutMI);
+        miAbout = new JMenuItem("About");
+        miAbout.setPreferredSize(new Dimension(120,25));
+        miAbout.setIcon(new ImageIcon(UIElements.info16));
+        miAbout.addActionListener(this);
+        mHelp.add(miAbout);
 
 // OUTER NORTH - logo
 
-        outerNorth = new JPanel(new GridBagLayout());
-        outerNorth.setBackground(Color.BLACK);
-        mainLogo = new JLabel();
-        mainLogo.setIcon(new ImageIcon(UIElements.banner));
-        outerNorth.add(mainLogo);
-        am.add(outerNorth, BorderLayout.NORTH);  // add to frame
+        pnlOuterNorth = new JPanel(new GridBagLayout());
+        pnlOuterNorth.setBackground(Color.BLACK);
+        lblMainLogo = new JLabel();
+        lblMainLogo.setIcon(new ImageIcon(UIElements.banner));
+        pnlOuterNorth.add(lblMainLogo);
+        am.add(pnlOuterNorth, BorderLayout.NORTH);  // add to frame
 
 // OUTER CENTER - buttons and interchangeable panels
 
-        outerCenter = new JPanel(new BorderLayout());
+        pnlOuterCenter = new JPanel(new BorderLayout());
 
         // INNER NORTH - buttons
-        innerNorth = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        innerNorth.setBackground(UIElements.getColour());
-        innerNorth.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "System Control")); // set anonymous titled, etched border);
+        pnlInnerNorth = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        pnlInnerNorth.setBackground(UIElements.getColour());
+        pnlInnerNorth.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "System Control")); // set anonymous titled, etched border);
 
-        empButton = new JButton("Employees");
-        empButton.setPreferredSize(new Dimension(150, 40));
-        empButton.setIcon(new ImageIcon(UIElements.person32));
-        empButton.setToolTipText("View Employee Information");
-        empButton.addActionListener(this);
-        innerNorth.add(empButton);
+        btnEmployee = new JButton("Employees");
+        btnEmployee.setPreferredSize(new Dimension(150, 40));
+        btnEmployee.setIcon(new ImageIcon(UIElements.person32));
+        btnEmployee.setToolTipText("View Employee Information");
+        btnEmployee.addActionListener(this);
+        pnlInnerNorth.add(btnEmployee);
 
-        memButton = new JButton("Members");
-        memButton.setPreferredSize(new Dimension(150, 40));
-        memButton.setIcon(new ImageIcon(UIElements.person32));
-        memButton.setToolTipText("View Member Information");
-        memButton.addActionListener(this);
-        innerNorth.add(memButton);
+        btnMember = new JButton("Members");
+        btnMember.setPreferredSize(new Dimension(150, 40));
+        btnMember.setIcon(new ImageIcon(UIElements.person32));
+        btnMember.setToolTipText("View Member Information");
+        btnMember.addActionListener(this);
+        pnlInnerNorth.add(btnMember);
 
-        prodButton = new JButton("Products");
-        prodButton.setPreferredSize(new Dimension(150, 40));
-        prodButton.setIcon(new ImageIcon(UIElements.product32));
-        prodButton.setToolTipText("View Product Information");
-        prodButton.addActionListener(this);
-        innerNorth.add(prodButton);
+        btnProduct = new JButton("Products");
+        btnProduct.setPreferredSize(new Dimension(150, 40));
+        btnProduct.setIcon(new ImageIcon(UIElements.product32));
+        btnProduct.setToolTipText("View Product Information");
+        btnProduct.addActionListener(this);
+        pnlInnerNorth.add(btnProduct);
 
-        reportButton = new JButton("Report");
-        reportButton.setPreferredSize(new Dimension(150, 40));
-        reportButton.setIcon(new ImageIcon(UIElements.report32));
-        reportButton.setToolTipText("View Reports");
-        reportButton.addActionListener(this);
-        innerNorth.add(reportButton);
+        btnReport = new JButton("Report");
+        btnReport.setPreferredSize(new Dimension(150, 40));
+        btnReport.setIcon(new ImageIcon(UIElements.report32));
+        btnReport.setToolTipText("View Reports");
+        btnReport.addActionListener(this);
+        pnlInnerNorth.add(btnReport);
 
-        optButton = new JButton("Options");
-        optButton.setPreferredSize(new Dimension(150, 40));
-        optButton.setIcon(new ImageIcon(UIElements.info32));
-        optButton.setToolTipText("View System Options");
-        optButton.addActionListener(this);
-        innerNorth.add(optButton);
+        btnOptions = new JButton("Options");
+        btnOptions.setPreferredSize(new Dimension(150, 40));
+        btnOptions.setIcon(new ImageIcon(UIElements.info32));
+        btnOptions.setToolTipText("View System Options");
+        btnOptions.addActionListener(this);
+        pnlInnerNorth.add(btnOptions);
 
-        outerCenter.add(innerNorth, BorderLayout.NORTH);
+        pnlOuterCenter.add(pnlInnerNorth, BorderLayout.NORTH);
 
         // INNER CENTER - interchangeable panels
-        innerCenter = new JPanel(new GridLayout());
+        pnlInnerCenter = new JPanel(new GridLayout());
 
         // starter panel - this appears by default when the program starts
         em = new EmployeeMain();  // have to do this (init EM twice) in order to set something visible when the program starts
-        innerCenter.add(em.getEmployeeMain()); // get employee panel
-        empButton.setForeground(Color.RED);
+        pnlInnerCenter.add(em.getEmployeeMain()); // get employee panel
+        btnEmployee.setForeground(Color.RED);
 
-        outerCenter.add(innerCenter, BorderLayout.CENTER);
-        am.add(outerCenter, BorderLayout.CENTER);  // add outer center to frame
+        pnlOuterCenter.add(pnlInnerCenter, BorderLayout.CENTER);
+        am.add(pnlOuterCenter, BorderLayout.CENTER);  // add outer center to frame
 
 // OUTER SOUTH
 
-        outerSouth = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        outerSouth.setBackground(UIElements.getColour());
-        outerSouth.setBorder(BorderFactory.createEtchedBorder()); // set anonymous titled, etched border);
+        pnlOuterSouth = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        pnlOuterSouth.setBackground(UIElements.getColour());
+        pnlOuterSouth.setBorder(BorderFactory.createEtchedBorder()); // set anonymous titled, etched border);
 
-        logoutButton = new JButton("Log Out");
-        logoutButton.setPreferredSize(new Dimension(100,40));
-        logoutButton.setIcon(new ImageIcon(UIElements.logout16));
-        logoutButton.setToolTipText("Log Out Of The Administration Window");
-        logoutButton.addActionListener(this);
-        outerSouth.add(logoutButton);
-        am.add(outerSouth, BorderLayout.SOUTH);  // add outer south to frame
+        btnLogout = new JButton("Log Out");
+        btnLogout.setPreferredSize(new Dimension(100,40));
+        btnLogout.setIcon(new ImageIcon(UIElements.logout16));
+        btnLogout.setToolTipText("Log Out Of The Administration Window");
+        btnLogout.addActionListener(this);
+        pnlOuterSouth.add(btnLogout);
+        am.add(pnlOuterSouth, BorderLayout.SOUTH);  // add outer south to frame
 
         // switch the lights on
         am.setVisible(true);
@@ -244,54 +244,54 @@ public class AdminMain extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         // Employees Menu Item and Button ACTIONS
-        if (e.getSource().equals(empMI) || e.getSource().equals(empButton)) {
+        if (e.getSource().equals(miEmployee) || e.getSource().equals(btnEmployee)) {
             em = new EmployeeMain();
-            empButton.setForeground(Color.RED);
-            memButton.setForeground(null);
-            prodButton.setForeground(null);
+            btnEmployee.setForeground(Color.RED);
+            btnMember.setForeground(null);
+            btnProduct.setForeground(null);
             if (displayarea) {
-                innerCenter.removeAll();
+                pnlInnerCenter.removeAll();
             }
-            innerCenter.add(em.getEmployeeMain());
+            pnlInnerCenter.add(em.getEmployeeMain());
             displayarea = true;
             am.setVisible(true);
         } // Member Menu Item and Button ACTIONS
-        else if (e.getSource().equals(memIM) || e.getSource().equals(memButton)) {
+        else if (e.getSource().equals(miMember) || e.getSource().equals(btnMember)) {
             MemberMain me = new MemberMain();
-            empButton.setForeground(null);
-            memButton.setForeground(Color.RED);
-            prodButton.setForeground(null);
+            btnEmployee.setForeground(null);
+            btnMember.setForeground(Color.RED);
+            btnProduct.setForeground(null);
             if (displayarea) {
-                innerCenter.removeAll();
+                pnlInnerCenter.removeAll();
             }
-            innerCenter.add(me.getMemberMain());
+            pnlInnerCenter.add(me.getMemberMain());
             displayarea = true;
             am.setVisible(true);
         } // Product Menu Item and Button ACTIONS
-        else if (e.getSource().equals(prodMI) || e.getSource().equals(prodButton)) {
+        else if (e.getSource().equals(miProduct) || e.getSource().equals(btnProduct)) {
             ProductMain pm = new ProductMain();
-            empButton.setForeground(null);
-            memButton.setForeground(null);
-            prodButton.setForeground(Color.RED);
+            btnEmployee.setForeground(null);
+            btnMember.setForeground(null);
+            btnProduct.setForeground(Color.RED);
             if (displayarea) {
-                innerCenter.removeAll();
+                pnlInnerCenter.removeAll();
             }
-            innerCenter.add(pm.getProductMain());
+            pnlInnerCenter.add(pm.getProductMain());
             displayarea = true;
             am.setVisible(true);
         } // Report Menu Item and Button ACTIONS
-        else if (e.getSource().equals(reportMI) || e.getSource().equals(reportButton)){
+        else if (e.getSource().equals(miReport) || e.getSource().equals(btnReport)){
             //Soon sosoon = new Soon();
              new ReportEmployee();
         } // Options Menu Item and Button ACTIONS
-        else if (e.getSource().equals(optionsMI) || e.getSource().equals(optButton)){
+        else if (e.getSource().equals(miOptions) || e.getSource().equals(btnOptions)){
             new AdminOptions(this, admin); // can also write AdminMain.this
         }
-        else if (e.getSource().equals(systemColourMI)){
+        else if (e.getSource().equals(miSystemColour)){
             changeSystemColor();
         }
          // Help Button
-        else if (e.getSource().equals(helpMI)){
+        else if (e.getSource().equals(miHelp)){
             if (Desktop.isDesktopSupported()) {
                 try {
                     File myFile = new File("src/res/AdminManual.pdf");
@@ -301,14 +301,14 @@ public class AdminMain extends JFrame implements ActionListener {
                 }
             }
         } // About Button
-        else if (e.getSource().equals(aboutMI)){
+        else if (e.getSource().equals(miAbout)){
             new About();
         } // Logout Menu Item and Button ACTIONS
-        else if (e.getSource().equals(logOutMI) || e.getSource().equals(logoutButton) ){
+        else if (e.getSource().equals(miLogOut) || e.getSource().equals(btnLogout) ){
             new StartWindow();
             am.dispose();
         } // Exit menuItem
-        else if (e.getSource().equals(exitMI) || e.getSource().equals(WindowConstants.EXIT_ON_CLOSE)){
+        else if (e.getSource().equals(miExit) || e.getSource().equals(WindowConstants.EXIT_ON_CLOSE)){
             UIPrompts.exitProgram();
         }
     }
