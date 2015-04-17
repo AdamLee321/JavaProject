@@ -260,7 +260,7 @@ public class ProductOperations {
 
     // get all the purchase history for a specific product
     public ResultSet getPurchases(int pid) {
-        String query = "SELECT s.saleid, s.saletime, s.saledate, e.empfname, e.emplname, m.memberfname, m.memberlname\n" +
+        String query = "SELECT s.saleid, s.saletime, s.saledate, e.empfname, e.emplname, m.memberfname, m.memberlname, sd.qty\n" +
                 "FROM sales s, salesdetails sd, member m, employee e, product p\n" +
                 "WHERE e.empid = s.empid AND s.saleid = sd.saleid AND m.memberId = sd.memberId AND sd.prodId = p.prodId AND p.prodId = ?";
         try {
@@ -277,7 +277,7 @@ public class ProductOperations {
 
     // get all the purchase history for a specific product, filter by sale id
     public ResultSet getPurchases(int pid, int sid) {
-        String query = "SELECT s.saleid, s.saletime, s.saledate, e.empfname, e.emplname, m.memberfname, m.memberlname\n" +
+        String query = "SELECT s.saleid, s.saletime, s.saledate, e.empfname, e.emplname, m.memberfname, m.memberlname, sd.qty\n" +
                 "FROM sales s, salesdetails sd, member m, employee e, product p\n" +
                 "WHERE e.empid = s.empid AND s.saleid = sd.saleid AND m.memberId = sd.memberId AND sd.prodId = p.prodId AND p.prodId = ? AND s.saleid = ?";
         try {

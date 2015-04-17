@@ -28,6 +28,7 @@ public class PurchaseHistoryTableModel extends DefaultTableModel {
     Date saleDate;
     String empName;
     String memName;
+    int quantity;
 
     // Table columns
     final static int id = 0;
@@ -35,7 +36,8 @@ public class PurchaseHistoryTableModel extends DefaultTableModel {
     final static int date = 2;
     final static int empN = 3;
     final static int memN = 4;
-    final static String[] columnNames = {"Sale ID", "Sale Time", "Sale Date", "Employee Name", "Member Name"};
+    final static int qty = 5;
+    final static String[] columnNames = {"Sale ID", "Sale Time", "Sale Date", "Employee Name", "Member Name", "Quantity"};
 
     // column model
     DefaultTableColumnModel columnModel = new DefaultTableColumnModel();
@@ -53,12 +55,13 @@ public class PurchaseHistoryTableModel extends DefaultTableModel {
         }
     }
 
-    public PurchaseHistoryTableModel(int saleId, String time, Date date, String empName, String memName) {
+    public PurchaseHistoryTableModel(int saleId, String time, Date date, String empName, String memName, int quantity) {
         this.saleId = saleId;
         this.saleTime = time;
         this.saleDate = date;
         this.empName = empName;
         this.memName = memName;
+        this.quantity = quantity;
     }
 
     // return the main list of employees from the database
@@ -67,7 +70,7 @@ public class PurchaseHistoryTableModel extends DefaultTableModel {
             ProductOperations po = new ProductOperations();
             ResultSet rset = po.getPurchases(pid);
             while (rset.next()) {
-                pHistoryRows.add(new PurchaseHistoryTableModel(rset.getInt(1), rset.getString(2), rset.getDate(3), (rset.getString(4) + " " + rset.getString(5)), (rset.getString(6) + " " + rset.getString(7))));
+                pHistoryRows.add(new PurchaseHistoryTableModel(rset.getInt(1), rset.getString(2), rset.getDate(3), (rset.getString(4) + " " + rset.getString(5)), (rset.getString(6) + " " + rset.getString(7)), rset.getInt(8)));
             }
             rset.close();
             fireTableChanged(new TableModelEvent(this, -1, -1));
@@ -82,7 +85,7 @@ public class PurchaseHistoryTableModel extends DefaultTableModel {
             ProductOperations po = new ProductOperations();
             ResultSet rset = po.getPurchases(pid, sid);
             while (rset.next()) {
-                pHistoryRows.add(new PurchaseHistoryTableModel(rset.getInt(1), rset.getString(2), rset.getDate(3), (rset.getString(4) + " " + rset.getString(5)), (rset.getString(6) + " " + rset.getString(7))));
+                pHistoryRows.add(new PurchaseHistoryTableModel(rset.getInt(1), rset.getString(2), rset.getDate(3), (rset.getString(4) + " " + rset.getString(5)), (rset.getString(6) + " " + rset.getString(7)), rset.getInt(8)));
             }
             rset.close();
             fireTableChanged(new TableModelEvent(this, -1, -1));
@@ -105,6 +108,8 @@ public class PurchaseHistoryTableModel extends DefaultTableModel {
                 return row.getEmpName();
             case memN:
                 return row.getMemName();
+            case qty:
+                return row.getQuantity();
             default:
                 return "";
         }
@@ -156,5 +161,8 @@ public class PurchaseHistoryTableModel extends DefaultTableModel {
     }
     public String getMemName() {
         return memName;
+    }
+    public int getQuantity(){
+        return quantity;
     }
 }
