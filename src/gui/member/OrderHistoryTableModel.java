@@ -34,9 +34,9 @@ public class OrderHistoryTableModel extends DefaultTableModel {
     final static int make = 2;
     final static int model = 3;
     final static int qty = 4;
-    final static int price = 5;
-    final static int paid = 6;
-    final static String[] columnNames = {"Sale ID", "Sale Date", "Make", "Model", "Quantity", "Price", "Paid"};
+    final static int itemPrice = 5;
+    final static int totalPaid = 6;
+    final static String[] columnNames = {"Sale ID", "Sale Date", "Make", "Model", "Quantity", "Item Price", "Total Paid"};
 
     // column model
     DefaultTableColumnModel columnModel = new DefaultTableColumnModel();
@@ -109,9 +109,9 @@ public class OrderHistoryTableModel extends DefaultTableModel {
                 return row.getProdModel();
             case qty:
                 return row.getQuantity();
-            case price:
+            case itemPrice:
                 return row.getSalePrice();
-            case paid:
+            case totalPaid:
                 return row.getTotalPrice();
             default:
                 return "";

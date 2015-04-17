@@ -191,7 +191,7 @@ public class MemberOperations {
 
     // get all the orders by a specific member
     public ResultSet getPurchases(int mid) {
-        String query = "SELECT sd.saleid, s.saledate, p.prodMake, p.prodModel, p.prodSalePrice, p.prodQTY, s.saleamount FROM product p, sales s, salesdetails sd WHERE p.prodId = sd.prodId AND sd.saleid = s.saleid and sd.memberid = ?";
+        String query = "SELECT sd.saleid, s.saledate, p.prodMake, p.prodModel, p.prodSalePrice, sd.qty, s.saleamount FROM product p, sales s, salesdetails sd WHERE p.prodId = sd.prodId AND sd.saleid = s.saleid and sd.memberid = ?";
         try {
             pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, mid);
@@ -206,7 +206,7 @@ public class MemberOperations {
 
     // get specific orders by a member and sale id
     public ResultSet getPurchases(int mid, int sid) {
-        String query = "SELECT sd.saleid, s.saledate, p.prodMake, p.prodModel, p.prodSalePrice, p.prodQTY, s.saleamount FROM product p, sales s, salesdetails sd WHERE p.prodId = sd.prodId AND sd.saleid = s.saleid and sd.memberid = ? and s.saleid = ?";
+        String query = "SELECT sd.saleid, s.saledate, p.prodMake, p.prodModel, p.prodSalePrice, sd.qty, s.saleamount FROM product p, sales s, salesdetails sd WHERE p.prodId = sd.prodId AND sd.saleid = s.saleid and sd.memberid = ? and s.saleid = ?";
         try {
             pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, mid);
