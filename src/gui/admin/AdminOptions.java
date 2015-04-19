@@ -1,16 +1,17 @@
 package gui.admin;
 
-import gui.FormValidator;
-import gui.Griddy;
-import gui.PasswordGenerator;
-import gui.UIElements;
+import database.operations.DepartmentOperations;
+import database.operations.EmployeeOperations;
+import gui.*;
 import model.Employee;
+import oracle.sql.BLOB;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 /*
 IT Tallaght - 2015, S2
@@ -21,17 +22,20 @@ Group 17 (George - 07/03/2015)
 public class AdminOptions implements ActionListener {
 
     private JDialog adminOps;
-    private JLabel lblName, lblSurname, lblContact, lblUsername, lblPassword, lblRepeatpass, lblCurrentPassword;
-    private JTextField tfName, tfSurname, tfContact, tfUsername;
+    private JLabel lblName, lblSurname, lblUsername, lblPassword, lblRepeatpass, lblCurrentPassword;
+    private JTextField tfName, tfSurname, tfUsername;
     private JPasswordField pfNewPassword, pfRepeatPassword, pfCurrentPassword;
-    private JButton btnCancel, btnOK, btnLog;
+    private JButton btnCancel, btnOK, btnLog, btnColour;
     private JPanel pnlMain, pnlButtons, pnlAdminName, pnlAdminUsername, pnlAdminPassword;
-    private JFrame am;
-    private Employee admin;
+    private AdminMain am;
+    private Employee currentAdmin;
+    private EmployeeOperations eo;
 
-    public AdminOptions(JFrame parent, Employee admin) {
+    public AdminOptions(AdminMain parent, Employee admin) {
 
-        this.admin = admin;
+        am = parent;
+        eo = new EmployeeOperations();
+        this.currentAdmin = eo.getEmployeeOb(admin.getEmpId());
 
         // setup JDialog - border layout
 
@@ -62,7 +66,7 @@ public class AdminOptions implements ActionListener {
         lblName = new JLabel("First Name");
         pnlAdminName.add(lblName, Griddy.getConstraints(0, 0, 1, 1, 0, 0, 0, 0, 5, 15, 0, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.WEST));
         tfName = new JTextField();
-        tfName.setText(admin.getEmpFName());
+        tfName.setText(currentAdmin.getEmpFName());
         pnlAdminName.add(tfName, Griddy.getConstraints(1, 0, 1, 1, 0, 0, 1, 0, 5, 15, 5, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER));
 
         // surname
@@ -70,9 +74,9 @@ public class AdminOptions implements ActionListener {
         pnlAdminName.add(lblSurname, Griddy.getConstraints(0, 1, 1, 1, 0, 0, 0, 0, 5, 15, 0, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.WEST));
         tfSurname = new JTextField();
         pnlAdminName.add(tfSurname, Griddy.getConstraints(1, 1, 1, 1, 0, 0, 0, 0, 5, 15, 5, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER));
-        tfSurname.setText(admin.getEmpLName());
+        tfSurname.setText(currentAdmin.getEmpLName());
 
-        pnlMain.add(pnlAdminName, Griddy.getConstraints(0, 0, 1, 1, 0, 0, 1, 0, 5, 5, 5, 5, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
+        pnlMain.add(pnlAdminName, Griddy.getConstraints(0, 0, 2, 1, 0, 0, 1, 0, 5, 5, 5, 5, GridBagConstraints.BOTH, GridBagConstraints.CENTER));
 
 // ADMIN USER NAME
 
@@ -84,10 +88,10 @@ public class AdminOptions implements ActionListener {
         lblUsername = new JLabel("Username");
         pnlAdminUsername.add(lblUsername, Griddy.getConstraints(0, 2, 1, 1, 0, 0, 0, 0, 5, 15, 0, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.WEST));
         tfUsername = new JTextField();
-        tfUsername.setText(admin.getEmpUsername());
+        tfUsername.setText(currentAdmin.getEmpUsername());
         pnlAdminUsername.add(tfUsername, Griddy.getConstraints(1, 2, 1, 1, 0, 0, 1, 0, 5, 15, 5, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER));
 
-        pnlMain.add(pnlAdminUsername, Griddy.getConstraints(0, 1, 1, 1, 0, 0, 0, 0, 5, 5, 5, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER));
+        pnlMain.add(pnlAdminUsername, Griddy.getConstraints(0, 1, 2, 1, 0, 0, 0, 0, 5, 5, 5, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER));
 
 // ADMIN PASSWORD
 
@@ -113,22 +117,32 @@ public class AdminOptions implements ActionListener {
         pfRepeatPassword = new JPasswordField();
         pnlAdminPassword.add(pfRepeatPassword, Griddy.getConstraints(1, 5, 1, 1, 0, 0, 0, 0, 5, 15, 5, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER));
 
-        pnlMain.add(pnlAdminPassword, Griddy.getConstraints(0, 2, 1, 1, 0, 0, 0, 0, 5, 5, 5, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER));
+        pnlMain.add(pnlAdminPassword, Griddy.getConstraints(0, 2, 2, 1, 0, 0, 0, 0, 5, 5, 5, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER));
+
+// BUTTONS
 
         // log button
-        btnLog = new JButton("View System Log");
+        btnLog = new JButton(" Log  ");
         btnLog.setIcon(new ImageIcon(UIElements.report16));
-        btnLog.setPreferredSize(new Dimension(50, 40));
+        btnLog.setPreferredSize(new Dimension(100, 40));
         btnLog.addActionListener(this);
-        pnlMain.add(btnLog, Griddy.getConstraints(0, 3, 2, 1, 0, 0, 0, 0, 5, 15, 15, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER));
+        pnlMain.add(btnLog, Griddy.getConstraints(0, 3, 1, 1, 0, 0, 1, 0, 5, 15, 0, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER));
+
+        // colour button
+        btnColour = new JButton("Colour");
+        btnColour.setIcon(new ImageIcon(UIElements.edit16));
+        btnColour.setPreferredSize(new Dimension(100, 40));
+        btnColour.addActionListener(this);
+        pnlMain.add(btnColour, Griddy.getConstraints(1, 3, 1, 1, 0, 0, 1, 0, 5, 0, 15, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.EAST));
 
         // separator
         pnlMain.add(new JSeparator(), Griddy.getConstraints(0, 4, 2, 1, 0, 0, 0, 0, 5, 15, 15, 5, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER));
 
         adminOps.add(pnlMain, BorderLayout.CENTER);
 
-        // buttons panel - flow layout - south on JDialog
+// BOTTOM BUTTONS
 
+        // flow layout - south on JDialog
         pnlButtons = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 5));
         pnlButtons.setBackground(UIElements.getColour());
 
@@ -154,23 +168,33 @@ public class AdminOptions implements ActionListener {
 
 // METHODS
 
+    // check if new passwords match
     public boolean newPasswordsMatch() {
-        if (new String(pfNewPassword.getPassword()).equals(new String(pfRepeatPassword.getPassword()))) {
-            System.out.println("success!");
-            return true;
-        } else {
-            return false;
-        }
+        return (new String(pfNewPassword.getPassword()).equals(new String(pfRepeatPassword.getPassword()))); // returns either true of false, shorter than if != return false, else return true
     }
 
-    public boolean passwordValid() {
-        String storedPass = admin.getEmpPassword();
+    // check if what user enters in "Current Password" matches what's in the database, in other words check to see if the entered admin password is correct
+    public void processPass() {
+
+        String storedPass = currentAdmin.getEmpPassword();
         String matchPass = PasswordGenerator.hashPassword(new String(pfCurrentPassword.getPassword())); // have to use new String because a String is a character array and hashPassword requires a char array
-        if (storedPass.equals(matchPass)) {
-            System.out.println("true");
-            return true;
+
+        if (FormValidator.isEmptyPassField(pfCurrentPassword.getPassword())) {
+            JOptionPane.showMessageDialog(null, "Enter the current password to save changes", "Empty Fields", JOptionPane.INFORMATION_MESSAGE);
+        } else if (!storedPass.equals(matchPass)) {
+            JOptionPane.showMessageDialog(null, "Password does not match", "Empty Fields", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            return false;
+            String adminPass;
+            if (FormValidator.isEmptyPassField(pfNewPassword.getPassword())){
+                adminPass = currentAdmin.getEmpPassword();
+            }
+            else {
+                currentAdmin.setEmpPassword(PasswordGenerator.hashPassword(new String(pfNewPassword.getPassword())));
+                adminPass = PasswordGenerator.hashPassword(new String(pfNewPassword.getPassword()));
+            }
+            eo.updateAdmin(currentAdmin.getEmpId(), tfName.getText(), tfSurname.getText(), tfUsername.getText(), adminPass);
+            JOptionPane.showMessageDialog(null, "Changes saved", "Admin information updated", JOptionPane.INFORMATION_MESSAGE);
+            adminOps.dispose();
         }
     }
 
@@ -182,28 +206,40 @@ public class AdminOptions implements ActionListener {
         else if (e.getSource().equals(btnLog))
             new Log(adminOps);
         else if (e.getSource().equals(btnOK)) {
-            // change just the username. needs password
-            if (!tfUsername.getText().equals(admin.getEmpUsername()) || !tfName.getText().equals(admin.getEmpFName()) || !tfSurname.getText().equals(admin.getEmpLName())) {
-                if (FormValidator.isEmptyPassField(pfCurrentPassword.getPassword())) {
-                    JOptionPane.showMessageDialog(null, "Enter the current password to save changes", "Empty Fields", JOptionPane.INFORMATION_MESSAGE);
-//                } else if () {
-
-//                }
-                    if (FormValidator.isEmptyPassField(pfCurrentPassword.getPassword()) || FormValidator.isEmptyPassField(pfNewPassword.getPassword())) {
-                        JOptionPane.showMessageDialog(null, "New password fields are empty", "Empty Fields", JOptionPane.INFORMATION_MESSAGE);
-                        if (!newPasswordsMatch()) {
-                            JOptionPane.showMessageDialog(null, "New passwords don't match", "Empty Fields", JOptionPane.INFORMATION_MESSAGE);
+            if (tfUsername.getText().equals(currentAdmin.getEmpUsername()) && tfName.getText().equals(currentAdmin.getEmpFName()) && tfSurname.getText().equals(currentAdmin.getEmpLName()) && FormValidator.isEmptyPassField(pfNewPassword.getPassword()) && FormValidator.isEmptyPassField(pfRepeatPassword.getPassword())) {
+                adminOps.dispose();
+            } else {
+                if (!tfUsername.getText().equals(currentAdmin.getEmpUsername()) || !tfName.getText().equals(currentAdmin.getEmpFName()) || !tfSurname.getText().equals(currentAdmin.getEmpLName())) {
+                    if ((tfUsername.getText().length() > 0) && (tfName.getText().length() > 0) && (tfSurname.getText().length() > 0 )) {
+                        if (FormValidator.isEmptyPassField(pfNewPassword.getPassword()) && FormValidator.isEmptyPassField(pfRepeatPassword.getPassword())) {
+                            processPass();
+                        } else {
+                            if (newPasswordsMatch()) {
+                                processPass();
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Sorry, the new passwords don't match", "Invalid password", JOptionPane.ERROR_MESSAGE);
+                            }
                         }
                     }
+                    else {
+                        JOptionPane.showMessageDialog(null, "Fields cannot be left empty", "Empty fields", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
-            } else if (!passwordValid()) {
-                JOptionPane.showMessageDialog(null, "Password does not match", "Empty Fields", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                adminOps.dispose();
+                else if (tfUsername.getText().equals(currentAdmin.getEmpUsername()) && tfName.getText().equals(currentAdmin.getEmpFName()) && tfSurname.getText().equals(currentAdmin.getEmpLName()) || !FormValidator.isEmptyPassField(pfNewPassword.getPassword()) || !FormValidator.isEmptyPassField(pfRepeatPassword.getPassword())) {
+                    if (newPasswordsMatch()) {
+                        processPass();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Sorry, the new passwords don't match", "Invalid password", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
             }
-            if(e.getSource().equals(btnLog)) {
-                new Log(adminOps);
-            }
+        }
+        else if (e.getSource().equals(btnLog)) {
+            new Log(adminOps);
+        }
+        else if (e.getSource().equals(btnColour)){
+            UIPrompts.changeSystemColor(am);
+            adminOps.dispose();
         }
     }
 }

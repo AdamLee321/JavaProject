@@ -114,6 +114,24 @@ public class EmployeeOperations {
         }
     }
 
+    public void updateAdmin(int empId, String fName, String lName, String uName, String pwd){
+        try {
+            String sql = "Update employee SET  empFName = ?, empLName = ?, empUsername = ?, empPassword = ? WHERE empid = '" + empId + "'";
+            pstmt = ConnectionDB.getConn().prepareStatement(sql);
+
+            // employee id SEQUENCE
+            pstmt.setString(1, fName); // employee first name
+            pstmt.setString(2, lName); // employee last name
+            pstmt.setString(3, uName); // employee username
+            pstmt.setString(4, pwd); // employee password
+            pstmt.execute();
+            System.out.println("alright!");
+        }
+        catch (SQLException sqlE){
+            System.out.println(sqlE);
+        }
+    }
+
     public void addEmployee(int dId, String fName, String lName, String position, String street, String city, String county,
                                int day, String month, String year, String email, double salary, File pic, String  uname, String pass) {
         try {
@@ -144,7 +162,6 @@ public class EmployeeOperations {
             System.out.println(sqlE);
         }
     }
-
 
     public void deleteEmployee(int id){
         String sql = "DELETE FROM Employee WHERE empid = '"+id+"'";

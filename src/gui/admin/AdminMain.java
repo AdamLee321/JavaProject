@@ -229,14 +229,10 @@ public class AdminMain extends JFrame implements ActionListener {
 
 // METHODS
 
-    public void changeSystemColor(){
-        Object[] options = {"Yes","No"}; // choices for closing dialog - these are buttons that appear on the dialog
-        int choice = JOptionPane.showOptionDialog(am, "Please note you will need to re-login , do you want to proceed?", "Change System Colour",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE,null,options,null);
-        if (choice == 0){
-            UIElements.setColour();
-            StartWindow sw = new StartWindow();
-            am.dispose();
-        }
+    // log out of the system (put this in a method because need to reuse (access) with the colour changing)
+    public void logout(){
+        am.dispose();
+        new StartWindow();
     }
 
 // BUTTON ACTIONS
@@ -280,14 +276,13 @@ public class AdminMain extends JFrame implements ActionListener {
             am.setVisible(true);
         } // Report Menu Item and Button ACTIONS
         else if (e.getSource().equals(miReport) || e.getSource().equals(btnReport)){
-            //Soon sosoon = new Soon();
              new ReportEmployee();
         } // Options Menu Item and Button ACTIONS
         else if (e.getSource().equals(miOptions) || e.getSource().equals(btnOptions)){
-            new AdminOptions(this, admin); // can also write AdminMain.this
+            new AdminOptions(AdminMain.this, admin); // can also write AdminMain.this
         }
         else if (e.getSource().equals(miSystemColour)){
-            changeSystemColor();
+            UIPrompts.changeSystemColor(this);
         }
          // Help Button
         else if (e.getSource().equals(miHelp)){
@@ -304,8 +299,7 @@ public class AdminMain extends JFrame implements ActionListener {
             new About();
         } // Logout Menu Item and Button ACTIONS
         else if (e.getSource().equals(miLogOut) || e.getSource().equals(btnLogout) ){
-            new StartWindow();
-            am.dispose();
+            logout();
         } // Exit menuItem
         else if (e.getSource().equals(miExit) || e.getSource().equals(WindowConstants.EXIT_ON_CLOSE)){
             UIPrompts.exitProgram();

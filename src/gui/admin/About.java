@@ -71,7 +71,7 @@ public class About implements ActionListener {
                 "<b>Date:</b> 2015, Semester 2<br><br>" +
                 "<b>Notes:</b> This application was developed as a second year, group project for IT-Tallaght Computing course<br><br>" +
                 "<b>Special Thanks To:</b> <br><br>" +
-                "<ul><li>Our lecturers @ ITT</li><li>StackOverflow community</li><li>YouTube</li></ul>" +
+                "<ul><li>Our lecturers @ ITT</li><li>Stack Overflow community</li><li>YouTube community</li></ul>" +
                 "</html>");
         pnlCenter.add(lblInfo);
 
