@@ -29,7 +29,7 @@ public class ManScreen extends JFrame{
         //TOP PANEL FOR LOGO
         top = new JPanel();
         top.setBackground(Color.BLACK);
-        top.setPreferredSize(new Dimension(100,150));
+        top.setPreferredSize(new Dimension(100,105));
 
         //JLabel for Logo
         logo = new JLabel(new ImageIcon(UIElements.banner));
@@ -45,8 +45,9 @@ public class ManScreen extends JFrame{
         button.add(north, BorderLayout.NORTH);
 
         //SALES Button
-        sales = new JButton("SALES");
+        sales = new JButton("SALES", new ImageIcon(UIElements.cashreg32));
         sales.setPreferredSize(new Dimension(130, 100));
+        sales.setFocusPainted(false); //Remove Outline
         north.add(sales);
         sales.addActionListener(new ActionListener() {
             @Override

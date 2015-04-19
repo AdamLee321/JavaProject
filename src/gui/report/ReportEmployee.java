@@ -24,7 +24,6 @@ public class ReportEmployee extends JFrame {
 
     private JFrame re;
     private JButton employee, year, month, week, okButton, members, product, sales;
-    private JLabel jLabel1; //Graph
     private JPanel north, jPanel1, jPanel2, jPanel3, south;//Container ,Personnel, calender, range, graph
     private JTextField jTextField1; // Search
 
@@ -47,7 +46,7 @@ public class ReportEmployee extends JFrame {
         jPanel1 = new JPanel(new FlowLayout());
         jPanel1.setBackground(new Color(98, 169, 221));
         jPanel1.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Personnel"));
-        //north.add(jPanel1, BorderLayout.NORTH); //Places the panel inside the north panel
+
         //Sales Button;
         sales = new JButton("Sales");
         jPanel1.add(sales);
@@ -152,7 +151,7 @@ public class ReportEmployee extends JFrame {
         week.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               // new ReportWeekYear();
+                new ReportWeekYear();
             }
         });
         //Month Button
@@ -161,7 +160,7 @@ public class ReportEmployee extends JFrame {
         month.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //new ReportMonthYear();
+                new ReportMonthYear();
             }
         });
         //Year Button
@@ -170,7 +169,7 @@ public class ReportEmployee extends JFrame {
         year.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //new ReportYear();
+                new ReportYear();
             }
         });
         north.add(jPanel2, BorderLayout.CENTER);
@@ -185,10 +184,9 @@ public class ReportEmployee extends JFrame {
         jTextField1.addFocusListener(new FocusListener() {
             public void focusGained(FocusEvent e) {
                 jTextField1.setText(""); //Empties textfield when clicked
-            }
 
+            }
             public void focusLost(FocusEvent e) {
-                // nothing
             }
         });
 
@@ -207,13 +205,9 @@ public class ReportEmployee extends JFrame {
         south = new JPanel(new BorderLayout());
         south.setBackground(new Color(98, 169, 221));
 
+        //ADDING PANELS TO THE FRAME
         re.add(north, BorderLayout.NORTH);
         re.add(south, BorderLayout.CENTER);
         re.setVisible(true);
-
-    }
-
-    public static void main(String[] args) {
-        ReportEmployee p = new ReportEmployee();
     }
 }
