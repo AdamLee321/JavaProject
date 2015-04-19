@@ -1,10 +1,19 @@
 package gui.report;
 
-import database.operations.ReportOperations;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import javafx.scene.chart.CategoryAxisBuilder;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.ui.ApplicationFrame;
+import org.jfree.ui.RefineryUtilities;
 
 /*IT Tallaght - 2015, S2
 Computing - Year 2, Project
@@ -46,7 +55,20 @@ public class ReportEmployee extends JFrame {
         sales.addActionListener(new ActionListener() {    // action
             @Override
             public void actionPerformed(ActionEvent e) {
-                //SALES ACTION
+                DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+                dataset.setValue(100, "Month", "Alien");
+                dataset.setValue(80, "Month", "Apple");
+                dataset.setValue(40, "Month", "Samsung");
+                dataset.setValue(78, "Month", "Dell");
+                dataset.setValue(20, "Month", "Toshiba");
+
+                JFreeChart chart = ChartFactory.createBarChart("Sales Chart", "Laptop Names", "Sales", dataset, PlotOrientation.VERTICAL, false, true, false);
+                CategoryPlot p = chart.getCategoryPlot();
+                p.setRangeGridlinePaint(Color.BLUE);
+                ChartPanel barPanel = new ChartPanel(chart);
+                south.removeAll();
+                south.add(barPanel, BorderLayout.CENTER);
+                south.validate();
             }
         });
 
@@ -56,7 +78,20 @@ public class ReportEmployee extends JFrame {
         employee.addActionListener(new ActionListener() {    // action
             @Override
             public void actionPerformed(ActionEvent e) {
-                //EMPLOYEE ACTION
+                DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+                dataset.setValue(100, "Employee", "John");
+                dataset.setValue(80, "Employee", "Marie");
+                dataset.setValue(40, "Employee", "Eoin");
+                dataset.setValue(78, "Employee", "Lisa");
+                dataset.setValue(20, "Employee", "Brendan");
+
+                JFreeChart chart = ChartFactory.createBarChart("Employee Sales", "Employee Names", "Number of Sales", dataset, PlotOrientation.VERTICAL, false, true, false);
+                CategoryPlot p = chart.getCategoryPlot();
+                p.setRangeGridlinePaint(Color.BLUE);
+                ChartPanel barPanel = new ChartPanel(chart);
+                south.removeAll();
+                south.add(barPanel, BorderLayout.CENTER);
+                south.validate();
             }
         });
 
@@ -67,7 +102,20 @@ public class ReportEmployee extends JFrame {
         product.addActionListener(new ActionListener() {    // action
             @Override
             public void actionPerformed(ActionEvent e) {
-                //PRODUCT ACTION
+                DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+                dataset.setValue(100, "Employee", "Fuck");
+                dataset.setValue(80, "Employee", "this");
+                dataset.setValue(40, "Employee", "Project");
+                dataset.setValue(78, "Employee", "George");
+                dataset.setValue(20, "Employee", "David");
+
+                JFreeChart chart = ChartFactory.createBarChart("Employee Sales", "DickHeads", "Number of Sales", dataset, PlotOrientation.VERTICAL, false, true, false);
+                CategoryPlot p = chart.getCategoryPlot();
+                p.setRangeGridlinePaint(Color.BLUE);
+                ChartPanel barPanel = new ChartPanel(chart);
+                south.removeAll();
+                south.add(barPanel, BorderLayout.CENTER);
+                south.validate();
             }
         });
 
@@ -77,7 +125,20 @@ public class ReportEmployee extends JFrame {
         members.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //MEMBERS ACTION
+                DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+                dataset.setValue(100, "Employee", "January");
+                dataset.setValue(80, "Employee", "February");
+                dataset.setValue(40, "Employee", "March");
+                dataset.setValue(78, "Employee", "April");
+                dataset.setValue(20, "Employee", "May");
+
+                JFreeChart chart = ChartFactory.createBarChart("New Members Chart", "Months", "New Members", dataset, PlotOrientation.VERTICAL, false, true, false);
+                CategoryPlot p = chart.getCategoryPlot();
+                p.setRangeGridlinePaint(Color.BLUE);
+                ChartPanel barPanel = new ChartPanel(chart);
+                south.removeAll();
+                south.add(barPanel, BorderLayout.CENTER);
+                south.validate();
             }
         });
         north.add(jPanel1, BorderLayout.NORTH);//Places the panel inside the north panel
@@ -91,7 +152,7 @@ public class ReportEmployee extends JFrame {
         week.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //WEEK ACTION
+                new ReportWeekYear();
             }
         });
         //Month Button
@@ -100,7 +161,7 @@ public class ReportEmployee extends JFrame {
         month.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //MONTH ACTION
+                new ReportMonthYear();
             }
         });
         //Year Button
@@ -109,7 +170,7 @@ public class ReportEmployee extends JFrame {
         year.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //YEAR ACTION
+                new ReportYear();
             }
         });
         north.add(jPanel2, BorderLayout.CENTER);
@@ -118,9 +179,19 @@ public class ReportEmployee extends JFrame {
         jPanel3.setBackground(new Color(98, 169, 221));
         jPanel3.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Range"));
         //TextField
-        jTextField1 = new JTextField("Emp id");
+        jTextField1 = new JTextField("Search");
         jTextField1.setColumns(15);// Sets the column width of the Textfield
         jPanel3.add(jTextField1);
+        jTextField1.addFocusListener(new FocusListener() {
+            public void focusGained(FocusEvent e) {
+                jTextField1.setText(""); //Empties textfield when clicked
+            }
+
+            public void focusLost(FocusEvent e) {
+                // nothing
+            }
+        });
+
         //OK BUTTON
         okButton = new JButton("Ok");
         jPanel3.add(okButton);
@@ -130,13 +201,11 @@ public class ReportEmployee extends JFrame {
                 //OK ACTION
             }
         });
-        north.add(jPanel3,BorderLayout.SOUTH);
+        north.add(jPanel3, BorderLayout.SOUTH);
 
         //SOUTH
         south = new JPanel(new BorderLayout());
         south.setBackground(new Color(98, 169, 221));
-        jLabel1 = new JLabel("GRAPH"); //Graph displayed here
-        south.add(jLabel1 ,BorderLayout.CENTER);
 
         re.add(north, BorderLayout.NORTH);
         re.add(south, BorderLayout.CENTER);

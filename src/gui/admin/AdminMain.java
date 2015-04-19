@@ -7,7 +7,6 @@ import gui.employee.EmployeeMain;
 import gui.member.MemberMain;
 import gui.product.ProductMain;
 import gui.report.ReportEmployee;
-import gui.sale.Discount;
 import model.Employee;
 
 import javax.swing.*;

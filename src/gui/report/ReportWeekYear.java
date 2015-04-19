@@ -20,7 +20,7 @@ public class ReportWeekYear{
         jd1 = new JDialog();
         jd1.setLayout(new BorderLayout());
         jd1.setTitle("Please select the Week and Year");
-        jd1.setSize(500, 500);
+        jd1.setSize(300, 100);
         jd1.setLocationRelativeTo(null);
 
         //JPanel initialisation
@@ -30,16 +30,16 @@ public class ReportWeekYear{
         //Combo box creation
         week = new JComboBox();
         center.add(week);
-        year.addItem("1");
-        year.addItem("2");
-        year.addItem("3");
-        year.setEditable(true);
-        System.out.println("Week=" + year.getItemCount());
+        week.addItem("1");
+        week.addItem("2");
+        week.addItem("3");
+        week.setEditable(true);
+        System.out.println("Week=" + week.getItemCount());
 
-        year.addActionListener(new ActionListener() {
+        week.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Selected index=" + year.getSelectedIndex()
-                        + " Selected week=" + year.getSelectedItem());
+                System.out.println("Selected index=" + week.getSelectedIndex()
+                        + " Selected week=" + week.getSelectedItem());
             }
         });
 

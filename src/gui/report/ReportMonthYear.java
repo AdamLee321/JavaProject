@@ -20,7 +20,7 @@ public class ReportMonthYear {
         jd2 = new JDialog();
         jd2.setLayout(new BorderLayout());
         jd2.setTitle("Please select Month and Year");
-        jd2.setSize(100, 2002);
+        jd2.setSize(300,100);
         jd2.setLocationRelativeTo(null);
 
         //JPanel initialisation
@@ -30,25 +30,25 @@ public class ReportMonthYear {
         //Combo box creation
         month = new JComboBox();
         center.add(month);
-        year.addItem("January");
-        year.addItem("February");
-        year.addItem("March");
-        year.addItem("April");
-        year.addItem("May");
-        year.addItem("June");
-        year.addItem("July");
-        year.addItem("August");
-        year.addItem("September");
-        year.addItem("October");
-        year.addItem("November");
-        year.addItem("December");
-        year.setEditable(true);
-        System.out.println("Week=" + year.getItemCount());
+        month.addItem("January");
+        month.addItem("February");
+        month.addItem("March");
+        month.addItem("April");
+        month.addItem("May");
+        month.addItem("June");
+        month.addItem("July");
+        month.addItem("August");
+        month.addItem("September");
+        month.addItem("October");
+        month.addItem("November");
+        month.addItem("December");
+        month.setEditable(true);
+        System.out.println("Week=" + month.getItemCount());
 
-        year.addActionListener(new ActionListener() {
+        month.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Selected index=" + year.getSelectedIndex()
-                        + " Selected week=" + year.getSelectedItem());
+                System.out.println("Selected index=" + month.getSelectedIndex()
+                        + " Selected week=" + month.getSelectedItem());
             }
         });
 

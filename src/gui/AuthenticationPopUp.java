@@ -2,7 +2,6 @@ package gui;
 
 import database.operations.EmployeeOperations;
 import gui.admin.AdminMain;
-import gui.admin.Soon;
 import gui.report.ReportEmployee;
 import gui.sale.SaleMain;
 import model.Employee;
@@ -11,8 +10,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 /*
 IT Tallaght - 2015, S2
