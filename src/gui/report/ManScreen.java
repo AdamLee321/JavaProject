@@ -78,7 +78,7 @@ public class ManScreen extends JFrame{
         button.add(south, BorderLayout.SOUTH);
 
         //LOGOUT Button
-        logout = new JButton("LOGOUT", new ImageIcon(UIElements.logout64));
+        logout = new JButton("LOGOUT", new ImageIcon(UIElements.logout32));
         logout.setPreferredSize(new Dimension(150,100));
         south.add(logout);
         logout.addActionListener(new ActionListener() {
