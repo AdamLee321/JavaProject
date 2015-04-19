@@ -1,5 +1,7 @@
 package gui.report;
 
+import gui.UIElements;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -48,7 +50,7 @@ public class ManSales extends JFrame{
         south = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         south.setBackground(new Color(98, 169, 221));
         //Print
-        print = new JButton("Print");
+        print = new JButton("Print", new ImageIcon(UIElements.print16));
         south.add(print);
 
 

@@ -51,8 +51,7 @@ public class ManScreen extends JFrame{
         sales.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ev) {
-                new ManSales()
-                ;
+                new ManSales();
             }
         });
 
@@ -62,7 +61,7 @@ public class ManScreen extends JFrame{
         button.add(center, BorderLayout.CENTER);
 
         //REPORTS Button
-        reports = new JButton("REPORTS");
+        reports = new JButton("REPORTS", new ImageIcon(UIElements.report32));
         reports.setPreferredSize(new Dimension(130,100));
         center.add(reports);
         reports.addActionListener(new ActionListener() {
