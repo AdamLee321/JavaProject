@@ -152,7 +152,7 @@ public class ReportEmployee extends JFrame {
         week.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new ReportWeekYear();
+               // new ReportWeekYear();
             }
         });
         //Month Button
@@ -161,7 +161,7 @@ public class ReportEmployee extends JFrame {
         month.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new ReportMonthYear();
+                //new ReportMonthYear();
             }
         });
         //Year Button
@@ -170,7 +170,7 @@ public class ReportEmployee extends JFrame {
         year.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new ReportYear();
+                //new ReportYear();
             }
         });
         north.add(jPanel2, BorderLayout.CENTER);
@@ -211,5 +211,9 @@ public class ReportEmployee extends JFrame {
         re.add(south, BorderLayout.CENTER);
         re.setVisible(true);
 
+    }
+
+    public static void main(String[] args) {
+        ReportEmployee p = new ReportEmployee();
     }
 }

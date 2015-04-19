@@ -1,5 +1,7 @@
 package gui.report;
 
+import gui.UIElements;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,7 +10,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by Adam Lee on 01/04/2015.
  */
-public class ManScreen extends JFrame implements ActionListener{
+public class ManScreen extends JFrame{
 
     private JFrame re;
     private JPanel top, button, north, center, south;
@@ -30,7 +32,7 @@ public class ManScreen extends JFrame implements ActionListener{
         top.setPreferredSize(new Dimension(100,150));
 
         //JLabel for Logo
-        logo = new JLabel("LOGO");
+        logo = new JLabel(new ImageIcon(UIElements.banner));
         top.add(logo);
 
         //BUTTON PANEL
@@ -76,7 +78,7 @@ public class ManScreen extends JFrame implements ActionListener{
         button.add(south, BorderLayout.SOUTH);
 
         //LOGOUT Button
-        logout = new JButton("LOGOUT");
+        logout = new JButton("LOGOUT", new ImageIcon(UIElements.logout64));
         logout.setPreferredSize(new Dimension(150,100));
         south.add(logout);
         logout.addActionListener(new ActionListener() {
@@ -97,11 +99,6 @@ public class ManScreen extends JFrame implements ActionListener{
 
     public static void main(String[] args) {
         ManScreen ma = new ManScreen();
-
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
 
     }
 }
