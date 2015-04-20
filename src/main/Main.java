@@ -6,6 +6,7 @@ import database.operations.EmployeeOperations;
 import gui.PasswordGenerator;
 import gui.StartWindow;
 import gui.admin.AdminMain;
+import gui.report.ManScreen;
 import gui.sale.SaleMain;
 import model.Employee;
 import sun.security.util.Password;
@@ -78,6 +79,7 @@ public class Main {
 
      new SaleMain(x);
      new AdminMain(x);
+      new ManScreen();
 //    new StartWindow();
 
   }

@@ -96,9 +96,4 @@ public class ManScreen extends JFrame{
         re.setVisible(true);
 
     }
-
-    public static void main(String[] args) {
-        ManScreen ma = new ManScreen();
-
-    }
 }

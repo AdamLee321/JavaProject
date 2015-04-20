@@ -2,6 +2,7 @@ package gui;
 
 import database.operations.EmployeeOperations;
 import gui.admin.AdminMain;
+import gui.report.ManScreen;
 import gui.report.ReportEmployee;
 import gui.sale.SaleMain;
 import model.Employee;
@@ -84,7 +85,7 @@ public class AuthenticationPopUp {
                         else if (position.equals("Admin"))
                             new AdminMain(em);
                         else if (position.equals("Manager"))
-                            new ReportEmployee();
+                            new ManScreen();
                         auth.dispose();
                         parent.dispose();
                     }

@@ -6,6 +6,7 @@ import gui.UIPrompts;
 import gui.employee.EmployeeMain;
 import gui.member.MemberMain;
 import gui.product.ProductMain;
+import gui.report.ManScreen;
 import gui.report.ReportEmployee;
 import model.Employee;
 
@@ -276,7 +277,7 @@ public class AdminMain extends JFrame implements ActionListener {
             am.setVisible(true);
         } // Report Menu Item and Button ACTIONS
         else if (e.getSource().equals(miReport) || e.getSource().equals(btnReport)){
-             new ReportEmployee();
+             new ManScreen();
         } // Options Menu Item and Button ACTIONS
         else if (e.getSource().equals(miOptions) || e.getSource().equals(btnOptions)){
             new AdminOptions(AdminMain.this, admin); // can also write AdminMain.this
