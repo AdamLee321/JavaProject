@@ -73,9 +73,9 @@ public class ManSales extends JFrame{
 
         //actual data for the table in a 2d array
         Object[][] data = new Object[][] {
-                {1, "Dell", "adbsau", 40, 249.99, "24-MAR-94", "16:00", "null" , 9999.60, 1 },
-                {2, "Dell", "bdfub" ,40, 249.99, "24-MAR-94", "16:00", "null" , 9999.60, 1 },
-                {3, "Dell", "lkauf",40, 249.99, "24-MAR-94", "16:00", "null" , 9999.60, 1 },
+                {1, "Dell", "zyu87", 40, 249.99, "24-MAR-94", "16:00", "null" , 9999.60, 1 },
+                {2, "Toshiba", "Ba123" ,40, 249.99, "24-MAR-94", "16:00", "null" , 9999.60, 1 },
+                {3, "Samsung", "X001",40, 249.99, "24-MAR-94", "16:00", "null" , 9999.60, 1 },
         };
 
         //create table with data
