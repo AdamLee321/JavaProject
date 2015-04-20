@@ -55,7 +55,7 @@ public class ReportEmployee extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-                dataset.setValue(100, "Month", "Alien");
+                dataset.setValue(100, "Month", "Alien"); //To be changed to use the database
                 dataset.setValue(80, "Month", "Apple");
                 dataset.setValue(40, "Month", "Samsung");
                 dataset.setValue(78, "Month", "Dell");
@@ -63,12 +63,12 @@ public class ReportEmployee extends JFrame {
 
                 JFreeChart chart = ChartFactory.createBarChart("Sales Chart", "Laptop Names", "Sales", dataset, PlotOrientation.VERTICAL, false, true, false);
                 CategoryPlot p = chart.getCategoryPlot();
-                p.setRangeGridlinePaint(Color.BLUE);
-                chart.setBackgroundPaint(new Color(98,169,221));
-                ChartPanel barPanel = new ChartPanel(chart);
-                south.removeAll();
-                south.add(barPanel, BorderLayout.CENTER);
-                south.validate();
+                p.setRangeGridlinePaint(Color.BLUE); //Graph gridline color
+                chart.setBackgroundPaint(new Color(98,169,221)); //Background color for the Graph
+                ChartPanel barPanel = new ChartPanel(chart); //Adds the chart to a Chart panel
+                south.removeAll(); //Removes old chart data
+                south.add(barPanel, BorderLayout.CENTER); //Adds the chart panel to the south panel
+                south.validate(); //Validates each time the buttons clicked
             }
         });
 
