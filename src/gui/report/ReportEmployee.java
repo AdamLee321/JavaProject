@@ -64,6 +64,7 @@ public class ReportEmployee extends JFrame {
                 JFreeChart chart = ChartFactory.createBarChart("Sales Chart", "Laptop Names", "Sales", dataset, PlotOrientation.VERTICAL, false, true, false);
                 CategoryPlot p = chart.getCategoryPlot();
                 p.setRangeGridlinePaint(Color.BLUE);
+                chart.setBackgroundPaint(new Color(98,169,221));
                 ChartPanel barPanel = new ChartPanel(chart);
                 south.removeAll();
                 south.add(barPanel, BorderLayout.CENTER);
@@ -78,15 +79,16 @@ public class ReportEmployee extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-                dataset.setValue(100, "Employee", "John");
-                dataset.setValue(80, "Employee", "Marie");
-                dataset.setValue(40, "Employee", "Eoin");
-                dataset.setValue(78, "Employee", "Lisa");
-                dataset.setValue(20, "Employee", "Brendan");
+                dataset.setValue(11, "Employee", "John");
+                dataset.setValue(90, "Employee", "Marie");
+                dataset.setValue(50, "Employee", "Eoin");
+                dataset.setValue(40, "Employee", "Lisa");
+                dataset.setValue(55, "Employee", "Brendan");
 
                 JFreeChart chart = ChartFactory.createBarChart("Employee Sales", "Employee Names", "Number of Sales", dataset, PlotOrientation.VERTICAL, false, true, false);
                 CategoryPlot p = chart.getCategoryPlot();
                 p.setRangeGridlinePaint(Color.BLUE);
+                chart.setBackgroundPaint(new Color(98,169,221));
                 ChartPanel barPanel = new ChartPanel(chart);
                 south.removeAll();
                 south.add(barPanel, BorderLayout.CENTER);
@@ -102,15 +104,16 @@ public class ReportEmployee extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-                dataset.setValue(100, "Employee", "Fuck");
-                dataset.setValue(80, "Employee", "this");
-                dataset.setValue(40, "Employee", "Project");
-                dataset.setValue(78, "Employee", "George");
-                dataset.setValue(20, "Employee", "David");
+                dataset.setValue(10, "Employee", "Ellen");
+                dataset.setValue(95, "Employee", "Ann");
+                dataset.setValue(22, "Employee", "Pat");
+                dataset.setValue(65, "Employee", "Greg");
+                dataset.setValue(35, "Employee", "Dan");
 
-                JFreeChart chart = ChartFactory.createBarChart("Employee Sales", "DickHeads", "Number of Sales", dataset, PlotOrientation.VERTICAL, false, true, false);
+                JFreeChart chart = ChartFactory.createBarChart("Employee Sales", "Employees", "Number of Sales", dataset, PlotOrientation.VERTICAL, false, true, false);
                 CategoryPlot p = chart.getCategoryPlot();
                 p.setRangeGridlinePaint(Color.BLUE);
+                chart.setBackgroundPaint(new Color(98,169,221));
                 ChartPanel barPanel = new ChartPanel(chart);
                 south.removeAll();
                 south.add(barPanel, BorderLayout.CENTER);
@@ -125,15 +128,16 @@ public class ReportEmployee extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-                dataset.setValue(100, "Employee", "January");
-                dataset.setValue(80, "Employee", "February");
-                dataset.setValue(40, "Employee", "March");
-                dataset.setValue(78, "Employee", "April");
-                dataset.setValue(20, "Employee", "May");
+                dataset.setValue(45, "Employee", "January");
+                dataset.setValue(60, "Employee", "February");
+                dataset.setValue(90, "Employee", "March");
+                dataset.setValue(72, "Employee", "April");
+                dataset.setValue(21, "Employee", "May");
 
                 JFreeChart chart = ChartFactory.createBarChart("New Members Chart", "Months", "New Members", dataset, PlotOrientation.VERTICAL, false, true, false);
                 CategoryPlot p = chart.getCategoryPlot();
                 p.setRangeGridlinePaint(Color.BLUE);
+                chart.setBackgroundPaint(new Color(98,169,221));
                 ChartPanel barPanel = new ChartPanel(chart);
                 south.removeAll();
                 south.add(barPanel, BorderLayout.CENTER);
