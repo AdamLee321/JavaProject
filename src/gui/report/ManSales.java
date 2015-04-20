@@ -25,7 +25,7 @@ public class ManSales extends JFrame{
     public ManSales(){
 
         try {
-            String queryString = "SELECT * FROM sales AND salesdetails";
+            String queryString = "SELECT * FROM sales AND salesdetails"; //Needs the write query EXAMPLE
             stmt = conn.createStatement();
             rset = stmt.executeQuery(queryString);
             System.out.println("Sales JTable");
@@ -79,7 +79,6 @@ public class ManSales extends JFrame{
         };
 
         //create table with data
-
         final JTable table = new JTable(data, columns)
         {
             public boolean isCellEditable(int dataInfo, int columns)
@@ -88,7 +87,7 @@ public class ManSales extends JFrame{
             }
         };
 
-        table.setBackground(new Color(98, 169, 221));
+        table.setBackground(new Color(98, 169, 221)); //Table background color
         //add the table to the frame
         frame.add(new JScrollPane(table));
 
