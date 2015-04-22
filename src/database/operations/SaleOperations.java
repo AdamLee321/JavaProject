@@ -18,18 +18,6 @@ public class SaleOperations {
   PreparedStatement pstmt;
   ResultSet rset;
 
-
-  public ResultSet getEmployees() {
-    try {
-      String sqlQuery = "SELECT * FROM Sale";
-      stmt = ConnectionDB.getConn().createStatement();
-      rset = stmt.executeQuery(sqlQuery);
-    } catch (SQLException e) {
-      System.out.println(e);
-    }
-    return rset;
-  }
-
   public void insertSale(int empId, String date, String time, double discount, double total) {
     try {
       //
@@ -62,6 +50,18 @@ public class SaleOperations {
     }
     return maxId;
   }
+
+  public ResultSet getSales(int empId){
+    String sql = "Select saleId, saleDate, saleTime, saleDiscount, saleAmount FROM Sales WHERE empId = '"+ empId +"'";
+    try {
+      stmt = ConnectionDB.getConn().createStatement();
+      rset = stmt.executeQuery(sql);
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return rset;
+  }
+
 
   }
 

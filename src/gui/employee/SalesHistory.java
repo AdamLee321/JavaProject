@@ -4,13 +4,13 @@ package gui.employee;
 IT Tallaght - 2015, S2
 Computing - Year 2, Project
 Group 17 (George - 22/03/2015)
+David Lawlor
 */
 
 import gui.FormValidator;
-import gui.OrderDetails;
 import gui.UIElements;
-
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -20,8 +20,12 @@ public class SalesHistory extends JDialog implements MouseListener, ActionListen
     private JButton btnSearch, btnBack;
     private JTextField tfSearch;
     private String textFieldTip = "type in the order number...";
+    private JTable saleHistory;
+    private SaleHistoryTableModel tableModel;
 
-    public SalesHistory(){
+
+
+    public SalesHistory(int id){
 
         this.setTitle("Sales History");
         this.setLayout(new BorderLayout()); // tip: border(don't indicate position), grid or gridbag layouts will stretch a component to the whole screen
@@ -51,7 +55,18 @@ public class SalesHistory extends JDialog implements MouseListener, ActionListen
 
 // CENTER
 
-        pnlCenter = new JPanel();
+        tableModel = new SaleHistoryTableModel();
+        saleHistory = new JTable(tableModel);
+        JScrollPane scrollPane = new JScrollPane(saleHistory);
+        scrollPane.setBorder(new BevelBorder(BevelBorder.LOWERED));
+        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+
+        pnlCenter = new JPanel(new GridLayout());
+        pnlCenter.add(scrollPane);
+
+        if (id != -1)
+            tableModel.getSaleList(id);
 
         this.add(pnlCenter, BorderLayout.CENTER);
 
@@ -104,13 +119,13 @@ public class SalesHistory extends JDialog implements MouseListener, ActionListen
             this.dispose();
         }
         else if (e.getSource().equals(btnSearch)){
-            if (FormValidator.isNumber(tfSearch.getText()) && FormValidator.isCorrectLength(tfSearch.getText(),6)){
-                // do action
+            if (FormValidator.isNumber(tfSearch.getText())){
+                tableModel.getSaleList(Integer.parseInt(tfSearch.getText()));
             } else if (tfSearch.getText().equals(textFieldTip)){
                 JOptionPane.showMessageDialog(this,"Please Enter The Order Number","No Order Number",JOptionPane.WARNING_MESSAGE);
             }
             else{
-                JOptionPane.showMessageDialog(this,"Please Enter The Correct Order Number (ex: 101010)","Invalid Number",JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this,"Please Enter The Correct Order Number","Invalid Number",JOptionPane.WARNING_MESSAGE);
             }
         }
     }

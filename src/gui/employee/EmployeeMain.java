@@ -1,14 +1,10 @@
 package gui.employee;
 
 import database.operations.EmployeeOperations;
-import database.operations.ProductOperations;
 import gui.Griddy;
 import gui.UIElements;
 import gui.admin.AdminMain;
-import gui.product.ProductAddEdit;
-import gui.product.ProductTableModel;
 import model.Employee;
-import model.Product;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
@@ -25,6 +21,7 @@ import java.lang.String;
 IT Tallaght - 2015, S2
 Computing - Year 2, Project
 Group 17 (George - 07/03/2015)
+David Lawlor
 */
 
 public class EmployeeMain implements ActionListener, MouseListener {
@@ -34,9 +31,6 @@ public class EmployeeMain implements ActionListener, MouseListener {
     private JTextField searchField;
     private JComboBox empTypes;
     private JPanel northPanel, managePanel, searchPanel, southPanel, centerPanel;
-    private JTable tblEmployee;
-    private JScrollPane tblScroll;
-
     private String textFieldTip = "type your search query...";
 
     private AdminMain am;  // declare for usage with JDialogs as parent
@@ -51,22 +45,14 @@ public class EmployeeMain implements ActionListener, MouseListener {
     String[] eempTypes = {"All", "Sales", "Management"};  // this just a placeholder, real info will be populated from DB
 
     public JPanel getEmployeeMain(){
-
-
     // setup the frame
-
         empMain = new JPanel(new BorderLayout());
-        //empMain.getContentPane().setBackground(new Color(98, 169, 221));
 
-// NORTH PANEL
-
+    // NORTH PANEL
         northPanel = new JPanel(new GridBagLayout());
-        //northPanel.setBackground(new Color(98, 169, 100));
 
     // manage employees panel
-
         managePanel = new JPanel(new FlowLayout());
-        //managePanel.setBackground(new Color(98, 169, 221));
         managePanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Manage Employees")); // set anonymous titled, etched border
 
         addButton = new JButton("Add");
@@ -92,7 +78,6 @@ public class EmployeeMain implements ActionListener, MouseListener {
     // search employees panel
 
         searchPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        //searchPanel.setBackground(new Color(98, 169, 221));
         searchPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Search Employees")); // set anonymous titled, etched border
 
         searchField = new JTextField(19);
@@ -153,7 +138,6 @@ public class EmployeeMain implements ActionListener, MouseListener {
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 
-        //productTableModel.getAllProductsTable();
         refreshList();
         centerPanel.add(scrollPane);
 
@@ -185,8 +169,7 @@ public class EmployeeMain implements ActionListener, MouseListener {
 
     // open the edit window (created a method because it's used in two places - mouse and action listener
     public void displayEdit() {
-        Employee e = eo.getEmployeeOb(selectedRowId);
-        new EmployeeAddEdit(am, 1, this, e);
+        new EmployeeAddEdit(am, 1, this, eo.getEmployeeOb(selectedRowId));
     }
 
 // BUTTON ACTIONS
@@ -216,9 +199,7 @@ public class EmployeeMain implements ActionListener, MouseListener {
             });
         }else if (e.getSource().equals(employees)) {
             selectedRow = employees.getSelectedRow();
-            System.out.println(selectedRow);
             selectedRowId = (Integer) employees.getValueAt(employees.getSelectedRow(), 0);
-            System.out.println(selectedRowId);
             if (e.getClickCount() == 2) {
                 displayEdit();
             }
@@ -228,10 +209,13 @@ public class EmployeeMain implements ActionListener, MouseListener {
     public void actionPerformed(ActionEvent e) {
         // add button
         if (e.getSource().equals(viewSalesButton)){
-            SalesHistory sv = new SalesHistory();
+            if (selectedRow == -1)
+                new SalesHistory(-1);
+            else
+                new SalesHistory(selectedRowId);
         }
         else if (e.getSource().equals(addButton)) {
-            EmployeeAddEdit eae = new EmployeeAddEdit(am,0, this, null);
+            new EmployeeAddEdit(am,0, this, null);
         } // edit button
         else {
             if (selectedRow == -1)
