@@ -100,19 +100,19 @@ public class OrderHistoryTableModel extends DefaultTableModel {
         OrderHistoryTableModel row = (OrderHistoryTableModel) pHistoryRows.get(rowNum);//casting a product from the object arraylist to a row type
         switch (colNum) {
             case id:
-                return row.getSaleid();
+                return row.saleid;
             case saleDate:
-                return row.getDate();
+                return row.date;
             case make:
-                return row.getProdMake();
+                return row.prodMake;
             case model:
-                return row.getProdModel();
+                return row.prodModel;
             case qty:
-                return row.getQuantity();
+                return row.quantity;
             case itemPrice:
-                return row.getSalePrice();
+                return row.salePrice;
             case totalPaid:
-                return row.getTotalPrice();
+                return row.totalPrice;
             default:
                 return "";
         }
@@ -153,35 +153,5 @@ public class OrderHistoryTableModel extends DefaultTableModel {
 
     public int getRowCount() {
         return pHistoryRows.size();
-    }
-
-// MODEL GETTERS
-
-    public int getSaleid() {
-        return this.saleid;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public String getProdMake() {
-        return prodMake;
-    }
-
-    public String getProdModel() {
-        return prodModel;
-    }
-
-    public double getSalePrice() {
-        return salePrice;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public double getTotalPrice() {
-        return totalPrice;
     }
 }

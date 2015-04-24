@@ -99,17 +99,17 @@ public class PurchaseHistoryTableModel extends DefaultTableModel {
         PurchaseHistoryTableModel row = (PurchaseHistoryTableModel) pHistoryRows.get(rowNum);//casting a product from the object arraylist to a row type
         switch (colNum) {
             case id:
-                return row.getSaleId();
+                return row.saleId;
             case time:
-                return row.getSaleTime();
+                return row.saleTime;
             case date:
-                return row.getSaleDate();
+                return row.saleDate;
             case empN:
-                return row.getEmpName();
+                return row.empName;
             case memN:
-                return row.getMemName();
+                return row.memName;
             case qty:
-                return row.getQuantity();
+                return row.quantity;
             default:
                 return "";
         }
@@ -143,26 +143,5 @@ public class PurchaseHistoryTableModel extends DefaultTableModel {
     }
     public int getRowCount() {
         return pHistoryRows.size();
-    }
-
-// MODEL GETTERS
-
-    public int getSaleId() {
-        return saleId;
-    }
-    public String getSaleTime() {
-        return saleTime;
-    }
-    public Date getSaleDate() {
-        return saleDate;
-    }
-    public String getEmpName() {
-        return empName;
-    }
-    public String getMemName() {
-        return memName;
-    }
-    public int getQuantity(){
-        return quantity;
     }
 }
