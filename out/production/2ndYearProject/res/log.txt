@@ -4,3 +4,9 @@ ID:	1
 Logout	23:43:23 19-Apr-2015
 Sales	€.00
 
+Login	13:23:04 24-Apr-2015
+Name:	Ermac Ward
+ID:	1
+Logout	13:23:12 24-Apr-2015
+Sales	€.00
+
