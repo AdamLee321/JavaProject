@@ -6,11 +6,9 @@ Computing - Year 2, Project
 Group 17 (George - 30/03/2015)
 */
 
-import database.create.CreateSales;
 import gui.Griddy;
 import gui.UIElements;
 import gui.ccValidation;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -84,10 +82,10 @@ public class CreditCard extends JDialog implements ActionListener {
         lblExpiration = new JLabel("Expiration Date");
         pnlMain.add(lblExpiration, Griddy.getConstraints(0,4,1,1,0,0,0,0,5,5,5,5,0,GridBagConstraints.WEST));
 
-        cbMonth = new JComboBox(new DefaultComboBoxModel<String>(months));
+        cbMonth = new JComboBox(new DefaultComboBoxModel<>(months));
         pnlMain.add(cbMonth, Griddy.getConstraints(1,4,1,1,0,0,0,0,5,5,0,0,0,GridBagConstraints.WEST));
 
-        cbYear = new JComboBox(new DefaultComboBoxModel<String>(years));
+        cbYear = new JComboBox(new DefaultComboBoxModel<>(years));
         pnlMain.add(cbYear, Griddy.getConstraints(2,4,1,1,0,0,0,0,5,0,0,0,0,GridBagConstraints.WEST));
 
         this.add(pnlMain, BorderLayout.CENTER);

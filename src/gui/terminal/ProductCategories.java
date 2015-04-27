@@ -73,7 +73,7 @@ public class ProductCategories implements ActionListener {
         }
         else if(e.getSource().equals(allInOne)){
             category = allInOne.getText();
-        };
+        }
         TerminalMode.mf.setToProductResults(category, 1);
     }
 }

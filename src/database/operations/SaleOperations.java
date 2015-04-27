@@ -6,7 +6,6 @@ package database.operations;/*2ndYearProject
 */
 
 import database.ConnectionDB;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -46,7 +45,7 @@ public class SaleOperations {
         maxId = rset.getInt(1);
       }
     } catch (SQLException e) {
-      System.out.println(e);
+      System.out.println(e.getMessage());
     }
     return maxId;
   }

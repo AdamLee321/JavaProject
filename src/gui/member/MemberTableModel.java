@@ -10,7 +10,6 @@ import database.operations.MemberOperations;
 
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
-import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -20,13 +19,13 @@ import java.util.ArrayList;
 
 public class MemberTableModel extends DefaultTableModel {
 
-    final static int id = 0;
-    final static int fname = 1;
-    final static int lname = 2;
-    final static int street = 3;
-    final static int city = 4;
-    final static int county = 5;
-    final static int email = 6;
+    final static int ID = 0;
+    final static int FNAME = 1;
+    final static int LNAME = 2;
+    final static int STREET = 3;
+    final static int CITY = 4;
+    final static int COUNTY = 5;
+    final static int EMAIL = 6;
     final static String[] columnNames = {"ID", "Name", "Surname", "Street", "City", "County", "E-mail"};
 
     DefaultTableColumnModel columnModel = new DefaultTableColumnModel();
@@ -76,19 +75,19 @@ public class MemberTableModel extends DefaultTableModel {
     public Object getValueAt(int rowNum, int colNum) {
         MemberRow row = (MemberRow)memberRows.get(rowNum);//casting a product from the object arraylist to a row type
         switch (colNum) {
-            case id:
+            case ID:
                 return row.getMemberId();
-            case fname:
+            case FNAME:
                 return row.getMemberFName();
-            case lname:
+            case LNAME:
                 return row.getMemberLName();
-            case street:
+            case STREET:
                 return row.getMemberStreet();
-            case city:
+            case CITY:
                 return row.getMemberCity();
-            case county:
+            case COUNTY:
                 return row.getMemberCounty();
-            case email:
+            case EMAIL:
                 return row.getMemberEmail();
             default:
                 return "";

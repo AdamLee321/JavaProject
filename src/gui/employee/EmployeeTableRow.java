@@ -1,9 +1,8 @@
 package gui.employee;
 
-import model.Employee;
-
 /**
  * Created by DL on 05/04/2015.
+ *
  */
 public class EmployeeTableRow {
 

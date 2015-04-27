@@ -26,14 +26,16 @@ public class CreateSales {
                 stmt.execute("DROP SEQUENCE saleSeq");
                 System.out.println("Sales sequence dropped successfully");
             } catch (SQLException e) {
+                System.out.println(e.getMessage());
             }
             try {
                 stmt.execute("DROP TABLE sales");
                 System.out.println("Sales table dropped successfully\n");
             } catch (SQLException e) {
+                System.out.println(e.getMessage());
             }
         } catch (SQLException e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
     }
 
@@ -54,7 +56,7 @@ public class CreateSales {
             System.out.println("Sales table created successfully");
             stmt.execute(sqlTable);
         } catch (SQLException e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
         try {
             // create sales id sequence
@@ -62,7 +64,7 @@ public class CreateSales {
             stmt.execute(sqlSequence);
             System.out.println("Sales sequence created successfully\n");
         } catch (SQLException e){
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
         try {
             //
@@ -119,7 +121,6 @@ public class CreateSales {
             pstmt.setDouble(5, 1399.99);
             pstmt.execute();
 
-
             pstmt.setInt(1,7);
             pstmt.setString(2, "16-FEB-2015");
             pstmt.setString(3, "NULL");
@@ -141,10 +142,8 @@ public class CreateSales {
             pstmt.setDouble(5, 529.99);
             pstmt.execute();
 
-
-
         } catch (SQLException e){
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
     }
 }

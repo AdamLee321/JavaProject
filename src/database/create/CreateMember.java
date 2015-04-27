@@ -284,7 +284,7 @@ public class CreateMember {
             pstmt.execute();
 
         } catch (SQLException e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
     }
     public FileInputStream savePic2DB(File pic) {
@@ -292,7 +292,7 @@ public class CreateMember {
         try {
             in = new FileInputStream(pic);
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
         return in;
     }

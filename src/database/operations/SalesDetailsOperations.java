@@ -6,7 +6,6 @@ package database.operations;/*2ndYearProject
 */
 
 import database.ConnectionDB;
-
 import javax.swing.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

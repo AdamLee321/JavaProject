@@ -28,14 +28,16 @@ public class CreateEmployee {
                 stmt.execute("DROP SEQUENCE empSeq");
                 System.out.println("Employee sequence dropped successfully");
             } catch (SQLException e) {
+                System.out.println(e.getMessage());
             }
             try {
                 stmt.execute("DROP TABLE employee");
                 System.out.println("Employee table dropped successfully\n");
             } catch (SQLException e) {
+                System.out.println(e.getMessage());
             }
         } catch (SQLException e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
     }
 
@@ -66,7 +68,7 @@ public class CreateEmployee {
             System.out.println("Employee table created successfully");
             stmt.execute(sqlTable);
         } catch (SQLException e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
         try {
             // create employee id sequence
@@ -74,7 +76,7 @@ public class CreateEmployee {
             stmt.execute(sqlSequence);
             System.out.println("Employee sequence created successfully\n");
         } catch (SQLException e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
         try {
             String sqlData = "INSERT INTO employee (empId, deptId, empFName, empLName, position, empStreet, empCity, empCounty, empDOBd, empDOBm, empDOBy, empEmail, salary, empPic, empUsername, empPassword)" +
@@ -423,7 +425,7 @@ public class CreateEmployee {
             pstmt.execute();
 
         } catch (SQLException e) {
-        System.out.println(e);
+        System.out.println(e.getMessage());
         }
     }
 
@@ -433,7 +435,7 @@ public class CreateEmployee {
         try {
             in = new FileInputStream(pic);
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
         return in;
     }

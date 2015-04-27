@@ -35,7 +35,7 @@ public class ProductMain implements ActionListener, MouseListener {
 
     private JTable products;
     private ProductTableModel productTableModel;
-    ProductOperations po;
+    private ProductOperations po;
     private int selectedRow = -1;
     private int selectedRowId = 0;
 
@@ -98,9 +98,9 @@ public class ProductMain implements ActionListener, MouseListener {
         // buttom panel containing comboboxes for information filtering
         searchBottomPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         //searchBottomPanel.setBackground(new Color(98, 169, 221));
-        prodTypes = new JComboBox(new DefaultComboBoxModel<String>(prodTypess));
-        brandTypes = new JComboBox(new DefaultComboBoxModel<String>(brandTypess));
-        modelTypes = new JComboBox(new DefaultComboBoxModel<String>(modelTypess));
+        prodTypes = new JComboBox(new DefaultComboBoxModel<>(prodTypess));
+        brandTypes = new JComboBox(new DefaultComboBoxModel<>(brandTypess));
+        modelTypes = new JComboBox(new DefaultComboBoxModel<>(modelTypess));
 
         // add bottom panel to search panel
         searchBottomPanel.add(prodTypes);

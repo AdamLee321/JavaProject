@@ -42,7 +42,7 @@ public class OrderHistoryTableModel extends DefaultTableModel {
     DefaultTableColumnModel columnModel = new DefaultTableColumnModel();
 
     // array for objects that Model fills into
-    private static ArrayList<Object> pHistoryRows = new ArrayList();
+    private static ArrayList<Object> pHistoryRows = new ArrayList<>();
 
     public OrderHistoryTableModel() {
         TableColumn col;
@@ -132,10 +132,6 @@ public class OrderHistoryTableModel extends DefaultTableModel {
                 pHistoryRows.remove(i - 1);
             }
         }
-    }
-
-    public ArrayList<Object> getArray() {
-        return pHistoryRows;
     }
 
     // don't allow editing cells when double clicked

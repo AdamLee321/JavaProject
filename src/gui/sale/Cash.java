@@ -9,7 +9,6 @@ David
 
 import gui.FormValidator;
 import gui.UIElements;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -63,10 +62,6 @@ public class Cash extends JDialog implements ActionListener {
         this.sm = sm;
 
         this.setVisible(true);
-    }
-
-    public double getAmount() {
-        return Double.parseDouble(tfCash.getText());
     }
 
 // BUTTON ACTIONS

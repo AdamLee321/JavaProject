@@ -198,7 +198,7 @@ public class TerminalMode extends JFrame implements ActionListener {
     try{
       centerPanel = pr.getResults(category, "");
     }catch(SQLException se){
-      System.out.println(se);
+      System.out.println(se.getMessage());
     }
 
     southPanel = getFullSouthPanel();
@@ -217,9 +217,8 @@ public class TerminalMode extends JFrame implements ActionListener {
     try{
       centerPanel = pr.getResults(category, keyword);
     }catch(SQLException se){
-      System.out.println(se);
+      System.out.println(se.getMessage());
     }
-
     southPanel = getFullSouthPanel();
     changePanels(centerPanel, southPanel);
   }

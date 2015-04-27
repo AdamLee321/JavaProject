@@ -14,7 +14,6 @@ import gui.Griddy;
 import gui.UIElements;
 import gui.admin.AdminMain;
 import model.Product;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

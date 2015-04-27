@@ -7,11 +7,11 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
  * Created by DL on 04/04/2015.
+ *
  */
 public class EmployeeTableModel extends DefaultTableModel{
     final static int ID = 0;
@@ -30,15 +30,9 @@ public class EmployeeTableModel extends DefaultTableModel{
     final static String[] columnNames = {"ID", "Forename", "Surname", "Position", "Department", "Street",
             "City", "County", "Date of Birth", "Email"};
 
-    private static ArrayList<Object> employeeTableRows = new ArrayList();
-
-    public ArrayList<Object> getList(){
-        return employeeTableRows;
-    }
+    private static ArrayList<Object> employeeTableRows = new ArrayList<>();
 
     DefaultTableColumnModel columnModel = new DefaultTableColumnModel();
-
-    DecimalFormat decimalFormat = new DecimalFormat("€###,###.00");
 
     public EmployeeTableModel() {
         TableColumn col;

@@ -5,7 +5,7 @@ IT Tallaght - 2015, S2
 Computing - Year 2, Project
 Group 17 (George - 03/04/2015)
 */
-
+//commented out methods left for future reference
 import database.ConnectionDB;
 import model.Member;
 import javax.swing.*;

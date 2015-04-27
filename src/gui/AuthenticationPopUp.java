@@ -3,10 +3,8 @@ package gui;
 import database.operations.EmployeeOperations;
 import gui.admin.AdminMain;
 import gui.report.ManScreen;
-import gui.report.ReportEmployee;
 import gui.sale.SaleMain;
 import model.Employee;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

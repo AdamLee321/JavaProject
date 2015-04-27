@@ -1,7 +1,6 @@
 package gui.terminal;
 
 import gui.UIElements;
-
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import java.awt.*;

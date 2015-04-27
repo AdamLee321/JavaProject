@@ -19,7 +19,6 @@ public class DateGenerator {
     public String[] getMonthDays(int monthIn, int yearIn){
 
         int numDays = 0;
-        int counter = 0;
 
         switch (monthIn) {
             case 1: case 3: case 5:

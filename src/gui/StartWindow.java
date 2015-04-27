@@ -7,7 +7,6 @@ package gui;
 
 import database.operations.ProductOperations;
 import gui.terminal.TerminalMode;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

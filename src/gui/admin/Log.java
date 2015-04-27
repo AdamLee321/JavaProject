@@ -9,11 +9,7 @@ Group 17 (George - 05/04/2015)
 import gui.DataProcessor;
 import gui.FormValidator;
 import gui.UIElements;
-
 import javax.print.*;
-import javax.print.attribute.AttributeSet;
-import javax.print.attribute.HashAttributeSet;
-import javax.print.attribute.standard.PrinterName;
 import javax.print.event.PrintJobAdapter;
 import javax.print.event.PrintJobEvent;
 import javax.swing.*;

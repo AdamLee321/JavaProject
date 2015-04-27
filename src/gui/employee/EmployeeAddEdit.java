@@ -3,11 +3,7 @@ package gui.employee;
 import database.operations.DepartmentOperations;
 import database.operations.EmployeeOperations;
 import gui.*;
-import gui.admin.AdminMain;
-import gui.product.ProductMain;
 import model.Employee;
-import model.Product;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -25,15 +21,14 @@ public class EmployeeAddEdit implements ActionListener {
 
     private JDialog employeeAdd;
     private JPanel picturePanel, pictureButtonsPanel, detailsPanel, buttonsPanel;
-    private JLabel profilePictureLabel, empIdLabel, empFNameLabel, empLNameLabel, empStreetLabel, empCityLabel, empCountyLabel, empDOB, empEmailLabel, empUsernameLabel, empPasswordLabel, empPositionLabel, empSalaryLabel, empDeptLabel;
-    private JTextField empIdField, empFNameField, empLNameField, empStreetField, empCityField, empCountyField, empEmailField, empUsernameField, empPasswordField, empPositionField, empSalaryField, empDeptField;
-    private JComboBox<String> birthDayCBox, birthMonthCBox, birthYearCBox;;
-    private JButton addButton, removeButton, cancelButton, previewButton, okButton, passGenButton, usernameGenButton;
+    private JLabel profilePictureLabel, empFNameLabel, empLNameLabel, empStreetLabel, empCityLabel, empCountyLabel, empDOB, empEmailLabel, empUsernameLabel, empPasswordLabel, empPositionLabel, empSalaryLabel, empDeptLabel;
+    private JTextField empFNameField, empLNameField, empStreetField, empCityField, empCountyField, empEmailField, empUsernameField, empPasswordField, empPositionField, empSalaryField, empDeptField;
+    private JComboBox<String> birthDayCBox, birthMonthCBox, birthYearCBox;
+    private JButton addButton, removeButton, cancelButton, okButton, passGenButton, usernameGenButton;
     private File fImg;
     private JFileChooser fc;
     private DateGenerator dg;
     private int dayBefore;
-    private AdminMain am;  // used for JDialogs as parent
 
     private EmployeeOperations eo;
     private int open = 1;
@@ -118,17 +113,17 @@ public class EmployeeAddEdit implements ActionListener {
         empDOB = new JLabel("Date Of Birth");
         detailsPanel.add(empDOB, Griddy.getConstraints(0,3,1,1,0,0,0,0,5,15,5,5,0,GridBagConstraints.WEST));
 
-        birthYearCBox = new JComboBox<String>(new DefaultComboBoxModel<String>(dg.getPastCentury()));
+        birthYearCBox = new JComboBox<>(new DefaultComboBoxModel<>(dg.getPastCentury()));
         // can either directly pass the parameters as displayed above, or do separately as displayed below
         // birthYearCBox = new JComboBox<String>()
         // birthYearCBox.setModel(new DefaultComboBoxModel<String>(dg.getPastCentury()));
         birthYearCBox.addActionListener(this);
 
-        birthMonthCBox = new JComboBox<String>(new DefaultComboBoxModel<String>(dg.getMonths()));
+        birthMonthCBox = new JComboBox<>(new DefaultComboBoxModel<>(dg.getMonths()));
         birthMonthCBox.setEnabled(false);
         birthMonthCBox.addActionListener(this);
 
-        birthDayCBox = new JComboBox<String>(dg.getMonthDays(birthMonthCBox.getSelectedIndex() + 1, Integer.parseInt(birthYearCBox.getSelectedItem().toString())));
+        birthDayCBox = new JComboBox<>(dg.getMonthDays(birthMonthCBox.getSelectedIndex() + 1, Integer.parseInt(birthYearCBox.getSelectedItem().toString())));
         birthDayCBox.setEnabled(false);
 
             // add day, month, year comboboxes to details panel
@@ -253,13 +248,13 @@ public class EmployeeAddEdit implements ActionListener {
     public void actionPerformed(ActionEvent e){ // the two methods below set the correct day, based on year and month, both month and year comboboxes set correct days. "dayBefore" is to remember what day was set before and set it again, otherwise it resets to 1 ... ex, Person A, birthday 4th, this way when selecting month,year, it stays at 4th, without beforeDay, day combobox would reset to 1 because month and year combobox trigger it
         if (e.getSource().equals(birthYearCBox)){
             dayBefore = birthDayCBox.getSelectedIndex();
-            birthDayCBox.setModel(new DefaultComboBoxModel<String>(dg.getMonthDays(birthMonthCBox.getSelectedIndex() + 1, Integer.parseInt(birthYearCBox.getSelectedItem().toString()))));
+            birthDayCBox.setModel(new DefaultComboBoxModel<>(dg.getMonthDays(birthMonthCBox.getSelectedIndex() + 1, Integer.parseInt(birthYearCBox.getSelectedItem().toString()))));
             birthDayCBox.setSelectedIndex(dayBefore);
             birthMonthCBox.setEnabled(true);
         }
         else if (e.getSource().equals(birthMonthCBox)){
             dayBefore = birthDayCBox.getSelectedIndex();
-            birthDayCBox.setModel(new DefaultComboBoxModel<String>(dg.getMonthDays(birthMonthCBox.getSelectedIndex() + 1, Integer.parseInt(birthYearCBox.getSelectedItem().toString()))));
+            birthDayCBox.setModel(new DefaultComboBoxModel<>(dg.getMonthDays(birthMonthCBox.getSelectedIndex() + 1, Integer.parseInt(birthYearCBox.getSelectedItem().toString()))));
             birthDayCBox.setSelectedIndex(dayBefore);
             birthDayCBox.setEnabled(true);
         }

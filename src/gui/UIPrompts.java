@@ -8,7 +8,6 @@ Group 17 (George - 10/03/2015)
 
 import database.ConnectionDB;
 import gui.admin.AdminMain;
-
 import javax.swing.*;
 
 public class UIPrompts {

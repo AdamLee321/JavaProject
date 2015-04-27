@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 /**
  * Created by DL on 04/04/2015.
+ *
  */
 public class ProductTableModel extends DefaultTableModel{
     final static int ID = 0;
@@ -24,11 +25,7 @@ public class ProductTableModel extends DefaultTableModel{
 
     final static String[] columnNames = {"Product ID", "Make", "Model", "Cost Price", "Sale Price", "Quantity", "Product Type"};
 
-    private static ArrayList<Object> adminProductRows = new ArrayList();
-
-    public static ArrayList<Object> getList(){
-        return adminProductRows;
-    }
+    private static ArrayList<Object> adminProductRows = new ArrayList<>();
 
     DefaultTableColumnModel columnModel = new DefaultTableColumnModel();
 

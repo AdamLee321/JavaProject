@@ -59,15 +59,15 @@ public class PasswordGenerator {
     }
 
     public static String hashPassword(String password){
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         try{
             MessageDigest md = MessageDigest.getInstance("MD5");
             md.update(password.getBytes());
 
             byte byteData[] = md.digest();
 
-            for (int i = 0; i < byteData.length; i++) {
-                sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+            for (byte aByteData : byteData) {
+                sb.append(Integer.toString((aByteData & 0xff) + 0x100, 16).substring(1));
             }
         }catch(NoSuchAlgorithmException nsa){
             System.out.println("The algorithm does not exist");

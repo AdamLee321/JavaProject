@@ -11,7 +11,9 @@ import java.util.ArrayList;
 
 /**
  * Created by DL on 08/03/2015.
+ *
  */
+//commented out methods left for future reference
 public class ProductOperations {
     Connection conn;
     Statement stmt;
@@ -23,7 +25,7 @@ public class ProductOperations {
     }
 
     public ResultSet searchProducts(String keyword, String category){
-        String sql = " ";
+        String sql;
         if (category.equals("All")){
             sql = "SELECT prodId, prodMake, prodModel, prodSalePrice, prodCostPrice, prodQTY,prodType, cpu, ram, OperatingSystem, storage, screen, prodDesc" +
                     "FROM PRODUCT" +
@@ -49,7 +51,7 @@ public class ProductOperations {
     }
 
     public ResultSet productCategory(String category){
-        String sql = new String();
+        String sql;
         if (category.equals("All")){
             sql = "SELECT prodId, prodMake, prodModel, prodSalePrice, prodCostPrice, prodQTY, prodPic," +
                     "prodType, cpu, ram, OperatingSystem, storage, screen, prodDesc FROM PRODUCT";
@@ -80,7 +82,7 @@ public class ProductOperations {
     }
 
     public ArrayList<Product> allProductsArray(){
-        ArrayList<Product> p = new ArrayList<Product>();
+        ArrayList<Product> p = new ArrayList<>();
         String sql = "SELECT prodId, prodMake, prodModel, prodSalePrice, prodCostPrice, prodQTY," +
                 "prodPic, prodType, cpu, ram, OperatingSystem, storage, screen, prodDesc FROM PRODUCT";
         try{
@@ -117,44 +119,44 @@ public class ProductOperations {
         return p;
     }
 
-    public ResultSet productByIDR(int id){
-        String sql = "SELECT prodId, prodMake, prodModel, prodSalePrice FROM PRODUCT WHERE prodId = '"+id+"'";
-        try{
-            stmt = conn.createStatement();
-            rset = stmt.executeQuery(sql);
-        }catch(SQLException sqlE){
-            System.out.println("Error in ResultSet to product Conversion");
-        }
-        return rset;
-    }
+//    public ResultSet productByIDR(int id){
+//        String sql = "SELECT prodId, prodMake, prodModel, prodSalePrice FROM PRODUCT WHERE prodId = '"+id+"'";
+//        try{
+//            stmt = conn.createStatement();
+//            rset = stmt.executeQuery(sql);
+//        }catch(SQLException sqlE){
+//            System.out.println("Error in ResultSet to product Conversion");
+//        }
+//        return rset;
+//    }
 
-    public int checkQuantity(int id){
-        int quantityInStock = 0;
-        String sql = "SELECT prodQty FROM product WHERE prodId = '"+id+"'";
-        try{
-            stmt = conn.createStatement();
-            rset = stmt.executeQuery(sql);
-            while (rset.next())
-                quantityInStock = rset.getInt(1);
-        }catch (SQLException sqlE){
-            System.out.println(sqlE.getMessage());
-        }
-        return quantityInStock;
-    }
-
-    public boolean checkProduct(int id){
-        boolean x = true;
-        String sql = "SELECT * FROM product WHERE prodId = '"+id+"'";
-        try{
-            stmt = conn.createStatement();
-            rset = stmt.executeQuery(sql);
-            if(!rset.next())
-                x = false;
-        }catch (SQLException sqlE){
-            System.out.println(sqlE.getMessage());
-        }
-        return x;
-    }
+//    public int checkQuantity(int id){
+//        int quantityInStock = 0;
+//        String sql = "SELECT prodQty FROM product WHERE prodId = '"+id+"'";
+//        try{
+//            stmt = conn.createStatement();
+//            rset = stmt.executeQuery(sql);
+//            while (rset.next())
+//                quantityInStock = rset.getInt(1);
+//        }catch (SQLException sqlE){
+//            System.out.println(sqlE.getMessage());
+//        }
+//        return quantityInStock;
+//    }
+//
+//    public boolean checkProduct(int id){
+//        boolean x = true;
+//        String sql = "SELECT * FROM product WHERE prodId = '"+id+"'";
+//        try{
+//            stmt = conn.createStatement();
+//            rset = stmt.executeQuery(sql);
+//            if(!rset.next())
+//                x = false;
+//        }catch (SQLException sqlE){
+//            System.out.println(sqlE.getMessage());
+//        }
+//        return x;
+//    }
 
     public void addProduct(String make, String model, double salePrice, double costPrice, int qty, File prodPic,
                            String prodType, String cpu, String ram, String os, String storage, String screen,
@@ -258,7 +260,7 @@ public class ProductOperations {
         try {
             in = new FileInputStream(pic);
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
         return in;
     }

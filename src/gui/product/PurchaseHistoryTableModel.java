@@ -6,9 +6,7 @@ Computing - Year 2, Project
 Group 17 (George - 09/04/2015)
 */
 
-import database.operations.MemberOperations;
 import database.operations.ProductOperations;
-
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableColumnModel;
@@ -16,7 +14,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -43,7 +40,7 @@ public class PurchaseHistoryTableModel extends DefaultTableModel {
     DefaultTableColumnModel columnModel = new DefaultTableColumnModel();
 
     // array for objects
-    private static ArrayList<Object> pHistoryRows = new ArrayList();
+    private static ArrayList<Object> pHistoryRows = new ArrayList<>();
 
     public PurchaseHistoryTableModel() {
         TableColumn col;
@@ -127,9 +124,6 @@ public class PurchaseHistoryTableModel extends DefaultTableModel {
                 pHistoryRows.remove(i - 1);
             }
         }
-    }
-    public ArrayList<Object> getArray() {
-        return pHistoryRows;
     }
     // don't allow editing cells when double clicked
     public boolean isCellEditable(int row, int column) {

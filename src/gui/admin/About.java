@@ -7,9 +7,7 @@ Group 17 (George - 17/03/2015)
 */
 
 import gui.DataProcessor;
-import gui.Griddy;
 import gui.UIElements;
-
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;

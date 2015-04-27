@@ -17,8 +17,6 @@ public class Department {
     private int deptId;
     private String deptName;
     private ArrayList<Employee> empList;
-    private ConnectionDB conn;
-    private EmployeeOperations eo;
 
 // overloaded constructor
     public Department(String deptNameIn){  // also pass database sequence id
@@ -26,7 +24,6 @@ public class Department {
         deptId = 0; // sequence in
         deptName = deptNameIn;
         empList = new ArrayList<Employee>();
-        conn.getConn();
     }
 
     // get department id

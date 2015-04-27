@@ -26,9 +26,10 @@ public class CreateSalesDetails {
                 stmt.execute("DROP TABLE salesdetails");
                 System.out.println("\nSalesDetails table dropped successfully\n");
             } catch (SQLException e) {
+                System.out.println(e.getMessage());
             }
         } catch (SQLException e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
     }
 
@@ -47,7 +48,7 @@ public class CreateSalesDetails {
                     "FOREIGN KEY (memberId) REFERENCES member (memberId)ON DELETE SET NULL)");
             System.out.println("SalesDetails table created successfully");
         } catch (SQLException e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
         try {
             // insert data into salesdetails
@@ -73,7 +74,7 @@ public class CreateSalesDetails {
             pstmt.execute();
 
         } catch (SQLException e){
-            System.out.println(e);
+            System.out.println(e.getMessage());
             JOptionPane.showMessageDialog(null,e,"Error",JOptionPane.ERROR_MESSAGE);
         }
     }

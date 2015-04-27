@@ -42,10 +42,6 @@ public class MemberRow {
     public String getMemberStreet() { return memberStreet; }
     public String getMemberCity() { return memberCity; }
     public String getMemberCounty() { return memberCounty; }
-    public String getDobd() { return dobd; }
-    public String getDobm() { return dobm; }
-    public String getDoby() { return doby; }
     public String getMemberEmail() { return memberEmail; }
-    public String getMemberNumber() { return memberNumber; }
-    public int getMemberPoints() { return memberPoints; }
+
 }

@@ -15,8 +15,8 @@ public class TerminalProductTableRow {
 
     public TerminalProductTableRow() {
         this.productID = 0;
-        this.make = new String();
-        this.model = new String();
+        this.make = "";
+        this.model = "";
         this.price = 0;
         this.quantity = 0;
     }

@@ -1,20 +1,13 @@
 package database.create;
 
-
 import java.sql.SQLException;
-
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.sql.Statement;
 
-import java.sql.*;
-import oracle.jdbc.pool.OracleDataSource;
-
-
 /**
- * Created by DL on 02/03/2015.
+ * Created by David Lawlor on 02/03/2015.
+ *
  */
 
 public class CreateShopDepartment {
@@ -23,11 +16,9 @@ public class CreateShopDepartment {
     private PreparedStatement pstmt;
     private Statement stmt;
 
-
     public CreateShopDepartment(Connection connIn) {
         conn = connIn;
     }
-
 
     public void dropShopDepartmentTable() {
         try {
@@ -83,4 +74,5 @@ public class CreateShopDepartment {
         } catch (SQLException sqlE) {
             System.out.println("Error creating ShopDepartment table");
         }
-    }}
+    }
+}

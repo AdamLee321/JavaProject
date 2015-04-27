@@ -46,10 +46,6 @@ public class UIElements {
     public final static String logout32 = "src/res/images/UI Elements/logout32.png";
     public final static String cashreg32 = "src/res/images/UI Elements/cashreg32.png";
 
-
-    // 64 pixel icons
-    public final static String person64 = "src/res/images/UI Elements/person64.png";
-
     // 128 pixel icons
     public final static String person128 = "src/res/images/UI Elements/person128.png";
     public final static String product128 = "src/res/images/UI Elements/product128.png";

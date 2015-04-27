@@ -8,16 +8,11 @@ Group 17 (George - 22/03/2015)
 */
 
 import gui.FormValidator;
-import gui.OrderDetails;
 import gui.UIElements;
-import gui.admin.AdminMain;
-import gui.member.OrderHistoryTableModel;
-
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.EventListener;
 
 public class PurchaseHistory extends JDialog implements MouseListener, ActionListener, KeyListener {
 

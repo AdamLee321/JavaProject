@@ -912,7 +912,7 @@ public class CreateProduct {
         try {
             in = new FileInputStream(pic);
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
         return in;
     }

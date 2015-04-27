@@ -24,7 +24,7 @@ public class ProductTableModel extends DefaultTableModel {
     final static int quantity = 4;
     final static String[] columnNames = {"Product ID", "Make", "Model", "Price €", "Quantity"};
 
-    private static ArrayList<Object> productRows = new ArrayList();
+    private static ArrayList<Object> productRows = new ArrayList<>();
 
     DefaultTableColumnModel columnModel = new DefaultTableColumnModel();
 

@@ -22,15 +22,13 @@ public class EmployeeOperations {
     PreparedStatement pstmt;
     ResultSet rset;
 
-    ConnectionDB conn;
-
     public ResultSet getEmployees(){
         try {
             String sqlQuery = "SELECT * FROM employee";
             stmt = ConnectionDB.getConn().createStatement();
             rset = stmt.executeQuery(sqlQuery);
         } catch(SQLException e){
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
         return rset;
     }
@@ -110,7 +108,7 @@ public class EmployeeOperations {
             System.out.println("Update Successful");
         }
         catch (SQLException sqlE){
-            System.out.println(sqlE);
+            System.out.println(sqlE.getMessage());
         }
     }
 
@@ -128,7 +126,7 @@ public class EmployeeOperations {
             System.out.println("alright!");
         }
         catch (SQLException sqlE){
-            System.out.println(sqlE);
+            System.out.println(sqlE.getMessage());
         }
     }
 
@@ -159,7 +157,7 @@ public class EmployeeOperations {
             System.out.println("Insert Successful");
         }
         catch (SQLException sqlE){
-            System.out.println(sqlE);
+            System.out.println(sqlE.getMessage());
         }
     }
 
@@ -193,7 +191,7 @@ public class EmployeeOperations {
         try {
             in = new FileInputStream(pic);
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
         return in;
     }

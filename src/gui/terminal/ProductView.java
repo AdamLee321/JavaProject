@@ -87,7 +87,7 @@ public class ProductView {
         try {
             productPicture = new JLabel(new ImageIcon(DataProcessor.fitImageByte(p.getProdPic(), 280, 280)));
         }catch (IOException ioe){
-
+            System.out.println(ioe.getMessage());
         }
         JPanel picturePanel = new JPanel(new GridLayout());
         TitledBorder titledBorder = new TitledBorder(p.getProdMake() + " " + p.getProdModel());

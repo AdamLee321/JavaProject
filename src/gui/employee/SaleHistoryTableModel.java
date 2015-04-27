@@ -41,7 +41,7 @@ public class SaleHistoryTableModel extends DefaultTableModel {
     DefaultTableColumnModel columnModel = new DefaultTableColumnModel();
 
     // array for objects that Model fills into
-    private static ArrayList<Object> saleHistoryRows = new ArrayList();
+    private static ArrayList<Object> saleHistoryRows = new ArrayList<>();
 
     public SaleHistoryTableModel() {
         TableColumn col;
@@ -112,9 +112,6 @@ public class SaleHistoryTableModel extends DefaultTableModel {
         }
     }
 
-    public ArrayList<Object> getArray() {
-        return saleHistoryRows;
-    }
 
     // don't allow editing cells when double clicked
     public boolean isCellEditable(int row, int column) {

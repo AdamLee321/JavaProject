@@ -72,15 +72,14 @@ public class Main {
       Logger.getLogger(StartWindow.class.getName()).log(Level.SEVERE, null, ex);
     }
 
-    char[] y = {'1','2','3','4','5'};
-    Employee x = new EmployeeOperations().validatePassword("ruthward", y);
+//    char[] y = {'1','2','3','4','5'};
+//    Employee x = new EmployeeOperations().validatePassword("ruthward", y);
+//
 
-//        new StartWindow();
-
-     new SaleMain(x);
-     new AdminMain(x);
-      new ManScreen();
-//    new StartWindow();
+//    new SaleMain(x);
+//    new AdminMain(x);
+//    new ManScreen();
+    new StartWindow();
 
   }
 }

@@ -22,8 +22,7 @@ public class DataProcessor {
     public static Image fitImageFile(File fileIn, int widthIn, int heightIn) throws IOException {
 
         BufferedImage img = ImageIO.read(fileIn);
-        Image scaled = img.getScaledInstance(widthIn, heightIn, Image.SCALE_SMOOTH);
-        return scaled;
+        return img.getScaledInstance(widthIn, heightIn, Image.SCALE_SMOOTH);
     }
 
     // Image Scaler - Takes an image in byte format, sets widths and height and returns it scaled
@@ -31,8 +30,7 @@ public class DataProcessor {
 
         ByteArrayInputStream in = new ByteArrayInputStream(image);
         BufferedImage img = ImageIO.read(in);
-        Image scaled = img.getScaledInstance(widthIn, heightIn, Image.SCALE_SMOOTH);
-        return scaled;
+        return img.getScaledInstance(widthIn, heightIn, Image.SCALE_SMOOTH);
     }
 
     // Image Scaler - Takes an image file in String format, sets widths and height and returns it scaled
@@ -41,8 +39,7 @@ public class DataProcessor {
         File tempFile = new File(imgIn);
 
         BufferedImage img = ImageIO.read(tempFile);
-        Image scaled = img.getScaledInstance(widthIn, heightIn, Image.SCALE_SMOOTH);
-        return scaled;
+        return img.getScaledInstance(widthIn, heightIn, Image.SCALE_SMOOTH);
     }
 
     // convert byte array to File

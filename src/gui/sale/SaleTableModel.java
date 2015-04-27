@@ -22,7 +22,7 @@ public class SaleTableModel extends DefaultTableModel {
   final static int price = 4;
   final static String[] columnNames = {"Product ID", "Make", "Model", "Quantity", "Price"};
 
-  private static ArrayList<Object> saleRows = new ArrayList();
+  private static ArrayList<Object> saleRows = new ArrayList<>();
 
   public ArrayList<Object> getList(){
     return saleRows;

@@ -1,17 +1,12 @@
 package gui.admin;
 
-import database.operations.DepartmentOperations;
 import database.operations.EmployeeOperations;
 import gui.*;
 import model.Employee;
-import oracle.sql.BLOB;
-
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 /*
 IT Tallaght - 2015, S2

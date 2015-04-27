@@ -1,7 +1,6 @@
 package database.create;
 
 import java.sql.*;
-import oracle.jdbc.pool.OracleDataSource;
 
 /*
 IT Tallaght - 2015, S2
@@ -12,8 +11,8 @@ Group 17
 public class CreateDepartment {
 
     private Connection conn;
-    private PreparedStatement pstmt = null;
-    private Statement stmt = null;
+    private PreparedStatement pstmt;
+    private Statement stmt;
 
     public CreateDepartment(Connection connIn){
 
@@ -36,7 +35,7 @@ public class CreateDepartment {
                 System.out.println("Error dropping department sequence or it may not exist");
             }
         } catch (SQLException e){
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
     }
 
@@ -74,7 +73,7 @@ public class CreateDepartment {
             pstmt.execute();
 
         } catch (SQLException e){
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
 
     }

@@ -11,7 +11,6 @@ import database.operations.MemberOperations;
 import gui.FormValidator;
 import gui.UIElements;
 import model.Member;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -154,7 +153,7 @@ public class Discount extends JDialog implements ActionListener, MouseListener {
                     if (mo.checkMember(Integer.parseInt(tfMemberId.getText()))) {
                         Member m = mo.getMemberById(Integer.parseInt(tfMemberId.getText()));
                         int points = m.getMemberPoints();
-                        double rate = 0;
+                        double rate;
                         if (points < 8)
                             rate = DISCOUNT_RATES[0];
                         else if (points < 16)
