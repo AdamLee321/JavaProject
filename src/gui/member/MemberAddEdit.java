@@ -2,7 +2,6 @@ package gui.member;
 
 import database.operations.MemberOperations;
 import gui.*;
-import gui.admin.AdminMain;
 import model.Member;
 
 import javax.swing.*;
@@ -24,11 +23,11 @@ public class MemberAddEdit implements ActionListener {
     private JLabel lblProfilePicture, lblMemberId, lblMemberNumber, lblMemberFName, lblMemberLName, lblMemberStreet, lblMemberCity, lblMemberCounty, lblMemberDOB, lblMemberEmail, lblMemberPoints;
     private JTextField tfMemberId, tfMemberFName, tfMemberNumber, tfMemberLName, tfMemberStreet, tfMemberCity, tfMemberCounty, tfMemberEmail, tfMemberPoints;
     private JComboBox<String> cbBirthDay, cbBirthMonth, cbBirthYear;
-    private JButton btnAdd, btnRemove, btnCancel, btnPreview, btnOK;
-    private File fImg = new File(UIElements.person128); // create initialize a new file for database update when adding (db insert expects a file, so this is needed)
+    private JButton btnAdd, btnRemove, btnCancel, btnOK;
+    private File imgStart = new File(UIElements.person128); // create initialize a new file for database update when adding (db insert expects a file, so this is needed)
+    private File imgDb;
     private JFileChooser fc;
     private DateGenerator dg;
-    private AdminMain am;  // used for JDialogs as parent
     private MemberOperations mo;
     private MemberMain mm;
     private Member m;
@@ -53,7 +52,7 @@ public class MemberAddEdit implements ActionListener {
         memberAdd.setResizable(false);
         memberAdd.setLocationRelativeTo(null);
 
-    // picture panel + picture buttons  panel inside it
+        // picture panel + picture buttons  panel inside it
 
         pnlPicture = new JPanel(new BorderLayout());
         pnlPicture.setBackground(UIElements.getColour());
@@ -84,7 +83,7 @@ public class MemberAddEdit implements ActionListener {
         // add picture panel to the main JDialog
         memberAdd.add(pnlPicture, BorderLayout.NORTH);
 
-    // pnlDetails - GridBagLayout
+        // pnlDetails - GridBagLayout
 
         pnlDetails = new JPanel(new GridBagLayout());
         pnlDetails.setBackground(UIElements.getColour());
@@ -142,7 +141,7 @@ public class MemberAddEdit implements ActionListener {
         cbBirthDay = new JComboBox<String>(dg.getMonthDays(cbBirthMonth.getSelectedIndex() + 1, Integer.parseInt(cbBirthYear.getSelectedItem().toString())));
         cbBirthDay.setEnabled(false);
 
-            // add day, month, year comboboxes to details panel
+        // add day, month, year comboboxes to details panel
         pnlDetails.add(cbBirthYear, Griddy.getConstraints(1,5,1,1,0,0,0,0,5,125,140,5,0,GridBagConstraints.WEST));
         pnlDetails.add(cbBirthMonth, Griddy.getConstraints(1,5,1,1,0,0,0,0,5,65,200,5,0,GridBagConstraints.WEST));
         pnlDetails.add(cbBirthDay, Griddy.getConstraints(1,5,1,1,0,0,0,0,5,15,260,5,0,GridBagConstraints.WEST));
@@ -173,7 +172,7 @@ public class MemberAddEdit implements ActionListener {
 
         memberAdd.add(pnlDetails, BorderLayout.CENTER);
 
-    // bottom, buttons panel - FlowLayout, added to main's South border
+        // bottom, buttons panel - FlowLayout, added to main's South border
 
         pnlButtons = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));  // layout, horizontal padding, vertical padding
         pnlButtons.setBackground(UIElements.getColour());
@@ -183,12 +182,6 @@ public class MemberAddEdit implements ActionListener {
         btnCancel.setIcon(new ImageIcon(UIElements.cancel6));
         btnCancel.addActionListener(this);
         pnlButtons.add(btnCancel);
-
-//        btnPreview = new JButton("Preview");
-//        btnPreview.setPreferredSize(new Dimension(100, 26));
-//        btnPreview.setIcon(new ImageIcon(UIElements.person16));
-//        btnPreview.addActionListener(this);
-//        pnlButtons.add(btnPreview);
 
         btnOK = new JButton("OK");
         btnOK.setPreferredSize(new Dimension(100, 28));
@@ -206,7 +199,8 @@ public class MemberAddEdit implements ActionListener {
 
             try {
                 lblProfilePicture.setIcon(new ImageIcon(DataProcessor.fitImageByte(m.getMemberPic(), 128, 128)));
-                fImg = DataProcessor.byteToFile(m.getMemberPic());
+                imgDb = DataProcessor.byteToFile(m.getMemberPic());
+                imgStart = imgDb;
             } catch (IOException e){
                 JOptionPane.showMessageDialog(memberAdd,"Image Problem");
             }
@@ -231,42 +225,38 @@ public class MemberAddEdit implements ActionListener {
 
 // METHODS
 
-   public boolean noChanges() {
-       return (tfMemberFName.getText().equals(m.getMemberFName())
-               && tfMemberLName.getText().equals(m.getMemberLName())
-               && tfMemberEmail.getText().equals(m.getMemberEmail())
-               && tfMemberNumber.getText().equals(m.getMemberNumber())
-               && cbBirthDay.getSelectedItem().equals(m.getDobd())
-               && cbBirthMonth.getSelectedItem().equals(m.getDobm())
-               && cbBirthYear.getSelectedItem().equals(m.getDoby())
-               && tfMemberStreet.getText().equals(m.getMemberStreet())
-               && tfMemberCity.getText().equals(m.getMemberCity())
-               && tfMemberCounty.getText().equals(m.getMemberCounty())
-               && tfMemberPoints.getText().equals(Integer.toString(m.getMemberPoints()))
-               && FormValidator.isSameImage(m.getMemberPic(),fImg));
-   }
+    public boolean changesMade() {
+        return (!tfMemberFName.getText().equals(m.getMemberFName())
+                || !tfMemberLName.getText().equals(m.getMemberLName())
+                || !tfMemberEmail.getText().equals(m.getMemberEmail())
+                || !tfMemberNumber.getText().equals(m.getMemberNumber())
+                || !cbBirthDay.getSelectedItem().equals(m.getDobd())
+                || !cbBirthMonth.getSelectedItem().equals(m.getDobm())
+                || !cbBirthYear.getSelectedItem().equals(m.getDoby())
+                || !tfMemberStreet.getText().equals(m.getMemberStreet())
+                || !tfMemberCity.getText().equals(m.getMemberCity())
+                || !tfMemberCounty.getText().equals(m.getMemberCounty())
+                || !tfMemberPoints.getText().equals(Integer.toString(m.getMemberPoints())));
+    }
 
-    // BUTTION ACTIONS
+// BUTTON ACTIONS
 
     public void actionPerformed(ActionEvent e){ // the two methods below set the correct day, based on year and month, both month and year comboboxes set correct days. "dayBefore" is to remember what day was set before and set it again, otherwise it resets to 1 ... ex, Person A, birthday 4th, this way when selecting month,year, it stays at 4th, without beforeDay, day combobox would reset to 1
         if (e.getSource() == cbBirthYear){
             dayBefore = cbBirthDay.getSelectedIndex();
-            cbBirthDay.setModel(new DefaultComboBoxModel<String>(dg.getMonthDays(cbBirthMonth.getSelectedIndex() + 1, Integer.parseInt(cbBirthYear.getSelectedItem().toString()))));
+            cbBirthDay.setModel(new DefaultComboBoxModel<>(dg.getMonthDays(cbBirthMonth.getSelectedIndex() + 1, Integer.parseInt(cbBirthYear.getSelectedItem().toString()))));
             cbBirthDay.setSelectedIndex(dayBefore);
             cbBirthMonth.setEnabled(true);
         }
         else if(e.getSource() == cbBirthMonth){
             dayBefore = cbBirthDay.getSelectedIndex();
-            cbBirthDay.setModel(new DefaultComboBoxModel<String>(dg.getMonthDays(cbBirthMonth.getSelectedIndex() + 1, Integer.parseInt(cbBirthYear.getSelectedItem().toString()))));
+            cbBirthDay.setModel(new DefaultComboBoxModel<>(dg.getMonthDays(cbBirthMonth.getSelectedIndex() + 1, Integer.parseInt(cbBirthYear.getSelectedItem().toString()))));
             cbBirthDay.setSelectedIndex(dayBefore);
             cbBirthDay.setEnabled(true);
         }
         else if(e.getSource() == btnCancel){
             memberAdd.dispose();
         }
-//        else if(e.getSource() == btnPreview){
-//            MemberPreview mp = new MemberPreview(am);
-//        }
         else if(e.getSource() == btnAdd){
             fc = new JFileChooser(); // initialize the JFileChooser - Initializing on button action because if initialized in the constructor, it slows down the UI response to the button
             fc.setFileFilter(DataProcessor.imageFilter); // set image filter on JFileChooser
@@ -276,30 +266,31 @@ public class MemberAddEdit implements ActionListener {
             fc.setAcceptAllFileFilterUsed(false); // turn off viewing of all files
             int open = fc.showOpenDialog(memberAdd); // could've done "this" if I was extending the JDialog
             if (open == JFileChooser.APPROVE_OPTION) {  // if JFileChooser is open (int 1)
-                fImg = fc.getSelectedFile();
+                imgStart = fc.getSelectedFile();
                 try{
-                    lblProfilePicture.setIcon(new ImageIcon(DataProcessor.fitImageFile(fImg, 128, 128)));
+                    lblProfilePicture.setIcon(new ImageIcon(DataProcessor.fitImageFile(imgStart, 128, 128)));
                 } catch (IOException ip){
                     JOptionPane.showMessageDialog(null, "Image Problem");
                 }
             }
         }
         else if(e.getSource() == btnRemove){
+            imgStart = new File(UIElements.person128);
             lblProfilePicture.setIcon(new ImageIcon(UIElements.person128));
         }
         else if(e.getSource() == btnOK){
             if (!FormValidator.isNumber(tfMemberFName.getText())
-             && !FormValidator.isNumber(tfMemberLName.getText())
-             && !FormValidator.isNumber(tfMemberCity.getText())
-             && FormValidator.isValidEmail(tfMemberEmail.getText())
-             && FormValidator.isNumber(tfMemberPoints.getText())
-             && FormValidator.isNumber(tfMemberNumber.getText())
-             && cbBirthDay.isEnabled()
-             && cbBirthMonth.isEnabled()){
+                    && !FormValidator.isNumber(tfMemberLName.getText())
+                    && !FormValidator.isNumber(tfMemberCity.getText())
+                    && FormValidator.isValidEmail(tfMemberEmail.getText())
+                    && FormValidator.isNumber(tfMemberPoints.getText())
+                    && FormValidator.isNumber(tfMemberNumber.getText())
+                    && cbBirthDay.isEnabled()
+                    && cbBirthMonth.isEnabled()){
                 if(choice == 0) { // if all the above validation is OK, and the choice is 0, add a new member
                     // initialize member ops, add a new member(pass all the paramemters), display message
                     mo = new MemberOperations();
-                    mo.addMember(tfMemberFName.getText(), tfMemberLName.getText(), tfMemberStreet.getText(), tfMemberCity.getText(), tfMemberCounty.getText(), cbBirthDay.getSelectedIndex() + 1, cbBirthMonth.getItemAt(cbBirthMonth.getSelectedIndex()), cbBirthYear.getItemAt(cbBirthYear.getSelectedIndex()), tfMemberEmail.getText(), Integer.parseInt(tfMemberNumber.getText()), Integer.parseInt(tfMemberPoints.getText()), fImg);
+                    mo.addMember(tfMemberFName.getText(), tfMemberLName.getText(), tfMemberStreet.getText(), tfMemberCity.getText(), tfMemberCounty.getText(), cbBirthDay.getSelectedIndex() + 1, cbBirthMonth.getItemAt(cbBirthMonth.getSelectedIndex()), cbBirthYear.getItemAt(cbBirthYear.getSelectedIndex()), tfMemberEmail.getText(), Integer.parseInt(tfMemberNumber.getText()), Integer.parseInt(tfMemberPoints.getText()), imgStart);
                     JOptionPane.showMessageDialog(null, "New Member Added", "Information", JOptionPane.INFORMATION_MESSAGE);
                     // refresh the MemberMain list after adding a new member
                     mm.displayMembers();
@@ -307,26 +298,25 @@ public class MemberAddEdit implements ActionListener {
                     memberAdd.dispose();
                 }
                 else if (choice == 1){ // if all the above validation is OK, and the choice is 1, update existing member
-                    System.out.println(FormValidator.isSameImage(m.getMemberPic(),fImg));
-
                     // initialize member ops, add a new member(pass all the paramemters), display message
-                    if (noChanges()){ // if there were no changes just close the window
-                        memberAdd.dispose();
-                    } else{ // if something changed then prompt and update the info
+                    if (changesMade() || !FormValidator.equalFiles(imgDb, imgStart)){ // if there were no changes just close the window
+                        imgDb = imgStart;
                         mo = new MemberOperations();
-                        mo.updateMember(m.getMemberId(), tfMemberFName.getText(), tfMemberLName.getText(), tfMemberStreet.getText(), tfMemberCity.getText(), tfMemberCounty.getText(), cbBirthDay.getSelectedIndex() + 1, cbBirthMonth.getItemAt(cbBirthMonth.getSelectedIndex()), cbBirthYear.getItemAt(cbBirthYear.getSelectedIndex()), tfMemberEmail.getText(), Integer.parseInt(tfMemberNumber.getText()), Integer.parseInt(tfMemberPoints.getText()), fImg);
+                        mo.updateMember(m.getMemberId(), tfMemberFName.getText(), tfMemberLName.getText(), tfMemberStreet.getText(), tfMemberCity.getText(), tfMemberCounty.getText(), cbBirthDay.getSelectedIndex() + 1, cbBirthMonth.getItemAt(cbBirthMonth.getSelectedIndex()), cbBirthYear.getItemAt(cbBirthYear.getSelectedIndex()), tfMemberEmail.getText(), Integer.parseInt(tfMemberNumber.getText()), Integer.parseInt(tfMemberPoints.getText()), imgDb);
                         JOptionPane.showMessageDialog(null, "Member Information Updated", "Information", JOptionPane.INFORMATION_MESSAGE);
                         // refresh the MemberMain list after adding a new member and sort it properly
                         mm.displayMembers();
                         mm.alignTables();
                         // sort tables, close window
                         memberAdd.dispose();
+                    } else{ // if something changed then prompt and update the info
+                        memberAdd.dispose();
                     }
                 }
                 else if (choice == 2){
                     // initialize member ops, add a new member(pass all the paramemters), display message
                     mo = new MemberOperations();
-                    mo.addMember(tfMemberFName.getText(), tfMemberLName.getText(), tfMemberStreet.getText(), tfMemberCity.getText(), tfMemberCounty.getText(), cbBirthDay.getSelectedIndex() + 1, cbBirthMonth.getItemAt(cbBirthMonth.getSelectedIndex()), cbBirthYear.getItemAt(cbBirthYear.getSelectedIndex()), tfMemberEmail.getText(), Integer.parseInt(tfMemberNumber.getText()), Integer.parseInt(tfMemberPoints.getText()), fImg);
+                    mo.addMember(tfMemberFName.getText(), tfMemberLName.getText(), tfMemberStreet.getText(), tfMemberCity.getText(), tfMemberCounty.getText(), cbBirthDay.getSelectedIndex() + 1, cbBirthMonth.getItemAt(cbBirthMonth.getSelectedIndex()), cbBirthYear.getItemAt(cbBirthYear.getSelectedIndex()), tfMemberEmail.getText(), Integer.parseInt(tfMemberNumber.getText()), Integer.parseInt(tfMemberPoints.getText()), imgStart);
                     JOptionPane.showMessageDialog(null, "New Member Added", "Information", JOptionPane.INFORMATION_MESSAGE);
                     // sort tables, close window
                     mm.alignTables();
@@ -335,18 +325,18 @@ public class MemberAddEdit implements ActionListener {
                 else if (choice == 3){
                     // initialize member ops, add a new member(pass all the paramemters), display message
                     mo = new MemberOperations();
-                    mo.addMember(tfMemberFName.getText(), tfMemberLName.getText(), tfMemberStreet.getText(), tfMemberCity.getText(), tfMemberCounty.getText(), cbBirthDay.getSelectedIndex() + 1, cbBirthMonth.getItemAt(cbBirthMonth.getSelectedIndex()), cbBirthYear.getItemAt(cbBirthYear.getSelectedIndex()), tfMemberEmail.getText(), Integer.parseInt(tfMemberNumber.getText()), Integer.parseInt(tfMemberPoints.getText()), fImg);
+                    mo.addMember(tfMemberFName.getText(), tfMemberLName.getText(), tfMemberStreet.getText(), tfMemberCity.getText(), tfMemberCounty.getText(), cbBirthDay.getSelectedIndex() + 1, cbBirthMonth.getItemAt(cbBirthMonth.getSelectedIndex()), cbBirthYear.getItemAt(cbBirthYear.getSelectedIndex()), tfMemberEmail.getText(), Integer.parseInt(tfMemberNumber.getText()), Integer.parseInt(tfMemberPoints.getText()), imgStart);
                     JOptionPane.showMessageDialog(null, "New Member Added", "Information", JOptionPane.INFORMATION_MESSAGE);
                     memberAdd.dispose();
                 }
             }
             else {
                 if (FormValidator.isEmptyField(tfMemberFName.getText())
-                 || FormValidator.isEmptyField(tfMemberLName.getText())
-                 || FormValidator.isEmptyField(tfMemberStreet.getText())
-                 || FormValidator.isEmptyField(tfMemberCity.getText())
-                 || FormValidator.isEmptyField(tfMemberCounty.getText())
-                 || FormValidator.isEmptyField(tfMemberPoints.getText())) {
+                        || FormValidator.isEmptyField(tfMemberLName.getText())
+                        || FormValidator.isEmptyField(tfMemberStreet.getText())
+                        || FormValidator.isEmptyField(tfMemberCity.getText())
+                        || FormValidator.isEmptyField(tfMemberCounty.getText())
+                        || FormValidator.isEmptyField(tfMemberPoints.getText())) {
                     JOptionPane.showMessageDialog(null, "Please fill-in all the fields of the form", "Empty fields", JOptionPane.WARNING_MESSAGE);
                 }
                 else if (!FormValidator.isValidEmail(tfMemberEmail.getText())){
