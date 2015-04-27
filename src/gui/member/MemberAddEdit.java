@@ -3,7 +3,6 @@ package gui.member;
 import database.operations.MemberOperations;
 import gui.*;
 import model.Member;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
