@@ -9,7 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
 import java.text.MessageFormat;
-
 import net.proteanit.sql.DbUtils;
 
 /**
@@ -53,7 +52,7 @@ public class ManSales extends JFrame{
 
         //create table with data
         reportTableModel = new ReportTableModel();
-        //UpdateJTable();//empty and update
+        UpdateJTable();//empty and update
         table = new JTable(reportTableModel);
         //table.setBackground(new Color(98, 169, 221)); //Table background color
         frame.add(new JScrollPane(table)); //add the table to the frame
@@ -73,7 +72,7 @@ public class ManSales extends JFrame{
         });
 
         //Display the window.
-        UpdateJTable();//empty and update
+        //empty and update
         frame.pack();
         frame.getContentPane();
         frame.add(south, BorderLayout.SOUTH);

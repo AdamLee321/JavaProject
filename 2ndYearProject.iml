@@ -36,5 +36,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="rs2xml1" level="project" />
   </component>
 </module>

@@ -303,10 +303,6 @@ public class ReportEmployee extends JFrame {
                 Graphics2D g2 = (Graphics2D)pg;
                 g2.translate(pf.getImageableX(), pf.getImageableY());
                 south.print(g2);
-            /* I've tried the following commented codes but they don't work */
-                //MainAppPanel.this.printAll(g2);
-                //MainAppPanel.this.print(g2);
-                //MainAppPanel.this.print(g2);
                 return Printable.PAGE_EXISTS;
             }
         });

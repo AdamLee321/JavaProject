@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Login	23:43:14 19-Apr-2015
 Name:	Ermac Ward
 ID:	1
@@ -10,3 +11,5 @@ ID:	1
 Logout	13:23:12 24-Apr-2015
 Sales	€.00
 
+=======
+>>>>>>> 9b8ccbec57420141af45a0698704caef185819fc

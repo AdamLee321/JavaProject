@@ -75,8 +75,8 @@ public class Main {
 
 //        new StartWindow();
 
-     new SaleMain(x);
-     new AdminMain(x);
+     //new SaleMain(x);
+     //new AdminMain(x);
       new ManScreen();
 //    new StartWindow();
 
