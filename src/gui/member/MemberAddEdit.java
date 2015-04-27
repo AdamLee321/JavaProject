@@ -332,6 +332,13 @@ public class MemberAddEdit implements ActionListener {
                     mm.alignTables();
                     memberAdd.dispose();
                 }
+                else if (choice == 3){
+                    // initialize member ops, add a new member(pass all the paramemters), display message
+                    mo = new MemberOperations();
+                    mo.addMember(tfMemberFName.getText(), tfMemberLName.getText(), tfMemberStreet.getText(), tfMemberCity.getText(), tfMemberCounty.getText(), cbBirthDay.getSelectedIndex() + 1, cbBirthMonth.getItemAt(cbBirthMonth.getSelectedIndex()), cbBirthYear.getItemAt(cbBirthYear.getSelectedIndex()), tfMemberEmail.getText(), Integer.parseInt(tfMemberNumber.getText()), Integer.parseInt(tfMemberPoints.getText()), fImg);
+                    JOptionPane.showMessageDialog(null, "New Member Added", "Information", JOptionPane.INFORMATION_MESSAGE);
+                    memberAdd.dispose();
+                }
             }
             else {
                 if (FormValidator.isEmptyField(tfMemberFName.getText())
