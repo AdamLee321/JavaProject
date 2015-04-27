@@ -66,7 +66,7 @@ public class Main {
       Logger.getLogger(StartWindow.class.getName()).log(Level.SEVERE, null, ex);
     } catch (IllegalAccessException ex) {
       Logger.getLogger(StartWindow.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+    } catch (UnsupportedLookAndFeelException ex) {
       Logger.getLogger(StartWindow.class.getName()).log(Level.SEVERE, null, ex);
     }
 

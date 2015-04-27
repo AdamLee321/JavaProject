@@ -27,8 +27,8 @@ public class ProductOperations {
     public ResultSet searchProducts(String keyword, String category){
         String sql;
         if (category.equals("All")){
-            sql = "SELECT prodId, prodMake, prodModel, prodSalePrice, prodCostPrice, prodQTY,prodType, cpu, ram, OperatingSystem, storage, screen, prodDesc" +
-                    "FROM PRODUCT" +
+            sql = "SELECT prodId, prodMake, prodModel, prodSalePrice, prodCostPrice, prodQTY,prodType, cpu, ram, OperatingSystem, storage, screen, prodDesc " +
+                    "FROM PRODUCT " +
                     "WHERE Upper(prodDesc) like Upper('%"+keyword+"%') OR Upper(prodMake) like Upper('%"+keyword+"%') OR Upper(prodModel) like Upper('%"+keyword+"%')";
             System.out.println(sql);
             System.out.println("2, all");
@@ -36,8 +36,8 @@ public class ProductOperations {
         else {
             sql = "SELECT prodId, prodMake, prodModel, prodSalePrice, prodCostPrice, prodQTY, prodPic,prodType, cpu, ram, OperatingSystem, storage, screen, prodDesc" +
                     " FROM PRODUCT " +
-                    "WHERE Upper(prodDesc) like Upper('%" + keyword + "%') OR Upper(prodMake) like Upper('%" + keyword + "%') " +
-                    "OR Upper(prodModel) like Upper('%" + keyword + "%') AND Upper(prodType) = Upper('" + category +"')";
+                    "WHERE (Upper(prodDesc) like Upper('%" + keyword + "%') OR Upper(prodMake) like Upper('%" + keyword + "%') " +
+                    "OR Upper(prodModel) like Upper('%" + keyword + "%')) AND Upper(prodType) = Upper('" + category +"')";
             System.out.println("1, cat");
             System.out.println(sql);
         }
