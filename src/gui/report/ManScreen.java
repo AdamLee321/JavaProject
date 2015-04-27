@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 /**
  * Created by Adam Lee on 01/04/2015.
@@ -52,7 +53,11 @@ public class ManScreen extends JFrame{
         sales.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ev) {
-                new ManSales();
+                try {
+                    new ManSales();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         });
 

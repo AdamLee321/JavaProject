@@ -3,17 +3,29 @@ package gui.report;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
+import java.io.File;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.MessageFormat;
+
+import database.ConnectionDB;
+import database.operations.ReportOperations;
 import javafx.scene.chart.CategoryAxisBuilder;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartFrame;
-import org.jfree.chart.ChartPanel;
-import org.jfree.chart.JFreeChart;
+import org.jfree.chart.*;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.jdbc.JDBCCategoryDataset;
 import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
+
+import static javax.swing.JPanel.*;
 
 /*IT Tallaght - 2015, S2
 Computing - Year 2, Project
@@ -23,9 +35,10 @@ Group 17*/
 public class ReportEmployee extends JFrame {
 
     private JFrame re;
-    private JButton employee, year, month, week, okButton, members, product, sales;
+    private JButton employee, year, month, day, members, product, sales, print;
     private JPanel north, jPanel1, jPanel2, jPanel3, south;//Container ,Personnel, calender, range, graph
-    private JTextField jTextField1; // Search
+    private JComboBox combo; // Search
+    ReportOperations ro;
 
 
     public ReportEmployee() {
@@ -54,21 +67,21 @@ public class ReportEmployee extends JFrame {
         sales.addActionListener(new ActionListener() {    // action
             @Override
             public void actionPerformed(ActionEvent e) {
-                DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-                dataset.setValue(100, "Month", "Alien"); //To be changed to use the database
-                dataset.setValue(80, "Month", "Apple");
-                dataset.setValue(40, "Month", "Samsung");
-                dataset.setValue(78, "Month", "Dell");
-                dataset.setValue(20, "Month", "Toshiba");
-
-                JFreeChart chart = ChartFactory.createBarChart("Sales Chart", "Laptop Names", "Sales", dataset, PlotOrientation.VERTICAL, false, true, false);
-                CategoryPlot p = chart.getCategoryPlot();
-                p.setRangeGridlinePaint(Color.BLUE); //Graph gridline color
-                chart.setBackgroundPaint(new Color(98,169,221)); //Background color for the Graph
-                ChartPanel barPanel = new ChartPanel(chart); //Adds the chart to a Chart panel
-                south.removeAll(); //Removes old chart data
-                south.add(barPanel, BorderLayout.CENTER); //Adds the chart panel to the south panel
-                south.validate(); //Validates each time the buttons clicked
+                try{
+                    String query = "select saleMonth, count(*) Total from (select saleMonth from sales) group by saleMonth order by total ASC";
+                    JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnectionDB.getConn(),query);
+                    JFreeChart BarChartObject = ChartFactory.createBarChart("Member Report", "Member ID", "Number of Points ",dataset,PlotOrientation.VERTICAL,true,true,false);
+                    BarRenderer rend = null;
+                    CategoryPlot p = BarChartObject.getCategoryPlot();
+                    rend = new BarRenderer();
+                    ChartPanel barPanel = new ChartPanel(BarChartObject);
+                    BarChartObject.setBackgroundPaint(new Color(98, 169, 221)); //Background color for the Graph
+                    south.removeAll(); //Removes old chart data
+                    south.add(barPanel, BorderLayout.CENTER); //Adds the chart panel to the south panel
+                    south.validate();//Validates each time the buttons clicked
+                } catch (Exception e1){
+                    JOptionPane.showMessageDialog(null, "Could not find the query!!");
+                }
             }
         });
 
@@ -78,21 +91,21 @@ public class ReportEmployee extends JFrame {
         employee.addActionListener(new ActionListener() {    // action
             @Override
             public void actionPerformed(ActionEvent e) {
-                DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-                dataset.setValue(11, "Employee", "John");
-                dataset.setValue(90, "Employee", "Marie");
-                dataset.setValue(50, "Employee", "Eoin");
-                dataset.setValue(40, "Employee", "Lisa");
-                dataset.setValue(55, "Employee", "Brendan");
-
-                JFreeChart chart = ChartFactory.createBarChart("Employee Sales", "Employee Names", "Number of Sales", dataset, PlotOrientation.VERTICAL, false, true, false);
-                CategoryPlot p = chart.getCategoryPlot();
-                p.setRangeGridlinePaint(Color.BLUE);
-                chart.setBackgroundPaint(new Color(98,169,221));
-                ChartPanel barPanel = new ChartPanel(chart);
-                south.removeAll();
-                south.add(barPanel, BorderLayout.CENTER);
-                south.validate();
+                try{
+                    String query = "select empid, count(*) Total from (select empid from sales) group by empid order by total desc";
+                    JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnectionDB.getConn(),query);
+                    JFreeChart BarChartObject = ChartFactory.createBarChart("Employee Sales", "Emp id", "Number of Sales",dataset,PlotOrientation.VERTICAL,true,true,false);
+                    BarRenderer renderer = null;
+                    CategoryPlot p = BarChartObject.getCategoryPlot();
+                    renderer = new BarRenderer();
+                    BarChartObject.setBackgroundPaint(new Color(98, 169, 221));
+                    ChartPanel barPanel = new ChartPanel(BarChartObject);
+                    south.removeAll();
+                    south.add(barPanel, BorderLayout.CENTER);
+                    south.validate();
+                } catch (Exception e1){
+                    JOptionPane.showMessageDialog(null, e1);
+                }
             }
         });
 
@@ -103,21 +116,21 @@ public class ReportEmployee extends JFrame {
         product.addActionListener(new ActionListener() {    // action
             @Override
             public void actionPerformed(ActionEvent e) {
-                DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-                dataset.setValue(10, "Employee", "Ellen");
-                dataset.setValue(95, "Employee", "Ann");
-                dataset.setValue(22, "Employee", "Pat");
-                dataset.setValue(65, "Employee", "Greg");
-                dataset.setValue(35, "Employee", "Dan");
-
-                JFreeChart chart = ChartFactory.createBarChart("Employee Sales", "Employees", "Number of Sales", dataset, PlotOrientation.VERTICAL, false, true, false);
-                CategoryPlot p = chart.getCategoryPlot();
-                p.setRangeGridlinePaint(Color.BLUE);
-                chart.setBackgroundPaint(new Color(98,169,221));
-                ChartPanel barPanel = new ChartPanel(chart);
-                south.removeAll();
-                south.add(barPanel, BorderLayout.CENTER);
-                south.validate();
+                try{
+                    String query = "SELECT DISTINCT prodMake,prodqty FROM product";
+                    JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnectionDB.getConn(),query);
+                    JFreeChart BarChartObject = ChartFactory.createBarChart("Product Report", "Products", "Product Quantity ",dataset,PlotOrientation.VERTICAL,true,true,false);
+                    BarRenderer renderer = null;
+                    CategoryPlot p = BarChartObject.getCategoryPlot();
+                    renderer = new BarRenderer();
+                    BarChartObject.setBackgroundPaint(new Color(98, 169, 221));
+                    ChartPanel barPanel = new ChartPanel(BarChartObject);
+                    south.removeAll();
+                    south.add(barPanel, BorderLayout.CENTER);
+                    south.validate();
+                } catch (Exception e1){
+                    JOptionPane.showMessageDialog(null, e1);
+                }
             }
         });
 
@@ -127,21 +140,21 @@ public class ReportEmployee extends JFrame {
         members.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-                dataset.setValue(45, "Employee", "January");
-                dataset.setValue(60, "Employee", "February");
-                dataset.setValue(90, "Employee", "March");
-                dataset.setValue(72, "Employee", "April");
-                dataset.setValue(21, "Employee", "May");
-
-                JFreeChart chart = ChartFactory.createBarChart("New Members Chart", "Months", "New Members", dataset, PlotOrientation.VERTICAL, false, true, false);
-                CategoryPlot p = chart.getCategoryPlot();
-                p.setRangeGridlinePaint(Color.BLUE);
-                chart.setBackgroundPaint(new Color(98,169,221));
-                ChartPanel barPanel = new ChartPanel(chart);
-                south.removeAll();
-                south.add(barPanel, BorderLayout.CENTER);
-                south.validate();
+                try{
+                    String query = "SELECT DISTINCT membernumber,memberpoints FROM member ORDER BY membernumber ASC";
+                    JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnectionDB.getConn(),query);
+                    JFreeChart BarChartObject = ChartFactory.createBarChart("Member Report", "Member ID", "Number of Points ",dataset,PlotOrientation.VERTICAL,true,true,false);
+                    BarRenderer rend = null;
+                    CategoryPlot p = BarChartObject.getCategoryPlot();
+                    rend = new BarRenderer();
+                    ChartPanel barPanel = new ChartPanel(BarChartObject);
+                    BarChartObject.setBackgroundPaint(new Color(98, 169, 221));
+                    south.removeAll();
+                    south.add(barPanel, BorderLayout.CENTER);
+                    south.validate();
+                } catch (Exception e1){
+                    JOptionPane.showMessageDialog(null, "Could not find the query!!");
+                }
             }
         });
         north.add(jPanel1, BorderLayout.NORTH);//Places the panel inside the north panel
@@ -150,12 +163,12 @@ public class ReportEmployee extends JFrame {
         jPanel2.setBackground(new Color(98, 169, 221));
         jPanel2.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Calender"));
         //Week Button
-        week = new JButton("Week");
-        jPanel2.add(week);
-        week.addActionListener(new ActionListener() {
+        day = new JButton("Day");
+        jPanel2.add(day);
+        day.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new ReportWeekYear();
+                new ReportDayYear();
             }
         });
         //Month Button
@@ -181,26 +194,85 @@ public class ReportEmployee extends JFrame {
         jPanel3 = new JPanel(new FlowLayout(FlowLayout.LEFT));
         jPanel3.setBackground(new Color(98, 169, 221));
         jPanel3.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Range"));
-        //TextField
-        jTextField1 = new JTextField("Search");
-        jTextField1.setColumns(15);// Sets the column width of the Textfield
-        jPanel3.add(jTextField1);
-        jTextField1.addFocusListener(new FocusListener() {
-            public void focusGained(FocusEvent e) {
-                jTextField1.setText(""); //Empties textfield when clicked
-
-            }
-            public void focusLost(FocusEvent e) {
-            }
-        });
-
-        //OK BUTTON
-        okButton = new JButton("Ok");
-        jPanel3.add(okButton);
-        okButton.addActionListener(new ActionListener() {
+        //Combobox
+        final String top5 = "Top 5 Products";
+        final String least5 = "Top 5 Least Purchased";
+        final String topMembers = "Top Members";
+        String[] queryTitles = new String[] {top5, least5};
+        final JComboBox<String> combo = new JComboBox<>(queryTitles);
+        combo.setPrototypeDisplayValue("I need it to be this length"); //Insert the widest value here to size the comboBox
+        jPanel3.add(combo);
+        combo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //OK ACTION
+                String selectedQuery = (String) combo.getSelectedItem();
+                System.out.println("You seleted the book: " + selectedQuery);
+                if(topMembers == selectedQuery){
+                    try{
+                        String query = "SELECT saleYear FROM sales WHERE saleYear = " ;
+                        JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnectionDB.getConn(),query);
+                        JFreeChart BarChartObject = ChartFactory.createBarChart("Top 5 Products", "Product ID", "Number of Sales per Item ",dataset,PlotOrientation.VERTICAL,true,true,false);
+                        BarRenderer rend = null;
+                        CategoryPlot p = BarChartObject.getCategoryPlot();
+                        rend = new BarRenderer();
+                        ChartPanel barPanel = new ChartPanel(BarChartObject);
+                        BarChartObject.setBackgroundPaint(new Color(98, 169, 221));
+                        south.removeAll();
+                        south.add(barPanel, BorderLayout.CENTER);
+                        south.validate();
+                    } catch (Exception e1){
+                        JOptionPane.showMessageDialog(null, "Could not find the query!!");
+                    }
+                }
+                if(top5 == selectedQuery){
+                    try{
+                        String query = "SELECT * FROM (SELECT prodid, Count(prodid) \"Sold\" FROM sales GROUP BY prodid ORDER BY count(prodid) DESC , prodid ASC) A WHERE rownum <= 5";
+                        JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnectionDB.getConn(),query);
+                        JFreeChart BarChartObject = ChartFactory.createBarChart("Top 5 Products", "Product ID", "Number of Sales per Item ",dataset,PlotOrientation.VERTICAL,true,true,false);
+                        BarRenderer rend = null;
+                        CategoryPlot p = BarChartObject.getCategoryPlot();
+                        rend = new BarRenderer();
+                        ChartPanel barPanel = new ChartPanel(BarChartObject);
+                        BarChartObject.setBackgroundPaint(new Color(98, 169, 221));
+                        south.removeAll();
+                        south.add(barPanel, BorderLayout.CENTER);
+                        south.validate();
+                    } catch (Exception e1){
+                        JOptionPane.showMessageDialog(null, "Could not find the query!!");
+                    }
+                }
+                if(least5 == selectedQuery) {
+                    try {
+                        String query = "SELECT * FROM (SELECT prodid, Count(prodid) \"Sold\" FROM sales GROUP BY prodid ORDER BY count(prodid) Asc , prodid DESC) A WHERE rownum <= 5";
+                        JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnectionDB.getConn(), query);
+                        JFreeChart BarChartObject = ChartFactory.createBarChart("Top 5 least Purchased", "Product ID", "Number of Sales per Item ", dataset, PlotOrientation.VERTICAL, true, true, false);
+                        BarRenderer rend = null;
+                        CategoryPlot p = BarChartObject.getCategoryPlot();
+                        rend = new BarRenderer();
+                        ChartPanel barPanel = new ChartPanel(BarChartObject);
+                        BarChartObject.setBackgroundPaint(new Color(98, 169, 221));
+                        south.removeAll();
+                        south.add(barPanel, BorderLayout.CENTER);
+                        south.validate();
+                    } catch (Exception e1) {
+                        JOptionPane.showMessageDialog(null, "Could not find the query!!");
+                    }
+                }
+                }
+        });
+
+        //PRINT BUTTON
+        print = new JButton("Print");
+        jPanel3.add(print);
+        print.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                print.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent evt) {
+                        printWork();
+                        }
+                });
             }
         });
         north.add(jPanel3, BorderLayout.SOUTH);
@@ -213,5 +285,36 @@ public class ReportEmployee extends JFrame {
         re.add(north, BorderLayout.NORTH);
         re.add(south, BorderLayout.CENTER);
         re.setVisible(true);
+    }
+
+    public void printWork()
+    {
+        PrinterJob pj = PrinterJob.getPrinterJob();
+        pj.setJobName("Print Graph");
+
+        pj.setPrintable(new Printable()
+        {
+            @Override
+            public int print(Graphics pg, PageFormat pf, int pageNum)
+            {
+                if(pageNum > 0)
+                    return Printable.NO_SUCH_PAGE;
+
+                Graphics2D g2 = (Graphics2D)pg;
+                g2.translate(pf.getImageableX(), pf.getImageableY());
+                south.print(g2);
+                return Printable.PAGE_EXISTS;
+            }
+        });
+        if(pj.printDialog() == false)
+            return;
+        try
+        {
+            pj.print();
+        }
+        catch(PrinterException xcp)
+        {
+            xcp.printStackTrace(System.err);
+        }
     }
 }

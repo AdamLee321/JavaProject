@@ -39,7 +39,7 @@ public class CreateMember {
         }
     }
 
-//Create Members
+    //Create Members
     public void createMembersTable() {
         try {
             // create member table
@@ -83,7 +83,7 @@ public class CreateMember {
             pstmt.setString(8, "1989");//Year
             pstmt.setString(9, "HJenkins@gmail.com"); //Email
             pstmt.setInt(10, 1); //MemNumber
-            pstmt.setInt(11, 0); //MemPoints
+            pstmt.setInt(11, 25); //MemPoints
             pstmt.setBinaryStream(12, savePic2DB(new File("src/res/images/MemberPictures/Bane.jpg")));
             pstmt.execute();
 //Member2
@@ -97,7 +97,7 @@ public class CreateMember {
             pstmt.setString(8, "1994");//Year
             pstmt.setString(9, "LMorris@hotmail.com"); //Email
             pstmt.setInt(10, 2); //MemNumber
-            pstmt.setInt(11, 0); //MemPoints
+            pstmt.setInt(11, 100); //MemPoints
             pstmt.setBinaryStream(12, savePic2DB(new File("src/res/images/MemberPictures/Batamn.jpg")));
             pstmt.execute();
 //Member3
@@ -111,7 +111,7 @@ public class CreateMember {
             pstmt.setString(8, "1976");//Year
             pstmt.setString(9, "BettyT123@yahoo.co.uk"); //Email
             pstmt.setInt(10, 3); //MemNumber
-            pstmt.setInt(11, 0); //MemPoints
+            pstmt.setInt(11, 20); //MemPoints
             pstmt.setBinaryStream(12, savePic2DB(new File("src/res/images/MemberPictures/Carnage.jpg")));
             pstmt.execute();
 //Member4
@@ -125,7 +125,7 @@ public class CreateMember {
             pstmt.setString(8, "1988");//Year
             pstmt.setString(9, "LBaker@gmail.com"); //Email
             pstmt.setInt(10, 4); //MemNumber
-            pstmt.setInt(11, 0); //MemPoints
+            pstmt.setInt(11, 40); //MemPoints
             pstmt.setBinaryStream(12, savePic2DB(new File("src/res/images/MemberPictures/Groot.jpg")));
             pstmt.execute();
 //Member5
@@ -153,7 +153,7 @@ public class CreateMember {
             pstmt.setString(8, "1982");//Year
             pstmt.setString(9, "KatPerry@yahoo.co.uk"); //Email
             pstmt.setInt(10, 6); //MemNumber
-            pstmt.setInt(11, 0); //MemPoints
+            pstmt.setInt(11, 10); //MemPoints
             pstmt.setBinaryStream(12, savePic2DB(new File("src/res/images/MemberPictures/Gambit.jpg")));
             pstmt.execute();
 //Member7
@@ -167,7 +167,7 @@ public class CreateMember {
             pstmt.setString(8, "1971");//Year
             pstmt.setString(9, "A.Stewart@hotmail.com"); //Email
             pstmt.setInt(10, 7); //MemNumber
-            pstmt.setInt(11, 0); //MemPoints
+            pstmt.setInt(11, 45); //MemPoints
             pstmt.setBinaryStream(12, savePic2DB(new File("src/res/images/MemberPictures/Deadshot.jpg")));
             pstmt.execute();
 //Member8
@@ -181,7 +181,7 @@ public class CreateMember {
             pstmt.setString(8, "1989");//Year
             pstmt.setString(9, "sAdams@gmail.com"); //Email
             pstmt.setInt(10, 8); //MemNumber
-            pstmt.setInt(11, 0); //MemPoints
+            pstmt.setInt(11, 10); //MemPoints
             pstmt.setBinaryStream(12, savePic2DB(new File("src/res/images/MemberPictures/Deathstroke.jpg")));
             pstmt.execute();
 //Member9
@@ -195,7 +195,7 @@ public class CreateMember {
             pstmt.setString(8, "1970");//Year
             pstmt.setString(9, "S.Green@aol.com"); //Email
             pstmt.setInt(10, 9); //MemNumber
-            pstmt.setInt(11, 0); //MemPoints
+            pstmt.setInt(11, 55); //MemPoints
             pstmt.setBinaryStream(12, savePic2DB(new File("src/res/images/MemberPictures/Hulk.jpg")));
             pstmt.execute();
 //Member10
@@ -209,7 +209,7 @@ public class CreateMember {
             pstmt.setString(8, "1981");//Year
             pstmt.setString(9, "Emalone@gmail.com"); //Email
             pstmt.setInt(10, 10); //MemNumber
-            pstmt.setInt(11, 0); //MemPoints
+            pstmt.setInt(11, 60); //MemPoints
             pstmt.setBinaryStream(12, savePic2DB(new File("src/res/images/MemberPictures/HarleyQuinn.jpg"))); //memPic
             pstmt.execute();
 //Member11
@@ -223,7 +223,7 @@ public class CreateMember {
             pstmt.setString(8, "1990");//Year
             pstmt.setString(9, "gDavid@hotmail.com"); //Email
             pstmt.setInt(10, 11); //MemNumber
-            pstmt.setInt(11, 0); //MemPoints
+            pstmt.setInt(11, 70); //MemPoints
             pstmt.setBinaryStream(12, savePic2DB(new File("src/res/images/MemberPictures/Ironman.jpg")));
             pstmt.execute();
 //Member12
@@ -237,7 +237,7 @@ public class CreateMember {
             pstmt.setString(8, "1984");//Year
             pstmt.setString(9, "bGeorge@hotmail.com"); //Email
             pstmt.setInt(10, 12); //MemNumber
-            pstmt.setInt(11, 0); //MemPoints
+            pstmt.setInt(11, 85); //MemPoints
             pstmt.setBinaryStream(12, savePic2DB(new File("src/res/images/MemberPictures/Joker.jpg")));
             pstmt.execute();
 //Member13
@@ -251,7 +251,7 @@ public class CreateMember {
             pstmt.setString(8, "1967");//Year
             pstmt.setString(9, "MarieH@yahoo.co.uk"); //Email
             pstmt.setInt(10, 13); //MemNumber
-            pstmt.setInt(11, 0); //MemPoints
+            pstmt.setInt(11, 100); //MemPoints
             pstmt.setBinaryStream(12, savePic2DB(new File("src/res/images/MemberPictures/Spiderman.jpg"))); //memPic
             pstmt.execute();
 //Member14
@@ -265,7 +265,7 @@ public class CreateMember {
             pstmt.setString(8, "1992");//Year
             pstmt.setString(9, "BWilk142@gmail.com"); //Email
             pstmt.setInt(10, 14); //MemNumber
-            pstmt.setInt(11, 0); //MemPoints
+            pstmt.setInt(11, 20); //MemPoints
             pstmt.setBinaryStream(12, savePic2DB(new File("src/res/images/MemberPictures/Thor.jpg"))); //memPic
             pstmt.execute();
 //Member15
@@ -279,7 +279,7 @@ public class CreateMember {
             pstmt.setString(8, "1994"); //Year
             pstmt.setString(9, "AReilly156@hotmail.com\n"); //Email
             pstmt.setInt(10, 15); //MemNumber
-            pstmt.setInt(11, 0); //MemPoints
+            pstmt.setInt(11, 45); //MemPoints
             pstmt.setBinaryStream(12, savePic2DB(new File("src/res/images/MemberPictures/Wolverine.jpg"))); //memPic
             pstmt.execute();
 
