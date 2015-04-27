@@ -14,6 +14,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 
 
@@ -132,6 +134,14 @@ public class TerminalMode extends JFrame implements ActionListener {
       windowNum = 0;
     }
     else if(e.getSource().equals(help)){
+      if (Desktop.isDesktopSupported()) {
+        try {
+          File myFile = new File("src/res/TerminalManual.pdf");
+          Desktop.getDesktop().open(myFile);
+        } catch (IOException ex) {
+          JOptionPane.showMessageDialog(null, "Cannot open file", "No supported application", JOptionPane.ERROR_MESSAGE);
+        }
+      }
     }
     else if(e.getSource().equals(back)){
       if (windowNum == 1 || windowNum == 2){  // search window = 1  categories = 2  product results = 3

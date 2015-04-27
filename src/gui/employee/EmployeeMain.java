@@ -108,30 +108,10 @@ public class EmployeeMain implements ActionListener, MouseListener {
         // results panel
         employeeTableModel = new EmployeeTableModel();
         employees = new JTable(employeeTableModel);
-        employees.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         employees.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         employees.addMouseListener(this);
 
 
-
-        employees.getColumnModel().getColumn(0).setPreferredWidth(27);
-        employees.getColumnModel().getColumn(1).setPreferredWidth(120);
-        employees.getColumnModel().getColumn(2).setPreferredWidth(100);
-        employees.getColumnModel().getColumn(3).setPreferredWidth(90);
-        employees.getColumnModel().getColumn(4).setPreferredWidth(90);
-        employees.getColumnModel().getColumn(6).setPreferredWidth(120);
-        employees.getColumnModel().getColumn(7).setPreferredWidth(100);
-        employees.getColumnModel().getColumn(8).setPreferredWidth(95);
-//        employees.getColumnModel().getColumn(9).setPreferredWidth(40);
-
-//                // Set the table width, depending upon the width of
-//        // the columns
-//        int tableWidth = 0;
-//        int columnCount = employeeTableModel.columnModel.getColumnCount();
-//        for (int i = 0; i < columnCount; i++) {
-//            tableWidth += employeeTableModel.columnModel.getColumn(i).getPreferredWidth();
-//            System.out.println(employeeTableModel.columnModel.getColumn(i).getPreferredWidth());
-//        }
 
         JScrollPane scrollPane = new JScrollPane(employees);
         scrollPane.setBorder(new BevelBorder(BevelBorder.LOWERED));

@@ -4,3 +4,9 @@ ID:	1
 Logout	17:17:32 27-Apr-2015
 Sales	€2,255.93
 
+Login	17:33:11 27-Apr-2015
+Name:	Ermac Ward
+ID:	1
+Logout	17:33:56 27-Apr-2015
+Sales	€1,979.57
+

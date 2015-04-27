@@ -9,6 +9,7 @@ import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.ResultSet;
 
 /*
 IT Tallaght - 2015, S2
@@ -22,12 +23,8 @@ public class ProductMain implements ActionListener, MouseListener {
     private JPanel prodMain;
     private JButton addButton, editButton, deleteButton, searchButton, viewButton;
     private JTextField searchField;
-    private JComboBox prodTypes, brandTypes, modelTypes;
+    private JComboBox prodManufacturers, prodType, modelTypes;
     private JPanel managePanel, northPanel, southPanel, searchPanel, searchTopPanel, searchBottomPanel;
-
-    private String[] prodTypess = {"All", "Sales", "Management"};  // this just a placeholder, real info will be populated from DB
-    private String[] brandTypess = {"All", "DELL", "HP", "Apple"};  // this just a placeholder, real info will be populated from DB
-    private String[] modelTypess = {"All", "Inpiron 5150", "Latitude 1350"};  // this just a placeholder, real info will be populated from DB
 
     private String textFieldTip = "type your search query...";
 
@@ -45,7 +42,6 @@ public class ProductMain implements ActionListener, MouseListener {
 // north panel
         northPanel = new JPanel(new GridBagLayout());
 //northPanel.setBackground(new Color(98, 169, 221));
-
         // manage products panel
 
         managePanel = new JPanel(new FlowLayout());
@@ -90,6 +86,7 @@ public class ProductMain implements ActionListener, MouseListener {
         searchButton = new JButton("Search");
         searchButton.setPreferredSize(new Dimension(105, 28));
         searchButton.setIcon(new ImageIcon(UIElements.search16));
+        searchButton.addActionListener(this);
         searchTopPanel.add(searchButton);
 
         // add top panel to search panel
@@ -97,14 +94,20 @@ public class ProductMain implements ActionListener, MouseListener {
 
         // buttom panel containing comboboxes for information filtering
         searchBottomPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        //searchBottomPanel.setBackground(new Color(98, 169, 221));
-        prodTypes = new JComboBox(new DefaultComboBoxModel<>(prodTypess));
-        brandTypes = new JComboBox(new DefaultComboBoxModel<>(brandTypess));
-        modelTypes = new JComboBox(new DefaultComboBoxModel<>(modelTypess));
+
+        po = new ProductOperations();
+        prodManufacturers = new JComboBox(new DefaultComboBoxModel(po.getManufacturers()));
+        prodManufacturers.addActionListener(this);
+        prodType = new JComboBox(new DefaultComboBoxModel<>());
+        prodType.setEnabled(false);
+        prodType.addActionListener(this);
+        modelTypes = new JComboBox(new DefaultComboBoxModel<>());
+        modelTypes.setEnabled(false);
+
 
         // add bottom panel to search panel
-        searchBottomPanel.add(prodTypes);
-        searchBottomPanel.add(brandTypes);
+        searchBottomPanel.add(prodManufacturers);
+        searchBottomPanel.add(prodType);
         searchBottomPanel.add(modelTypes);
 
         searchPanel.add(searchBottomPanel, BorderLayout.SOUTH);
@@ -157,6 +160,10 @@ public class ProductMain implements ActionListener, MouseListener {
     public void refreshList() {
         productTableModel.emptyArray();
         productTableModel.getAllProductsTable();
+    }
+
+    public void refine(){
+        productTableModel.emptyArray();
     }
 
     // open the edit window (created a method because it's used in two places - mouse and action listener
@@ -214,7 +221,33 @@ public class ProductMain implements ActionListener, MouseListener {
         else if (e.getSource().equals(viewButton)){
             new PurchaseHistory(selectedRowId);
         }
-        else {
+        else if (e.getSource().equals(searchButton)){
+            productTableModel.searchTable(searchField.getText());
+        }
+        else if (e.getSource() == prodManufacturers){
+            prodType.removeAllItems();
+            prodType.setEnabled(true);
+            String[] types = po.getTypes((String)prodManufacturers.getItemAt(prodManufacturers.getSelectedIndex()));
+            for (int i = 0; i < types.length; i++)
+                prodType.addItem(types[i]);
+            productTableModel.emptyArray();
+            String selection = (String)prodManufacturers.getItemAt(prodManufacturers.getSelectedIndex());
+            if(selection.equals("All"))
+                refreshList();
+            else
+                productTableModel.refreshTableProduct((String) prodManufacturers.getItemAt(prodManufacturers.getSelectedIndex()));
+        }
+        else if (e.getSource() == prodType){
+            modelTypes.removeAllItems();
+            modelTypes.setEnabled(true);
+            String[] types = po.getModels((String) prodManufacturers.getItemAt(prodManufacturers.getSelectedIndex()), (String)prodType.getItemAt(prodType.getSelectedIndex()));
+            for (int i = 0; i < types.length; i++) {
+                modelTypes.addItem(types[i]);
+            }
+            productTableModel.refreshTableProduct((String)prodManufacturers.getItemAt(prodManufacturers.getSelectedIndex()),
+                    (String)prodType.getItemAt(prodType.getSelectedIndex()));
+        }
+        else if (e.getSource() == editButton){
             if (selectedRow == -1)
                 JOptionPane.showMessageDialog(null, "Please Select The Product First", "Product Not Selected", JOptionPane.WARNING_MESSAGE);
             else {

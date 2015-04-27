@@ -81,6 +81,31 @@ public class ProductOperations {
         return rset;
     }
 
+    public ResultSet productManufacturer(String make){
+        String sql ="SELECT prodId, prodMake, prodModel, prodSalePrice, prodCostPrice, prodQTY, " +
+                "prodType, cpu, ram, OperatingSystem, storage, screen, prodDesc FROM PRODUCT Where prodmake ='"+make+"'";
+        try{
+            stmt = conn.createStatement();
+            rset = stmt.executeQuery(sql);
+        }catch (SQLException sqlE){
+            System.out.println(sqlE.getMessage());
+        }
+        return rset;
+    }
+
+    public ResultSet productManuMake(String make, String type){
+        String sql ="SELECT prodId, prodMake, prodModel, prodSalePrice, prodCostPrice, prodQTY, " +
+                "prodType, cpu, ram, OperatingSystem, storage, screen, prodDesc FROM PRODUCT Where prodmake ='"+make+"'" +
+                "AND prodType = '"+type+"'";
+        try{
+            stmt = conn.createStatement();
+            rset = stmt.executeQuery(sql);
+        }catch (SQLException sqlE){
+            System.out.println(sqlE.getMessage());
+        }
+        return rset;
+    }
+
     public ArrayList<Product> allProductsArray(){
         ArrayList<Product> p = new ArrayList<>();
         String sql = "SELECT prodId, prodMake, prodModel, prodSalePrice, prodCostPrice, prodQTY," +
@@ -119,44 +144,106 @@ public class ProductOperations {
         return p;
     }
 
-//    public ResultSet productByIDR(int id){
-//        String sql = "SELECT prodId, prodMake, prodModel, prodSalePrice FROM PRODUCT WHERE prodId = '"+id+"'";
-//        try{
-//            stmt = conn.createStatement();
-//            rset = stmt.executeQuery(sql);
-//        }catch(SQLException sqlE){
-//            System.out.println("Error in ResultSet to product Conversion");
-//        }
-//        return rset;
-//    }
+    public ResultSet productByIDR(int id){
+        String sql = "SELECT prodId, prodMake, prodModel, prodSalePrice FROM PRODUCT WHERE prodId = '"+id+"'";
+        try{
+            stmt = conn.createStatement();
+            rset = stmt.executeQuery(sql);
+        }catch(SQLException sqlE){
+            System.out.println("Error in ResultSet to product Conversion");
+        }
+        return rset;
+    }
 
-//    public int checkQuantity(int id){
-//        int quantityInStock = 0;
-//        String sql = "SELECT prodQty FROM product WHERE prodId = '"+id+"'";
-//        try{
-//            stmt = conn.createStatement();
-//            rset = stmt.executeQuery(sql);
-//            while (rset.next())
-//                quantityInStock = rset.getInt(1);
-//        }catch (SQLException sqlE){
-//            System.out.println(sqlE.getMessage());
-//        }
-//        return quantityInStock;
-//    }
-//
-//    public boolean checkProduct(int id){
-//        boolean x = true;
-//        String sql = "SELECT * FROM product WHERE prodId = '"+id+"'";
-//        try{
-//            stmt = conn.createStatement();
-//            rset = stmt.executeQuery(sql);
-//            if(!rset.next())
-//                x = false;
-//        }catch (SQLException sqlE){
-//            System.out.println(sqlE.getMessage());
-//        }
-//        return x;
-//    }
+    public int checkQuantity(int id){
+        int quantityInStock = 0;
+        String sql = "SELECT prodQty FROM product WHERE prodId = '"+id+"'";
+        try{
+            stmt = conn.createStatement();
+            rset = stmt.executeQuery(sql);
+            while (rset.next())
+                quantityInStock = rset.getInt(1);
+        }catch (SQLException sqlE){
+            System.out.println(sqlE.getMessage());
+        }
+        return quantityInStock;
+    }
+
+    public boolean checkProduct(int id){
+        boolean x = true;
+        String sql = "SELECT * FROM product WHERE prodId = '"+id+"'";
+        try{
+            stmt = conn.createStatement();
+            rset = stmt.executeQuery(sql);
+            if(!rset.next())
+                x = false;
+        }catch (SQLException sqlE){
+            System.out.println(sqlE.getMessage());
+        }
+        return x;
+    }
+
+    public String[] getManufacturers(){
+        ArrayList<String> prodMakes = new ArrayList<>();
+        String sql = "SELECT DISTINCT(prodMake) FROM Product ORDER BY prodMake";
+        try {
+            stmt = conn.createStatement();
+            rset = stmt.executeQuery(sql);
+            prodMakes = new ArrayList<>();
+            while(rset.next()){
+                prodMakes.add(rset.getString(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        String[] makes = new String[prodMakes.size()+1];
+        makes[0] = "All";
+        for (int i = 0; i < prodMakes.size(); i++) {
+            makes[i+1] = prodMakes.get(i);
+        }
+        return makes;
+    }
+
+    public String[] getTypes(String man){
+        ArrayList<String> prodTypes = new ArrayList<>();
+        String sql = "SELECT DISTINCT(prodType) FROM Product WHERE prodMake = '"+ man +"' ORDER BY prodType";
+        try {
+            stmt = conn.createStatement();
+            rset = stmt.executeQuery(sql);
+            prodTypes = new ArrayList<>();
+            while(rset.next()){
+                prodTypes.add(rset.getString(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        String[] types = new String[prodTypes.size()+1];
+        types[0] = "Select";
+        for (int i = 0; i < prodTypes.size(); i++) {
+            types[i+1] = prodTypes.get(i);
+        }
+        return types;
+    }
+
+    public String[] getModels(String man, String type){
+        ArrayList<String> prodModels = new ArrayList<>();
+        String sql = "SELECT prodModel FROM Product WHERE prodMake = '"+man+"' AND prodtype = '"+type+"' ORDER BY prodType";
+        try {
+            stmt = conn.createStatement();
+            rset = stmt.executeQuery(sql);
+            prodModels = new ArrayList<>();
+            while(rset.next()){
+                prodModels.add(rset.getString(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        String[] models = new String[prodModels.size()];
+        for (int i = 0; i < prodModels.size(); i++) {
+            models[i] = prodModels.get(i);
+        }
+        return models;
+    }
 
     public void addProduct(String make, String model, double salePrice, double costPrice, int qty, File prodPic,
                            String prodType, String cpu, String ram, String os, String storage, String screen,

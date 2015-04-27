@@ -1,6 +1,8 @@
 package gui.product;
 
 import database.operations.ProductOperations;
+import gui.terminal.TerminalProductTableRow;
+
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
@@ -52,6 +54,54 @@ public class ProductTableModel extends DefaultTableModel{
             rset.close();
         }catch (SQLException sqlE){
             System.out.println(sqlE.getMessage());
+        }
+        fireTableChanged(new TableModelEvent(this, -1, -1));
+    }
+
+    public void refreshTableProduct(String category){
+        ProductOperations po = new ProductOperations();
+        ResultSet rset = po.productManufacturer(category);
+        emptyArray();
+        try {
+            while (rset.next()) {
+                adminProductRows.add(new AdminProductTableTableRow(rset.getInt(1), rset.getString(2), rset.getString(3),
+                        rset.getDouble(4), rset.getDouble(5), rset.getInt(6), rset.getString(7)));
+            }
+            rset.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        fireTableChanged(new TableModelEvent(this, -1, -1));
+    }
+
+    public void searchTable(String category){
+        ProductOperations po = new ProductOperations();
+        ResultSet rset = po.searchProducts(category, "All");
+        emptyArray();
+        try {
+            while (rset.next()) {
+                adminProductRows.add(new AdminProductTableTableRow(rset.getInt(1), rset.getString(2), rset.getString(3),
+                        rset.getDouble(4), rset.getDouble(5), rset.getInt(6), rset.getString(7)));
+            }
+            rset.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        fireTableChanged(new TableModelEvent(this, -1, -1));
+    }
+
+    public void refreshTableProduct(String category, String type){
+        ProductOperations po = new ProductOperations();
+        ResultSet rset = po.productManuMake(category, type);
+        emptyArray();
+        try {
+            while (rset.next()) {
+                adminProductRows.add(new AdminProductTableTableRow(rset.getInt(1), rset.getString(2), rset.getString(3),
+                        rset.getDouble(4), rset.getDouble(5), rset.getInt(6), rset.getString(7)));
+            }
+            rset.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         fireTableChanged(new TableModelEvent(this, -1, -1));
     }
@@ -111,5 +161,7 @@ public class ProductTableModel extends DefaultTableModel{
     public int getRowCount() {
         return adminProductRows.size();
     }
+
+
 }
 

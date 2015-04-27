@@ -11,8 +11,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
-  public class StartWindow extends JFrame implements ActionListener {
+public class StartWindow extends JFrame implements ActionListener {
 
     private ProductOperations po;
     public static TerminalMode mf;
@@ -84,6 +86,14 @@ import java.awt.event.ActionListener;
       } else if (e.getSource().equals(login)) {
         new AuthenticationPopUp(this);
       } else if (e.getSource().equals(help)) {
+        if (Desktop.isDesktopSupported()) {
+          try {
+            File myFile = new File("src/res/TerminalManual.pdf");
+            Desktop.getDesktop().open(myFile);
+          } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Cannot open file", "No supported application", JOptionPane.ERROR_MESSAGE);
+          }
+        }
       }
     }
   }
