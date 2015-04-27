@@ -507,7 +507,7 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
             new StartWindow();
             this.dispose();
         } else if (e.getSource().equals(btnRegister)) {
-            new MemberAddEdit(this, 2, null, null);
+            new MemberAddEdit(this, 3, null, null);
         } else if (e.getSource().equals(btnVoidSale)) {
             tableModel.emptyArray();
             refreshBasket();

@@ -72,8 +72,6 @@ public class Main {
 
 //    char[] y = {'1','2','3','4','5'};
 //    Employee x = new EmployeeOperations().validatePassword("ruthward", y);
-//
-
 
 //    new SaleMain(x);
 //    new AdminMain(x);
