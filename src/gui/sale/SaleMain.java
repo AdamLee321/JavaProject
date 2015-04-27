@@ -73,10 +73,10 @@ public class SaleMain extends JFrame implements ActionListener, MouseListener {
     public SaleMain(Employee e) {
 
         super("DGA Sale");
-        this.setSize(1000, 700);
+        this.setSize(1000, 710);
         this.setLocationRelativeTo(null);
         this.setResizable(true);
-        this.setMinimumSize(new Dimension(1000,700));
+        this.setMinimumSize(new Dimension(1000,710));
         this.setLayout(new GridBagLayout());
         this.getContentPane().setBackground(UIElements.getColour());
         this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);

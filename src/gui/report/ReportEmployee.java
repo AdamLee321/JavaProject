@@ -7,25 +7,13 @@ import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
-import java.io.File;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.text.MessageFormat;
-
 import database.ConnectionDB;
 import database.operations.ReportOperations;
-import javafx.scene.chart.CategoryAxisBuilder;
 import org.jfree.chart.*;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.BarRenderer;
-import org.jfree.data.category.CategoryDataset;
-import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.jdbc.JDBCCategoryDataset;
-import org.jfree.ui.ApplicationFrame;
-import org.jfree.ui.RefineryUtilities;
-
-import static javax.swing.JPanel.*;
 
 /*IT Tallaght - 2015, S2
 Computing - Year 2, Project

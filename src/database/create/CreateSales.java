@@ -301,7 +301,7 @@ public class CreateSales {
             pstmt.setDouble(4, 0);
             pstmt.setDouble(5, 899.99);
 
-            
+
             pstmt.setInt(1, 5);
             pstmt.setInt(2,1000012);
             pstmt.setString(3, "12");
