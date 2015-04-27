@@ -1,23 +1,30 @@
 package gui.report;
 
+import database.ConnectionDB;
 import javafx.scene.control.ComboBox;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 /**
  * Created by Adam Lee on 13/03/2015.
  */
 public class ReportYear {
+    Statement stmt;
+    PreparedStatement pstmt;
+    ResultSet rset;
+
     private JDialog jd3;
     private JPanel center;
     private JComboBox year;
     private JButton okButton;
 
     public ReportYear() {
-
         jd3 = new JDialog();
         jd3.setLayout(new BorderLayout());
         jd3.setTitle("Please select the year");
@@ -29,10 +36,8 @@ public class ReportYear {
 
         //Year Combobox
         year = new JComboBox();
+        SYFillCombo();
         center.add(year);
-        year.addItem("2015");
-        year.addItem("2014");
-        year.addItem("2013");
         year.setEditable(true);
         System.out.println("Year=" + year.getItemCount());
 
@@ -49,6 +54,22 @@ public class ReportYear {
 
         jd3.add(center, BorderLayout.CENTER);
         jd3.setVisible(true);
+    }
+
+    public void SYFillCombo(){
+        try{
+            String query = "SELECT DISTINCT saleYear FROM sales";
+            stmt = ConnectionDB.getConn().createStatement();
+            rset = stmt.executeQuery(query);
+            while(rset.next()){
+                String name = rset.getString("saleYear"); //Field I want to show in combobox
+                year.addItem(name);
+            }
+
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,e);
+        }
+
     }
 }
 

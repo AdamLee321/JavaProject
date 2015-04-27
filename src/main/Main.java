@@ -3,13 +3,11 @@ package main;
 import database.ConnectionDB;
 import database.create.*;
 import database.operations.EmployeeOperations;
-import gui.PasswordGenerator;
 import gui.StartWindow;
 import gui.admin.AdminMain;
 import gui.report.ManScreen;
 import gui.sale.SaleMain;
 import model.Employee;
-import sun.security.util.Password;
 
 import javax.swing.*;
 import java.util.logging.Level;
