@@ -61,24 +61,6 @@ public class CreateSalesDetails {
             pstmt.setInt(4,1);
             pstmt.execute();
 
-            pstmt.setInt(1,100000);
-            pstmt.setInt(2,1);
-            pstmt.setInt(3,1);
-            pstmt.setInt(4,1);
-            pstmt.execute();
-
-            pstmt.setInt(1,100000);
-            pstmt.setInt(2,1);
-            pstmt.setInt(3,1);
-            pstmt.setInt(4,1);
-            pstmt.execute();
-
-            pstmt.setInt(1,100003);
-            pstmt.setInt(2,2);
-            pstmt.setInt(3,4);
-            pstmt.setInt(4,4);
-            pstmt.execute();
-
             pstmt.setInt(1,100003);
             pstmt.setInt(2,2);
             pstmt.setInt(3,4);
