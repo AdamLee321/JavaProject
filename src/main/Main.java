@@ -71,7 +71,7 @@ public class Main {
       Logger.getLogger(StartWindow.class.getName()).log(Level.SEVERE, null, ex);
     }
 
-    //new StartWindow();
-     new ManScreen();
+    new StartWindow();
+
   }
 }
