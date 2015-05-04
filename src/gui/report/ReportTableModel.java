@@ -48,7 +48,7 @@ public class ReportTableModel extends DefaultTableModel {
     public void queryTableData() throws SQLException{
             ReportOperations ro = new ReportOperations();
             ResultSet rset = ro.getSales();
-            //clearArray();
+            clearArray();
             while(rset.next()) {
                  ReportTableRow row = new ReportTableRow(rset.getInt(1), rset.getInt(2),  rset.getString(3), rset.getString(4),
                         rset.getDouble(5),rset.getDouble(6));
@@ -85,13 +85,13 @@ public class ReportTableModel extends DefaultTableModel {
             return "";
     }
 
-    /*public void clearArray() {
+    public void clearArray() {
         if (salesTableRow.size() > 0) {
             for (int i = salesTableRow.size(); i > 0; i--) {
                 salesTableRow.remove(i-1);
             }
         }
-    }*/
+    }
 
     public int getColumnCount() {
         return columns.length;

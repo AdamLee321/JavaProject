@@ -81,6 +81,7 @@ public class ManSales extends JFrame{
 
     public void UpdateJTable() throws SQLException {
         //no duplicating
+        reportTableModel.clearArray();
         reportTableModel.queryTableData(); //get updated results
     }
 }
