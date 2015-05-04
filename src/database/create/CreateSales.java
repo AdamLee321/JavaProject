@@ -39,7 +39,7 @@ public class CreateSales {
                     "empId INTEGER," +
                     "saleDate DATE," +
                     "saleTime VARCHAR(20)," +
-                    "saleDiscount NUMBER(4,2)," +
+                    "saleDiscount NUMBER(5,2)," +
                     "saleAmount NUMBER(6,2)," +
                     "PRIMARY KEY (saleId)," +
                     "FOREIGN KEY (empId) references employee(empId) ON DELETE SET NULL" +
@@ -122,6 +122,216 @@ public class CreateSales {
             pstmt.setDouble(4, 0);
             pstmt.setDouble(5, 529.99);
             pstmt.execute();
+            pstmt.setInt(1,1);
+            pstmt.setString(2, "09-MAR-2015");
+            pstmt.setString(3, "NULL");
+            pstmt.setDouble(4, 0);
+            pstmt.setDouble(5, 599.99);
+            pstmt.execute();
+            pstmt.setInt(1,3);
+            pstmt.setString(2, "21-DEC-2014");
+            pstmt.setString(3, "NULL");
+            pstmt.setDouble(4, 0);
+            pstmt.setDouble(5, 699.99);
+            pstmt.execute();
+            pstmt.setInt(1,4);
+            pstmt.setString(2, "19-DEC-2014");
+            pstmt.setString(3, "NULL");
+            pstmt.setDouble(4, 0);
+            pstmt.setDouble(5, 2099.99);
+            pstmt.execute();
+            pstmt.setInt(1,5);
+            pstmt.setString(2, "07-JAN-2015");
+            pstmt.setString(3, "NULL");
+            pstmt.setDouble(4, 0);
+            pstmt.setDouble(5, 1099.99);
+            pstmt.execute();
+            pstmt.setInt(1,1);
+            pstmt.setString(2, "09-FEB-2015");
+            pstmt.setString(3, "NULL");
+            pstmt.setDouble(4, 0);
+            pstmt.setDouble(5, 2299.99);
+            pstmt.execute();
+            pstmt.setInt(1,1);
+            pstmt.setString(2, "01-APR-2015");
+            pstmt.setString(3, "NULL");
+            pstmt.setDouble(4, 0);
+            pstmt.setDouble(5, 899.99);
+            pstmt.execute();
+            pstmt.setInt(1,2);
+            pstmt.setString(2, "24-MAR-2015");
+            pstmt.setString(3, "NULL");
+            pstmt.setDouble(4, 0);
+            pstmt.setDouble(5, 799.99);
+            pstmt.execute();
+            pstmt.setInt(1,7);
+            pstmt.setString(2, "14-APR-2015");
+            pstmt.setString(3, "NULL");
+            pstmt.setDouble(4, 0);
+            pstmt.setDouble(5, 1299.99);
+            pstmt.execute();
+            pstmt.setInt(1,1);
+            pstmt.setString(2, "15-APR-2015");
+            pstmt.setString(3, "NULL");
+            pstmt.setDouble(4, 0);
+            pstmt.setDouble(5, 699.99);
+            pstmt.execute();
+            pstmt.setInt(1,3);
+            pstmt.setString(2, "22-FEB-2015");
+            pstmt.setString(3, "NULL");
+            pstmt.setDouble(4, 0);
+            pstmt.setDouble(5, 2099.99);
+            pstmt.execute();
+            pstmt.setInt(1,3);
+            pstmt.setString(2, "21-MAR-2015");
+            pstmt.setString(3, "NULL");
+            pstmt.setDouble(4, 0);
+            pstmt.setDouble(5, 799.99);
+            pstmt.execute();
+            pstmt.setInt(1,2);
+            pstmt.setString(2, "22-MAR-2015");
+            pstmt.setString(3, "NULL");
+            pstmt.setDouble(4, 250.01);
+            pstmt.setDouble(5, 2499.99);
+            pstmt.execute();
+            pstmt.setInt(1,2);
+            pstmt.setString(2, "19-MAR-2015");
+            pstmt.setString(3, "NULL");
+            pstmt.setDouble(4, 0);
+            pstmt.setDouble(5, 899.99);
+            pstmt.execute();
+            pstmt.setInt(1,3);
+            pstmt.setString(2, "02-FEB-2015");
+            pstmt.setString(3, "NULL");
+            pstmt.setDouble(4, 0);
+            pstmt.setDouble(5, 899.99);
+            pstmt.execute();
+            pstmt.setInt(1,10);
+            pstmt.setString(2, "02-MAR-2015");
+            pstmt.setString(3, "NULL");
+            pstmt.setDouble(4, 0);
+            pstmt.setDouble(5, 499.99);
+            pstmt.execute();
+            pstmt.setInt(1,9);
+            pstmt.setString(2, "17-JAN-2015");
+            pstmt.setString(3, "NULL");
+            pstmt.setDouble(4, 0);
+            pstmt.setDouble(5, 1499.99);
+            pstmt.execute();
+            pstmt.setInt(1,1);
+            pstmt.setString(2, "06-APR-2015");
+            pstmt.setString(3, "NULL");
+            pstmt.setDouble(4, 0);
+            pstmt.setDouble(5, 2199.99);
+            pstmt.execute();
+            pstmt.setInt(1,8);
+            pstmt.setString(2, "09-JAN-2015");
+            pstmt.setString(3, "NULL");
+            pstmt.setDouble(4, 0);
+            pstmt.setDouble(5, 1999.99);
+            pstmt.execute();
+            pstmt.setInt(1,1);
+            pstmt.setString(2, "09-NOV-2014");
+            pstmt.setString(3, "NULL");
+            pstmt.setDouble(4, 0);
+            pstmt.setDouble(5, 1899.99);
+            pstmt.execute();
+            pstmt.setInt(1,4);
+            pstmt.setString(2, "15-DEC-2014");
+            pstmt.setString(3, "NULL");
+            pstmt.setDouble(4, 0);
+            pstmt.setDouble(5, 2099.99);
+            pstmt.execute();
+            pstmt.setInt(1,6);
+            pstmt.setString(2, "09-DEC-2014");
+            pstmt.setString(3, "NULL");
+            pstmt.setDouble(4, 0);
+            pstmt.setDouble(5, 799.99);
+            pstmt.execute();
+            pstmt.setInt(1,2);
+            pstmt.setString(2, "25-FEB-2015");
+            pstmt.setString(3, "NULL");
+            pstmt.setDouble(4, 0);
+            pstmt.setDouble(5, 199.99);
+            pstmt.execute();
+            pstmt.setInt(1,2);
+            pstmt.setString(2, "13-JAN-2015");
+            pstmt.setString(3, "NULL");
+            pstmt.setDouble(4, 0);
+            pstmt.setDouble(5, 1299.99);
+            pstmt.execute();
+            pstmt.setInt(1,3);
+            pstmt.setString(2, "29-APR-2015");
+            pstmt.setString(3, "NULL");
+            pstmt.setDouble(4, 0);
+            pstmt.setDouble(5, 2099.99);
+            pstmt.execute();
+            pstmt.setInt(1,1);
+            pstmt.setString(2, "19-MAR-2015");
+            pstmt.setString(3, "NULL");
+            pstmt.setDouble(4, 0);
+            pstmt.setDouble(5, 2099.99);
+            pstmt.execute();
+            pstmt.setInt(1,1);
+            pstmt.setString(2, "09-APR-2015");
+            pstmt.setString(3, "NULL");
+            pstmt.setDouble(4, 0);
+            pstmt.setDouble(5, 799.99);
+            pstmt.execute();
+            pstmt.setInt(1,6);
+            pstmt.setString(2, "11-FEB-2015");
+            pstmt.setString(3, "NULL");
+            pstmt.setDouble(4, 0);
+            pstmt.setDouble(5, 1699.99);
+            pstmt.execute();
+            pstmt.setInt(1,1);
+            pstmt.setString(2, "09-FEB-2015");
+            pstmt.setString(3, "NULL");
+            pstmt.setDouble(4, 0);
+            pstmt.setDouble(5, 2099.99);
+            pstmt.execute();
+            pstmt.setInt(1,2);
+            pstmt.setString(2, "09-FEB-2015");
+            pstmt.setString(3, "NULL");
+            pstmt.setDouble(4, 0);
+            pstmt.setDouble(5, 599.99);
+            pstmt.execute();
+            pstmt.setInt(1,1);
+            pstmt.setString(2, "09-FEB-2015");
+            pstmt.setString(3, "NULL");
+            pstmt.setDouble(4, 0);
+            pstmt.setDouble(5, 299.99);
+            pstmt.execute();
+            pstmt.setInt(1,9);
+            pstmt.setString(2, "18-FEB-2015");
+            pstmt.setString(3, "NULL");
+            pstmt.setDouble(4, 0);
+            pstmt.setDouble(5, 999.99);
+            pstmt.execute();
+            pstmt.setInt(1,7);
+            pstmt.setString(2, "21-JAN-2015");
+            pstmt.setString(3, "NULL");
+            pstmt.setDouble(4, 0);
+            pstmt.setDouble(5, 1599.99);
+            pstmt.execute();
+            pstmt.setInt(1,1);
+            pstmt.setString(2, "12-FEB-2015");
+            pstmt.setString(3, "NULL");
+            pstmt.setDouble(4, 0);
+            pstmt.setDouble(5, 599.99);
+            pstmt.execute();
+
+
+
+
+
+
+
+
+
+
+
+
         } catch (SQLException e){
             System.out.println(e);
         }
