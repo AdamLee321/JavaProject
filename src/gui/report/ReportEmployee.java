@@ -234,7 +234,7 @@ public class ReportEmployee extends JFrame {
                 }
                 if (top5 == selectedQuery) {
                     try {
-                        String query = "SELECT * FROM (SELECT prodid, Count(prodid) \"Sold\" FROM sales GROUP BY prodid ORDER BY count(prodid) DESC , prodid ASC) A WHERE rownum <= 5";
+                        String query = "SELECT * FROM (SELECT prodid, Count(prodid) \"Sold\" FROM salesdetails GROUP BY prodid ORDER BY count(prodid) DESC , prodid ASC) A WHERE rownum <= 5";
                         JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnectionDB.getConn(), query);
                         JFreeChart BarChartObject = ChartFactory.createBarChart("Top 5 Products", "Product ID", "Number of Sales per Item ", dataset, PlotOrientation.VERTICAL, true, true, false);
                         BarRenderer rend = null;
@@ -251,7 +251,7 @@ public class ReportEmployee extends JFrame {
                 }
                 if (least5 == selectedQuery) {
                     try {
-                        String query = "SELECT * FROM (SELECT prodid, Count(prodid) \"Sold\" FROM sales GROUP BY prodid ORDER BY count(prodid) Asc , prodid DESC) A WHERE rownum <= 5";
+                        String query = "SELECT * FROM (SELECT prodid, Count(prodid) \"Sold\" FROM salesdetails GROUP BY prodid ORDER BY count(prodid) Asc , prodid DESC) A WHERE rownum <= 5";
                         JDBCCategoryDataset dataset = new JDBCCategoryDataset(ConnectionDB.getConn(), query);
                         JFreeChart BarChartObject = ChartFactory.createBarChart("Top 5 least Purchased", "Product ID", "Number of Sales per Item ", dataset, PlotOrientation.VERTICAL, true, true, false);
                         BarRenderer rend = null;
