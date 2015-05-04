@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
 import java.text.MessageFormat;
+import net.proteanit.sql.DbUtils;
 
 /**
  * Created by Adam Lee on 06/03/2015.

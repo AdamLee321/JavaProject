@@ -1,6 +1,5 @@
 package gui.report;
 
-import database.operations.EmployeeOperations;
 import database.operations.ReportOperations;
 import gui.employee.EmployeeTableRow;
 
@@ -10,7 +9,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -20,16 +18,13 @@ public class ReportTableModel extends DefaultTableModel {
 
     final static int SALE = 0;
     final static int EMP = 1;
-    final static int PROD = 2;
-    final static int DAY = 3;
-    final static int MONTH = 4;
-    final static int YEAR = 5;
-    final static int TIME = 6;
-    final static int DISCOUNT = 7;
-    final static int AMOUNT = 8;
+    final static int SALEDATE = 2;
+    final static int TIME = 3;
+    final static int DISCOUNT = 4;
+    final static int AMOUNT = 5;
 
     String[] columns = new String[] {
-            "Sale ID" , "Emp ID", "Prod ID" , "Day" ,"Month" ,"Year" , "Time", "Sale Discount" , "Sale Amount"
+            "Sale ID" , "Emp ID", "SaleDate" , "Time", "Sale Discount" , "Sale Amount"
     };
 
     private static ArrayList<Object> salesTableRow = new ArrayList();
@@ -53,9 +48,10 @@ public class ReportTableModel extends DefaultTableModel {
     public void queryTableData() throws SQLException{
             ReportOperations ro = new ReportOperations();
             ResultSet rset = ro.getSales();
+            //clearArray();
             while(rset.next()) {
-                ReportTableRow row = new ReportTableRow(rset.getInt(1), rset.getInt(2),  rset.getInt(3), rset.getString(4),
-                        rset.getString(5),rset.getString(6), rset.getString(7), rset.getDouble(8), rset.getDouble(9));
+                 ReportTableRow row = new ReportTableRow(rset.getInt(1), rset.getInt(2),  rset.getString(3), rset.getString(4),
+                        rset.getDouble(5),rset.getDouble(6));
                 salesTableRow.add(row);
             }
         rset.close();
@@ -69,14 +65,8 @@ public class ReportTableModel extends DefaultTableModel {
                 return row.getSaleId();
             case EMP:
                 return row.getEmpId();
-            case PROD:
-                return row.getProdId();
-            case DAY:
-                return row.getSaleDay();
-            case MONTH:
-                return row.getSaleMonth();
-            case YEAR:
-                return row.getSaleYear();
+            case SALEDATE:
+                return row.getSaleDate();
             case TIME:
                 return row.getSaleTime();
             case DISCOUNT:
@@ -94,6 +84,14 @@ public class ReportTableModel extends DefaultTableModel {
         else
             return "";
     }
+
+    /*public void clearArray() {
+        if (salesTableRow.size() > 0) {
+            for (int i = salesTableRow.size(); i > 0; i--) {
+                salesTableRow.remove(i-1);
+            }
+        }
+    }*/
 
     public int getColumnCount() {
         return columns.length;

@@ -6,6 +6,7 @@ import database.operations.EmployeeOperations;
 import gui.StartWindow;
 import gui.admin.AdminMain;
 import gui.report.ManScreen;
+import gui.report.ReportEmployee;
 import gui.sale.SaleMain;
 import model.Employee;
 
@@ -70,6 +71,7 @@ public class Main {
       Logger.getLogger(StartWindow.class.getName()).log(Level.SEVERE, null, ex);
     }
 
-    new StartWindow();
+    //new StartWindow();
+     new ManScreen();
   }
 }

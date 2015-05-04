@@ -7,35 +7,26 @@ public class ReportTableRow {
 
     private int saleId;
     private int empId;
-    private int prodId;
-    private String saleDay;
-    private String saleMonth;
-    private String saleYear;
+    private String saleDate;
     private String saleTime;
     private double saleDiscount;
     private double saleAmount;
 
-    public ReportTableRow()
+    public ReportTableRow(int Int, String string, String rsetString, double aDouble, double rsetDouble)
     {
         this.saleId = 0;
         this.empId = 0;
-        this.prodId = 0;
-        this.saleDay = "";
-        this.saleMonth = "";
-        this.saleYear = "";
+        this.saleDate = "";
         this.saleTime = "";
         this.saleDiscount = 0.0;
         this.saleAmount = 0.0;
     }
 
-    public ReportTableRow(int saleIdIn, int empIdIn, int prodIdIn, String saleDayIn,String saleMonthIn,String saleYearIn, String saleTimeIn, double saleDiscountIn, double saleAmountIn)
+    public ReportTableRow(int saleIdIn, int empIdIn, String saleDateIn, String saleTimeIn, double saleDiscountIn, double saleAmountIn)
     {
         saleId = saleIdIn;
         empId = empIdIn;
-        prodId = prodIdIn;
-        saleDay = saleDayIn;
-        saleMonth = saleMonthIn;
-        saleYear = saleYearIn;
+        saleDate = saleDateIn;
         saleTime = saleTimeIn;
         saleDiscount = saleDiscountIn;
         saleAmount = saleAmountIn;
@@ -47,10 +38,7 @@ public class ReportTableRow {
     public int getEmpId(){
         return empId;
     }
-    public int getProdId(){ return prodId;}
-    public String getSaleDay(){return saleDay;}
-    public String getSaleMonth(){ return saleMonth; }
-    public String getSaleYear() { return saleYear; }
+    public String getSaleDate(){ return saleDate;}
     public String getSaleTime(){
         return saleTime;
     }
