@@ -1,5 +1,6 @@
 package gui.report;
 
+import gui.StartWindow;
 import gui.UIElements;
 
 import javax.swing.*;
@@ -91,7 +92,8 @@ public class ManScreen extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 if (JOptionPane.showConfirmDialog(null, "Do you wish to logout?", "Logout", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
                 {
-                    System.exit(0);
+                    re.dispose();
+                    new StartWindow();
                 }
             }
         });
