@@ -12,7 +12,7 @@ public class ReportTableRow {
     private double saleDiscount;
     private double saleAmount;
 
-    public ReportTableRow(int Int, String string, String rsetString, double aDouble, double rsetDouble)
+    public ReportTableRow()
     {
         this.saleId = 0;
         this.empId = 0;
@@ -22,7 +22,8 @@ public class ReportTableRow {
         this.saleAmount = 0.0;
     }
 
-    public ReportTableRow(int saleIdIn, int empIdIn, String saleDateIn, String saleTimeIn, double saleDiscountIn, double saleAmountIn)
+    public ReportTableRow(int saleIdIn, int empIdIn, String saleDateIn, String saleTimeIn, double saleDiscountIn,
+                          double saleAmountIn)
     {
         saleId = saleIdIn;
         empId = empIdIn;

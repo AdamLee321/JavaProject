@@ -49,7 +49,6 @@ public class ManSales extends JFrame{
         });
 
         //JTable properties
-
         //create table with data
         reportTableModel = new ReportTableModel();
         UpdateJTable();//empty and update
@@ -72,14 +71,13 @@ public class ManSales extends JFrame{
         });
 
         //Display the window.
-        //empty and update
         frame.pack();
         frame.getContentPane();
         frame.add(south, BorderLayout.SOUTH);
         frame.setVisible(true);
     }
 
-    public void UpdateJTable() throws SQLException {
+    public void UpdateJTable(){
         //no duplicating
         reportTableModel.clearArray();
         reportTableModel.queryTableData(); //get updated results

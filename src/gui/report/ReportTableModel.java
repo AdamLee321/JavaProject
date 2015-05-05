@@ -18,13 +18,13 @@ public class ReportTableModel extends DefaultTableModel {
 
     final static int SALE = 0;
     final static int EMP = 1;
-    final static int SALEDATE = 2;
+    final static int DATE = 2;
     final static int TIME = 3;
     final static int DISCOUNT = 4;
     final static int AMOUNT = 5;
 
-    String[] columns = new String[] {
-            "Sale ID" , "Emp ID", "SaleDate" , "Time", "Sale Discount" , "Sale Amount"
+    final static String[] columns = {
+            "Sale ID" , "Emp ID", "Date" , "Time", "Sale Discount" , "Sale Amount"
     };
 
     private static ArrayList<Object> salesTableRow = new ArrayList();
@@ -34,6 +34,7 @@ public class ReportTableModel extends DefaultTableModel {
     }
 
     DefaultTableColumnModel columnsModel = new DefaultTableColumnModel();
+
 
     public  ReportTableModel() {
         TableColumn cols;
@@ -45,16 +46,17 @@ public class ReportTableModel extends DefaultTableModel {
         }
     }
 
-    public void queryTableData() throws SQLException{
-            ReportOperations ro = new ReportOperations();
-            ResultSet rset = ro.getSales();
-            clearArray();
-            while(rset.next()) {
-                 ReportTableRow row = new ReportTableRow(rset.getInt(1), rset.getInt(2),  rset.getString(3), rset.getString(4),
-                        rset.getDouble(5),rset.getDouble(6));
-                salesTableRow.add(row);
+    public void queryTableData(){
+        try{
+            ResultSet rset = new ReportOperations().getSales();
+            while (rset.next()) {
+                salesTableRow.add(new ReportTableRow(rset.getInt(1), rset.getInt(2), rset.getString(3), rset.getString(4),
+                        rset.getDouble(5), rset.getDouble(6)));
             }
-        rset.close();
+            rset.close();
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
         fireTableChanged(new TableModelEvent(this, -1, -1));
     }
 
@@ -65,7 +67,7 @@ public class ReportTableModel extends DefaultTableModel {
                 return row.getSaleId();
             case EMP:
                 return row.getEmpId();
-            case SALEDATE:
+            case DATE:
                 return row.getSaleDate();
             case TIME:
                 return row.getSaleTime();
@@ -73,6 +75,7 @@ public class ReportTableModel extends DefaultTableModel {
                 return row.getSaleDiscount();
             case AMOUNT:
                 return row.getSaleAmount();
+            
             default:
                 return "";
         }
@@ -96,6 +99,8 @@ public class ReportTableModel extends DefaultTableModel {
     public int getColumnCount() {
         return columns.length;
     }
+
+    public Class getColumnClass(int column) {return String.class;}
 
     public int getRowCount() {
         return salesTableRow.size();
